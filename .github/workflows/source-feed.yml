@@ -1,0 +1,52 @@
+name: Source feed (official sources only; never drivendata.org)
+
+# Runs on a GitHub-hosted runner because the build sandbox can reach only github.com.
+# Writes docs/data/feed.json + feed_history.json to the branch that triggered the run.
+# It never requests drivendata.org (hard guard in the script), uploads nothing, reads no scores.
+on:
+  schedule:
+    - cron: '17 6 * * *'
+  workflow_dispatch:
+  push:
+    branches: ['arena/**']
+    paths:
+      - 'scripts/refresh_source_feed.py'
+      - 'registry/sources.json'
+      - '.github/workflows/source-feed.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: source-feed-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  feed:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests
+      - name: Refresh feed
+        run: python scripts/refresh_source_feed.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit feed to this branch only
+        run: |
+          set -euo pipefail
+          git config user.name 'GEMS source feed'
+          git config user.email 'gems-feed@users.noreply.github.com'
+          git add docs/data/feed.json docs/data/feed_history.json
+          git commit -m "feed: refresh official-source checks" || exit 0
+          for i in 1 2 3 4; do
+            git pull --rebase origin "$GITHUB_REF_NAME" && git push origin "HEAD:$GITHUB_REF_NAME" && exit 0
+            sleep $((i * 4))
+          done
+          exit 1

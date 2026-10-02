@@ -1,0 +1,62 @@
+{
+ "rule": {
+  "cone_deg": 30.0,
+  "rmin": 10.0,
+  "rmax": 40.0
+ },
+ "spacing": 3,
+ "z_min": 3,
+ "dedupe_mutual": true,
+ "links_all_forward": 1965,
+ "z_counts": {
+  "0": 375,
+  "1": 713,
+  "2": 377,
+  "3": 234,
+  "4": 183,
+  "5": 83
+ },
+ "selected_links": 345,
+ "selected_dots": 1840,
+ "nonredundant_dots_vs_0_2477": 1259,
+ "closure": {
+  "systems_before": 3199,
+  "systems_after": 2857,
+  "systems_joined": 342,
+  "largest_km_before": 42.267619023324855,
+  "largest_km_after": 57.50974388731824,
+  "top5_km_after": [
+   57.50974388731824,
+   42.267619023324855,
+   36.650461735799475,
+   33.053405460951765,
+   32.56698129686261
+  ]
+ },
+ "graph": {
+  "skeleton_px": 59209,
+  "components": 3199,
+  "end_nodes": 6949,
+  "junction_nodes": 679,
+  "edges": 4681,
+  "cyclomatic_number": 504,
+  "endpoints_with_tangent": 6530,
+  "component_length_km": {
+   "median": 1.265685424949238,
+   "p90": 4.366173157302033,
+   "p99": 14.05908556342245,
+   "max": 42.267619023324855,
+   "sum": 6740.273061937567
+  },
+  "components_ge_10km": 69,
+  "components_lt_2km": 2211
+ },
+ "kind_counts": {
+  "end-to-end": 314,
+  "abutting": 16,
+  "tip-to-tip oblique": 15
+ },
+ "mutual_links": 172,
+ "median_gap_km": 1.844,
+ "mean_base_overlap": 0.31864927536231885
+}
