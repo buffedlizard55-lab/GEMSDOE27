@@ -150,6 +150,12 @@
    "severity": "medium",
    "issue": "The scored raster behind the owner-reported 0.0107 (GEMSDOE9 'PLACEHOLDER', sha256 2314b599..., recovered and hash-matched in Session 3) has 196,132 POSITIVE pixels OUTSIDE the organisers' 5,167,373-px footprint, and only 145,610 inside it (of which 2,074 sit on catalogue cells and are therefore free). The sibling repo's own note says this file 'fails the range/footprint check in this repo's verifier'.",
    "action": "Counted correctly in evidence/live_inversion.json as n_scored = 145,610 (inside-footprint, off-catalogue) with n_positive_outside_footprint = 196,132 reported separately. An earlier draft of the inversion script summed positives over the WHOLE grid and so charged this file 341,742 scored pixels - a 2.3x overstatement that propagated into its implied credit. Fixed in scripts/invert_live_scores.py::emission_of and covered by the explicit outside-footprint field. No 27GEMSDOE candidate is affected: all four emit 0 pixels outside the footprint and 0 on catalogue cells (scripts/verify_downloads.py, 79 checks)."
+  },
+  {
+   "id": "ci-red-on-main-raster-tests",
+   "severity": "high",
+   "issue": "CI was RED on `main` before Session 3 and nobody had noticed. `.github/workflows/ci.yml` runs `python -m pytest -q` on a bare checkout, but `data_cache/` is git-ignored by design and CI cannot restore it (`scripts/restore_data.py` reads the inputs from SIBLING repositories, which the workflow's `contents: read` GITHUB_TOKEN cannot access). `tests/test_vector_and_oof.py::test_vector_attribution_and_evidence_files` opens `paths.TEMPLATE`, so it failed with `RasterioIOError: data_cache/sample_submission.tif: No such file or directory`. Reproduced on the base commit `ce80ead` in a clean clone: 1 failed, 35 passed.",
+   "action": "Fixed in Session 3 with `tests/conftest.py`: a `requires_rasters` marker plus a collection hook that skips with the missing file names in the reason. Applied to the pre-existing test and to the new `test_verify_downloads_still_passes_with_four_slots`. Verified in a clean clone without `data_cache`: 45 passed, 2 skipped; and locally after `restore_data.py`: 47 passed, 0 skipped. A red suite now always means a real failure. Consequence to record honestly: **CI does not exercise the two raster-dependent checks** - they run locally and must be re-run before any release. Adding a data-restore step to CI needs a token with read access to the sibling repositories, which is an access request for the owner, not something the agent can grant itself."
   }
  ]
 }

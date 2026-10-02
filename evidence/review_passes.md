@@ -98,3 +98,15 @@ as `buffedlizard55-lab`. Sandbox network: `api.github.com`, `github.com`, `codel
 | Autonomous, no manual input; verify from official sources with links; flag irregularities; no hallucinations | 6 new irregularities (25 total) including one that changed a number; every score labelled owner-reported; every model labelled a model; three rejected ideas recorded with the measurement that killed them | **Blocked on the owner:** no 27GEMSDOE file has ever been uploaded, so `live_scores.json["27GEMSDOE"]` is still `null` and Session-3 priority 1 (ingest the slot 1 A/B score) could not be executed |
 | Previous session's next steps first | priority 1 attempted and blocked (no score exists); substituted the no-upload-needed inversion, which delivered more than priority 1 would have. Priorities 2 (detector upgrade) and 5 (Siler/DeAngelo) **not done** | detector upgrade is now the top technical item and is next-step 2 for Session 4, with the arithmetic case for why it is the *only* remaining route |
 | Three passes, PR, merge, remaining work | this file; `knowledge/06` "Prioritised next steps for Session 4"; PR from `arena/01a0fe89-gemsdoe27` → `main` | — |
+
+### Pass 2 addendum — CI was red on `main` before this session
+Reproduced in a clean clone of the base commit `ce80ead` **without** `data_cache/`: `1 failed, 35 passed`.
+`tests/test_vector_and_oof.py::test_vector_attribution_and_evidence_files` opens `paths.TEMPLATE`, but
+`.github/workflows/ci.yml` runs `pytest` on a bare checkout and cannot restore the inputs — they live in
+*sibling* repositories that the workflow's `contents: read` token cannot read. Fixed with `tests/conftest.py`
+(a `requires_rasters` marker plus a collection hook that skips with the missing file names in the reason),
+applied to the pre-existing test and to the new raster-dependent one. Clean clone now gives **45 passed,
+2 skipped**; locally after `restore_data.py`, **47 passed, 0 skipped**. Recorded as
+`ci-red-on-main-raster-tests` (severity **high**) with the honest consequence: CI does not exercise those two
+checks, so they must be re-run locally before any release. Giving CI a restore step needs a token with
+sibling-repo read access — an owner access request, not something the agent can grant itself.

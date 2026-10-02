@@ -115,10 +115,11 @@ def test_dot_thin_budget_is_monotone_in_distance():
     assert counts == sorted(counts, reverse=True), counts
 
 
+@pytest.mark.requires_rasters
 def test_verify_downloads_still_passes_with_four_slots():
+    # inherits GEMS_DATA_DIR from the caller, so it verifies the same cache the suite is using
     r = subprocess.run([sys.executable, str(ROOT / "scripts" / "verify_downloads.py")],
-                       capture_output=True, text=True,
-                       env={**__import__("os").environ, "GEMS_DATA_DIR": str(ROOT / "data_cache")})
+                       capture_output=True, text=True)
     assert r.returncode == 0, r.stdout[-3000:]
     assert "0 failure(s)" in r.stdout
     for slot in ("primary", "secondary", "tertiary", "quaternary"):
