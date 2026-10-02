@@ -1,7 +1,7 @@
 # 27GEMSDOE - topology-first research and submission lab for DrivenData #306 (DOE GEMS)
 
 **Site:** https://buffedlizard55-lab.github.io/GEMSDOE27/ (first screen = one-click download + the note to paste).
-**Status (2026-10-02):** 3 weekly slot candidates built and format-verified (66 standalone checks passed); **no leaderboard score exists for any 27GEMSDOE file** - nothing in this repo claims one.
+**Status (2026-10-02):** The three weekly slot candidates remain unchanged. A separate, unscored H28-1 research candidate is now built and independently format/range-verified; the latest download audit had 0 failures. **No leaderboard score exists for any 27GEMSDOE file** - nothing in this repo claims one.
 Owner-reported reference: the 24GEMSDOE file scored **0.2477** (owner-reported); the owner-stated leader is **0.3195** (unconfirmed; the agent does not access drivendata.org).
 
 ## Start here every session (checklist)
@@ -25,15 +25,23 @@ Owner-reported reference: the 24GEMSDOE file scored **0.2477** (owner-reported);
   * Note to paste (`154` chars): `27GEMSDOE T-v2+H27-4 | 0.2477 base minus 5355 100m flank-shadow dots + 1278 T-v2 gap dots (OOF +0.0141, 4/4 folds) | id d466b251f309 | not yet live-scored`
 * Exact steps and the decision rules for the 3 weekly slots: `docs/executive-summary.html`.
 
+### Separate research-only candidate (not one of the current weekly slots)
+
+* **H28-1 + T-v2 + H27-4 r1:** `docs/downloads/gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.tif` (1.63 MB); ZIP: `docs/downloads/gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.zip`; all-finite fallback: `docs/downloads/gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-allfinite.tif`.
+* Content id `1113fba5f6cb`; SHA-256 (nan GeoTIFF) `61f9b53de42786e6d48afa50fd453a87c57d5d7b9b626c7dcf28c2dfbd20f411`; 59,075 binary pixels; zero known-catalogue overlap. It passed the frozen *internal* spatial holdout (`+0.00295` mean paired DTI, 3/4 folds, 9/10 seeds); this is not an organizer-label/live score and **does not use a weekly slot**.
+* Note to paste (`142` characters): `27GEMSDOE H28-1 research | OOF +0.0029 paired DTI; 3/4 folds, 9/10 seeds; no live score | id 1113fba5f6cb | research only; not yet live-scored`.
+* The dedicated research page exposes the `.tif` and `.zip`: `docs/research.html`. Do not substitute it into the three-slot weekly decision tree without a future controlled A/B decision.
+
 ## What is validated, and what is not
 | claim | status |
 |---|---|
-| Files are single-band float32, exact 0.0/1.0 inside the footprint, NaN outside (nodata=NaN) like the sample; fallback and zip provided | verified by an independent script (`scripts/verify_downloads.py`, 66 checks, 0 failures) |
+| The 3 weekly candidates and separate H28 research candidate are single-band float32, exact 0.0/1.0 inside the footprint, and valid on the same grid; NaN/nodata=NaN main file, all-finite fallback, and single-TIFF ZIP are supplied | independent `scripts/verify_downloads.py` audit: 0 failures; includes range, no-infinity, catalogue-overlap, checksum, fallback, and ZIP checks |
 | The 0.2477 file is exactly `dot_thin(H19-5 minus catalogue, 1.5)` | reproduced (60,069 px identical) |
 | Topology gap-closure beats rotated-cone controls and random same-size subsets on the 8-connected component holdout | pre-registered gates passed on seeds 100-109 (`0.118` vs `0.057` ctrl) and confirmed on fresh seeds 110-119 (`z>=3 dedup = 0.280` vs `0.056` ctrl) and seeds 120-129 (`0.2926` vs `0.0586` ctrl) |
 | Topology gap-closure and H27-5 kinematic typing beat rotated-cone controls when **whole NBMG INGENIOUS `FID` vector polylines** are held out | pre-registered Addendum B gate passed on seeds 120-129 (`evidence/vector_topology_validation.json`): `z>=3 dedup = 0.1003` vs `0.0204` ctrl (`4.92x`, `> m(0.30) = 0.0638`); `H27-5a (inter-FID + kinematic_compat) = 0.1374` (`6.74x`); `H27-5b (inter-FID + same_name + kinematic_compat) = 0.1783` (`8.74x`) |
 | Topology gap-closure (H27-1) and 100–200 m flank-shadow pruning (H27-4) improve DTI on a **strictly out-of-fold 4-quadrant spatial-CV detector ($B_{\text{oof}}$)** | pre-registered Addendum C gates passed on seeds 130-139 (`evidence/oof_hypothesis_gates.json`): `plus_T_v2` gains `+0.0115` (`4/4` folds); `prune_r1_100m` gains `+0.0022` solo (`4/4` folds, removed efficiency `0.0034` vs live break-even `0.0521`) and **`+0.0141` stacked with T-v2** (`4/4` folds); H27-3 isolated-dot removal refuted (`-0.0010`, `0/4` folds) |
 | H28-1 magnetic/gravity edge features + T-v2/H27-4 beat the current OOF best | pre-registered seeds 140-149 passed (`evidence/h28_1_edge_holdout.json`): mean paired ΔDTI `+0.00295` across 40 cells; 3/4 folds and 9/10 seeds. NE fold and seed 149 were negative. Catalogue-internal only; no public score or weekly slot |
+| A full-map H28-1 candidate was produced | fixed full-fit recipe in `knowledge/09_preregistration_H28-1_candidate.md`; 59,075 exact binary pixels, zero known-label overlap, single-band float32 on the official template grid, `[0,1]`/finite inside, NaN outside; all-finite fallback and one-TIFF ZIP independently verified. It is research-only and unscored. |
 | The same on the real hidden test set | **unknown until a slot is used** (only a live score tests the organisers' newly created expert labels) |
 | Plausible effect on DTI at the 0.2477 operating point | Slot 1 (`5512495c6bd1`): `-0.0029` (zero hit rate) ... `+0.0024` (`FID_trace` eff `0.1003`) ... `+0.0110` (`component` eff `0.280`); Slot 3 (`d466b251f309`): `+0.0141` (`FID_trace`) to `+0.0223` (`component`) |
 | Reaching 0.3195 | not with verified/modelled increments on H19-5 alone (`~0.262-0.270`; see `knowledge/01_why_0.2477_won_and_the_ceiling.md`) |
@@ -42,11 +50,11 @@ Owner-reported reference: the 24GEMSDOE file scored **0.2477** (owner-reported);
 | path | what |
 |---|---|
 | `src/gems27/` | `metric.py`, `thinning.py`, `holdout.py`, `graph.py`, `links.py`, `candidates.py`, `topology_theory.py`, `submission.py`, `grid.py`, `paths.py`, **`vector_graph.py`** (NBMG INGENIOUS vector attribution & H27-5 kinematic compatibility), **`oof_detector.py`** (4-fold spatial-CV detector), **`potential_edges.py`** (H28-1 label-free multiscale field transforms) |
-| `scripts/` | `restore_data.py`, `download_competition_data.sh`, `prepare_data.py`, `fetch_vector_faults.py`, `run_graph_report.py`, `run_topology_validation.py`, `run_topology_confirm.py`, `run_vector_topology_validation.py`, `run_oof_hypothesis_gates.py`, `run_h28_1_edge_holdout.py`, `build_candidates.py`, `build_submission27.py`, `verify_downloads.py`, `make_figures.py`, `build_site.py`, `refresh_source_feed.py`, `operating_point.py`, `channel_auc.py` |
+| `scripts/` | `restore_data.py`, `download_competition_data.sh`, `prepare_data.py`, `fetch_vector_faults.py`, `run_graph_report.py`, `run_topology_validation.py`, `run_topology_confirm.py`, `run_vector_topology_validation.py`, `run_oof_hypothesis_gates.py`, `run_h28_1_edge_holdout.py`, `build_h28_1_candidate.py` (full-map research export), `build_candidates.py`, `build_submission27.py`, `verify_downloads.py`, `make_figures.py`, `build_site.py`, `refresh_source_feed.py`, `operating_point.py`, `channel_auc.py` |
 | `knowledge/` | 01 why 0.2477 won; 02 hypotheses (ranked); 03 pre-registration (incl. Addenda A, B, C); 04 topology & vector argument; 05 sources; 06 limitations/access; 07 H28 hypotheses/results; 08 frozen H28-1 protocol; 09 full-map candidate export preregistration |
 | `registry/` | `sources.json`, `hypotheses.json`, `next_hypotheses.json`, `irregularities.json`, `live_scores.json`, `topology_candidates.json` (345 links with NBMG/USGS vector fault names, `FID`, `SLIPSENSE`, `DIPDIRECT`, `kinematic_compat`) |
 | `evidence/` | machine-readable results (`topology_validation.json`, `topology_confirmation_v2.json`, `vector_topology_validation.json`, `oof_hypothesis_gates.json`, `h28_1_edge_holdout.json`, `data_preparation.json`, `graph_report.json`, `channel_auc.json`, `review_passes.md`) |
-| `docs/` | GitHub Pages site (`index.html`, `executive-summary.html`, `topology.html`, `research.html`, `sources.html`), `downloads/`, `data/` (`topology_links.csv`, `topology_links.geojson`, `feed.json`, `vector_faults_status.json`) |
+| `docs/` | GitHub Pages site (`index.html`, `executive-summary.html`, `topology.html`, `research.html`, `sources.html`), `downloads/` (3 weekly-slot manifest + separate `h28_1_candidate_manifest.json`), `data/` (`topology_links.csv`, `topology_links.geojson`, `feed.json`, `vector_faults_status.json`) |
 | `.github/workflows/` | `source-feed.yml` (official sources only; never drivendata.org), `fetch-vector-faults.yml` (NBMG INGENIOUS ArcGIS REST check), `ci.yml` (tests + lint + site build) |
 
 ## Reproduce

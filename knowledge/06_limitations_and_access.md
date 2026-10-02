@@ -43,8 +43,8 @@
 
 ## Current prioritised next steps
 
-1. **Serialize H28-1 as a research-only full-map candidate** using the frozen recipe in `knowledge/09_preregistration_H28-1_candidate.md`; independently verify GeoTIFF, fallback and ZIP. Keep the three existing weekly-slot artifacts unchanged. The `+0.00295` OOF result does not equal a live-score improvement.
-2. **If the owner later chooses a future controlled A/B slot, compare it against the owner-reported 0.2477 reference and record the public score manually.** The agent never accesses DrivenData. Do not treat the internal catalogue holdout as organizer-label evidence.
+1. **Keep the H28-1 full-map raster as research-only** (`docs/downloads/h28_1_candidate_manifest.json` and `knowledge/09_preregistration_H28-1_candidate.md`). It was independently verified and the original three weekly-slot artifacts are unchanged. The `+0.00295` OOF result does not equal a live-score improvement.
+2. **If the owner later chooses a future controlled A/B slot, consider H28 against the owner-reported 0.2477 reference and record the public score manually.** The agent never accesses DrivenData. Do not treat the internal catalogue holdout as organizer-label evidence or alter current slots without a fresh decision.
 3. **Pursue the next H28 hypothesis only with a new preregistration and fresh spatial holdout.** H28-2 is the most practical follow-up using the existing 3DEP-derived descriptor grid; H28-5 remains blocked until official GDR binaries are independently retrievable and hash-pinned.
 4. **Continue optional deep-model work only when compute/data are available:** a U-Net / FaultSEG-style model needs geologist-reviewed labels and a GPU. The Hermant et al. (2025) PR-AUC is from their task/data and is not a forecast for this competition.
 5. **Retain limitations:** no 27GEMSDOE live score exists, 0.3195 is owner-reported, the private expert labels are unavailable, and the owner-mirror data provenance has not been reconciled with a logged-in competition download.

@@ -15,3 +15,14 @@ H28-1 + the already-gated T-v2/H27-4 stack cleared its pre-registered gate on se
 5. Keep the three existing weekly slot artifacts and their manifest entries untouched. Store this separately as a `research_candidate`; expose it on the Research page, not as Slot 1/2/3. Do not upload or claim a leaderboard score.
 
 The candidate is not itself a holdout result: the one full-area model is fit on all catalogue labels, and the organizers' expert-created labels remain unseen. Its presence on the site means only that the fixed research recipe was serialized and format-checked. A human may choose a future slot only after weighing the holdout result and the existing weekly decision tree; the agent will not access DrivenData.
+
+## Execution record (2026-10-02)
+
+The frozen recipe ran successfully with builder `scripts/build_h28_1_candidate.py` (SHA-256 `12cee167a41067e4f41bab4ac0f85a22cb5ed87fa944e048a83d7313b8d46662`). The full-fit estimator used 60,988 positive plus 609,880 sampled negative rows and all 38 inputs (32 prepared + 6 H28); seed 2026. The serialized raster contains 59,075 `1.0` cells, exactly 0/1 within the footprint and zero known-label overlap. T-v2 selected 345 links; 983 nonredundant graph pixels were added to the 58,092-pixel post-prune base.
+
+- Main GeoTIFF: `docs/downloads/gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.tif`; content id `1113fba5f6cb`; SHA-256 `61f9b53de42786e6d48afa50fd453a87c57d5d7b9b626c7dcf28c2dfbd20f411`; 1,630,604 bytes.
+- All-finite fallback SHA-256: `60a7930a5ac229bb8a3a81656de49c1e228eab8398e0b26316972d516a2951f5`; ZIP is recorded with checksum in `docs/downloads/checks-gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.json`.
+- Independent `scripts/verify_downloads.py` passed with 0 failures across the original three slots and this separate research candidate. It checked EPSG:32611, 3730×3292, 100 m transform `(100, 0, 243350, 0, -100, 4508550)`, one float32 band, inside `[0,1]`, no infinities, exact 0/1 values, all 7,111,787 outside pixels as NaN with nodata=NaN (matching the sample), a zero-outside no-nodata fallback, catalogue overlap, ZIP contents, note length, and the unchanged original-slot relationships. Original three GeoTIFF and `manifest.json` SHA-256 values were rechecked and unchanged.
+- Note (142 characters): `27GEMSDOE H28-1 research | OOF +0.0029 paired DTI; 3/4 folds, 9/10 seeds; no live score | id 1113fba5f6cb | research only; not yet live-scored`.
+
+This was a candidate-file build only: `weekly_slot_used=false`, `leaderboard_upload=false`, and no public score is claimed.

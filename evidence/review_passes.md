@@ -41,7 +41,7 @@
 | 6. clean Pages site, official links, up-to-date feed | `docs/`, `source-feed.yml`, `fetch-vector-faults.yml`, `ci.yml` | - |
 | 7. README with the prompt verbatim + Core Values | `README.md` (both verbatim Task prompt and verbatim Core Values included) | resolved in Session 2 |
 | 8. limitations and access | `knowledge/06`, executive summary | - |
-| 9. three passes, PR, merge, remaining work | this file; prior PR and merge executed on `arena/01a0fe2a-gemsdoe27` -> `main` | - |
+| 9. three passes, PR, merge, remaining work | this file; the earlier session's PR is historical, and the H28 continuation's current-branch PR result is recorded below | current continuation still requires its own PR/merge attempt |
 
 ## Current continuation (2026-10-02) — H28-1 work
 
@@ -57,8 +57,21 @@
 - Found old prose claiming 1,701 DEM tiles. Corrected it to the pinned owner-mirror inventory (716 links, 706 successful derivatives, 10 failures); explicitly state this is not an independent USGS download audit.
 - Reviewed transform boundary/nodata behavior, classifier sampling and feature order, T-v2 graph reuse, the 100 m catalogue prune, DTI masks and no-known-catalogue-overlap guard. Disclosed that 1 km covariate filters can share adjacent field values across the existing 600 m fold buffer; no labels enter the transform, but spatial covariate correlation remains a limitation.
 - After commits `c5d40b7` (hypotheses/protocol) and `5a6972e` (implementation), ran the frozen seeds 140–149. H28-1 + T-v2 + H27-4 r1 passed: `+0.00294884` mean paired ΔDTI, 3/4 folds, 9/10 seeds. The NE fold and seed 149 were negative; see `evidence/h28_1_edge_holdout.json` for all 40 paired cells and hashes.
-- The holdout runner wrote no submission TIFF. The existing three submission files remain unchanged, no weekly slot was used, and no public score is claimed. A separate full-map export protocol is now preregistered in `knowledge/09_preregistration_H28-1_candidate.md`; its implementation and format checks remain pending.
+- The holdout runner itself wrote no submission TIFF. After committing the separate export recipe in `knowledge/09_preregistration_H28-1_candidate.md`, built the full-map H28-1 research candidate `1113fba5f6cb` with seed 2026. It has 59,075 binary cells, zero known-label overlap, a single-band float32 TIFF on EPSG:32611 / 3730×3292 / the exact sample geotransform, an all-finite fallback, one-TIFF ZIP, and a 142-character note. Full model/input/code hashes and validation reports are in `docs/downloads/checks-gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.json`.
+- Independent `scripts/verify_downloads.py` checked all three unchanged weekly slots plus the separate research candidate: 0 failures. The original six weekly-slot GeoTIFF hashes and `docs/downloads/manifest.json` hash were compared before/after and are unchanged. No weekly slot or leaderboard upload was used; no public score is claimed.
 
-### Pass 3 — full-request recheck
+### Pass 3 — final recheck against the full owner request (2026-10-02)
 
-Pending the full-map candidate export/format checks and final repository/PR review. The final recheck must include the user-requested site/download workflow, scientific limits, score uncertainty, tests, and the PR/merge outcome.
+| requirement | final evidence | remaining limit |
+|---|---|---|
+| Explain the 0.2477 result and investigate 0.3195 without inventing a score | `knowledge/01_why_0.2477_won_and_the_ceiling.md`; README and research page | 0.2477 and 0.3195 remain owner-reported; 0.3195 is unconfirmed and no 27GEMSDOE live score exists |
+| Graph mapped INGENIOUS/USGS traces and document structurally plausible missing connections | `src/gems27/graph.py`, `knowledge/04_topology_graph_argument.md`, `registry/topology_candidates.json`, topology page and link dossiers | graph/pixel evidence does not establish that any individual proposed segment is load-bearing |
+| Rank distinct new geology hypotheses and test before any weekly slot | `knowledge/07_untried_hypotheses.md`, `registry/next_hypotheses.json`; H28-1 protocol in `knowledge/08`; seed-140–149 evidence in `evidence/h28_1_edge_holdout.json` | gate passed +0.00295 mean paired DTI, but one fold and one seed regressed; holdout is catalogue-internal and has the documented spatial-covariate limitation |
+| Produce a candidate only after the gate, keep existing weekly candidates separate | `knowledge/09_preregistration_H28-1_candidate.md`; research content id `1113fba5f6cb` | full-area candidate is unscored and is not a current slot; only an organizer-label live A/B can determine its real effect |
+| Deliver a valid single-band, in-range TIFF and explicitly address the prior range error | front-page Slot 1 download and note; separate candidate/fallback/ZIP on research page; `scripts/verify_downloads.py` | portal validator is private; if all listed variants are rejected, the owner must provide the exact message |
+| Provide clear upload steps, note, fallback instructions, and clean research/source pages | `docs/index.html`, `docs/executive-summary.html`, `docs/research.html`, `docs/sources.html` | the owner must perform any DrivenData sign-in/upload; the agent does not access or automate DrivenData |
+| Preserve the project prompt and reproducible provenance | verbatim north star in `README.md`; `AGENTS.md`, `registry/sources.json`, H28 source/code/input hashes and validation reports | competition data page still requires login; available owner-mirror derivatives are not an independent raw-data audit |
+| Test final code/site and candidate files | `.venv/bin/python -m pytest -q` (**42 passed**); Ruff and `py_compile` pass; `scripts/verify_downloads.py` (**0 failures**); `git diff --check` passes; original 3 weekly TIFF hashes and weekly manifest unchanged | no GPU or new external dataset was needed for H28-1; deeper models and H28-5 remain compute/data limited |
+| Create and merge a PR from this session branch | current session branch is `arena/01a0fec2-gemsdoe27`; PR/merge attempt will be reported from actual GitHub state, never inferred | remote permissions/checks may block; no upload or score is claimed |
+
+**Current disposition:** the existing three weekly candidates remain intact. H28-1 is the top research candidate cleared by the frozen spatial gate and is available as a separate, content-hashed file for a future controlled decision. No weekly submission slot, DrivenData upload, or public score was used.

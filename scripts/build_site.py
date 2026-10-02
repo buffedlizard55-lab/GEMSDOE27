@@ -68,6 +68,8 @@ def build() -> None:
     h28_hypotheses = h28["hypotheses"]
     h28_eval_path = EV / "h28_1_edge_holdout.json"
     h28_eval = J(h28_eval_path) if h28_eval_path.exists() else None
+    h28_candidate_path = DOCS / "downloads" / "h28_1_candidate_manifest.json"
+    h28_candidate = J(h28_candidate_path).get("candidate") if h28_candidate_path.exists() else None
     src = J(REG / "sources.json")["sources"]
     irr = J(REG / "irregularities.json")["items"]
     sc = J(REG / "live_scores.json")
@@ -120,6 +122,13 @@ The agent never uploads anything; you press the button.</div>
 
     # ---------------------------------------------------------------- executive summary
     rows_pay = "".join(f"<tr><td class='num'>{k}</td><td class='num'>{v:+.4f}</td></tr>" for k, v in pay.items())
+    h28_candidate_box = ""
+    if h28_candidate:
+        h28_candidate_box = f"""
+<div class="warnbox"><b>Separate H28-1 research file — not one of these three current weekly slots.</b>
+The candidate cleared the preregistered catalogue-internal gate (+0.00295 mean paired DTI; 3/4 folds, 9/10 seeds), but the negative NE fold and seed 149 are real caveats and the organizer-created test labels remain unobserved.
+<a href="research.html">Review the research</a> · <a href="downloads/{e(h28_candidate['nan'])}" download>research .tif</a> · <a href="downloads/{e(h28_candidate['zip'])}" download>.zip</a> · <a href="downloads/{e(h28_candidate['allfinite'])}" download>all-finite fallback</a>.
+Do not treat the holdout as a public score or as permission to overwrite a current slot.</div>"""
     pages["executive-summary.html"] = ("Executive summary", f"""
 <h1>Executive summary</h1>
 <p class="lead">What to submit, exactly how, what it can and cannot do, and what to do next.</p>
@@ -158,6 +167,7 @@ If all three are rejected, paste the exact message and the file name – that is
 <tr><td>1</td><td><b>A/B primary</b> (above)</td><td>now</td><td>Δ &gt; +0.0005: topology helps → slot 2 = file B. −0.0015 &lt; Δ ≤ +0.0005: no detectable effect → slot 2 = the owner's plain d2.8 file. Δ &lt; −0.0015: refuted on the real set → do not stack; slot 2 = plain d2.8. (A drop beyond −0.0026 would contradict the arithmetic – investigate scoring or masking.)</td></tr>
 <tr><td>2</td><td>B = <span class="mono">{e(S['nan'])}</span> (d2.8 base + same links; <a href="downloads/{e(S['nan'])}" download>.tif</a> · <a href="downloads/{e(S['zip'])}" download>.zip</a>)<br><span class="small">Note ({len(S['note'])} chars): <code>{e(S['note'])}</code></span></td><td>after slot 1</td><td>d2.8 is a sibling <i>model</i> (+≈0.010 over d1.5), never scored; B stacks it with the topology dots.</td></tr>
 <tr><td>3</td><td>C = <span class="mono">{e(T['nan'])}</span> (0.2477 base minus {T['pruned_flank_shadow_px']:,} 100 m flank-shadow dots + {T['added_px']:,} T-v2 dots; <a href="downloads/{e(T['nan'])}" download>.tif</a> · <a href="downloads/{e(T['zip'])}" download>.zip</a>)<br><span class="small">Note ({len(T['note'])} chars): <code>{e(T['note'])}</code></span></td><td>after slot 1/2</td><td>Validated on the honest 4-fold spatial-CV OOF detector (seeds 130–139): 100 m flank-shadow dots have hit efficiency 0.0034 (15× below break-even 0.0521); stacking H27-4 r≤1px + T-v2 gains <b>+0.0141 DTI in 4/4 folds</b> (modelled live DTI ≈ 0.262–0.270).</td></tr></table>
+{h28_candidate_box}
 <p class="small">Limit: 3 submissions per week; one submission is chosen for both rounds (problem page and Official Rules, read in part). Choose the final one deliberately.</p>
 
 <h2>Modelled payoff of the shipped addition</h2>
@@ -249,17 +259,32 @@ Where a network sits near threshold, individual closures matter more than in a w
         for h in h28_hypotheses
     )
     if h28_eval:
+        negative_folds = [name for name, gain in h28_eval["gain_by_fold"].items() if gain < 0]
+        negative_seeds = [seed for seed, gain in h28_eval["gain_by_seed"].items() if gain < 0]
         h28_gate_text = (
             f"H28-1 holdout result: <b>{'PASS' if h28_eval['gate']['pass'] else 'NOT VALIDATED'}</b>; "
             f"mean paired ΔDTI {h28_eval['candidate_minus_baseline_mean_gain']:+.4f}, "
             f"improved folds {h28_eval['improved_fold_count']}/4, positive seeds "
-            f"{h28_eval['positive_seed_count']}/{len(h28_eval['seeds'])}. This is a catalogue-internal spatial holdout, "
+            f"{h28_eval['positive_seed_count']}/{len(h28_eval['seeds'])}. Negative fold(s): "
+            f"{e(', '.join(negative_folds) or 'none')}; negative seed(s): "
+            f"{e(', '.join(negative_seeds) or 'none')}. This is a catalogue-internal spatial holdout, "
             f"not a leaderboard result. <a href='../evidence/h28_1_edge_holdout.json'>Full cell-level evidence</a>."
         )
     else:
         h28_gate_text = (
             "H28-1 is preregistered but not yet tested. No H28 submission raster or weekly slot is authorized."
         )
+    if h28_candidate:
+        h28_gate_text += (
+            f"<br><b>Research-only full-map candidate (not a current weekly slot):</b> "
+            f"<a href='downloads/{e(h28_candidate['nan'])}'>download .tif</a> · "
+            f"<a href='downloads/{e(h28_candidate['zip'])}'>single-TIFF .zip</a> · "
+            f"<a href='downloads/{e(h28_candidate['allfinite'])}'>all-finite fallback</a>; "
+            f"{h28_candidate['emitted_px']:,} pixels. Note ({len(h28_candidate['note'])} chars): "
+            f"<code>{e(h28_candidate['note'])}</code>."
+        )
+    elif h28_eval and h28_eval["gate"]["pass"]:
+        h28_gate_text += " The H28-1 holdout passed; the full-map research artifact has not yet been built."
     pages["research.html"] = ("Research", f"""
 <h1>Research</h1>
 <p class="lead">Why the 0.2477 file won, what a higher score needs, and the ranked hypotheses.</p>

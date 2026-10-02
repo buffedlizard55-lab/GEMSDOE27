@@ -1,6 +1,6 @@
 {
   "generated": "2026-10-02",
-  "status": "H28-1 preregistered gate passed on seeds 140-149; no weekly submission slot has been used and no public score is claimed",
+  "status": "H28-1 preregistered gate passed; separate unscored full-area research candidate 1113fba5f6cb verified; three weekly slots unchanged; no public score claimed",
   "novelty_scope": "Scanned this checkout and the owner-provided comparison list. The sibling score list does not provide source code or complete method descriptions, so global novelty is unknown.",
   "target": "100 m fault-location pixels scored against newly expert-mapped faults; geothermal vents, wells and thermal favorability are contextual evidence, not the label target.",
   "baseline": {
@@ -33,9 +33,20 @@
       "cost": "medium (approximately 1-2 engineering days plus validation runtime)",
       "data_gate": "Uses the existing hash-pinned training-feature owner mirror; no new external data. Original competition-file provenance remains the caveat in data/manifest.json.",
       "validation": "knowledge/08_preregistration_H28-1.md; fresh seeds 140-149; paired comparison to B_oof + T-v2 + H27-4 r1",
-      "status": "preregistered gate passed; +0.00295 mean paired DTI vs current OOF best (3/4 folds, 9/10 seeds; evidence/h28_1_edge_holdout.json); catalogue-internal only, no public score",
+      "status": "preregistered gate passed (+0.00295 mean paired DTI); full-area research candidate 1113fba5f6cb built and format/range verified; unscored, not a current weekly slot",
       "implementation_result": "Mean \u0394DTI +0.0029488388 across 40 paired cells; mean baseline 0.1045377979, H28-1+T-v2+H27-4 mean 0.1074866367; one quadrant and one seed were negative. No submission written by the holdout runner.",
-      "holdout_evidence": "evidence/h28_1_edge_holdout.json; code SHA-256 runner 989dd1b03e448cc0ab84e1401dd197b4d25213b956163c2a3f33a8959d1e9bbd, transform 96dbe727891f06cd42e0f111df3696d8995cf2e62bd522c8781677365e024cf1"
+      "holdout_evidence": "evidence/h28_1_edge_holdout.json; code SHA-256 runner 989dd1b03e448cc0ab84e1401dd197b4d25213b956163c2a3f33a8959d1e9bbd, transform 96dbe727891f06cd42e0f111df3696d8995cf2e62bd522c8781677365e024cf1",
+      "full_map_candidate": {
+        "manifest": "docs/downloads/h28_1_candidate_manifest.json",
+        "geotiff": "docs/downloads/gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.tif",
+        "content_id": "1113fba5f6cb",
+        "sha256": "61f9b53de42786e6d48afa50fd453a87c57d5d7b9b626c7dcf28c2dfbd20f411",
+        "emitted_px": 59075,
+        "format_verified": true,
+        "weekly_slot_used": false,
+        "leaderboard_upload": false,
+        "public_score": null
+      }
     },
     {
       "id": "H28-2",

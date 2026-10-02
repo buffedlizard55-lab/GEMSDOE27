@@ -72,6 +72,17 @@ def test_research_page_lists_preregistered_h28_hypotheses_and_evidence_link():
     if evidence.exists():
         assert "Full cell-level evidence" in research
         assert "leaderboard result" in research
+    candidate_manifest = DOCS / "downloads" / "h28_1_candidate_manifest.json"
+    if candidate_manifest.exists():
+        candidate = json.loads(candidate_manifest.read_text())["candidate"]
+        assert candidate["format_verified"] is True
+        assert len(candidate["note"]) <= 200
+        assert candidate["nan"] in research and candidate["zip"] in research
+        assert candidate["allfinite"] in research
+        assert "not a current weekly slot" in research
+        summary = (DOCS / "executive-summary.html").read_text()
+        assert candidate["nan"] in summary
+        assert "not one of these three current weekly slots" in summary
 
 
 def test_no_score_is_claimed_for_27gemsdoe_and_scripts_never_fetch_drivendata():
