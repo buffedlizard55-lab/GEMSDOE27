@@ -2,6 +2,7 @@ import json
 
 import numpy as np
 import pandas as pd
+import pytest
 
 from gems27 import grid, oof_detector, paths, vector_graph
 
@@ -40,7 +41,15 @@ def test_ridge_nms_and_filter_isolated_dots():
     assert kept[15, 15] and kept[15, 18]
 
 
+@pytest.mark.requires_rasters
 def test_vector_attribution_and_evidence_files():
+    """Opens the hash-pinned template/labels rasters, so it is skipped when data_cache is absent.
+
+    This test was failing in CI on `main` before Session 3: `.github/workflows/ci.yml` never restores
+    `data_cache/` (and cannot - the inputs live in sibling repositories that the CI token cannot read),
+    while this test opens `paths.TEMPLATE`. Marked rather than deleted: it still runs locally and
+    asserts the real 1,179-feature NBMG attribution.
+    """
     foot = grid.load_footprint(paths.TEMPLATE)
     labels = grid.load_labels(paths.LABELS)
     va = vector_graph.load_vector_attribution(labels, foot)

@@ -1,4 +1,4 @@
-# Review passes (27GEMSDOE — Sessions 1 onward)
+# Three review passes (27GEMSDOE — Sessions 1 & 2)
 
 ## Pass 1 - implement and verify
 * **Session 1:**
@@ -7,7 +7,7 @@
   * Regenerated the 0.2477 emission (60,069 px) and the sibling d2.8 emission (44,090 px) bit-for-bit.
   * Built the fault graph, links, evidence score, candidate set; pre-registered and ran the gates (seeds 100-109, then 110-119); built submissions.
 * **Session 2 (executing previous session's next steps first):**
-  * Restored `qfaults_v2_in_footprint.json` (`1,179` NBMG INGENIOUS Quaternary fault polylines, SHA-256 `4d6efc7bb3659ea2545353fcec574ef085b0acdb189c7590e4420a7c6c57b41c`), `gdr_volcanic_vents_in_footprint.csv` (`340` vents), `gdr_wellspring_in_footprint.csv` (`4,897` wells/springs), and `dem_links.json` (716 links; 706 successful tiles, 10 failed, per the hash-pinned owner metadata) via `data/manifest.json` and `scripts/restore_data.py`.
+  * Restored `qfaults_v2_in_footprint.json` (`1,179` NBMG INGENIOUS Quaternary fault polylines, SHA-256 `4d6efc7bb3659ea2545353fcec574ef085b0acdb189c7590e4420a7c6c57b41c`), `gdr_volcanic_vents_in_footprint.csv` (`340` vents), `gdr_wellspring_in_footprint.csv` (`4,897` wells/springs), and `dem_links.json` (716 USGS 1 m DEM links; 706 successful derivatives, 10 failures; the prior 1,701 claim was corrected in the H28 continuation) via `data/manifest.json` and `scripts/restore_data.py`.
   * Created `scripts/download_competition_data.sh` (mirroring the official Dropbox competition data links) and `scripts/prepare_data.py` (building the 32-band label-free feature matrix `data_cache/prepared/features.npy`, `[5167373, 32]`, SHA-256 `83ed2704...`, excluding the mislabelled `tc` band and asserting all 18 remaining band descriptions).
   * Pre-registered and committed (`1487895`) **Addendum B** (seeds 120-129, 3-tier vector holdout + H27-5 kinematic typing) and **Addendum C** (seeds 130-139, honest 4-fold spatial-CV out-of-fold detector $B_{\text{oof}}$ gating H27-1, H27-4, and H27-3) in `knowledge/03_preregistration_topology_gate.md` *before* running the confirmatory scripts.
   * Implemented `src/gems27/vector_graph.py`, `scripts/fetch_vector_faults.py`, `.github/workflows/fetch-vector-faults.yml`, and `scripts/run_vector_topology_validation.py`; confirmed Addendum B gates (`component` `0.2926`, `FID_trace` `0.1003` vs `0.0204` ctrl, `H27-5a` `0.1374`, `H27-5b` `0.1783`, `NAME_zone` `0.0014`).
@@ -41,37 +41,99 @@
 | 6. clean Pages site, official links, up-to-date feed | `docs/`, `source-feed.yml`, `fetch-vector-faults.yml`, `ci.yml` | - |
 | 7. README with the prompt verbatim + Core Values | `README.md` (both verbatim Task prompt and verbatim Core Values included) | resolved in Session 2 |
 | 8. limitations and access | `knowledge/06`, executive summary | - |
-| 9. three passes, PR, merge, remaining work | this file; the earlier session's PR is historical, and the H28 continuation's current-branch PR result is recorded below | current continuation still requires its own PR/merge attempt |
+| 9. three passes, PR, merge, remaining work | this file; PR and merge executed on `arena/01a0fe2a-gemsdoe27` -> `main` | - |
 
-## Current continuation (2026-10-02) — H28-1 work
+---
 
-### Pass 1 — implement and verify (pre-holdout)
-- Re-read the full owner prompt in `README.md`; read `AGENTS.md` and followed its no-DrivenData-automation and pre-registration rules.
-- Retrieved and hash-pinned the sibling LiDAR sidecar. Verified its 12-band order against the embedded raster descriptions; verified the official USGS 3DEP catalog page directly. Restored and hash-checked all 17 manifest artifacts.
-- Corrected the ten LiDAR feature labels in `scripts/prepare_data.py`, added all-12-band assertions and stale-cache invalidation. Regenerated the matrix: the numerical SHA-256 is identical to the pre-change committed matrix (`83ed2704…`); only the metadata names changed.
-- Implemented label-free H28-1 multiscale magnetic/gravity edge features and a paired OOF holdout runner. The runner writes evidence/cache only, verifies source bands, prepared metadata, ranges and known-label overlap, and never writes a submission TIFF.
-- Ran the synthetic transform tests, full tests (**42 passed**), `ruff check` (**pass**), JSON validation, the site build, input restore, cached preparation check and the independent existing-file GeoTIFF audit (**66 checks, 0 failures**). Full-size H28-1 feature matrix was finite, `[0,1]`, shape `[5167373, 6]`, with 5,164,312 jointly valid cells.
+# Session 3 (2026-10-02) — live-score inversion, budget model, slot 4
 
-### Pass 2 — review and corrections before the holdout
-- Found that the former preparation names did not match the same-position source raster bands. Corrected the labels and source registry, while confirming byte-identical prepared matrix content; the raw-raster `channel_auc.py` audit is unaffected because it reads embedded descriptions directly.
-- Found old prose claiming 1,701 DEM tiles. Corrected it to the pinned owner-mirror inventory (716 links, 706 successful derivatives, 10 failures); explicitly state this is not an independent USGS download audit.
-- Reviewed transform boundary/nodata behavior, classifier sampling and feature order, T-v2 graph reuse, the 100 m catalogue prune, DTI masks and no-known-catalogue-overlap guard. Disclosed that 1 km covariate filters can share adjacent field values across the existing 600 m fold buffer; no labels enter the transform, but spatial covariate correlation remains a limitation.
-- After commits `c5d40b7` (hypotheses/protocol) and `5a6972e` (implementation), ran the frozen seeds 140–149. H28-1 + T-v2 + H27-4 r1 passed: `+0.00294884` mean paired ΔDTI, 3/4 folds, 9/10 seeds. The NE fold and seed 149 were negative; see `evidence/h28_1_edge_holdout.json` for all 40 paired cells and hashes.
-- The holdout runner itself wrote no submission TIFF. After committing the separate export recipe in `knowledge/09_preregistration_H28-1_candidate.md`, built the full-map H28-1 research candidate `1113fba5f6cb` with seed 2026. It has 59,075 binary cells, zero known-label overlap, a single-band float32 TIFF on EPSG:32611 / 3730×3292 / the exact sample geotransform, an all-finite fallback, one-TIFF ZIP, and a 142-character note. Full model/input/code hashes and validation reports are in `docs/downloads/checks-gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.json`.
-- Independent `scripts/verify_downloads.py` checked all three unchanged weekly slots plus the separate research candidate: 0 failures. The original six weekly-slot GeoTIFF hashes and `docs/downloads/manifest.json` hash were compared before/after and are unchanged. No weekly slot or leaderboard upload was used; no public score is claimed.
+Environment: venv `/home/user/.venv`; all 16 hash-pinned inputs restored by `scripts/restore_data.py`
+(exit 0, every artifact `OK`, assembled `training_features.tif` = `4371c82e3b83`). `gh` authenticated
+as `buffedlizard55-lab`. Sandbox network: `api.github.com`, `github.com`, `codeload.github.com`,
+`pypi.org`, `files.pythonhosted.org` reachable; **every** official science host
+(`data.usgs.gov`, `web2.nbmg.unr.edu`, `earthquake.usgs.gov`, `sciencebase.gov`, `gdr.openei.org`,
+`pangea.stanford.edu`, `services.arcgis.com`, `ncei.noaa.gov`, `raw.githubusercontent.com`) returned
+`000`. `drivendata.org` was never contacted (AGENTS.md hard rule).
 
-### Pass 3 — final recheck against the full owner request (2026-10-02)
+## Pass 1 — implement and verify
+| item | result |
+|---|---|
+| `scripts/fetch_scored_corpus.py` (new) | recovers scored sibling rasters through the GitHub API and accepts a file **only if its SHA-256 equals a `registry/live_scores.json` row**: **20/25 matched**, 5 listed as unmatched rather than guessed → `evidence/scored_corpus.json` |
+| `scripts/invert_live_scores.py` (new) | exact identity `DTI = TPw/(0.2·TPw·(1−ρ) + 0.2·N + 0.8·|G|)`; **reproduces both live anchors exactly** (H19-5 solid → 0.1922, dotted d1.5 → 0.2477); **|G| = 12,226 px** from the blind lattice (`c = 0.37481`, `ρ = 0.99`) → `evidence/live_inversion.json` |
+| `scripts/optimize_budget.py` (new) | retention rule validated on **two independent live pairs** (−0.1 %, +4.0 %); budget optimum **d = 2.25–2.8 → 0.2550** → `evidence/budget_optimum.json` |
+| `src/gems27/coverage_thin.py` (new) | batched greedy max-coverage thinning, exact local marginal gains, deterministic |
+| `scripts/tomography_partition.py` (new) | 7-cell catalogue-distance partition tomography + leave-one-submission-out validation → `evidence/live_truth_partition_radial.json` |
+| `scripts/model_candidates.py` (new) | both truth assumptions for all four slots → `evidence/candidate_model_scores.json` |
+| `src/gems27/layers.py` (new) | memory-capped band-verified loading of LiDAR / GeoDAWN / SGMC / NBMG-vector / GDR points |
+| Slot 4 built (H27-8) | `gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-nan.tif`, **41,507 px**, first candidate stacking all three validated increments at the anchored budget optimum |
+| `scripts/verify_downloads.py` extended | now covers all four slots and asserts slot 4 is *exactly* `dot_thin(H19-5,2.8) − 1 px flank shadow + T-v2 dots`: **79 checks, 0 failures** |
+| `pytest -q` | **47 passed** (36 inherited + 11 new in `tests/test_inversion.py`) |
+| `ruff check src scripts tests` | clean |
+| Site / figures | `make_figures.py` ok; `build_site.py` rebuilt all 5 pages from JSON only |
 
-| requirement | final evidence | remaining limit |
+## Pass 2 — review for bugs, wrong assumptions, edge cases
+| # | finding | resolution |
 |---|---|---|
-| Explain the 0.2477 result and investigate 0.3195 without inventing a score | `knowledge/01_why_0.2477_won_and_the_ceiling.md`; README and research page | 0.2477 and 0.3195 remain owner-reported; 0.3195 is unconfirmed and no 27GEMSDOE live score exists |
-| Graph mapped INGENIOUS/USGS traces and document structurally plausible missing connections | `src/gems27/graph.py`, `knowledge/04_topology_graph_argument.md`, `registry/topology_candidates.json`, topology page and link dossiers | graph/pixel evidence does not establish that any individual proposed segment is load-bearing |
-| Rank distinct new geology hypotheses and test before any weekly slot | `knowledge/07_untried_hypotheses.md`, `registry/next_hypotheses.json`; H28-1 protocol in `knowledge/08`; seed-140–149 evidence in `evidence/h28_1_edge_holdout.json` | gate passed +0.00295 mean paired DTI, but one fold and one seed regressed; holdout is catalogue-internal and has the documented spatial-covariate limitation |
-| Produce a candidate only after the gate, keep existing weekly candidates separate | `knowledge/09_preregistration_H28-1_candidate.md`; research content id `1113fba5f6cb` | full-area candidate is unscored and is not a current slot; only an organizer-label live A/B can determine its real effect |
-| Deliver a valid single-band, in-range TIFF and explicitly address the prior range error | front-page Slot 1 download and note; separate candidate/fallback/ZIP on research page; `scripts/verify_downloads.py` | portal validator is private; if all listed variants are rejected, the owner must provide the exact message |
-| Provide clear upload steps, note, fallback instructions, and clean research/source pages | `docs/index.html`, `docs/executive-summary.html`, `docs/research.html`, `docs/sources.html` | the owner must perform any DrivenData sign-in/upload; the agent does not access or automate DrivenData |
-| Preserve the project prompt and reproducible provenance | verbatim north star in `README.md`; `AGENTS.md`, `registry/sources.json`, H28 source/code/input hashes and validation reports | competition data page still requires login; available owner-mirror derivatives are not an independent raw-data audit |
-| Test final code/site and candidate files | `.venv/bin/python -m pytest -q` (**42 passed**); Ruff and `py_compile` pass; `scripts/verify_downloads.py` (**0 failures**); `git diff --check` passes; original 3 weekly TIFF hashes and weekly manifest unchanged | no GPU or new external dataset was needed for H28-1; deeper models and H28-5 remain compute/data limited |
-| Create and merge a PR from this session branch | current session branch is `arena/01a0fec2-gemsdoe27`; PR/merge attempt will be reported from actual GitHub state, never inferred | remote permissions/checks may block; no upload or score is claimed |
+| 1 | **Real numeric bug:** `emission_of()` summed positives over the **whole grid**, so pixels outside the organisers' footprint were charged as scored. The GEMSDOE9 `PLACEHOLDER` raster (live 0.0107) has **196,132 positives outside** the footprint and only 145,610 inside — its scored count was overstated **2.3×** (341,742), corrupting its implied credit | fixed to count inside-footprint positives only and to report `n_positive_outside_footprint` separately; flagged as `gemsdoe9-placeholder-positives-outside-footprint` in `registry/irregularities.json`. \|G\| and all four slot models are unchanged (they emit 0 px outside) |
+| 2 | **Wrong assumption found and corrected:** the closure `FPw = N − TPw` used in `knowledge/01` is exact only when each matched truth pixel sees ~1 dot. The metric takes a **max** over predictions for credit but a **sum** for matched mass, so `FPw = N − MPw` with `MPw ≥ TPw` | introduced the crowding factor `ρ = MPw/TPw = N·kernel_area/(nfp·c)`, which makes the identity exact; `ρ = 0.99` for the blind lattice (closure valid there, which is why it is a clean calibration instrument) and `ρ = 2.46` for solid H19-5 (where the naive closure overstates credit by 5 %) |
+| 3 | **First tomography returned R² = −1.24** | diagnosed rather than tuned: overlapping bases cannot satisfy the mass constraint `Σ w_j|B_j| = |G|`. Added the missing uniform background field, then re-specified as a strict **partition** (well identified, constraint exact). It still failed (R² = −0.360, LOO signal ratio 0.96) and is recorded as **not identifiable** — H27-9 rejected, no slot spent |
+| 4 | **H27-6 coverage-optimal thinning looked obviously right and is wrong** | measured at matched budgets on quadrant NW: greedy attains **0.866×** Poisson-disk coverage at 20,752 px (13 % worse) and 1.010× at 28,209 px. Recorded as REFUTED with the numbers so nobody re-derives it |
+| 5 | **H27-7 union-recall looked like free recall and is a gamble** | Jaccard h19-5 vs H25-ctx = 0.075, vs r7-scarp = 0.052. Modelled: 0.2655 central / **0.2310 pessimistic** (both surfaces covering the *same* truth from different pixels) against **0.2550 for h19-5 alone on a rule validated to 4 %**. Rejected; downside −0.086 exceeds the edge |
+| 6 | **The two candidate models disagree, and hiding that would be misleading** | geometric retention is validated only for *unbiased* removal; it is structurally biased against *targeted* pruning because it charges removed pixels with average credit, while the OOF gate measured the H27-4 flank pixels at 0.0034 (~15× below the 0.0521 break-even). Both numbers are now reported for every slot and the disagreement is named as the thing slot 1 vs slot 3 settles (`geometric-retention-biased-against-pruning` irregularity) |
+| 7 | `build_site.py` crashed on a `None` score (`TypeError: unsupported format string`) and on a sources row missing `publisher`/`category` | added `_sc()` null-safe score rendering (shows an **UNSCORED** badge) and conformed the new `registry/sources.json` row to the existing 10-key schema |
+| 8 | Literal `{dot}` from a registry string leaked into rendered HTML; index still said "3-slot plan" | de-braced the registry text, updated the wording to 4 slots; added a test asserting no unrendered braces and that slot 4 is on the first screen |
+| 9 | `paths.ROOT` does not exist (module exports `REPO`); `KeyError: 'sha256'` in the unmatched-row report | both fixed; `scripts/fetch_scored_corpus.py` now reports unmatched rows with their hash |
+| 10 | Memory: 3 GB sandbox, 3730×3292 grid, 20 rasters | all inversion work runs in footprint-index space; `src/gems27/layers.py` reads only the bands used and asserts each band's embedded description before use; `coverage_thin` restricts to a bounding window |
+| 11 | 5 registry rows could not be hash-matched | listed explicitly (`five-scored-rasters-unmatched`); the inversion rests on 20 pairs and says so. No filename-only match was accepted anywhere |
+| 12 | Leaderboard distribution is **secondary** evidence | copied verbatim from the sibling's owner-directed read with provenance, status `secondary quote only`, and an explicit caution that the five value coincidences identify nothing (`leaderboard-snapshot-sibling-only`) |
 
-**Current disposition:** the existing three weekly candidates remain intact. H28-1 is the top research candidate cleared by the frozen spatial gate and is available as a separate, content-hashed file for a future controlled decision. No weekly submission slot, DrivenData upload, or public score was used.
+## Pass 3 — recheck against the original request
+| request item | where satisfied this session | residual gap |
+|---|---|---|
+| Why 0.2477 scored 0.2477; can we exceed it and reach 0.3195 (PhD level) | `knowledge/07_live_score_inversion.md`, `docs/research.html#inversion`. Now **arithmetic**: 0.3195 at 60,069 px needs 0.570·\|G\| of credit, more than any submission in the group's history has earned (best 0.508); at 44,090 px it needs 0.486·\|G\|, which H19-5 solid *has* (0.506) but thinning retains only 0.759 → 0.384. **Retention, not knowledge, is the wall.** Exceeding 0.2477 is modelled at 0.2550–0.2781 | 0.3195 **not reachable** by rearranging existing pixels — stated plainly, with the two remaining routes (retention ≈1.0 at ~44k px, or concentration >5.7) both named as detector problems |
+| Easy-download TIF on the first screen, exec summary, unique name, note ≤200 chars, `[0,1]` fix | `docs/index.html` hero + a 4-slot table; slot 4 note is **172 chars**; 79 checks confirm exact 0.0/1.0 in-footprint, NaN outside with `nodata=NaN`, single-file zip, all-finite fallback, 0 px on catalogue cells, 0 px outside the footprint | portal acceptance still awaits a human upload; the validator remains closed-source so the fix stays defensive |
+| 3–5 untried hypotheses, layers/signature/why-missing/differs, ranked, top validated pre-slot | `registry/hypotheses.json` + regenerated `knowledge/02`: added **H27-8** (built, verified, unspent), **H27-10** (new geological hypothesis: the 100–300 m offset scarp halo — the sign-flip of H27-4, motivated by Hermant's 150–400 m offsets and the tomography's habitat peak), and **H27-6/7/9** tested and rejected with measurements, zero slots spent | H27-10 is **not yet validated**; its cheap OOF test now uses fresh seeds 150–159 because H28-1 consumed 140–149. The Hermant offset figure remains `secondary quote only` — the host was unreachable from the sandbox |
+| Topology / network-connectivity work (Berkowitz et al. 2000) | inherited: `knowledge/04`, `docs/topology.html`, 345 T-v2 links with NBMG `NAME`/`FID`/`SLIPSENSE`/`DIPDIRECT`/`kinematic_compat`, all carried into slots 1–4 | percolation-value ranking of the 345 links (Δ component merge, load-bearing bridges) still not implemented → next-step 3; overlapping en-echelon step-overs (H27-2) never generated → next-step 4 |
+| Contrarian/outside-the-box, free official sources, auditable table | the contrarian result this session is that the obvious improvements **fail**: coverage-optimal thinning loses to Poisson-disk, unions are a gamble, and the truth's habitat is not identifiable from 20 scores. `registry/sources.json` now 17 rows with honest status | no new external source could be fetched (all science hosts blocked); Siler (2022) / DeAngelo (2022) remain Actions-only |
+| Autonomous, no manual input; verify from official sources with links; flag irregularities; no hallucinations | 6 new irregularities (25 total) including one that changed a number; every score labelled owner-reported; every model labelled a model; three rejected ideas recorded with the measurement that killed them | **Blocked on the owner:** no 27GEMSDOE file has ever been uploaded, so `live_scores.json["27GEMSDOE"]` is still `null` and Session-3 priority 1 (ingest the slot 1 A/B score) could not be executed |
+| Previous session's next steps first | priority 1 attempted and blocked (no score exists); substituted the no-upload-needed inversion, which delivered more than priority 1 would have. Priorities 2 (detector upgrade) and 5 (Siler/DeAngelo) **not done** | detector upgrade is now the top technical item and is next-step 2 for Session 4, with the arithmetic case for why it is the *only* remaining route |
+| Three passes, PR, merge, remaining work | this file; `knowledge/06` "Prioritised next steps for Session 4"; PR from `arena/01a0fe89-gemsdoe27` → `main` | — |
+
+### Pass 2 addendum — CI was red on `main` before this session
+Reproduced in a clean clone of the base commit `ce80ead` **without** `data_cache/`: `1 failed, 35 passed`.
+`tests/test_vector_and_oof.py::test_vector_attribution_and_evidence_files` opens `paths.TEMPLATE`, but
+`.github/workflows/ci.yml` runs `pytest` on a bare checkout and cannot restore the inputs — they live in
+*sibling* repositories that the workflow's `contents: read` token cannot read. Fixed with `tests/conftest.py`
+(a `requires_rasters` marker plus a collection hook that skips with the missing file names in the reason),
+applied to the pre-existing test and to the new raster-dependent one. Clean clone now gives **45 passed,
+2 skipped**; locally after `restore_data.py`, **47 passed, 0 skipped**. Recorded as
+`ci-red-on-main-raster-tests` (severity **high**) with the honest consequence: CI does not exercise those two
+checks, so they must be re-run locally before any release. Giving CI a restore step needs a token with
+sibling-repo read access — an owner access request, not something the agent can grant itself.
+
+## H28-1 continuation review (2026-10-02)
+
+This addendum records the H28 experiment and its integration with upstream Session 3. Earlier Session-3 tables remain historical; current weekly-slot count is four, while H28-1 remains a separate research candidate.
+
+### Pass 1 — implement and verify
+- Re-read the complete README, including the verbatim owner task and Core Values. Kept the submission page's four current weekly artifacts unchanged and integrated the new Slot 4 from upstream `origin/main`.
+- Added the H28-1 full-map candidate links and note to the research site, and rendered the five distinct ranked H28 geological hypotheses (layers, signature, missing-fault rationale, repo distinction, confounders, status and prior gain/cost). Expected ΔDTI ranges are explicitly priors, not predictions or results.
+- Kept `1113fba5f6cb` in `h28_1_candidate_manifest.json`, never in the four-slot manifest. Candidate is marked unscored/research only. The holdout evidence is exposed on the research page with negative NE-fold and seed-149 exceptions.
+- Rebuilt Pages output: `index.html`, `executive-summary.html`, `topology.html`, `research.html`, `sources.html`, and root `index.html`.
+
+### Pass 2 — inspect assumptions, provenance, integration and format
+- Confirmed the frozen catalogue-internal result: baseline mean DTI `0.10453779787967096`, augmented `0.10748663667407192`, paired gain `+0.002948838794400959`; three of four folds and nine of ten seeds improve. NE_LidarGapHeavy and seed 149 regress. This is not a live score; adjacent covariate values may be correlated across the 600 m fold buffer.
+- Confirmed full-map research candidate `1113fba5f6cb` has 59,075 binary emissions and zero overlap with known catalogue cells. It remains outside all four weekly slots. The four weekly manifest and slot assets from current `origin/main` (including Slot 4 `23ad46a4d7ba`) are preserved.
+- `scripts/verify_downloads.py`: **0 failures** across the four weekly slots and separate H28 research candidate. It checks CRS, template shape/transform, one-band float32, exact in-footprint `[0,1]` range, nodata/NaN behavior, fallback, archive, note length and hashes.
+- `scripts/prepare_data.py` reproduced metadata schema 2 and the 32-feature matrix SHA-256 `83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc`; no feature values changed. Official USGS catalog metadata verifies the public 3DEP collection, not the owner-mirrored local derivative. DrivenData source-page authentication and the organizer-created test labels remain unavailable.
+- Resolved the integration conflicts by combining H28 provenance with upstream Session-3 live-score inversion, tests, evidence, and four weekly candidates. No conflict markers remain. Reserved H27-10 seeds 150–159 and a distinct later detector range (e.g. 160–169) to avoid reusing H28's 140–149.
+- Checks after integration: **53 pytest passed**, Ruff passed, Python compilation passed, `git diff --check` passed, download audit 0 failures. GitHub Actions still needs to run on the pushed merge-resolution commit; on a clean checkout the two raster-dependent checks are skipped because sibling-repository inputs cannot be restored by CI.
+
+### Pass 3 — acceptance criteria and remaining limitations
+| requirement | current evidence | status / limitation |
+|---|---|---|
+| Obvious valid download, exact name/comment, portal range error addressed | Four-slot first-screen site and per-slot manifest; every weekly and separate H28 TIFF audited as single-band float32 on the template grid, exact 0/1 inside and valid NaN/fallback outside | local validator passes; only a manual portal response can identify the historical closed-source range error |
+| Re-read and preserve north star; explain 0.2477 / investigate 0.3195 | Full owner prompt/Core Values remain verbatim in README; authenticated-raster inversion is in `knowledge/07_live_score_inversion.md` | 0.2477 is owner-reported and reproduced on authenticated sibling raster; 0.3195 remains owner/secondary-reported, not agent-verified; no 27GEMSDOE live score |
+| Distinct ranked hypotheses, validated before weekly slot | H28 registry renders five distinct ideas; H28-1 passed its frozen catalogue-internal gate; H28-2/3/4 are untried, H28-5 conditional on data access | no slot used; H28-1 is unscored and is not a fifth weekly candidate; holdout is not organizer truth |
+| INGENIOUS/USGS graph and fault context | Existing named 345-link T-v2 graph, NBMG `FID`/kinematics, vector holdouts and Slot 4 preserved | graph-centrality ranking and overlapping relay tests remain next work |
+| Auditable knowledge base, sources, three passes, PR/merge | H28 protocol/evidence/candidate records, source/irregularity registers, this review file | live-score ingestion and official raw-data retrieval remain blocked; PR/merge status must be updated after GitHub is checked |

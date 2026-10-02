@@ -17,6 +17,9 @@ from pathlib import Path
 
 import numpy as np
 import rasterio
+from scipy.ndimage import distance_transform_edt
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = Path(os.environ.get("GEMS_DATA_DIR", ROOT / "data_cache"))
@@ -51,7 +54,7 @@ def main() -> int:
     with rasterio.open(DATA / "dotted_h19_5_d1_5_nan.tif") as s:
         base = np.nan_to_num(s.read(1)) > 0
     ok(int(foot.sum()) == 5167373 and tprof[:2] == (32611, (3730, 3292)), "template: EPSG:32611, 3730x3292, 5,167,373 px footprint")
-    slots = tuple(s for s in ("primary", "secondary", "tertiary", "h28_1_research") if s in man)
+    slots = tuple(s for s in ("primary", "secondary", "tertiary", "quaternary", "h28_1_research") if s in man)
     for slot in slots:
         m = man[slot]
         for variant in ("nan", "allfinite"):
@@ -87,6 +90,24 @@ def main() -> int:
         A = np.nan_to_num(s.read(1)) > 0
     ok(bool((A & base).sum() == base.sum()), "primary is a superset of the 0.2477 emission (nothing removed)")
     ok(int(A.sum() - base.sum()) == man["primary"]["added_px"], f"primary adds exactly {man['primary']['added_px']} px to the 0.2477 emission")
+    # slot 4 must be exactly: dot_thin(H19-5, 2.8) minus the 1 px catalogue-flank shadow, plus T-v2 dots
+    if "quaternary" in man:
+        from gems27 import thinning
+        with rasterio.open(DATA / "h19_5_nan.tif") as s:
+            raw = np.nan_to_num(s.read(1)) > 0
+        base28 = thinning.dot_thin(raw & ~cat, 2.8)
+        dcat = distance_transform_edt(~cat)
+        base28_r1 = base28 & (dcat > 1.0)
+        with rasterio.open(DL / man["quaternary"]["nan"]) as s:
+            Dm = np.nan_to_num(s.read(1)) > 0
+        ok(bool((Dm & base28_r1).sum() == base28_r1.sum()),
+           "slot4 contains the whole pruned d2.8 base (nothing else removed)")
+        ok(int(Dm.sum()) == man["quaternary"]["emitted_px"],
+           f"slot4 emits exactly {man['quaternary']['emitted_px']} px (manifest)")
+        ok(int(Dm.sum() - base28_r1.sum()) == man["quaternary"]["added_px"],
+           f"slot4 adds exactly {man['quaternary']['added_px']} T-v2 dots on top of the pruned base")
+        ok(int((base28 & ~base28_r1).sum()) == man["quaternary"]["pruned_flank_shadow_px"],
+           f"slot4 prunes exactly {man['quaternary']['pruned_flank_shadow_px']} catalogue-flank-shadow px")
     ok(len(list(DL.glob("*.tif"))) == len(set(p.name for p in DL.glob("*.tif"))), "all .tif file names are unique")
     print(f"\n{len(FAIL)} failure(s)")
     return 1 if FAIL else 0

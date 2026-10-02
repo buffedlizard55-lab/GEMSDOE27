@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "generated_utc": "2026-10-02T23:12:22Z",
-  "status": "research candidate only; not one of the current three weekly slots; unscored",
+  "status": "research candidate only; not one of the current four weekly slots; unscored",
   "holdout_evidence": "evidence/h28_1_edge_holdout.json",
   "candidate": {
     "hypothesis": "H28-1 + T-v2 + H27-4 r1",
