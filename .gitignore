@@ -5,6 +5,8 @@ __pycache__/
 .venv/
 venv/
 data_cache/
+data/*
+!data/manifest.json
 *.egg-info/
 .DS_Store
 # large intermediate arrays are never committed; small derived evidence is

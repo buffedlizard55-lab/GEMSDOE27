@@ -1,0 +1,57 @@
+{
+  "names": [
+    "mag_anom",
+    "rtp",
+    "tmi_hg",
+    "geod_2ndinv",
+    "iso_grav_anom_slope",
+    "geod_shearrate",
+    "geod_dilaterate",
+    "tmi_vg",
+    "deq_n100a15",
+    "iso_grav_anom_vg",
+    "det_elev",
+    "iso_grav_anom",
+    "tmi",
+    "depth_to_base_surf",
+    "ieq_n100a15",
+    "cond_surf",
+    "iso_grav_anom_hg",
+    "det_elev_slope",
+    "lidar_scarp_p95",
+    "lidar_scarp_max",
+    "lidar_slope_p95",
+    "lidar_lappos_p95",
+    "lidar_lappos_max",
+    "lidar_lapneg_p95",
+    "lidar_lapneg_max",
+    "lidar_rough_p95",
+    "lidar_openness_neg",
+    "lidar_lrm_abs",
+    "lidar_cos2strike",
+    "lidar_sin2strike",
+    "det_local_relief",
+    "det_gradient"
+  ],
+  "n_features": 32,
+  "shape": [
+    5167373,
+    32
+  ],
+  "footprint_px": 5167373,
+  "grid_shape": [
+    3730,
+    3292
+  ],
+  "crs": "EPSG:32611",
+  "sha256": "83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc",
+  "inputs": {
+    "template": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+    "training_features": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+    "lidar_scarp_features_u8": "d580bb8bdcdb941e32fefb8b38044bc5bf04e199bf2e83498c3576e6fc465568",
+    "labels": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+    "qfaults_v2_in_footprint": "4d6efc7bb3659ea2545353fcec574ef085b0acdb189c7590e4420a7c6c57b41c",
+    "dem_links": "8804dbff8754dd885df88bf412cced52b0be6490aa79142f4588700a8e4ada7b"
+  },
+  "note": "Label-free feature matrix for spatial-CV detectors. Band 6 ('tc') is excluded because it is rank-identical to radiometric total count (Spearman 1.0000); all remaining 18 training bands are verified by embedded description."
+}
