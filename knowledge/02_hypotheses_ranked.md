@@ -38,11 +38,12 @@ Ranking rule: expected DTI gain x probability the test can validate it / cost. B
 * **Physical signature:** Retain a gap link only if both segments are critically stressed (high slip/dilation tendency) and dip senses are synthetic (relay) or antithetic (accommodation zone) rather than conflicting.
 * **Why it catches a fault missing from USGS/INGENIOUS:** Replaces the data-driven strike domain by an independent stress field and adds dip/slip attributes the raster lacks.
 * **How it differs from the repo:** No repo layer uses an independent stress model; all kinematics so far are data-driven.
-* **Status:** Needs external data. Both sources are free, official and public domain; ScienceBase listing (27.35 MB INGENIOUS-area shapefile zip, doi:10.5066/P9YL58W6) and the USGS Qfaults page (Qfaults_GIS.zip 16 MB) were verified, but neither could be downloaded from the sandbox - a GitHub-runner step is required.
+* **Status:** Needs a CI download-and-derive job (not written yet). Both sources are free and official, and their obtainability is now EVIDENCED from a GitHub runner: the NBMG INGENIOUS Qfaults ArcGIS layer (22,956 polylines, 23 attributes incl. DIPDIRECT/SLIPSENSE/FTYPE_/MAPSCALE) is queryable, and USGS Qfaults_GIS.zip (32.4 MB, application/zip) is downloadable. The Siler (2022) stress release is listed (27.35 MB INGENIOUS-area zip) but its file download is not yet verified.
 * **Expected gain:** Small to moderate, on the topology class only.
-* **Cost:** 1-2 days.
-* **External data (free, official):** [Siler (2022) slip & dilation tendency, Great Basin](https://www.sciencebase.gov/catalog/item/6296974dd34ec53d276bb33d) - listing verified; download unverified
-* **External data (free, official):** [USGS Qfaults GIS](https://earthquake.usgs.gov/static/lfs/nshm/qfaults/Qfaults_GIS.zip) - page verified; download unverified
+* **Cost:** 1-2 days (CI job + attributed vector graph + trace-level holdout).
+* **External data (free, official):** [NBMG Qfaults_INGENIOUS ArcGIS REST layer 0 (22,956 polylines with dip/slip attributes)](https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0) - verified queryable from a GitHub runner 2026-10-02
+* **External data (free, official):** [USGS Qfaults GIS (zip, 32.4 MB)](https://earthquake.usgs.gov/static/lfs/nshm/qfaults/Qfaults_GIS.zip) - verified downloadable from a GitHub runner 2026-10-02 (application/zip)
+* **External data (free, official):** [Siler (2022) slip & dilation tendency, Great Basin (USGS ScienceBase)](https://www.sciencebase.gov/catalog/item/6296974dd34ec53d276bb33d) - listing verified; file download not yet verified
 
 ## H27-2 (rank 5): Step-over / relay-typed linking (oblique tip-to-tip, overlapping en-echelon tips)
 

@@ -49,19 +49,24 @@
    "signature": "Retain a gap link only if both segments are critically stressed (high slip/dilation tendency) and dip senses are synthetic (relay) or antithetic (accommodation zone) rather than conflicting.",
    "why": "Replaces the data-driven strike domain by an independent stress field and adds dip/slip attributes the raster lacks.",
    "differs": "No repo layer uses an independent stress model; all kinematics so far are data-driven.",
-   "status": "Needs external data. Both sources are free, official and public domain; ScienceBase listing (27.35 MB INGENIOUS-area shapefile zip, doi:10.5066/P9YL58W6) and the USGS Qfaults page (Qfaults_GIS.zip 16 MB) were verified, but neither could be downloaded from the sandbox - a GitHub-runner step is required.",
+   "status": "Needs a CI download-and-derive job (not written yet). Both sources are free and official, and their obtainability is now EVIDENCED from a GitHub runner: the NBMG INGENIOUS Qfaults ArcGIS layer (22,956 polylines, 23 attributes incl. DIPDIRECT/SLIPSENSE/FTYPE_/MAPSCALE) is queryable, and USGS Qfaults_GIS.zip (32.4 MB, application/zip) is downloadable. The Siler (2022) stress release is listed (27.35 MB INGENIOUS-area zip) but its file download is not yet verified.",
    "gain": "Small to moderate, on the topology class only.",
-   "cost": "1-2 days.",
+   "cost": "1-2 days (CI job + attributed vector graph + trace-level holdout).",
    "external": [
     {
-     "name": "Siler (2022) slip & dilation tendency, Great Basin",
-     "url": "https://www.sciencebase.gov/catalog/item/6296974dd34ec53d276bb33d",
-     "obtainable": "listing verified; download unverified"
+     "name": "NBMG Qfaults_INGENIOUS ArcGIS REST layer 0 (22,956 polylines with dip/slip attributes)",
+     "url": "https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0",
+     "obtainable": "verified queryable from a GitHub runner 2026-10-02"
     },
     {
-     "name": "USGS Qfaults GIS",
+     "name": "USGS Qfaults GIS (zip, 32.4 MB)",
      "url": "https://earthquake.usgs.gov/static/lfs/nshm/qfaults/Qfaults_GIS.zip",
-     "obtainable": "page verified; download unverified"
+     "obtainable": "verified downloadable from a GitHub runner 2026-10-02 (application/zip)"
+    },
+    {
+     "name": "Siler (2022) slip & dilation tendency, Great Basin (USGS ScienceBase)",
+     "url": "https://www.sciencebase.gov/catalog/item/6296974dd34ec53d276bb33d",
+     "obtainable": "listing verified; file download not yet verified"
     }
    ]
   },

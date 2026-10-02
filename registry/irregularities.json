@@ -102,6 +102,12 @@
    "severity": "low",
    "issue": "8 of the 345 shipped links pass within ~100 m of a third mapped system, so they are not pure two-system gaps; they belong to the validated rule and are flagged in their dossiers.",
    "action": "A reviewer may drop them; effect on the shipped dots is small."
+  },
+  {
+   "id": "usgs-qfaults-size-discrepancy",
+   "severity": "low",
+   "issue": "The USGS Faults page says the GIS zip is 16 MB; the server reports 32,371,696 bytes (feed check, 2026-10-02).",
+   "action": "Treat the page text as stale; the feed records the live size."
   }
  ]
 }

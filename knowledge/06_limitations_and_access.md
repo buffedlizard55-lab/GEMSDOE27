@@ -20,14 +20,14 @@
 | Confirm the deadline (page: Dec 3 2026 11:59 p.m. UTC vs rules: 5 p.m. ET) | unresolved discrepancy |
 | Disclose generative-AI use in the final narrative | Official Rules; see AI_DISCLOSURE.md |
 | Optional: a geologist to review the 345 dossiers (`docs/topology.html`) | the final round re-scores against expert-expanded labels |
-| Optional: run the GitHub Actions workflow to download USGS Qfaults GIS and Siler (2022) data | H27-5; both sources are free, official, listed and verified, not downloadable from the sandbox |
+| Optional: approve a CI job that downloads the NBMG INGENIOUS Qfaults layer (22,956 polylines with dip/slip attributes; verified queryable from a runner) and USGS Qfaults GIS (32.4 MB; verified downloadable), and Siler (2022) | H27-5 and a trace-level holdout; obtainability is evidenced in `docs/data/feed.json`, the job itself is not written |
 | Optional: DrivenData `1m_DEM_links.csv` (login) | supervised scarp detector (sibling hypothesis H25-3) |
 
 ## Remaining work (ordered by expected value per hour)
 1. Owner submits slot 1 (primary, A/B against 0.2477); record the score.
 2. Decide slot 2 by the rules in the executive summary (stack d2.8 only if slot 1 >= 0.2477).
 3. Build an honest label-blind surface (spatial-CV detector) to gate H27-3/H27-4 on the holdout.
-4. Pull Qfaults vector + Siler stress via CI; type the links (H27-5).
+4. Write the CI job that pulls the NBMG INGENIOUS Qfaults vector layer (22,956 polylines; `DIPDIRECT`, `SLIPSENSE`, `FTYPE_`, `MAPSCALE`), build the attributed *vector* graph, validate on a trace-level holdout (hide whole mapped traces), and type the links (H27-5); add Siler stress.
 5. Supervised scarp detector on 1 m DEM with geologist-labelled scarps.
 
 ## Previous sessions' next steps (from the sibling 24GEMSDOE record) - status
