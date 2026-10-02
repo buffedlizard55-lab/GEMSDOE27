@@ -33,7 +33,7 @@ jobs:
           set -euo pipefail
           git config user.name 'GEMS site build'
           git config user.email 'gems-site@users.noreply.github.com'
-          git add docs knowledge
+          git add docs knowledge index.html
           git commit -m "site: rebuild from registries" || exit 0
           for i in 1 2 3; do git pull --rebase origin "$GITHUB_REF_NAME" && git push origin "HEAD:$GITHUB_REF_NAME" && exit 0; sleep $((i*4)); done
           exit 1

@@ -42,6 +42,12 @@ Scores shown are owner-reported. This site never contacts drivendata.org.</foote
 <script src="assets/app.js"></script></body></html>"""
 
 
+def rebase(text: str, prefix: str) -> str:
+    """Prefix every relative href/src (used for the repository-root copy of the front page)."""
+    import re
+    return re.sub(r'(href|src)="(?!https?:|#|mailto:|data:)([^"]+)"', lambda m: f'{m.group(1)}="{prefix}{m.group(2)}"', text)
+
+
 def kb(n: float, d=0) -> str:
     return f"{n:,.{d}f}"
 
@@ -262,6 +268,12 @@ Stacking only verified/modelled increments gives ≈0.26–0.27 – so 0.3195 ne
 
     for fname, (title, body) in pages.items():
         (DOCS / fname).write_text(layout(fname, title, body, stamp))
+    # Repository-root entry: GitHub Pages may be configured as main:/ (the API refused to change it), in which case the
+    # root URL must show the one-click page. Same content, relative paths rebased onto docs/.
+    t, b = pages["index.html"]
+    banner = ('<div class="okbox small">This is the repository-root copy of the front page (Pages is served from the repository root). '
+              'All other pages are under <a href="executive-summary.html">docs/</a>.</div>')
+    (ROOT / "index.html").write_text(rebase(layout("index.html", t, banner + b, stamp), "docs/"))
 
     # derived markdown knowledge docs (single source of truth = registry JSON)
     md = ["# Untried hypotheses, ranked (generated from `registry/hypotheses.json`; do not edit by hand)\n",
