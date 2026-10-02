@@ -25,4 +25,4 @@ Exact 0.0/1.0 (or sanitised probabilities) inside the footprint, NaN outside wit
 `verify_downloads.py` passing, no pixel on a catalogue cell, a documented hypothesis and its holdout gate result, and an entry in `docs/downloads/manifest.json`.
 
 ## Next steps inherited from this session
-`knowledge/06_limitations_and_access.md` -> "Remaining work". Do those first.
+`knowledge/06_limitations_and_access.md` -> "Current prioritised next steps". Do those first.

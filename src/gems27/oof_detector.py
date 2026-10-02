@@ -15,7 +15,7 @@ from sklearn.ensemble import HistGradientBoostingClassifier
 
 from . import grid, paths, thinning
 
-BUFFER_PX = 6           # 600 m buffer around each test quadrant
+BUFFER_PX = 6  # 600 m buffer around each test quadrant
 PRE_THIN_FRAC = 0.0245  # pre-thinning ridge budget matching the H19-5 -> d1.5 operating density
 
 
@@ -47,12 +47,21 @@ def fit_predict_oof_probabilities(
     labels: np.ndarray,
     fold: np.ndarray,
     *,
+    extra_features: np.ndarray | None = None,
     neg_ratio: int = 10,
     seed: int = 2026,
 ) -> np.ndarray:
-    """Predict strictly out-of-fold fault probabilities across all 4 spatial quadrants."""
+    """Predict strictly out-of-fold probabilities; optional rows must follow ``foot`` order."""
     X_foot = np.load(paths.PREPARED_FEATURES, mmap_mode="r")
     foot_rc = np.argwhere(foot)
+    if X_foot.shape[0] != len(foot_rc):
+        raise ValueError(
+            f"prepared features have {X_foot.shape[0]} rows for {len(foot_rc)} footprint cells"
+        )
+    if extra_features is not None:
+        extra_features = np.asarray(extra_features)
+        if extra_features.ndim != 2 or extra_features.shape[0] != len(foot_rc):
+            raise ValueError("extra_features must be a 2-D row matrix in row-major footprint order")
     y_foot = labels[foot]
     oof_prob = np.zeros(grid.SHAPE, dtype=np.float32)
 
@@ -74,9 +83,15 @@ def fit_predict_oof_probabilities(
             l2_regularization=5.0,
             random_state=seed + f,
         )
-        clf.fit(X_foot[idx], y_foot[idx].astype(int))
+        if extra_features is None:
+            x_train = X_foot[idx]
+            x_test = X_foot[fm[foot]]
+        else:
+            x_train = np.concatenate((X_foot[idx], extra_features[idx]), axis=1)
+            x_test = np.concatenate((X_foot[fm[foot]], extra_features[fm[foot]]), axis=1)
+        clf.fit(x_train, y_foot[idx].astype(int))
         te_foot = fm[foot]
-        prob = clf.predict_proba(X_foot[te_foot])[:, 1].astype(np.float32)
+        prob = clf.predict_proba(x_test)[:, 1].astype(np.float32)
         rc = foot_rc[te_foot]
         oof_prob[rc[:, 0], rc[:, 1]] = prob
 

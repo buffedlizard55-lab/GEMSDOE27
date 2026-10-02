@@ -151,7 +151,7 @@
    "used_for": "Hash-pinned inputs; the 0.2477 file; metric/thinning/holdout conventions (re-implemented here)",
    "status": "read and hash-verified",
    "accessed": "2026-10-02",
-   "evidence": "labels sha256 7ba308cc...; template 2176d08e...; 0.2477 file 68d0e2e4...; training raster 4371c82e... (all re-verified).",
+   "evidence": "labels sha256 7ba308cc...; template 2176d08e...; 0.2477 file 68d0e2e4...; training raster 4371c82e... (all re-verified). Pinned sibling metadata `data/external/lidar_scarp_features.json` was independently retrieved from commit `07345ea0604953d7efb858d9cfbc21e20c7aca0b`; SHA-256 `9ef0df6e87598a8b0cd52fe821661e5fdb3a00568c5d9b1c5d61fd6b242dcd41`. It provides the 12 band names, quantisation and first-eight descriptor semantics; the prepared feature matrix values retain the prior SHA-256 after correcting labels.",
    "feed": true,
    "feed_kind": "github",
    "feed_repo": "buffedlizard55-lab/GEMSDOE24"

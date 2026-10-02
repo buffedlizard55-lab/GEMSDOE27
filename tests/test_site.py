@@ -61,6 +61,19 @@ def test_front_page_has_download_and_exact_note():
     assert "UNSCORED" in idx
 
 
+def test_research_page_lists_preregistered_h28_hypotheses_and_evidence_link():
+    research = (DOCS / "research.html").read_text()
+    registry = json.loads((ROOT / "registry" / "next_hypotheses.json").read_text())
+    for hypothesis in registry["hypotheses"]:
+        assert hypothesis["id"] in research
+    assert "knowledge/07_untried_hypotheses.md" in research
+    assert "knowledge/08_preregistration_H28-1.md" in research
+    evidence = ROOT / "evidence" / "h28_1_edge_holdout.json"
+    if evidence.exists():
+        assert "Full cell-level evidence" in research
+        assert "leaderboard result" in research
+
+
 def test_no_score_is_claimed_for_27gemsdoe_and_scripts_never_fetch_drivendata():
     sc = json.loads((ROOT / "registry" / "live_scores.json").read_text())
     assert all(x["score"] is None for x in sc["27GEMSDOE"])

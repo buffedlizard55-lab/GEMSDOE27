@@ -64,6 +64,10 @@ def build() -> None:
     cs = J(EV / "candidate_summary.json")
     op = J(EV / "operating_point_model.json")
     hyp = J(REG / "hypotheses.json")["hypotheses"]
+    h28 = J(REG / "next_hypotheses.json")
+    h28_hypotheses = h28["hypotheses"]
+    h28_eval_path = EV / "h28_1_edge_holdout.json"
+    h28_eval = J(h28_eval_path) if h28_eval_path.exists() else None
     src = J(REG / "sources.json")["sources"]
     irr = J(REG / "irregularities.json")["items"]
     sc = J(REG / "live_scores.json")
@@ -235,6 +239,27 @@ Where a network sits near threshold, individual closures matter more than in a w
     # ---------------------------------------------------------------- research
     hrows = "".join(f"<tr><td><b>{e(h['id'])}</b><br><span class='small'>rank {h['rank']}</span></td><td><b>{e(h['title'])}</b><br><span class='small'>{e(h['layers'])}</span></td>"
                     f"<td>{e(h['signature'])}</td><td>{e(h['why'])}</td><td>{e(h['differs'])}</td><td>{e(h['status'])}</td><td>{e(h['gain'])}<br><span class='small'>cost: {e(h['cost'])}</span></td></tr>" for h in hyp)
+    h28rows = "".join(
+        f"<tr><td><b>{e(h['id'])}</b><br><span class='small'>rank {h['rank']}</span></td>"
+        f"<td><b>{e(h['title'])}</b><br><span class='small'>{e(', '.join(h['layers']))}</span></td>"
+        f"<td>{e(h['signature'])}</td><td>{e(h['why_missing_faults'])}</td>"
+        f"<td>{e(h['differs_from_repo'])}</td><td>{e(h['status'])}</td>"
+        f"<td>{h['expected_holdout_delta_dti'][0]:+.3f} to {h['expected_holdout_delta_dti'][1]:+.3f}<br>"
+        f"<span class='small'>cost: {e(h['cost'])}</span></td></tr>"
+        for h in h28_hypotheses
+    )
+    if h28_eval:
+        h28_gate_text = (
+            f"H28-1 holdout result: <b>{'PASS' if h28_eval['gate']['pass'] else 'NOT VALIDATED'}</b>; "
+            f"mean paired ΔDTI {h28_eval['candidate_minus_baseline_mean_gain']:+.4f}, "
+            f"improved folds {h28_eval['improved_fold_count']}/4, positive seeds "
+            f"{h28_eval['positive_seed_count']}/{len(h28_eval['seeds'])}. This is a catalogue-internal spatial holdout, "
+            f"not a leaderboard result. <a href='../evidence/h28_1_edge_holdout.json'>Full cell-level evidence</a>."
+        )
+    else:
+        h28_gate_text = (
+            "H28-1 is preregistered but not yet tested. No H28 submission raster or weekly slot is authorized."
+        )
     pages["research.html"] = ("Research", f"""
 <h1>Research</h1>
 <p class="lead">Why the 0.2477 file won, what a higher score needs, and the ranked hypotheses.</p>
@@ -250,6 +275,10 @@ Stacking only verified/modelled increments gives ≈0.26–0.27 – so 0.3195 ne
 <p>Full write-up: <a href="{REPO_URL}/blob/main/knowledge/01_why_0.2477_won_and_the_ceiling.md">knowledge/01</a>.</p>
 <h2>Hypotheses, ranked (expected DTI gain × probability of validation ÷ cost)</h2>
 <div class="tw"><table><tr><th>ID</th><th>Hypothesis · layers</th><th>Physical signature</th><th>Why it catches a fault missing from USGS/INGENIOUS</th><th>How it differs from the repo</th><th>Status</th><th>Gain · cost</th></tr>{hrows}</table></div>
+<h2>Next pre-registered tests (H28)</h2>
+<p>{h28_gate_text}</p>
+<p class="small">The five new geological hypotheses, availability checks, and frozen H28-1 protocol are documented in <a href="../knowledge/07_untried_hypotheses.md">knowledge/07</a> and <a href="../knowledge/08_preregistration_H28-1.md">knowledge/08</a>. Ranges below are expert priors, not measured DTI gains or score promises. The graph candidate remains a structural hypothesis: a pixel classifier score is not evidence that any individual fault gap is load-bearing.</p>
+<div class="tw"><table><tr><th>ID</th><th>Hypothesis · layers</th><th>Target physical signature</th><th>Why it could find uncatalogued faults</th><th>Difference from repository methods</th><th>Status</th><th>Expected holdout ΔDTI · cost</th></tr>{h28rows}</table></div>
 <h2>Contrarian, grounded notes</h2>
 <ul class="tight"><li>Point-wise AUC of any single channel is weak (best: lidar <code>lappos_max</code> 0.58); magnetic/gravity <i>values</i> sit near 0.5 – faults are edges, not values (<code>evidence/channel_auc.json</code>).</li>
 <li>The training band <code>tc</code> is rank-identical to the radiometric total-count grid (Spearman 1.0000), not a magnetic tilt/curvature as its metadata says – a documentation irregularity.</li>
@@ -313,7 +342,7 @@ Stacking only verified/modelled increments gives ≈0.26–0.27 – so 0.3195 ne
     (KN / "05_sources_and_verification.md").write_text("\n".join(md) + "\n")
     # lightweight CSV of the sources for the audit table
     with open(DOCS / "data" / "sources.csv", "w", newline="") as f:
-        w = csv.writer(f)
+        w = csv.writer(f, lineterminator="\n")
         w.writerow(["id", "title", "publisher", "url", "category", "status", "accessed"])
         for s in src:
             w.writerow([s["id"], s["title"], s["publisher"], s["url"], s["category"], s["status"], s["accessed"]])

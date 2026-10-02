@@ -6,8 +6,8 @@ Owner-reported reference: the 24GEMSDOE file scored **0.2477** (owner-reported);
 
 ## Start here every session (checklist)
 1. Re-read **Task prompt (verbatim)** and **Core Values (verbatim)** below. Maximize P(Win) and Own the Outcome are the focal point of every build, research and implementation decision.
-2. Do the previous session's next steps first: `knowledge/06_limitations_and_access.md` -> "Prioritised next steps for Session 3".
-3. Verify inputs: `python scripts/restore_data.py` (16 hash-pinned artifacts; SHA-256 in `data/manifest.json`), `python scripts/prepare_data.py`, then `python -m pytest -q` and `python scripts/verify_downloads.py`.
+2. Do the current prioritised next steps first: `knowledge/06_limitations_and_access.md` -> "Current prioritised next steps".
+3. Verify inputs: `python scripts/restore_data.py` (17 hash-pinned artifacts, including the pinned LiDAR band-metadata sidecar; SHA-256 in `data/manifest.json`), `python scripts/prepare_data.py`, then `python -m pytest -q` and `python scripts/verify_downloads.py`.
 4. Verify line by line against official sources and give links for manual review (`registry/sources.json`, `docs/sources.html`). Flag irregularities (`registry/irregularities.json`). No hallucinations: unknown stays unknown.
 5. Never automate drivendata.org (Terms of Use); never claim an upload, score, PR or merge without evidence.
 6. Before implementing anything new: 3-5 untried hypotheses with layers, physical signature, why it catches a fault missing from USGS/INGENIOUS, how it differs from the repo, ranked by expected DTI gain and cost (`registry/hypotheses.json`); validate the top one on the spatially blocked holdout **before** a weekly slot is spent. Current H28 candidates and the frozen H28-1 test are in `knowledge/07_untried_hypotheses.md`, `knowledge/08_preregistration_H28-1.md`, and `registry/next_hypotheses.json`.
@@ -40,19 +40,20 @@ Owner-reported reference: the 24GEMSDOE file scored **0.2477** (owner-reported);
 ## Map of the repo
 | path | what |
 |---|---|
-| `src/gems27/` | `metric.py`, `thinning.py`, `holdout.py`, `graph.py`, `links.py`, `candidates.py`, `topology_theory.py`, `submission.py`, `grid.py`, `paths.py`, **`vector_graph.py`** (NBMG INGENIOUS vector attribution & H27-5 kinematic compatibility), **`oof_detector.py`** (4-fold spatial-CV out-of-fold detector) |
-| `scripts/` | `restore_data.py`, `download_competition_data.sh`, `prepare_data.py`, `fetch_vector_faults.py`, `run_graph_report.py`, `run_topology_validation.py`, `run_topology_confirm.py`, `run_vector_topology_validation.py`, `run_oof_hypothesis_gates.py`, `build_candidates.py`, `build_submission27.py`, `verify_downloads.py`, `make_figures.py`, `build_site.py`, `refresh_source_feed.py`, `operating_point.py`, `channel_auc.py` |
-| `knowledge/` | 01 why 0.2477 won; 02 hypotheses (ranked); 03 pre-registration (incl. Addenda A, B, C); 04 topology & vector argument; 05 sources; 06 limitations/access |
-| `registry/` | `sources.json`, `hypotheses.json`, `irregularities.json`, `live_scores.json`, `topology_candidates.json` (345 links with NBMG/USGS vector fault names, `FID`, `SLIPSENSE`, `DIPDIRECT`, `kinematic_compat`) |
-| `evidence/` | machine-readable results (`topology_validation.json`, `topology_confirmation_v2.json`, `vector_topology_validation.json`, `oof_hypothesis_gates.json`, `data_preparation.json`, `graph_report.json`, `channel_auc.json`, `review_passes.md`) |
+| `src/gems27/` | `metric.py`, `thinning.py`, `holdout.py`, `graph.py`, `links.py`, `candidates.py`, `topology_theory.py`, `submission.py`, `grid.py`, `paths.py`, **`vector_graph.py`** (NBMG INGENIOUS vector attribution & H27-5 kinematic compatibility), **`oof_detector.py`** (4-fold spatial-CV detector), **`potential_edges.py`** (H28-1 label-free multiscale field transforms) |
+| `scripts/` | `restore_data.py`, `download_competition_data.sh`, `prepare_data.py`, `fetch_vector_faults.py`, `run_graph_report.py`, `run_topology_validation.py`, `run_topology_confirm.py`, `run_vector_topology_validation.py`, `run_oof_hypothesis_gates.py`, `run_h28_1_edge_holdout.py`, `build_candidates.py`, `build_submission27.py`, `verify_downloads.py`, `make_figures.py`, `build_site.py`, `refresh_source_feed.py`, `operating_point.py`, `channel_auc.py` |
+| `knowledge/` | 01 why 0.2477 won; 02 hypotheses (ranked); 03 pre-registration (incl. Addenda A, B, C); 04 topology & vector argument; 05 sources; 06 limitations/access; 07 H28 hypotheses; 08 frozen H28-1 protocol |
+| `registry/` | `sources.json`, `hypotheses.json`, `next_hypotheses.json`, `irregularities.json`, `live_scores.json`, `topology_candidates.json` (345 links with NBMG/USGS vector fault names, `FID`, `SLIPSENSE`, `DIPDIRECT`, `kinematic_compat`) |
+| `evidence/` | machine-readable results (`topology_validation.json`, `topology_confirmation_v2.json`, `vector_topology_validation.json`, `oof_hypothesis_gates.json`, `h28_1_edge_holdout.json`, `data_preparation.json`, `graph_report.json`, `channel_auc.json`, `review_passes.md`) |
 | `docs/` | GitHub Pages site (`index.html`, `executive-summary.html`, `topology.html`, `research.html`, `sources.html`), `downloads/`, `data/` (`topology_links.csv`, `topology_links.geojson`, `feed.json`, `vector_faults_status.json`) |
 | `.github/workflows/` | `source-feed.yml` (official sources only; never drivendata.org), `fetch-vector-faults.yml` (NBMG INGENIOUS ArcGIS REST check), `ci.yml` (tests + lint + site build) |
 
 ## Reproduce
 ```bash
 pip install -r requirements.txt
-GEMS_DATA_DIR=./data_cache python scripts/restore_data.py          # restores 16 hash-pinned artifacts (or run bash scripts/download_competition_data.sh outside the sandbox)
-python scripts/prepare_data.py                                     # builds 32-band label-free feature matrix (data_cache/prepared/features.npy)
+GEMS_DATA_DIR=./data_cache python scripts/restore_data.py          # restores 17 hash-pinned artifacts (or run bash scripts/download_competition_data.sh outside the sandbox)
+python scripts/prepare_data.py                                     # builds 32-band label-free feature matrix with sidecar-verified LiDAR names
+python scripts/run_h28_1_edge_holdout.py                           # frozen spatial holdout; never writes a submission TIFF
 python scripts/fetch_vector_faults.py                              # verifies qfaults_v2_in_footprint.json (1,179 NBMG polylines)
 python scripts/run_graph_report.py
 python scripts/run_topology_validation.py --seeds 100-109

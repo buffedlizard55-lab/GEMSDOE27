@@ -1,4 +1,4 @@
-# Three review passes (27GEMSDOE — Sessions 1 & 2)
+# Review passes (27GEMSDOE — Sessions 1 onward)
 
 ## Pass 1 - implement and verify
 * **Session 1:**
@@ -7,7 +7,7 @@
   * Regenerated the 0.2477 emission (60,069 px) and the sibling d2.8 emission (44,090 px) bit-for-bit.
   * Built the fault graph, links, evidence score, candidate set; pre-registered and ran the gates (seeds 100-109, then 110-119); built submissions.
 * **Session 2 (executing previous session's next steps first):**
-  * Restored `qfaults_v2_in_footprint.json` (`1,179` NBMG INGENIOUS Quaternary fault polylines, SHA-256 `4d6efc7bb3659ea2545353fcec574ef085b0acdb189c7590e4420a7c6c57b41c`), `gdr_volcanic_vents_in_footprint.csv` (`340` vents), `gdr_wellspring_in_footprint.csv` (`4,897` wells/springs), and `dem_links.json` (`1,701` USGS 1 m DEM tiles) via `data/manifest.json` and `scripts/restore_data.py`.
+  * Restored `qfaults_v2_in_footprint.json` (`1,179` NBMG INGENIOUS Quaternary fault polylines, SHA-256 `4d6efc7bb3659ea2545353fcec574ef085b0acdb189c7590e4420a7c6c57b41c`), `gdr_volcanic_vents_in_footprint.csv` (`340` vents), `gdr_wellspring_in_footprint.csv` (`4,897` wells/springs), and `dem_links.json` (716 links; 706 successful tiles, 10 failed, per the hash-pinned owner metadata) via `data/manifest.json` and `scripts/restore_data.py`.
   * Created `scripts/download_competition_data.sh` (mirroring the official Dropbox competition data links) and `scripts/prepare_data.py` (building the 32-band label-free feature matrix `data_cache/prepared/features.npy`, `[5167373, 32]`, SHA-256 `83ed2704...`, excluding the mislabelled `tc` band and asserting all 18 remaining band descriptions).
   * Pre-registered and committed (`1487895`) **Addendum B** (seeds 120-129, 3-tier vector holdout + H27-5 kinematic typing) and **Addendum C** (seeds 130-139, honest 4-fold spatial-CV out-of-fold detector $B_{\text{oof}}$ gating H27-1, H27-4, and H27-3) in `knowledge/03_preregistration_topology_gate.md` *before* running the confirmatory scripts.
   * Implemented `src/gems27/vector_graph.py`, `scripts/fetch_vector_faults.py`, `.github/workflows/fetch-vector-faults.yml`, and `scripts/run_vector_topology_validation.py`; confirmed Addendum B gates (`component` `0.2926`, `FID_trace` `0.1003` vs `0.0204` ctrl, `H27-5a` `0.1374`, `H27-5b` `0.1783`, `NAME_zone` `0.0014`).
@@ -41,4 +41,23 @@
 | 6. clean Pages site, official links, up-to-date feed | `docs/`, `source-feed.yml`, `fetch-vector-faults.yml`, `ci.yml` | - |
 | 7. README with the prompt verbatim + Core Values | `README.md` (both verbatim Task prompt and verbatim Core Values included) | resolved in Session 2 |
 | 8. limitations and access | `knowledge/06`, executive summary | - |
-| 9. three passes, PR, merge, remaining work | this file; PR and merge executed on `arena/01a0fe2a-gemsdoe27` -> `main` | - |
+| 9. three passes, PR, merge, remaining work | this file; prior PR and merge executed on `arena/01a0fe2a-gemsdoe27` -> `main` | - |
+
+## Current continuation (2026-10-02) — H28-1 work
+
+### Pass 1 — implement and verify (pre-holdout)
+- Re-read the full owner prompt in `README.md`; read `AGENTS.md` and followed its no-DrivenData-automation and pre-registration rules.
+- Retrieved and hash-pinned the sibling LiDAR sidecar. Verified its 12-band order against the embedded raster descriptions; verified the official USGS 3DEP catalog page directly. Restored and hash-checked all 17 manifest artifacts.
+- Corrected the ten LiDAR feature labels in `scripts/prepare_data.py`, added all-12-band assertions and stale-cache invalidation. Regenerated the matrix: the numerical SHA-256 is identical to the pre-change committed matrix (`83ed2704…`); only the metadata names changed.
+- Implemented label-free H28-1 multiscale magnetic/gravity edge features and a paired OOF holdout runner. The runner writes evidence/cache only, verifies source bands, prepared metadata, ranges and known-label overlap, and never writes a submission TIFF.
+- Ran the synthetic transform tests, full tests (**42 passed**), `ruff check` (**pass**), JSON validation, the site build, input restore, cached preparation check and the independent existing-file GeoTIFF audit (**66 checks, 0 failures**). Full-size H28-1 feature matrix was finite, `[0,1]`, shape `[5167373, 6]`, with 5,164,312 jointly valid cells.
+
+### Pass 2 — review and corrections before the holdout
+- Found that the former preparation names did not match the same-position source raster bands. Corrected the labels and source registry, while confirming byte-identical prepared matrix content; the raw-raster `channel_auc.py` audit is unaffected because it reads embedded descriptions directly.
+- Found old prose claiming 1,701 DEM tiles. Corrected it to the pinned owner-mirror inventory (716 links, 706 successful derivatives, 10 failures); explicitly state this is not an independent USGS download audit.
+- Reviewed transform boundary/nodata behavior, classifier sampling and feature order, T-v2 graph reuse, the 100 m catalogue prune, DTI masks and no-known-catalogue-overlap guard. Disclosed that 1 km covariate filters can share adjacent field values across the existing 600 m fold buffer; no labels enter the transform, but spatial covariate correlation remains a limitation.
+- No holdout has been run at this point. The unchanged submission files have not been replaced, and no weekly slot has been used.
+
+### Pass 3 — full-request recheck
+
+Pending the frozen seeds 140–149 result. The final recheck will be recorded only after the gate and post-run review; it must include the user-requested site/download workflow, scientific limits, score uncertainty, tests, and the PR/merge outcome.

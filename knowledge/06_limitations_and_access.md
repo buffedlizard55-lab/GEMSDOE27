@@ -24,7 +24,12 @@
 1. **No live score for 27GEMSDOE yet:** The agent never accesses or uploads to `drivendata.org` (per DrivenData Terms of Use). All three shipped 27GEMSDOE candidates (`5512495c6bd1`, `3ebd51534bb1`, `d466b251f309`) are **UNSCORED** until the human owner uploads them.
 2. **Real hidden test set vs. catalogue holdout:** While T-v2 is now validated on both 8-connected components (`0.2926`) and whole NBMG `FID` vector polylines (`0.1003`, `0.1374` with H27-5a, `0.1783` with H27-5b), any holdout constructed from `labels.tif` tests held-out pieces of the existing compilation rather than the organisers' newly created expert labels. Only the live Slot 1 A/B score (`score(5512495c6bd1) - 0.2477`) measures the exact transfer rate to the private/public test labels.
 3. **Cause of the historical `"Predicted values must be in range [0, 1]"` portal message:** Because the portal validator is closed-source, our fix is defensive (providing exact `{0.0, 1.0}` `float32` inside the footprint, `NaN` outside with `nodata=NaN`, a single-file `.zip`, and an `allfinite` zero-outside fallback, verified by 66 standalone checks in `scripts/verify_downloads.py`).
-4. **Reaching `0.3195` requires higher base recall or lower base false positives beyond `H19-5`:** Stacking T-v2 (`+1,259` gap-closure dots) and H27-4 (`-5,355` 100 m flank-shadow dots) on the `0.2477` base models to **`~0.262–0.270`**. Closing the remaining gap to `0.3195` requires a materially stronger scarp/lineament detector trained on the full 1 m 3DEP LiDAR DEM tiles (`dem_links.json`, 1,701 USGS tiles) or multi-scale 2D CNN/U-Net segmentation (as in Hermant et al. 2025 `FaultSEG`) rather than pixelwise tabular boosting alone.
+4. **Reaching `0.3195` requires higher base recall or lower base false positives beyond `H19-5`:** Stacking T-v2 (`+1,259` gap-closure dots) and H27-4 (`-5,355` 100 m flank-shadow dots) on the `0.2477` base models to **`~0.262–0.270`**. Closing the remaining gap to `0.3195` requires a materially stronger scarp/lineament detector or multi-scale 2D CNN/U-Net segmentation (as in Hermant et al. 2025 `FaultSEG`) rather than pixelwise tabular boosting alone. The pinned LiDAR sidecar reports 716 tile links, 706 successful derived tiles and 10 failures; this is an owner-mirror inventory, not a newly verified USGS download list.
+
+## Data audit corrections (2026-10-02)
+
+- **LiDAR feature labels were wrong, values were not shown to be wrong.** The pinned sibling sidecar (`data/external/lidar_scarp_features.json`, SHA-256 `9ef0df6e87598a8b0cd52fe821661e5fdb3a00568c5d9b1c5d61fd6b242dcd41`) and raster descriptions identify bands 1–10 as `ex_max`, `ex_mean`, `step_max`, `lapneg_max`, `lappos_max`, `downface_max`, `upface_max`, `cross_max`, `relief`, and `coh100`. `scripts/prepare_data.py` now labels these positional channels accurately and asserts all 12 descriptions. The rebuilt 32-column matrix has the same SHA-256 as the earlier matrix (`83ed2704…`), confirming no numerical channel change; the earlier feature-name interpretations are withdrawn. H28-1 is not run until the updated metadata check passes.
+- **DEM inventory count corrected.** Some previous prose claimed 1,701 tiles. The hash-pinned `dem_links.json` and pinned sidecar instead report 716 links/tiles total, of which 706 succeeded and 10 failed. The exact 1,701 figure was not supported by the restored inventory and has been removed from active prose. This count describes the owner mirror, not an independent official USGS download audit.
 
 ---
 
@@ -32,11 +37,11 @@
 
 1. **DrivenData submission & live score recording:** Upload **Slot 1 (`5512495c6bd1`)** on DrivenData, record the returned public score in `registry/live_scores.json`, and follow the pre-committed Slot 2 / Slot 3 decision tree (`3ebd51534bb1` or `d466b251f309`).
 2. **Portal error message (if any):** If any upload is rejected, paste the exact portal error string and filename into `registry/irregularities.json`.
-3. **1 m USGS DEM tile cache / GPU runner (for >0.30 scarp segmentation):** Downloading and processing the 1,701 1 m 3DEP LiDAR DEM tiles in `data_cache/dem_links.json` (or training a 2D U-Net / `FaultSEG` model on multi-azimuth hillshades) requires an external runner with full internet + GPU access.
+3. **1 m DEM/GPU runner (for >0.30 scarp segmentation):** The local owner-mirror inventory contains 716 links (706 successful derived tiles; 10 failed), not the previously reported 1,701. Reprocessing raw 1 m DEMs or training a 2D U-Net / `FaultSEG` model on multi-azimuth hillshades still requires an external runner with sufficient storage, full internet and a GPU; direct raw-tile retrieval was not verified in this sandbox.
 
 ---
 
-## Prioritised next steps for Session 3
+## Current prioritised next steps
 
 1. **Ingest the live Slot 1 A/B score (`score(5512495c6bd1) - 0.2477`):**
    - Compute the empirical live efficiency of the 1,259 T-v2 dots from the exact score difference.

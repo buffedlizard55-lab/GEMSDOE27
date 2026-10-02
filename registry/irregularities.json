@@ -114,6 +114,18 @@
    "severity": "low",
    "issue": "The USGS Faults page says the GIS zip is 16 MB; the server reports 32,371,696 bytes (feed check, 2026-10-02).",
    "action": "Treat the page text as stale; the feed records the live size."
+  },
+  {
+   "id": "lidar-feature-name-mismatch",
+   "severity": "medium",
+   "issue": "The prior scripts/prepare_data.py assigned feature names that did not match positional bands 1-10 of the restored lidar_scarp_features_u8.tif. The pinned sibling sidecar and embedded raster descriptions provide the correct order. No numerical misread was demonstrated: rebuilding after correcting labels produced the identical feature-matrix SHA-256 83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc.",
+   "action": "Corrected scripts/prepare_data.py to assert the 12 embedded band descriptions and use the verified names; added the sidecar to data/manifest.json and a regression test. The corrected preparation evidence is evidence/data_preparation.json. Old prepared-feature name associations are withdrawn; raw-band channel_auc.py reads embedded raster descriptions directly and is unaffected. No claim of improved model performance follows from this metadata correction."
+  },
+  {
+   "id": "dem-inventory-count-corrected",
+   "severity": "low",
+   "issue": "Prior project prose reported 1,701 1 m DEM tiles. The restored data_cache/dem_links.json and pinned sidecar instead report 716 links/tiles total, with 706 successful derived tiles and 10 failures.",
+   "action": "Corrected active prose and evidence/review_passes.md. This is an owner-mirror inventory count; it is not an independent official USGS tile-download audit."
   }
  ]
 }
