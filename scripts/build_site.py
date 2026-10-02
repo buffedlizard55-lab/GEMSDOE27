@@ -57,6 +57,13 @@ def build() -> None:
     man = J(DOCS / "downloads" / "manifest.json")
     P, S, T = man["primary"], man["secondary"], man["tertiary"]
     Q = man.get("quaternary")
+    h28_manifest_path = DOCS / "downloads" / "h28_1_candidate_manifest.json"
+    h28_manifest = J(h28_manifest_path) if h28_manifest_path.exists() else None
+    h28_candidate = h28_manifest.get("candidate") if h28_manifest else None
+    h28_hypothesis_path = REG / "next_hypotheses.json"
+    h28_hypotheses = J(h28_hypothesis_path).get("hypotheses", []) if h28_hypothesis_path.exists() else []
+    h28_evidence_path = EV / "h28_1_edge_holdout.json"
+    h28_eval = J(h28_evidence_path) if h28_evidence_path.exists() else None
     ms = J(EV / "candidate_model_scores.json") if (EV / "candidate_model_scores.json").exists() else None
     inv = J(EV / "live_inversion.json") if (EV / "live_inversion.json").exists() else None
     bo = J(EV / "budget_optimum.json") if (EV / "budget_optimum.json").exists() else None
@@ -143,6 +150,29 @@ def build() -> None:
     veff_fid = vval["tiers"]["FID_trace"]["efficiency_pooled"]
     pay = op["payoff_of_shipped_addition"]["by_efficiency"]
     size_mb = P["bytes_nan"] / 1e6
+    h28_gate_summary = ""
+    if h28_eval:
+        negative_folds = [name for name, gain in h28_eval["gain_by_fold"].items() if gain < 0]
+        negative_seeds = [seed for seed, gain in h28_eval["gain_by_seed"].items() if gain < 0]
+        h28_gate_summary = (
+            f"Frozen seeds 140–149: mean paired ΔDTI {h28_eval['candidate_minus_baseline_mean_gain']:+.5f}; "
+            f"{h28_eval['improved_fold_count']}/4 folds and {h28_eval['positive_seed_count']}/10 seeds improved. "
+            f"Negative fold(s): {', '.join(negative_folds) or 'none'}; negative seed(s): "
+            f"{', '.join(negative_seeds) or 'none'}. Catalogue-internal validation, not a leaderboard score."
+        )
+    h28_research_box = ""
+    if h28_candidate:
+        h28_research_box = f"""
+<div class="warnbox"><b>H28-1 research candidate — not one of the four weekly slots.</b>
+{e(h28_gate_summary)} Full-map candidate content id <code>{e(h28_candidate['content_id'])}</code>,
+{h28_candidate['emitted_px']:,} binary cells; no known-label overlap.
+<a href="downloads/{e(h28_candidate['nan'])}" download>research .tif</a> ·
+<a href="downloads/{e(h28_candidate['zip'])}" download>single-TIFF .zip</a> ·
+<a href="downloads/{e(h28_candidate['allfinite'])}" download>all-finite fallback</a>.
+Note ({len(h28_candidate['note'])} chars): <code>{e(h28_candidate['note'])}</code>.
+The organizer-created test labels remain unobserved; this is not a fifth weekly slot or a score.</div>"""
+    elif h28_eval:
+        h28_research_box = f'<div class="warnbox"><b>H28-1 holdout:</b> {e(h28_gate_summary)} The separate full-map research candidate has not been built.</div>'
     pages: dict[str, tuple[str, str]] = {}
 
     # ---------------------------------------------------------------- index
@@ -179,6 +209,7 @@ Exact steps, the "[0, 1]" troubleshooting and the 4-slot plan are in the <a href
   <tr><td><b>4 (NEW &mdash; all increments)</b></td><td><a href="downloads/{e(Q['nan'])}" download class="mono">{e(Q['nan'])}</a> &middot; <a href="downloads/{e(Q['zip'])}" download>.zip</a> &middot; <a href="downloads/{e(Q['allfinite'])}" download>allfinite</a></td><td class="num">{Q['emitted_px']:,}</td><td class="num">{mscore('slot4_quaternary_all_increments','model_score_geometric')} / {mscore('slot4_quaternary_all_increments','model_score_hybrid')}</td><td>d2.8 optimum base &minus; {Q['pruned_flank_shadow_px']:,} flank-shadow dots + {Q['added_px']:,} T-v2 dots. First candidate to stack <b>every</b> increment this programme validated, at the live-anchored budget; highest hybrid estimate of the four.</td></tr>
  </table>
 </div>
+{h28_research_box}
 <div class="warnbox"><b>Honest status.</b> We validated T-v2 across three holdout tiers (8-connected components: {eff['z>=3 dedup']:.3f}, whole NBMG FID vector polylines: {veff_fid['z>=3 dedup']:.3f} / H27-5b {veff_fid['z>=3 inter-FID + same_name + kinematic_compat (H27-5b)']:.3f}) and on a strictly out-of-fold 4-quadrant spatial-CV detector (ΔDTI {oof['variants']['plus_T_v2']['mean_dti_gain']:+.4f} solo, {oof['variants']['plus_T_v2_and_prune_r1']['mean_dti_gain']:+.4f} stacked with H27-4). Only a live score tests the organisers' newly created expert labels.
 Reaching the owner-stated leader (0.3195) is not possible with verified/modelled increments on H19-5 alone (they reach ≈0.262–0.270) – see <a href="research.html">research</a>.
 The agent never uploads anything; you press the button.</div>
@@ -199,6 +230,13 @@ score(A) − 0.2477 isolates the effect of the new class.</td></tr>
 <tr><td>Evidence</td><td>Pre-registered gate passed on seeds 100–109 and confirmed on fresh seeds 110–119 (efficiency {eff['z>=3 dedup']:.3f}; controls {con['control_pooled']:.3f}; random same-size subsets {con['random_same_size']['mean']:.3f}, 95th pct {con['random_same_size']['p95']:.3f}).</td></tr>
 <tr><td>Is 0.3195 reachable?</td><td>Not with verified/modelled increments (they reach ≈0.26–0.27). It needs ≈31% more weighted recall at equal false positives, or ≈46% fewer false-positive pixels at equal recall – i.e. new information. <a href="research.html">Why</a>.</td></tr>
 <tr><td>What is unknown</td><td>The real hidden-set effect; the cause of the portal's "[0, 1]" rejection; the live scores of all 27GEMSDOE files.</td></tr></table></div>
+
+<div class="card hero"><h2 style="margin-top:0">One-click: current Slot 1 TIFF</h2>
+<p><a class="btn" href="downloads/{e(P['nan'])}" download>⬇ Download current submission (.tif)</a>
+<a class="btn alt" href="downloads/{e(P['zip'])}" download>.zip</a>
+<a class="btn alt" href="downloads/{e(P['allfinite'])}" download>all-finite fallback</a></p>
+<p class="small mono">{e(P['nan'])} · SHA-256 {e(P['sha256_nan'])}</p>
+<p>Optional note ({len(P['note'])}/200 characters): <code>{e(P['note'])}</code></p></div>
 
 <h2>Exact submission steps</h2>
 <ol class="steps">
@@ -226,6 +264,7 @@ If all three are rejected, paste the exact message and the file name – that is
 <tr><td>2</td><td>B = <span class="mono">{e(S['nan'])}</span> (d2.8 base + same links; <a href="downloads/{e(S['nan'])}" download>.tif</a> · <a href="downloads/{e(S['zip'])}" download>.zip</a>)<br><span class="small">Note ({len(S['note'])} chars): <code>{e(S['note'])}</code></span></td><td>after slot 1</td><td>d2.8 is a sibling <i>model</i> (+≈0.010 over d1.5), never scored; B stacks it with the topology dots.</td></tr>
 <tr><td>3</td><td>C = <span class="mono">{e(T['nan'])}</span> (0.2477 base minus {T['pruned_flank_shadow_px']:,} 100 m flank-shadow dots + {T['added_px']:,} T-v2 dots; <a href="downloads/{e(T['nan'])}" download>.tif</a> · <a href="downloads/{e(T['zip'])}" download>.zip</a>)<br><span class="small">Note ({len(T['note'])} chars): <code>{e(T['note'])}</code></span></td><td>after slot 1/2</td><td>Validated on the honest 4-fold spatial-CV OOF detector (seeds 130–139): 100 m flank-shadow dots have hit efficiency 0.0034 (15× below break-even 0.0521); stacking H27-4 r≤1px + T-v2 gains <b>+0.0141 DTI in 4/4 folds</b> (modelled live DTI ≈ 0.262–0.270).</td></tr>
 <tr><td>4</td><td><b>D = NEW</b> <span class="mono">{e(Q['nan'])}</span> (d2.8 optimum base minus {Q['pruned_flank_shadow_px']:,} flank-shadow dots + {Q['added_px']:,} T-v2 dots; <a href="downloads/{e(Q['nan'])}" download>.tif</a> · <a href="downloads/{e(Q['zip'])}" download>.zip</a>)<br><span class="small">Note ({len(Q['note'])} chars): <code>{e(Q['note'])}</code></span></td><td>after slot 1 or 3</td><td>First candidate stacking <b>all three</b> validated increments at the live-anchored budget. Model {mscore('slot4_quaternary_all_increments','model_score_geometric')} (geometric) / <b>{mscore('slot4_quaternary_all_increments','model_score_hybrid')}</b> (hybrid) &mdash; the highest hybrid estimate of the four. Run slot 1 or 3 first: they measure whether the prune pays, which is the only term the two models disagree about.</td></tr></table>
+{h28_research_box}
 <p class="small">The geometric/hybrid pair is explained in <a href="research.html#inversion">the inversion</a>: they differ only in what the targeted H27-4 prune is charged, and slot&nbsp;1&nbsp;vs&nbsp;slot&nbsp;3 is the live A/B that settles it.</p>
 <p class="small">Limit: 3 submissions per week; one submission is chosen for both rounds (problem page and Official Rules, read in part). Choose the final one deliberately.</p>
 
@@ -308,9 +347,26 @@ Where a network sits near threshold, individual closures matter more than in a w
     # ---------------------------------------------------------------- research
     hrows = "".join(f"<tr><td><b>{e(h['id'])}</b><br><span class='small'>rank {h['rank']}</span></td><td><b>{e(h['title'])}</b><br><span class='small'>{e(h['layers'])}</span></td>"
                     f"<td>{e(h['signature'])}</td><td>{e(h['why'])}</td><td>{e(h['differs'])}</td><td>{e(h['status'])}</td><td>{e(h['gain'])}<br><span class='small'>cost: {e(h['cost'])}</span></td></tr>" for h in hyp)
+    h28rows = "".join(
+        f"<tr><td><b>{e(h['id'])}</b><br><span class='small'>rank {h['rank']}</span></td>"
+        f"<td><b>{e(h['title'])}</b><br><span class='small'>{'<br>'.join(e(x) for x in h['layers'])}</span></td>"
+        f"<td>{e(h['signature'])}</td><td>{e(h['why_missing_faults'])}</td>"
+        f"<td>{e(h['differs_from_repo'])}</td><td>{e(h['confounders'])}</td>"
+        f"<td>{e(h['status'])}</td><td>{h['expected_holdout_delta_dti'][0]:+.3f} to "
+        f"{h['expected_holdout_delta_dti'][1]:+.3f}<br><span class='small'>cost: {e(h['cost'])}</span></td></tr>"
+        for h in h28_hypotheses
+    )
     pages["research.html"] = ("Research", f"""
 <h1>Research</h1>
 <p class="lead">Why the 0.2477 file won, what a higher score needs, and the ranked hypotheses.</p>
+<h2 id="h28-1">H28-1 — multiscale potential-field edge coherence</h2>
+<p>The H28-1 transform uses label-free, multiscale edge strength and orientation agreement in the existing RTP magnetic and isostatic gravity grids. It tests a feature representation of geophysical boundaries that differs from the earlier pixelwise/tabular detector; it does not itself prove that any edge is a fault. The T-v2 additions remain a separate, geology-reviewable graph hypothesis.</p>
+<p><b>{e(h28_gate_summary) if h28_gate_summary else 'No frozen H28-1 holdout evidence is available.'}</b></p>
+{h28_research_box}
+<p class="small">Ranked hypotheses and result: <a href="{REPO_URL}/blob/main/knowledge/07_untried_hypotheses.md">H28 knowledge record</a>. Frozen protocol: <a href="{REPO_URL}/blob/main/knowledge/08_preregistration_H28-1.md">H28-1 preregistration</a> · full-map recipe/results: <a href="{REPO_URL}/blob/main/knowledge/09_preregistration_H28-1_candidate.md">candidate record</a> · <a href="{REPO_URL}/blob/main/evidence/h28_1_edge_holdout.json">cell-level holdout evidence</a>. The 1 km label-free filters can share covariate values across the existing 600 m quadrant buffer; no labels enter the transform, but spatial covariate correlation remains a limitation.</p>
+<h3>Five distinct H28 geological hypotheses, ranked</h3>
+<p class="small">Expected ΔDTI ranges are expert priors for the next holdout, not measurements or score guarantees. H28-1 is now tested; H28-2 to H28-4 remain untried and H28-5 is conditional on raw-data access. The grid-based result does not replace the graph-based structural argument for T-v2 gap closures.</p>
+<div class="tw"><table><thead><tr><th>ID · rank</th><th>Hypothesis · layers</th><th>Physical signature</th><th>Why a missing fault</th><th>Differs from repo</th><th>Confounders</th><th>Status</th><th>Prior ΔDTI · cost</th></tr></thead><tbody>{h28rows}</tbody></table></div>
 <h2 id="inversion">Session 3 &mdash; inverting all 20 live scores</h2>
 <p class="lead">The owner's scored rasters are still in the sibling repositories. All <b>20</b> that could be
 matched were downloaded through the GitHub API and accepted <b>only if their SHA-256 equalled a
@@ -479,7 +535,7 @@ Stacking only verified/modelled increments gives ≈0.26–0.27 – so 0.3195 ne
     (KN / "05_sources_and_verification.md").write_text("\n".join(md) + "\n")
     # lightweight CSV of the sources for the audit table
     with open(DOCS / "data" / "sources.csv", "w", newline="") as f:
-        w = csv.writer(f)
+        w = csv.writer(f, lineterminator="\n")
         w.writerow(["id", "title", "publisher", "url", "category", "status", "accessed"])
         for s in src:
             w.writerow([s["id"], s["title"], s["publisher"], s["url"], s["category"], s["status"], s["accessed"]])

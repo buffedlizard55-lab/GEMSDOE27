@@ -43,18 +43,21 @@ TRAINING_BANDS: list[tuple[int, str]] = [
     (18, "iso_grav_anom_hg"),
     (19, "det_elev_slope"),
 ]
+# Use the raster's embedded source-band names. A prior preparation pass mislabeled
+# several channels while preserving their values; see registry/irregularities.json.
 LIDAR_BANDS: list[tuple[int, str]] = [
-    (1, "lidar_scarp_p95"),
-    (2, "lidar_scarp_max"),
-    (3, "lidar_slope_p95"),
-    (4, "lidar_lappos_p95"),
-    (5, "lidar_lappos_max"),
-    (6, "lidar_lapneg_p95"),
-    (7, "lidar_lapneg_max"),
-    (8, "lidar_rough_p95"),
-    (9, "lidar_openness_neg"),
-    (10, "lidar_lrm_abs"),
+    (1, "ex_max"),
+    (2, "ex_mean"),
+    (3, "step_max"),
+    (4, "lapneg_max"),
+    (5, "lappos_max"),
+    (6, "downface_max"),
+    (7, "upface_max"),
+    (8, "cross_max"),
+    (9, "relief"),
+    (10, "coh100"),
 ]
+LIDAR_EXPECTED_DESCRIPTIONS = tuple(name for _, name in LIDAR_BANDS) + ("strike", "valid")
 
 
 def sha256_file(path: Path) -> str:
@@ -75,36 +78,80 @@ def main() -> int:
     dest = paths.PREPARED_FEATURES
     meta_path = paths.PREPARED_META
     ev_path = paths.EVIDENCE / "data_preparation.json"
-
-    if dest.exists() and meta_path.exists() and not args.force:
-        meta = json.loads(meta_path.read_text())
-        ev_path.write_text(json.dumps(meta, indent=2) + "\n")
-        print(json.dumps(meta, indent=2))
-        return 0
-
     foot = grid.load_footprint(paths.TEMPLATE)
     idx = np.flatnonzero(foot.ravel())
+    names = (
+        [name for _, name in TRAINING_BANDS]
+        + [f"lidar_{name}" for _, name in LIDAR_BANDS]
+        + ["lidar_cos2strike", "lidar_sin2strike", "det_local_relief", "det_gradient"]
+    )
+    input_hashes = {
+        "template": sha256_file(paths.TEMPLATE),
+        "training_features": sha256_file(paths.TRAINING),
+        "lidar_scarp_features_u8": sha256_file(paths.LIDAR),
+        "lidar_scarp_features_metadata": sha256_file(paths.LIDAR_META),
+        "labels": sha256_file(paths.LABELS),
+        "qfaults_v2_in_footprint": sha256_file(paths.QFAULT_VECTORS),
+        "dem_links": sha256_file(paths.DEM_LINKS),
+    }
 
-    with rasterio.open(paths.TEMPLATE) as t, rasterio.open(paths.TRAINING) as s, rasterio.open(paths.LIDAR) as lid:
+    # Do not silently reuse a cache with stale feature names or source hashes. A stale cache is
+    # rebuilt automatically; --force remains available for an explicit clean rebuild.
+    if dest.exists() and meta_path.exists() and not args.force:
+        try:
+            cached_meta = json.loads(meta_path.read_text())
+            cached_arr = np.load(dest, mmap_mode="r")
+            cache_valid = (
+                cached_meta.get("schema") == 2
+                and cached_meta.get("names") == names
+                and cached_meta.get("inputs") == input_hashes
+                and cached_meta.get("shape") == [int(len(idx)), int(len(names))]
+                and cached_arr.shape == (len(idx), len(names))
+                and cached_arr.dtype == np.dtype("float32")
+                and sha256_file(dest) == cached_meta.get("sha256")
+            )
+        except (OSError, ValueError, json.JSONDecodeError):
+            cache_valid = False
+        if cache_valid:
+            ev_path.write_text(json.dumps(cached_meta, indent=2) + "\n")
+            print(json.dumps(cached_meta, indent=2))
+            return 0
+        print(
+            "Existing prepared-feature cache is stale or has invalid metadata; rebuilding.",
+            flush=True,
+        )
+
+    lidar_meta = json.loads(paths.LIDAR_META.read_text())
+    if lidar_meta.get("bands") != list(LIDAR_EXPECTED_DESCRIPTIONS):
+        raise SystemExit("Pinned LiDAR metadata band list differs from the expected feature order")
+
+    with (
+        rasterio.open(paths.TEMPLATE) as t,
+        rasterio.open(paths.TRAINING) as s,
+        rasterio.open(paths.LIDAR) as lid,
+    ):
         for d in (s, lid):
             if d.shape != t.shape or d.crs != t.crs or d.transform != t.transform:
                 raise SystemExit("Input grid mismatch; no silent reprojecting")
         if s.count != 19:
             raise SystemExit(f"Expected 19 competition training bands, got {s.count}")
-        if lid.count != 12:
-            raise SystemExit(f"Expected 12 lidar scarp descriptor bands, got {lid.count}")
+        if lid.count != len(LIDAR_EXPECTED_DESCRIPTIONS):
+            raise SystemExit(
+                f"Expected {len(LIDAR_EXPECTED_DESCRIPTIONS)} LiDAR descriptor bands, got {lid.count}"
+            )
         for b, expected_name in TRAINING_BANDS:
             actual = (s.descriptions[b - 1] or "").split(" - ")[0].strip()
             if actual != expected_name:
                 raise SystemExit(f"Band {b} description mismatch: {actual!r} != {expected_name!r}")
-
-    names = (
-        [name for _, name in TRAINING_BANDS]
-        + [name for _, name in LIDAR_BANDS]
-        + ["lidar_cos2strike", "lidar_sin2strike", "det_local_relief", "det_gradient"]
-    )
+        actual_lidar = tuple((name or "").split(" - ")[0].strip() for name in lid.descriptions)
+        if actual_lidar != LIDAR_EXPECTED_DESCRIPTIONS:
+            raise SystemExit(
+                f"LiDAR band description mismatch: {actual_lidar!r} != {LIDAR_EXPECTED_DESCRIPTIONS!r}"
+            )
     partial = dest.with_name("features.partial.npy")
-    arr = np.lib.format.open_memmap(partial, mode="w+", dtype=np.float32, shape=(len(idx), len(names)))
+    arr = np.lib.format.open_memmap(
+        partial, mode="w+", dtype=np.float32, shape=(len(idx), len(names))
+    )
 
     col = 0
     dem = None
@@ -163,6 +210,7 @@ def main() -> int:
         link.symlink_to(p)
 
     metadata = {
+        "schema": 2,
         "names": names,
         "n_features": len(names),
         "shape": [int(len(idx)), int(len(names))],
@@ -170,14 +218,9 @@ def main() -> int:
         "grid_shape": list(grid.SHAPE),
         "crs": f"EPSG:{grid.CRS_EPSG}",
         "sha256": sha256_file(dest),
-        "inputs": {
-            "template": sha256_file(paths.TEMPLATE),
-            "training_features": sha256_file(paths.TRAINING),
-            "lidar_scarp_features_u8": sha256_file(paths.LIDAR),
-            "labels": sha256_file(paths.LABELS),
-            "qfaults_v2_in_footprint": sha256_file(paths.QFAULT_VECTORS),
-            "dem_links": sha256_file(paths.DEM_LINKS),
-        },
+        "inputs": input_hashes,
+        "lidar_band_descriptions": list(LIDAR_EXPECTED_DESCRIPTIONS),
+        "lidar_metadata_sha256": input_hashes["lidar_scarp_features_metadata"],
         "note": "Label-free feature matrix for spatial-CV detectors. Band 6 ('tc') is excluded because it is rank-identical to radiometric total count (Spearman 1.0000); all remaining 18 training bands are verified by embedded description.",
     }
     meta_path.write_text(json.dumps(metadata, indent=2) + "\n")

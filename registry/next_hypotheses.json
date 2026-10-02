@@ -1,0 +1,136 @@
+{
+  "generated": "2026-10-02",
+  "status": "H28-1 preregistered gate passed; separate unscored full-area research candidate 1113fba5f6cb verified; four current weekly slots unchanged; no public score claimed",
+  "novelty_scope": "Scanned this checkout and the owner-provided comparison list. The sibling score list does not provide source code or complete method descriptions, so global novelty is unknown.",
+  "target": "100 m fault-location pixels scored against newly expert-mapped faults; geothermal vents, wells and thermal favorability are contextual evidence, not the label target.",
+  "baseline": {
+    "name": "Current in-repo OOF best",
+    "definition": "B_oof + T-v2 + H27-4 r1 (100 m flank-shadow pruning)",
+    "evidence": "evidence/oof_hypothesis_gates.json, seeds 130-139; paired mean DTI gain +0.0141 over B_oof, 4/4 folds",
+    "limitation": "Catalogue-internal, component-hidden spatial holdout; not the organizer-created expert-label set"
+  },
+  "ranking_basis": "Expert prior on expected paired holdout \u0394DTI multiplied by testability and divided by engineering cost; ranges are not observations or score guarantees.",
+  "hypotheses": [
+    {
+      "id": "H28-1",
+      "rank": 1,
+      "title": "Multiscale, cross-potential-field edge coherence",
+      "layers": [
+        "training_features.tif band 2: rtp",
+        "band 13: iso_grav_anom",
+        "band 3: tmi_hg",
+        "band 9: tmi_vg",
+        "bands 11 and 18: iso_grav_anom_vg and iso_grav_anom_hg"
+      ],
+      "signature": "Gaussian scale-space edge magnitude at sigma 3 and 10 100-m cells, normalized within the footprint, with co-location and absolute gradient-orientation agreement between reduced-to-pole magnetic and isostatic-gravity fields.",
+      "why_missing_faults": "A buried or alluvium-covered fault without a young surface scarp can juxtapose contrasting magnetic susceptibility or density units; a persistent, cross-field boundary may provide subsurface structural evidence where the Quaternary-trace catalogue has no line.",
+      "confounders": "Lithologic contacts that are not faults, magnetic remanence, survey seams and differing source depths/resolution.",
+      "differs_from_repo": "No current script derives multiscale gradient-orientation concordance across magnetic and gravity fields. Existing per-channel AUC is univariate and ridge NMS acts on the prediction surface, not on cross-physics edge features.",
+      "expected_holdout_delta_dti": [
+        0.0,
+        0.01
+      ],
+      "cost": "medium (approximately 1-2 engineering days plus validation runtime)",
+      "data_gate": "Uses the existing hash-pinned training-feature owner mirror; no new external data. Original competition-file provenance remains the caveat in data/manifest.json.",
+      "validation": "knowledge/08_preregistration_H28-1.md; fresh seeds 140-149; paired comparison to B_oof + T-v2 + H27-4 r1",
+      "status": "preregistered gate passed (+0.00295 mean paired DTI); full-area research candidate 1113fba5f6cb built and format/range verified; unscored, not a current weekly slot",
+      "implementation_result": "Mean \u0394DTI +0.0029488388 across 40 paired cells; mean baseline 0.1045377979, H28-1+T-v2+H27-4 mean 0.1074866367; one quadrant and one seed were negative. No submission written by the holdout runner.",
+      "holdout_evidence": "evidence/h28_1_edge_holdout.json; code SHA-256 runner 989dd1b03e448cc0ab84e1401dd197b4d25213b956163c2a3f33a8959d1e9bbd, transform 96dbe727891f06cd42e0f111df3696d8995cf2e62bd522c8781677365e024cf1",
+      "full_map_candidate": {
+        "manifest": "docs/downloads/h28_1_candidate_manifest.json",
+        "geotiff": "docs/downloads/gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.tif",
+        "content_id": "1113fba5f6cb",
+        "sha256": "61f9b53de42786e6d48afa50fd453a87c57d5d7b9b626c7dcf28c2dfbd20f411",
+        "emitted_px": 59075,
+        "format_verified": true,
+        "weekly_slot_used": false,
+        "leaderboard_upload": false,
+        "public_score": null
+      }
+    },
+    {
+      "id": "H28-2",
+      "rank": 2,
+      "title": "Multiscale LiDAR scarp persistence and structural-tensor coherence",
+      "layers": [
+        "3DEP-derived 100 m bands ex_max, ex_mean, step_max, lapneg_max, lappos_max, downface_max, upface_max, cross_max, relief, coh100",
+        "detrended elevation and strike orientation"
+      ],
+      "signature": "Scale persistence of short-wavelength slope/curvature edges plus local line-orientation coherence over 0.3-2 km, not a pointwise high-slope threshold.",
+      "why_missing_faults": "Previously unmapped subtle scarps may be visible in bare-earth LiDAR even when absent from a legacy or Quaternary trace catalogue; continuity can suppress isolated non-tectonic relief.",
+      "confounders": "Channels, roads, terrace risers, paleo-shorelines, landslides, mines, vegetation artifacts and tiled DEM seams.",
+      "differs_from_repo": "The current OOF workflow applies one-scale ridge NMS to a classifier score; this tests terrain-scale persistence/coherence before classification. It is not the already tested isolated-dot filter.",
+      "expected_holdout_delta_dti": [
+        0.0,
+        0.008
+      ],
+      "cost": "medium; existing derived terrain grid available, raw 1-m DEM is optional higher-cost follow-up",
+      "data_gate": "Existing hash-pinned LiDAR descriptor raster. Official USGS 3DEP catalog page read; the local derivative remains an owner mirror.",
+      "status": "untried"
+    },
+    {
+      "id": "H28-3",
+      "rank": 3,
+      "title": "Dilatational-strain and conductivity intersection corridors",
+      "layers": [
+        "geod_2ndinv",
+        "geod_shearrate",
+        "geod_dilaterate",
+        "cond_surf",
+        "depth_to_base_surf"
+      ],
+      "signature": "Joint spatial support from dilatational-strain gradients and conductive anomalies, restricted to narrow lineaments rather than broad high-value regions.",
+      "why_missing_faults": "Buried, fluid-bearing or active faults can have weak surface relief but express stress concentration and conductive alteration at depth.",
+      "confounders": "Clay caps, basin-scale conductivity, non-fault conductive alteration, strain-field smoothing and depth mismatch.",
+      "differs_from_repo": "The current model uses these as individual raster features and H27-5 types known mapped faults; it does not test explicit strain-conductivity spatial conjunction for new line candidates.",
+      "expected_holdout_delta_dti": [
+        0.0,
+        0.006
+      ],
+      "cost": "low-medium; existing raster layers only",
+      "data_gate": "No new external data for first test.",
+      "status": "untried"
+    },
+    {
+      "id": "H28-4",
+      "rank": 4,
+      "title": "Seismicity-fabric lineaments",
+      "layers": [
+        "deq_n100a15",
+        "ieq_n100a15",
+        "geod_shearrate"
+      ],
+      "signature": "Directional anisotropy and line support in earthquake-density gradients, assessed across scales wider than a single hypocenter.",
+      "why_missing_faults": "Linear seismicity concentrations can reveal blind active structures missing from a surface-trace database.",
+      "confounders": "Aseismic faults, spatially variable catalog completeness, diffuse swarms, broad smoothing in the delivered density layers.",
+      "differs_from_repo": "The raw earthquake channels were included in the current feature set and channel audit, but directional seismicity-fabric transforms have not been tested.",
+      "expected_holdout_delta_dti": [
+        0.0,
+        0.004
+      ],
+      "cost": "low-medium; existing raster layers only",
+      "data_gate": "No new external data for first test.",
+      "status": "untried"
+    },
+    {
+      "id": "H28-5",
+      "rank": 5,
+      "title": "Hydrothermal observation corridors from well/spring temperatures and chemistry",
+      "layers": [
+        "INGENIOUS/GDR well and spring points: temp_c, geothermquartz_c, geothermchalc_c, geothermcat_c",
+        "optional GDR 2-m temperature probes"
+      ],
+      "signature": "Spatially coherent thermal/geochemical observations rasterized as narrow, directionally constrained corridors rather than isotropic point buffers.",
+      "why_missing_faults": "Fault-focused discharge and hydrothermal chemistry may indicate permeable structures absent from the compiled surface-fault traces.",
+      "confounders": "Hydrogeologic flow away from the source fault, sparse and biased sampling, duplicate station records, non-fault heat sources, and geothermometer uncertainty.",
+      "differs_from_repo": "The point observations are not among the current 32 raster-model features; this would add independent observation-driven line evidence rather than another pixel transform or catalogue graph link.",
+      "expected_holdout_delta_dti": [
+        0.0,
+        0.006
+      ],
+      "cost": "high; requires station deduplication, quality filters, spatial fold controls and provenance review",
+      "data_gate": "GDR #1391 page and package listing verified; public/CC BY. Direct binary ZIP retrieval failed in this sandbox (page fetch HTTP 500; shell TLS egress failure), so a new raw package is not verified obtainable here. The current point CSV is an owner-repository hash-pinned mirror, not an independently fetched GDR binary. Not viable for confirmatory use until that gap is closed.",
+      "status": "conditional; not viable this session"
+    }
+  ]
+}

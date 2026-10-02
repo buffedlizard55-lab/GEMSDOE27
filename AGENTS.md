@@ -22,7 +22,7 @@ python scripts/build_site.py                   # rebuilds docs/*.html from JSON 
 
 ## Definition of done for a candidate file
 Exact 0.0/1.0 (or sanitised probabilities) inside the footprint, NaN outside with nodata=NaN, an all-finite fallback, a zip with exactly one GeoTIFF, a checks JSON,
-`verify_downloads.py` passing, no pixel on a catalogue cell, a documented hypothesis and its holdout gate result, and an entry in `docs/downloads/manifest.json`.
+`verify_downloads.py` passing, no pixel on a catalogue cell, a documented hypothesis and its holdout gate result, and an entry in the correct manifest (`docs/downloads/manifest.json` for a weekly slot; `docs/downloads/h28_1_candidate_manifest.json` for the separate H28-1 research file).
 
 ## Next steps inherited from this session
 `knowledge/06_limitations_and_access.md` -> "Prioritised next steps for Session 4". Do those first.
@@ -32,3 +32,5 @@ Exact 0.0/1.0 (or sanitised probabilities) inside the footprint, NaN outside wit
 * **Report both truth assumptions for any modelled score.** `geometric` (uniform-truth retention for every pixel change) is validated only for *unbiased* removal such as thinning; `hybrid` (geometric for thinning, measured OOF efficiencies for targeted steps) is the right charge for *targeted* pruning. Quoting one without the other hides the only term the two disagree about.
 * **A model is not a score.** `evidence/candidate_model_scores.json` and `evidence/budget_optimum.json` are calibrated models that reproduce live anchors; they are never to be quoted as leaderboard results.
 * **Negative results are deliverables.** H27-6, H27-7 and H27-9 are recorded in `registry/hypotheses.json` with the measurement that killed them, so no session repeats the work.
+* **H28-1 consumed the preregistered OOF seeds 140–149.** Its +0.00295 mean paired DTI result is catalogue-internal and mixed (3/4 folds, 9/10 seeds); do not reuse those seeds as a fresh confirmation. The next H27-10 annulus test is reserved for fresh seeds 150–159; a subsequent CNN/FaultSEG detector test needs a separate fresh set (e.g. 160–169), preregistered before either run.
+* **Keep the H28-1 full-map file separate from all weekly slots.** It is a fixed full-fit research candidate, not a live score or a replacement for the four existing slots; no upload is automated.
