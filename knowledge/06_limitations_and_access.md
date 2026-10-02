@@ -28,7 +28,7 @@
 
 ## Data audit corrections (2026-10-02)
 
-- **LiDAR feature labels were wrong, values were not shown to be wrong.** The pinned sibling sidecar (`data/external/lidar_scarp_features.json`, SHA-256 `9ef0df6e87598a8b0cd52fe821661e5fdb3a00568c5d9b1c5d61fd6b242dcd41`) and raster descriptions identify bands 1–10 as `ex_max`, `ex_mean`, `step_max`, `lapneg_max`, `lappos_max`, `downface_max`, `upface_max`, `cross_max`, `relief`, and `coh100`. `scripts/prepare_data.py` now labels these positional channels accurately and asserts all 12 descriptions. The rebuilt 32-column matrix has the same SHA-256 as the earlier matrix (`83ed2704…`), confirming no numerical channel change; the earlier feature-name interpretations are withdrawn. H28-1 is not run until the updated metadata check passes.
+- **LiDAR feature labels were wrong, values were not shown to be wrong.** The pinned sibling sidecar (`data/external/lidar_scarp_features.json`, SHA-256 `9ef0df6e87598a8b0cd52fe821661e5fdb3a00568c5d9b1c5d61fd6b242dcd41`) and raster descriptions identify bands 1–10 as `ex_max`, `ex_mean`, `step_max`, `lapneg_max`, `lappos_max`, `downface_max`, `upface_max`, `cross_max`, `relief`, and `coh100`. `scripts/prepare_data.py` now labels these positional channels accurately and asserts all 12 descriptions. The rebuilt 32-column matrix has the same SHA-256 as the earlier matrix (`83ed2704…`), confirming no numerical channel change; the earlier feature-name interpretations are withdrawn. H28-1 ran only after this metadata check passed.
 - **DEM inventory count corrected.** Some previous prose claimed 1,701 tiles. The hash-pinned `dem_links.json` and pinned sidecar instead report 716 links/tiles total, of which 706 succeeded and 10 failed. The exact 1,701 figure was not supported by the restored inventory and has been removed from active prose. This count describes the owner mirror, not an independent official USGS download audit.
 
 ---
@@ -43,10 +43,8 @@
 
 ## Current prioritised next steps
 
-1. **Ingest the live Slot 1 A/B score (`score(5512495c6bd1) - 0.2477`):**
-   - Compute the empirical live efficiency of the 1,259 T-v2 dots from the exact score difference.
-   - Select **Slot 2** (`3ebd51534bb1` d2.8 + T-v2 vs. **Slot 3** `d466b251f309` d1.5 + H27-4 100 m flank-shadow prune + T-v2).
-2. **Upgrade the OOF detector from tabular `HistGradientBoostingClassifier` (`0.0861` holdout DTI) to a multi-scale spatial U-Net / `FaultSEG` ridge detector:**
-   - Hermant et al. (2025) demonstrated that 2D convolutional segmentation (`FaultSEG`, PR-AUC `0.595`) on LiDAR DEM + slope + NIR substantially outperforms pixelwise or small-receptive-field models because it captures 1–5 km linear continuity and rejects nonlinear geomorphology (paleo-shorelines, canyon rims, stream boundaries).
-3. **Integrate Siler (2022) slip & dilation tendency (`doi:10.5066/P9YL58W6`) and DeAngelo et al. (2022) heat flow (`doi:10.5066/P9BZPVUC`) via GitHub Actions:**
-   - Extend `.github/workflows/fetch-vector-faults.yml` to fetch the Siler (2022) shapefile attributes (`Shapefile_INGENIOUS area.zip`, 27.35 MB) and test whether weighting H27-5b links by slip/dilation tendency further improves `FID_trace` holdout efficiency above `0.1783`.
+1. **Serialize H28-1 as a research-only full-map candidate** using the frozen recipe in `knowledge/09_preregistration_H28-1_candidate.md`; independently verify GeoTIFF, fallback and ZIP. Keep the three existing weekly-slot artifacts unchanged. The `+0.00295` OOF result does not equal a live-score improvement.
+2. **If the owner later chooses a future controlled A/B slot, compare it against the owner-reported 0.2477 reference and record the public score manually.** The agent never accesses DrivenData. Do not treat the internal catalogue holdout as organizer-label evidence.
+3. **Pursue the next H28 hypothesis only with a new preregistration and fresh spatial holdout.** H28-2 is the most practical follow-up using the existing 3DEP-derived descriptor grid; H28-5 remains blocked until official GDR binaries are independently retrievable and hash-pinned.
+4. **Continue optional deep-model work only when compute/data are available:** a U-Net / FaultSEG-style model needs geologist-reviewed labels and a GPU. The Hermant et al. (2025) PR-AUC is from their task/data and is not a forecast for this competition.
+5. **Retain limitations:** no 27GEMSDOE live score exists, 0.3195 is owner-reported, the private expert labels are unavailable, and the owner-mirror data provenance has not been reconciled with a logged-in competition download.

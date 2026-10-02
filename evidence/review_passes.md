@@ -56,8 +56,9 @@
 - Found that the former preparation names did not match the same-position source raster bands. Corrected the labels and source registry, while confirming byte-identical prepared matrix content; the raw-raster `channel_auc.py` audit is unaffected because it reads embedded descriptions directly.
 - Found old prose claiming 1,701 DEM tiles. Corrected it to the pinned owner-mirror inventory (716 links, 706 successful derivatives, 10 failures); explicitly state this is not an independent USGS download audit.
 - Reviewed transform boundary/nodata behavior, classifier sampling and feature order, T-v2 graph reuse, the 100 m catalogue prune, DTI masks and no-known-catalogue-overlap guard. Disclosed that 1 km covariate filters can share adjacent field values across the existing 600 m fold buffer; no labels enter the transform, but spatial covariate correlation remains a limitation.
-- No holdout has been run at this point. The unchanged submission files have not been replaced, and no weekly slot has been used.
+- After commits `c5d40b7` (hypotheses/protocol) and `5a6972e` (implementation), ran the frozen seeds 140–149. H28-1 + T-v2 + H27-4 r1 passed: `+0.00294884` mean paired ΔDTI, 3/4 folds, 9/10 seeds. The NE fold and seed 149 were negative; see `evidence/h28_1_edge_holdout.json` for all 40 paired cells and hashes.
+- The holdout runner wrote no submission TIFF. The existing three submission files remain unchanged, no weekly slot was used, and no public score is claimed. A separate full-map export protocol is now preregistered in `knowledge/09_preregistration_H28-1_candidate.md`; its implementation and format checks remain pending.
 
 ### Pass 3 — full-request recheck
 
-Pending the frozen seeds 140–149 result. The final recheck will be recorded only after the gate and post-run review; it must include the user-requested site/download workflow, scientific limits, score uncertainty, tests, and the PR/merge outcome.
+Pending the full-map candidate export/format checks and final repository/PR review. The final recheck must include the user-requested site/download workflow, scientific limits, score uncertainty, tests, and the PR/merge outcome.

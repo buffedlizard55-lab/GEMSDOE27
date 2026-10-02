@@ -1,0 +1,17 @@
+# Productionization preregistration: H28-1 full-map research candidate
+
+**Written after the frozen H28-1 gate passed and before implementing the full-area exporter.** Holdout evidence: `evidence/h28_1_edge_holdout.json`; protocol: `knowledge/08_preregistration_H28-1.md`. The intended artifact is an **unscored research candidate**, not an upload or a fourth weekly slot.
+
+## Why build it
+
+H28-1 + the already-gated T-v2/H27-4 stack cleared its pre-registered gate on seeds 140–149: mean paired ΔDTI `+0.00294884`, positive in 3/4 folds and 9/10 seeds against the current OOF best. This evidence is catalogue-internal only, with a negative NE fold and one negative seed. A full-area raster is useful for a future controlled A/B decision, but its live effect is unknown. No slot is used by generating, packaging, or publishing this file.
+
+## Frozen full-map model and candidate recipe
+
+1. Use only the existing 32-column matrix (`features.npy`, corrected metadata schema 2, SHA-256 `83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc`) plus the exact six H28-1 columns from `potential_edges.py` and its hash-pinned feature cache. The same verified source bands are training band 2 `rtp` and band 13 `iso_grav_anom`; no labels enter edge-feature construction.
+2. Train one `HistGradientBoostingClassifier` on all in-footprint catalogue-positive cells and a deterministic sample of at most 10 negatives per positive, without replacement, using RNG/model seed `2026`. Freeze the OOF model parameters: `max_iter=100`, `max_leaf_nodes=31`, `learning_rate=0.08`, `l2_regularization=5.0`. Predict all footprint rows in fixed-size chunks; no tuning from the holdout results.
+3. Apply the existing `ridge_nms(sigma=1)`, `PRE_THIN_FRAC=0.0245` footprint budget, and `dot_thin(d=1.5)`, excluding mapped labels as the current detector does. Remove base dots at catalogue distance `<=1` pixel (H27-4 r1). Build the existing labelled-catalogue graph and select the frozen T-v2 `z>=3`, mutual-deduplicated links. Add only T-v2 dots at least `metric.RADIUS_PX` (300 m) from the pruned base. This is exactly the full-map analogue of the passed `H28_edge_best_Tv2_prune_r1` variant; do not add any new layer, filter, or threshold.
+4. Fail closed if source descriptions/grid, feature-cache hashes, probabilities, footprint, labels, or no-known-label-overlap checks fail. Write a unique content-hashed single-band `float32` GeoTIFF with exact 0/1 in the footprint and `NaN` outside (`nodata=NaN`), an all-finite zero-outside fallback, a one-TIFF ZIP, note <=200 characters, and an independent format/range/label-overlap report.
+5. Keep the three existing weekly slot artifacts and their manifest entries untouched. Store this separately as a `research_candidate`; expose it on the Research page, not as Slot 1/2/3. Do not upload or claim a leaderboard score.
+
+The candidate is not itself a holdout result: the one full-area model is fit on all catalogue labels, and the organizers' expert-created labels remain unseen. Its presence on the site means only that the fixed research recipe was serialized and format-checked. A human may choose a future slot only after weighing the holdout result and the existing weekly decision tree; the agent will not access DrivenData.
