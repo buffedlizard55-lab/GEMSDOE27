@@ -208,6 +208,18 @@
    "feed": true,
    "feed_kind": "github",
    "feed_repo": "drivendataorg/gems-prize-reference-solution"
+  },
+  {
+   "id": "usgs-3dep-1m",
+   "title": "USGS 3D Elevation Program (3DEP), 1-meter DEM downloadable data collection",
+   "publisher": "U.S. Geological Survey",
+   "url": "https://data.usgs.gov/datacatalog/data/USGS:77ae0551-c61e-4979-aedd-d797abdcde0e",
+   "category": "candidate-data-and-provenance",
+   "used_for": "Official provenance/context for the owner-mirrored LiDAR-derived terrain descriptors and H28-2 multi-scale scarp hypothesis",
+   "status": "official catalog page read 2026-10-02; public-domain description and 1-m bare-earth DEM coverage verified; tile binary not retrieved from this sandbox",
+   "accessed": "2026-10-02",
+   "evidence": "USGS record states 1-m 3DEP DEMs are a tiled bare-earth elevation collection produced from high-resolution lidar and identifies 3DEP products as public domain. Repository lidar_scarp_features_u8.tif is a hash-pinned owner mirror/derivative, not a direct USGS download in this session. The local DEM inventory has 716 confirmed links, 706 successful derived tiles, 10 failed tiles (see data_cache/dem_links.json and pinned sibling metadata).",
+   "feed": false
   }
  ]
 }

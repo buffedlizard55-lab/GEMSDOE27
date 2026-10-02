@@ -10,8 +10,8 @@ Owner-reported reference: the 24GEMSDOE file scored **0.2477** (owner-reported);
 3. Verify inputs: `python scripts/restore_data.py` (16 hash-pinned artifacts; SHA-256 in `data/manifest.json`), `python scripts/prepare_data.py`, then `python -m pytest -q` and `python scripts/verify_downloads.py`.
 4. Verify line by line against official sources and give links for manual review (`registry/sources.json`, `docs/sources.html`). Flag irregularities (`registry/irregularities.json`). No hallucinations: unknown stays unknown.
 5. Never automate drivendata.org (Terms of Use); never claim an upload, score, PR or merge without evidence.
-6. Before implementing anything new: 3-5 untried hypotheses with layers, physical signature, why it catches a fault missing from USGS/INGENIOUS, how it differs from the repo, ranked by expected DTI gain and cost (`registry/hypotheses.json`); validate the top one on the spatially blocked holdout **before** a weekly slot is spent.
-7. Run three passes: implement+verify; review bugs/assumptions/edge cases; recheck against the original request (`evidence/review_passes.md`).
+6. Before implementing anything new: 3-5 untried hypotheses with layers, physical signature, why it catches a fault missing from USGS/INGENIOUS, how it differs from the repo, ranked by expected DTI gain and cost (`registry/hypotheses.json`); validate the top one on the spatially blocked holdout **before** a weekly slot is spent. Current H28 candidates and the frozen H28-1 test are in `knowledge/07_untried_hypotheses.md`, `knowledge/08_preregistration_H28-1.md`, and `registry/next_hypotheses.json`.
+7. Run three passes: implement+verify; review bugs/assumptions/edge cases; recheck against the original request (`evidence/review_passes.md`). Never create or replace a submission file unless its pre-registered holdout gate passes.
 
 ## Submit (one click — 3 pre-built weekly slot candidates)
 * **Slot 1 (Primary A/B):** `docs/downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif` (`.zip`: `gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.zip`; fallback: `...-allfinite.tif`).
