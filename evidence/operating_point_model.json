@@ -1,0 +1,102 @@
+{
+ "assumptions": {
+  "G_px_equivalent": 12631.65,
+  "dti_0.2477_owner_reported": 0.2477,
+  "status": "model, unconfirmed"
+ },
+ "credit_per_dot": {
+  "1": {
+   "credit_per_true_px": 1.0,
+   "credit_per_dot": 1.0
+  },
+  "2": {
+   "credit_per_true_px": 0.8333,
+   "credit_per_dot": 1.6667
+  },
+  "3": {
+   "credit_per_true_px": 0.7778,
+   "credit_per_dot": 2.3333
+  },
+  "4": {
+   "credit_per_true_px": 0.6667,
+   "credit_per_dot": 2.6667
+  },
+  "5": {
+   "credit_per_true_px": 0.6,
+   "credit_per_dot": 3.0
+  },
+  "6": {
+   "credit_per_true_px": 0.5,
+   "credit_per_dot": 3.0
+  },
+  "7": {
+   "credit_per_true_px": 0.4286,
+   "credit_per_dot": 3.0
+  },
+  "8": {
+   "credit_per_true_px": 0.375,
+   "credit_per_dot": 3.0
+  }
+ },
+ "operating_point": {
+  "3.0": {
+   "recall_w": 0.3649,
+   "FP_px": 37895,
+   "TP_px": 4609
+  },
+  "3.5": {
+   "recall_w": 0.3909,
+   "FP_px": 44211,
+   "TP_px": 4938
+  },
+  "4.3": {
+   "recall_w": 0.4326,
+   "FP_px": 54316,
+   "TP_px": 5465
+  },
+  "5.0": {
+   "recall_w": 0.4691,
+   "FP_px": 63158,
+   "TP_px": 5925
+  },
+  "6.0": {
+   "recall_w": 0.5212,
+   "FP_px": 75790,
+   "TP_px": 6584
+  }
+ },
+ "to_reach_0.3195": {
+  "at_FP_over_G": 4.3,
+  "recall_now": 0.4326,
+  "recall_needed_same_FP": 0.5666,
+  "FP_px_needed_same_recall": 29527,
+  "FP_reduction": 0.4564
+ },
+ "denominator_shares_at_0.2477": {
+  "0.2TP": 0.05,
+  "0.2FP": 0.492,
+  "0.8G": 0.458
+ },
+ "break_even_efficiency": {
+  "0.1": 0.0204,
+  "0.1922": 0.04,
+  "0.2477": 0.0521,
+  "0.25": 0.0526,
+  "0.3": 0.0638,
+  "0.3195": 0.0683
+ },
+ "payoff_of_shipped_addition": {
+  "nonredundant_dots": 1259,
+  "assumed_dFP_per_dot": 0.93,
+  "base_dti_model": 0.2477,
+  "by_efficiency": {
+   "0.0": -0.0026,
+   "0.02": -0.0016,
+   "0.0526": 0.0,
+   "0.1": 0.0024,
+   "0.14": 0.0044,
+   "0.2": 0.0074,
+   "0.28": 0.0113
+  }
+ }
+}

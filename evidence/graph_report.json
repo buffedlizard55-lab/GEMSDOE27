@@ -5,7 +5,11 @@
   "end_nodes": 6949,
   "junction_nodes": 679,
   "edges": 4681,
-  "cyclomatic_number": 504,
+  "cyclomatic_number_raw": 250,
+  "cyclomatic_number": 110,
+  "enclosed_regions_all": 370,
+  "enclosed_regions_ge_20px": 6,
+  "self_loop_edges_le_3px": 140,
   "endpoints_with_tangent": 6530,
   "component_length_km": {
    "median": 1.265685424949238,

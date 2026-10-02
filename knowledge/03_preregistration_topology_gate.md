@@ -68,3 +68,9 @@ T-v1 links filtered to z >= 3 (primary); z >= 2 and z >= 4 reported as neighbour
 4. Paired DTI gain vs the leaky dotted-H19-5 base is > +0.001 on average and no cell loses more than 0.01.
 
 Same standing caveats as above: catalogue-internal truth, correlated replicates, no significance claim.
+
+
+## Provenance limit of this pre-registration (stated plainly)
+Both registration texts (the original and Addendum A) were written *before* the corresponding runs in the working session, but the repository's first commit was made after the runs, so
+**git history cannot independently prove that ordering**; there is no external timestamp. The ordering is attested only by the session record and by the structure of the evidence (distinct,
+non-overlapping seed ranges: exploratory 0-2, confirmatory 100-109, filter selection from 100-109 only, confirmation 110-119). Treat the gates as disciplined, not notarised.

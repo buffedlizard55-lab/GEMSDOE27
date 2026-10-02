@@ -81,6 +81,13 @@
       "bytes": 126177,
       "sha256": "9702f2e5c382a4f472ae834d22b94990983b059677a37adfafd51c50f75e643c",
       "what": "INGENIOUS/GDR Qfaults per-trace attributes (centroids only, no geometry)"
+    },
+    {
+      "source": "sibling24",
+      "path": "docs/downloads/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+      "bytes": 1603424,
+      "sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
+      "what": "dotted H19-5 d=2.8 (sibling candidate, never live-scored); used to assert that this repo regenerates the same emission"
     }
   ],
   "assembled": [

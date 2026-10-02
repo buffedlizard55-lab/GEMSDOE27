@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-10-02T19:06:34Z",
+ "generated_utc": "2026-10-02T19:20:12Z",
  "status": "UNSCORED candidates; no leaderboard score is claimed",
  "primary": {
   "slug": "topo-gap-closure-t-v2-on-d1-5",
@@ -36,6 +36,7 @@
   "base": "dotted H19-5 d2.8 (sibling-modelled optimum; never live-scored)",
   "added_px": 1284,
   "base_px": 44090,
+  "regenerated_equals_sibling_d2_8": true,
   "links": 345,
   "conditional_on": "5512495c6bd1"
  },

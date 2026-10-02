@@ -147,6 +147,7 @@
   "base": "dotted H19-5 d2.8 (sibling-modelled optimum; never live-scored)",
   "added_px": 1284,
   "base_px": 44090,
+  "regenerated_equals_sibling_d2_8": true,
   "links": 345,
   "conditional_on": "5512495c6bd1"
 }

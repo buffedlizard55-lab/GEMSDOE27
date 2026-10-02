@@ -1,0 +1,107 @@
+{
+ "generated": "2026-10-02",
+ "items": [
+  {
+   "id": "prompt-verbatim-unavailable",
+   "severity": "high",
+   "issue": "The verbatim text of this session's task prompt is no longer available to the agent (the conversation was condensed); the README holds a structured restatement and the owner's Core Values text copied from the sibling README, not the original prompt.",
+   "action": "Owner: paste the original prompt into README.md section 'Task prompt' (placeholder marked)."
+  },
+  {
+   "id": "portal-0-1-error-cause-unknown",
+   "severity": "high",
+   "issue": "The cause of 'Predicted values must be in range [0, 1]' is not established; the validator is not public. Earlier forensics (sibling) found no in-footprint value outside [0,1] in 148 rasters; three early files had NaN inside the footprint.",
+   "action": "Shipped files: exact 0.0/1.0, nodata=NaN as in the sample, plus an all-finite fallback and a zip. If rejected again, paste the exact message and file name."
+  },
+  {
+   "id": "ai-use-disclosure",
+   "severity": "high",
+   "issue": "The Official Rules require generative-AI use to be stated in the narrative (Sept 2026 rules, read in part).",
+   "action": "This work is agent-assisted; see AI_DISCLOSURE.md. Include a statement in the final-round narrative."
+  },
+  {
+   "id": "sample-submission-has-ones",
+   "severity": "medium",
+   "issue": "The owner's mirror of the sample submission has 60,988 pixels equal to 1.0 exactly on the catalogue pixels, although the organisers describe the sample as predicting absence. Verified this session (values {0,1}, 60,988 ones).",
+   "action": "Used only as a grid/footprint template."
+  },
+  {
+   "id": "deadline-discrepancy",
+   "severity": "medium",
+   "issue": "Competition page: Dec 3, 2026 11:59 p.m. UTC; Official Rules A.1: 5:00 p.m. ET on the deadline date.",
+   "action": "Treat the earlier time as binding until the organisers clarify."
+  },
+  {
+   "id": "bridge-hashes-not-authenticated",
+   "severity": "medium",
+   "issue": "Inputs come from the owner's GitHub mirrors (hash-pinned), not from an organiser-authenticated download.",
+   "action": "Re-verify against the DrivenData data page when logged in."
+  },
+  {
+   "id": "scores-unconfirmed",
+   "severity": "medium",
+   "issue": "Scores for 25/26/27GEMSDOE are blank; 0.3195 (leader) and h23-a 0.1002 appear only in the task statement; all scores are owner-reported, not receipts.",
+   "action": "Owner to re-check the submissions page; record with registry/live_scores.json."
+  },
+  {
+   "id": "tc-band-mislabelled",
+   "severity": "medium",
+   "issue": "The training band 'tc' is described as 'Tilt angle or total curvature - magnetic field derivative for edge detection', but it is rank-identical (Spearman 1.0000, n=299,822) to the GeoDAWN radiometric total-count grid and only -0.15 correlated with the magnetic horizontal gradient (tmi_hg). Verified this session from the pinned rasters.",
+   "action": "Do not use 'tc' as a magnetic edge transform; treat it as gamma-ray total count."
+  },
+  {
+   "id": "berkowitz-scope",
+   "severity": "medium",
+   "issue": "Berkowitz et al. (2000) give ensemble-average connectivity estimates ('rather than particular realizations'); they do not state that one segment decides whether two particular faults join.",
+   "action": "The per-gap argument here rests on the graph analysis and the holdout, not on the paper alone."
+  },
+  {
+   "id": "catalogue-fragmentation",
+   "severity": "medium",
+   "issue": "The catalogue is 3,199 systems (median 1.27 km; 2,211 shorter than 2 km). Holdout truth is catalogue-internal, so segmentation can inflate link enrichment relative to genuinely new expert-mapped faults.",
+   "action": "Class-level validation only; the live score is the only test of the real hidden set."
+  },
+  {
+   "id": "run-a-implementation-bug",
+   "severity": "low",
+   "issue": "My first confirmatory launch applied the minimum gap before choosing the nearest target (deviation from the registered rule); caught by a unit test, stopped, disclosed, rerun as registered.",
+   "action": "evidence/topology_validation_runA_partial_log.txt; knowledge/03_preregistration_topology_gate.md Addendum A."
+  },
+  {
+   "id": "leaky-paired-base",
+   "severity": "low",
+   "issue": "The dotted H19-5 base was trained on all labels, so its coverage of hidden catalogue pieces is inflated and its DTI on the holdout (~0.098) is not comparable to the live 0.2477.",
+   "action": "Paired comparisons only."
+  },
+  {
+   "id": "geodawn-metadata-placeholders",
+   "severity": "low",
+   "issue": "Carried from the sibling record (not re-verified): GeoDAWN metadata has placeholder fields and line-km mismatches (151,799 vs 149,030).",
+   "action": "Treat acquisition metadata as approximate."
+  },
+  {
+   "id": "account-compliance",
+   "severity": "low",
+   "issue": "Leaderboard rows smrtdoog5 and SDCF9 are associated with the owner in sibling notes but ownership and compliance with the one-entity / 3-per-week rules are unverified.",
+   "action": "Owner to confirm before relying on additional accounts."
+  },
+  {
+   "id": "preregistration-not-notarised",
+   "severity": "low",
+   "issue": "The pre-registration texts precede the runs in the working session, but git history (first commit after the runs) cannot prove it; no external timestamp exists.",
+   "action": "Gates are disciplined, not notarised; the live score is the real test. See the 'Provenance limit' section of knowledge/03."
+  },
+  {
+   "id": "graph-loop-count-corrected",
+   "severity": "low",
+   "issue": "An earlier edge builder over-counted loops (cyclomatic number 504, caused by 1-px stubs recorded as self-loops). Corrected in review pass 2: raw 250; 110 after dropping self-loops <= 3 px; only 6 enclosed regions >= 20 px.",
+   "action": "Use the corrected figures (evidence/graph_report.json); the catalogue is nearly acyclic at 100 m."
+  },
+  {
+   "id": "links-touching-third-system",
+   "severity": "low",
+   "issue": "8 of the 345 shipped links pass within ~100 m of a third mapped system, so they are not pure two-system gaps; they belong to the validated rule and are flagged in their dossiers.",
+   "action": "A reviewer may drop them; effect on the shipped dots is small."
+  }
+ ]
+}

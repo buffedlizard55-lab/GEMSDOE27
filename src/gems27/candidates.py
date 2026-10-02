@@ -106,6 +106,19 @@ def build_set(labels: np.ndarray, foot: np.ndarray, base: np.ndarray, h19_raw: n
     sel = pd.concat([sel, ex], axis=1)
     sel["base_overlap"] = (sel.dots_near_base_px3 / sel.dots.clip(lower=1)).round(3)
     nonred = dots_all & (d_base >= 3)
+    from skimage.draw import line as sk_line
+
+    third = []
+    for r in sel.itertuples(index=False):
+        rr, cc = sk_line(int(r.e_row), int(r.e_col), int(r.q_row), int(r.q_col))
+        hit = False
+        for y, x in list(zip(rr, cc))[3:max(len(rr) - 3, 3)]:
+            ids = set(np.unique(fg.comp[max(y - 1, 0):y + 2, max(x - 1, 0):x + 2]).tolist()) - {0, int(r.comp_src), int(r.comp_tgt)}
+            if ids:
+                hit = True
+                break
+        third.append(hit)
+    sel["third_system_contact"] = third
     lon0, lat0 = grid.rc_to_lonlat(sel.e_row.to_numpy(), sel.e_col.to_numpy())
     lon1, lat1 = grid.rc_to_lonlat(sel.q_row.to_numpy(), sel.q_col.to_numpy())
     sel["lon_a"], sel["lat_a"], sel["lon_b"], sel["lat_b"] = lon0, lat0, lon1, lat1

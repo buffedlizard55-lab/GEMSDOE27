@@ -167,6 +167,32 @@
    "accessed": "2026-10-02",
    "evidence": "-",
    "feed": false
+  },
+  {
+   "id": "usgs-qfaults",
+   "title": "USGS Quaternary Fault and Fold Database of the United States (interactive map; GIS download)",
+   "publisher": "U.S. Geological Survey (public domain)",
+   "url": "https://www.usgs.gov/programs/earthquake-hazards/faults",
+   "category": "candidate-external-data",
+   "used_for": "Free official vector fault geometry + attributes (slip sense, dip direction) for hypothesis H27-5; reviewers' map viewer (doi:10.5066/F7S75FJM)",
+   "status": "page verified 2026-10-02 (lists Qfaults_GIS.zip 16 MB and qfaults.kmz 13 MB); files NOT downloaded (host unreachable from the sandbox)",
+   "accessed": "2026-10-02",
+   "evidence": "Scope statement: faults with \"geological evidence of coseismic surface deformation in large earthquakes during the past 1.6 million years\" (Quaternary only), which is why a Quaternary-fault catalogue cannot contain older/unlisted bedrock faults. Direct link: https://earthquake.usgs.gov/static/lfs/nshm/qfaults/Qfaults_GIS.zip",
+   "feed": true,
+   "feed_kind": "http",
+   "feed_url": "https://earthquake.usgs.gov/static/lfs/nshm/qfaults/Qfaults_GIS.zip"
+  },
+  {
+   "id": "siler-companions",
+   "title": "Companion USGS data releases for the Great Basin (related items on the Siler 2022 ScienceBase page): regional geophysical maps, electrical conductance maps, heat-flow maps",
+   "publisher": "USGS ScienceBase",
+   "url": "https://www.sciencebase.gov/catalog/item/6296974dd34ec53d276bb33d",
+   "category": "candidate-external-data",
+   "used_for": "Overlooked free official layers that the competition's own feature stack does not include (heat flow; independent regional geophysics). Not used in this session.",
+   "status": "listed as related items on the verified Siler page (item ids 628d4fabd34ef70cdba3c4a4, 62979746d34ec53d276c113b, 6297d2fad34ec53d276c5b28); NOT opened or evaluated",
+   "accessed": "2026-10-02",
+   "evidence": "Titles as shown on the page: 'Regional geophysical maps of the Great Basin, USA'; 'Electrical Conductance Maps of the Great Basin, USA'; 'Heat flow maps and supporting data for the Great Basin, USA'.",
+   "feed": false
   }
  ]
 }

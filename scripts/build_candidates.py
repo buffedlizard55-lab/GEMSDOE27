@@ -34,7 +34,9 @@ def argument(r, gb) -> str:
             f"connectivity (Berkowitz-style P={gb['P']:.2f} vs Pc 5.6-6.0 at the domain scale), where individual closures matter "
             f"most, but Berkowitz et al. (2000) give ensemble statistics, not a verdict on this particular gap. "
             f"Base coverage: {100 * r.base_overlap:.0f}% of its dots already lie within 300 m of the 0.2477 emission. "
-            f"Status: class-level holdout validation only.")
+            + ("NOTE: the straight link passes within ~100 m of a THIRD mapped system (crossing/T-junction), so it is not a pure "
+               "two-system gap; kept because it belongs to the validated rule. " if r.third_system_contact else "")
+            + "Status: class-level holdout validation only.")
 
 
 def main() -> int:
@@ -48,7 +50,7 @@ def main() -> int:
     gb = {"P": gr["P_at_domain_equivalent_side"]}
     L["argument"] = [argument(r, gb) for r in L.itertuples(index=False)]
     keep = ["link_id", "z", "kind", "gap_km", "ang_src", "ang_tgt", "mutual", "strike", "strike_compat",
-            "size_src_km", "size_tgt_km", "merged_km", "dots", "base_overlap", "dots_near_h19_5_raw_px3",
+            "size_src_km", "size_tgt_km", "merged_km", "dots", "base_overlap", "dots_near_h19_5_raw_px3", "third_system_contact",
             "lon_a", "lat_a", "lon_b", "lat_b", "e_row", "e_col", "q_row", "q_col", "argument"]
     df = L[keep].copy()
     for c in ("gap_km", "ang_src", "ang_tgt", "strike", "strike_compat", "size_src_km", "size_tgt_km", "merged_km",
@@ -70,7 +72,7 @@ def main() -> int:
                "links_all_forward": res["links_all_forward"], "z_counts": res["z_counts"], "selected_links": int(len(df)),
                "selected_dots": int(res["dots"].sum()), "nonredundant_dots_vs_0_2477": int(res["dots_nonredundant"].sum()),
                "closure": clo, "graph": res["graph"], "kind_counts": df.kind.value_counts().to_dict(),
-               "mutual_links": int(df.mutual.sum()),
+               "mutual_links": int(df.mutual.sum()), "third_system_contact_links": int(df.third_system_contact.sum()),
                "median_gap_km": float(df.gap_km.median()), "mean_base_overlap": float(df.base_overlap.mean())}
     (paths.EVIDENCE / "candidate_summary.json").write_text(json.dumps(summary, indent=1, default=float))
     (paths.REGISTRY / "topology_candidates.json").write_text(json.dumps({"summary": summary, "links": json.loads(df.to_json(orient="records"))},

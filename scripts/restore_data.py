@@ -28,6 +28,7 @@ LOCAL_NAMES = {
     "data/bridge/sample_submission.tif": "sample_submission.tif",
     "inputs/gems19-h19-5-powerlaw-budget-multiline-corroborated-20260930-e27054cf-nan.tif": "h19_5_nan.tif",
     "docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif": "dotted_h19_5_d1_5_nan.tif",
+    "docs/downloads/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif": "dotted_h19_5_d2_8_nan.tif",
 }
 
 

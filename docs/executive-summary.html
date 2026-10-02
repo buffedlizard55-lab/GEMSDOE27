@@ -1,0 +1,62 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Executive summary · 27GEMSDOE</title><meta name="description" content="27GEMSDOE: topology-first research and submission lab for DrivenData #306 (DOE GEMS). Unscored candidate; no score claimed.">
+<link rel="stylesheet" href="assets/style.css"></head><body>
+<header class="top"><div class="in"><a class="brand" href="index.html">27GEMSDOE · DOE GEMS</a><nav><a href="index.html">Submit</a><a href="executive-summary.html" class=on>Executive summary</a><a href="topology.html">Topology candidates</a><a href="research.html">Research</a><a href="sources.html">Sources &amp; feed</a></nav></div></header>
+<main>
+<h1>Executive summary</h1>
+<p class="lead">What to submit, exactly how, what it can and cannot do, and what to do next.</p>
+<div class="card"><h2 style="margin-top:0">Decision in one table</h2>
+<table><tr><th>Question</th><th>Answer</th></tr>
+<tr><td>What to submit now</td><td><b>Slot 1:</b> <span class="mono">gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif</span> (or its .zip)</td></tr>
+<tr><td>Why this file</td><td>It is the owner-reported 0.2477 emission (dotted H19-5, d=1.5) plus 1,259 dots on 345 topology gap-closure links and nothing removed – a <b>controlled A/B test</b>:
+score(A) − 0.2477 isolates the effect of the new class.</td></tr>
+<tr><td>What it can do</td><td>Modelled effect at the 0.2477 operating point: -0.0026 (hit rate 0) · break-even at efficiency 0.052 · +0.0044 at half the holdout efficiency · +0.0113 at the holdout efficiency. The downside is small because only ~1.3k dots are added to a 60k base.</td></tr>
+<tr><td>Evidence</td><td>Pre-registered gate passed on seeds 100–109 and confirmed on fresh seeds 110–119 (efficiency 0.280; controls 0.056; random same-size subsets 0.149, 95th pct 0.156).</td></tr>
+<tr><td>Is 0.3195 reachable?</td><td>Not with verified/modelled increments (they reach ≈0.26–0.27). It needs ≈31% more weighted recall at equal false positives, or ≈46% fewer false-positive pixels at equal recall – i.e. new information. <a href="research.html">Why</a>.</td></tr>
+<tr><td>What is unknown</td><td>The real hidden-set effect; the cause of the portal's "[0, 1]" rejection; the live scores of all 27GEMSDOE files.</td></tr></table></div>
+
+<h2>Exact submission steps</h2>
+<ol class="steps">
+<li>Download the <b>.tif</b> from the <a href="index.html">front page</a> (do not open and re-save it in a GIS; that rewrites the file). Keep the file name.</li>
+<li>Sign in at DrivenData and open <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">the competition page</a>.</li>
+<li>Open the competition's submission form (the tab/button label depends on your logged-in view; the agent cannot see it and does not automate that site).</li>
+<li>Upload the <b>.tif</b> – or the <b>.zip</b>, which holds exactly the same single GeoTIFF (the form takes a .tif or a .zip with one GeoTIFF).</li>
+<li>Paste the note (<b>151</b> characters, copy button on the front page) into the optional Note field:<br><code>27GEMSDOE T-v2 A/B | 0.2477 base (dotted H19-5 d1.5) + 1259 dots on 345 aligned 1-4 km gap links; A/B vs 0.2477 | id 5512495c6bd1 | not yet live-scored</code></li>
+<li>Submit and wait for scoring. Copy the public score.</li>
+<li>Record it: add the number to the "27GEMSDOE" entry of <code>registry/live_scores.json</code> and push – the <i>build-site</i> workflow refreshes these pages. (Scores are owner-reported; the site never fetches them.)</li></ol>
+
+<h2>If the form says "Predicted values must be in range [0, 1]"</h2>
+<div class="card">
+<p>The cause of that message in the earlier attempt is <b>not established</b> – the validator is not public. What is verified for these files (<code>scripts/verify_downloads.py</code>, independent of the project code):</p>
+<ul class="tight"><li>single band, float32, EPSG:32611, 3730 × 3292, same transform as the sample;</li>
+<li>every in-footprint pixel is exactly 0.0 or 1.0 (no float rounding above 1, no negatives, no NaN, no Inf inside the footprint);</li>
+<li>NaN only outside the footprint (7,111,787 px) with <code>nodata=NaN</code> declared, exactly like the sample submission;</li>
+<li>no emitted pixel on a catalogue cell; zip holds exactly one identical .tif; note ≤ 200 characters.</li></ul>
+<p><b>Order to try:</b> (1) the .tif; (2) the <a href="downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.zip">.zip</a>; (3) the <a href="downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-allfinite.tif">all-finite fallback</a> (zeros outside the footprint, no NaN anywhere – it satisfies even a validator that compares NaN directly; the owner's sibling forensics found both outside-footprint conventions have scored on the live board).
+If all three are rejected, paste the exact message and the file name – that is the information needed to find the real rule.</p></div>
+
+<h2>The three weekly slots (decision rules fixed in advance)</h2>
+<table><tr><th>Slot</th><th>File</th><th>Run when</th><th>Reading the result (Δ = score − 0.2477, owner-reported)</th></tr>
+<tr><td>1</td><td><b>A/B primary</b> (above)</td><td>now</td><td>Δ &gt; +0.0005: topology helps → slot 2 = file B. −0.0015 &lt; Δ ≤ +0.0005: no detectable effect → slot 2 = the owner's plain d2.8 file. Δ &lt; −0.0015: refuted on the real set → do not stack; slot 2 = plain d2.8. (A drop beyond −0.0026 would contradict the arithmetic – investigate scoring or masking.)</td></tr>
+<tr><td>2</td><td>B = <span class="mono">gems27-topo-gap-closure-t-v2-on-d2-8-20261002-3ebd51534bb1-nan.tif</span> (d2.8 base + same links; <b>combination unvalidated</b>) – or the sibling's <a href="https://github.com/buffedlizard55-lab/GEMSDOE24/raw/07345ea0604953d7efb858d9cfbc21e20c7aca0b/docs/downloads/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif">plain d2.8 file</a></td><td>after slot 1</td><td>d2.8 is a sibling <i>model</i> (+≈0.010 over d1.5), never scored; B stacks it with the topology dots.</td></tr>
+<tr><td>3</td><td>reserve</td><td>—</td><td>best follow-up; a diagnostic such as tip-shadow pruning (H27-4) is the cheapest informative probe.</td></tr></table>
+<p class="small">Limit: 3 submissions per week; one submission is chosen for both rounds (problem page and Official Rules, read in part). Choose the final one deliberately.</p>
+
+<h2>Modelled payoff of the shipped addition</h2>
+<div class="row"><table style="max-width:22rem"><tr><th class="num">hit efficiency</th><th class="num">ΔDTI at 0.2477</th></tr><tr><td class='num'>0.0</td><td class='num'>-0.0026</td></tr><tr><td class='num'>0.02</td><td class='num'>-0.0016</td></tr><tr><td class='num'>0.0526</td><td class='num'>+0.0000</td></tr><tr><td class='num'>0.1</td><td class='num'>+0.0024</td></tr><tr><td class='num'>0.14</td><td class='num'>+0.0044</td></tr><tr><td class='num'>0.2</td><td class='num'>+0.0074</td></tr><tr><td class='num'>0.28</td><td class='num'>+0.0113</td></tr></table>
+<p class="small" style="flex:1;min-width:16rem">Model arithmetic from <code>evidence/operating_point_model.json</code> (assumes hidden truth ≈ 12.6k px and FP ≈ 4.3|G|; both unconfirmed). Break-even efficiency is 0.052 at DTI 0.2477. Holdout efficiency of the shipped set: 0.28; catalogue-internal, so expect less.</p></div>
+
+<h2>Compliance checklist</h2>
+<ul class="tight"><li><b>Automation:</b> the DrivenData Terms of Use prohibit robots/automatic means "for any purpose, including monitoring or copying" – this project never requests drivendata.org.</li>
+<li><b>AI disclosure:</b> the Official Rules require generative-AI use to be stated in the narrative – see <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/AI_DISCLOSURE.md">AI_DISCLOSURE.md</a>.</li>
+<li><b>Deadline:</b> the page says Dec 3, 2026 11:59 p.m. UTC; the rules (A.1) say 5:00 p.m. ET – unresolved; use the earlier.</li>
+<li><b>Finalists</b> deliver code and documentation – this repository is that documentation.</li></ul>
+
+<h2>Limitations and access needed</h2>
+<ul class="tight"><li>No live score exists for any 27GEMSDOE file; validation is catalogue-internal; the paired base is leaky; the graph is raster-based (no names/slip sense).</li>
+<li>Owner actions: submit and record the score; paste the exact portal message if rejected; paste the original task prompt into the README placeholder; optional geologist review of the 345 dossiers; optional CI download of USGS Qfaults/Siler data.</li></ul>
+<p>Full lists: <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/06_limitations_and_access.md">limitations &amp; access</a> · <a href="sources.html#irregularities">flagged irregularities</a>.</p>
+</main>
+<footer>Built 2026-10-02 19:21 UTC from <a href="https://github.com/buffedlizard55-lab/GEMSDOE27">the repository</a>. Unscored candidates: no leaderboard score is claimed anywhere on this site.
+Scores shown are owner-reported. This site never contacts drivendata.org.</footer>
+<script src="assets/app.js"></script></body></html>

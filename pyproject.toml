@@ -15,3 +15,6 @@ src = ["src", "scripts", "tests"]
 [tool.ruff.lint]
 select = ["E", "F", "I", "B"]
 ignore = ["E741", "E501", "B905"]
+
+[tool.ruff.lint.per-file-ignores]
+"scripts/make_figures.py" = ["E702"]

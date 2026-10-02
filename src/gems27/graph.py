@@ -154,21 +154,22 @@ def build_graph(mask: np.ndarray, with_edges: bool = True) -> FaultGraph:
             if not ends:        # closed ring without branch pixels
                 ends = [next(iter(pts))]
             ends = ends[:2] if len(ends) > 2 else ends
-            terminals = []
+            # Terminals: for every chain end, any adjacent junction cluster(s) and, if the end pixel is itself a
+            # free tip, its tip node. A 1-px stub on a junction therefore gets BOTH (junction, tip) - recording only
+            # the junction would turn it into a spurious self-loop and inflate the cyclomatic number.
+            terminals: list[int] = []
             for (y, x) in ends:
-                jhit = None
-                for a, b in _OFFS:
-                    yy_, xx_ = y + a, x + b
+                hits = []
+                for a_, b_ in _OFFS:
+                    yy_, xx_ = y + a_, x + b_
                     if 0 <= yy_ < mask.shape[0] and 0 <= xx_ < mask.shape[1] and jlab[yy_, xx_]:
-                        jhit = int(jlab[yy_, xx_])
-                        break
-                if jhit is not None:
-                    terminals.append(jn_id[jhit])
-                elif (y, x) in en_id:
+                        hits.append(jn_id[int(jlab[yy_, xx_])])
+                for h in dict.fromkeys(hits):
+                    if h not in terminals or len(ends) == 1:
+                        terminals.append(h)
+                if (y, x) in en_id:
                     terminals.append(en_id[(y, x)])
-            if len(ends) == 2 and len(terminals) < 2:
-                # one end sits on a branch pixel cluster that was not adjacent (rare): keep as stub
-                pass
+            terminals = list(dict.fromkeys(terminals)) if len(ends) == 1 else terminals
             u = terminals[0] if terminals else -1
             v = terminals[1] if len(terminals) > 1 else (terminals[0] if terminals else -1)
             L = float(len(pts))
@@ -187,20 +188,39 @@ def build_graph(mask: np.ndarray, with_edges: bool = True) -> FaultGraph:
 
 
 def graph_summary(fg: FaultGraph) -> dict:
-    """Counts for documentation (all at 100 m / 8-connectivity)."""
+    """Counts for documentation (all at 100 m / 8-connectivity).
+
+    Loops: at 100 m, pixel-scale loops around thick junction clusters dominate any raw cycle count, so three views are
+    reported: the raw graph cyclomatic number, the same after dropping self-loops of <= 3 px, and the number of enclosed
+    background regions of >= 20 px (a robust Euler-type count of genuinely closed fault polygons).
+    """
     n_end = int((fg.nodes.kind == "end").sum())
     n_jun = int((fg.nodes.kind == "junction").sum())
     n_edge = int(len(fg.edges))
     comps = fg.n_components
     lens_km = fg.comp_length_px[1:] * 0.1
+    raw = int(fg.graph.number_of_edges() - fg.graph.number_of_nodes() + nx.number_connected_components(fg.graph))
+    g2 = nx.MultiGraph()
+    g2.add_nodes_from(fg.graph.nodes)
+    for r in fg.edges.itertuples(index=False):
+        if r.u >= 0 and not (r.u == r.v and r.length_px <= 3):
+            g2.add_edge(r.u, r.v)
+    cyc = int(g2.number_of_edges() - g2.number_of_nodes() + nx.number_connected_components(g2))
+    bg, nb = ndi.label(~fg.skeleton, structure=ndi.generate_binary_structure(2, 1))
+    border = set(np.unique(np.r_[bg[0], bg[-1], bg[:, 0], bg[:, -1]]).tolist())
+    sizes = np.bincount(bg.ravel(), minlength=nb + 1)
+    enclosed = [i for i in range(1, nb + 1) if i not in border]
     return {
         "skeleton_px": int(fg.skeleton.sum()),
         "components": comps,
         "end_nodes": n_end,
         "junction_nodes": n_jun,
         "edges": n_edge,
-        "cyclomatic_number": int(fg.graph.number_of_edges() - fg.graph.number_of_nodes()
-                                 + nx.number_connected_components(fg.graph)),
+        "cyclomatic_number_raw": raw,
+        "cyclomatic_number": cyc,
+        "enclosed_regions_all": len(enclosed),
+        "enclosed_regions_ge_20px": int(sum(sizes[i] >= 20 for i in enclosed)),
+        "self_loop_edges_le_3px": int(((fg.edges.u == fg.edges.v) & (fg.edges.length_px <= 3)).sum()),
         "endpoints_with_tangent": int(fg.endpoints.ty.notna().sum()),
         "component_length_km": {
             "median": float(np.median(lens_km)), "p90": float(np.percentile(lens_km, 90)),

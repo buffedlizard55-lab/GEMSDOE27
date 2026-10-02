@@ -79,11 +79,12 @@ def main() -> int:
               A, labels, foot, out_dir, extraA)
     # secondary: thinner base + the same links (non-redundant with respect to that base)
     base28 = thinning.dot_thin(raw & ~labels, 2.8)
+    assert (base28 == load_mask(paths.DOTTED_D2_8)).all(), "dot_thin(2.8) no longer reproduces the sibling d2.8 emission"
     d28 = distance_transform_edt(~base28)
     add28 = res["dots"] & (d28 >= 3)
     B = base28 | add28
     extraB = {"base": "dotted H19-5 d2.8 (sibling-modelled optimum; never live-scored)", "added_px": int(add28.sum()),
-              "base_px": int(base28.sum()), "links": n_links, "conditional_on": ma["content_id"]}
+              "base_px": int(base28.sum()), "regenerated_equals_sibling_d2_8": True, "links": n_links, "conditional_on": ma["content_id"]}
     mb = emit("topo-gap-closure-t-v2-on-d2-8", "T-v2 d2.8",
               f"d2.8-thinned H19-5 + {int(add28.sum())} dots on {n_links} aligned gap links; conditional slot 2, combination unvalidated",
               B, labels, foot, out_dir, extraB)
