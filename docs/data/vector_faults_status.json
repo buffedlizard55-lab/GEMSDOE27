@@ -1,0 +1,33 @@
+{
+  "verified_utc": "2026-10-02T20:51:27Z",
+  "source_endpoint": "https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0",
+  "local_file": "data_cache/qfaults_v2_in_footprint.json",
+  "bytes": 1252341,
+  "sha256": "4d6efc7bb3659ea2545353fcec574ef085b0acdb189c7590e4420a7c6c57b41c",
+  "feature_count": 1179,
+  "distinct_named_fault_zones": 349,
+  "ftype_counts": {
+    "Well Constrained": 739,
+    "Moderately Constrained": 351,
+    "Inferred": 89
+  },
+  "slipsense_counts": {
+    "RL": 91,
+    "N": 901,
+    "LL": 82,
+    " ": 105
+  },
+  "dipdirect_counts": {
+    "Unspecified": 415,
+    "W": 139,
+    "E": 112,
+    "SW": 25,
+    "NW": 74,
+    "NE": 35,
+    "SE": 66,
+    "N": 23,
+    "S": 6,
+    " ": 284
+  },
+  "matches_manifest_sha256": true
+}

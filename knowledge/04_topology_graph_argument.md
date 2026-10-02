@@ -60,6 +60,31 @@ Post-hoc structure (seeds 100-109, exploratory): hit ratio rises with mutual tip
 Closing all 345: systems 3,199 -> 2,857, largest 42.3 -> 57.5 km. The class **completes fragments; it does not form the giant system** - the percolation argument motivates the angle, the holdout validates only the fragment-completion part.
 
 ## 6. Regional-kinematics statement (what is and is not used)
-* Used: a data-driven strike domain - the share of nearby catalogued fault length (distance-weighted, ~40 km) within 20 deg of the link strike.
+* Used: a data-driven strike domain - the share of nearby catalogued fault length (distance-weighted, ~40 km) within 20 deg of the link strike — AND, in Session 2, official NBMG INGENIOUS Quaternary Fault vector attributes (`FID`, `NAME`, `NUM`, `FTYPE_`, `SLIPSENSE`, `DIPDIRECT`, `MAPSCALE` from `qfaults_v2_in_footprint.json`).
 * Context only (literature, not an input): west- to northwest-directed extension of the Basin and Range and dextral Walker Lane shear (Faulds & Hinz 2015); step-overs/relay ramps host ~32 % and terminations ~25 % of characterised Great Basin geothermal systems; the largest strike-slip step broken by a rupture in Wesnousky's compilations was 4 km (as quoted by Biasi & Wesnousky 2016) - the same scale as the 1-4 km link range, which is context and not evidence.
-* Not used (needs external data, hypothesis H27-5): an independent stress field (Siler 2022 slip/dilation tendency) and vector slip-sense/dip-direction attributes (USGS Qfaults).
+
+## 7. Official NBMG INGENIOUS vector attribution & three-tier holdout (`evidence/vector_topology_validation.json`)
+To resolve whether T-v2 merely repairs raster discretisation gaps or also bridges genuinely distinct vector fault traces, we cross-referenced `labels.tif` against the 1,179 NBMG INGENIOUS Quaternary fault polylines (`Qfaults [INGENIOUS 6-27-2023]`, `data_cache/qfaults_v2_in_footprint.json`, SHA-256 `4d6efc7bb3659ea2545353fcec574ef085b0acdb189c7590e4420a7c6c57b41c`):
+* **Raster-to-vector alignment:** **98.42%** of `labels.tif` pixels lie within 100 m (1 px) of a vector polyline, and **99.97%** lie within 200 m (2 px).
+* **Attribution of the 345 shipped T-v2 links:**
+  * **230 / 345 (66.7%)** bridge sub-parts of the same multipart `FID` polyline (intra-`FID` compilation/discretisation gaps).
+  * **115 / 345 (33.3%)** bridge distinct `FID` polylines (inter-`FID` structural relays/step-overs).
+  * **312 / 345 (90.4%)** bridge segments within the same named fault zone (`NAME`/`NUM`); **33 / 345 (9.6%)** bridge across differently named or unnamed traces.
+  * **333 / 345 (96.5%)** satisfy kinematic compatibility (`kinematic_compat`: non-conflicting `SLIPSENSE` and synthetic/conjugate `DIPDIRECT`).
+* **Confirmatory three-tier holdout (Addendum B, seeds 120-129, 40 cells per tier):**
+
+| Holdout tier (20% hidden per quadrant) | `all` links | `z>=3 dedup` (shipped rule) | `H27-5a` (`inter-FID + kinematic_compat`) | `H27-5b` (`inter-FID + same_name + kinematic_compat`) | Rotated-cone `ctrl` | Enrichment (`z>=3 / ctrl`) |
+|---|---:|---:|---:|---:|---:|---:|
+| **Tier 1: `component`** (8-connected raster systems) | 0.1257 | **0.2926** | 0.1987 | 0.2366 | 0.0586 | **5.00x** |
+| **Tier 2: `FID_trace`** (whole NBMG `FID` multipart polylines) | 0.0442 | **0.1003** | **0.1374** | **0.1783** | 0.0204 | **4.92x** (`H27-5b`: **8.74x**) |
+| **Tier 3: `NAME_zone`** (entire 20-70 km named fault zones) | 0.0005 | **0.0014** | 0.0042 | 0.0031 | 0.0012 | 1.17x |
+
+Both pre-registered Addendum B gates passed (`g1_fid_trace_z3_gt_m030_and_ge_2x_ctrl = true`, `g2_h27_5_kinematic_typing_improves_on_fid_trace = true`).
+
+## 8. Honest out-of-fold (OOF) spatial-CV hypothesis gates (`evidence/oof_hypothesis_gates.json`)
+To eliminate the `H19-5` training-label leakage on paired holdout tests, we trained a 4-fold spatial-CV `HistGradientBoostingClassifier` (with a 600 m buffer around each test quadrant) on the 32-band label-free feature matrix (`data_cache/prepared/features.npy`, excluding the mislabelled `tc` band) and extracted 1-px ridges via directional non-maximum suppression (`src/gems27/oof_detector.py`). On fresh seeds 130-139 (40 cells, mean base DTI `0.0861`, OOF break-even `0.0175`, live break-even `0.0521`):
+* **H27-1 (`plus_T_v2`):** **`+0.0115`** mean paired DTI gain (`+0.0078` to `+0.0145` across all 10 seeds), improving **4/4 folds**, marginal efficiency **`0.2251`** (**PASSED**).
+* **H27-4 (`prune_r1_100m`, dropping dots within 100 m of catalogue):** removed dots have efficiency **`0.0034`** (15x below live break-even `0.0521`), giving **`+0.0022`** mean DTI gain in **4/4 folds** solo, and **`+0.0141`** in **4/4 folds** when stacked with T-v2 (**PASSED**; shipped as Tertiary Slot 3 candidate `d466b251f309`).
+* **H27-4 (`prune_r2_200m`, dropping dots within 200 m of catalogue):** removed dots have efficiency **`0.0080`**, giving **`+0.0025`** solo in **4/4 folds** and **`+0.0147`** stacked with T-v2 (**PASSED**).
+* **H27-3 (`coherence_h27_3`, dropping isolated 1-dot fragments with no neighbour within 600 m):** removed dots have efficiency **`0.0329`** (`> m_oof = 0.0175`), reducing DTI by **`-0.0010`** in **0/4 folds** (**REFUTED** and rejected without spending a slot).
+

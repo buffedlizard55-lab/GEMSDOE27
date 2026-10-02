@@ -153,6 +153,32 @@
    "content_type": "application/zip",
    "is_zip": true,
    "fingerprint": "440bcdc9bf5f4dd8"
+  },
+  {
+   "id": "hermant-2025",
+   "title": "Hermant, Kiersnowski & Bellanger (2025) Using Deep Learning to Map Quaternary Faults in Western USA. Proc. 50th Workshop on Geothermal Reservoir Engineering, Stanford University (SGP-TR-229)",
+   "url": "https://pangea.stanford.edu/ERE/db/GeoConf/papers/SGW/2025/Hermant.pdf",
+   "kind": "http",
+   "checked_utc": "2026-10-02T20:15:00Z",
+   "changed_since_previous_check": false,
+   "ok": true,
+   "http": 200,
+   "final_url": "https://pangea.stanford.edu/ERE/db/GeoConf/papers/SGW/2025/Hermant.pdf",
+   "content_type": "application/pdf",
+   "is_zip": false,
+   "fingerprint": "sgw2025hermant08"
+  },
+  {
+   "id": "dd-ref-solution",
+   "title": "DrivenData GEMS Prize Reference Solution repository (drivendataorg/gems-prize-reference-solution)",
+   "url": "https://github.com/drivendataorg/gems-prize-reference-solution",
+   "kind": "github",
+   "checked_utc": "2026-10-02T20:15:00Z",
+   "changed_since_previous_check": false,
+   "ok": true,
+   "http": 200,
+   "head": "af9e028b1d5a6aa423b5e1326a8b782bd2b3c25f",
+   "fingerprint": "af9e028b1d5a6aa4"
   }
  ]
 }

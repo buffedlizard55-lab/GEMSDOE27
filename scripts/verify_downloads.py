@@ -45,7 +45,8 @@ def main() -> int:
     with rasterio.open(DATA / "dotted_h19_5_d1_5_nan.tif") as s:
         base = np.nan_to_num(s.read(1)) > 0
     ok(int(foot.sum()) == 5167373 and tprof[:2] == (32611, (3730, 3292)), "template: EPSG:32611, 3730x3292, 5,167,373 px footprint")
-    for slot in ("primary", "secondary"):
+    slots = tuple(s for s in ("primary", "secondary", "tertiary") if s in man)
+    for slot in slots:
         m = man[slot]
         for variant in ("nan", "allfinite"):
             p = DL / m[variant]

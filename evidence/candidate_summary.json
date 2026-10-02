@@ -55,6 +55,29 @@
   "components_ge_10km": 69,
   "components_lt_2km": 2211
  },
+ "vector_attribution": {
+  "alignment": {
+   "n_vector_features": 1179,
+   "n_unique_names_in_json": 349,
+   "n_unique_names_matched_to_labels": 159,
+   "n_unique_fids_matched_to_labels": 413,
+   "labels_px": 60988,
+   "vector_rasterized_in_footprint_px": 59611,
+   "share_labels_within_1px_100m": 0.9841936118580704,
+   "share_labels_within_2px_200m": 0.9997048599724536,
+   "share_labels_within_3px_300m": 0.9999180166590149,
+   "share_vector_within_2px_of_labels": 0.9998490211538139,
+   "median_label_to_vector_px": 0.0
+  },
+  "shipped_links_total": 345,
+  "shipped_same_fid": 230,
+  "shipped_inter_fid": 115,
+  "shipped_same_name": 312,
+  "shipped_inter_name": 33,
+  "shipped_kinematic_compat": 333,
+  "shipped_inter_fid_and_same_name": 82,
+  "shipped_inter_fid_and_kinematic_compat": 103
+ },
  "kind_counts": {
   "end-to-end": 314,
   "abutting": 16,

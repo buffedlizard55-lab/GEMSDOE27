@@ -1,0 +1,39 @@
+name: Vector faults check (NBMG INGENIOUS ArcGIS REST; never drivendata.org)
+
+on:
+  schedule:
+    - cron: '47 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: vector-faults-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  verify-vector-faults:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests
+      - name: Restore cached vector faults & verify against NBMG ArcGIS REST
+        run: |
+          python scripts/restore_data.py
+          python scripts/fetch_vector_faults.py
+      - name: Commit status JSON if updated
+        run: |
+          set -euo pipefail
+          git config user.name 'GEMS vector fault check'
+          git config user.email 'gems-vector@users.noreply.github.com'
+          git add docs/data/vector_faults_status.json
+          git commit -m "data: refresh vector_faults_status.json" || exit 0
+          git pull --rebase origin "$GITHUB_REF_NAME" && git push origin "HEAD:$GITHUB_REF_NAME"

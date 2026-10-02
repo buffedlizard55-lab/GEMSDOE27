@@ -88,14 +88,39 @@ def main() -> int:
     mb = emit("topo-gap-closure-t-v2-on-d2-8", "T-v2 d2.8",
               f"d2.8-thinned H19-5 + {int(add28.sum())} dots on {n_links} aligned gap links; conditional slot 2, combination unvalidated",
               B, labels, foot, out_dir, extraB)
+    # tertiary (slot 3): 0.2477 base with 100 m (1 px) catalogue-flank shadow pruned (H27-4 r<=1) + T-v2 gap-closure dots
+    d_cat = distance_transform_edt(~labels)
+    base15_r1 = base15 & (d_cat > 1.0)
+    d_base15_r1 = distance_transform_edt(~base15_r1)
+    add15_r1 = res["dots"] & (d_base15_r1 >= 3.0)
+    C = base15_r1 | add15_r1
+    extraC = {
+        "base": "dotted H19-5 d1.5 with 100 m (1 px) catalogue-flank shadow removed (H27-4 r<=1)",
+        "base_px_after_r1_prune": int(base15_r1.sum()),
+        "pruned_flank_shadow_px": int((base15 & ~base15_r1).sum()),
+        "added_px": int(add15_r1.sum()),
+        "links": n_links,
+        "conditional_on": ma["content_id"],
+    }
+    mc = emit(
+        "topo-gap-closure-t-v2-plus-h27-4-r1-on-d1-5",
+        "T-v2+H27-4",
+        f"0.2477 base minus {int((base15 & ~base15_r1).sum())} 100m flank-shadow dots + {int(add15_r1.sum())} T-v2 gap dots (OOF +0.0141, 4/4 folds)",
+        C,
+        labels,
+        foot,
+        out_dir,
+        extraC,
+    )
     manifest = {"generated_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "status": "UNSCORED candidates; no leaderboard score is claimed",
-                "primary": ma, "secondary": mb,
+                "primary": ma, "secondary": mb, "tertiary": mc,
                 "reference_0_2477": {"owner_reported_score": 0.2477, "sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
                                      "url": "https://github.com/buffedlizard55-lab/GEMSDOE24/raw/07345ea0604953d7efb858d9cfbc21e20c7aca0b/docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif",
                                      "note": "owner-reported; not an organiser receipt"}}
     (out_dir / "manifest.json").write_text(json.dumps(manifest, indent=1))
     print(json.dumps({"primary": {k: ma[k] for k in ("nan", "content_id", "emitted_px", "added_px", "removed_px_vs_base", "note")},
-                      "secondary": {k: mb[k] for k in ("nan", "content_id", "emitted_px", "added_px", "note")}}, indent=1))
+                      "secondary": {k: mb[k] for k in ("nan", "content_id", "emitted_px", "added_px", "note")},
+                      "tertiary": {k: mc[k] for k in ("nan", "content_id", "emitted_px", "pruned_flank_shadow_px", "added_px", "note")}}, indent=1))
     return 0
 
 

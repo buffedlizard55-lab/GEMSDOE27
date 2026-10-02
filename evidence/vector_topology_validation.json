@@ -1,0 +1,254 @@
+{
+  "preregistration": "knowledge/03_preregistration_topology_gate.md#addendum-b",
+  "seeds": [
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129
+  ],
+  "vector_catalogue_summary": {
+    "alignment": {
+      "n_vector_features": 1179,
+      "n_unique_names_in_json": 349,
+      "n_unique_names_matched_to_labels": 159,
+      "n_unique_fids_matched_to_labels": 413,
+      "labels_px": 60988,
+      "vector_rasterized_in_footprint_px": 59611,
+      "share_labels_within_1px_100m": 0.9841936118580704,
+      "share_labels_within_2px_200m": 0.9997048599724536,
+      "share_labels_within_3px_300m": 0.9999180166590149,
+      "share_vector_within_2px_of_labels": 0.9998490211538139,
+      "median_label_to_vector_px": 0.0
+    },
+    "shipped_links_total": 345,
+    "shipped_same_fid": 230,
+    "shipped_inter_fid": 115,
+    "shipped_same_name": 312,
+    "shipped_inter_name": 33,
+    "shipped_kinematic_compat": 333,
+    "shipped_inter_fid_and_same_name": 82,
+    "shipped_inter_fid_and_kinematic_compat": 103
+  },
+  "tiers": {
+    "component": {
+      "efficiency_pooled": {
+        "all": 0.12449996431717464,
+        "z>=3 dedup": 0.292612557573181,
+        "z>=3 inter-FID": 0.1892579812929563,
+        "z>=3 inter-FID + kinematic_compat (H27-5a)": 0.1987260552308511,
+        "z>=3 inter-FID + same_name + kinematic_compat (H27-5b)": 0.2365829893762171,
+        "z>=3 intra-FID": 0.3505629108348887,
+        "ctrl": 0.05858089537912696
+      },
+      "enrichment_z3_over_ctrl": 4.995016816991878,
+      "dots_per_seed": {
+        "all": 9527.0,
+        "z>=3 dedup": 2097.3,
+        "z>=3 inter-FID": 698.0,
+        "z>=3 inter-FID + kinematic_compat (H27-5a)": 613.7,
+        "z>=3 inter-FID + same_name + kinematic_compat (H27-5b)": 471.6,
+        "z>=3 intra-FID": 1399.4,
+        "ctrl": 19759.2
+      },
+      "links_per_seed": {
+        "all": 1778.1,
+        "z>=3 dedup": 368.2,
+        "z>=3 inter-FID": 116.9,
+        "z>=3 inter-FID + kinematic_compat (H27-5a)": 105.0,
+        "z>=3 inter-FID + same_name + kinematic_compat (H27-5b)": 83.6,
+        "z>=3 intra-FID": 251.3,
+        "ctrl": 3416.9
+      },
+      "per_fold_efficiency": {
+        "NW": {
+          "all": 0.20959873392580924,
+          "z>=3 dedup": 0.648382809467206,
+          "z>=3 inter-FID": 0.38044734125780316,
+          "z>=3 inter-FID + kinematic_compat (H27-5a)": 0.3986735064373409,
+          "z>=3 inter-FID + same_name + kinematic_compat (H27-5b)": 0.4636017874564765,
+          "z>=3 intra-FID": 0.7776189072985629,
+          "ctrl": 0.038801643332035035
+        },
+        "NE_LidarGapHeavy": {
+          "all": 0.10906931503485993,
+          "z>=3 dedup": 0.25090400144498787,
+          "z>=3 inter-FID": 0.1524795591717282,
+          "z>=3 inter-FID + kinematic_compat (H27-5a)": 0.1524795591717282,
+          "z>=3 inter-FID + same_name + kinematic_compat (H27-5b)": 0.20794788886451349,
+          "z>=3 intra-FID": 0.28232937791996787,
+          "ctrl": 0.04062616718830943
+        },
+        "SW": {
+          "all": 0.09515954646343265,
+          "z>=3 dedup": 0.18739415679848567,
+          "z>=3 inter-FID": 0.14494166529793348,
+          "z>=3 inter-FID + kinematic_compat (H27-5a)": 0.17249901968380127,
+          "z>=3 inter-FID + same_name + kinematic_compat (H27-5b)": 0.17658950414410934,
+          "z>=3 intra-FID": 0.21260943215647665,
+          "ctrl": 0.06442754070259968
+        },
+        "SE": {
+          "all": 0.1308300305806206,
+          "z>=3 dedup": 0.25761700013054123,
+          "z>=3 inter-FID": 0.17520088917446988,
+          "z>=3 inter-FID + kinematic_compat (H27-5a)": 0.16487683096570624,
+          "z>=3 inter-FID + same_name + kinematic_compat (H27-5b)": 0.21033863099293568,
+          "z>=3 intra-FID": 0.3390471379885335,
+          "ctrl": 0.07837233750199611
+        }
+      }
+    },
+    "FID_trace": {
+      "efficiency_pooled": {
+        "all": 0.040865114353819364,
+        "z>=3 dedup": 0.10034133232163957,
+        "z>=3 inter-FID": 0.12116288882208585,
+        "z>=3 inter-FID + kinematic_compat (H27-5a)": 0.13739459300628037,
+        "z>=3 inter-FID + same_name + kinematic_compat (H27-5b)": 0.17829598184006035,
+        "z>=3 intra-FID": 0.09327937588302837,
+        "ctrl": 0.020384388176087564
+      },
+      "enrichment_z3_over_ctrl": 4.922459847941258,
+      "dots_per_seed": {
+        "all": 7975.8,
+        "z>=3 dedup": 1575.5,
+        "z>=3 inter-FID": 491.0,
+        "z>=3 inter-FID + kinematic_compat (H27-5a)": 416.6,
+        "z>=3 inter-FID + same_name + kinematic_compat (H27-5b)": 301.9,
+        "z>=3 intra-FID": 1084.5,
+        "ctrl": 18224.5
+      },
+      "links_per_seed": {
+        "all": 1533.1,
+        "z>=3 dedup": 290.1,
+        "z>=3 inter-FID": 84.4,
+        "z>=3 inter-FID + kinematic_compat (H27-5a)": 74.9,
+        "z>=3 inter-FID + same_name + kinematic_compat (H27-5b)": 57.0,
+        "z>=3 intra-FID": 205.7,
+        "ctrl": 3195.1
+      },
+      "per_fold_efficiency": {
+        "NW": {
+          "all": 0.021026719469760254,
+          "z>=3 dedup": 0.06673768692406438,
+          "z>=3 inter-FID": 0.0673634246160666,
+          "z>=3 inter-FID + kinematic_compat (H27-5a)": 0.07400757789213937,
+          "z>=3 inter-FID + same_name + kinematic_compat (H27-5b)": 0.08998282630770195,
+          "z>=3 intra-FID": 0.06650277069367862,
+          "ctrl": 0.013555575117009838
+        },
+        "NE_LidarGapHeavy": {
+          "all": 0.008923074325154878,
+          "z>=3 dedup": 0.01686880914920932,
+          "z>=3 inter-FID": 0.0069317005044446335,
+          "z>=3 inter-FID + kinematic_compat (H27-5a)": 0.0069317005044446335,
+          "z>=3 inter-FID + same_name + kinematic_compat (H27-5b)": 0.011973793213816543,
+          "z>=3 intra-FID": 0.019199674928724732,
+          "ctrl": 0.002760550289385507
+        },
+        "SW": {
+          "all": 0.03839342628986391,
+          "z>=3 dedup": 0.11381831111199935,
+          "z>=3 inter-FID": 0.15708069047097553,
+          "z>=3 inter-FID + kinematic_compat (H27-5a)": 0.21455721447625636,
+          "z>=3 inter-FID + same_name + kinematic_compat (H27-5b)": 0.2323804765491682,
+          "z>=3 intra-FID": 0.09606820657854834,
+          "ctrl": 0.01999583905994846
+        },
+        "SE": {
+          "all": 0.07850579494595086,
+          "z>=3 dedup": 0.1697421638548182,
+          "z>=3 inter-FID": 0.1460846819982364,
+          "z>=3 inter-FID + kinematic_compat (H27-5a)": 0.15269350323559222,
+          "z>=3 inter-FID + same_name + kinematic_compat (H27-5b)": 0.2188549152765626,
+          "z>=3 intra-FID": 0.1940812815458149,
+          "ctrl": 0.038480302416603204
+        }
+      }
+    },
+    "NAME_zone": {
+      "efficiency_pooled": {
+        "all": 0.0008111180963839383,
+        "z>=3 dedup": 0.0013531226151491974,
+        "z>=3 inter-FID": 0.00376768730938878,
+        "z>=3 inter-FID + kinematic_compat (H27-5a)": 0.004249767392497135,
+        "z>=3 inter-FID + same_name + kinematic_compat (H27-5b)": 0.0030555162968857893,
+        "z>=3 intra-FID": 0.00010987292061479639,
+        "ctrl": 0.0011769688654239944
+      },
+      "enrichment_z3_over_ctrl": 1.1496672978360774,
+      "dots_per_seed": {
+        "all": 7799.5,
+        "z>=3 dedup": 1458.5,
+        "z>=3 inter-FID": 496.2,
+        "z>=3 inter-FID + kinematic_compat (H27-5a)": 440.0,
+        "z>=3 inter-FID + same_name + kinematic_compat (H27-5b)": 340.2,
+        "z>=3 intra-FID": 962.3,
+        "ctrl": 18292.5
+      },
+      "links_per_seed": {
+        "all": 1521.7,
+        "z>=3 dedup": 274.9,
+        "z>=3 inter-FID": 89.2,
+        "z>=3 inter-FID + kinematic_compat (H27-5a)": 81.8,
+        "z>=3 inter-FID + same_name + kinematic_compat (H27-5b)": 66.2,
+        "z>=3 intra-FID": 185.7,
+        "ctrl": 3247.9
+      },
+      "per_fold_efficiency": {
+        "NW": {
+          "all": 0.003064000727820464,
+          "z>=3 dedup": 0.002899384771438051,
+          "z>=3 inter-FID": 0.0077611790423777,
+          "z>=3 inter-FID + kinematic_compat (H27-5a)": 0.00856348326499248,
+          "z>=3 inter-FID + same_name + kinematic_compat (H27-5b)": 0.009982370031911736,
+          "z>=3 intra-FID": 0.0008305647840531562,
+          "ctrl": 0.0021183965247012168
+        },
+        "NE_LidarGapHeavy": {
+          "all": 0.0006450788184935462,
+          "z>=3 dedup": 0.0012387635613985198,
+          "z>=3 inter-FID": 0.005531129890908999,
+          "z>=3 inter-FID + kinematic_compat (H27-5a)": 0.005531129890908999,
+          "z>=3 inter-FID + same_name + kinematic_compat (H27-5b)": 0.007320889002155282,
+          "z>=3 intra-FID": 0.0,
+          "ctrl": 0.00027396430462617706
+        },
+        "SW": {
+          "all": 0.0005237357405052517,
+          "z>=3 dedup": 0.0016326115211298495,
+          "z>=3 inter-FID": 0.004626475229223062,
+          "z>=3 inter-FID + kinematic_compat (H27-5a)": 0.0057543129457627434,
+          "z>=3 inter-FID + same_name + kinematic_compat (H27-5b)": 0.0,
+          "z>=3 intra-FID": 0.0,
+          "ctrl": 0.0011854162250332365
+        },
+        "SE": {
+          "all": 0.0001600612838503369,
+          "z>=3 dedup": 0.00039814720382541906,
+          "z>=3 inter-FID": 0.000826000467171879,
+          "z>=3 inter-FID + kinematic_compat (H27-5a)": 0.0009105544191180898,
+          "z>=3 inter-FID + same_name + kinematic_compat (H27-5b)": 0.0014113298053624644,
+          "z>=3 intra-FID": 2.8173679654028623e-05,
+          "ctrl": 0.0012136259976823006
+        }
+      }
+    }
+  },
+  "inclusion_threshold": {
+    "dti_0.2477": 0.052122130336889505,
+    "dti_0.30": 0.06382978723404255
+  },
+  "gate_addendum_b": {
+    "g1_fid_trace_z3_gt_m030_and_ge_2x_ctrl": true,
+    "g2_h27_5_kinematic_typing_improves_on_fid_trace": true
+  },
+  "gate_passed": true,
+  "seconds": 498.40244364738464
+}

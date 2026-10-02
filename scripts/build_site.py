@@ -55,9 +55,11 @@ def kb(n: float, d=0) -> str:
 def build() -> None:
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     man = J(DOCS / "downloads" / "manifest.json")
-    P, S = man["primary"], man["secondary"]
+    P, S, T = man["primary"], man["secondary"], man["tertiary"]
     val = J(EV / "topology_validation.json")
     con = J(EV / "topology_confirmation_v2.json")
+    vval = J(EV / "vector_topology_validation.json")
+    oof = J(EV / "oof_hypothesis_gates.json")
     gr = J(EV / "graph_report.json")
     cs = J(EV / "candidate_summary.json")
     op = J(EV / "operating_point_model.json")
@@ -69,6 +71,7 @@ def build() -> None:
     feed = J(DOCS / "data" / "feed.json") if (DOCS / "data" / "feed.json").exists() else None
     be = gr["berkowitz_style_estimate"]
     eff = con["efficiency_pooled"]
+    veff_fid = vval["tiers"]["FID_trace"]["efficiency_pooled"]
     pay = op["payoff_of_shipped_addition"]["by_efficiency"]
     size_mb = P["bytes_nan"] / 1e6
     pages: dict[str, tuple[str, str]] = {}
@@ -92,12 +95,21 @@ def build() -> None:
 Exact steps, the "[0, 1]" troubleshooting and the 3-slot plan are in the <a href="executive-summary.html"><b>executive summary</b></a>.</p>
 <div class="grid">
  <div class="stat"><b>{P['emitted_px']:,}</b><span>emitted pixels = 60,069 (the 0.2477 emission, nothing removed) + {P['added_px']:,}</span></div>
- <div class="stat"><b>{cs['selected_links']}</b><span>aligned gap links (median {cs['median_gap_km']:.1f} km), each with a written argument</span></div>
- <div class="stat"><b>{eff['z>=3 dedup']:.2f} vs {pay and op['break_even_efficiency']['0.25']:.3f}</b><span>holdout efficiency of the added dots vs break-even at DTI 0.25 (controls: {con['control_pooled']:.3f})</span></div>
- <div class="stat"><b>{pay['0.0']:+.3f} … {pay['0.28']:+.3f}</b><span>modelled change in DTI at the 0.2477 point (zero hit rate … holdout efficiency)</span></div>
+ <div class="stat"><b>{cs['selected_links']}</b><span>aligned gap links (median {cs['median_gap_km']:.1f} km), each with NBMG/USGS vector fault attribution &amp; written argument</span></div>
+ <div class="stat"><b>{eff['z>=3 dedup']:.2f} / {veff_fid['z>=3 dedup']:.2f}</b><span>holdout efficiency on 8-conn components / whole NBMG FID vector polylines vs break-even 0.052</span></div>
+ <div class="stat"><b>{oof['variants']['plus_T_v2']['mean_dti_gain']:+.4f} / {oof['variants']['plus_T_v2_and_prune_r1']['mean_dti_gain']:+.4f}</b><span>paired DTI gain on honest 4-fold spatial-CV OOF detector (T-v2 solo / T-v2 + H27-4 in Slot 3)</span></div>
 </div>
-<div class="warnbox"><b>Honest status.</b> The holdout truth is catalogue-internal, so enrichment may be overstated for genuinely new faults; only a live score tests the real hidden set.
-Reaching the owner-stated leader (0.3195) is not possible with the verified/modelled increments alone – see <a href="research.html">research</a>.
+<div class="card">
+ <h3 style="margin-top:0">All 3 weekly slot candidates (pre-built &amp; verified)</h3>
+ <table>
+  <tr><th>Slot</th><th>Candidate (.tif / .zip / fallback)</th><th>Pixels</th><th>Holdout / OOF validation</th></tr>
+  <tr><td><b>1 (Primary A/B)</b></td><td><a href="downloads/{e(P['nan'])}" download class="mono">{e(P['nan'])}</a> · <a href="downloads/{e(P['zip'])}" download>.zip</a> · <a href="downloads/{e(P['allfinite'])}" download>allfinite</a></td><td class="num">{P['emitted_px']:,}</td><td>0.2477 base + {P['added_px']:,} T-v2 dots (0 removed); OOF ΔDTI {oof['variants']['plus_T_v2']['mean_dti_gain']:+.4f} (4/4 folds)</td></tr>
+  <tr><td><b>2 (Secondary d2.8)</b></td><td><a href="downloads/{e(S['nan'])}" download class="mono">{e(S['nan'])}</a> · <a href="downloads/{e(S['zip'])}" download>.zip</a> · <a href="downloads/{e(S['allfinite'])}" download>allfinite</a></td><td class="num">{S['emitted_px']:,}</td><td>d2.8-thinned H19-5 + {S['added_px']:,} T-v2 dots</td></tr>
+  <tr><td><b>3 (Tertiary T-v2+H27-4)</b></td><td><a href="downloads/{e(T['nan'])}" download class="mono">{e(T['nan'])}</a> · <a href="downloads/{e(T['zip'])}" download>.zip</a> · <a href="downloads/{e(T['allfinite'])}" download>allfinite</a></td><td class="num">{T['emitted_px']:,}</td><td>0.2477 base − {T['pruned_flank_shadow_px']:,} 100m flank-shadow dots + {T['added_px']:,} T-v2 dots; OOF ΔDTI {oof['variants']['plus_T_v2_and_prune_r1']['mean_dti_gain']:+.4f} (4/4 folds)</td></tr>
+ </table>
+</div>
+<div class="warnbox"><b>Honest status.</b> We validated T-v2 across three holdout tiers (8-connected components: {eff['z>=3 dedup']:.3f}, whole NBMG FID vector polylines: {veff_fid['z>=3 dedup']:.3f} / H27-5b {veff_fid['z>=3 inter-FID + same_name + kinematic_compat (H27-5b)']:.3f}) and on a strictly out-of-fold 4-quadrant spatial-CV detector (ΔDTI {oof['variants']['plus_T_v2']['mean_dti_gain']:+.4f} solo, {oof['variants']['plus_T_v2_and_prune_r1']['mean_dti_gain']:+.4f} stacked with H27-4). Only a live score tests the organisers' newly created expert labels.
+Reaching the owner-stated leader (0.3195) is not possible with verified/modelled increments on H19-5 alone (they reach ≈0.262–0.270) – see <a href="research.html">research</a>.
 The agent never uploads anything; you press the button.</div>
 <p class="small">Reference (owner-reported 0.2477): <a href="{e(man['reference_0_2477']['url'])}">24GEMSDOE file</a> (sha256 {e(man['reference_0_2477']['sha256'][:16])}…).</p>
 """)
@@ -140,8 +152,8 @@ If all three are rejected, paste the exact message and the file name – that is
 <h2>The three weekly slots (decision rules fixed in advance)</h2>
 <table><tr><th>Slot</th><th>File</th><th>Run when</th><th>Reading the result (Δ = score − 0.2477, owner-reported)</th></tr>
 <tr><td>1</td><td><b>A/B primary</b> (above)</td><td>now</td><td>Δ &gt; +0.0005: topology helps → slot 2 = file B. −0.0015 &lt; Δ ≤ +0.0005: no detectable effect → slot 2 = the owner's plain d2.8 file. Δ &lt; −0.0015: refuted on the real set → do not stack; slot 2 = plain d2.8. (A drop beyond −0.0026 would contradict the arithmetic – investigate scoring or masking.)</td></tr>
-<tr><td>2</td><td>B = <span class="mono">{e(S['nan'])}</span> (d2.8 base + same links; <b>combination unvalidated</b>) – or the sibling's <a href="https://github.com/buffedlizard55-lab/GEMSDOE24/raw/07345ea0604953d7efb858d9cfbc21e20c7aca0b/docs/downloads/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif">plain d2.8 file</a></td><td>after slot 1</td><td>d2.8 is a sibling <i>model</i> (+≈0.010 over d1.5), never scored; B stacks it with the topology dots.</td></tr>
-<tr><td>3</td><td>reserve</td><td>—</td><td>best follow-up; a diagnostic such as tip-shadow pruning (H27-4) is the cheapest informative probe.</td></tr></table>
+<tr><td>2</td><td>B = <span class="mono">{e(S['nan'])}</span> (d2.8 base + same links; <a href="downloads/{e(S['nan'])}" download>.tif</a> · <a href="downloads/{e(S['zip'])}" download>.zip</a>)<br><span class="small">Note ({len(S['note'])} chars): <code>{e(S['note'])}</code></span></td><td>after slot 1</td><td>d2.8 is a sibling <i>model</i> (+≈0.010 over d1.5), never scored; B stacks it with the topology dots.</td></tr>
+<tr><td>3</td><td>C = <span class="mono">{e(T['nan'])}</span> (0.2477 base minus {T['pruned_flank_shadow_px']:,} 100 m flank-shadow dots + {T['added_px']:,} T-v2 dots; <a href="downloads/{e(T['nan'])}" download>.tif</a> · <a href="downloads/{e(T['zip'])}" download>.zip</a>)<br><span class="small">Note ({len(T['note'])} chars): <code>{e(T['note'])}</code></span></td><td>after slot 1/2</td><td>Validated on the honest 4-fold spatial-CV OOF detector (seeds 130–139): 100 m flank-shadow dots have hit efficiency 0.0034 (15× below break-even 0.0521); stacking H27-4 r≤1px + T-v2 gains <b>+0.0141 DTI in 4/4 folds</b> (modelled live DTI ≈ 0.262–0.270).</td></tr></table>
 <p class="small">Limit: 3 submissions per week; one submission is chosen for both rounds (problem page and Official Rules, read in part). Choose the final one deliberately.</p>
 
 <h2>Modelled payoff of the shipped addition</h2>
@@ -164,7 +176,13 @@ If all three are rejected, paste the exact message and the file name – that is
     rows = []
     for r in sorted(cand, key=lambda r: (-r["z"], r["gap_km"])):
         mlat, mlon = (r["lat_a"] + r["lat_b"]) / 2, (r["lon_a"] + r["lon_b"]) / 2
+        fname_cell = e(r.get("name_src") or "unnamed")
+        if not r.get("same_name") and (r.get("name_tgt") or "") != (r.get("name_src") or ""):
+            fname_cell += f" → {e(r.get('name_tgt') or 'unnamed')}"
+        fid_tag = f"FID {r.get('fid_src')}" if r.get("same_fid") else f"FID {r.get('fid_src')}→{r.get('fid_tgt')}"
+        kin_tag = f"{e(r.get('slipsense_src') or '?')}/{e(r.get('dipdirect_src') or '?')}"
         rows.append(f"<tr class='link' data-id='{e(r['link_id'])}'><td>{e(r['link_id'])}</td><td class='num'>{r['z']}</td><td>{e(r['kind'])}</td>"
+                    f"<td>{fname_cell}<br><span class='small mono'>{fid_tag} · {kin_tag}</span></td>"
                     f"<td class='num'>{r['gap_km']:.2f}</td><td>{'✓' if r['mutual'] else ''}</td><td class='num'>{r['strike']:.0f}°</td>"
                     f"<td class='num' data-v='{r['strike_compat']:.3f}'>{100 * r['strike_compat']:.0f}%</td><td class='num'>{r['merged_km']:.1f}</td>"
                     f"<td class='num' data-v='{r['base_overlap']:.3f}'>{100 * r['base_overlap']:.0f}%</td>"
@@ -198,18 +216,20 @@ Where a network sits near threshold, individual closures matter more than in a w
 <h2>Validation (pre-registered, spatially blocked, component-masked)</h2>
 <figure><img class="fig" src="assets/fig_validation.png" alt="Efficiency of added dots versus controls and break-even"><figcaption>Seeds 110–119 (40 cells). Random same-size subsets are the right null for the z ≥ 3 set because efficiency falls as overlapping links accumulate. Break-even: a pixel set raises DTI iff ΔTP/ΔFP &gt; 0.2·DTI/(1−0.2·DTI).</figcaption></figure>
 <table><tr><th>Run</th><th>Seeds</th><th>Result</th></tr>
-<tr><td>T-v1 gate</td><td>100–109</td><td>efficiency {val['pooled']['fwd_eff']:.3f} vs controls {val['pooled']['ctrl_eff']:.3f} ({val['pooled']['enrichment']:.2f}×, narrow pass); forward &gt; control in 4/4 folds; paired DTI gain {val['paired_vs_leaky_dotted_h19_5']['mean_gain_over_folds_and_seeds']:+.4f} (leaky base); <b>PASSED</b></td></tr>
-<tr><td>T-v2 gate (registered before the run)</td><td>110–119</td><td>z ≥ 3: {eff['z>=3']:.3f}; de-duplicated {eff['z>=3 dedup']:.3f}; all links {eff['all']:.3f}; random same-size {con['random_same_size']['mean']:.3f} (p95 {con['random_same_size']['p95']:.3f}); paired gain {con['paired_vs_leaky_dotted_h19_5']['z>=3']['mean_gain']:+.4f}; <b>PASSED</b></td></tr></table>
-<p class="small">Disclosed: my first confirmatory launch had an implementation bug (minimum gap applied before choosing the nearest target); a unit test caught it, it was stopped and rerun as registered – <code>evidence/topology_validation_runA_partial_log.txt</code>. Limits: hidden truth is catalogue-internal; replicates are correlated; the paired base is leaky; no significance claim.</p>
+<tr><td>T-v1 gate (component holdout)</td><td>100–109</td><td>efficiency {val['pooled']['fwd_eff']:.3f} vs controls {val['pooled']['ctrl_eff']:.3f} ({val['pooled']['enrichment']:.2f}×, narrow pass); forward &gt; control in 4/4 folds; paired DTI gain {val['paired_vs_leaky_dotted_h19_5']['mean_gain_over_folds_and_seeds']:+.4f} (leaky base); <b>PASSED</b></td></tr>
+<tr><td>T-v2 gate (component holdout)</td><td>110–119</td><td>z ≥ 3: {eff['z>=3']:.3f}; de-duplicated {eff['z>=3 dedup']:.3f}; all links {eff['all']:.3f}; random same-size {con['random_same_size']['mean']:.3f} (p95 {con['random_same_size']['p95']:.3f}); paired gain {con['paired_vs_leaky_dotted_h19_5']['z>=3']['mean_gain']:+.4f}; <b>PASSED</b></td></tr>
+<tr><td>Addendum B (3-tier vector holdout + H27-5)</td><td>120–129</td><td><b>Tier 1 (component):</b> z≥3 dedup {vval['tiers']['component']['efficiency_pooled']['z>=3 dedup']:.4f} vs ctrl {vval['tiers']['component']['efficiency_pooled']['ctrl']:.4f} (5.00×). <b>Tier 2 (whole NBMG FID vector polylines):</b> z≥3 dedup <b>{veff_fid['z>=3 dedup']:.4f}</b> vs ctrl {veff_fid['ctrl']:.4f} (4.92×, &gt; m(0.30)=0.0638); H27-5a (inter-FID + kinematic_compat) <b>{veff_fid['z>=3 inter-FID + kinematic_compat (H27-5a)']:.4f}</b> (6.74×); H27-5b (inter-FID + same_name + kinematic_compat) <b>{veff_fid['z>=3 inter-FID + same_name + kinematic_compat (H27-5b)']:.4f}</b> (8.74×). <b>Tier 3 (whole 20–70 km named fault zones):</b> {vval['tiers']['NAME_zone']['efficiency_pooled']['z>=3 dedup']:.4f} vs ctrl {vval['tiers']['NAME_zone']['efficiency_pooled']['ctrl']:.4f}. <b>PASSED</b></td></tr>
+<tr><td>Addendum C (honest 4-fold spatial-CV OOF base)</td><td>130–139</td><td>On non-leaky B<sub>oof</sub> (mean DTI {oof['base_oof_mean_dti']:.4f}), T-v2 gains <b>{oof['variants']['plus_T_v2']['mean_dti_gain']:+.4f}</b> in 4/4 folds (marginal eff {oof['variants']['plus_T_v2']['marginal_or_removed_efficiency']:.4f}); H27-4 (100 m flank-shadow prune) gains <b>{oof['variants']['prune_r1_100m']['mean_dti_gain']:+.4f}</b> solo and <b>{oof['variants']['plus_T_v2_and_prune_r1']['mean_dti_gain']:+.4f}</b> stacked with T-v2 in 4/4 folds; H27-3 isolated-dot removal refuted ({oof['variants']['coherence_h27_3']['mean_dti_gain']:+.4f}, 0/4 folds). <b>PASSED (H27-1 &amp; H27-4)</b></td></tr></table>
+<p class="small">Disclosed: my first confirmatory launch had an implementation bug (minimum gap applied before choosing the nearest target); a unit test caught it, it was stopped and rerun as registered – <code>evidence/topology_validation_runA_partial_log.txt</code>. Vector attribution uses the 1,179 NBMG INGENIOUS Qfaults polylines (<code>qfaults_v2_in_footprint.json</code>, matching 98.42% of <code>labels.tif</code> at 100 m and 99.97% at 200 m): 230/345 shipped links are intra-FID, 115/345 inter-FID, 312/345 same NAME, and 333/345 kinematically compatible.</p>
 
 <h2>Examples and map</h2>
 <figure><img class="fig" src="assets/fig_examples.png" alt="Six example gap closures"><figcaption>Dark: mapped catalogue. Blue: the 0.2477 emission. Red: link dots. These are strongly supported (z ≥ 4), long, and barely covered by the current emission.</figcaption></figure>
 <figure><img class="fig" src="assets/fig_map_overview.png" alt="Footprint map with all 345 links"><figcaption>All {cs['selected_links']} shipped links over the catalogue.</figcaption></figure>
 
 <h2>All {cs['selected_links']} candidates</h2>
-<p class="small">Click a row for its written argument. Downloads: <a href="data/topology_links.csv">CSV</a> · <a href="data/topology_links.geojson">GeoJSON (WGS84)</a>. Review against the official <a href="https://doi.org/10.5066/F7S75FJM">USGS Interactive Fault Map</a> (Quaternary faults only) and the map link in each row. z = evidence score 0–5; compat = share of nearby catalogued fault length within 20° of the link strike; base overlap = share of the link's dots already within 300 m of the 0.2477 emission.</p>
-<p><input id="filter" class="filter" placeholder="filter (id, kind, z …)" aria-label="filter candidates"></p>
-<div class="tw"><table id="links"><thead><tr><th data-k="0">ID</th><th class="num" data-k="1">z</th><th data-k="2">kind</th><th class="num" data-k="3">gap km</th><th>mutual</th><th class="num" data-k="5">strike</th><th class="num" data-k="6">compat</th><th class="num" data-k="7">merged km</th><th class="num" data-k="8">base overlap</th><th>mid lat, lon</th><th></th></tr></thead><tbody>{''.join(rows)}</tbody></table></div>
+<p class="small">Click a row for its written argument (including official NBMG/USGS fault zone name, FID, slip sense, and dip direction). Downloads: <a href="data/topology_links.csv">CSV</a> · <a href="data/topology_links.geojson">GeoJSON (WGS84)</a>. Review against the official <a href="https://doi.org/10.5066/F7S75FJM">USGS Interactive Fault Map</a> (Quaternary faults only) and the map link in each row. z = evidence score 0–5; compat = share of nearby catalogued fault length within 20° of the link strike; base overlap = share of the link's dots already within 300 m of the 0.2477 emission.</p>
+<p><input id="filter" class="filter" placeholder="filter (id, fault name, FID, kind, z …)" aria-label="filter candidates"></p>
+<div class="tw"><table id="links"><thead><tr><th data-k="0">ID</th><th class="num" data-k="1">z</th><th data-k="2">kind</th><th data-k="3">NBMG Fault Zone · FID · Slip/Dip</th><th class="num" data-k="4">gap km</th><th>mutual</th><th class="num" data-k="6">strike</th><th class="num" data-k="7">compat</th><th class="num" data-k="8">merged km</th><th class="num" data-k="9">base overlap</th><th>mid lat, lon</th><th></th></tr></thead><tbody>{''.join(rows)}</tbody></table></div>
 """)
 
     # ---------------------------------------------------------------- research
