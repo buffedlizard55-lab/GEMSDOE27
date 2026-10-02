@@ -6,14 +6,14 @@ Owner-reported reference: the 24GEMSDOE file scored **0.2477** (owner-reported);
 
 ## Start here every session (checklist)
 1. Re-read **Task prompt (verbatim)** and **Core Values (verbatim)** below. Maximize P(Win) and Own the Outcome are the focal point of every build, research and implementation decision.
-2. Do the previous session's next steps first: `knowledge/06_limitations_and_access.md` -> "Prioritised next steps for Session 3".
+2. Do the previous session's next steps first: `knowledge/06_limitations_and_access.md` -> "Prioritised next steps for Session 4".
 3. Verify inputs: `python scripts/restore_data.py` (16 hash-pinned artifacts; SHA-256 in `data/manifest.json`), `python scripts/prepare_data.py`, then `python -m pytest -q` and `python scripts/verify_downloads.py`.
 4. Verify line by line against official sources and give links for manual review (`registry/sources.json`, `docs/sources.html`). Flag irregularities (`registry/irregularities.json`). No hallucinations: unknown stays unknown.
 5. Never automate drivendata.org (Terms of Use); never claim an upload, score, PR or merge without evidence.
 6. Before implementing anything new: 3-5 untried hypotheses with layers, physical signature, why it catches a fault missing from USGS/INGENIOUS, how it differs from the repo, ranked by expected DTI gain and cost (`registry/hypotheses.json`); validate the top one on the spatially blocked holdout **before** a weekly slot is spent.
 7. Run three passes: implement+verify; review bugs/assumptions/edge cases; recheck against the original request (`evidence/review_passes.md`).
 
-## Submit (one click — 3 pre-built weekly slot candidates)
+## Submit (one click — 4 pre-built weekly slot candidates)
 * **Slot 1 (Primary A/B):** `docs/downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif` (`.zip`: `gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.zip`; fallback: `...-allfinite.tif`).
   * SHA-256 (nan file): `33003374335d84bf885f2d8f5e9dd4c57044c8ec58fa6a0d7fa581e8bc41c11d`; content id `5512495c6bd1`; **61,328** emitted pixels = the 0.2477 emission (60,069 px, nothing removed) + 1,259 topology gap-closure dots on 345 aligned 1–4 km links.
   * Note to paste (`151` chars, `<= 200`): `27GEMSDOE T-v2 A/B | 0.2477 base (dotted H19-5 d1.5) + 1259 dots on 345 aligned 1-4 km gap links; A/B vs 0.2477 | id 5512495c6bd1 | not yet live-scored`
@@ -23,19 +23,40 @@ Owner-reported reference: the 24GEMSDOE file scored **0.2477** (owner-reported);
 * **Slot 3 (Tertiary T-v2 + H27-4 100 m flank-shadow prune):** `docs/downloads/gems27-topo-gap-closure-t-v2-plus-h27-4-r1-on-d1-5-20261002-d466b251f309-nan.tif` (`.zip` & `-allfinite.tif` included).
   * Content id `d466b251f309`; **55,992** emitted pixels = 0.2477 base minus 5,355 100 m catalogue-flank shadow dots (54,714 px) + 1,278 non-redundant T-v2 dots.
   * Note to paste (`154` chars): `27GEMSDOE T-v2+H27-4 | 0.2477 base minus 5355 100m flank-shadow dots + 1278 T-v2 gap dots (OOF +0.0141, 4/4 folds) | id d466b251f309 | not yet live-scored`
-* Exact steps and the decision rules for the 3 weekly slots: `docs/executive-summary.html`.
+* **Slot 4 (NEW this session — all three validated increments at the live-anchored budget optimum):** `docs/downloads/gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-nan.tif` (`.zip` & `-allfinite.tif` included).
+  * SHA-256 (nan file): `344e7c857f363b195dbfd6e64a0a0e0fc77923c8c14d7830e53bfd2d5c05610c`; content id `23ad46a4d7ba`; **41,507** emitted pixels = `dot_thin(H19-5, 2.8)` (44,090 px, the live-anchored budget optimum) minus 3,891 100 m catalogue-flank-shadow dots (H27-4 r≤1) + 1,308 non-redundant T-v2 topology dots.
+  * Note to paste (`172` chars, `<= 200`): `27GEMSDOE H27-8 all-increments | d2.8 optimum base minus 3891 flank-shadow dots + 1308 T-v2 dots; all 3 validated increments stacked | id 23ad46a4d7ba | not yet live-scored`
+  * Modelled `0.2484` (geometric) / **`0.2781`** (hybrid) — the highest hybrid estimate of the four. The two models differ *only* in what the targeted prune is charged; **slot 1 vs slot 3 is the live A/B that settles it**.
+* Exact steps and the decision rules for the 4 weekly slots: `docs/executive-summary.html`.
+
+## New in Session 3 — the live scores were inverted (`knowledge/07_live_score_inversion.md`)
+All **20** of the owner's scored rasters that could be matched were recovered from the sibling repositories and accepted **only if their SHA-256 equalled a `registry/live_scores.json` row** (provenance by hash, not filename; `scripts/fetch_scored_corpus.py`). Five rows could not be matched and are listed as unmatched, not guessed.
+* **The exact identity**, including a term the programme had been missing: `DTI = TPw / (0.2·TPw·(1 − ρ) + 0.2·N + 0.8·|G|)` where `ρ = MPw/TPw` is a **crowding factor**. Credit takes a *max* over predictions per truth pixel but false-positive mass takes a *sum*, so a pixel that merely sits near truth is cheap even when redundant — **crowding near truth is a discount, not a penalty**. The identity reproduces both live anchors exactly: H19-5 solid → **0.1922** (live 0.1922), dotted d1.5 → **0.2477** (live 0.2477).
+* **|G| = 12,226 px**, from a blind spacing-5 lattice whose credit per truth pixel (`c = 0.37481`) is pure geometry and needs no assumption about *where* the truth is. The sibling's independent estimate was 12,503 — **2.2 % apart**. Use 12.2–12.8k.
+* **Retention rule validated twice live**: `credit(d) = credit_solid · c(d)/c_solid` predicts H19-5→d1.5 to **−0.1 %** and H25-ctx→h28 to **+4.0 %**. Budget optimum **d = 2.25–2.8 → 0.2550** (+0.0073); the sibling's independent fit said 0.2553. **The emission-geometry lever is exhausted at ≈0.255.**
+* **Concentration** (`(TPw/|G|)/c`) ranks detector quality independently of budget: the 0.2477 file is **5.67×** better than blind. The whole H19-5/h19-4/h16-1 family **plateaus at 5.3–5.7** — same detector, different clothes — and **no submission in the group's history has ever earned more than 0.508·|G|** of credit.
+* **0.3195 is arithmetically out of reach by rearranging pixels**: at 60,069 px it needs **0.570·|G|** of credit, more than any submission has ever earned at any budget; at 44,090 px it needs 0.486·|G|, which H19-5 solid *has* (0.506) but thinning to that budget retains only 0.759 → 0.384. **Retention, not knowledge, is the wall.** Only two routes remain: retention ≈1.0 at ~44k px, or concentration above 5.7 — both are detector problems needing *new information*.
+* **Rejected with evidence, so nobody re-derives them:** H27-6 coverage-optimal thinning (**0.866× Poisson-disk — 13 % worse** at the budget that matters); H27-7 union-recall ensembling (central 0.2655 but **pessimistic bound 0.2310**, vs 0.2550 for h19-5 alone on a rule validated to 4 %); H27-9 habitat tomography (**not identifiable** — LOO score RMSE 0.0715 vs a score spread of 0.0686, signal ratio 0.96).
+* **Leaderboard context** (secondary quote from the sibling's owner-directed read, *not* fetched by this agent — drivendata.org is off limits): rank 1 **0.3195**, rank 2 **0.3128 with only 2 submissions**, rank 5 **0.2941**; the group's 0.2477 sits at **rank 16**. Rank 2 reaching 0.31+ in two attempts is evidence of a materially better **detector**, not a better submission schedule.
 
 ## What is validated, and what is not
 | claim | status |
 |---|---|
-| Files are single-band float32, exact 0.0/1.0 inside the footprint, NaN outside (nodata=NaN) like the sample; fallback and zip provided | verified by an independent script (`scripts/verify_downloads.py`, 66 checks, 0 failures) |
+| Files are single-band float32, exact 0.0/1.0 inside the footprint, NaN outside (nodata=NaN) like the sample; fallback and zip provided | verified by an independent script (`scripts/verify_downloads.py`, **79 checks, 0 failures**, now covering all four slots) |
+| The forward model `DTI = TPw/(0.2·TPw·(1−ρ) + 0.2·N + 0.8·|G|)` reproduces the two live anchors | **verified exactly** on hash-authenticated rasters: H19-5 solid → 0.1922, dotted d1.5 → 0.2477 (`evidence/live_inversion.json`, `tests/test_inversion.py`) |
+| The retention rule `credit(d) = credit_solid·c(d)/c_solid` transfers to an unseen live pair | **verified**: −0.1 % on H19-5→d1.5, +4.0 % on H25-ctx→h28 (`evidence/budget_optimum.json`) |
+| `|G|` ≈ 12.2–12.8k px | three independent instruments agree within 4.3 % (blind lattice 12,226 here; sibling lattice 12,503; sibling pair 12,769). Still an **estimate**, not an organiser receipt |
+| Coverage-optimal thinning beats Poisson-disk | **REFUTED** — 0.866× at the sparse budget (`src/gems27/coverage_thin.py`) |
+| Union-recall ensembling of near-disjoint surfaces beats the best single surface | **REFUTED as an improvement** — central 0.2655 vs pessimistic 0.2310, against 0.2550 for h19-5 alone |
+| Habitat tomography of the hidden truth is identifiable from 20 live scores | **REFUTED** — LOO signal ratio 0.96, no better than predicting the mean |
 | The 0.2477 file is exactly `dot_thin(H19-5 minus catalogue, 1.5)` | reproduced (60,069 px identical) |
 | Topology gap-closure beats rotated-cone controls and random same-size subsets on the 8-connected component holdout | pre-registered gates passed on seeds 100-109 (`0.118` vs `0.057` ctrl) and confirmed on fresh seeds 110-119 (`z>=3 dedup = 0.280` vs `0.056` ctrl) and seeds 120-129 (`0.2926` vs `0.0586` ctrl) |
 | Topology gap-closure and H27-5 kinematic typing beat rotated-cone controls when **whole NBMG INGENIOUS `FID` vector polylines** are held out | pre-registered Addendum B gate passed on seeds 120-129 (`evidence/vector_topology_validation.json`): `z>=3 dedup = 0.1003` vs `0.0204` ctrl (`4.92x`, `> m(0.30) = 0.0638`); `H27-5a (inter-FID + kinematic_compat) = 0.1374` (`6.74x`); `H27-5b (inter-FID + same_name + kinematic_compat) = 0.1783` (`8.74x`) |
 | Topology gap-closure (H27-1) and 100–200 m flank-shadow pruning (H27-4) improve DTI on a **strictly out-of-fold 4-quadrant spatial-CV detector ($B_{\text{oof}}$)** | pre-registered Addendum C gates passed on seeds 130-139 (`evidence/oof_hypothesis_gates.json`): `plus_T_v2` gains `+0.0115` (`4/4` folds); `prune_r1_100m` gains `+0.0022` solo (`4/4` folds, removed efficiency `0.0034` vs live break-even `0.0521`) and **`+0.0141` stacked with T-v2** (`4/4` folds); H27-3 isolated-dot removal refuted (`-0.0010`, `0/4` folds) |
 | The same on the real hidden test set | **unknown until a slot is used** (only a live score tests the organisers' newly created expert labels) |
 | Plausible effect on DTI at the 0.2477 operating point | Slot 1 (`5512495c6bd1`): `-0.0029` (zero hit rate) ... `+0.0024` (`FID_trace` eff `0.1003`) ... `+0.0110` (`component` eff `0.280`); Slot 3 (`d466b251f309`): `+0.0141` (`FID_trace`) to `+0.0223` (`component`) |
-| Reaching 0.3195 | not with verified/modelled increments on H19-5 alone (`~0.262-0.270`; see `knowledge/01_why_0.2477_won_and_the_ceiling.md`) |
+| Modelled DTI of all four slots under both truth assumptions | `evidence/candidate_model_scores.json`: geo/hyb — slot 1 `0.2506`/`0.2580`, slot 2 `0.2585`/`0.2671`, slot 3 `0.2439`/`0.2704`, slot 4 `0.2484`/`0.2781`. **Models, not scores.** They disagree only on the targeted prune; the geometric model is validated for *unbiased* removal and is known to be biased against *targeted* removal (it charges pruned flank pixels average credit; the OOF gate measured 0.0034, ~15× below the 0.0521 break-even) |
+| Reaching 0.3195 | **No** — not with any rearrangement of pixels the group already has. It needs 0.570·\|G\| of credit at 60,069 px (more than any submission has ever earned) or retention ≈1.0 at ~44k px. See `knowledge/07_live_score_inversion.md` §8 |
 
 ## Map of the repo
 | path | what |

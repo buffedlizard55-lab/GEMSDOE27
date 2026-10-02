@@ -56,6 +56,75 @@ def build() -> None:
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     man = J(DOCS / "downloads" / "manifest.json")
     P, S, T = man["primary"], man["secondary"], man["tertiary"]
+    Q = man.get("quaternary")
+    ms = J(EV / "candidate_model_scores.json") if (EV / "candidate_model_scores.json").exists() else None
+    inv = J(EV / "live_inversion.json") if (EV / "live_inversion.json").exists() else None
+    bo = J(EV / "budget_optimum.json") if (EV / "budget_optimum.json").exists() else None
+    mslot = {c["slot"]: c for c in (ms["candidates"] if ms else [])}
+
+    def mscore(slot, which):
+        v = mslot.get(slot, {}).get(which)
+        return f"{v:.4f}" if v else "&ndash;"
+
+    geo_ceiling = max(c["model_score"] for c in bo["sweeps"]["h19_5"]["rows"]) if bo else 0.2550
+    invcard = ""
+    if inv and bo:
+        invcard = (
+            '<div class="card"><h3 style="margin-top:0">New this session: the live scores were inverted</h3>'
+            "<p>All <b>20</b> of the owner's scored rasters were recovered from the sibling repositories and "
+            "authenticated by <b>SHA-256</b>, then inverted against the official metric. Two instruments came "
+            'out of it, and both reproduce the live anchors exactly.</p><div class="grid">'
+            f'<div class="stat"><b>{inv["G_used"]:,.0f}</b><span>hidden-truth pixels |G|, from a blind '
+            "spacing-5 lattice whose credit is pure geometry. The sibling's independent estimate: 12,503 "
+            "&mdash; <b>2.2&nbsp;% apart</b></span></div>"
+            '<div class="stat"><b>&minus;0.1&nbsp;% / +4.0&nbsp;%</b><span>error of the retention rule on two '
+            "independent live solid&rarr;dotted pairs (H19-5&rarr;d1.5, H25-ctx&rarr;h28)</span></div>"
+            f'<div class="stat"><b>{geo_ceiling:.4f}</b><span>ceiling of the emission-geometry lever '
+            "(d=2.25&ndash;2.8, 44,090 px). The sibling's independent fit: 0.2553</span></div>"
+            '<div class="stat"><b>5.67</b><span>concentration of the 0.2477 file &mdash; 5.67&times; better '
+            "than a blind lattice at finding truth. The whole H19-5 family plateaus at 5.3&ndash;5.7</span></div>"
+            '</div><p class="small">No submission in the group&#39;s history has ever earned more than '
+            "<b>0.508&#124;G&#124;</b> of credit. 0.3195 at 60,069&nbsp;px needs <b>0.570&#124;G&#124;</b>. "
+            'That is now an arithmetic statement, not an opinion &mdash; see <a href="research.html#inversion">'
+            "the inversion</a>.</p></div>")
+    # ---- tables for the Session-3 live-score inversion (research.html#inversion) ----
+    inv_g = inv["G_used"] if inv else 12226.0
+    concrows, retrows, sweeprows, reqrows = "", "", "", ""
+    if inv:
+        keep = [r for r in inv["submissions"]
+                if r["credit_fraction_of_G"] >= 0.18 or "lattice" in r["label"]]
+        for r in sorted(keep, key=lambda r: -r["score"])[:12]:
+            conc = (r["credit_fraction_of_G"] / r["c_blind_credit_per_truth"]
+                    if r["c_blind_credit_per_truth"] else 0.0)
+            nm = r["label"].split(" ", 1)[-1]
+            concrows += (f"<tr><td>{e(nm[:40])}</td><td class='num'>{r['n_scored']:,}</td>"
+                         f"<td class='num'>{r['score']:.4f}</td>"
+                         f"<td class='num'>{r['credit_TPw']:,.0f}</td>"
+                         f"<td class='num'>{r['credit_fraction_of_G']:.3f}</td>"
+                         f"<td class='num'><b>{conc:.2f}</b></td>"
+                         f"<td class='num'>{r['rho_matched_over_TP']:.2f}</td></tr>")
+        for v in (bo["retention_validation"] if bo else []):
+            retrows += (f"<tr><td>{e(v['solid'].split(' ', 1)[-1][:26])} &rarr; "
+                        f"{e(v['dotted'].split(' ', 1)[-1][:30])}</td>"
+                        f"<td class='num'>{v['retention_predicted_by_geometry']:.4f}</td>"
+                        f"<td class='num'>{v['retention_measured_live']:.4f}</td>"
+                        f"<td class='num'>{v['relative_error'] * 100:+.1f}&nbsp;%</td></tr>")
+        for n in (20000, 30000, 44090, 60069, 121131):
+            row = {q["target"]: q for q in inv["requirements"] if q["emitted_px"] == n}
+            if len(row) == 3:
+                reqrows += (f"<tr><td class='num'>{n:,}</td>"
+                            + "".join(f"<td class='num'>{row[t]['credit_fraction_required']:.3f}|G|</td>"
+                                      for t in (0.2477, 0.2941, 0.3195)) + "</tr>")
+    if bo and "h19_5" in bo["sweeps"]:
+        for r in bo["sweeps"]["h19_5"]["rows"]:
+            if r["min_dist"] in (1.0, 1.25, 1.5, 2.25, 3.0, 4.0, 6.0):
+                sweeprows += (f"<tr><td class='num'>{r['min_dist']}</td>"
+                              f"<td class='num'>{r['n_px']:,}</td>"
+                              f"<td class='num'>{r['retention_vs_solid']:.3f}</td>"
+                              f"<td class='num'>{r['rho']:.2f}</td>"
+                              f"<td class='num'><b>{r['model_score']:.4f}</b></td></tr>")
+    geoceil = max((c["model_score"] for c in bo["sweeps"]["h19_5"]["rows"]), default=0.2550) if bo else 0.2550
+
     val = J(EV / "topology_validation.json")
     con = J(EV / "topology_confirmation_v2.json")
     vval = J(EV / "vector_topology_validation.json")
@@ -92,20 +161,22 @@ def build() -> None:
  <div class="row"><span class="badge ok">format verified: float32 · single band · exact 0/1 · NaN outside</span><span class="badge ok">gates passed on blocked holdout (class level)</span><span class="badge warn">real hidden set: untested</span></div>
 </div>
 <p>Steps: download → open <a href="{DD_COMP}">the competition</a> (sign in) → Submit → upload the .tif (or the .zip) → paste the note → submit.
-Exact steps, the "[0, 1]" troubleshooting and the 3-slot plan are in the <a href="executive-summary.html"><b>executive summary</b></a>.</p>
+Exact steps, the "[0, 1]" troubleshooting and the 4-slot plan are in the <a href="executive-summary.html"><b>executive summary</b></a>.</p>
 <div class="grid">
  <div class="stat"><b>{P['emitted_px']:,}</b><span>emitted pixels = 60,069 (the 0.2477 emission, nothing removed) + {P['added_px']:,}</span></div>
  <div class="stat"><b>{cs['selected_links']}</b><span>aligned gap links (median {cs['median_gap_km']:.1f} km), each with NBMG/USGS vector fault attribution &amp; written argument</span></div>
  <div class="stat"><b>{eff['z>=3 dedup']:.2f} / {veff_fid['z>=3 dedup']:.2f}</b><span>holdout efficiency on 8-conn components / whole NBMG FID vector polylines vs break-even 0.052</span></div>
  <div class="stat"><b>{oof['variants']['plus_T_v2']['mean_dti_gain']:+.4f} / {oof['variants']['plus_T_v2_and_prune_r1']['mean_dti_gain']:+.4f}</b><span>paired DTI gain on honest 4-fold spatial-CV OOF detector (T-v2 solo / T-v2 + H27-4 in Slot 3)</span></div>
 </div>
+{invcard}
 <div class="card">
- <h3 style="margin-top:0">All 3 weekly slot candidates (pre-built &amp; verified)</h3>
+ <h3 style="margin-top:0">All 4 weekly slot candidates (pre-built &amp; verified)</h3>
  <table>
-  <tr><th>Slot</th><th>Candidate (.tif / .zip / fallback)</th><th>Pixels</th><th>Holdout / OOF validation</th></tr>
-  <tr><td><b>1 (Primary A/B)</b></td><td><a href="downloads/{e(P['nan'])}" download class="mono">{e(P['nan'])}</a> · <a href="downloads/{e(P['zip'])}" download>.zip</a> · <a href="downloads/{e(P['allfinite'])}" download>allfinite</a></td><td class="num">{P['emitted_px']:,}</td><td>0.2477 base + {P['added_px']:,} T-v2 dots (0 removed); OOF ΔDTI {oof['variants']['plus_T_v2']['mean_dti_gain']:+.4f} (4/4 folds)</td></tr>
-  <tr><td><b>2 (Secondary d2.8)</b></td><td><a href="downloads/{e(S['nan'])}" download class="mono">{e(S['nan'])}</a> · <a href="downloads/{e(S['zip'])}" download>.zip</a> · <a href="downloads/{e(S['allfinite'])}" download>allfinite</a></td><td class="num">{S['emitted_px']:,}</td><td>d2.8-thinned H19-5 + {S['added_px']:,} T-v2 dots</td></tr>
-  <tr><td><b>3 (Tertiary T-v2+H27-4)</b></td><td><a href="downloads/{e(T['nan'])}" download class="mono">{e(T['nan'])}</a> · <a href="downloads/{e(T['zip'])}" download>.zip</a> · <a href="downloads/{e(T['allfinite'])}" download>allfinite</a></td><td class="num">{T['emitted_px']:,}</td><td>0.2477 base − {T['pruned_flank_shadow_px']:,} 100m flank-shadow dots + {T['added_px']:,} T-v2 dots; OOF ΔDTI {oof['variants']['plus_T_v2_and_prune_r1']['mean_dti_gain']:+.4f} (4/4 folds)</td></tr>
+  <tr><th>Slot</th><th>Candidate (.tif / .zip / fallback)</th><th>Pixels</th><th>Model<br>geo / hyb</th><th>What it tests</th></tr>
+  <tr><td><b>1 (Primary A/B)</b></td><td><a href="downloads/{e(P['nan'])}" download class="mono">{e(P['nan'])}</a> &middot; <a href="downloads/{e(P['zip'])}" download>.zip</a> &middot; <a href="downloads/{e(P['allfinite'])}" download>allfinite</a></td><td class="num">{P['emitted_px']:,}</td><td class="num">{mscore('slot1_primary_A_B','model_score_geometric')} / {mscore('slot1_primary_A_B','model_score_hybrid')}</td><td>0.2477 base + {P['added_px']:,} T-v2 dots, <b>nothing removed</b>. Changes exactly one thing, so slot 1 against the scored 0.2477 parent is a clean A/B. OOF &Delta;DTI {oof['variants']['plus_T_v2']['mean_dti_gain']:+.4f} (4/4 folds).</td></tr>
+  <tr><td><b>2 (budget optimum)</b></td><td><a href="downloads/{e(S['nan'])}" download class="mono">{e(S['nan'])}</a> &middot; <a href="downloads/{e(S['zip'])}" download>.zip</a> &middot; <a href="downloads/{e(S['allfinite'])}" download>allfinite</a></td><td class="num">{S['emitted_px']:,}</td><td class="num">{mscore('slot2_secondary_d2_8','model_score_geometric')} / {mscore('slot2_secondary_d2_8','model_score_hybrid')}</td><td>d2.8-thinned H19-5 + {S['added_px']:,} T-v2 dots. d=2.25&ndash;2.8 is the <b>live-anchored budget optimum</b> ({geo_ceiling:.4f} for that base alone, vs 0.2477 live).</td></tr>
+  <tr><td><b>3 (T-v2 + H27-4 prune)</b></td><td><a href="downloads/{e(T['nan'])}" download class="mono">{e(T['nan'])}</a> &middot; <a href="downloads/{e(T['zip'])}" download>.zip</a> &middot; <a href="downloads/{e(T['allfinite'])}" download>allfinite</a></td><td class="num">{T['emitted_px']:,}</td><td class="num">{mscore('slot3_tertiary_prune_d1_5','model_score_geometric')} / {mscore('slot3_tertiary_prune_d1_5','model_score_hybrid')}</td><td>0.2477 base &minus; {T['pruned_flank_shadow_px']:,} 100&nbsp;m catalogue-flank-shadow dots + {T['added_px']:,} T-v2 dots. OOF &Delta;DTI {oof['variants']['plus_T_v2_and_prune_r1']['mean_dti_gain']:+.4f} (4/4 folds). <b>Slot 1 vs slot 3 settles whether the prune pays.</b></td></tr>
+  <tr><td><b>4 (NEW &mdash; all increments)</b></td><td><a href="downloads/{e(Q['nan'])}" download class="mono">{e(Q['nan'])}</a> &middot; <a href="downloads/{e(Q['zip'])}" download>.zip</a> &middot; <a href="downloads/{e(Q['allfinite'])}" download>allfinite</a></td><td class="num">{Q['emitted_px']:,}</td><td class="num">{mscore('slot4_quaternary_all_increments','model_score_geometric')} / {mscore('slot4_quaternary_all_increments','model_score_hybrid')}</td><td>d2.8 optimum base &minus; {Q['pruned_flank_shadow_px']:,} flank-shadow dots + {Q['added_px']:,} T-v2 dots. First candidate to stack <b>every</b> increment this programme validated, at the live-anchored budget; highest hybrid estimate of the four.</td></tr>
  </table>
 </div>
 <div class="warnbox"><b>Honest status.</b> We validated T-v2 across three holdout tiers (8-connected components: {eff['z>=3 dedup']:.3f}, whole NBMG FID vector polylines: {veff_fid['z>=3 dedup']:.3f} / H27-5b {veff_fid['z>=3 inter-FID + same_name + kinematic_compat (H27-5b)']:.3f}) and on a strictly out-of-fold 4-quadrant spatial-CV detector (ΔDTI {oof['variants']['plus_T_v2']['mean_dti_gain']:+.4f} solo, {oof['variants']['plus_T_v2_and_prune_r1']['mean_dti_gain']:+.4f} stacked with H27-4). Only a live score tests the organisers' newly created expert labels.
@@ -149,11 +220,13 @@ score(A) − 0.2477 isolates the effect of the new class.</td></tr>
 <p><b>Order to try:</b> (1) the .tif; (2) the <a href="downloads/{e(P['zip'])}">.zip</a>; (3) the <a href="downloads/{e(P['allfinite'])}">all-finite fallback</a> (zeros outside the footprint, no NaN anywhere – it satisfies even a validator that compares NaN directly; the owner's sibling forensics found both outside-footprint conventions have scored on the live board).
 If all three are rejected, paste the exact message and the file name – that is the information needed to find the real rule.</p></div>
 
-<h2>The three weekly slots (decision rules fixed in advance)</h2>
+<h2>The four weekly slots (decision rules fixed in advance)</h2>
 <table><tr><th>Slot</th><th>File</th><th>Run when</th><th>Reading the result (Δ = score − 0.2477, owner-reported)</th></tr>
 <tr><td>1</td><td><b>A/B primary</b> (above)</td><td>now</td><td>Δ &gt; +0.0005: topology helps → slot 2 = file B. −0.0015 &lt; Δ ≤ +0.0005: no detectable effect → slot 2 = the owner's plain d2.8 file. Δ &lt; −0.0015: refuted on the real set → do not stack; slot 2 = plain d2.8. (A drop beyond −0.0026 would contradict the arithmetic – investigate scoring or masking.)</td></tr>
 <tr><td>2</td><td>B = <span class="mono">{e(S['nan'])}</span> (d2.8 base + same links; <a href="downloads/{e(S['nan'])}" download>.tif</a> · <a href="downloads/{e(S['zip'])}" download>.zip</a>)<br><span class="small">Note ({len(S['note'])} chars): <code>{e(S['note'])}</code></span></td><td>after slot 1</td><td>d2.8 is a sibling <i>model</i> (+≈0.010 over d1.5), never scored; B stacks it with the topology dots.</td></tr>
-<tr><td>3</td><td>C = <span class="mono">{e(T['nan'])}</span> (0.2477 base minus {T['pruned_flank_shadow_px']:,} 100 m flank-shadow dots + {T['added_px']:,} T-v2 dots; <a href="downloads/{e(T['nan'])}" download>.tif</a> · <a href="downloads/{e(T['zip'])}" download>.zip</a>)<br><span class="small">Note ({len(T['note'])} chars): <code>{e(T['note'])}</code></span></td><td>after slot 1/2</td><td>Validated on the honest 4-fold spatial-CV OOF detector (seeds 130–139): 100 m flank-shadow dots have hit efficiency 0.0034 (15× below break-even 0.0521); stacking H27-4 r≤1px + T-v2 gains <b>+0.0141 DTI in 4/4 folds</b> (modelled live DTI ≈ 0.262–0.270).</td></tr></table>
+<tr><td>3</td><td>C = <span class="mono">{e(T['nan'])}</span> (0.2477 base minus {T['pruned_flank_shadow_px']:,} 100 m flank-shadow dots + {T['added_px']:,} T-v2 dots; <a href="downloads/{e(T['nan'])}" download>.tif</a> · <a href="downloads/{e(T['zip'])}" download>.zip</a>)<br><span class="small">Note ({len(T['note'])} chars): <code>{e(T['note'])}</code></span></td><td>after slot 1/2</td><td>Validated on the honest 4-fold spatial-CV OOF detector (seeds 130–139): 100 m flank-shadow dots have hit efficiency 0.0034 (15× below break-even 0.0521); stacking H27-4 r≤1px + T-v2 gains <b>+0.0141 DTI in 4/4 folds</b> (modelled live DTI ≈ 0.262–0.270).</td></tr>
+<tr><td>4</td><td><b>D = NEW</b> <span class="mono">{e(Q['nan'])}</span> (d2.8 optimum base minus {Q['pruned_flank_shadow_px']:,} flank-shadow dots + {Q['added_px']:,} T-v2 dots; <a href="downloads/{e(Q['nan'])}" download>.tif</a> · <a href="downloads/{e(Q['zip'])}" download>.zip</a>)<br><span class="small">Note ({len(Q['note'])} chars): <code>{e(Q['note'])}</code></span></td><td>after slot 1 or 3</td><td>First candidate stacking <b>all three</b> validated increments at the live-anchored budget. Model {mscore('slot4_quaternary_all_increments','model_score_geometric')} (geometric) / <b>{mscore('slot4_quaternary_all_increments','model_score_hybrid')}</b> (hybrid) &mdash; the highest hybrid estimate of the four. Run slot 1 or 3 first: they measure whether the prune pays, which is the only term the two models disagree about.</td></tr></table>
+<p class="small">The geometric/hybrid pair is explained in <a href="research.html#inversion">the inversion</a>: they differ only in what the targeted H27-4 prune is charged, and slot&nbsp;1&nbsp;vs&nbsp;slot&nbsp;3 is the live A/B that settles it.</p>
 <p class="small">Limit: 3 submissions per week; one submission is chosen for both rounds (problem page and Official Rules, read in part). Choose the final one deliberately.</p>
 
 <h2>Modelled payoff of the shipped addition</h2>
@@ -238,6 +311,96 @@ Where a network sits near threshold, individual closures matter more than in a w
     pages["research.html"] = ("Research", f"""
 <h1>Research</h1>
 <p class="lead">Why the 0.2477 file won, what a higher score needs, and the ranked hypotheses.</p>
+<h2 id="inversion">Session 3 &mdash; inverting all 20 live scores</h2>
+<p class="lead">The owner's scored rasters are still in the sibling repositories. All <b>20</b> that could be
+matched were downloaded through the GitHub API and accepted <b>only if their SHA-256 equalled a
+<code>registry/live_scores.json</code> row</b> &mdash; provenance by hash, not by filename
+(<code>scripts/fetch_scored_corpus.py</code>, <code>evidence/scored_corpus.json</code>). Five rows could not be
+matched and are listed as unmatched rather than guessed.</p>
+
+<h3>The exact identity, and the term everyone missed</h3>
+<p>With <code>k(d)=max(1&minus;d/300&nbsp;m,0)</code>, <code>TPw=&Sigma;_g max_x p(x)k</code> and
+<code>FPw=&Sigma;_x p(x)(1&minus;max_g k)</code>, the metric collapses to</p>
+<p class="mono" style="text-align:center">DTI = TPw / ( 0.2&middot;TPw&middot;(1 &minus; &rho;) + 0.2&middot;N + 0.8&middot;|G| ),
+&nbsp;&nbsp; &rho; = MPw/TPw</p>
+<p><code>&rho;</code> is a <b>crowding factor</b>: the metric takes a <i>max</i> over predictions per truth pixel
+for credit but a <i>sum</i> over predictions for false-positive mass, so a pixel that merely sits near truth is
+cheap even when it is redundant for credit. <b>Crowding near truth is a discount, not a penalty.</b> The identity
+reproduces both live anchors exactly: H19-5 solid &rarr; <b>0.1922</b> (live 0.1922), dotted d1.5 &rarr;
+<b>0.2477</b> (live 0.2477). For the blind lattice &rho;=0.99, which is why it is a clean instrument.</p>
+
+<h3>|G| = {inv_g:,.0f} px, from an instrument that needs no geology</h3>
+<p>A spacing-5 blind lattice earns credit <code>c=0.37481</code> per truth pixel by pure geometry, wherever the
+truth is. Inverting its live score (0.0904, N=204,504) gives <b>|G| = {inv_g:,.0f} px</b>. The sibling's
+independent estimate was 12,503 &mdash; <b>2.2&nbsp;% apart</b>, two instruments, two repositories.
+<code>knowledge/01</code>'s ~12.6k should be read as 12.2&ndash;12.8k.</p>
+
+<h3>Concentration: the only ranking that survives</h3>
+<p><code>conc = (TPw/|G|) / c(S)</code> measures how many times better than blind an emission is at <i>finding</i>
+truth. <code>c</code> alone only measures how much area was sprayed.</p>
+<div class="tw"><table><tr><th>surface</th><th class="num">N</th><th class="num">live</th><th class="num">credit</th>
+<th class="num">credit/|G|</th><th class="num">conc</th><th class="num">&rho;</th></tr>{concrows}</table></div>
+<p>Three readings, each of which kills a family of ideas. (1) The H19-5 / h19-4 / h16-1 family sits on a
+<b>plateau at conc 5.3&ndash;5.7</b>: same detector quality, different clothes &mdash; recombining them cannot
+raise concentration. (2) <b>No submission in the group's history has ever exceeded 0.508|G| of credit</b>; the
+best file ever made still misses about half the hidden truth. (3) Spraying area does not work &mdash; H19-C
+reaches 0.239|G| with 452,798 px and scores 0.0297.</p>
+
+<h3>The retention rule, validated twice live</h3>
+<p>For geometric thinning, <code>credit(d) = credit_solid &middot; c(d)/c_solid</code>. Against two independent
+live solid&rarr;dotted pairs:</p>
+<table style="max-width:44rem"><tr><th>pair</th><th class="num">predicted by geometry</th><th class="num">measured live</th><th class="num">error</th></tr>
+{retrows}</table>
+<p>This is the strongest instrument the programme has: a rule anchored on one live pair predicts a second,
+unrelated live pair to 4&nbsp;%. It is valid for <b>spatially unbiased</b> removal only.</p>
+
+<h3>The budget sweep &mdash; a ceiling, not a springboard</h3>
+<div class="tw"><table><tr><th class="num">min dist (px)</th><th class="num">N</th><th class="num">retention</th>
+<th class="num">&rho;</th><th class="num">model score</th></tr>{sweeprows}</table></div>
+<p>Optimum <b>d = 2.25&ndash;2.8 &rarr; {geoceil:.4f}</b>, i.e. <b>+{geoceil-0.2477:.4f}</b> over 0.2477. The
+sibling's completely independent two-parameter fit said 0.2553 (band 0.250&ndash;0.261). Two methods, two
+repositories, same number: <b>the emission-geometry lever is exhausted at &asymp;0.255.</b></p>
+
+<h3>Two ideas tested and rejected this session</h3>
+<ul class="tight">
+<li><b>H27-6 coverage-optimal thinning &mdash; REFUTED.</b> Poisson-disk is a <i>packing</i> rule, blind to how
+much of the emission's own support survives, so the obvious improvement is to pick the N dots that maximise
+coverage directly (a monotone submodular problem whose objective <i>is</i> the metric's credit functional).
+Implemented as batched greedy with exact local marginal gains (<code>src/gems27/coverage_thin.py</code>).
+Measured on quadrant NW at matched budgets: at 20,752 px greedy scores <b>0.866&times;</b> Poisson-disk
+(143,341 vs 165,563 coverage mass) &mdash; <b>13&nbsp;% worse</b>; at 28,209 px it is a wash (1.010&times;).
+On a 1-px-wide ridge network isotropic spacing already <i>is</i> the near-optimal cover, and greedy's early
+picks are made against an empty coverage map and cannot be undone. Do not re-propose.</li>
+<li><b>H27-7 union-recall ensembling &mdash; REFUTED as an improvement.</b> The best surfaces are nearly
+pixel-disjoint (Jaccard: h19-5 vs H25-ctx <b>0.075</b>, vs r7-scarp <b>0.052</b>), which looks like free recall.
+It is not: h19-5&cup;h16-1 thinned to d2.25 models at 0.2655 central but <b>0.2310</b> under the pessimistic
+bound (both cover the <i>same</i> truth from different pixels); h19-5&cup;H25-ctx models 0.2521 / <b>0.1688</b>.
+Against those, <b>h19-5 alone at d2.25 is {geoceil:.4f} with a rule validated to 4&nbsp;%</b>. The union's whole
+edge lives in an unvalidated complementarity assumption and its downside is &minus;0.086.</li>
+<li><b>Habitat tomography &mdash; not identifiable.</b> Because <code>TP_i = &Sigma;_x &lambda;(x)K_i(x)</code> is
+linear in the truth intensity, 20 scored submissions are in principle 20 measurements of <i>where</i> the hidden
+labels live. With overlapping geological bases it fails outright (in-sample R&sup2; = &minus;1.24). Restricted to a
+strict 7-cell catalogue-distance <b>partition</b> (well identified, mass constraint exact) it still fails:
+R&sup2; = &minus;0.360, leave-one-submission-out score RMSE <b>0.0715</b> against a score spread of 0.0686 &mdash;
+signal ratio 0.96, no better than predicting the mean. The fitted &lambda; put 66&nbsp;% of truth in the
+100&ndash;200&nbsp;m catalogue ring and 34&nbsp;% at 800&ndash;1500&nbsp;m, consistent with the Hermant et al.
+(2025) 150&ndash;400&nbsp;m LiDAR-offset finding, but it did not pass its own validation and <b>must not</b> be
+used to choose an emission.</li></ul>
+
+<h3>What 0.3195 requires, arithmetically</h3>
+<div class="tw"><table><tr><th class="num">emitted px</th><th class="num">credit for 0.2477</th>
+<th class="num">for 0.2941 (#5)</th><th class="num">for 0.3195 (#1)</th></tr>{reqrows}</table></div>
+<p>The group's best ever credit fraction is <b>0.508</b>. So 0.3195 at 44,090&nbsp;px needs 0.486|G| &mdash;
+<i>below</i> what H19-5 solid already earns (0.506), but thinning to 44,090&nbsp;px retains only 0.759 &rarr;
+0.384. <b>Retention, not knowledge, is the wall.</b> And 0.3195 at 60,069&nbsp;px needs 0.570|G| &mdash; more
+credit than any submission in the group's history has ever earned at any budget. Exactly two routes remain:
+(1)&nbsp;retention &asymp;1.0 at ~44k&nbsp;px &mdash; and H27-6 shows the obvious way fails; (2)&nbsp;concentration
+above 5.7 &mdash; which needs <i>new information</i>, since the whole family plateaus at 5.3&ndash;5.7. Both are
+detector problems. <b>0.3195 is not reachable by rearranging pixels we already have.</b></p>
+<p class="small">Scripts: <code>fetch_scored_corpus.py</code> &rarr; <code>invert_live_scores.py</code> &rarr;
+<code>optimize_budget.py</code> / <code>tomography_partition.py</code> &rarr; <code>model_candidates.py</code>.
+Full write-up with every number: <a href="{REPO_URL}/blob/main/knowledge/07_live_score_inversion.md">knowledge/07</a>.</p>
+
 <h2>Why the 0.2477 file won</h2>
 <p>DTI = TP / (0.2·TP + 0.2·FP + 0.8·|G|). The 0.8|G| term cannot be reduced; false positives are cheap per pixel (0.2) but unbounded – about 49% of the denominator at the reconstructed operating point (recall ≈0.43, FP ≈54k px; hidden truth |G| ≈ 12.6k px, unconfirmed).
 Dotting a solid line at ~3 px keeps 78% of its on-line credit for a third of its false-positive mass because credit per dot saturates at 3 while cost stays 1.
@@ -263,7 +426,10 @@ Stacking only verified/modelled increments gives ≈0.26–0.27 – so 0.3195 ne
     srows = "".join(f"<tr><td><a href='{e(s['url'])}'>{e(s['title'])}</a><br><span class='small'>{e(s['publisher'])}</span></td><td>{e(s['category'])}</td><td>{e(s['used_for'])}</td>"
                     f"<td><b>{e(s['status'])}</b><br><span class='small'>{e(s['evidence'])}</span></td></tr>" for s in src)
     irows = "".join(f"<tr><td><span class='badge {'bad' if i['severity']=='high' else ('warn' if i['severity']=='medium' else '')}'>{e(i['severity'])}</span></td><td>{e(i['issue'])}</td><td>{e(i['action'])}</td></tr>" for i in irr)
-    scrows = "".join(f"<tr><td>{e(a['label'])}</td><td class='num'>{a['owner_reported_public_score']:.4f}</td><td class='small'>{e(a.get('corroboration') or '')}</td></tr>" for a in sc["artifacts"])
+    def _sc(a):
+        v = a.get("owner_reported_public_score")
+        return f"{v:.4f}" if isinstance(v, (int, float)) else "<span class='badge warn'>UNSCORED</span>"
+    scrows = "".join(f"<tr><td>{e(a['label'])}</td><td class='num'>{_sc(a)}</td><td class='small'>{e(a.get('corroboration') or '')}</td></tr>" for a in sc["artifacts"])
     if feed:
         fstatic = "".join(f"<tr><td><a href='{e(x['url'])}'>{e(x['title'])}</a></td><td>{'reachable (HTTP ' + str(x.get('http', '?')) + ')' if x.get('ok') else 'NOT reachable'}</td>"
                           f"<td>{e(x.get('last_updated') or x.get('pushed_at') or x.get('last_modified') or '-')}{' · ' + format(x['total_bytes'], ',') + ' B' if x.get('total_bytes') else ''}{' · zip' if x.get('is_zip') else ''}{' · ' + str(x['record_count']) + ' records' if x.get('record_count') is not None else ''}</td><td>{'CHANGED' if x.get('changed_since_previous_check') else 'no change'}</td><td>{e(x['checked_utc'])}</td></tr>" for x in feed["entries"])

@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-02",
+ "generated": "2026-10-02 (Session 3)",
  "items": [
   {
    "id": "prompt-verbatim-unavailable",
@@ -114,6 +114,48 @@
    "severity": "low",
    "issue": "The USGS Faults page says the GIS zip is 16 MB; the server reports 32,371,696 bytes (feed check, 2026-10-02).",
    "action": "Treat the page text as stale; the feed records the live size."
+  },
+  {
+   "id": "g-estimate-refined-12226",
+   "severity": "info",
+   "issue": "knowledge/01 and the operating-point model assume |G| ~ 12.63k px. Session 3 re-derived it from the blind spacing-5 lattice alone (whose credit per truth pixel c = 0.37481 is pure geometry, independent of where the truth is) using the SHA-256-authenticated raster: |G| = 12,226 px. The sibling GEMSDOE25 independently derived 12,503 (lattice) and 12,769 (pair).",
+   "action": "Adopt 12,226 px with a stated range of 12.2-12.8k. All Session-3 modelling uses 12,226. This is a refinement, not a contradiction: the three instruments agree within 2.2-4.3%. evidence/live_inversion.json."
+  },
+  {
+   "id": "tomography-not-identifiable",
+   "severity": "medium",
+   "issue": "A habitat tomography of the hidden truth (20 live scores as 20 linear measurements of the truth intensity lambda) is NOT identifiable from the available corpus. Overlapping bases: in-sample R2 = -1.24. Strict 7-cell catalogue-distance partition: R2 = -0.360, leave-one-submission-out score RMSE 0.0715 vs a score spread of 0.0686 (signal ratio 0.96).",
+   "action": "Recorded so no future session re-derives it or - worse - ships an emission chosen by the fitted lambda. The fitted habitat weights (66% of truth in the 100-200 m catalogue ring) are hypothesis-generating ONLY. evidence/live_truth_partition_radial.json."
+  },
+  {
+   "id": "geometric-retention-biased-against-pruning",
+   "severity": "medium",
+   "issue": "The live-validated retention rule credit(d) = credit_solid * c(d)/c_solid assumes the hidden truth is spread uniformly near the emission. That is exactly right for geometric (Poisson-disk) thinning - it predicts two independent live solid->dotted pairs to -0.1% and +4.0% - but it is biased against TARGETED pruning, because it charges every removed pixel with average credit. The out-of-fold gate measured the H27-4 catalogue-flank pixels directly at 0.0034 credit/px, about 15x below the 0.0521 live break-even.",
+   "action": "Report BOTH models for every candidate (evidence/candidate_model_scores.json): 'geometric' charges uniform-truth retention for all changes, 'hybrid' charges geometric retention for thinning and the measured OOF efficiencies for the targeted steps. Slot 1 vs slot 3 is the live A/B that settles which is right. Neither column is a score."
+  },
+  {
+   "id": "five-scored-rasters-unmatched",
+   "severity": "low",
+   "issue": "5 of the 25 registry rows could not be matched to a raster by SHA-256 in the sibling repositories searched (ens12-adopted, dual-family-union, lidarscarp-ridge-top2pct, GEMSDOE4 combined, hgb88-topk03). Their files exist under different names or in paths outside the searched directories.",
+   "action": "Listed as 'unmatched' in evidence/scored_corpus.json rather than guessed. The inversion therefore rests on 20 hash-authenticated pairs, not 25. No filename-only match was accepted anywhere."
+  },
+  {
+   "id": "leaderboard-snapshot-sibling-only",
+   "severity": "medium",
+   "issue": "The only leaderboard distribution the programme has (rank 1 DARD 0.3195, rank 2 nchuzhoy 0.3128 with only 2 submissions, rank 5 xiaofanhu 0.2941, and five rows whose values coincide with owner-reported artifacts: 0.2477 #16, 0.1922 #28, 0.1894 #30, 0.1855 #33, 0.1563 #41) is recorded in the SIBLING repo GEMSDOE25/registry/live_scores.json under a one-off user-directed page read of 2026-10-02. It is not in this repository and the agent must not fetch drivendata.org.",
+   "action": "Copied into registry/live_scores.json as 'leaderboard_snapshot_sibling_2026-10-02' with its provenance and the explicit note that the value coincidences are matches by VALUE ONLY and do not identify the owner's account. Needed because rank 2 reached 0.3128 with 2 submissions - evidence that a much better detector exists, not a better emission schedule."
+  },
+  {
+   "id": "gemsdoe9-placeholder-positives-outside-footprint",
+   "severity": "medium",
+   "issue": "The scored raster behind the owner-reported 0.0107 (GEMSDOE9 'PLACEHOLDER', sha256 2314b599..., recovered and hash-matched in Session 3) has 196,132 POSITIVE pixels OUTSIDE the organisers' 5,167,373-px footprint, and only 145,610 inside it (of which 2,074 sit on catalogue cells and are therefore free). The sibling repo's own note says this file 'fails the range/footprint check in this repo's verifier'.",
+   "action": "Counted correctly in evidence/live_inversion.json as n_scored = 145,610 (inside-footprint, off-catalogue) with n_positive_outside_footprint = 196,132 reported separately. An earlier draft of the inversion script summed positives over the WHOLE grid and so charged this file 341,742 scored pixels - a 2.3x overstatement that propagated into its implied credit. Fixed in scripts/invert_live_scores.py::emission_of and covered by the explicit outside-footprint field. No 27GEMSDOE candidate is affected: all four emit 0 pixels outside the footprint and 0 on catalogue cells (scripts/verify_downloads.py, 79 checks)."
+  },
+  {
+   "id": "ci-red-on-main-raster-tests",
+   "severity": "high",
+   "issue": "CI was RED on `main` before Session 3 and nobody had noticed. `.github/workflows/ci.yml` runs `python -m pytest -q` on a bare checkout, but `data_cache/` is git-ignored by design and CI cannot restore it (`scripts/restore_data.py` reads the inputs from SIBLING repositories, which the workflow's `contents: read` GITHUB_TOKEN cannot access). `tests/test_vector_and_oof.py::test_vector_attribution_and_evidence_files` opens `paths.TEMPLATE`, so it failed with `RasterioIOError: data_cache/sample_submission.tif: No such file or directory`. Reproduced on the base commit `ce80ead` in a clean clone: 1 failed, 35 passed.",
+   "action": "Fixed in Session 3 with `tests/conftest.py`: a `requires_rasters` marker plus a collection hook that skips with the missing file names in the reason. Applied to the pre-existing test and to the new `test_verify_downloads_still_passes_with_four_slots`. Verified in a clean clone without `data_cache`: 45 passed, 2 skipped; and locally after `restore_data.py`: 47 passed, 0 skipped. A red suite now always means a real failure. Consequence to record honestly: **CI does not exercise the two raster-dependent checks** - they run locally and must be re-run before any release. Adding a data-restore step to CI needs a token with read access to the sibling repositories, which is an access request for the owner, not something the agent can grant itself."
   }
  ]
 }
