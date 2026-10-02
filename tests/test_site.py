@@ -32,14 +32,22 @@ def test_site_builds_from_json_only_and_pages_exist():
 
 
 def test_all_internal_links_and_assets_resolve():
-    for p in PAGES:
+    for base, p in [(DOCS, q) for q in PAGES] + [(ROOT, "index.html")]:
         parser = Links()
-        parser.feed((DOCS / p).read_text())
+        parser.feed((base / p).read_text())
         for ref in parser.refs:
             if re.match(r"^(https?:|mailto:|#|data:)", ref):
                 continue
             target = ref.split("#")[0]
-            assert (DOCS / target).exists(), f"{p}: broken internal reference {ref}"
+            assert (base / target).exists(), f"{base.name}/{p}: broken internal reference {ref}"
+
+
+def test_repository_root_front_page_serves_the_one_click_download():
+    man = json.loads((DOCS / "downloads" / "manifest.json").read_text())
+    root_idx = (ROOT / "index.html").read_text()
+    P = man["primary"]
+    assert f'href="docs/downloads/{P["nan"]}"' in root_idx and "download" in root_idx
+    assert (ROOT / ".nojekyll").exists()
 
 
 def test_front_page_has_download_and_exact_note():
