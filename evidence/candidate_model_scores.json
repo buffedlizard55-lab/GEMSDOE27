@@ -1,0 +1,106 @@
+{
+ "G_used": 12225.896194356133,
+ "anchor": {
+  "label": "19GEMSDOE h19-5",
+  "live_score": 0.1922,
+  "credit_TPw": 6188.804163187549,
+  "c_blind": 0.08938629147603268
+ },
+ "base_thinnings": {
+  "1.5": {
+   "n_px": 60069,
+   "c": 0.07630155077189939,
+   "retention": 0.8536158007221754
+  },
+  "2.8": {
+   "n_px": 44090,
+   "c": 0.06787970273473934,
+   "retention": 0.7593972365767077
+  }
+ },
+ "assumptions": {
+  "eff_prune_removed_credit_per_px": 0.0034,
+  "eff_t_v2_added_credit_per_px": 0.2251,
+  "geometric_model": "uniform-truth retention c(S')/c_solid charged for ALL pixel changes, including the targeted prune",
+  "hybrid_model": "geometric retention for the thinning step only; the targeted prune and T-v2 additions are charged at the marginal efficiencies the out-of-fold gate measured"
+ },
+ "candidates": [
+  {
+   "slot": "slot1_primary_A_B",
+   "file": "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif",
+   "content_id": "5512495c6bd1",
+   "emitted_px": 61328,
+   "base_min_dist": 1.5,
+   "pruned_flank_shadow_px": 0,
+   "added_t_v2_px": 1259,
+   "retention_vs_H19_5_solid": 0.8741647060447851,
+   "rho_matched_over_TP": 1.4247594001970965,
+   "model_score_geometric": 0.25061857818135524,
+   "model_score_hybrid": 0.25801442355262266,
+   "credit_geometric": 5410.034172081587,
+   "credit_hybrid": 5566.261921272072
+  },
+  {
+   "slot": "slot2_secondary_d2_8",
+   "file": "gems27-topo-gap-closure-t-v2-on-d2-8-20261002-3ebd51534bb1-nan.tif",
+   "content_id": "3ebd51534bb1",
+   "emitted_px": 45374,
+   "base_min_dist": 2.8,
+   "pruned_flank_shadow_px": 0,
+   "added_t_v2_px": 1284,
+   "retention_vs_H19_5_solid": 0.7803618797692448,
+   "rho_matched_over_TP": 1.180829019707738,
+   "model_score_geometric": 0.2585270920306814,
+   "model_score_hybrid": 0.2671359696375286,
+   "credit_geometric": 4829.506850308764,
+   "credit_hybrid": 4988.789179239049
+  },
+  {
+   "slot": "slot3_tertiary_prune_d1_5",
+   "file": "gems27-topo-gap-closure-t-v2-plus-h27-4-r1-on-d1-5-20261002-d466b251f309-nan.tif",
+   "content_id": "d466b251f309",
+   "emitted_px": 55992,
+   "base_min_dist": 1.5,
+   "pruned_flank_shadow_px": 5355,
+   "added_t_v2_px": 1278,
+   "retention_vs_H19_5_solid": 0.810923535130999,
+   "rho_matched_over_TP": 1.4022390997862184,
+   "model_score_geometric": 0.243915179172834,
+   "model_score_hybrid": 0.2704174832180233,
+   "credit_geometric": 5018.646950245492,
+   "credit_hybrid": 5552.331821272072
+  },
+  {
+   "slot": "slot4_quaternary_all_increments",
+   "file": "gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-nan.tif",
+   "content_id": "23ad46a4d7ba",
+   "emitted_px": 41507,
+   "base_min_dist": 2.8,
+   "pruned_flank_shadow_px": 3891,
+   "added_t_v2_px": 1308,
+   "retention_vs_H19_5_solid": 0.7197444559816928,
+   "rho_matched_over_TP": 1.1711675047303363,
+   "model_score_geometric": 0.24843556768945146,
+   "model_score_hybrid": 0.27808581313444625,
+   "credit_geometric": 4454.357485610658,
+   "credit_hybrid": 4980.962179239049
+  }
+ ],
+ "live_references": [
+  {
+   "label": "19GEMSDOE h19-5",
+   "live_score": 0.1922,
+   "emitted_px": 121131,
+   "credit_TPw": 6188.804163187549,
+   "rho": 2.4599778597568105
+  },
+  {
+   "label": "24GEMSDOE h25-1 dotted-h19-5-d1-5 (989f59505db1)",
+   "live_score": 0.2477,
+   "emitted_px": 60069,
+   "credit_TPw": 5286.130270299154,
+   "rho": 1.429104058177201
+  }
+ ],
+ "reading": "Both models reproduce the live anchors. They disagree only on the targeted H27-4 prune: the geometric model charges pruned flank pixels with average credit, the hybrid model charges them with the efficiency the out-of-fold gate actually measured (0.0034, ~15x below the 0.0521 live break-even). Slot 1 vs slot 3 is the live A/B that settles which is right. Neither column is a leaderboard score."
+}

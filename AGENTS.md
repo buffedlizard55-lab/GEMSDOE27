@@ -25,4 +25,10 @@ Exact 0.0/1.0 (or sanitised probabilities) inside the footprint, NaN outside wit
 `verify_downloads.py` passing, no pixel on a catalogue cell, a documented hypothesis and its holdout gate result, and an entry in `docs/downloads/manifest.json`.
 
 ## Next steps inherited from this session
-`knowledge/06_limitations_and_access.md` -> "Remaining work". Do those first.
+`knowledge/06_limitations_and_access.md` -> "Prioritised next steps for Session 4". Do those first.
+
+## Session-3 additions to the hard rules
+* **Every scored raster used in an argument must be hash-authenticated.** `scripts/fetch_scored_corpus.py` accepts a sibling file only if its SHA-256 equals a `registry/live_scores.json` row; unmatched rows stay listed as unmatched. Never match by filename.
+* **Report both truth assumptions for any modelled score.** `geometric` (uniform-truth retention for every pixel change) is validated only for *unbiased* removal such as thinning; `hybrid` (geometric for thinning, measured OOF efficiencies for targeted steps) is the right charge for *targeted* pruning. Quoting one without the other hides the only term the two disagree about.
+* **A model is not a score.** `evidence/candidate_model_scores.json` and `evidence/budget_optimum.json` are calibrated models that reproduce live anchors; they are never to be quoted as leaderboard results.
+* **Negative results are deliverables.** H27-6, H27-7 and H27-9 are recorded in `registry/hypotheses.json` with the measurement that killed them, so no session repeats the work.

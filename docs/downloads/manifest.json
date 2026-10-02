@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-10-02T20:56:25Z",
+ "generated_utc": "2026-10-02T22:26:42Z",
  "status": "UNSCORED candidates; no leaderboard score is claimed",
  "primary": {
   "slug": "topo-gap-closure-t-v2-on-d1-5",
@@ -56,6 +56,30 @@
   "pruned_flank_shadow_px": 5355,
   "added_px": 1278,
   "links": 345,
+  "conditional_on": "5512495c6bd1"
+ },
+ "quaternary": {
+  "slug": "all-increments-d2-8-h27-4-r1-t-v2",
+  "hypothesis": "H27-8 all-increments",
+  "content_id": "23ad46a4d7ba",
+  "note": "27GEMSDOE H27-8 all-increments | d2.8 optimum base minus 3891 flank-shadow dots + 1308 T-v2 dots; all 3 validated increments stacked | id 23ad46a4d7ba | not yet live-scored",
+  "nan": "gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-nan.tif",
+  "allfinite": "gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-allfinite.tif",
+  "zip": "gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-nan.zip",
+  "sha256_nan": "344e7c857f363b195dbfd6e64a0a0e0fc77923c8c14d7830e53bfd2d5c05610c",
+  "bytes_nan": 1598402,
+  "emitted_px": 41507,
+  "base": "dotted H19-5 d2.8 (live-anchored budget optimum, model 0.2550) minus the 100 m catalogue-flank shadow (H27-4 r<=1), plus T-v2 topology gap-closure dots (H27-1)",
+  "base_px_before_prune": 44090,
+  "base_px_after_r1_prune": 40199,
+  "pruned_flank_shadow_px": 3891,
+  "added_px": 1308,
+  "links": 345,
+  "increments_stacked": [
+   "H27-1 T-v2 gap closure (OOF +0.0115, 4/4 folds)",
+   "H27-4 r<=1 flank-shadow prune (OOF +0.0022 solo, +0.0141 stacked, 4/4 folds)",
+   "live-anchored budget optimum d=2.25-2.8 (model 0.2550 vs 0.2477)"
+  ],
   "conditional_on": "5512495c6bd1"
  },
  "reference_0_2477": {

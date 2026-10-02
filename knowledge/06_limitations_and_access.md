@@ -36,7 +36,22 @@
 
 ---
 
-## Prioritised next steps for Session 3
+## What Session 3 resolved
+1. **"Ingest the live Slot 1 A/B score"** — could not be done: `registry/live_scores.json["27GEMSDOE"]` is still `null`, so no 27GEMSDOE file has been uploaded. Blocked on the owner, unchanged.
+2. **Replaced that blocked step with something that needed no upload:** all 20 matchable scored rasters were recovered by SHA-256 and inverted against the official metric. This produced the exact forward identity (including the crowding term ρ), a second independent |G| estimate (12,226 px, 2.2 % from the sibling's), a retention rule validated on two live pairs (−0.1 %, +4.0 %), the budget optimum (d = 2.25–2.8 → 0.2550), and a concentration ranking that shows the whole H19-5 family plateauing at 5.3–5.7× blind. See `knowledge/07_live_score_inversion.md`.
+3. **Built slot 4** — the first candidate stacking all three validated increments at the live-anchored budget optimum (`23ad46a4d7ba`, 41,507 px). 79 verification checks pass.
+4. **Three ideas tested and rejected with evidence** (H27-6 coverage-optimal thinning, H27-7 union-recall ensembling, H27-9 habitat tomography) so no future session repeats them.
+5. **Upgraded the OOF detector to a spatial/convolutional ridge detector — NOT done.** Still the top unfinished technical item; see next steps.
+
+## Prioritised next steps for Session 4
+1. **Ingest the live score for whichever slot the owner uploads** (`registry/live_scores.json["27GEMSDOE"]` is still `null`). Slot 1 vs slot 3 is the pre-registered A/B that settles whether the H27-4 prune pays live — that single comparison converts the geometric/hybrid model disagreement (0.2439 vs 0.2704) into a measurement. Record the exact portal response text either way.
+2. **Detector upgrade — the only remaining route.** Session 3 proved arithmetically that 0.3195 needs concentration above 5.7× blind (the family plateaus at 5.3–5.7) or retention ≈1.0 at ~44k px (H27-6 shows the obvious approach fails). Both are detector problems. Upgrade `src/gems27/oof_detector.py` from the tabular HistGradientBoosting classifier (holdout DTI 0.0861) to a multi-scale spatial/convolutional ridge detector in the direction of Hermant et al. (2025) FaultSEG. Gate it on the 4-fold spatial-CV holdout with **fresh seeds (140–149)**, pre-registered before running.
+3. **Rank the 345 T-v2 links by graph-connectivity value**, not just local z-score: Δ(component merge) and load-bearing-bridge centrality per Berkowitz, Bour, Davy & Odling (2000). A link that merges two large clusters is worth far more at the percolation threshold than one that merges two small ones. Cheap; uses only data already in `data_cache/`.
+4. **H27-2 step-over/relay linking with *overlapping* en-echelon offsets** — never generated. The tested variant used non-overlapping offsets only.
+5. **Siler (2022) slip/dilation tendency + DeAngelo (2022) heat flow** — still blocked locally (USGS/ScienceBase hosts unreachable from the sandbox). Advance by writing the GitHub Actions workflow only; test whether weighting H27-5b links by slip/dilation tendency beats `FID_trace` efficiency 0.1783.
+6. **Do not re-propose** H27-3 (refuted), H27-6 (refuted, 13 % worse), H27-7 (bounded gamble, downside −0.086), H27-9 (not identifiable), Tier-3 `NAME_zone` gap closure (efficiency 0.0014), or any pure-emission-geometry tweak beyond d = 2.25–2.8 (ceiling ≈0.255).
+
+## Prioritised next steps for Session 3 (superseded — kept for audit)
 
 1. **Ingest the live Slot 1 A/B score (`score(5512495c6bd1) - 0.2477`):**
    - Compute the empirical live efficiency of the 1,259 T-v2 dots from the exact score difference.

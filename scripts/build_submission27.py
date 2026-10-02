@@ -112,15 +112,51 @@ def main() -> int:
         out_dir,
         extraC,
     )
+
+    # ---- slot 4 (H27-8): every increment validated this programme, at the live-anchored budget ----
+    # Session 3 added `scripts/optimize_budget.py`, a forward model that reproduces BOTH live anchors
+    # exactly (H19-5 solid -> 0.1922, dotted d1.5 -> 0.2477) and whose retention assumption checks out
+    # on two independent solid->dotted live pairs (-0.1 % and +4.0 %). Its optimum over the thinning
+    # distance is d = 2.25-2.8 (N = 44,090, model score 0.2550 vs 0.2477). Slot 2 already sits at that
+    # budget but carries only T-v2; slot 3 carries T-v2 + the H27-4 flank-shadow prune but at d1.5.
+    # Nothing in the programme has stacked ALL THREE validated increments at the anchored optimum.
+    base28_r1 = base28 & (d_cat > 1.0)
+    d_base28_r1 = distance_transform_edt(~base28_r1)
+    add28_r1 = res["dots"] & (d_base28_r1 >= 3.0)
+    D = base28_r1 | add28_r1
+    extraD = {
+        "base": "dotted H19-5 d2.8 (live-anchored budget optimum, model 0.2550) minus the 100 m "
+                "catalogue-flank shadow (H27-4 r<=1), plus T-v2 topology gap-closure dots (H27-1)",
+        "base_px_before_prune": int(base28.sum()),
+        "base_px_after_r1_prune": int(base28_r1.sum()),
+        "pruned_flank_shadow_px": int((base28 & ~base28_r1).sum()),
+        "added_px": int(add28_r1.sum()),
+        "links": n_links,
+        "increments_stacked": ["H27-1 T-v2 gap closure (OOF +0.0115, 4/4 folds)",
+                               "H27-4 r<=1 flank-shadow prune (OOF +0.0022 solo, +0.0141 stacked, 4/4 folds)",
+                               "live-anchored budget optimum d=2.25-2.8 (model 0.2550 vs 0.2477)"],
+        "conditional_on": ma["content_id"],
+    }
+    md = emit(
+        "all-increments-d2-8-h27-4-r1-t-v2",
+        "H27-8 all-increments",
+        f"d2.8 optimum base minus {int((base28 & ~base28_r1).sum())} flank-shadow dots + {int(add28_r1.sum())} T-v2 dots; all 3 validated increments stacked",
+        D,
+        labels,
+        foot,
+        out_dir,
+        extraD,
+    )
     manifest = {"generated_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "status": "UNSCORED candidates; no leaderboard score is claimed",
-                "primary": ma, "secondary": mb, "tertiary": mc,
+                "primary": ma, "secondary": mb, "tertiary": mc, "quaternary": md,
                 "reference_0_2477": {"owner_reported_score": 0.2477, "sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
                                      "url": "https://github.com/buffedlizard55-lab/GEMSDOE24/raw/07345ea0604953d7efb858d9cfbc21e20c7aca0b/docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif",
                                      "note": "owner-reported; not an organiser receipt"}}
     (out_dir / "manifest.json").write_text(json.dumps(manifest, indent=1))
     print(json.dumps({"primary": {k: ma[k] for k in ("nan", "content_id", "emitted_px", "added_px", "removed_px_vs_base", "note")},
                       "secondary": {k: mb[k] for k in ("nan", "content_id", "emitted_px", "added_px", "note")},
-                      "tertiary": {k: mc[k] for k in ("nan", "content_id", "emitted_px", "pruned_flank_shadow_px", "added_px", "note")}}, indent=1))
+                      "tertiary": {k: mc[k] for k in ("nan", "content_id", "emitted_px", "pruned_flank_shadow_px", "added_px", "note")},
+                      "quaternary": {k: md[k] for k in ("nan", "content_id", "emitted_px", "pruned_flank_shadow_px", "added_px", "note")}}, indent=1))
     return 0
 
 

@@ -1,0 +1,260 @@
+{
+ "method": "non-negative mass-constrained NNLS of 20 live scores on interpretable habitat bases",
+ "G_used": 12225.896194356133,
+ "fitted_truth_mass_px": 6209.453983676315,
+ "basis_sizes": {
+  "catring_100_200m": 176003,
+  "catring_200_300m": 169333,
+  "catring_300_500m": 240798,
+  "catring_500_800m": 396500,
+  "catring_800_1500m": 784497,
+  "catring_1500_3000m": 1250133,
+  "catfar_gt3000m": 2089121,
+  "lidar_lappos_top1pct": 38617,
+  "lidar_lappos_top5pct": 199366,
+  "lidar_step_top1pct": 38926,
+  "lidar_ex_top1pct": 38874,
+  "lidar_coh100_top1pct": 40327,
+  "sgmc_fault_cell": 79615,
+  "sgmc_within_300m": 462138,
+  "sgmc_within_1000m": 891996,
+  "nbmg_vec_beyond_cat_300m": 2,
+  "nbmg_vec_within_300m": 357145,
+  "nbmg_vec_within_1000m": 864733,
+  "wellspring_ring_0_300m": 217345,
+  "wellspring_ring_300_1000m": 858411,
+  "wellspring_ring_1000_3000m": 2159473,
+  "volcanicvent_ring_0_1000m": 5867,
+  "volcanicvent_ring_1000_3000m": 29174,
+  "volcanicvent_ring_3000_10000m": 211471,
+  "geodawn_tmi_hg_top2pct": 102069,
+  "geodawn_iso_grav_slope_top2pct": 102069,
+  "geodawn_cond_surf_top2pct": 102633,
+  "geodawn_geod_2ndinv_top2pct": 102481,
+  "geodawn_basement_depth_top2pct": 101878,
+  "det_elev_slope_top5pct": 255319
+ },
+ "habitat_intensity": [
+  {
+   "habitat": "volcanicvent_ring_0_1000m",
+   "pixels": 5867,
+   "lambda_px_per_px": 0.35,
+   "truth_px_estimated": 2053.45,
+   "share_of_estimated_truth": 0.33069735364787295
+  },
+  {
+   "habitat": "catring_100_200m",
+   "pixels": 176003,
+   "lambda_px_per_px": 0.014409315964730302,
+   "truth_px_estimated": 2536.0828377404273,
+   "share_of_estimated_truth": 0.40842284110767113
+  },
+  {
+   "habitat": "catring_200_300m",
+   "pixels": 169333,
+   "lambda_px_per_px": 0.009566482291909359,
+   "truth_px_estimated": 1619.9211459358876,
+   "share_of_estimated_truth": 0.26087980524445586
+  }
+ ],
+ "fit": {
+  "tp_observed": [
+   5398.501849873612,
+   6536.129438844199,
+   6541.216311368843,
+   6412.459895242451,
+   4198.053928113674,
+   3940.245134039747,
+   5382.901370302068,
+   4865.640592789349,
+   4698.422433271861,
+   3338.3803748553273,
+   3546.96597160016,
+   4581.609132775836,
+   3385.1481073052473,
+   2309.08310591892,
+   3065.0560916478544,
+   2980.107413577902,
+   1339.0240025007952,
+   522.2894470675678,
+   835.9815514236885,
+   66.04903391096983
+  ],
+  "tp_fitted": [
+   1053.0943256323485,
+   1242.4443166250928,
+   1258.646568902558,
+   1280.9980087697118,
+   1739.9954122753852,
+   2132.5406807524596,
+   2323.1813530030095,
+   1716.4086932047467,
+   1258.9094368969832,
+   1239.7012223684305,
+   1709.7748271978103,
+   2319.6712228520028,
+   1699.82719202856,
+   1131.1659939746053,
+   2274.66850462665,
+   2869.6119925701064,
+   3005.7726797143237,
+   964.1792782364428,
+   615.2168011877699,
+   954.3374368097523
+  ],
+  "labels": [
+   "24GEMSDOE h25-1 dotted-h19-5-d1-5 (989f59505db1)",
+   "19GEMSDOE h19-5",
+   "19GEMSDOE h19-4",
+   "16GEMSDOE h16-1 topo-geophys-baseline-ridges",
+   "GEMSDOE10 h28-dotted-ridge",
+   "12GEMSDOE r7-nms3-dem10-scarp",
+   "GEMSDOE10 H25-ctx-ridge",
+   "GEMSDOE3 pindrop-v4-nodes",
+   "GEMSDOE3 pindrop-v4-ridge",
+   "16GEMSDOE h18-3a complexity-prior",
+   "GEMSDOE10 h20-dem10-scarp-thin",
+   "13GEMSDOE r13-lattice-s5 (nan-outside)",
+   "GEMSDOE3 pindrop-v4-discovery",
+   "15GEMSDOE conj_alteration_mag",
+   "GEMSDOE10 h16-continuation",
+   "18GEMSDOE H19-C",
+   "11GEMSDOE structural-area06-v1",
+   "17GEMSDOE F-ensemble-2pct",
+   "GEMSDOE9 placeholder (2314b599)",
+   "14GEMSDOE geom-horse-ensemble"
+  ],
+  "rmse_credit_px": 2855.999602335166,
+  "r2_credit": -1.2402860356153305
+ },
+ "loo_validation": {
+  "rows": [
+   {
+    "label": "24GEMSDOE h25-1 dotted-h19-5-d1-5 (989f59505db1)",
+    "score_actual": 0.2477,
+    "score_predicted": 0.050223790476976234,
+    "error": -0.19747620952302378
+   },
+   {
+    "label": "19GEMSDOE h19-5",
+    "score_actual": 0.1922,
+    "score_predicted": 0.038880333186823414,
+    "error": -0.1533196668131766
+   },
+   {
+    "label": "19GEMSDOE h19-4",
+    "score_actual": 0.1894,
+    "score_predicted": 0.03867191868192006,
+    "error": -0.15072808131807997
+   },
+   {
+    "label": "16GEMSDOE h16-1 topo-geophys-baseline-ridges",
+    "score_actual": 0.1855,
+    "score_predicted": 0.03955611506236974,
+    "error": -0.14594388493763027
+   },
+   {
+    "label": "GEMSDOE10 h28-dotted-ridge",
+    "score_actual": 0.1839,
+    "score_predicted": 0.07362100867888433,
+    "error": -0.11027899132111568
+   },
+   {
+    "label": "GEMSDOE3 pindrop-v4-ridge",
+    "score_actual": 0.1152,
+    "score_predicted": 0.029064428103639177,
+    "error": -0.08613557189636081
+   },
+   {
+    "label": "GEMSDOE10 H25-ctx-ridge",
+    "score_actual": 0.128,
+    "score_predicted": 0.04935124268685129,
+    "error": -0.07864875731314871
+   },
+   {
+    "label": "GEMSDOE3 pindrop-v4-nodes",
+    "score_actual": 0.1193,
+    "score_predicted": 0.042721641890868384,
+    "error": -0.07657835810913162
+   },
+   {
+    "label": "16GEMSDOE h18-3a complexity-prior",
+    "score_actual": 0.0976,
+    "score_predicted": 0.03298840425717152,
+    "error": -0.06461159574282849
+   },
+   {
+    "label": "12GEMSDOE r7-nms3-dem10-scarp",
+    "score_actual": 0.1294,
+    "score_predicted": 0.06878792727770758,
+    "error": -0.06061207272229241
+   },
+   {
+    "label": "GEMSDOE10 h20-dem10-scarp-thin",
+    "score_actual": 0.0921,
+    "score_predicted": 0.03910908499503589,
+    "error": -0.05299091500496411
+   },
+   {
+    "label": "11GEMSDOE structural-area06-v1",
+    "score_actual": 0.0202,
+    "score_predicted": 0.06727150001483473,
+    "error": 0.04707150001483473
+   },
+   {
+    "label": "13GEMSDOE r13-lattice-s5 (nan-outside)",
+    "score_actual": 0.0904,
+    "score_predicted": 0.045767000023520577,
+    "error": -0.04463299997647942
+   },
+   {
+    "label": "GEMSDOE3 pindrop-v4-discovery",
+    "score_actual": 0.083,
+    "score_predicted": 0.04169214134737879,
+    "error": -0.04130785865262122
+   },
+   {
+    "label": "15GEMSDOE conj_alteration_mag",
+    "score_actual": 0.0782,
+    "score_predicted": 0.03827308144213143,
+    "error": -0.039926918557868576
+   },
+   {
+    "label": "14GEMSDOE geom-horse-ensemble",
+    "score_actual": 0.002,
+    "score_predicted": 0.03238641765242814,
+    "error": 0.030386417652428138
+   },
+   {
+    "label": "GEMSDOE10 h16-continuation",
+    "score_actual": 0.0461,
+    "score_predicted": 0.029083223810142663,
+    "error": -0.01701677618985734
+   },
+   {
+    "label": "17GEMSDOE F-ensemble-2pct",
+    "score_actual": 0.0187,
+    "score_predicted": 0.035690203712557884,
+    "error": 0.016990203712557883
+   },
+   {
+    "label": "18GEMSDOE H19-C",
+    "score_actual": 0.0297,
+    "score_predicted": 0.04251421071287107,
+    "error": 0.01281421071287107
+   },
+   {
+    "label": "GEMSDOE9 placeholder (2314b599)",
+    "score_actual": 0.0107,
+    "score_predicted": 0.00763823770414606,
+    "error": -0.0030617622958539394
+   }
+  ],
+  "rmse_score": 0.08887997756644307,
+  "max_abs_error": 0.19747620952302378,
+  "score_spread_sd": 0.06857918981002911,
+  "signal_ratio_sd_over_rmse": 0.7715932394195542,
+  "verdict": "in-sample R2(credit)=-1.240; LOO score RMSE=0.0889 vs score spread 0.0686 (signal ratio 0.77). WEAK: LOO error is not clearly below the score spread; treat habitat weights as hypothesis-generating only."
+ },
+ "caveat": "lam is a habitat intensity, not a fault map: 20 measurements cannot resolve 5.2 M pixels. Bases overlap, so shares are indicative, not a partition of the truth."
+}
