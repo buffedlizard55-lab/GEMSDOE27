@@ -1,0 +1,126 @@
+{
+  "preregistration": "knowledge/03_preregistration_topology_gate.md#addendum-c",
+  "seeds": [
+    130,
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    137,
+    138,
+    139
+  ],
+  "base_oof_mean_dti": 0.0860757127205034,
+  "base_oof_dots_per_seed": 67248.4,
+  "inclusion_threshold_oof": 0.017516694944471282,
+  "inclusion_threshold_live_0_2477": 0.052122130336889505,
+  "variants": {
+    "plus_T_v2": {
+      "mean_dti_gain": 0.011494303345533637,
+      "min_seed_gain": 0.007840226705624526,
+      "max_seed_gain": 0.014480569588829404,
+      "fold_gains": {
+        "NW": 0.01665482143771887,
+        "NE_LidarGapHeavy": 0.009714911710143685,
+        "SW": 0.008768787942287517,
+        "SE": 0.010838692291984484
+      },
+      "folds_improved": 4,
+      "delta_dots_per_seed": 1422.4,
+      "marginal_or_removed_efficiency": 0.22507937462246067
+    },
+    "prune_r1_100m": {
+      "mean_dti_gain": 0.0021938468431642864,
+      "min_seed_gain": 0.0019790499972794622,
+      "max_seed_gain": 0.0024123646439815766,
+      "fold_gains": {
+        "NW": 0.0014377463908634759,
+        "NE_LidarGapHeavy": 0.003780798585301437,
+        "SW": 0.0009152338548415642,
+        "SE": 0.0026416085416506667
+      },
+      "folds_improved": 4,
+      "delta_dots_per_seed": -3404.1,
+      "marginal_or_removed_efficiency": 0.00340877372914432
+    },
+    "prune_r2_200m": {
+      "mean_dti_gain": 0.002523009211251921,
+      "min_seed_gain": 0.0018225254929708917,
+      "max_seed_gain": 0.003188556448743003,
+      "fold_gains": {
+        "NW": 0.0015453987144880943,
+        "NE_LidarGapHeavy": 0.004993871408401502,
+        "SW": 0.0003965666681497879,
+        "SE": 0.0031562000539683
+      },
+      "folds_improved": 4,
+      "delta_dots_per_seed": -5568.8,
+      "marginal_or_removed_efficiency": 0.0079502125941363
+    },
+    "prune_r3_300m": {
+      "mean_dti_gain": 0.0013575735428905673,
+      "min_seed_gain": 0.0002936065113345876,
+      "max_seed_gain": 0.0022600479031385824,
+      "fold_gains": {
+        "NW": 0.0007871541712494906,
+        "NE_LidarGapHeavy": 0.004637069088315386,
+        "SW": -0.0011319770267302896,
+        "SE": 0.001138047938727682
+      },
+      "folds_improved": 3,
+      "delta_dots_per_seed": -7252.2,
+      "marginal_or_removed_efficiency": 0.014033758893801151
+    },
+    "plus_T_v2_and_prune_r1": {
+      "mean_dti_gain": 0.014051027737106241,
+      "min_seed_gain": 0.010187238230875414,
+      "max_seed_gain": 0.017001678640989507,
+      "fold_gains": {
+        "NW": 0.01856657788607981,
+        "NE_LidarGapHeavy": 0.013827927332171048,
+        "SW": 0.009960835821982424,
+        "SE": 0.013848769908191677
+      },
+      "folds_improved": 4,
+      "delta_dots_per_seed": -1965.4,
+      "marginal_or_removed_efficiency": -0.13327499989511524
+    },
+    "plus_T_v2_and_prune_r2": {
+      "mean_dti_gain": 0.014685865425223984,
+      "min_seed_gain": 0.01040612831908691,
+      "max_seed_gain": 0.01778819573424903,
+      "fold_gains": {
+        "NW": 0.019106602168565336,
+        "NE_LidarGapHeavy": 0.015257731732232655,
+        "SW": 0.0097208034007083,
+        "SE": 0.014658324399389643
+      },
+      "folds_improved": 4,
+      "delta_dots_per_seed": -4115.3,
+      "marginal_or_removed_efficiency": -0.05899441227846776
+    },
+    "coherence_h27_3": {
+      "mean_dti_gain": -0.000958836918557561,
+      "min_seed_gain": -0.001295606854748159,
+      "max_seed_gain": -0.0006015307121470803,
+      "fold_gains": {
+        "NW": -0.0006610534042363024,
+        "NE_LidarGapHeavy": -0.0008892441166652553,
+        "SW": -0.001518927299784218,
+        "SE": -0.0007661228535444681
+      },
+      "folds_improved": 0,
+      "delta_dots_per_seed": -1511.9,
+      "marginal_or_removed_efficiency": 0.032866093130442
+    }
+  },
+  "gate_addendum_c": {
+    "h27_1_tv2_on_oof_passed": true,
+    "h27_4_prune_300m_on_oof_passed": true,
+    "h27_4_prune_100m_on_oof_passed": true,
+    "h27_3_coherence_on_oof_passed": false
+  },
+  "seconds": 192.09862208366394
+}

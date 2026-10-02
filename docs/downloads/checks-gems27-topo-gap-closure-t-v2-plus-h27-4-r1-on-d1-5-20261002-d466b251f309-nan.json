@@ -1,0 +1,153 @@
+{
+  "content_id": "d466b251f309",
+  "note": "27GEMSDOE T-v2+H27-4 | 0.2477 base minus 5355 100m flank-shadow dots + 1278 T-v2 gap dots (OOF +0.0141, 4/4 folds) | id d466b251f309 | not yet live-scored",
+  "note_chars": 154,
+  "variants": {
+    "nan": {
+      "file": "gems27-topo-gap-closure-t-v2-plus-h27-4-r1-on-d1-5-20261002-d466b251f309-nan.tif",
+      "bytes": 1625248,
+      "sha256": "b60b3a668f80564133af5a7c99fd5c50879ac8f0614e6ca73a0540f80eddb75a",
+      "variant": "nan",
+      "checks": {
+        "grid_matches_template": {
+          "pass": true,
+          "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+          "hard": true
+        },
+        "single_band_float32": {
+          "pass": true,
+          "detail": "count=1 dtype=float32",
+          "hard": true
+        },
+        "inside_footprint_all_finite": {
+          "pass": true,
+          "detail": "0 non-finite inside 5167373 px",
+          "hard": true
+        },
+        "inside_footprint_in_0_1": {
+          "pass": true,
+          "detail": "min=0 max=1",
+          "hard": true
+        },
+        "no_infinities_anywhere": {
+          "pass": true,
+          "detail": "np.isinf(whole array) is empty",
+          "hard": true
+        },
+        "outside_footprint_is_nan": {
+          "pass": true,
+          "detail": "7111787/7111787 NaN outside the footprint (as in the sample)",
+          "hard": true
+        },
+        "nodata_tag_is_nan": {
+          "pass": true,
+          "detail": "nodata=NaN declared, same as the sample submission",
+          "hard": true
+        },
+        "masked_read_in_0_1": {
+          "pass": true,
+          "detail": "masked count=5167373, min=0, max=1",
+          "hard": true
+        },
+        "nan_aware_range_in_0_1": {
+          "pass": true,
+          "detail": "nanmin=0 nanmax=1",
+          "hard": true
+        },
+        "strict_whole_array_range_ignoring_nan_is_informational": {
+          "pass": false,
+          "detail": "A validator that compares NaN directly would fail ANY file with NaN outside the footprint, including the sample. Informational only; use the allfinite fallback if the portal rejects.",
+          "hard": false
+        },
+        "profile_driver_gtiff": {
+          "pass": true,
+          "detail": "GTiff",
+          "hard": false
+        },
+        "compression_like_sample": {
+          "pass": true,
+          "detail": "Compression.lzw",
+          "hard": false
+        }
+      },
+      "hard_checks_passed": true,
+      "hard_failures": [],
+      "nonzero_inside_px": 55992,
+      "value_set_inside": [
+        0.0,
+        1.0
+      ]
+    },
+    "allfinite": {
+      "file": "gems27-topo-gap-closure-t-v2-plus-h27-4-r1-on-d1-5-20261002-d466b251f309-allfinite.tif",
+      "bytes": 857108,
+      "sha256": "19fc681f3c6d1894efb5d44d6552a34d9989fe43ea8a6da13fcfb8a03bec92af",
+      "variant": "allfinite",
+      "checks": {
+        "grid_matches_template": {
+          "pass": true,
+          "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+          "hard": true
+        },
+        "single_band_float32": {
+          "pass": true,
+          "detail": "count=1 dtype=float32",
+          "hard": true
+        },
+        "inside_footprint_all_finite": {
+          "pass": true,
+          "detail": "0 non-finite inside 5167373 px",
+          "hard": true
+        },
+        "inside_footprint_in_0_1": {
+          "pass": true,
+          "detail": "min=0 max=1",
+          "hard": true
+        },
+        "no_infinities_anywhere": {
+          "pass": true,
+          "detail": "np.isinf(whole array) is empty",
+          "hard": true
+        },
+        "outside_footprint_is_zero_and_finite": {
+          "pass": true,
+          "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+          "hard": true
+        },
+        "strict_whole_array_range": {
+          "pass": true,
+          "detail": "whole-array min=0 max=1",
+          "hard": true
+        },
+        "profile_driver_gtiff": {
+          "pass": true,
+          "detail": "GTiff",
+          "hard": false
+        },
+        "compression_like_sample": {
+          "pass": true,
+          "detail": "Compression.lzw",
+          "hard": false
+        }
+      },
+      "hard_checks_passed": true,
+      "hard_failures": [],
+      "nonzero_inside_px": 55992,
+      "value_set_inside": [
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "zip": {
+    "file": "gems27-topo-gap-closure-t-v2-plus-h27-4-r1-on-d1-5-20261002-d466b251f309-nan.zip",
+    "bytes": 357881,
+    "sha256": "35979295de2e93c616991b54de12ee6212d2e65c870386b0e76e739a7f826f67"
+  },
+  "base": "dotted H19-5 d1.5 with 100 m (1 px) catalogue-flank shadow removed (H27-4 r<=1)",
+  "base_px_after_r1_prune": 54714,
+  "pruned_flank_shadow_px": 5355,
+  "added_px": 1278,
+  "links": 345,
+  "conditional_on": "5512495c6bd1"
+}

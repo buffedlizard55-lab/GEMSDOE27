@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-10-02T19:20:12Z",
+ "generated_utc": "2026-10-02T20:56:25Z",
  "status": "UNSCORED candidates; no leaderboard score is claimed",
  "primary": {
   "slug": "topo-gap-closure-t-v2-on-d1-5",
@@ -37,6 +37,24 @@
   "added_px": 1284,
   "base_px": 44090,
   "regenerated_equals_sibling_d2_8": true,
+  "links": 345,
+  "conditional_on": "5512495c6bd1"
+ },
+ "tertiary": {
+  "slug": "topo-gap-closure-t-v2-plus-h27-4-r1-on-d1-5",
+  "hypothesis": "T-v2+H27-4",
+  "content_id": "d466b251f309",
+  "note": "27GEMSDOE T-v2+H27-4 | 0.2477 base minus 5355 100m flank-shadow dots + 1278 T-v2 gap dots (OOF +0.0141, 4/4 folds) | id d466b251f309 | not yet live-scored",
+  "nan": "gems27-topo-gap-closure-t-v2-plus-h27-4-r1-on-d1-5-20261002-d466b251f309-nan.tif",
+  "allfinite": "gems27-topo-gap-closure-t-v2-plus-h27-4-r1-on-d1-5-20261002-d466b251f309-allfinite.tif",
+  "zip": "gems27-topo-gap-closure-t-v2-plus-h27-4-r1-on-d1-5-20261002-d466b251f309-nan.zip",
+  "sha256_nan": "b60b3a668f80564133af5a7c99fd5c50879ac8f0614e6ca73a0540f80eddb75a",
+  "bytes_nan": 1625248,
+  "emitted_px": 55992,
+  "base": "dotted H19-5 d1.5 with 100 m (1 px) catalogue-flank shadow removed (H27-4 r<=1)",
+  "base_px_after_r1_prune": 54714,
+  "pruned_flank_shadow_px": 5355,
+  "added_px": 1278,
   "links": 345,
   "conditional_on": "5512495c6bd1"
  },

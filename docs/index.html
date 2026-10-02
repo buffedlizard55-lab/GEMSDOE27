@@ -20,15 +20,24 @@
 Exact steps, the "[0, 1]" troubleshooting and the 3-slot plan are in the <a href="executive-summary.html"><b>executive summary</b></a>.</p>
 <div class="grid">
  <div class="stat"><b>61,328</b><span>emitted pixels = 60,069 (the 0.2477 emission, nothing removed) + 1,259</span></div>
- <div class="stat"><b>345</b><span>aligned gap links (median 1.8 km), each with a written argument</span></div>
- <div class="stat"><b>0.28 vs 0.053</b><span>holdout efficiency of the added dots vs break-even at DTI 0.25 (controls: 0.056)</span></div>
- <div class="stat"><b>-0.003 … +0.011</b><span>modelled change in DTI at the 0.2477 point (zero hit rate … holdout efficiency)</span></div>
+ <div class="stat"><b>345</b><span>aligned gap links (median 1.8 km), each with NBMG/USGS vector fault attribution &amp; written argument</span></div>
+ <div class="stat"><b>0.28 / 0.10</b><span>holdout efficiency on 8-conn components / whole NBMG FID vector polylines vs break-even 0.052</span></div>
+ <div class="stat"><b>+0.0115 / +0.0141</b><span>paired DTI gain on honest 4-fold spatial-CV OOF detector (T-v2 solo / T-v2 + H27-4 in Slot 3)</span></div>
 </div>
-<div class="warnbox"><b>Honest status.</b> The holdout truth is catalogue-internal, so enrichment may be overstated for genuinely new faults; only a live score tests the real hidden set.
-Reaching the owner-stated leader (0.3195) is not possible with the verified/modelled increments alone – see <a href="research.html">research</a>.
+<div class="card">
+ <h3 style="margin-top:0">All 3 weekly slot candidates (pre-built &amp; verified)</h3>
+ <table>
+  <tr><th>Slot</th><th>Candidate (.tif / .zip / fallback)</th><th>Pixels</th><th>Holdout / OOF validation</th></tr>
+  <tr><td><b>1 (Primary A/B)</b></td><td><a href="downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif" download class="mono">gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif</a> · <a href="downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.zip" download>.zip</a> · <a href="downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-allfinite.tif" download>allfinite</a></td><td class="num">61,328</td><td>0.2477 base + 1,259 T-v2 dots (0 removed); OOF ΔDTI +0.0115 (4/4 folds)</td></tr>
+  <tr><td><b>2 (Secondary d2.8)</b></td><td><a href="downloads/gems27-topo-gap-closure-t-v2-on-d2-8-20261002-3ebd51534bb1-nan.tif" download class="mono">gems27-topo-gap-closure-t-v2-on-d2-8-20261002-3ebd51534bb1-nan.tif</a> · <a href="downloads/gems27-topo-gap-closure-t-v2-on-d2-8-20261002-3ebd51534bb1-nan.zip" download>.zip</a> · <a href="downloads/gems27-topo-gap-closure-t-v2-on-d2-8-20261002-3ebd51534bb1-allfinite.tif" download>allfinite</a></td><td class="num">45,374</td><td>d2.8-thinned H19-5 + 1,284 T-v2 dots</td></tr>
+  <tr><td><b>3 (Tertiary T-v2+H27-4)</b></td><td><a href="downloads/gems27-topo-gap-closure-t-v2-plus-h27-4-r1-on-d1-5-20261002-d466b251f309-nan.tif" download class="mono">gems27-topo-gap-closure-t-v2-plus-h27-4-r1-on-d1-5-20261002-d466b251f309-nan.tif</a> · <a href="downloads/gems27-topo-gap-closure-t-v2-plus-h27-4-r1-on-d1-5-20261002-d466b251f309-nan.zip" download>.zip</a> · <a href="downloads/gems27-topo-gap-closure-t-v2-plus-h27-4-r1-on-d1-5-20261002-d466b251f309-allfinite.tif" download>allfinite</a></td><td class="num">55,992</td><td>0.2477 base − 5,355 100m flank-shadow dots + 1,278 T-v2 dots; OOF ΔDTI +0.0141 (4/4 folds)</td></tr>
+ </table>
+</div>
+<div class="warnbox"><b>Honest status.</b> We validated T-v2 across three holdout tiers (8-connected components: 0.280, whole NBMG FID vector polylines: 0.100 / H27-5b 0.178) and on a strictly out-of-fold 4-quadrant spatial-CV detector (ΔDTI +0.0115 solo, +0.0141 stacked with H27-4). Only a live score tests the organisers' newly created expert labels.
+Reaching the owner-stated leader (0.3195) is not possible with verified/modelled increments on H19-5 alone (they reach ≈0.262–0.270) – see <a href="research.html">research</a>.
 The agent never uploads anything; you press the button.</div>
 <p class="small">Reference (owner-reported 0.2477): <a href="https://github.com/buffedlizard55-lab/GEMSDOE24/raw/07345ea0604953d7efb858d9cfbc21e20c7aca0b/docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif">24GEMSDOE file</a> (sha256 68d0e2e4fcc594f9…).</p>
 </main>
-<footer>Built 2026-10-02 19:30 UTC from <a href="https://github.com/buffedlizard55-lab/GEMSDOE27">the repository</a>. Unscored candidates: no leaderboard score is claimed anywhere on this site.
+<footer>Built 2026-10-02 21:21 UTC from <a href="https://github.com/buffedlizard55-lab/GEMSDOE27">the repository</a>. Unscored candidates: no leaderboard score is claimed anywhere on this site.
 Scores shown are owner-reported. This site never contacts drivendata.org.</footer>
 <script src="assets/app.js"></script></body></html>

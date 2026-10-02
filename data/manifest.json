@@ -6,6 +6,10 @@
       "repo": "buffedlizard55-lab/GEMSDOE24",
       "commit": "07345ea0604953d7efb858d9cfbc21e20c7aca0b"
     },
+    "sibling24_public_layers": {
+      "repo": "buffedlizard55-lab/GEMSDOE24",
+      "commit": "ee5d7c65ede2d0b891f747619ac8da81e8e76a15"
+    },
     "sibling_main": {
       "repo": "buffedlizard55-lab/GEMSDOE",
       "commit": "c0c06ac82178f26b94fce3397036ef8f12a2f3a0"
@@ -81,6 +85,34 @@
       "bytes": 126177,
       "sha256": "9702f2e5c382a4f472ae834d22b94990983b059677a37adfafd51c50f75e643c",
       "what": "INGENIOUS/GDR Qfaults per-trace attributes (centroids only, no geometry)"
+    },
+    {
+      "source": "sibling24_public_layers",
+      "path": "data_external/qfaults_v2_in_footprint.json",
+      "bytes": 1252341,
+      "sha256": "4d6efc7bb3659ea2545353fcec574ef085b0acdb189c7590e4420a7c6c57b41c",
+      "what": "1,179 NBMG INGENIOUS Qfaults vector polylines in the GeoDAWN footprint (NAD83 Albers 117) with FID, NAME, NUM, DIPDIRECT, SLIPSENSE, FTYPE_, MAPSCALE, REC2023, SLIPRT2023"
+    },
+    {
+      "source": "sibling24",
+      "path": "data/external/gdr_volcanic_vents_in_footprint.csv",
+      "bytes": 672,
+      "sha256": "f91bafbaccaaf2754e71d60434fc0f9eb2c7b880c6e714883f4974542ff6a0bf",
+      "what": "INGENIOUS GDR 1391 Quaternary volcanic vents inside the GeoDAWN footprint"
+    },
+    {
+      "source": "sibling24",
+      "path": "data/external/gdr_wellspring_in_footprint.csv",
+      "bytes": 2146771,
+      "sha256": "122718e65bdf55aab0ee12ad20d80062f0deb1de957225a61ad880dd5dc196ea",
+      "what": "INGENIOUS GDR 1391 well and spring temperatures and chemistry inside the GeoDAWN footprint"
+    },
+    {
+      "source": "sibling_main",
+      "path": "data/dem_links.json",
+      "bytes": 541953,
+      "sha256": "8804dbff8754dd885df88bf412cced52b0be6490aa79142f4588700a8e4ada7b",
+      "what": "716 USGS 3DEP 1 m DEM tile URLs extracted from Digital-elevation-model-links-JSON.pdf and verified against the USGS S3 bucket"
     },
     {
       "source": "sibling24",
