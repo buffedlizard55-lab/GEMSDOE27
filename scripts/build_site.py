@@ -240,7 +240,7 @@ Stacking only verified/modelled increments gives ≈0.26–0.27 – so 0.3195 ne
     scrows = "".join(f"<tr><td>{e(a['label'])}</td><td class='num'>{a['owner_reported_public_score']:.4f}</td><td class='small'>{e(a.get('corroboration') or '')}</td></tr>" for a in sc["artifacts"])
     if feed:
         fstatic = "".join(f"<tr><td><a href='{e(x['url'])}'>{e(x['title'])}</a></td><td>{'reachable (HTTP ' + str(x.get('http', '?')) + ')' if x.get('ok') else 'NOT reachable'}</td>"
-                          f"<td>{e(x.get('last_updated') or x.get('pushed_at') or x.get('last_modified') or '-')}</td><td>{'CHANGED' if x.get('changed_since_previous_check') else 'no change'}</td><td>{e(x['checked_utc'])}</td></tr>" for x in feed["entries"])
+                          f"<td>{e(x.get('last_updated') or x.get('pushed_at') or x.get('last_modified') or '-')}{' · ' + format(x['total_bytes'], ',') + ' B' if x.get('total_bytes') else ''}{' · zip' if x.get('is_zip') else ''}{' · ' + str(x['record_count']) + ' records' if x.get('record_count') is not None else ''}</td><td>{'CHANGED' if x.get('changed_since_previous_check') else 'no change'}</td><td>{e(x['checked_utc'])}</td></tr>" for x in feed["entries"])
         fstamp = feed["generated_utc"]
     else:
         fstatic, fstamp = "<tr><td colspan=5>No feed run yet – the <i>source-feed</i> workflow writes <code>docs/data/feed.json</code> (daily and on demand).</td></tr>", "never"

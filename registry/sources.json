@@ -140,7 +140,7 @@
    "accessed": "2026-10-02",
    "evidence": "-",
    "feed": true,
-   "feed_kind": "http"
+   "feed_kind": "arcgis"
   },
   {
    "id": "sibling24",

@@ -7,8 +7,9 @@ this script refuses any drivendata.org host (hard guard below). Leaderboard and 
 the site as *links for a human to open*; nothing here fetches them, uploads files or reads scores.
 
 What it does (run on a GitHub-hosted runner, because the build sandbox reaches only github.com):
-  * for each feed-enabled row in registry/sources.json: HTTP status, Last-Modified, ETag, final URL and a
-    SHA-256 fingerprint of the first 64 KB; ScienceBase items via their JSON API (provenance.lastUpdated and a
+  * for each feed-enabled row in registry/sources.json: HTTP status, Last-Modified, ETag, final URL, total bytes,
+    content type, zip magic and a SHA-256 fingerprint of the first 64 KB (`feed_url` overrides `url` when the row
+    points at a download); ArcGIS REST layers via ?f=pjson plus a record count; ScienceBase items via their JSON API (provenance.lastUpdated and a
     file-list hash); GitHub repos via the REST API (pushed_at and default-branch head);
   * compare with the previous docs/data/feed.json and flag `changed`;
   * write docs/data/feed.json (current) and docs/data/feed_history.json (changes only, last 200).
@@ -49,9 +50,12 @@ def check_http(url: str) -> dict:
                          allow_redirects=True, stream=True)
         body = next(r.iter_content(65536), b"")
         guard(r.url)
+        total = r.headers.get("Content-Range", "").split("/")[-1] or r.headers.get("Content-Length")
         return {"ok": r.status_code < 400, "http": r.status_code, "final_url": r.url,
                 "last_modified": r.headers.get("Last-Modified"), "etag": r.headers.get("ETag"),
                 "content_length": r.headers.get("Content-Range") or r.headers.get("Content-Length"),
+                "total_bytes": int(total) if total and total.isdigit() else None,
+                "content_type": r.headers.get("Content-Type"), "is_zip": body[:4] == b"PK\x03\x04",
                 "fingerprint": fingerprint(body)}
     except Exception as e:  # noqa: BLE001
         return {"ok": False, "error": repr(e)[:200]}
@@ -66,6 +70,21 @@ def check_sciencebase(url: str) -> dict:
         return {"ok": r.status_code < 400, "http": r.status_code, "title": j.get("title"),
                 "last_updated": (j.get("provenance") or {}).get("lastUpdated"), "n_files": len(files),
                 "fingerprint": fingerprint(json.dumps(files).encode())}
+    except Exception as e:  # noqa: BLE001
+        return {"ok": False, "error": repr(e)[:200]}
+
+
+def check_arcgis(url: str) -> dict:
+    """ArcGIS REST layer: metadata (?f=pjson) and a record count, to prove the layer is queryable."""
+    guard(url)
+    try:
+        meta = requests.get(url, params={"f": "pjson"}, headers={"User-Agent": UA}, timeout=TIMEOUT).json()
+        cnt = requests.get(url.rstrip("/") + "/query", params={"where": "1=1", "returnCountOnly": "true", "f": "json"},
+                           headers={"User-Agent": UA}, timeout=TIMEOUT).json()
+        return {"ok": "name" in meta, "http": 200, "layer_name": meta.get("name"), "geometry_type": meta.get("geometryType"),
+                "n_fields": len(meta.get("fields", [])), "field_names": [f.get("name") for f in meta.get("fields", [])][:40],
+                "max_record_count": meta.get("maxRecordCount"), "record_count": cnt.get("count"),
+                "fingerprint": fingerprint(json.dumps([meta.get("name"), cnt.get("count")]).encode())}
     except Exception as e:  # noqa: BLE001
         return {"ok": False, "error": repr(e)[:200]}
 
@@ -103,8 +122,10 @@ def main() -> int:
             res = check_sciencebase(s["feed_url"])
         elif kind == "github":
             res = check_github(s["feed_repo"])
+        elif kind == "arcgis":
+            res = check_arcgis(s.get("feed_url") or s["url"])
         else:
-            res = check_http(s["url"])
+            res = check_http(s.get("feed_url") or s["url"])
         old = prev.get(s["id"], {})
         changed = bool(old and old.get("fingerprint") and res.get("fingerprint") and old["fingerprint"] != res["fingerprint"])
         entry = {"id": s["id"], "title": s["title"], "url": s["url"], "kind": kind, "checked_utc": now,
