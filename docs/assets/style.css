@@ -1,0 +1,38 @@
+:root{--ink:#1b2733;--muted:#57606a;--line:#d8dee4;--bg:#f6f8fa;--card:#fff;--blue:#1f6feb;--green:#1a7f37;--red:#cf222e;--amber:#9a6700}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+a{color:var(--blue)}a:hover{text-decoration:none}
+header.top{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+header.top .in{max-width:1000px;margin:0 auto;padding:.6rem 1rem;display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;align-items:center}
+header.top .brand{font-weight:700;color:var(--ink);text-decoration:none;margin-right:auto}
+header.top nav a{color:var(--muted);text-decoration:none;padding:.25rem .1rem;border-bottom:2px solid transparent;font-size:.95rem}
+header.top nav a.on,header.top nav a:hover{color:var(--ink);border-bottom-color:var(--blue)}
+main{max-width:1000px;margin:0 auto;padding:1.2rem 1rem 3rem}
+h1{font-size:1.9rem;line-height:1.2;margin:.4rem 0 .3rem}h2{font-size:1.3rem;margin:2rem 0 .6rem}h3{font-size:1.05rem;margin:1.2rem 0 .4rem}
+.lead{color:var(--muted);font-size:1.05rem;margin:.2rem 0 1rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1rem 1.1rem;margin:1rem 0}
+.hero{border:2px solid var(--blue)}
+.btn{display:inline-block;background:var(--blue);color:#fff;text-decoration:none;font-weight:700;font-size:1.15rem;padding:.8rem 1.3rem;border-radius:8px;border:0;cursor:pointer}
+.btn:hover{background:#1858c2}.btn.alt{background:#fff;color:var(--blue);border:1px solid var(--blue);font-size:.95rem;font-weight:600;padding:.45rem .8rem}
+.btn.copy{font-size:.9rem;padding:.4rem .8rem;margin-top:.4rem}
+.row{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:.6rem 0}
+.badge{display:inline-block;font-size:.78rem;font-weight:700;padding:.12rem .5rem;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--muted)}
+.badge.warn{color:var(--amber);border-color:#d4a72c;background:#fff8c5}.badge.ok{color:var(--green);border-color:#4ac26b;background:#dafbe1}.badge.bad{color:var(--red);border-color:#ff8182;background:#ffebe9}
+code,pre,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86rem}
+pre{background:#0d1117;color:#e6edf3;padding:.8rem 1rem;border-radius:8px;overflow:auto}
+textarea.note{width:100%;min-height:4.6rem;font:inherit;font-size:.92rem;padding:.5rem;border:1px solid var(--line);border-radius:6px;resize:vertical;background:#f6f8fa}
+table{border-collapse:collapse;width:100%;font-size:.88rem;margin:.6rem 0;background:#fff}
+th,td{border:1px solid var(--line);padding:.35rem .5rem;text-align:left;vertical-align:top}th{background:#f0f3f6;position:sticky;top:0}
+.tw{overflow:auto;max-height:70vh;border:1px solid var(--line);border-radius:8px}.tw table{margin:0}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.8rem}
+.stat{background:#fff;border:1px solid var(--line);border-radius:10px;padding:.7rem .9rem}.stat b{display:block;font-size:1.5rem}.stat span{color:var(--muted);font-size:.85rem}
+img.fig{max-width:100%;height:auto;border:1px solid var(--line);border-radius:8px;background:#fff}
+figcaption{color:var(--muted);font-size:.88rem;margin:.3rem 0 1rem}
+.small{font-size:.86rem;color:var(--muted)}.warnbox{border-left:4px solid #d4a72c;background:#fff8c5;padding:.6rem .9rem;border-radius:6px;margin:1rem 0}
+.okbox{border-left:4px solid #2da44e;background:#dafbe1;padding:.6rem .9rem;border-radius:6px;margin:1rem 0}
+tr.dossier td{background:#f6f8fa;font-size:.86rem}tr.link{cursor:pointer}tr.link:hover td{background:#eef6ff}
+input.filter{padding:.45rem .6rem;border:1px solid var(--line);border-radius:6px;width:min(100%,22rem);font:inherit}
+footer{max-width:1000px;margin:0 auto;padding:1rem;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line)}
+ol.steps li,ul.tight li{margin:.35rem 0}
+@media (max-width:600px){h1{font-size:1.5rem}.btn{font-size:1rem}}

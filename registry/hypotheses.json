@@ -1,0 +1,87 @@
+{
+ "generated": "2026-10-02",
+ "ranking_rule": "expected DTI gain x probability the test can validate it / cost",
+ "hypotheses": [
+  {
+   "id": "H27-1",
+   "rank": 1,
+   "title": "Topology gap-closure: along-strike links between disconnected mapped fault systems",
+   "layers": "Catalogue raster (labels.tif) -> skeleton graph; local strike domain from the same graph. No external layer.",
+   "signature": "Free tips (degree-1 nodes) whose strike points at a tip of a different system 1-4 km away; straight link; evidence score z = [mutual] + [end-to-end] + [tip within 15 deg] + [local strike agreement >= 0.4] + [merged length <= 8 km]; ship z >= 3. Network sits near its connectivity threshold (Berkowitz-style P ~ 5.8 vs Pc 5.6-6.0).",
+   "why": "Mapped faults are compiled in pieces; unmapped continuations across short gaps are where an expert panel adds 'new' faults, and surface-contrast detectors cannot see them because the gap itself is low-contrast. A catalogue that is near percolation is sensitive to exactly such closures.",
+   "differs": "First use of the catalogue's graph. The sibling's h16-continuation (owner-reported 0.0461) is the nearest prior idea; its construction was not re-examined here, but T-v2 differs by requiring a target system, a 1-4 km gap bound, tip-to-tip alignment and a strike-agreement score, and by being gated on controls.",
+   "status": "Validated: pre-registered gates PASSED on seeds 100-109 and confirmed on fresh seeds 110-119 (catalogue-internal holdout).",
+   "gain": "At the 0.2477 operating point: worst case about -0.003 (zero hit rate), break-even at efficiency 0.052, +0.011 at the holdout efficiency 0.28; central judgment +0.004 to +0.008 if half the holdout enrichment carries over.",
+   "cost": "Done (this repo). One slot.",
+   "external": null
+  },
+  {
+   "id": "H27-4",
+   "rank": 2,
+   "title": "Tip-shadow pruning: drop emission within 300 m of masked catalogue pixels",
+   "layers": "Catalogue distance transform + the dotted H19-5 emission.",
+   "signature": "A surface trained on catalogued scarps peaks on them; once catalogue pixels are masked, emission survives as 1-3 px 'shadows' beside known faults (the sibling measured 22-23% of H19-5 emission within 300 m of the catalogue, ~3.2x enriched at exactly 100 m).",
+   "why": "If hidden new faults rarely run within 300 m of known ones, these dots are almost pure false-positive mass; removing them cuts FP without touching recall elsewhere.",
+   "differs": "Subset transform driven by catalogue geometry; the repo's thinning is geometry-blind and its proximity analyses only correlated scores with distance.",
+   "status": "Untested: a label-blind honest surface is not available (H19-5 is leaky), so it cannot be gated on the holdout; it is a one-slot diagnostic.",
+   "gain": "Unknown, signed either way. Break-even logic: removing a set of n dots helps iff its hit efficiency is below 0.052.",
+   "cost": "Minutes to build; one slot.",
+   "external": null
+  },
+  {
+   "id": "H27-3",
+   "rank": 3,
+   "title": "Emission-graph coherence filter: keep collinear chains, drop isolated short fragments",
+   "layers": "The emission itself as a graph (no new data).",
+   "signature": "H19-5 is 26,645 components of mean 4.5 px, whereas catalogued systems have median 12 px (1.27 km). Chains of fragments that are collinear within a few pixels behave like lineaments; isolated 1-4 px specks behave like noise.",
+   "why": "Raises precision where lineament coherence is absent. Risk: true hidden faults can also be short.",
+   "differs": "Graph analysis of the emission rather than of the catalogue; the repo only thins by distance.",
+   "status": "Untested (needs an honest label-blind surface).",
+   "gain": "Unknown (0 to +0.02 judgment).",
+   "cost": "Hours.",
+   "external": null
+  },
+  {
+   "id": "H27-5",
+   "rank": 4,
+   "title": "Kinematically typed linking with an official stress model and vector fault attributes",
+   "layers": "USGS slip/dilation tendency (Siler 2022) and USGS Qfaults GIS (slip sense, dip direction).",
+   "signature": "Retain a gap link only if both segments are critically stressed (high slip/dilation tendency) and dip senses are synthetic (relay) or antithetic (accommodation zone) rather than conflicting.",
+   "why": "Replaces the data-driven strike domain by an independent stress field and adds dip/slip attributes the raster lacks.",
+   "differs": "No repo layer uses an independent stress model; all kinematics so far are data-driven.",
+   "status": "Needs a CI download-and-derive job (not written yet). Both sources are free and official, and their obtainability is now EVIDENCED from a GitHub runner: the NBMG INGENIOUS Qfaults ArcGIS layer (22,956 polylines, 23 attributes incl. DIPDIRECT/SLIPSENSE/FTYPE_/MAPSCALE) is queryable, and USGS Qfaults_GIS.zip (32.4 MB, application/zip) is downloadable. The Siler (2022) stress release is listed (27.35 MB INGENIOUS-area zip) but its file download is not yet verified.",
+   "gain": "Small to moderate, on the topology class only.",
+   "cost": "1-2 days (CI job + attributed vector graph + trace-level holdout).",
+   "external": [
+    {
+     "name": "NBMG Qfaults_INGENIOUS ArcGIS REST layer 0 (22,956 polylines with dip/slip attributes)",
+     "url": "https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0",
+     "obtainable": "verified queryable from a GitHub runner 2026-10-02"
+    },
+    {
+     "name": "USGS Qfaults GIS (zip, 32.4 MB)",
+     "url": "https://earthquake.usgs.gov/static/lfs/nshm/qfaults/Qfaults_GIS.zip",
+     "obtainable": "verified downloadable from a GitHub runner 2026-10-02 (application/zip)"
+    },
+    {
+     "name": "Siler (2022) slip & dilation tendency, Great Basin (USGS ScienceBase)",
+     "url": "https://www.sciencebase.gov/catalog/item/6296974dd34ec53d276bb33d",
+     "obtainable": "listing verified; file download not yet verified"
+    }
+   ]
+  },
+  {
+   "id": "H27-2",
+   "rank": 5,
+   "title": "Step-over / relay-typed linking (oblique tip-to-tip, overlapping en-echelon tips)",
+   "layers": "Same graph; lateral offset and overlap of parallel tips.",
+   "signature": "Tips of parallel strands offset 0.3-3 km, linked by an oblique breaching segment; Faulds & Hinz (2015) report step-overs as the most common structural setting (~32%) of characterised geothermal systems.",
+   "why": "Relay zones are where overlapping strands multiply; an expert panel mapping a geothermal target would add strands there.",
+   "differs": "Adds lateral-offset geometry the forward-cone rule cannot generate (overlapping tips).",
+   "status": "Partly tested, not supported: in seeds 100-109 oblique tip-to-tip and abutting links had dot-level hit ratios 0.048 and 0.040 against 0.125 for end-to-end links, and only 15 + 16 of the 345 shipped links are of those kinds. Overlapping offsets were never generated.",
+   "gain": "Not demonstrated.",
+   "cost": "Low.",
+   "external": null
+  }
+ ]
+}

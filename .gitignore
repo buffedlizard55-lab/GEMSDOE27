@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
+data_cache/
+*.egg-info/
+.DS_Store
+# large intermediate arrays are never committed; small derived evidence is
+evidence/_scratch/

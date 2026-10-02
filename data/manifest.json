@@ -1,0 +1,109 @@
+{
+  "schema": 1,
+  "note": "Inputs are restored from the owner's sibling repositories at pinned commits via the GitHub API (the sandbox can reach only github.com). They are NOT organiser-authenticated.",
+  "sources": {
+    "sibling24": {
+      "repo": "buffedlizard55-lab/GEMSDOE24",
+      "commit": "07345ea0604953d7efb858d9cfbc21e20c7aca0b"
+    },
+    "sibling_main": {
+      "repo": "buffedlizard55-lab/GEMSDOE",
+      "commit": "c0c06ac82178f26b94fce3397036ef8f12a2f3a0"
+    }
+  },
+  "files": [
+    {
+      "source": "sibling24",
+      "path": "data/bridge/labels.tif",
+      "bytes": 425830,
+      "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+      "what": "labels (INGENIOUS/USGS catalogue raster, int8, -1 outside footprint)"
+    },
+    {
+      "source": "sibling24",
+      "path": "data/bridge/existing_faults.tif",
+      "bytes": 425830,
+      "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+      "what": "existing_faults (identical content to labels.tif per sibling hash record)"
+    },
+    {
+      "source": "sibling24",
+      "path": "data/bridge/sample_submission.tif",
+      "bytes": 1599597,
+      "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+      "what": "grid/footprint template (owner copy of the sample submission; NOT an organiser-authenticated file)"
+    },
+    {
+      "source": "sibling24",
+      "path": "inputs/gems19-h19-5-powerlaw-budget-multiline-corroborated-20260930-e27054cf-nan.tif",
+      "bytes": 1712322,
+      "sha256": "ec1f9b56b83ce33cad781ceb9f104b18fb4f2ff785263a4e89616af4aabdee8d",
+      "what": "H19-5 emission, owner-reported live score 0.1922"
+    },
+    {
+      "source": "sibling24",
+      "path": "docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif",
+      "bytes": 1632732,
+      "sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
+      "what": "dotted H19-5 d=1.5, owner-reported live score 0.2477 (24GEMSDOE)"
+    },
+    {
+      "source": "sibling24",
+      "path": "data/external/lidar_scarp_features_u8.tif",
+      "bytes": 36943606,
+      "sha256": "d580bb8bdcdb941e32fefb8b38044bc5bf04e199bf2e83498c3576e6fc465568",
+      "what": "12-band 100 m terrain descriptors derived from USGS 3DEP 1 m DEM tiles (706/716 tiles)"
+    },
+    {
+      "source": "sibling24",
+      "path": "data/external/geodawn_extensions_u8.tif",
+      "bytes": 27132925,
+      "sha256": "a35a9c6d2a14786f4dab85481ee59769213072f5dab5b2535ea82ae4d9bb7d9b",
+      "what": "4-band GeoDAWN contractor ratio/upward-continued grids (u8 ranks)"
+    },
+    {
+      "source": "sibling24",
+      "path": "data/external/geodawn_rad_u8.tif",
+      "bytes": 26612970,
+      "sha256": "c22420f75999030d7cc65c9e31e50d232ea6158423bca051613a18a8b20ba682",
+      "what": "4-band GeoDAWN radiometric grids (u8 ranks)"
+    },
+    {
+      "source": "sibling24",
+      "path": "data/external/derived_sgmc_faults_100m_u8.tif",
+      "bytes": 198602,
+      "sha256": "643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0",
+      "what": "USGS SGMC geologic-map faults rasterised at 100 m"
+    },
+    {
+      "source": "sibling24",
+      "path": "data/external/gdr_qfaults_traces.csv",
+      "bytes": 126177,
+      "sha256": "9702f2e5c382a4f472ae834d22b94990983b059677a37adfafd51c50f75e643c",
+      "what": "INGENIOUS/GDR Qfaults per-trace attributes (centroids only, no geometry)"
+    },
+    {
+      "source": "sibling24",
+      "path": "docs/downloads/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+      "bytes": 1603424,
+      "sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
+      "what": "dotted H19-5 d=2.8 (sibling candidate, never live-scored); used to assert that this repo regenerates the same emission"
+    }
+  ],
+  "assembled": [
+    {
+      "source": "sibling_main",
+      "dir": "data/bridge",
+      "parts": [
+        "gems-geodawn-numerical-features.tif.part-000",
+        "gems-geodawn-numerical-features.tif.part-001",
+        "gems-geodawn-numerical-features.tif.part-002",
+        "gems-geodawn-numerical-features.tif.part-003",
+        "gems-geodawn-numerical-features.tif.part-004"
+      ],
+      "assembled_name": "training_features.tif",
+      "sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+      "what": "19-band GeoDAWN numerical training features, 100 m, EPSG:32611 (owner mirror of the DrivenData download)"
+    }
+  ]
+}

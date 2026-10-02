@@ -1,0 +1,194 @@
+{
+ "warning": "Owner-reported public-leaderboard values, not DrivenData receipts. Unknown stays unknown.",
+ "owner_stated_leader": {
+  "score": 0.3195,
+  "corroboration": "task statement only; not re-checked (the agent does not access drivendata.org)"
+ },
+ "also_in_task_statement": {
+  "h23-a": 0.1002
+ },
+ "artifacts": [
+  {
+   "label": "24GEMSDOE h25-1 dotted-h19-5-d1-5 (989f59505db1)",
+   "repo": "buffedlizard55-lab/GEMSDOE24",
+   "sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
+   "owner_reported_public_score": 0.2477,
+   "corroboration": "task_statement_only"
+  },
+  {
+   "label": "19GEMSDOE h19-5",
+   "repo": "buffedlizard55-lab/19GEMSDOE",
+   "sha256": "ec1f9b56b83ce33cad781ceb9f104b18fb4f2ff785263a4e89616af4aabdee8d",
+   "owner_reported_public_score": 0.1922,
+   "corroboration": "owner_list_snapshot"
+  },
+  {
+   "label": "19GEMSDOE h19-4",
+   "repo": "buffedlizard55-lab/19GEMSDOE",
+   "sha256": "89109a3bd2cd3b12e7a0f388113c519843acfc9c4f46825affefc3e63dd99b22",
+   "owner_reported_public_score": 0.1894,
+   "corroboration": "owner_list_snapshot"
+  },
+  {
+   "label": "16GEMSDOE h16-1 topo-geophys-baseline-ridges",
+   "repo": "buffedlizard55-lab/16GEMSDOE",
+   "sha256": "055309694ed499ca3d87e76b3f5e81c292aef6e39c418d33ff5a817aa1309bea",
+   "owner_reported_public_score": 0.1855,
+   "corroboration": "owner_list_snapshot"
+  },
+  {
+   "label": "GEMSDOE10 h28-dotted-ridge",
+   "repo": "buffedlizard55-lab/GEMSDOE10",
+   "sha256": "7637b72d4c6c3e10226bf46bd72a20272d62ccbe29743062632d10b158b49c58",
+   "owner_reported_public_score": 0.1839,
+   "corroboration": "task_statement_only"
+  },
+  {
+   "label": "GEMSDOE ens12-adopted (7f00890a\u2026)",
+   "repo": "buffedlizard55-lab/GEMSDOE",
+   "sha256": "7f00890a62878d612fb5eef67a9a364a2df819433dde74b6762ce4fc0fc4fe15",
+   "owner_reported_public_score": 0.1563,
+   "corroboration": "owner_list_snapshot"
+  },
+  {
+   "label": "GEMSDOE2 dual-family-union (f68e590f)",
+   "repo": "buffedlizard55-lab/GEMSDOE2",
+   "sha256": "f68e590f8534d036872f18170819b52366c728e68619f17c648dce9629b0aaf2",
+   "owner_reported_public_score": 0.156,
+   "corroboration": "owner_list_snapshot"
+  },
+  {
+   "label": "7GEMSDOE lidarscarp-ridge-top2pct",
+   "repo": "buffedlizard55-lab/7GEMSDOE",
+   "sha256": "36c3a3f341c8306dfb5610f61acfec635a7cb8a3ef6ef00380ca083d2f9745fe",
+   "owner_reported_public_score": 0.1461,
+   "corroboration": "owner_list_snapshot"
+  },
+  {
+   "label": "12GEMSDOE r7-nms3-dem10-scarp",
+   "repo": "buffedlizard55-lab/12GEMSDOE",
+   "sha256": "0c9199f14e625d7b2539a0a045803b74d6494ce568d185abecc193fe7e93c6f2",
+   "owner_reported_public_score": 0.1294,
+   "corroboration": "owner_list_snapshot"
+  },
+  {
+   "label": "GEMSDOE10 H25-ctx-ridge",
+   "repo": "buffedlizard55-lab/GEMSDOE10",
+   "sha256": "1381e784fb8b8340beffd0e735ac9eea89ad35d1a807f8a9bab5506e3fc8275e",
+   "owner_reported_public_score": 0.128,
+   "corroboration": "owner_list_snapshot"
+  },
+  {
+   "label": "GEMSDOE3 pindrop-v4-nodes",
+   "repo": "buffedlizard55-lab/GEMSDOE3",
+   "sha256": "f347b70daa95170bfc967b1c0b6bbf951496c2b74764a7102848ad6178829aca",
+   "owner_reported_public_score": 0.1193,
+   "corroboration": "owner_list_snapshot"
+  },
+  {
+   "label": "GEMSDOE3 pindrop-v4-ridge",
+   "repo": "buffedlizard55-lab/GEMSDOE3",
+   "sha256": "4e03fc97052e9bd673e48f1923ad17f15926f8db26d2befc033e1722381dc9b7",
+   "owner_reported_public_score": 0.1152,
+   "corroboration": "owner_list_snapshot"
+  },
+  {
+   "label": "16GEMSDOE h18-3a complexity-prior",
+   "repo": "buffedlizard55-lab/16GEMSDOE",
+   "sha256": "92904a5bfd84c8bd1141683fc5d29817aa4de71574d8caff5b40f7ed0072a5b8",
+   "owner_reported_public_score": 0.0976,
+   "corroboration": "task_statement_only"
+  },
+  {
+   "label": "GEMSDOE10 h20-dem10-scarp-thin",
+   "repo": "buffedlizard55-lab/GEMSDOE10",
+   "sha256": "a26e5e46acc00ddd867f0b2910e638b25e4e81108ebe05c0abcc7c9b04372247",
+   "owner_reported_public_score": 0.0921,
+   "corroboration": "owner_list_snapshot"
+  },
+  {
+   "label": "13GEMSDOE r13-lattice-s5 (nan-outside)",
+   "repo": "buffedlizard55-lab/13GEMSDOE",
+   "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+   "owner_reported_public_score": 0.0904,
+   "corroboration": "task_statement_only"
+  },
+  {
+   "label": "GEMSDOE3 pindrop-v4-discovery",
+   "repo": "buffedlizard55-lab/GEMSDOE3",
+   "sha256": "37f9d5b855ee1b6c302cb81cdae1414db94db427f5dc9da3538474df37cf1cad",
+   "owner_reported_public_score": 0.083,
+   "corroboration": "owner_list_snapshot"
+  },
+  {
+   "label": "15GEMSDOE conj_alteration_mag",
+   "repo": "buffedlizard55-lab/15GEMSDOE",
+   "sha256": "b437efcec17fb4582a3ff2f5f6ce6a179545c1e21fcd51e0c4b828cfd185d631",
+   "owner_reported_public_score": 0.0782,
+   "corroboration": "owner_list_snapshot"
+  },
+  {
+   "label": "GEMSDOE10 h16-continuation",
+   "repo": "buffedlizard55-lab/GEMSDOE10",
+   "sha256": "b33684ae033512a1a1c7d2cfccd128955fedfdff2a8fed6c7585a755b1b58b3c",
+   "owner_reported_public_score": 0.0461,
+   "corroboration": "owner_list_snapshot"
+  },
+  {
+   "label": "GEMSDOE4 combined (237f0063)",
+   "repo": "buffedlizard55-lab/GEMSDOE4",
+   "sha256": "237f0063a440b2c6c4b822bcb0f74e5203586313b3b5ed6c5cabe70fa046f63f",
+   "owner_reported_public_score": 0.0343,
+   "corroboration": "owner_list_snapshot"
+  },
+  {
+   "label": "18GEMSDOE H19-C",
+   "repo": "buffedlizard55-lab/18GEMSDOE",
+   "sha256": "c11e495e5817730ad5f0fdc368b810f79050cbb6bd65e98c98123b7921ed336b",
+   "owner_reported_public_score": 0.0297,
+   "corroboration": "owner_list_snapshot"
+  },
+  {
+   "label": "6GEMSDOE hgb88-topk03",
+   "repo": "buffedlizard55-lab/6GEMSDOE",
+   "sha256": "33cec71ff00b3f32d0d59c81c156f3f1488ffef46baa4b6499094e24ea1875ab",
+   "owner_reported_public_score": 0.0286,
+   "corroboration": "owner_list_snapshot"
+  },
+  {
+   "label": "11GEMSDOE structural-area06-v1",
+   "repo": "buffedlizard55-lab/11GEMSDOE",
+   "sha256": "6292a7916c83d371fc650b0f0c6a090702b9890eaa6e6546d50f104eea2fadc3",
+   "owner_reported_public_score": 0.0202,
+   "corroboration": "owner_list_snapshot"
+  },
+  {
+   "label": "17GEMSDOE F-ensemble-2pct",
+   "repo": "buffedlizard55-lab/17GEMSDOE",
+   "sha256": "0210da4395b209450e52e9efc780ab3ca6aceffd60c26d6f623da2b8fe76b691",
+   "owner_reported_public_score": 0.0187,
+   "corroboration": "owner_list_snapshot"
+  },
+  {
+   "label": "GEMSDOE9 placeholder (2314b599)",
+   "repo": "buffedlizard55-lab/GEMSDOE9",
+   "sha256": "2314b59920bfeeaf6a592d4868b25eca62212825620f9945723c2f6d0a2e5b22",
+   "owner_reported_public_score": 0.0107,
+   "corroboration": "owner_list_snapshot"
+  },
+  {
+   "label": "14GEMSDOE geom-horse-ensemble",
+   "repo": "buffedlizard55-lab/14GEMSDOE",
+   "sha256": "ccbe1de0cfd70cbe7257c04669195f390ca652fa3a76c51505f461f01a1424c6",
+   "owner_reported_public_score": 0.002,
+   "corroboration": "owner_list_snapshot"
+  }
+ ],
+ "27GEMSDOE": [
+  {
+   "file": "(see docs/downloads/manifest.json)",
+   "score": null,
+   "status": "not yet submitted/scored - add the number here after submitting"
+  }
+ ]
+}

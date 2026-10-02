@@ -1,0 +1,49 @@
+{
+ "generated_utc": "2026-10-02T19:20:12Z",
+ "status": "UNSCORED candidates; no leaderboard score is claimed",
+ "primary": {
+  "slug": "topo-gap-closure-t-v2-on-d1-5",
+  "hypothesis": "T-v2 A/B",
+  "content_id": "5512495c6bd1",
+  "note": "27GEMSDOE T-v2 A/B | 0.2477 base (dotted H19-5 d1.5) + 1259 dots on 345 aligned 1-4 km gap links; A/B vs 0.2477 | id 5512495c6bd1 | not yet live-scored",
+  "nan": "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif",
+  "allfinite": "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-allfinite.tif",
+  "zip": "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.zip",
+  "sha256_nan": "33003374335d84bf885f2d8f5e9dd4c57044c8ec58fa6a0d7fa581e8bc41c11d",
+  "bytes_nan": 1635084,
+  "emitted_px": 61328,
+  "base": "dotted H19-5 d1.5 (owner-reported live score 0.2477, 24GEMSDOE)",
+  "added_px": 1259,
+  "removed_px_vs_base": 0,
+  "links": 345,
+  "provenance": {
+   "regenerated_equals_0_2477_file": true,
+   "base15_px": 60069,
+   "h19_5_px": 121131
+  }
+ },
+ "secondary": {
+  "slug": "topo-gap-closure-t-v2-on-d2-8",
+  "hypothesis": "T-v2 d2.8",
+  "content_id": "3ebd51534bb1",
+  "note": "27GEMSDOE T-v2 d2.8 | d2.8-thinned H19-5 + 1284 dots on 345 aligned gap links; conditional slot 2, combination unvalidated | id 3ebd51534bb1 | not yet live-scored",
+  "nan": "gems27-topo-gap-closure-t-v2-on-d2-8-20261002-3ebd51534bb1-nan.tif",
+  "allfinite": "gems27-topo-gap-closure-t-v2-on-d2-8-20261002-3ebd51534bb1-allfinite.tif",
+  "zip": "gems27-topo-gap-closure-t-v2-on-d2-8-20261002-3ebd51534bb1-nan.zip",
+  "sha256_nan": "f64d57df29e6f97d17a0236780afd564a359e773b5595f94c87f1287d12002d1",
+  "bytes_nan": 1605928,
+  "emitted_px": 45374,
+  "base": "dotted H19-5 d2.8 (sibling-modelled optimum; never live-scored)",
+  "added_px": 1284,
+  "base_px": 44090,
+  "regenerated_equals_sibling_d2_8": true,
+  "links": 345,
+  "conditional_on": "5512495c6bd1"
+ },
+ "reference_0_2477": {
+  "owner_reported_score": 0.2477,
+  "sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
+  "url": "https://github.com/buffedlizard55-lab/GEMSDOE24/raw/07345ea0604953d7efb858d9cfbc21e20c7aca0b/docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif",
+  "note": "owner-reported; not an organiser receipt"
+ }
+}

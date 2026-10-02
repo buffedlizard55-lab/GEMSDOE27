@@ -1,0 +1,20 @@
+[project]
+name = "gems27"
+version = "0.1.0"
+description = "27GEMSDOE: graph-topology research and submission system for DrivenData #306 (DOE GEMS)"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+src = ["src", "scripts", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]
+ignore = ["E741", "E501", "B905"]
+
+[tool.ruff.lint.per-file-ignores]
+"scripts/make_figures.py" = ["E702"]
