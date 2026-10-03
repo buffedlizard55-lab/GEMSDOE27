@@ -1,173 +1,221 @@
 {
-  "generated": "2026-10-02",
-  "items": [
-    {
-      "id": "prompt-verbatim-unavailable",
-      "severity": "low",
-      "issue": "In Session 1 the verbatim text of the task prompt was unavailable due to conversation condensation; in Session 2 the user provided the complete verbatim task prompt.",
-      "action": "Resolved in Session 2: the full verbatim task prompt and Arena AI Core Values ('Maximize P(Win)' and 'Own the Outcome') are now recorded word-for-word in README.md."
-    },
-    {
-      "id": "portal-0-1-error-cause-unknown",
-      "severity": "high",
-      "issue": "The cause of 'Predicted values must be in range [0, 1]' is not established; the validator is not public. Earlier forensics (sibling) found no in-footprint value outside [0,1] in 148 rasters; three early files had NaN inside the footprint.",
-      "action": "Shipped files: exact 0.0/1.0, nodata=NaN as in the sample, plus an all-finite fallback and a zip. If rejected again, paste the exact message and file name."
-    },
-    {
-      "id": "ai-use-disclosure",
-      "severity": "high",
-      "issue": "The Official Rules require generative-AI use to be stated in the narrative (Sept 2026 rules, verified in full across all 7 chunks).",
-      "action": "This work is agent-assisted; see AI_DISCLOSURE.md. Include a statement in the final-round narrative."
-    },
-    {
-      "id": "hermant-2025-lidar-catalogue-offset",
-      "severity": "medium",
-      "issue": "Hermant, Kiersnowski & Bellanger (2025, Stanford Geothermal Workshop, Fig. 2 & Fig. 9B) document 150-400 m positional offsets between USGS Quaternary fault traces and 3DEP LiDAR scarp breaks. When a scarp detector fires along a known fault and only the 1-px catalogue spine is masked (~labels), the unmasked 100-200 m flank survives as a dense band of dots (5,355 dots = 8.91% of the 0.2477 file sit at d_cat = 100 m; 8,769 dots = 14.60% sit at d_cat <= 200 m). On our non-leaky OOF detector B_oof (seeds 130-139), those d_cat = 100 m dots have hit efficiency 0.0034 (15x below break-even 0.0521).",
-      "action": "Validated H27-4 on B_oof (+0.0022 solo at 100 m, +0.0141 stacked with T-v2 in 4/4 folds) and shipped Tertiary Slot 3 candidate (d466b251f309, 55,992 px)."
-    },
-    {
-      "id": "sample-submission-has-ones",
-      "severity": "medium",
-      "issue": "The owner's mirror of the sample submission has 60,988 pixels equal to 1.0 exactly on the catalogue pixels, although the organisers describe the sample as predicting absence. Verified this session (values {0,1}, 60,988 ones).",
-      "action": "Used only as a grid/footprint template."
-    },
-    {
-      "id": "deadline-discrepancy",
-      "severity": "medium",
-      "issue": "Competition page: Dec 3, 2026 11:59 p.m. UTC; Official Rules A.1: 5:00 p.m. ET on the deadline date.",
-      "action": "Treat the earlier time as binding until the organisers clarify."
-    },
-    {
-      "id": "bridge-hashes-not-authenticated",
-      "severity": "medium",
-      "issue": "Inputs come from the owner's GitHub mirrors (hash-pinned), not from an organiser-authenticated download.",
-      "action": "Re-verify against the DrivenData data page or official Dropbox mirrors (scripts/download_competition_data.sh) when logged in."
-    },
-    {
-      "id": "scores-unconfirmed",
-      "severity": "medium",
-      "issue": "Scores for 25/26/27GEMSDOE are blank; 0.3195 (leader) and h23-a 0.1002 appear only in the task statement; all scores are owner-reported, not receipts.",
-      "action": "Owner to re-check the submissions page; record with registry/live_scores.json."
-    },
-    {
-      "id": "tc-band-mislabelled",
-      "severity": "medium",
-      "issue": "The training band 'tc' is described as 'Tilt angle or total curvature - magnetic field derivative for edge detection', but it is rank-identical (Spearman 1.0000, n=299,822) to the GeoDAWN radiometric total-count grid and only -0.15 correlated with the magnetic horizontal gradient (tmi_hg). Verified from the pinned rasters.",
-      "action": "Do not use 'tc' as a magnetic edge transform; excluded by scripts/prepare_data.py when building the 32-band label-free feature matrix (data_cache/prepared/features.npy)."
-    },
-    {
-      "id": "berkowitz-scope",
-      "severity": "medium",
-      "issue": "Berkowitz et al. (2000) give ensemble-average connectivity estimates ('rather than particular realizations'); they do not state that one segment decides whether two particular faults join.",
-      "action": "The per-gap argument here rests on the graph analysis and the holdout, not on the paper alone."
-    },
-    {
-      "id": "catalogue-fragmentation",
-      "severity": "medium",
-      "issue": "The raster catalogue has 3,199 8-connected systems (median 1.27 km). In Session 2 we cross-referenced against the 1,179 NBMG INGENIOUS Qfaults vector polylines (qfaults_v2_in_footprint.json, 99.97% match within 200 m) and ran a three-tier holdout (seeds 120-129, evidence/vector_topology_validation.json): z>=3 dedup achieves 0.2926 on 8-connected components (5.00x ctrl), 0.1003 on whole NBMG FID multipart polylines (4.92x ctrl, rising to 0.1374 with H27-5a kinematic typing and 0.1783 with H27-5b same-name kinematic typing), and 0.0014 on whole 20-70 km named fault zones (NAME).",
-      "action": "Both component and whole-FID vector holdout gates pass (> m(0.30) = 0.0638); whole-zone holdout confirms 1-4 km links complete segments within and between traces rather than bridging 15-30 km inter-range basins."
-    },
-    {
-      "id": "run-a-implementation-bug",
-      "severity": "low",
-      "issue": "My first confirmatory launch applied the minimum gap before choosing the nearest target (deviation from the registered rule); caught by a unit test, stopped, disclosed, rerun as registered.",
-      "action": "evidence/topology_validation_runA_partial_log.txt; knowledge/03_preregistration_topology_gate.md Addendum A."
-    },
-    {
-      "id": "leaky-paired-base",
-      "severity": "low",
-      "issue": "The dotted H19-5 base was trained on all labels, so its coverage of hidden catalogue pieces is inflated. In Session 2 (Addendum C, seeds 130-139, evidence/oof_hypothesis_gates.json), we trained a strictly out-of-fold 4-quadrant HistGradientBoostingClassifier (600 m buffer) on the 32-band label-free feature matrix.",
-      "action": "On the non-leaky OOF base B_oof (mean DTI 0.0861), T-v2 still improves DTI in 4/4 folds (+0.0115 mean gain, marginal efficiency 0.2251), H27-4 improves DTI in 4/4 folds (+0.0022 at 100 m; +0.0141 stacked with T-v2), and H27-3 is refuted (-0.0010, 0/4 folds)."
-    },
-    {
-      "id": "geodawn-metadata-placeholders",
-      "severity": "low",
-      "issue": "Carried from the sibling record (and ScienceBase item 657e1d85d34e23d3533209f7 re-verified): GeoDAWN metadata has placeholder fields and line-km differences across summary tables (151,799 vs 149,030).",
-      "action": "Treat acquisition metadata as approximate."
-    },
-    {
-      "id": "account-compliance",
-      "severity": "low",
-      "issue": "Leaderboard rows smrtdoog5 and SDCF9 are associated with the owner in sibling notes but ownership and compliance with the one-entity / 3-per-week rules are unverified.",
-      "action": "Owner to confirm before relying on additional accounts."
-    },
-    {
-      "id": "preregistration-not-notarised",
-      "severity": "low",
-      "issue": "In Session 1 the pre-registration texts preceded the runs in the working session; in Session 2 Addenda B (seeds 120-129) and C (seeds 130-139) were committed to git (commit 1487895) before running the confirmatory scripts.",
-      "action": "Addenda B and C are git-timestamped prior to execution (commit 1487895); the live score remains the ultimate test."
-    },
-    {
-      "id": "graph-loop-count-corrected",
-      "severity": "low",
-      "issue": "An earlier edge builder over-counted loops (cyclomatic number 504, caused by 1-px stubs recorded as self-loops). Corrected in review pass 2: raw 250; 110 after dropping self-loops <= 3 px; only 6 enclosed regions >= 20 px.",
-      "action": "Use the corrected figures (evidence/graph_report.json); the catalogue is nearly acyclic at 100 m."
-    },
-    {
-      "id": "links-touching-third-system",
-      "severity": "low",
-      "issue": "8 of the 345 shipped links pass within ~100 m of a third mapped system, so they are not pure two-system gaps; they belong to the validated rule and are flagged in their dossiers.",
-      "action": "A reviewer may drop them; effect on the shipped dots is small."
-    },
-    {
-      "id": "usgs-qfaults-size-discrepancy",
-      "severity": "low",
-      "issue": "The USGS Faults page says the GIS zip is 16 MB; the server reports 32,371,696 bytes (feed check, 2026-10-02).",
-      "action": "Treat the page text as stale; the feed records the live size."
-    },
-    {
-      "id": "g-estimate-refined-12226",
-      "severity": "info",
-      "issue": "knowledge/01 and the operating-point model assume |G| ~ 12.63k px. Session 3 re-derived it from the blind spacing-5 lattice alone (whose credit per truth pixel c = 0.37481 is pure geometry, independent of where the truth is) using the SHA-256-authenticated raster: |G| = 12,226 px. The sibling GEMSDOE25 independently derived 12,503 (lattice) and 12,769 (pair).",
-      "action": "Adopt 12,226 px with a stated range of 12.2-12.8k. All Session-3 modelling uses 12,226. This is a refinement, not a contradiction: the three instruments agree within 2.2-4.3%. evidence/live_inversion.json."
-    },
-    {
-      "id": "tomography-not-identifiable",
-      "severity": "medium",
-      "issue": "A habitat tomography of the hidden truth (20 live scores as 20 linear measurements of the truth intensity lambda) is NOT identifiable from the available corpus. Overlapping bases: in-sample R2 = -1.24. Strict 7-cell catalogue-distance partition: R2 = -0.360, leave-one-submission-out score RMSE 0.0715 vs a score spread of 0.0686 (signal ratio 0.96).",
-      "action": "Recorded so no future session re-derives it or - worse - ships an emission chosen by the fitted lambda. The fitted habitat weights (66% of truth in the 100-200 m catalogue ring) are hypothesis-generating ONLY. evidence/live_truth_partition_radial.json."
-    },
-    {
-      "id": "geometric-retention-biased-against-pruning",
-      "severity": "medium",
-      "issue": "The live-validated retention rule credit(d) = credit_solid * c(d)/c_solid assumes the hidden truth is spread uniformly near the emission. That is exactly right for geometric (Poisson-disk) thinning - it predicts two independent live solid->dotted pairs to -0.1% and +4.0% - but it is biased against TARGETED pruning, because it charges every removed pixel with average credit. The out-of-fold gate measured the H27-4 catalogue-flank pixels directly at 0.0034 credit/px, about 15x below the 0.0521 live break-even.",
-      "action": "Report BOTH models for every candidate (evidence/candidate_model_scores.json): 'geometric' charges uniform-truth retention for all changes, 'hybrid' charges geometric retention for thinning and the measured OOF efficiencies for the targeted steps. Slot 1 vs slot 3 is the live A/B that settles which is right. Neither column is a score."
-    },
-    {
-      "id": "five-scored-rasters-unmatched",
-      "severity": "low",
-      "issue": "5 of the 25 registry rows could not be matched to a raster by SHA-256 in the sibling repositories searched (ens12-adopted, dual-family-union, lidarscarp-ridge-top2pct, GEMSDOE4 combined, hgb88-topk03). Their files exist under different names or in paths outside the searched directories.",
-      "action": "Listed as 'unmatched' in evidence/scored_corpus.json rather than guessed. The inversion therefore rests on 20 hash-authenticated pairs, not 25. No filename-only match was accepted anywhere."
-    },
-    {
-      "id": "leaderboard-snapshot-sibling-only",
-      "severity": "medium",
-      "issue": "The only leaderboard distribution the programme has (rank 1 DARD 0.3195, rank 2 nchuzhoy 0.3128 with only 2 submissions, rank 5 xiaofanhu 0.2941, and five rows whose values coincide with owner-reported artifacts: 0.2477 #16, 0.1922 #28, 0.1894 #30, 0.1855 #33, 0.1563 #41) is recorded in the SIBLING repo GEMSDOE25/registry/live_scores.json under a one-off user-directed page read of 2026-10-02. It is not in this repository and the agent must not fetch drivendata.org.",
-      "action": "Copied into registry/live_scores.json as 'leaderboard_snapshot_sibling_2026-10-02' with its provenance and the explicit note that the value coincidences are matches by VALUE ONLY and do not identify the owner's account. Needed because rank 2 reached 0.3128 with 2 submissions - evidence that a much better detector exists, not a better emission schedule."
-    },
-    {
-      "id": "gemsdoe9-placeholder-positives-outside-footprint",
-      "severity": "medium",
-      "issue": "The scored raster behind the owner-reported 0.0107 (GEMSDOE9 'PLACEHOLDER', sha256 2314b599..., recovered and hash-matched in Session 3) has 196,132 POSITIVE pixels OUTSIDE the organisers' 5,167,373-px footprint, and only 145,610 inside it (of which 2,074 sit on catalogue cells and are therefore free). The sibling repo's own note says this file 'fails the range/footprint check in this repo's verifier'.",
-      "action": "Counted correctly in evidence/live_inversion.json as n_scored = 145,610 (inside-footprint, off-catalogue) with n_positive_outside_footprint = 196,132 reported separately. An earlier draft of the inversion script summed positives over the WHOLE grid and so charged this file 341,742 scored pixels - a 2.3x overstatement that propagated into its implied credit. Fixed in scripts/invert_live_scores.py::emission_of and covered by the explicit outside-footprint field. No 27GEMSDOE candidate is affected: all four emit 0 pixels outside the footprint and 0 on catalogue cells (scripts/verify_downloads.py, 79 checks)."
-    },
-    {
-      "id": "ci-red-on-main-raster-tests",
-      "severity": "high",
-      "issue": "CI was RED on `main` before Session 3 and nobody had noticed. `.github/workflows/ci.yml` runs `python -m pytest -q` on a bare checkout, but `data_cache/` is git-ignored by design and CI cannot restore it (`scripts/restore_data.py` reads the inputs from SIBLING repositories, which the workflow's `contents: read` GITHUB_TOKEN cannot access). `tests/test_vector_and_oof.py::test_vector_attribution_and_evidence_files` opens `paths.TEMPLATE`, so it failed with `RasterioIOError: data_cache/sample_submission.tif: No such file or directory`. Reproduced on the base commit `ce80ead` in a clean clone: 1 failed, 35 passed.",
-      "action": "Fixed in Session 3 with `tests/conftest.py`: a `requires_rasters` marker plus a collection hook that skips with the missing file names in the reason. Applied to the pre-existing test and to the new `test_verify_downloads_still_passes_with_four_slots`. Verified in a clean clone without `data_cache`: 45 passed, 2 skipped; and locally after `restore_data.py`: 47 passed, 0 skipped. A red suite now always means a real failure. Consequence to record honestly: **CI does not exercise the two raster-dependent checks** - they run locally and must be re-run before any release. Adding a data-restore step to CI needs a token with read access to the sibling repositories, which is an access request for the owner, not something the agent can grant itself."
-    },
-    {
-      "id": "lidar-feature-name-mismatch",
-      "severity": "medium",
-      "issue": "The prior scripts/prepare_data.py assigned feature names that did not match positional bands 1-10 of the restored lidar_scarp_features_u8.tif. The pinned sibling sidecar and embedded raster descriptions provide the correct order. No numerical misread was demonstrated: rebuilding after correcting labels produced the identical feature-matrix SHA-256 83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc.",
-      "action": "Corrected scripts/prepare_data.py to assert the 12 embedded band descriptions and use the verified names; added the sidecar to data/manifest.json and a regression test. The corrected preparation evidence is evidence/data_preparation.json. Old prepared-feature name associations are withdrawn; raw-band channel_auc.py reads embedded raster descriptions directly and is unaffected. No claim of improved model performance follows from this metadata correction."
-    },
-    {
-      "id": "dem-inventory-count-corrected",
-      "severity": "low",
-      "issue": "Prior project prose reported 1,701 1 m DEM tiles. The restored data_cache/dem_links.json and pinned sidecar instead report 716 links/tiles total, with 706 successful derived tiles and 10 failures.",
-      "action": "Corrected active prose and evidence/review_passes.md. This is an owner-mirror inventory count; it is not an independent official USGS tile-download audit."
-    }
-  ]
+ "generated": "2026-10-02 | Session 4 additions: 8 items added - the unregistered h18-4 score, the SGMC pixel-count discrepancy, the restore_data .part bug and its fix, the proxy's blindness to the far field, the signed/NaN prepared band, the underpowered D-4 control, a scratch AUC artefact, and the unverified second-moment threshold)",
+ "items": [
+  {
+   "id": "prompt-verbatim-unavailable",
+   "severity": "low",
+   "issue": "In Session 1 the verbatim text of the task prompt was unavailable due to conversation condensation; in Session 2 the user provided the complete verbatim task prompt.",
+   "action": "Resolved in Session 2: the full verbatim task prompt and Arena AI Core Values ('Maximize P(Win)' and 'Own the Outcome') are now recorded word-for-word in README.md."
+  },
+  {
+   "id": "portal-0-1-error-cause-unknown",
+   "severity": "high",
+   "issue": "The cause of 'Predicted values must be in range [0, 1]' is not established; the validator is not public. Earlier forensics (sibling) found no in-footprint value outside [0,1] in 148 rasters; three early files had NaN inside the footprint.",
+   "action": "Shipped files: exact 0.0/1.0, nodata=NaN as in the sample, plus an all-finite fallback and a zip. If rejected again, paste the exact message and file name."
+  },
+  {
+   "id": "ai-use-disclosure",
+   "severity": "high",
+   "issue": "The Official Rules require generative-AI use to be stated in the narrative (Sept 2026 rules, verified in full across all 7 chunks).",
+   "action": "This work is agent-assisted; see AI_DISCLOSURE.md. Include a statement in the final-round narrative."
+  },
+  {
+   "id": "hermant-2025-lidar-catalogue-offset",
+   "severity": "medium",
+   "issue": "Hermant, Kiersnowski & Bellanger (2025, Stanford Geothermal Workshop, Fig. 2 & Fig. 9B) document 150-400 m positional offsets between USGS Quaternary fault traces and 3DEP LiDAR scarp breaks. When a scarp detector fires along a known fault and only the 1-px catalogue spine is masked (~labels), the unmasked 100-200 m flank survives as a dense band of dots (5,355 dots = 8.91% of the 0.2477 file sit at d_cat = 100 m; 8,769 dots = 14.60% sit at d_cat <= 200 m). On our non-leaky OOF detector B_oof (seeds 130-139), those d_cat = 100 m dots have hit efficiency 0.0034 (15x below break-even 0.0521).",
+   "action": "Validated H27-4 on B_oof (+0.0022 solo at 100 m, +0.0141 stacked with T-v2 in 4/4 folds) and shipped Tertiary Slot 3 candidate (d466b251f309, 55,992 px)."
+  },
+  {
+   "id": "sample-submission-has-ones",
+   "severity": "medium",
+   "issue": "The owner's mirror of the sample submission has 60,988 pixels equal to 1.0 exactly on the catalogue pixels, although the organisers describe the sample as predicting absence. Verified this session (values {0,1}, 60,988 ones).",
+   "action": "Used only as a grid/footprint template."
+  },
+  {
+   "id": "deadline-discrepancy",
+   "severity": "medium",
+   "issue": "Competition page: Dec 3, 2026 11:59 p.m. UTC; Official Rules A.1: 5:00 p.m. ET on the deadline date.",
+   "action": "Treat the earlier time as binding until the organisers clarify."
+  },
+  {
+   "id": "bridge-hashes-not-authenticated",
+   "severity": "medium",
+   "issue": "Inputs come from the owner's GitHub mirrors (hash-pinned), not from an organiser-authenticated download.",
+   "action": "Re-verify against the DrivenData data page or official Dropbox mirrors (scripts/download_competition_data.sh) when logged in."
+  },
+  {
+   "id": "scores-unconfirmed",
+   "severity": "medium",
+   "issue": "Scores for 25/26/27GEMSDOE are blank; 0.3195 (leader) and h23-a 0.1002 appear only in the task statement; all scores are owner-reported, not receipts.",
+   "action": "Owner to re-check the submissions page; record with registry/live_scores.json."
+  },
+  {
+   "id": "tc-band-mislabelled",
+   "severity": "medium",
+   "issue": "The training band 'tc' is described as 'Tilt angle or total curvature - magnetic field derivative for edge detection', but it is rank-identical (Spearman 1.0000, n=299,822) to the GeoDAWN radiometric total-count grid and only -0.15 correlated with the magnetic horizontal gradient (tmi_hg). Verified from the pinned rasters.",
+   "action": "Do not use 'tc' as a magnetic edge transform; excluded by scripts/prepare_data.py when building the 32-band label-free feature matrix (data_cache/prepared/features.npy)."
+  },
+  {
+   "id": "berkowitz-scope",
+   "severity": "medium",
+   "issue": "Berkowitz et al. (2000) give ensemble-average connectivity estimates ('rather than particular realizations'); they do not state that one segment decides whether two particular faults join.",
+   "action": "The per-gap argument here rests on the graph analysis and the holdout, not on the paper alone."
+  },
+  {
+   "id": "catalogue-fragmentation",
+   "severity": "medium",
+   "issue": "The raster catalogue has 3,199 8-connected systems (median 1.27 km). In Session 2 we cross-referenced against the 1,179 NBMG INGENIOUS Qfaults vector polylines (qfaults_v2_in_footprint.json, 99.97% match within 200 m) and ran a three-tier holdout (seeds 120-129, evidence/vector_topology_validation.json): z>=3 dedup achieves 0.2926 on 8-connected components (5.00x ctrl), 0.1003 on whole NBMG FID multipart polylines (4.92x ctrl, rising to 0.1374 with H27-5a kinematic typing and 0.1783 with H27-5b same-name kinematic typing), and 0.0014 on whole 20-70 km named fault zones (NAME).",
+   "action": "Both component and whole-FID vector holdout gates pass (> m(0.30) = 0.0638); whole-zone holdout confirms 1-4 km links complete segments within and between traces rather than bridging 15-30 km inter-range basins."
+  },
+  {
+   "id": "run-a-implementation-bug",
+   "severity": "low",
+   "issue": "My first confirmatory launch applied the minimum gap before choosing the nearest target (deviation from the registered rule); caught by a unit test, stopped, disclosed, rerun as registered.",
+   "action": "evidence/topology_validation_runA_partial_log.txt; knowledge/03_preregistration_topology_gate.md Addendum A."
+  },
+  {
+   "id": "leaky-paired-base",
+   "severity": "low",
+   "issue": "The dotted H19-5 base was trained on all labels, so its coverage of hidden catalogue pieces is inflated. In Session 2 (Addendum C, seeds 130-139, evidence/oof_hypothesis_gates.json), we trained a strictly out-of-fold 4-quadrant HistGradientBoostingClassifier (600 m buffer) on the 32-band label-free feature matrix.",
+   "action": "On the non-leaky OOF base B_oof (mean DTI 0.0861), T-v2 still improves DTI in 4/4 folds (+0.0115 mean gain, marginal efficiency 0.2251), H27-4 improves DTI in 4/4 folds (+0.0022 at 100 m; +0.0141 stacked with T-v2), and H27-3 is refuted (-0.0010, 0/4 folds)."
+  },
+  {
+   "id": "geodawn-metadata-placeholders",
+   "severity": "low",
+   "issue": "Carried from the sibling record (and ScienceBase item 657e1d85d34e23d3533209f7 re-verified): GeoDAWN metadata has placeholder fields and line-km differences across summary tables (151,799 vs 149,030).",
+   "action": "Treat acquisition metadata as approximate."
+  },
+  {
+   "id": "account-compliance",
+   "severity": "low",
+   "issue": "Leaderboard rows smrtdoog5 and SDCF9 are associated with the owner in sibling notes but ownership and compliance with the one-entity / 3-per-week rules are unverified.",
+   "action": "Owner to confirm before relying on additional accounts."
+  },
+  {
+   "id": "preregistration-not-notarised",
+   "severity": "low",
+   "issue": "In Session 1 the pre-registration texts preceded the runs in the working session; in Session 2 Addenda B (seeds 120-129) and C (seeds 130-139) were committed to git (commit 1487895) before running the confirmatory scripts.",
+   "action": "Addenda B and C are git-timestamped prior to execution (commit 1487895); the live score remains the ultimate test."
+  },
+  {
+   "id": "graph-loop-count-corrected",
+   "severity": "low",
+   "issue": "An earlier edge builder over-counted loops (cyclomatic number 504, caused by 1-px stubs recorded as self-loops). Corrected in review pass 2: raw 250; 110 after dropping self-loops <= 3 px; only 6 enclosed regions >= 20 px.",
+   "action": "Use the corrected figures (evidence/graph_report.json); the catalogue is nearly acyclic at 100 m."
+  },
+  {
+   "id": "links-touching-third-system",
+   "severity": "low",
+   "issue": "8 of the 345 shipped links pass within ~100 m of a third mapped system, so they are not pure two-system gaps; they belong to the validated rule and are flagged in their dossiers.",
+   "action": "A reviewer may drop them; effect on the shipped dots is small."
+  },
+  {
+   "id": "usgs-qfaults-size-discrepancy",
+   "severity": "low",
+   "issue": "The USGS Faults page says the GIS zip is 16 MB; the server reports 32,371,696 bytes (feed check, 2026-10-02).",
+   "action": "Treat the page text as stale; the feed records the live size."
+  },
+  {
+   "id": "g-estimate-refined-12226",
+   "severity": "info",
+   "issue": "knowledge/01 and the operating-point model assume |G| ~ 12.63k px. Session 3 re-derived it from the blind spacing-5 lattice alone (whose credit per truth pixel c = 0.37481 is pure geometry, independent of where the truth is) using the SHA-256-authenticated raster: |G| = 12,226 px. The sibling GEMSDOE25 independently derived 12,503 (lattice) and 12,769 (pair).",
+   "action": "Adopt 12,226 px with a stated range of 12.2-12.8k. All Session-3 modelling uses 12,226. This is a refinement, not a contradiction: the three instruments agree within 2.2-4.3%. evidence/live_inversion.json."
+  },
+  {
+   "id": "tomography-not-identifiable",
+   "severity": "medium",
+   "issue": "A habitat tomography of the hidden truth (20 live scores as 20 linear measurements of the truth intensity lambda) is NOT identifiable from the available corpus. Overlapping bases: in-sample R2 = -1.24. Strict 7-cell catalogue-distance partition: R2 = -0.360, leave-one-submission-out score RMSE 0.0715 vs a score spread of 0.0686 (signal ratio 0.96).",
+   "action": "Recorded so no future session re-derives it or - worse - ships an emission chosen by the fitted lambda. The fitted habitat weights (66% of truth in the 100-200 m catalogue ring) are hypothesis-generating ONLY. evidence/live_truth_partition_radial.json."
+  },
+  {
+   "id": "geometric-retention-biased-against-pruning",
+   "severity": "medium",
+   "issue": "The live-validated retention rule credit(d) = credit_solid * c(d)/c_solid assumes the hidden truth is spread uniformly near the emission. That is exactly right for geometric (Poisson-disk) thinning - it predicts two independent live solid->dotted pairs to -0.1% and +4.0% - but it is biased against TARGETED pruning, because it charges every removed pixel with average credit. The out-of-fold gate measured the H27-4 catalogue-flank pixels directly at 0.0034 credit/px, about 15x below the 0.0521 live break-even.",
+   "action": "Report BOTH models for every candidate (evidence/candidate_model_scores.json): 'geometric' charges uniform-truth retention for all changes, 'hybrid' charges geometric retention for thinning and the measured OOF efficiencies for the targeted steps. Slot 1 vs slot 3 is the live A/B that settles which is right. Neither column is a score."
+  },
+  {
+   "id": "five-scored-rasters-unmatched",
+   "severity": "low",
+   "issue": "5 of the 25 registry rows could not be matched to a raster by SHA-256 in the sibling repositories searched (ens12-adopted, dual-family-union, lidarscarp-ridge-top2pct, GEMSDOE4 combined, hgb88-topk03). Their files exist under different names or in paths outside the searched directories.",
+   "action": "Listed as 'unmatched' in evidence/scored_corpus.json rather than guessed. The inversion therefore rests on 20 hash-authenticated pairs, not 25. No filename-only match was accepted anywhere."
+  },
+  {
+   "id": "leaderboard-snapshot-sibling-only",
+   "severity": "medium",
+   "issue": "The only leaderboard distribution the programme has (rank 1 DARD 0.3195, rank 2 nchuzhoy 0.3128 with only 2 submissions, rank 5 xiaofanhu 0.2941, and five rows whose values coincide with owner-reported artifacts: 0.2477 #16, 0.1922 #28, 0.1894 #30, 0.1855 #33, 0.1563 #41) is recorded in the SIBLING repo GEMSDOE25/registry/live_scores.json under a one-off user-directed page read of 2026-10-02. It is not in this repository and the agent must not fetch drivendata.org.",
+   "action": "Copied into registry/live_scores.json as 'leaderboard_snapshot_sibling_2026-10-02' with its provenance and the explicit note that the value coincidences are matches by VALUE ONLY and do not identify the owner's account. Needed because rank 2 reached 0.3128 with 2 submissions - evidence that a much better detector exists, not a better emission schedule."
+  },
+  {
+   "id": "gemsdoe9-placeholder-positives-outside-footprint",
+   "severity": "medium",
+   "issue": "The scored raster behind the owner-reported 0.0107 (GEMSDOE9 'PLACEHOLDER', sha256 2314b599..., recovered and hash-matched in Session 3) has 196,132 POSITIVE pixels OUTSIDE the organisers' 5,167,373-px footprint, and only 145,610 inside it (of which 2,074 sit on catalogue cells and are therefore free). The sibling repo's own note says this file 'fails the range/footprint check in this repo's verifier'.",
+   "action": "Counted correctly in evidence/live_inversion.json as n_scored = 145,610 (inside-footprint, off-catalogue) with n_positive_outside_footprint = 196,132 reported separately. An earlier draft of the inversion script summed positives over the WHOLE grid and so charged this file 341,742 scored pixels - a 2.3x overstatement that propagated into its implied credit. Fixed in scripts/invert_live_scores.py::emission_of and covered by the explicit outside-footprint field. No 27GEMSDOE candidate is affected: all four emit 0 pixels outside the footprint and 0 on catalogue cells (scripts/verify_downloads.py, 79 checks)."
+  },
+  {
+   "id": "ci-red-on-main-raster-tests",
+   "severity": "high",
+   "issue": "CI was RED on `main` before Session 3 and nobody had noticed. `.github/workflows/ci.yml` runs `python -m pytest -q` on a bare checkout, but `data_cache/` is git-ignored by design and CI cannot restore it (`scripts/restore_data.py` reads the inputs from SIBLING repositories, which the workflow's `contents: read` GITHUB_TOKEN cannot access). `tests/test_vector_and_oof.py::test_vector_attribution_and_evidence_files` opens `paths.TEMPLATE`, so it failed with `RasterioIOError: data_cache/sample_submission.tif: No such file or directory`. Reproduced on the base commit `ce80ead` in a clean clone: 1 failed, 35 passed.",
+   "action": "Fixed in Session 3 with `tests/conftest.py`: a `requires_rasters` marker plus a collection hook that skips with the missing file names in the reason. Applied to the pre-existing test and to the new `test_verify_downloads_still_passes_with_four_slots`. Verified in a clean clone without `data_cache`: 45 passed, 2 skipped; and locally after `restore_data.py`: 47 passed, 0 skipped. A red suite now always means a real failure. Consequence to record honestly: **CI does not exercise the two raster-dependent checks** - they run locally and must be re-run before any release. Adding a data-restore step to CI needs a token with read access to the sibling repositories, which is an access request for the owner, not something the agent can grant itself."
+  },
+  {
+   "id": "lidar-feature-name-mismatch",
+   "severity": "medium",
+   "issue": "The prior scripts/prepare_data.py assigned feature names that did not match positional bands 1-10 of the restored lidar_scarp_features_u8.tif. The pinned sibling sidecar and embedded raster descriptions provide the correct order. No numerical misread was demonstrated: rebuilding after correcting labels produced the identical feature-matrix SHA-256 83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc.",
+   "action": "Corrected scripts/prepare_data.py to assert the 12 embedded band descriptions and use the verified names; added the sidecar to data/manifest.json and a regression test. The corrected preparation evidence is evidence/data_preparation.json. Old prepared-feature name associations are withdrawn; raw-band channel_auc.py reads embedded raster descriptions directly and is unaffected. No claim of improved model performance follows from this metadata correction."
+  },
+  {
+   "id": "dem-inventory-count-corrected",
+   "severity": "low",
+   "issue": "Prior project prose reported 1,701 1 m DEM tiles. The restored data_cache/dem_links.json and pinned sidecar instead report 716 links/tiles total, with 706 successful derived tiles and 10 failures.",
+   "action": "Corrected active prose and evidence/review_passes.md. This is an owner-mirror inventory count; it is not an independent official USGS tile-download audit."
+  },
+  {
+   "id": "h18-4-score-unregistered",
+   "severity": "high",
+   "issue": "The group's single most informative live measurement was invisible to this repository for three sessions. 16GEMSDOE H18-4 (content id aef8f42c, sha256 736f62c2da58...) - 57,783 px of USGS State Geologic Map Compilation faults all >=300 m from the catalogue, owner-reported score 0.0360 - is the only scored emission anywhere in the programme whose pixels are all far-field, and it was not a row in registry/live_scores.json, so evidence/live_inversion.json inverted 20 pairs without it.",
+   "action": "Session 4 added the row with full provenance, hash-authenticated the raster against the sibling's record, re-fetched the scored corpus (21/26 matched, was 20/26) and inverted it: concentration 1.62x blind (exact bracket 0.76-1.65x) against 5.3-6.0x for the H19-5 family. evidence/sgmc_gap_inversion.json. Recorded so that 'emit on an independent second catalogue' is never re-proposed as a new idea."
+  },
+  {
+   "id": "sgmc-px-count-discrepancy",
+   "severity": "low",
+   "issue": "The sibling's exploratory record (19GEMSDOE evidence/hypothesis_h18_sgmc_exploratory.json) reports sgmc_fault_pixels_in_footprint = 110,732; the SGMC mask restored into this repo (data_cache/derived_sgmc_faults_100m_u8.tif) has 83,593 positive px; and the h18-4 probe's own 57,783 positives overlap our restored mask on 79.66% of pixels. Most likely a rasterisation/buffer difference (all_touched vs centre-in-cell, or a 100 m vs 300 m exclusion buffer). Unresolved.",
+   "action": "Does not affect any conclusion: the inversion reads the SCORED raster's bytes and verifies the construction claim from them (0 positives on catalogue px, min catalogue distance 3.16 px), not the restored layer. The restored layer is used only as a detector FEATURE (Addendum D +sgmc arm) and as a cross-check."
+  },
+  {
+   "id": "restore-part-truncation-bug",
+   "severity": "high",
+   "issue": "scripts/restore_data.py left a truncated <name>.part behind when a gh api download failed (transient HTTP/2 INTERNAL_ERROR on the ~94 MB bridge parts). Any later glob-based assembly then silently concatenated the truncated part: training_features.tif came out 492,887,617 B / sha256 c0e9b856... instead of the pinned 418,912,844 B / 4371c82e.... The final hash check printed BAD but left the corrupt file in place, so the next run skipped it (dest.exists()).",
+   "action": "FIXED in Session 4: stale .part files are removed before fetching, downloads are retried (3 attempts, backoff), every part is verified against the byte count GitHub itself reports, and a hash mismatch now deletes the corrupt assembly AND its parts so a re-run refetches. Session 4 re-assembled the file manually and confirmed sha256 4371c82e... before use."
+  },
+  {
+   "id": "proxy-blind-to-far-field",
+   "severity": "high",
+   "issue": "Every gate this programme has run hides pieces of the CATALOGUE, so 100% of hidden truth (120,983 px over the Addendum-D cells) lies at distance 0 from the published catalogue and Habitat A (>=300 m away) contains NO truth by construction. Measured credit shares for the base arm: 36.8% on the spine, 51.5% at 100 m, 11.4% at 200 m, 0.37% at 300 m-1 km, 0.0% beyond 1 km. The live-scored 0.2477 emission puts 81.4% of its dots >=300 m from the catalogue (median 1.5 km). The proxy is therefore blind to the habitat that carries the real credit - the standing caveat 'catalogue-internal truth overstates real-world enrichment', now with numbers.",
+   "action": "Two consequences, both acted on. (1) The Addendum-D arms that PASS both registered criteria (+sgmc +0.0285, +all +0.0341 paired DTI, 4/4 folds) are NOT promoted: their entire gain is catalogue proximity, and their far-field behaviour is the SGMC-gap habitat measured live at 1.62x blind. (2) The question is registered as a bounded live measurement instead - Addendum E, Slot 5 (gems27-...-a34b0799df59), which changes only WHICH far-field pixels are emitted at fixed pixel count. evidence/arm_habitat_decomposition.json."
+  },
+  {
+   "id": "det-local-relief-signed-with-nan",
+   "severity": "medium",
+   "issue": "data_cache/prepared/features.npy band 'det_local_relief' is SIGNED (min -207.686, max +299.416, mean -0.026, 64.7% negative) and carries 3,061 NaN; the lidar_* columns carry 24.63% NaN (the LiDAR-invalid footprint), not 0. Any code that assumes a non-negative descriptor silently misbehaves: the pre-registered anisotropy (max-mean)/max reached 6.6e7 on that band.",
+   "action": "Disclosed deviation in knowledge/03 Addendum D before the gate ran: signed layers use the bounded (max-mean)/(max-min) form in [0,1]; the three non-negative LiDAR layers keep the registered form (measured in [0,0.8]). nodata -> 0 before line integration; the LiDAR-invalid footprint is 0 by construction in the uint8 source raster. Band names, count, scales and orientations unchanged. tests/test_newinfo.py covers both."
+  },
+  {
+   "id": "d4-control-underpowered",
+   "severity": "low",
+   "issue": "The Addendum-D control for the step-over rule (same lateral-offset and overlap windows but strike difference 70-110 deg, i.e. kinematically wrong) finds only 3.75 links per cell against 148.8 real step-over links, so the registered '>=2x enrichment over control' criterion is measured against a very small sample.",
+   "action": "Reported as measured (enrichment 1.11x, control efficiency 0.0545 on 35 dots/cell). The verdict does not rest on it: the absolute pooled efficiency of step-over dots is 0.0605, below the break-even m(0.30)=0.0638 on its own."
+  },
+  {
+   "id": "scratch-lidar-auc-artifact",
+   "severity": "low",
+   "issue": "A Session-4 screening script (scratch, never committed) computed LiDAR descriptor statistics over ALL footprint pixels including the 24.7% LiDAR-invalid area where the descriptor is 0, which pushed an 'SGMC-only vs background' AUC to 0.4831 even though the means clearly favour SGMC-only (136.4 vs 86.2).",
+   "action": "Corrected by restricting descriptor statistics to lidar:valid; the corrected means are the ones quoted in knowledge/10 section 1. The repository's published evidence/channel_auc.json is NOT affected - scripts/channel_auc.py maps 0 -> NaN for every uint8 layer and drops non-finite values on both sides (verified: lidar:lappos_max n_pos = 48,441 of 60,988 catalogue px). Verified by reading the script, not assumed."
+  },
+  {
+   "id": "second-moment-threshold-unverified",
+   "severity": "low",
+   "issue": "The second-moment quantity sum(l^2)/area is the standard continuous connectivity measure for 2-D line networks, but no critical value for it could be verified from an official source inside this sandbox (only github.com and pypi.org are reachable; the Berkowitz et al. 2000 text available here gives the P criterion, not a sum(l^2) threshold).",
+   "action": "sum(l^2) = 56,580 km^2 (1.095 per unit area) is reported as a continuous RELATIVE measure and as the tie-break inside equal |dP| only. No pass/fail claim anywhere in the repo rests on it. The paper-verified threshold statement remains P = 5.784 -> 6.124 against Pc = 5.6-6.0."
+  }
+ ]
 }

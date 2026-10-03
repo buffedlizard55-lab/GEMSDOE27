@@ -1,0 +1,350 @@
+{
+  "preregistration": "diagnostic, NOT a gate: it decomposes the registered Addendum-D result on the same cells (seeds 140-149) into the habitat a real submission can occupy (>= 300 m from the whole published catalogue) and the habitat that exists only because the experiment hides catalogue pixels",
+  "seeds": [
+    140,
+    141,
+    142,
+    143,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149
+  ],
+  "arms": [
+    "base",
+    "sgmc",
+    "all"
+  ],
+  "seconds": 116.06036043167114,
+  "habitat_definition": {
+    "A": "d(dot, FULL published catalogue) >= 3 px (300 m): shippable; live-measured once by 16GEMSDOE H18-4 (SGMC-gap probe, 0.0360, concentration 1.62x blind)",
+    "B": "d(dot, FULL catalogue) < 3 px: cannot exist in a real file (verify_downloads.py requires 0 pixels on catalogue cells); its credit is pure catalogue-internal truth"
+  },
+  "truth_split": {
+    "habitat_A": 0,
+    "habitat_B": 120983,
+    "by_band": {
+      "d0_on_spine": 120983,
+      "d1_100m": 0,
+      "d2_200m": 0,
+      "d3to10": 0,
+      "dgt10": 0
+    },
+    "structural_note": "Hidden truth in this proxy is made of catalogue pixels, so 100% of it lies at d(full catalogue) = 0 and Habitat A contains no truth BY CONSTRUCTION. The proxy can therefore only ever reward dots placed next to the published catalogue; it is blind to the far-field habitat that the live scores say carries most of the real credit (81.4% of the 0.2477 emission's dots are >= 300 m from the catalogue). This is the quantitative form of the standing caveat 'catalogue-internal truth overstates real-world enrichment'."
+  },
+  "pooled": {
+    "base_band_d0_on_spine": {
+      "credit_TP": 9415.778214779615,
+      "fp_weight": 0.0,
+      "efficiency": 0.0,
+      "mean_dti": 0.09938483265862937,
+      "n_dots": 3799
+    },
+    "base_band_d1_100m": {
+      "credit_TP": 13178.163180267207,
+      "fp_weight": 46962.19750472171,
+      "efficiency": 0.2806121493557076,
+      "mean_dti": 0.12540779988638412,
+      "n_dots": 52959
+    },
+    "base_band_d2_200m": {
+      "credit_TP": 2914.2237517579865,
+      "fp_weight": 24116.578840278005,
+      "efficiency": 0.12083901995629794,
+      "mean_dti": 0.02982536302113491,
+      "n_dots": 25711
+    },
+    "base_band_d3to10": {
+      "credit_TP": 94.82260905693877,
+      "fp_weight": 166007.89143615094,
+      "efficiency": 0.0005711933826556007,
+      "mean_dti": 0.0007445409306573023,
+      "n_dots": 166103
+    },
+    "base_band_dgt10": {
+      "credit_TP": 0.0,
+      "fp_weight": 423353.0,
+      "efficiency": 0.0,
+      "mean_dti": 0.0,
+      "n_dots": 423353
+    },
+    "base": {
+      "credit_TP": 20646.93060494927,
+      "fp_weight": 660439.6677811507,
+      "efficiency": 0.03126240232406971,
+      "mean_dti": 0.0889420669450024,
+      "n_dots": 671925
+    },
+    "base_habitatA": {
+      "credit_TP": 0.0,
+      "fp_weight": 581017.0,
+      "efficiency": 0.0,
+      "mean_dti": 0.0,
+      "n_dots": 581017
+    },
+    "base_habitatB": {
+      "credit_TP": 20646.93060494927,
+      "fp_weight": 79422.66778115068,
+      "efficiency": 0.25996269304176395,
+      "mean_dti": 0.18139343536472186,
+      "n_dots": 90908
+    },
+    "base_shippable": {
+      "credit_TP": 0.0,
+      "fp_weight": 581017.0,
+      "efficiency": 0.0,
+      "mean_dti": 0.0,
+      "n_dots": 581017
+    },
+    "sgmc_band_d0_on_spine": {
+      "credit_TP": 12057.816209874452,
+      "fp_weight": 0.0,
+      "efficiency": 0.0,
+      "mean_dti": 0.12855733544995415,
+      "n_dots": 4906
+    },
+    "sgmc_band_d1_100m": {
+      "credit_TP": 17322.947270803623,
+      "fp_weight": 62924.85564451181,
+      "efficiency": 0.2752957808702498,
+      "mean_dti": 0.15991036462884786,
+      "n_dots": 71070
+    },
+    "sgmc_band_d2_200m": {
+      "credit_TP": 3867.3618628722415,
+      "fp_weight": 31896.31757078041,
+      "efficiency": 0.12124791064956839,
+      "mean_dti": 0.03921512138442264,
+      "n_dots": 34015
+    },
+    "sgmc_band_d3to10": {
+      "credit_TP": 125.64853564420659,
+      "fp_weight": 171228.0083186053,
+      "efficiency": 0.000733808311373986,
+      "mean_dti": 0.0009861002413743755,
+      "n_dots": 171354
+    },
+    "sgmc_band_dgt10": {
+      "credit_TP": 0.0,
+      "fp_weight": 362771.0,
+      "efficiency": 0.0,
+      "mean_dti": 0.0,
+      "n_dots": 362771
+    },
+    "sgmc": {
+      "credit_TP": 26422.145619482028,
+      "fp_weight": 628820.1815338975,
+      "efficiency": 0.04201860308463669,
+      "mean_dti": 0.11746527605432452,
+      "n_dots": 644116
+    },
+    "sgmc_habitatA": {
+      "credit_TP": 0.0,
+      "fp_weight": 523132.0,
+      "efficiency": 0.0,
+      "mean_dti": 0.0,
+      "n_dots": 523132
+    },
+    "sgmc_habitatB": {
+      "credit_TP": 26422.145619482028,
+      "fp_weight": 105688.18153389751,
+      "efficiency": 0.25000094841264364,
+      "mean_dti": 0.2209767328085314,
+      "n_dots": 120984
+    },
+    "sgmc_shippable": {
+      "credit_TP": 0.0,
+      "fp_weight": 523132.0,
+      "efficiency": 0.0,
+      "mean_dti": 0.0,
+      "n_dots": 523132
+    },
+    "all_band_d0_on_spine": {
+      "credit_TP": 12566.868542448654,
+      "fp_weight": 0.0,
+      "efficiency": 0.0,
+      "mean_dti": 0.13353675111421343,
+      "n_dots": 5104
+    },
+    "all_band_d1_100m": {
+      "credit_TP": 18138.79242317604,
+      "fp_weight": 66137.21564866051,
+      "efficiency": 0.2742599948497138,
+      "mean_dti": 0.16464427015686614,
+      "n_dots": 74745
+    },
+    "all_band_d2_200m": {
+      "credit_TP": 3892.988906785169,
+      "fp_weight": 33223.758844009084,
+      "efficiency": 0.11717484842890237,
+      "mean_dti": 0.039242218507909266,
+      "n_dots": 35381
+    },
+    "all_band_d3to10": {
+      "credit_TP": 128.05055589775992,
+      "fp_weight": 171033.1487706844,
+      "efficiency": 0.0007486885251083453,
+      "mean_dti": 0.0010185407453713624,
+      "n_dots": 171162
+    },
+    "all_band_dgt10": {
+      "credit_TP": 0.0,
+      "fp_weight": 344783.0,
+      "efficiency": 0.0,
+      "mean_dti": 0.0,
+      "n_dots": 344783
+    },
+    "all": {
+      "credit_TP": 27481.523292865775,
+      "fp_weight": 615177.123263354,
+      "efficiency": 0.04467253780030615,
+      "mean_dti": 0.12308666621094724,
+      "n_dots": 631175
+    },
+    "all_habitatA": {
+      "credit_TP": 0.0,
+      "fp_weight": 504234.0,
+      "efficiency": 0.0,
+      "mean_dti": 0.0,
+      "n_dots": 504234
+    },
+    "all_habitatB": {
+      "credit_TP": 27481.523292865775,
+      "fp_weight": 110943.12326335395,
+      "efficiency": 0.24770821736855955,
+      "mean_dti": 0.22628825819302403,
+      "n_dots": 126941
+    },
+    "all_shippable": {
+      "credit_TP": 0.0,
+      "fp_weight": 504234.0,
+      "efficiency": 0.0,
+      "mean_dti": 0.0,
+      "n_dots": 504234
+    }
+  },
+  "per_arm": {
+    "base": {
+      "mean_paired_gain_vs_base": 0.0,
+      "per_fold_gain": {},
+      "mean_paired_gain_habitatA_only": 0.0,
+      "per_fold_gain_habitatA_only": {},
+      "share_of_dots_in_habitat_B": 0.13529486177772818,
+      "share_of_credit_in_habitat_B": 1.0,
+      "dots_by_band": {
+        "d0_on_spine": 3799,
+        "d1_100m": 52959,
+        "d2_200m": 25711,
+        "d3to10": 166103,
+        "dgt10": 423353
+      },
+      "credit_by_band": {
+        "d0_on_spine": 9415.8,
+        "d1_100m": 13178.2,
+        "d2_200m": 2914.2,
+        "d3to10": 94.8,
+        "dgt10": 0.0
+      },
+      "efficiency_by_band": {
+        "d0_on_spine": 0.0,
+        "d1_100m": 0.28061,
+        "d2_200m": 0.12084,
+        "d3to10": 0.00057,
+        "dgt10": 0.0
+      }
+    },
+    "sgmc": {
+      "mean_paired_gain_vs_base": 0.02852320910932213,
+      "per_fold_gain": {
+        "NE_LidarGapHeavy": 0.044290432772075075,
+        "NW": 0.03298152598931155,
+        "SE": 0.027577033894555875,
+        "SW": 0.009243843781346005
+      },
+      "mean_paired_gain_habitatA_only": 0.0,
+      "per_fold_gain_habitatA_only": {
+        "NE_LidarGapHeavy": 0.0,
+        "NW": 0.0,
+        "SE": 0.0,
+        "SW": 0.0
+      },
+      "share_of_dots_in_habitat_B": 0.18782952139055697,
+      "share_of_credit_in_habitat_B": 1.0,
+      "dots_by_band": {
+        "d0_on_spine": 4906,
+        "d1_100m": 71070,
+        "d2_200m": 34015,
+        "d3to10": 171354,
+        "dgt10": 362771
+      },
+      "credit_by_band": {
+        "d0_on_spine": 12057.8,
+        "d1_100m": 17322.9,
+        "d2_200m": 3867.4,
+        "d3to10": 125.6,
+        "dgt10": 0.0
+      },
+      "efficiency_by_band": {
+        "d0_on_spine": 0.0,
+        "d1_100m": 0.2753,
+        "d2_200m": 0.12125,
+        "d3to10": 0.00073,
+        "dgt10": 0.0
+      }
+    },
+    "all": {
+      "mean_paired_gain_vs_base": 0.034144599265944854,
+      "per_fold_gain": {
+        "NE_LidarGapHeavy": 0.05230509083509075,
+        "NW": 0.03222291937095012,
+        "SE": 0.034837649443793396,
+        "SW": 0.017212737413945117
+      },
+      "mean_paired_gain_habitatA_only": 0.0,
+      "per_fold_gain_habitatA_only": {
+        "NE_LidarGapHeavy": 0.0,
+        "NW": 0.0,
+        "SE": 0.0,
+        "SW": 0.0
+      },
+      "share_of_dots_in_habitat_B": 0.20111854873846396,
+      "share_of_credit_in_habitat_B": 1.0,
+      "dots_by_band": {
+        "d0_on_spine": 5104,
+        "d1_100m": 74745,
+        "d2_200m": 35381,
+        "d3to10": 171162,
+        "dgt10": 344783
+      },
+      "credit_by_band": {
+        "d0_on_spine": 12566.9,
+        "d1_100m": 18138.8,
+        "d2_200m": 3893.0,
+        "d3to10": 128.1,
+        "dgt10": 0.0
+      },
+      "efficiency_by_band": {
+        "d0_on_spine": 0.0,
+        "d1_100m": 0.27426,
+        "d2_200m": 0.11717,
+        "d3to10": 0.00075,
+        "dgt10": 0.0
+      }
+    }
+  },
+  "verdict": {
+    "shippable_habitat_A_efficiency": {
+      "base": 0.0,
+      "sgmc": 0.0,
+      "all": 0.0
+    },
+    "shippable_habitat_A_mean_dti": {
+      "base": 0.0,
+      "sgmc": 0.0,
+      "all": 0.0
+    },
+    "note": "Read the Habitat-A columns as the only part of an arm that could reach a submission, and compare them with the live-anchored concentration of the H19-5 family (5.3-6.0x blind) and of the SGMC-gap probe (1.62x blind)."
+  }
+}

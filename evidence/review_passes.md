@@ -111,6 +111,127 @@ applied to the pre-existing test and to the new raster-dependent one. Clean clon
 checks, so they must be re-run locally before any release. Giving CI a restore step needs a token with
 sibling-repo read access — an owner access request, not something the agent can grant itself.
 
+---
+
+# Session 4 (2026-10-02) — SGMC-gap live inversion, Addendum D/E, graph value, external-layer bridge
+
+## Pass 1 — implement and verify
+* `scripts/invert_sgmc_probe.py` (new): authenticates the h18-4 probe by SHA-256 against
+  `registry/live_scores.json`, re-verifies its construction claim from the raster bytes, reproduces
+  Session 3's published anchors with the same instrument, inverts under three |G| candidates and under
+  exact MP bounds, and models the habitat's best possible thinning budget with the live-validated
+  retention rule. Output `evidence/sgmc_gap_inversion.json`.
+* `src/gems27/graph_value.py` + `tests/test_graph_value.py` (4 tests): per-link bridge status, merged
+  length, largest-share change, Berkowitz dP (reproduces the published P = 5.784491473419016 exactly)
+  and the continuous d(sum l^2) tie-break. Wired into `scripts/build_candidates.py`, so all 345
+  dossiers, `docs/data/topology_links.csv`/`.geojson`, `evidence/link_graph_value.json` and the site
+  table carry it.
+* `src/gems27/newinfo.py` + `tests/test_newinfo.py` (8 tests): 24 oriented line-integral bands, 16
+  unused-official-layer bands, and the overlapping en-echelon step-over rule with its perpendicular
+  control. `scripts/build_augmented_features.py` writes the 40-band matrix (827 MB memmap,
+  sha256 `98abf032a0df…`), `scripts/run_addendum_d_gates.py` runs the registered gates,
+  `scripts/diagnose_arm_habitats.py` decomposes where an arm's credit comes from.
+* `oof_detector.fit_predict_oof_probabilities` gained an optional band matrix and chunked prediction
+  (3 GB box); `fit_predict_full_probabilities` added for emission time. Base arm reproduces Session 3
+  (mean DTI 0.08894 vs 0.0861; T-v2 +0.01221 vs +0.0115), so the refactor did not move the instrument.
+* Slot 5 built by `scripts/build_submission27.py`; `scripts/verify_downloads.py` extended from 79 to
+  **125 checks over 5 slots, 0 failures**, including six Addendum-E single-variable invariants.
+* `.github/workflows/fetch-gdr-external-layers.yml` + `scripts/fetch_external_layers.py`: hash-pinned
+  download/verify/inventory/clip of three official GDR 1391 layers plus HEAD-checks of the larger
+  sources. Failure path exercised locally (host unreachable from the sandbox -> `ok:false` recorded,
+  no crash); success path runs on the runner.
+* `scripts/restore_data.py` hardened (stale `.part` removal, retries, GitHub-reported byte-count
+  verification, deletion of a corrupt assembly and its parts).
+
+## Pass 2 — bugs, wrong assumptions, edge cases (each one caught and fixed this session)
+1. **Wrong inversion closure.** The first draft solved `TP` from `MP = rho * c * G` while leaving `TP`
+   free — an inconsistent double use of the uniform-truth assumption. It gave anchor concentrations
+   6.01/6.12 instead of the published 5.67/5.66. Fixed to the repository's self-consistent closure
+   (`TP = s(0.2N + 0.8|G|)/(1 - 0.2s + 0.2 s rho)`), after which the anchors reproduce to 5
+   significant figures (credit 5,286.0 and 6,188.8; rel. diff 3.2e-5).
+2. **Prose written before the numbers.** That same draft carried a pre-written verdict claiming the
+   probe was "BELOW the blind lattice floor of 1.00 under every closure". The corrected measurement is
+   **1.62x blind (bracket 0.76-1.65)** — the claim was false. Verdict text is now generated from the
+   computed values, not written by hand.
+3. **Boolean-index bug** in the construction check (`d = pos[in_fp]` then used as a mask) — IndexError
+   on first run.
+4. **Redundant links looked valuable.** `merged_lengths` added every link's gap length to the merged
+   system, so one of two parallel closures reported d(sum l^2) = 6.72 km^2 instead of 0. Rewritten as
+   ascending-gap union-find where only a merge of two *different* systems contributes; pinned by a test.
+5. **A wrong test, not wrong code:** merging two 4 km strands gives dn = 1 - 1 - 1 = -1, so dP < 0. The
+   test asserted dP > 0; rewritten to assert the quantum semantics in both directions.
+6. **Unbounded statistic on a signed band:** the pre-registered anisotropy `(max-mean)/max` reached
+   6.6e7 on `det_local_relief` (signed, 64.7 % negative, 3,061 NaN). Bounded form used for signed
+   layers only, disclosed in `knowledge/03` Addendum D **before** the gate ran.
+7. **Band lookup by the wrong key** (`KeyError: 1`) in the first augmented-features build; now reads
+   band names from the raster's own descriptions.
+8. **Silent patch miss:** `_d3_verdict` computed the two exploratory pools but never returned them.
+   Caught by a KeyError on read; recomputed from the per-cell rows the registered run had already
+   stored, and the evidence file says so explicitly rather than looking like a fresh run.
+9. **Step-over search was both slow and incomplete** (centroid radius would miss long parallel strands;
+   pixel-pair matrices were O(|A|x|B|)). Rewritten with per-component projections, a capped-extent
+   KD-tree candidate search and a `cKDTree` closest-pair query; the cap is documented in the docstring
+   as a conservative omission (pairs of systems each > 20 km offset along strike by > 10 km).
+10. **An unquoted heredoc ate the README's backticks.** `bash <<PY` command-substituted every
+    `` `path` `` span, deleting file names from the text. Caught by re-reading the file, reverted with
+    `git checkout README.md`, re-applied from a written-out patch script. Recorded as a standing rule:
+    never patch prose through an unquoted heredoc.
+11. **Arithmetic quoted from memory was wrong.** "98.1 % of credit within 200 m" and band shares
+    36.2/50.7/11.2/0.4 recomputed from the evidence are **99.6 %** and **36.8/51.5/11.4/0.37**. All six
+    affected files corrected and the site regenerated. The site computes the figure itself and showed
+    99.6 % — which is how the error was caught. Lesson: compute prose numbers from the artifact.
+12. **A claim with no committed reproduction.** The LiDAR-response corollary (136.4 vs 99.7) existed
+    only in an ephemeral scratch script. `scripts/sgmc_lidar_response.py` now produces
+    `evidence/sgmc_lidar_response.json` and confirms the numbers exactly (136.41 / 99.66 / 86.15 on
+    `lidar:valid` pixels), with the pooled-AUC artefact that motivated the `valid` restriction recorded.
+13. **Slot 5 would have shipped unverified:** `verify_downloads.py` iterated a hard-coded 4-slot tuple.
+    Extended, plus invariants specific to a single-variable probe (near field byte-identical, no pixel
+    changed within 300 m of the catalogue, added dots off-catalogue/in-footprint/>= 1.5 px from kept
+    dots, manifest fractions consistent).
+
+**Assumptions audited, not assumed:** |G| (three instruments within 4.3 %; verdict identical under all
+three candidates); the uniform-truth rho (bracketed exactly by MP in [0, N], so no verdict rests on it);
+the retention rule for the probe's budget sweep (validated live at -0.1 % and +4.0 % on two independent
+pairs, and labelled MODEL, never a score); the catalogue-internal proxy (now *measured* to be blind to
+the far field, which is why two gate-passing arms were not promoted); the 20 % far-field swap fraction
+(fixed before building, downside declared in the registration).
+
+## Pass 3 — recheck against the original request
+* **One-click submission on the first screen:** Slot 1 unchanged and still the recommendation, with
+  `.zip` (exactly one GeoTIFF) and an all-finite fallback; the portal's `Predicted values must be in
+  range [0, 1]` rejection is defended by exact 0.0/1.0 values, nodata=NaN like the sample, the
+  all-finite variant and 125 automated checks. Slot 5 appears next to it, unmistakably labelled
+  `MEASUREMENT PROBE — NOT RECOMMENDED`, with its registered reading and declared downside.
+* **Fault-network topology rather than pixels:** nodes/edges/systems graph, 345 short low-scoring gaps
+  treated as a distinct high-priority class, each with a written argument naming the two independently
+  mapped faults (NBMG FID, zone name, slip sense, dip direction), the system they would form, and now
+  its network consequence (bridge, dP, d(sum l^2), merged length, largest-share change) — independently
+  checkable in `docs/data/topology_links.csv`/`.geojson` and `docs/topology.html`. Headline: closing all
+  345 moves P from 5.784 to 6.124 across Pc = 5.6-6.0.
+* **3-5 untried hypotheses before implementing:** five registered (H27-11 to H27-14, H27-16) plus
+  H27-17 and an updated H27-2, each with layers, physical signature, why it catches a fault missing
+  from USGS/INGENIOUS, how it differs from the repo, expected gain and cost; re-ranked 1-16. External
+  data is named specifically (three GDR 1391 files with byte counts and SHA-256) and its obtainability
+  is hash-pinned from an independent runner record, not asserted.
+* **Validate before spending a slot:** Addendum D ran on fresh seeds 140-149 after pre-registration was
+  committed. Two arms passed both criteria and were **not** promoted, with the reason measured rather
+  than argued; no slot was spent by the agent. Slot 5 is offered to the owner as a bounded experiment
+  with its interpretation rule fixed in advance.
+* **Verify from official sources with links; flag irregularities:** `registry/sources.json` now 21 rows
+  with honest statuses (the three new GDR rows say explicitly "hash-pinned, NOT downloaded here");
+  `registry/irregularities.json` now 34 items, 8 added this session including one against my own
+  scratch analysis and one against this repo's restore script.
+* **Site:** rebuilt (submit / executive summary / topology / research / sources), with the Session-4
+  findings card, the Addendum-D row in the validation table, the fifth slot in both decision tables and
+  the graph-value columns. The source feed was **not** refreshed this session: the sandbox cannot reach
+  the official hosts it checks, and a refresh would only record failures — the feed still carries its
+  Session-3 timestamps, and that limitation is written in `knowledge/06`.
+* **Limitations and needed access:** `knowledge/06` gains six measured limitations, the access list
+  (owner upload + score report; sibling-read token for CI; 1 m 3DEP tiles; GPU; Siler/DeAngelo surfaces)
+  and a five-item prioritised list for Session 5.
+* **Negative results are deliverables:** four refutations recorded with numbers (SGMC-gap emission,
+  connectivity ranking, step-overs, oriented lineament/radiometric/thermal features) and a fifth
+  methodological one (the proxy's blindness), each with a "do not re-propose" entry.
 ## H28-1 continuation review (2026-10-02)
 
 This addendum records the H28 experiment and its integration with upstream Session 3. Earlier Session-3 tables remain historical; current weekly-slot count is four, while H28-1 remains a separate research candidate.
@@ -137,3 +258,16 @@ This addendum records the H28 experiment and its integration with upstream Sessi
 | Distinct ranked hypotheses, validated before weekly slot | H28 registry renders five distinct ideas; H28-1 passed its frozen catalogue-internal gate; H28-2/3/4 are untried, H28-5 conditional on data access | no slot used; H28-1 is unscored and is not a fifth weekly candidate; holdout is not organizer truth |
 | INGENIOUS/USGS graph and fault context | Existing named 345-link T-v2 graph, NBMG `FID`/kinematics, vector holdouts and Slot 4 preserved | graph-centrality ranking and overlapping relay tests remain next work |
 | Auditable knowledge base, sources, three passes, PR/merge | H28 protocol/evidence/candidate records, source/irregularity registers, this review file; PR #5 has an updated, complete description | live-score ingestion and official raw-data retrieval remain blocked; PR #5 is open and mergeable at the pre-merge review, with CI passing on head `064f742624f4c2422e07c5da42512638f299d61f`; merge attempt follows this audit |
+
+
+## Pass 2 addendum — merging a parallel session that landed on `main` mid-flight (Session 4)
+While this branch was open, PR #5 (`arena/01a0fec2-gemsdoe27`, the H28-1 edge-coherence work) merged to `main`, so this branch had to be merged with it rather than fast-forwarded. 15 files conflicted; every resolution kept **both** sessions' work:
+* `src/gems27/oof_detector.py`: both sessions independently added an optional extra-band matrix, under different names (`extra_features` on main, `extra` here). The merged function accepts **either alias**, keeps main's shape validation and keeps this session's chunked gather/predict (the box has 3 GB of RAM; main's dense `np.concatenate` over 5.1 M rows would not fit with a 40-band memmap). Both callers work unchanged.
+* `scripts/verify_downloads.py`: main verifies a separate `h28_1_research` candidate injected from `h28_1_candidate_manifest.json`; this session added `quinary_probe`. The merged slot tuple covers both, so the audit runs **147 checks over 6 files with 0 failures** (79 before either session).
+* `scripts/build_site.py`: three additive conflicts (evidence loaders, derived-number blocks, the executive-summary slot table) unioned; the duplicated slot-4 row that the union produced was removed, and both the Slot-5 probe row and the H28-1 research box render.
+* `registry/sources.json` (18 + 4 = 22 rows), `registry/irregularities.json` (28 + 8 = 36 items) and `registry/hypotheses.json` (16, ids unique) were merged by id with main's refreshed statuses as the base; `README.md` and this file were unioned.
+* Generated files (`docs/*.html`, `index.html`, `docs/data/sources.csv`, `knowledge/02`, `knowledge/05`) were taken from main and then **regenerated** from the merged registries, so the site and the derived knowledge docs have one source of truth.
+* **Numbering collision resolved:** main already had `knowledge/08_preregistration_H28-1.md` and `knowledge/09_...`; this session's findings document was renamed to `knowledge/10_session4_farfield_measurement_and_proxy_limit.md` and every reference updated.
+* **Disclosed coincidence, not a conflict:** both sessions pre-registered gates on **seeds 140–149**. `holdout.make_split` is deterministic in the seed, so the two gates ran on the *same* 40 hidden-truth cells with different candidates. Their results are therefore correlated, not independent replicates; neither session knew of the other when it froze its seeds. Any future claim that "two gates agree" must account for this.
+* Not re-run and not claimed: main's `scripts/prepare_data.py` now requires a LiDAR metadata sidecar (`paths.LIDAR_META`) that this sandbox's `data_cache/` does not contain, so the prepared matrix was **not** rebuilt here. Every Session-4 number rests on the matrix already on disk, `data_cache/prepared/features.npy` sha256 `83ed2704…`, and `data_cache/prepared/features_aug.json` pins that base sha so a future rebuild cannot silently change the comparison.
+* After the merge: **65 tests pass** (59 from this session's run + 6 from main), site rebuilt, `verify_downloads.py` 147/0.

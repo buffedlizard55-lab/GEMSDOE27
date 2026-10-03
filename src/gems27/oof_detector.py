@@ -50,20 +50,36 @@ def fit_predict_oof_probabilities(
     extra_features: np.ndarray | None = None,
     neg_ratio: int = 10,
     seed: int = 2026,
+    extra: np.ndarray | None = None,
+    chunk: int = 400_000,
 ) -> np.ndarray:
-    """Predict strictly out-of-fold probabilities; optional rows must follow ``foot`` order."""
+    """Predict strictly out-of-fold fault probabilities across all 4 spatial quadrants.
+
+    `extra_features` (Session-5 H28-1 arm) and `extra` (Session-4 Addendum-D arm) are aliases: both
+    append further label-free bands, in row-major footprint order, to the prepared matrix. `extra` may
+    be a memmap or a strided column view and is gathered in chunks, because the box has 3 GB of RAM and
+    the full augmented matrix would not fit resident. Everything else - hyper-parameters, 600 m buffer,
+    negative subsample, seeds - is identical across arms, so they are directly comparable.
+    """
+    if extra is None and extra_features is not None:
+        extra = extra_features
     X_foot = np.load(paths.PREPARED_FEATURES, mmap_mode="r")
     foot_rc = np.argwhere(foot)
     if X_foot.shape[0] != len(foot_rc):
         raise ValueError(
             f"prepared features have {X_foot.shape[0]} rows for {len(foot_rc)} footprint cells"
         )
-    if extra_features is not None:
-        extra_features = np.asarray(extra_features)
-        if extra_features.ndim != 2 or extra_features.shape[0] != len(foot_rc):
-            raise ValueError("extra_features must be a 2-D row matrix in row-major footprint order")
+    if extra is not None:
+        if extra.ndim != 2 or extra.shape[0] != len(foot_rc):
+            raise ValueError("extra/extra_features must be a 2-D row matrix in row-major footprint order")
     y_foot = labels[foot]
     oof_prob = np.zeros(grid.SHAPE, dtype=np.float32)
+
+    def assemble(idx: np.ndarray) -> np.ndarray:
+        base = np.asarray(X_foot[idx], dtype=np.float32)
+        if extra is None:
+            return base
+        return np.concatenate([base, np.asarray(extra[idx], dtype=np.float32)], axis=1)
 
     for f in range(4):
         fm = fold == f
@@ -74,7 +90,7 @@ def fit_predict_oof_probabilities(
         neg = np.flatnonzero(tr_foot & ~y_foot)
         rng = np.random.default_rng(seed + f)
         neg_sub = rng.choice(neg, size=min(len(neg), len(pos) * neg_ratio), replace=False)
-        idx = np.r_[pos, neg_sub]
+        idx = np.sort(np.r_[pos, neg_sub])
 
         clf = HistGradientBoostingClassifier(
             max_iter=100,
@@ -83,19 +99,58 @@ def fit_predict_oof_probabilities(
             l2_regularization=5.0,
             random_state=seed + f,
         )
-        if extra_features is None:
-            x_train = X_foot[idx]
-            x_test = X_foot[fm[foot]]
-        else:
-            x_train = np.concatenate((X_foot[idx], extra_features[idx]), axis=1)
-            x_test = np.concatenate((X_foot[fm[foot]], extra_features[fm[foot]]), axis=1)
-        clf.fit(x_train, y_foot[idx].astype(int))
-        te_foot = fm[foot]
-        prob = clf.predict_proba(x_test)[:, 1].astype(np.float32)
+        clf.fit(assemble(idx), y_foot[idx].astype(int))
+        te_foot = np.flatnonzero(fm[foot])
+        prob = np.empty(len(te_foot), np.float32)
+        for a in range(0, len(te_foot), chunk):
+            b = min(a + chunk, len(te_foot))
+            prob[a:b] = clf.predict_proba(assemble(te_foot[a:b]))[:, 1].astype(np.float32)
         rc = foot_rc[te_foot]
         oof_prob[rc[:, 0], rc[:, 1]] = prob
 
     return oof_prob
+
+
+def fit_predict_full_probabilities(foot: np.ndarray, labels: np.ndarray, *, extra: np.ndarray | None = None,
+                                   neg_ratio: int = 10, seed: int = 2026, chunk: int = 400_000) -> np.ndarray:
+    """Fit on ALL published labels and predict everywhere - the emission-time detector.
+
+    At submission time there is no held-out truth (every label is public), so out-of-fold fitting would
+    only weaken the surface. Hyper-parameters, negative subsample and seeds are identical to
+    `fit_predict_oof_probabilities`, so this is the same instrument trained on all four quadrants.
+    Used by Addendum E's far-field swap probe (`scripts/build_submission27.py`, slot 5).
+    """
+    X_foot = np.load(paths.PREPARED_FEATURES, mmap_mode="r")
+    foot_rc = np.argwhere(foot)
+    y_foot = labels[foot]
+
+    def assemble(idx: np.ndarray) -> np.ndarray:
+        base = np.asarray(X_foot[idx], dtype=np.float32)
+        if extra is None:
+            return base
+        return np.concatenate([base, np.asarray(extra[idx], dtype=np.float32)], axis=1)
+
+    pos = np.flatnonzero(y_foot)
+    neg = np.flatnonzero(~y_foot)
+    rng = np.random.default_rng(seed)
+    idx = np.sort(np.r_[pos, rng.choice(neg, size=min(len(neg), len(pos) * neg_ratio), replace=False)])
+    clf = HistGradientBoostingClassifier(max_iter=100, max_leaf_nodes=31, learning_rate=0.08,
+                                         l2_regularization=5.0, random_state=seed)
+    clf.fit(assemble(idx), y_foot[idx].astype(int))
+    prob = np.zeros(grid.SHAPE, dtype=np.float32)
+    all_idx = np.arange(len(y_foot))
+    out = np.empty(len(all_idx), np.float32)
+    for a in range(0, len(all_idx), chunk):
+        b = min(a + chunk, len(all_idx))
+        out[a:b] = clf.predict_proba(assemble(all_idx[a:b]))[:, 1].astype(np.float32)
+    prob[foot_rc[:, 0], foot_rc[:, 1]] = out
+    return prob
+
+
+def oof_pr_auc(oof_prob: np.ndarray, labels: np.ndarray, foot: np.ndarray) -> float:
+    """Out-of-fold PR-AUC (average precision) against catalogue pixels, over footprint pixels."""
+    from sklearn.metrics import average_precision_score
+    return float(average_precision_score(labels[foot].astype(int), oof_prob[foot]))
 
 
 def build_oof_dotted_base(

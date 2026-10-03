@@ -54,7 +54,9 @@ def main() -> int:
     with rasterio.open(DATA / "dotted_h19_5_d1_5_nan.tif") as s:
         base = np.nan_to_num(s.read(1)) > 0
     ok(int(foot.sum()) == 5167373 and tprof[:2] == (32611, (3730, 3292)), "template: EPSG:32611, 3730x3292, 5,167,373 px footprint")
-    slots = tuple(s for s in ("primary", "secondary", "tertiary", "quaternary", "h28_1_research") if s in man)
+    # both Session-4's Addendum-E probe and Session-5's H28-1 research slot are verified here
+    slots = tuple(s for s in ("primary", "secondary", "tertiary", "quaternary", "quinary_probe",
+                              "h28_1_research") if s in man)
     for slot in slots:
         m = man[slot]
         for variant in ("nan", "allfinite"):
@@ -108,6 +110,33 @@ def main() -> int:
            f"slot4 adds exactly {man['quaternary']['added_px']} T-v2 dots on top of the pruned base")
         ok(int((base28 & ~base28_r1).sum()) == man["quaternary"]["pruned_flank_shadow_px"],
            f"slot4 prunes exactly {man['quaternary']['pruned_flank_shadow_px']} catalogue-flank-shadow px")
+    # slot 5 (Addendum E far-field swap probe) must differ from the 0.2477 file in exactly one way:
+    # WHICH far-field pixels are emitted. Same count, same near field, every change >= 300 m out.
+    if "quinary_probe" in man:
+        from gems27 import oof_detector  # noqa: F401  (imported for parity of environment checks)
+        m5 = man["quinary_probe"]
+        with rasterio.open(DL / m5["nan"]) as s5:
+            E = np.nan_to_num(s5.read(1)) > 0
+        dcat5 = distance_transform_edt(~cat)
+        near_base, near_E = base & (dcat5 < 3.0), E & (dcat5 < 3.0)
+        dropped, added = base & ~E, E & ~base
+        ok(int(E.sum()) == int(base.sum()) == m5["emitted_px"],
+           f"slot5 keeps the 0.2477 file's exact pixel count ({m5['emitted_px']} px)")
+        ok(bool((near_base == near_E).all()),
+           f"slot5 near field (< 300 m from catalogue) is byte-identical to the 0.2477 file ({int(near_base.sum())} px)")
+        ok(int(dropped.sum()) == m5["far_field_px_dropped"] == m5["far_field_px_added"] == int(added.sum()),
+           f"slot5 swaps exactly {m5['far_field_px_dropped']} far-field dots")
+        ok(bool((dcat5[dropped] >= 3.0).all()) and bool((dcat5[added] >= 3.0).all()),
+           "slot5 changes no pixel closer than 300 m to the catalogue (single-variable far-field swap)")
+        ok(bool((dcat5[added] >= 3.0).all() and not (added & cat).any() and not (added & ~foot).any()),
+           "slot5 added dots are off-catalogue and inside the footprint")
+        kept = E & ~added
+        dk = distance_transform_edt(~kept)
+        ok(bool((dk[added] >= 1.5 - 1e-6).all()),
+           "slot5 added dots respect the d1.5 emission geometry (>= 1.5 px from every kept dot)")
+        ok(abs(m5["fraction_of_file_swapped"] - added.sum() / E.sum()) < 1e-9,
+           f"slot5 manifest reports the one-sided swapped fraction {m5['fraction_of_file_swapped']:.4f} "
+           f"(symmetric difference {m5['symmetric_difference_fraction']:.4f})")
     ok(len(list(DL.glob("*.tif"))) == len(set(p.name for p in DL.glob("*.tif"))), "all .tif file names are unique")
     print(f"\n{len(FAIL)} failure(s)")
     return 1 if FAIL else 0

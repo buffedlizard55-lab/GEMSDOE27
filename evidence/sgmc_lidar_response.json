@@ -1,0 +1,221 @@
+{
+ "note": "Descriptor statistics are restricted to lidar:valid pixels (the 24.6 % of the footprint without 1 m LiDAR carries 0 in every descriptor and would otherwise flatten every comparison). Populations are measured on the restored official layers, not on any prediction.",
+ "lidar_valid_px": 3894460,
+ "footprint_px": 5167373,
+ "catalogue_px": 60988,
+ "sgmc_px": 83593,
+ "populations": {
+  "catalogue_pixels": {
+   "px_total": 60988,
+   "px_with_lidar": 48465,
+   "descriptors": {
+    "lappos_max": {
+     "n": 48465,
+     "mean": 99.6635513305664,
+     "p50": 95.0,
+     "p90": 172.0,
+     "std": 51.88612365722656
+    },
+    "step_max": {
+     "n": 48465,
+     "mean": 79.23099517822266,
+     "p50": 78.0,
+     "p90": 137.0,
+     "std": 43.12991714477539
+    },
+    "ex_max": {
+     "n": 48465,
+     "mean": 93.36302185058594,
+     "p50": 91.0,
+     "p90": 147.0,
+     "std": 43.45930862426758
+    },
+    "relief": {
+     "n": 48465,
+     "mean": 57.91981887817383,
+     "p50": 55.0,
+     "p90": 97.0,
+     "std": 28.335735321044922
+    },
+    "lapneg_max": {
+     "n": 48465,
+     "mean": 98.83358764648438,
+     "p50": 93.0,
+     "p90": 170.0,
+     "std": 51.611167907714844
+    }
+   }
+  },
+  "sgmc_all": {
+   "px_total": 83593,
+   "px_with_lidar": 54830,
+   "descriptors": {
+    "lappos_max": {
+     "n": 54830,
+     "mean": 130.24530029296875,
+     "p50": 129.0,
+     "p90": 200.0,
+     "std": 52.42961883544922
+    },
+    "step_max": {
+     "n": 54830,
+     "mean": 104.77536010742188,
+     "p50": 107.0,
+     "p90": 157.0,
+     "std": 43.28569030761719
+    },
+    "ex_max": {
+     "n": 54830,
+     "mean": 117.00676727294922,
+     "p50": 113.0,
+     "p90": 178.0,
+     "std": 47.56818389892578
+    },
+    "relief": {
+     "n": 54830,
+     "mean": 79.93423461914062,
+     "p50": 81.0,
+     "p90": 116.0,
+     "std": 27.982807159423828
+    },
+    "lapneg_max": {
+     "n": 54830,
+     "mean": 127.64678192138672,
+     "p50": 125.0,
+     "p90": 198.0,
+     "std": 52.27383804321289
+    }
+   }
+  },
+  "sgmc_only_ge_300m_from_catalogue": {
+   "px_total": 63121,
+   "px_with_lidar": 40564,
+   "descriptors": {
+    "lappos_max": {
+     "n": 40564,
+     "mean": 136.41281127929688,
+     "p50": 137.0,
+     "p90": 204.0,
+     "std": 51.57984924316406
+    },
+    "step_max": {
+     "n": 40564,
+     "mean": 111.0150146484375,
+     "p50": 113.0,
+     "p90": 161.0,
+     "std": 41.71165084838867
+    },
+    "ex_max": {
+     "n": 40564,
+     "mean": 122.14884948730469,
+     "p50": 118.0,
+     "p90": 183.0,
+     "std": 47.5876350402832
+    },
+    "relief": {
+     "n": 40564,
+     "mean": 84.12700653076172,
+     "p50": 85.0,
+     "p90": 119.0,
+     "std": 27.257036209106445
+    },
+    "lapneg_max": {
+     "n": 40564,
+     "mean": 133.82351684570312,
+     "p50": 132.0,
+     "p90": 202.0,
+     "std": 51.48612594604492
+    }
+   }
+  },
+  "sgmc_only_ge_600m_from_catalogue": {
+   "px_total": 55435,
+   "px_with_lidar": 35089,
+   "descriptors": {
+    "lappos_max": {
+     "n": 35089,
+     "mean": 138.73922729492188,
+     "p50": 140.0,
+     "p90": 204.0,
+     "std": 50.569828033447266
+    },
+    "step_max": {
+     "n": 35089,
+     "mean": 113.35726165771484,
+     "p50": 115.0,
+     "p90": 162.0,
+     "std": 40.4716682434082
+    },
+    "ex_max": {
+     "n": 35089,
+     "mean": 124.09712219238281,
+     "p50": 120.0,
+     "p90": 185.0,
+     "std": 47.1993408203125
+    },
+    "relief": {
+     "n": 35089,
+     "mean": 85.92282104492188,
+     "p50": 87.0,
+     "p90": 120.0,
+     "std": 26.592918395996094
+    },
+    "lapneg_max": {
+     "n": 35089,
+     "mean": 136.1025390625,
+     "p50": 134.0,
+     "p90": 203.0,
+     "std": 50.52582931518555
+    }
+   }
+  },
+  "random_background_200k": {
+   "px_total": 200000,
+   "px_with_lidar": 200000,
+   "descriptors": {
+    "lappos_max": {
+     "n": 200000,
+     "mean": 86.14948272705078,
+     "p50": 73.0,
+     "p90": 169.0,
+     "std": 54.71195983886719
+    },
+    "step_max": {
+     "n": 200000,
+     "mean": 68.99044036865234,
+     "p50": 59.0,
+     "p90": 135.0,
+     "std": 46.3059196472168
+    },
+    "ex_max": {
+     "n": 200000,
+     "mean": 83.7576675415039,
+     "p50": 76.0,
+     "p90": 144.0,
+     "std": 45.91081237792969
+    },
+    "relief": {
+     "n": 200000,
+     "mean": 51.89150619506836,
+     "p50": 43.0,
+     "p90": 102.0,
+     "std": 33.03518295288086
+    },
+    "lapneg_max": {
+     "n": 200000,
+     "mean": 86.30280303955078,
+     "p50": 73.0,
+     "p90": 166.0,
+     "std": 54.127689361572266
+    }
+   }
+  }
+ },
+ "reading": {
+  "mean_lappos_max_catalogue": 99.6635513305664,
+  "mean_lappos_max_sgmc_gap": 136.41281127929688,
+  "mean_lappos_max_background": 86.14948272705078,
+  "sgmc_gap_response_vs_catalogue": 1.368733197423797,
+  "conclusion": "SGMC-gap pixels show a HIGHER mean 1 m LiDAR positive-laplacian response than catalogued fault pixels, yet the live-scored emission built from exactly those pixels (16GEMSDOE h18-4, 0.0360) inverts to 1.62x blind against 5.3-6.0x for the H19-5 family. Raw scarp-detector intensity therefore does NOT discriminate hidden truth; position relative to the Quaternary catalogue does. evidence/sgmc_gap_inversion.json."
+ }
+}

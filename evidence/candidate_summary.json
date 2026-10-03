@@ -86,5 +86,118 @@
  "mutual_links": 172,
  "third_system_contact_links": 8,
  "median_gap_km": 1.844,
- "mean_base_overlap": 0.31864927536231885
+ "mean_base_overlap": 0.31864927536231885,
+ "graph_value": {
+  "method": "Berkowitz-Bour-Davy-Odling (2000) connectivity parameter P = beta L^D lmin^(1-a)/(a-1) integrated over the domain, computed with this repo's own closed form (src/gems27/topology_theory.py, unit-tested against the paper); a = 2.5000 and D = 1.5662 held at the values fitted on the full catalogue (evidence/graph_report.json), lmin = 2 km, L = 227.319 km (domain-equivalent side). dP is exact for a single merge: dn = [lA+lB+gap >= lmin] - [lA >= lmin] - [lB >= lmin] and P is linear in n.",
+  "P_with_all_345_candidates": 6.124066883801913,
+  "P_catalogue_only_published": 5.784491473419016,
+  "Pc_range": [
+   5.6,
+   6.0
+  ],
+  "largest_share_of_mapped_length_with_all_candidates": 0.007745050224796676,
+  "n_bridges": 339,
+  "n_links": 345,
+  "delta_P_min": -0.00585474845487699,
+  "delta_P_max": 0.00585474845487699,
+  "delta_P_nonzero": 159,
+  "delta_P_is_quantised": "dP takes only the values {-1, 0, +1} x P/n_ge because it counts systems above lmin = 2 km; it is an ordinal. The continuous tie-break is delta_second_moment_km2 (change in sum l^2 over systems), and connectivity_rank = |dP| desc, |d(sum l^2)| desc, merged length desc. Disclosed in knowledge/03 Addendum D before the Stage-B gate ran.",
+  "network_second_moment_km2_with_all_candidates": 56579.5137208216,
+  "second_moment_per_area_with_all_candidates": 1.094937673762308,
+  "second_moment_caveat": "No critical value is quoted for sum(l^2)/area: a threshold for it could not be verified from an official source inside this sandbox (only github.com and pypi.org are reachable). It is reported as a continuous relative measure and as the tie-break inside equal |dP|, never as a pass/fail criterion.",
+  "delta_largest_share_max": 0.0014588752246620304,
+  "top10_by_abs_delta_P": [
+   {
+    "link_id": "T27-0316",
+    "delta_P": -0.005855,
+    "bridge": true,
+    "merge_len_km": 49.764,
+    "name_src": "Paymaster Ridge fault",
+    "kind": "end-to-end",
+    "z": 3
+   },
+   {
+    "link_id": "T27-0185",
+    "delta_P": -0.005855,
+    "bridge": true,
+    "merge_len_km": 46.658,
+    "name_src": "Paymaster Ridge fault",
+    "kind": "end-to-end",
+    "z": 3
+   },
+   {
+    "link_id": "T27-0289",
+    "delta_P": -0.005855,
+    "bridge": true,
+    "merge_len_km": 6.138,
+    "name_src": "Unnamed fault zone southeastern Truckee Range",
+    "kind": "end-to-end",
+    "z": 3
+   },
+   {
+    "link_id": "T27-0127",
+    "delta_P": -0.005855,
+    "bridge": true,
+    "merge_len_km": 5.862,
+    "name_src": "Unnamed fault zone southeastern Truckee Range",
+    "kind": "end-to-end",
+    "z": 4
+   },
+   {
+    "link_id": "T27-0103",
+    "delta_P": -0.005855,
+    "bridge": true,
+    "merge_len_km": 5.0,
+    "name_src": "Western Fairview Peak fault",
+    "kind": "end-to-end",
+    "z": 4
+   },
+   {
+    "link_id": "T27-0228",
+    "delta_P": -0.005855,
+    "bridge": true,
+    "merge_len_km": 23.003,
+    "name_src": "Fairview fault zone",
+    "kind": "end-to-end",
+    "z": 3
+   },
+   {
+    "link_id": "T27-0262",
+    "delta_P": -0.005855,
+    "bridge": true,
+    "merge_len_km": 32.567,
+    "name_src": "Simpson Park Mountains fault zone",
+    "kind": "end-to-end",
+    "z": 3
+   },
+   {
+    "link_id": "T27-0102",
+    "delta_P": -0.005855,
+    "bridge": true,
+    "merge_len_km": 4.634,
+    "name_src": "Western Fairview Peak fault",
+    "kind": "end-to-end",
+    "z": 4
+   },
+   {
+    "link_id": "T27-0153",
+    "delta_P": -0.005855,
+    "bridge": true,
+    "merge_len_km": 6.193,
+    "name_src": "Jersey Valley fault zone",
+    "kind": "end-to-end",
+    "z": 4
+   },
+   {
+    "link_id": "T27-0286",
+    "delta_P": -0.005855,
+    "bridge": true,
+    "merge_len_km": 7.618,
+    "name_src": "Fairview fault zone",
+    "kind": "tip-to-tip oblique",
+    "z": 3
+   }
+  ],
+  "gate": "Addendum D, D-3: whether ranking by |dP| beats the shipped z>=3 rule is MEASURED on seeds 140-149 in evidence/addendum_d_gates.json; these values are documentation regardless of that gate's outcome."
+ }
 }
