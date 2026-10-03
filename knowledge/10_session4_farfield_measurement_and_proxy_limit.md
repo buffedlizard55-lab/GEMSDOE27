@@ -260,14 +260,18 @@ the proxy cannot see the habitat that pays.
 
 1. **Spend Slot 5** (the Addendum-E probe). It is the only experiment that can tell the programme
    whether detector work can pay at all. Cost: one of ~27 remaining weekly slots.
-2. **Get the layers this sandbox cannot reach.** `.github/workflows/fetch-gdr-external-layers.yml` +
-   `scripts/fetch_external_layers.py` download, hash-verify against the 2026-09-30 pins, inventory and
-   footprint-clip three official GDR 1391 files that no detector in this repository has used:
-   paleo-geothermal (84,008 B, `faffcf69...`), INGENIOUS 2 m temperature probes (1,080,530 B,
-   `1301f70d...`) and Great Basin Quaternary volcanics (9,898,770 B, `c4a2d2df...`). It also
-   HEAD-checks the larger sources (wellspring FileGDB, both Qfaults releases, SGMC NV/CA, the Siler
-   2022 and DeAngelo 2022 DOIs, the GeoDAWN ScienceBase item) so obtainability is a recorded fact
-   rather than an assumption. Artifacts come back with `gh run download`.
+2. **Get the layers this sandbox cannot reach, after resolving the runner failure.**
+   `.github/workflows/fetch-gdr-external-layers.yml` + `scripts/fetch_external_layers.py` are
+   implemented to download, hash-verify against the 2026-09-30 pins, inventory and footprint-clip
+   three official GDR 1391 files no detector here has used: paleo-geothermal (84,008 B,
+   `faffcf69...`), INGENIOUS 2 m temperature probes (1,080,530 B, `1301f70d...`) and Great Basin
+   Quaternary volcanics (9,898,770 B, `c4a2d2df...`). However, the reviewed run set through branch head a58e74d includes Actions runs
+   37099986237, 37100053264, 37100608786, 37100751573, 37100935082, and 37101134684, all of which concluded failure with zero jobs and no logs, so there was no local
+   fetch, checksum verification, clipping, or artifact. The older sibling-runner pin record is
+   provenance only; it does not put bytes in this checkout. The workflow also contains HEAD-checks
+   for larger sources. A repository maintainer must investigate why the runs created no jobs, or
+   provide official bytes; the available run records do not establish the cause. Do not infer source
+   unavailability from the empty runs.
 3. **Ask the owner for one live measurement of a far-field-only variant of the *current* best
    detector** if Slot 5 is inconclusive: the far field is 81.4 % of the emission and no probe in the
    programme has ever isolated it.
