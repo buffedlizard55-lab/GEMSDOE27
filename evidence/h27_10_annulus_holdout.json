@@ -58,7 +58,7 @@
   "gross_removed_farfield_efficiency": 0.033406434892356694,
   "m_live_0_2477": 0.052122130336889505,
   "code_sha256": {
-    "runner": "1eb8bb9b7417f7036427c70217ee7bd5eecf34023f0a63b547793101bf19b87f",
+    "runner": "bedf96dcdc15a5b29ac907530e9df1b3e305d344f8860953523547e2d5eff28f",
     "annulus_transform": "6568357c8ad8415a814d3e46a6f888dce43690ec6608af1046166b564338086e",
     "h28_runner_helpers": "989dd1b03e448cc0ab84e1401dd197b4d25213b956163c2a3f33a8959d1e9bbd",
     "oof_detector": "6c041479cf92d28d7a084f5d69407963bde45b7463e0fea624673efa3506b235"
@@ -173,7 +173,7 @@
     "no_known_catalogue_overlap": true,
     "known_catalogue_overlap_pixels_across_variants": 0,
     "all_additions_inside_annulus": true,
-    "all_additions_respect_minimum_spacing": false,
+    "all_additions_respect_minimum_spacing": true,
     "submission_written": false
   },
   "gate": {
@@ -183,7 +183,7 @@
     "annulus_efficiency_at_least_m_live_0_2477": false,
     "annulus_efficiency_exceeds_removed_farfield_efficiency": true,
     "exactly_10_preregistered_seeds": true,
-    "data_checks_passed": false,
+    "data_checks_passed": true,
     "pass": false
   },
   "cell_results": [
@@ -225,7 +225,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 150,
@@ -265,7 +265,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 150,
@@ -305,7 +305,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 150,
@@ -345,7 +345,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 151,
@@ -385,7 +385,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 151,
@@ -425,7 +425,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 151,
@@ -465,7 +465,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 151,
@@ -505,7 +505,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 152,
@@ -545,7 +545,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 152,
@@ -585,7 +585,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 152,
@@ -625,7 +625,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 152,
@@ -665,7 +665,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 153,
@@ -705,7 +705,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 153,
@@ -745,7 +745,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 153,
@@ -785,7 +785,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 153,
@@ -825,7 +825,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 154,
@@ -865,7 +865,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 154,
@@ -905,7 +905,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 154,
@@ -945,7 +945,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 154,
@@ -985,7 +985,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 155,
@@ -1025,7 +1025,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 155,
@@ -1065,7 +1065,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 155,
@@ -1105,7 +1105,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 155,
@@ -1145,7 +1145,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 156,
@@ -1185,7 +1185,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 156,
@@ -1225,7 +1225,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 156,
@@ -1265,7 +1265,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 156,
@@ -1305,7 +1305,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 157,
@@ -1345,7 +1345,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 157,
@@ -1385,7 +1385,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 157,
@@ -1425,7 +1425,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 157,
@@ -1465,7 +1465,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 158,
@@ -1505,7 +1505,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 158,
@@ -1545,7 +1545,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 158,
@@ -1585,7 +1585,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 158,
@@ -1625,7 +1625,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 159,
@@ -1665,7 +1665,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 159,
@@ -1705,7 +1705,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 159,
@@ -1745,7 +1745,7 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     },
     {
       "seed": 159,
@@ -1785,8 +1785,8 @@
       "same_dot_count": true,
       "no_known_overlap": true,
       "annulus_additions_in_band": true,
-      "annulus_additions_spaced": false
+      "annulus_additions_spaced": true
     }
   ],
-  "seconds": 203.91830587387085
+  "seconds": 192.28864312171936
 }

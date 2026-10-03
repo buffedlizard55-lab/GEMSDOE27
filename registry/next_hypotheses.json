@@ -1,6 +1,6 @@
 {
   "generated": "2026-10-03",
-  "status": "Session 5 hypothesis screen; H27-10 is frozen for the next catalogue-internal test on seeds 150-159. No weekly slot has been used.",
+  "status": "Session 5 screen current as of 2026-10-03: four genuinely untried hypotheses remain. H27-10 was tested on seeds 150-159 and failed its frozen gate; it is excluded from the untried list. No weekly slot has been used.",
   "novelty_scope": "Screened against this checkout, its evidence ledger, and the owner-provided comparison list. The sibling score list does not include complete source methods; global novelty is unknown.",
   "target": "Fault-location pixels in the organizer-created test labels, which remain unobserved here. Catalogue-internal holdouts are only a proxy and cannot validate far-field behavior.",
   "baseline": {
@@ -9,33 +9,11 @@
     "evidence": "evidence/h28_1_edge_holdout.json; seeds 140-149; +0.00294884 mean paired DTI over base_oof + T-v2 + H27-4 r1, 3/4 folds and 9/10 seeds",
     "limitation": "Catalogue-internal component-hidden, four-quadrant holdout. It is not the organizer-created expert-label set and is especially weak for the far field."
   },
-  "ranking_basis": "Expert priors on potential paired catalogue-holdout ΔDTI × testability / engineering cost. The ranges below are planning priors, not measured effects or leaderboard predictions; the one H27-10 test is preregistered before implementation.",
+  "ranking_basis": "Expert priors on potential paired catalogue-holdout \u0394DTI \u00d7 testability / engineering cost. These ranges are planning priors only, not measurements or leaderboard predictions. H27-10 is a completed, rejected test, not part of this untried ranking.",
   "hypotheses": [
     {
-      "id": "H27-10",
-      "rank": 1,
-      "title": "Model-ranked 100-300 m offset-scarp annulus (narrow H27-10 test)",
-      "layers": [
-        "Existing 32-feature matrix, including lidar_lappos_max, lidar_step_max, lidar_ex_max, and lidar_coh100",
-        "H28-1 six-band multiscale magnetic/gravity edge matrix",
-        "Known-catalogue distance on each spatial holdout and 4-fold OOF ridge probabilities"
-      ],
-      "signature": "Reallocate the exact number of H27-4 r1-pruned OOF dots into the 1 < distance <= 3 pixel (100-300 m) annulus around the known catalogue. Rank eligible OOF ridges by the frozen current-best detector probability and preserve the dot budget and >=1.5 px spacing.",
-      "why_missing_faults": "The hypothesis is that an expert-mapped scarp can sit offset from a legacy/catalogue trace, so a LiDAR-supported ridge in a nearby annulus may mark a missing branch or parallel strand. The official Hermant paper reports one local USGS/TLS separation can be up to 400 m; it does not establish a typical 150-400 m distribution or validate this 100-300 m band.",
-      "confounders": "Catalogue-internal truth is itself the held-out catalogue; the band may merely exploit segmentation proximity. Roads, channels, shorelines, lithologic edges, DEM seams, and broad classifier covariates can mimic scarps. The failed habitat tomography is not used as evidence. No kinematic side-selection is claimed or tested in this narrowed variant.",
-      "differs_from_repo": "H27-4 removes the <=100 m shadow, while no existing rule reallocates that same dot budget to 100-300 m candidates. Unlike the prior draft, this frozen variant tests only the distance annulus using the current-best OOF ranking; it does not claim a mechanically determined side from SLIPSENSE/DIPDIRECT.",
-      "expected_holdout_delta_dti": [
-        0.0,
-        0.004
-      ],
-      "cost": "low-medium; reuse the prepared matrix, cached H28-1 features, OOF model, and T-v2 candidate code; about one holdout run",
-      "data_gate": "Hash-pinned prepared features, LiDAR descriptors, and H28-1 edge cache are present locally. No new raw data are needed.",
-      "validation": "knowledge/03_preregistration_topology_gate.md#addendum-f-h27-10; exact paired comparison to H28-1 + T-v2 + H27-4 r1 on fresh seeds 150-159",
-      "status": "PREREGISTERED; implementation and holdout pending. No slot or submission file is authorized."
-    },
-    {
       "id": "H27-16",
-      "rank": 2,
+      "rank": 1,
       "title": "Add three official GDR 1391 layers that are absent from the detector",
       "layers": [
         "Paleo-geothermal sinter/tufa/travertine and altered-bedrock regional vectors",
@@ -51,13 +29,13 @@
         0.006
       ],
       "cost": "medium-high; external fetch is automated, but requires verified vector reading, fold-safe rasterization, and separate feature arms",
-      "data_gate": "Official GDR #1391 lists the packages. Exact ZIPs are hash-pinned by a sibling independent runner (2026-09-30); raw files are not in this checkout, and the last workflow-dispatch attempt returned 403. Re-fetch and verify all hashes before use.",
+      "data_gate": "Official GDR #1391 page/package listing was verified; three resource packages are listed and hash pins exist in the sibling runner, but the raw packages are not present in this checkout. Prior retrieval/dispatch was blocked; obtain the official raw bytes and verify SHA-256 before use.",
       "validation": "After raw-data inventory, preregister a separate spatial holdout with unused seeds; do not reuse 150-159 or treat catalogue-holdout success as a live score.",
-      "status": "UNTRIED; source packages are not yet present in this checkout."
+      "status": "UNTRIED; official source packages are not yet present in this checkout."
     },
     {
       "id": "H28-3",
-      "rank": 3,
+      "rank": 2,
       "title": "Dilatational-strain and conductivity intersection corridors",
       "layers": [
         "geod_2ndinv",
@@ -76,12 +54,12 @@
       ],
       "cost": "low-medium; existing raster layers only, but a fold-safe joint-feature definition needs preregistration",
       "data_gate": "All listed bands are in the locally restored hash-pinned training-feature mirror.",
-      "validation": "No run registered yet; reserve fresh seeds after H27-10 and preregister the exact transform, controls, and gate first.",
+      "validation": "No run registered yet; use a fresh seed range and preregister the exact transform, controls, and gate against the current-best holdout baseline.",
       "status": "UNTRIED."
     },
     {
       "id": "H28-4",
-      "rank": 4,
+      "rank": 3,
       "title": "Anisotropic seismicity-fabric lineaments",
       "layers": [
         "deq_n100a15",
@@ -103,7 +81,7 @@
     },
     {
       "id": "H28-5",
-      "rank": 5,
+      "rank": 4,
       "title": "Quality-filtered hydrothermal chemistry gradients, not point-distance buffers",
       "layers": [
         "GDR/INGENIOUS wellspring CSV: temp_c, geothermquartz_c, geothermchalc_c, geothermcat_c, thermalclass, station name, and coordinates",
@@ -119,8 +97,76 @@
       ],
       "cost": "medium; point QA/deduplication and fold-safe spatial encoding",
       "data_gate": "The in-footprint wellspring CSV is present as an owner-repository mirror; its official GDR package listing is verified, but this session did not independently fetch or re-hash the raw GDR binary.",
-      "validation": "No run registered yet; preregister quality filters and spatial holdout before feature construction.",
+      "validation": "No run registered yet; preregister quality filters and a fresh spatial holdout before feature construction.",
       "status": "UNTRIED; separate from the refuted distance-only feature arm."
     }
-  ]
+  ],
+  "tested_hypotheses": [
+    {
+      "id": "H27-10",
+      "title": "Model-ranked 100-300 m offset-scarp annulus substitution",
+      "status": "TESTED \u2014 FROZEN GATE FAILED; not untried and not eligible to justify a weekly slot",
+      "validation": "knowledge/03_preregistration_topology_gate.md#addendum-f-h27-10; evidence/h27_10_annulus_holdout.json; initial diagnostic output preserved at evidence/h27_10_annulus_holdout_initial.json",
+      "seeds": [
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159
+      ],
+      "baseline_mean_dti": 0.10937684901995678,
+      "candidate_mean_dti": 0.11022299884251226,
+      "mean_paired_delta_dti": 0.0008461498225554992,
+      "improved_folds": "4/4",
+      "improved_seeds": "7/10",
+      "annulus_add_efficiency": 0.03356785533811333,
+      "live_break_even_efficiency": 0.052122130336889505,
+      "removed_farfield_efficiency": 0.033406434892356694,
+      "integrity_note": "The first-run self-distance spacing check produced a false negative. It was corrected and rerun on the same used seeds solely as an integrity check; data checks then passed, numerical results and the frozen FAIL outcome were unchanged. Not fresh confirmation."
+    }
+  ],
+  "separate_review_class": {
+    "id": "H27-5b",
+    "status": "Geologist-review prioritization class; already measured in catalogue-internal whole-FID holdout; not a new untried score hypothesis or a weekly-slot authorization.",
+    "definition": "Different NBMG FIDs AND same non-unnamed NAME AND kinematic_compat=true.",
+    "candidate_count": 81,
+    "catalogue_candidate_count": 345,
+    "interpretation": "Review prioritization only. Graph importance is not evidence of hidden-label truth or a live-score gain. Graph-value ranking and overlapping step-over as holdout-improvement signals remain refuted.",
+    "population": "Existing z>=3 deduplicated T-v2 candidate set; all 345 links have 1-4 km gaps; no new links generated.",
+    "holdout_evidence": {
+      "tier": "Tier-2 whole NBMG FID_trace holdout; catalogue-internal only",
+      "seeds": [
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129
+      ],
+      "priority_efficiency": 0.17829598184006035,
+      "rotated_control_efficiency": 0.020384388176087564,
+      "enrichment_over_control": 8.746692826876947,
+      "not_evidence_of": "candidate-specific hidden-label truth, transfer to organizer-created labels, or live-score gain"
+    },
+    "artifacts": [
+      "docs/data/topology_priority_h27_5b.csv",
+      "docs/data/topology_priority_h27_5b.geojson",
+      "docs/data/topology_review_classes.json",
+      "knowledge/11_h27_5b_geologist_review_class.md",
+      "docs/assets/fig_map_h27_5b_priority.png"
+    ],
+    "refuted_signals": [
+      "graph-\u0394P ranking as a holdout-improvement signal (Addendum D-3)",
+      "overlapping en-echelon step-over as a holdout-improvement signal (Addendum D-4)"
+    ]
+  }
 }

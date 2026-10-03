@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-02 (Session 4: H27-11 live-refuted by inverting the group's h18-4 SGMC-gap score; H27-12/13/14 measured in Addendum D; H27-16 registered with hash-pinned obtainability and a runner workflow; H27-17 the registered Addendum-E far-field probe, built and verified; H27-2 updated with the overlapping step-over rule it had never generated)",
+ "generated": "2026-10-03 (Session 5 update: H27-10 frozen seeds 150-159 gate failed; corrected same-seed integrity rerun preserved; current untried screen is registry/next_hypotheses.json; H27-5b geologist-review class added separately)",
  "ranking_rule": "expected DTI gain x probability the test can actually validate it / cost. Session 4 ranks the two routes that add information or settle the question (H27-17, H27-16) above the shipped increments, because Session 3 proved that rearranging pixels cannot exceed ~0.2550 and Session 4 proved that the catalogue-internal proxy cannot see the far-field habitat where 81.4% of the live emission's dots sit.",
  "hypotheses": [
   {
@@ -120,8 +120,8 @@
    "signature": "Reallocate the exact number of H27-4 r1-pruned OOF dots into the 1 < distance <= 3 px (100-300 m) annulus around known catalogue traces. Rank eligible OOF ridge cells by the frozen H28-1 OOF detector probability; preserve the total dot count, T-v2 links, and >=1.5 px spacing.",
    "why": "A LiDAR-supported ridge offset from a mapped Quaternary trace may be an unlabelled parallel strand or splay. The official Hermant et al. (2025) PDF says one local USGS/TLS separation can be up to 400 m; it does not establish a typical 150-400 m distribution or validate the selected 100-300 m band. Prior habitat tomography failed validation and is not evidence for the location. The experiment tests this narrow band directly on catalogue-internal hidden components, whose transfer limit is explicit.",
    "differs": "H27-4 removes d<=1 px emissions; this version tests whether the pruned dot budget is better reallocated to model-ranked 1<d<=3 px OOF ridges than to the current best's lower-probability >3 px dots. It does not use SLIPSENSE/DIPDIRECT to claim a mechanically predicted side: no local stress model or preregistered sidedness rule is available.",
-   "status": "PREREGISTERED in knowledge/03_preregistration_topology_gate.md Addendum F, before implementation and seeds 150-159. Frozen candidate: swap the same number of H27-4 r1-pruned dots for the highest-probability OOF ridges in the 100-300 m annulus; compare to H28-1 + T-v2 + H27-4 r1. Holdout outcome pending. No weekly slot or submission file authorized.",
-   "gain": "planning prior: +0.000 to +0.004 catalogue-holdout DTI; unmeasured, not a public-score prediction",
+   "status": "TESTED \u2014 FROZEN GATE FAILED on seeds 150-159; do not treat as untried or use to justify a weekly slot. Mean paired \u0394DTI +0.00084615 (required \u2265+0.001); 4/4 folds but 7/10 seeds (required \u22658/10); annulus addition efficiency 0.03357 < m(0.2477)=0.05212. First-run self-distance spacing diagnostic false-negative is recorded; corrected rerun on the same used seeds passed data checks with numerical result and gate unchanged (integrity check only, not fresh confirmation). See evidence/h27_10_annulus_holdout.json, evidence/h27_10_annulus_holdout_initial.json, and registry/irregularities.json.",
+   "gain": "Observed catalogue-holdout result: +0.00084615 paired mean DTI; frozen gate failed. No live score or weekly slot.",
    "cost": "low-medium; cached, hash-pinned feature inputs and existing OOF/link code; one holdout run",
    "external": [
     {
@@ -242,7 +242,7 @@
    "signature": "Drop isolated emitted dots that have no other emitted dot within 600 m (6 px), on the hypothesis that isolated specks are false-positive noise whereas multi-dot chains are true fault scarps.",
    "why": "Tests whether isolated dots in a d=1.5 thinned ridge emission have efficiency below the break-even threshold m(D).",
    "differs": "Graph filter on the emission itself rather than on the catalogue.",
-   "status": "REFUTED on the honest 4-fold spatial-CV out-of-fold detector B_oof (Addendum C, seeds 130-139, evidence/oof_hypothesis_gates.json): isolated dots removed by the 600 m filter had hit efficiency 0.0329 (> m_oof = 0.0175), so dropping them reduced DTI in 4/4 folds (mean -0.0010, min -0.0013, max -0.0006). Because catalogued fault segments have a median length of 1.27 km, a single d=1.5 thinned scarp fragment often consists of 1-2 dots; dropping isolated dots discards real short faults. Rejected — no submission slot spent.",
+   "status": "REFUTED on the honest 4-fold spatial-CV out-of-fold detector B_oof (Addendum C, seeds 130-139, evidence/oof_hypothesis_gates.json): isolated dots removed by the 600 m filter had hit efficiency 0.0329 (> m_oof = 0.0175), so dropping them reduced DTI in 4/4 folds (mean -0.0010, min -0.0013, max -0.0006). Because catalogued fault segments have a median length of 1.27 km, a single d=1.5 thinned scarp fragment often consists of 1-2 dots; dropping isolated dots discards real short faults. Rejected \u2014 no submission slot spent.",
    "gain": "-0.0010 on OOF holdout (negative in 4/4 folds). Do not ship.",
    "cost": "Tested and rejected on holdout (0 slots spent).",
    "external": null

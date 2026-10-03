@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-03 | Session 5: corrected Hermant offset wording; logged H27-10 first-run spacing-check self-distance diagnostic.",
+ "generated": "2026-10-03 | Session 5: corrected Hermant offset wording; logged and resolved the H27-10 first-run spacing-check self-distance diagnostic.",
  "items": [
   {
    "id": "prompt-verbatim-unavailable",
@@ -23,7 +23,7 @@
    "id": "hermant-2025-lidar-catalogue-offset",
    "severity": "medium",
    "issue": "The earlier registry wording '150-400 m positional offsets' overstates the official Hermant et al. (2025) PDF. Figure 2 supports that a local distance between USGS Quaternary traces and TLS fault labels can be up to 400 m; it does not establish a general 150-400 m distribution, a 150 m lower bound, or the H27-10 100-300 m annulus. Separately, the local 0.2477 raster has 5,355 dots at d_cat=100 m and 8,769 at d_cat<=200 m; on B_oof (seeds 130-139) the d_cat=100 m removed band has efficiency 0.0034 vs the live 0.0521 break-even.",
-   "action": "Correct the source wording; retain H27-4's measured 100 m prune result, but treat H27-10's 100-300 m annulus as an unvalidated hypothesis. Do not cite failed habitat tomography as evidence. The H27-10 narrowed, model-ranked reallocation is frozen in Addendum F before seeds 150-159."
+   "action": "Correct the source wording; retain H27-4's measured 100 m prune result, but do not infer that the adjacent H27-10 annulus is productive. Do not cite failed habitat tomography as evidence. Addendum F later tested the narrowed H27-10 reallocation on seeds 150-159 and its frozen gate failed; current result and same-seed integrity-recheck disclosure are in knowledge/07_untried_hypotheses.md and the h27-10-first-run-spacing-diagnostic-self-distance item."
   },
   {
    "id": "sample-submission-has-ones",
@@ -220,8 +220,8 @@
   {
    "id": "h27-10-first-run-spacing-diagnostic-self-distance",
    "severity": "low",
-   "issue": "The first H27-10 run (seeds 150-159) correctly generated the frozen equal-count candidate and measured mean paired ΔDTI +0.00084615, 3/4 folds and 7/10 seeds improved, and annulus gross efficiency 0.03357 < m(0.2477)=0.05219. Its spacing integrity check incorrectly measured each added pixel against a mask that included itself, so it necessarily returned zero and marked the spacing data check false. This is a diagnostic false negative, not evidence of a spacing violation.",
-   "action": "Preserved the first JSON as evidence/h27_10_annulus_holdout_initial.json. Corrected only the spacing-check implementation and added tests; the frozen masks, ranker, K, gate, and seeds are unchanged. A same-seed integrity rerun is documented as non-confirmatory and cannot change the negative gate result."
+   "issue": "The first H27-10 run (seeds 150-159) correctly generated the frozen equal-count candidate and measured mean paired ΔDTI +0.00084615, 4/4 fold means and 7/10 seed means improved, and annulus gross efficiency 0.03357 < m(0.2477)=0.05212. Its spacing integrity check incorrectly measured each added pixel against a mask that included itself, so it necessarily returned zero and marked the spacing data check false. This is a diagnostic false negative, not evidence of a spacing violation.",
+   "action": "Preserved the first JSON as evidence/h27_10_annulus_holdout_initial.json. Corrected only the spacing-check implementation and added tests; the frozen masks, ranker, K, gate, and seeds are unchanged. The deterministic integrity rerun on the same used seeds passed all data checks; all 40 cell outcomes, aggregate metrics, and the frozen FAIL are unchanged in evidence/h27_10_annulus_holdout.json. This rerun is non-confirmatory and cannot change the negative gate result."
   }
  ]
 }

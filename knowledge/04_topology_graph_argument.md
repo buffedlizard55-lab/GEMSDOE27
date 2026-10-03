@@ -68,9 +68,9 @@ To resolve whether T-v2 merely repairs raster discretisation gaps or also bridge
 * **Raster-to-vector alignment:** **98.42%** of `labels.tif` pixels lie within 100 m (1 px) of a vector polyline, and **99.97%** lie within 200 m (2 px).
 * **Attribution of the 345 shipped T-v2 links:**
   * **230 / 345 (66.7%)** bridge sub-parts of the same multipart `FID` polyline (intra-`FID` compilation/discretisation gaps).
-  * **115 / 345 (33.3%)** bridge distinct `FID` polylines (inter-`FID` structural relays/step-overs).
-  * **312 / 345 (90.4%)** bridge segments within the same named fault zone (`NAME`/`NUM`); **33 / 345 (9.6%)** bridge across differently named or unnamed traces.
-  * **333 / 345 (96.5%)** satisfy kinematic compatibility (`kinematic_compat`: non-conflicting `SLIPSENSE` and synthetic/conjugate `DIPDIRECT`).
+  * **115 / 345 (33.3%)** link distinct `FID` records (inter-`FID` review candidates; not all are verified geological relays or step-overs).
+  * **312 / 345 (90.4%)** link segments within the same named fault zone (`NAME`/`NUM`); **33 / 345 (9.6%)** link differently named or unnamed records.
+  * **333 / 345 (96.5%)** pass the permissive `kinematic_compat` screen. It rejects conflicting known slip senses and certain opposite dip-direction pairs; blank/`Unspecified` attributes can pass. It is not a stress inversion or verified slip history.
 * **Confirmatory three-tier holdout (Addendum B, seeds 120-129, 40 cells per tier):**
 
 | Holdout tier (20% hidden per quadrant) | `all` links | `z>=3 dedup` (shipped rule) | `H27-5a` (`inter-FID + kinematic_compat`) | `H27-5b` (`inter-FID + same_name + kinematic_compat`) | Rotated-cone `ctrl` | Enrichment (`z>=3 / ctrl`) |
@@ -88,3 +88,9 @@ To eliminate the `H19-5` training-label leakage on paired holdout tests, we trai
 * **H27-4 (`prune_r2_200m`, dropping dots within 200 m of catalogue):** removed dots have efficiency **`0.0080`**, giving **`+0.0025`** solo in **4/4 folds** and **`+0.0147`** stacked with T-v2 (**PASSED**).
 * **H27-3 (`coherence_h27_3`, dropping isolated 1-dot fragments with no neighbour within 600 m):** removed dots have efficiency **`0.0329`** (`> m_oof = 0.0175`), reducing DTI by **`-0.0010`** in **0/4 folds** (**REFUTED** and rejected without spending a slot).
 
+## 9. Session 5 H27-5b map-review export (not a new predictive class)
+The exclusive geologist-review class is **81** of the 345 selected links, defined exactly as `fid_src != fid_tgt AND same_name AND kinematic_compat=true`; `same_name` excludes the generic `NAME == "Unnamed fault"` sentinel. The 345 records partition into 230 same-FID multipart-continuity, 81 H27-5b, 22 other-name kinematically-compatible inter-FID, and 12 conflict/unknown inter-FID links. The priority subset comprises 73 end-to-end, 4 abutting and 4 tip-to-tip oblique links; all 81 have `bridge=true` under the selected-candidate graph, which is a graph property and not fault confirmation.
+
+The focused, shortest-gap-first table is `docs/data/topology_priority_h27_5b.csv`; the endpoint-line GeoJSON is `docs/data/topology_priority_h27_5b.geojson` (WGS84 candidate geometries, not mapped fault traces); all 345 links retain the exclusive review class in `docs/data/topology_links.csv`/`.geojson`. The docs page, machine-readable counts and source links are maintained in `docs/topology.html`, `docs/data/topology_review_classes.json`, `evidence/structural_relay_classes.json`, and `knowledge/11_h27_5b_geologist_review_class.md`.
+
+Tier-2 whole-FID holdout efficiency for H27-5b is 0.178296 versus 0.020384 for the rotated control (8.75x), seeds 120-129. This catalogue-internal enrichment supports map-review prioritization only; it does not establish hidden-label truth, transfer, or a live-score gain. Different FIDs are records in the same NBMG compilation, not independent surveys, and the compatibility screen is permissive when attributes are missing. Geometry cues and Faulds & Hinz structural-setting frequencies are context only. The graph-ΔP ranking and overlapping en-echelon step-over were **refuted** as predictive holdout-improvement signals in Addendum D; the review class does not revive either signal.

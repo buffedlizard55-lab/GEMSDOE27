@@ -78,6 +78,66 @@
   "shipped_inter_fid_and_same_name": 82,
   "shipped_inter_fid_and_kinematic_compat": 103
  },
+ "structural_review_classes": {
+  "schema": 1,
+  "candidate_count": 345,
+  "priority_class": "H27-5b_inter-FID_same-name_kinematic-compatible",
+  "priority_candidate_count": 81,
+  "priority_population": "existing z>=3 deduplicated T-v2 candidate set; all 345 links have a 1-4 km gap; no new links generated",
+  "priority_rule": "different NBMG FID AND same non-unnamed NAME AND kinematic_compat=true",
+  "same_name_semantics": "vector_graph.annotate_links: name_src == name_tgt and name_src != 'Unnamed fault'",
+  "kinematic_compatibility_semantics": "vector_graph.is_kinematically_compatible: reject differing non-empty slip senses; also reject registered opposite dip-direction pairs when the senses differ and at least one is RL/LL. Blank/Unspecified values are normalized to unknown and may pass; this is a permissive screen.",
+  "counts_by_exclusive_review_class": {
+   "same-FID_multipart-continuity": 230,
+   "H27-5b_inter-FID_same-name_kinematic-compatible": 81,
+   "inter-FID_other-name_kinematic-compatible": 22,
+   "inter-FID_kinematic-conflict-or-unknown": 12
+  },
+  "priority_basis": {
+   "validation": "Tier-2 whole NBMG FID_trace component holdout; not organizer-created test labels",
+   "seeds": [
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129
+   ],
+   "h27_5b_efficiency": 0.17829598184006035,
+   "rotated_control_efficiency": 0.020384388176087564,
+   "enrichment_over_control": 8.746692826876947,
+   "graph_delta_P_used_for_priority": false,
+   "graph_value_ranking_status": "refuted as a predictive ranking signal in Addendum D (seeds 140-149)"
+  },
+  "geometry_setting_hints": {
+   "end-to-end": "along-strike endpoint gap; assess continuation, relay, or cartographic segmentation",
+   "abutting": "abutment/termination geometry; verify fault intersections and cross-cutting relations",
+   "tip-to-tip oblique": "oblique step-over-like geometry; verify overlap, slip sense, and relay direction"
+  },
+  "files": {
+   "full_csv": "docs/data/topology_links.csv",
+   "full_geojson": "docs/data/topology_links.geojson",
+   "priority_csv": "docs/data/topology_priority_h27_5b.csv",
+   "priority_geojson": "docs/data/topology_priority_h27_5b.geojson",
+   "priority_map_preview": "docs/assets/fig_map_h27_5b_priority.png"
+  },
+  "official_sources": {
+   "nbmg_qfaults_layer": "https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0",
+   "faulds_hinz_2015_context": "https://www.osti.gov/servlets/purl/1724082",
+   "berkowitz_2000_publisher": "https://agupubs.onlinelibrary.wiley.com/doi/10.1029/1999GL011241"
+  },
+  "limitations": [
+   "Different FIDs are distinct records in one NBMG INGENIOUS compilation, not independent surveys; same-name records may be named segments of one fault zone.",
+   "Nearest-polyline vector attribution and the compatibility rule are screening annotations, not verified slip histories or fault truth.",
+   "H27-5b enrichment is catalogue-internal whole-FID holdout evidence; no hidden organizer labels or public score were observed.",
+   "Geometry hints only nominate map-review context. Faulds and Hinz setting frequencies describe characterized geothermal systems, not any individual link.",
+   "The separate overlapping en-echelon step-over test was refuted as a holdout-improvement signal; a tip-to-tip oblique cue does not reverse that result."
+  ]
+ },
  "kind_counts": {
   "end-to-end": 314,
   "abutting": 16,

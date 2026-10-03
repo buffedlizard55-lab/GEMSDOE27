@@ -58,9 +58,9 @@
    "url": "https://agupubs.onlinelibrary.wiley.com/doi/10.1029/1999GL011241",
    "category": "literature",
    "used_for": "Connectivity framework for the topology candidate class (exponent a, fractal dimension D, density, critical length)",
-   "status": "abstract verified on publisher page; full text read via a ResearchGate copy",
-   "accessed": "2026-10-02",
-   "evidence": "Abstract: connectivity depends on scale of measurement for a < D+1, independent of scale for a > D+1; \"Analysis of the San Andreas fault system shows that a < D+1 and that the connectivity threshold is reached only at a critical length scale.\" Text: a = 2.1, D = 1.65, beta = 0.0085; \"connectivity is expected for L > 21 km\"; \"the above results are statistical, and provide connectivity estimates on averages, rather than on particular realizations\".",
+   "status": "Publisher abstract rechecked this session; full text read previously via a ResearchGate copy.",
+   "accessed": "2026-10-03",
+   "evidence": "Abstract: connectivity depends on scale of measurement for a < D+1, independent of scale for a > D+1; \"Analysis of the San Andreas fault system shows that a < D+1 and that the connectivity threshold is reached only at a critical length scale.\" Text: a = 2.1, D = 1.65, beta = 0.0085; \"connectivity is expected for L > 21 km\"; \"the above results are statistical, and provide connectivity estimates on averages, rather than on particular realizations\". Publisher abstract states that connectivity depends on a, D and density, with scale behavior conditional on a relative to D+1; it does not validate any individual candidate gap.",
    "feed": false
   },
   {
@@ -70,8 +70,8 @@
    "url": "https://www.osti.gov/servlets/purl/1724082",
    "category": "literature",
    "used_for": "Structural-setting statistics for step-overs, terminations, intersections; regional kinematic context",
-   "status": "read (abstract + regional setting)",
-   "accessed": "2026-10-02",
+   "status": "Full OSTI-hosted paper fetched/read via page service; abstract and reported Great Basin setting frequencies rechecked this session.",
+   "accessed": "2026-10-03",
    "evidence": "Of ~250 categorised fields: step-overs/relay ramps ~32 %, normal-fault terminations 25 %, intersections 22 %, accommodation zones 9 %, transfer zones 5 %, pull-aparts 3 %, bends 2 %, major range-front faults 1 %; ~39 % of 426 systems are blind.",
    "feed": true,
    "feed_kind": "http"
@@ -136,8 +136,8 @@
    "url": "https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0",
    "category": "data",
    "used_for": "Vector fault geometry + attributes (FID, NAME, NUM, DIPDIRECT, SLIPSENSE, FTYPE_, MAPSCALE): upgrades the raster graph to a named, attributed vector graph for H27-5 and the three-tier holdout (evidence/vector_topology_validation.json)",
-   "status": "VERIFIED QUERYABLE and RESTORED LOCALLY in data_cache/qfaults_v2_in_footprint.json (1,179 in-footprint polylines, sha256 4d6efc7b..., matching 98.42% of labels.tif within 100 m and 99.97% within 200 m)",
-   "accessed": "2026-10-02",
+   "status": "VERIFIED QUERYABLE and RESTORED LOCALLY in data_cache/qfaults_v2_in_footprint.json (1,179 in-footprint polylines, sha256 4d6efc7b..., matching 98.42% of labels.tif within 100 m and 99.97% within 200 m); layer metadata rechecked this session.",
+   "accessed": "2026-10-03",
    "evidence": "Layer 'Qfaults [INGENIOUS 6-27-2023]', 22,956 total records (1,179 intersecting the GeoDAWN envelope: 739 Well Constrained, 351 Moderately Constrained, 89 Inferred; 349 distinct NAME values).",
    "feed": true,
    "feed_kind": "arcgis"
