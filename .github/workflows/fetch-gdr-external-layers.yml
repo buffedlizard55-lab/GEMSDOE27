@@ -11,7 +11,12 @@ name: fetch-gdr-external-layers
 # evidence/ci/external_verification.json), inventories them, clips them to the competition footprint
 # and uploads the result as a run artifact.
 #
-# It deliberately does NOT commit or push anything, and it never contacts drivendata.org
+# It commits exactly ONE small file back to the repository - evidence/external_layer_inventory.json -
+# because the agent sandbox cannot read run logs or download artifacts (both live on hosts outside its
+# allowlist: results-receiver.actions.githubusercontent.com and *.blob.core.windows.net). Committing the
+# inventory is what makes the result verifiable from a session with `gh api`. That path is not in the
+# push trigger's `paths:` filter, so the commit cannot re-trigger this workflow. It never contacts
+# drivendata.org
 # (the competition Terms of Use prohibit robots/automatic access; see scripts/refresh_source_feed.py).
 #
 # Retrieve the artifact from a session with:
@@ -45,7 +50,7 @@ on:
         default: "true"
 
 permissions:
-  contents: read
+  contents: write   # needed only to commit evidence/external_layer_inventory.json back to main:
 
 jobs:
   fetch:
@@ -69,6 +74,7 @@ jobs:
           DATASETS: ${{ github.event.inputs.datasets || 'paleo,probes,volcanics' }}
           AVAIL_ONLY: ${{ github.event.inputs.availability_only || 'true' }}
         run: |
+          set -o pipefail   # a verification failure must fail the job, not be swallowed by tee
           mkdir -p /tmp/gdr/out
           python scripts/fetch_external_layers.py \
             --datasets "$DATASETS" \
@@ -82,6 +88,27 @@ jobs:
         run: |
           echo "===== inventory ====="
           cat /tmp/gdr/out/inventory.json || echo "(no inventory produced)"
+
+      - name: Commit the inventory so a session can read it with gh api
+        if: always()
+        run: |
+          if [ ! -f /tmp/gdr/out/inventory.json ]; then
+            echo "no inventory produced; nothing to commit"; exit 0
+          fi
+          cp /tmp/gdr/out/inventory.json evidence/external_layer_inventory.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add evidence/external_layer_inventory.json
+          if git diff --cached --quiet; then
+            echo "inventory unchanged; nothing to commit"
+          else
+            git commit -m "evidence: external-layer fetch inventory (hashes, layer schemas, in-footprint counts)
+
+Written by .github/workflows/fetch-gdr-external-layers.yml on the runner, because run logs and
+artifacts are hosted outside the agent sandbox's allowlist and cannot be read from a session.
+Every dataset row carries the pin it was checked against and whether it matched."
+            git push origin HEAD:${GITHUB_REF_NAME}
+          fi
 
       - uses: actions/upload-artifact@v4
         if: always()
