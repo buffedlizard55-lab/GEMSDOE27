@@ -24,6 +24,15 @@ name: fetch-gdr-external-layers
 #   Siler et al. 2022 (DOI 10.5066/P9YL58W6)                  https://doi.org/10.5066/P9YL58W6
 
 on:
+  # Dispatching this workflow needs `actions: write`, which the agent's token does not have
+  # (HTTP 403 on POST /actions/workflows/<id>/dispatches, recorded 2026-10-03). The push trigger below
+  # is path-filtered to this workflow and its script, so merging a change to either runs the fetch
+  # without anyone needing dispatch permission - and it still runs on demand for anyone who has it.
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/fetch-gdr-external-layers.yml"
+      - "scripts/fetch_external_layers.py"
   workflow_dispatch:
     inputs:
       datasets:
@@ -57,8 +66,8 @@ jobs:
 
       - name: Download, hash-verify, inventory and clip
         env:
-          DATASETS: ${{ github.event.inputs.datasets }}
-          AVAIL_ONLY: ${{ github.event.inputs.availability_only }}
+          DATASETS: ${{ github.event.inputs.datasets || 'paleo,probes,volcanics' }}
+          AVAIL_ONLY: ${{ github.event.inputs.availability_only || 'true' }}
         run: |
           mkdir -p /tmp/gdr/out
           python scripts/fetch_external_layers.py \
