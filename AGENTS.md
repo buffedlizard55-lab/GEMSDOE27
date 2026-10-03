@@ -25,7 +25,7 @@ Exact 0.0/1.0 (or sanitised probabilities) inside the footprint, NaN outside wit
 `verify_downloads.py` passing, no pixel on a catalogue cell, a documented hypothesis and its holdout gate result, and an entry in the correct manifest (`docs/downloads/manifest.json` for a weekly slot; `docs/downloads/h28_1_candidate_manifest.json` for the separate H28-1 research file).
 
 ## Next steps inherited from this session
-`knowledge/06_limitations_and_access.md` -> "Prioritised next steps for Session 4". Do those first.
+`knowledge/06_limitations_and_access.md` -> the latest "Prioritised next steps for Session 5" / Session 5 outcome addendum. Read the newest dated section and do those first.
 
 ## Session-3 additions to the hard rules
 * **Every scored raster used in an argument must be hash-authenticated.** `scripts/fetch_scored_corpus.py` accepts a sibling file only if its SHA-256 equals a `registry/live_scores.json` row; unmatched rows stay listed as unmatched. Never match by filename.

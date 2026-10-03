@@ -195,3 +195,32 @@ The 0.003 band is set from the smallest live difference this programme has ever 
 
 ## Declared downside (owned, not hidden)
 If the augmented detector has no far-field information, this probe **randomises 16.3 % of the best file's dots** and should lose roughly 0.003-0.008 of live score. That is the price of the only measurement that can settle whether detector work can pay at all. Slot 5 is therefore labelled `MEASUREMENT PROBE - NOT THE RECOMMENDED SUBMISSION` everywhere it appears, and **Slot 1 remains the one-click recommendation**. The group has 3 slots per week and about 9 weeks to the 2026-12-03 deadline; spending one on this is judged worth more than a fifth unscored rearrangement of the same pixels, which Session 3 proved cannot exceed ~0.2550 by geometry alone.
+
+---
+
+# Addendum F - Session 5: H27-10 model-ranked 100-300 m offset-scarp annulus (frozen before implementation and seeds 150-159)
+
+## Motivation and corrected source scope
+The 100-300 m ring is a falsifiable engineering choice, not a distribution established by the literature. The official Hermant, Kiersnowski & Bellanger (2025) Stanford workshop PDF (full text retrieved through the page-fetch service on 2026-10-02) says in Figure 2 that a *local* distance between USGS Quaternary traces and TLS fault labels can be up to 400 m. It does not establish a general 150-400 m offset distribution, a 150 m lower bound, or the 100-300 m ring used here. The older registry wording overstated that source and is corrected in `registry/sources.json` and `registry/irregularities.json`.
+
+The prior habitat-tomography estimate is excluded: it failed leave-one-submission-out validation (signal ratio 0.96) and MUST NOT be used to locate a candidate. H27-4's measured 100 m removed-band efficiency of 0.0034 versus the owner-reported 0.2477 live break-even m=0.0521 motivates testing the adjacent band, but does not establish that the adjacent band is productive. No SLIPSENSE/DIPDIRECT side-selection is made: without a local stress model and a frozen mechanical rule, assigning an expected branch side would be speculative.
+
+## Frozen candidate and comparison
+* **Target annulus:** pixel-centre Euclidean distance from the *known catalogue pixels in the current holdout fold*, `1.0 < d_known <= 3.0` pixels on the 100 m grid (100-300 m). The hidden component pixels are not used to form this mask.
+* **Frozen ranker:** strictly four-quadrant OOF probabilities from the current-best H28-1 detector (32 prepared features plus the six hash-validated H28-1 magnetic/gravity edge features; detector seed 2026), followed by the same `ridge_nms(sigma=1.0)`. No parameter is fitted on seeds 150-159.
+* **Baseline, per cell:** `H28_edge_best_Tv2_prune_r1` — H28-1 OOF dotted base (`PRE_THIN_FRAC`, `thin_d=1.5`), H27-4 prune `d_known > 1.0`, plus the existing deterministic T-v2 z>=3 deduplicated link dots at the registered `metric.RADIUS_PX` spacing. This is the current strongest in-repository paired OOF variant; it is not a leaderboard score.
+* **Equal-count substitution, per cell:** Let K be the count of H28-1 base dots that H27-4 r1 removes at `d_known <= 1.0`. Remove the K lowest-probability H28-1 base dots in the baseline with `d_known > 3.0`; replace them with the K highest-probability eligible H28-1 OOF ridge pixels in the 100-300 m annulus. Candidates must be in the active fold, not already emitted, and at least 1.5 px from every retained or newly selected dot (Euclidean). T-v2 links are unchanged. If either the source or candidate pool cannot supply exactly K pixels, the cell is invalid and the data gate fails; do not lower K or alter the annulus after seeing results.
+* **No submission is constructed.** The test writes only a machine-readable evidence JSON. It does not modify the four weekly candidates or the separate H28-1 full-map research TIFF.
+
+## Frozen holdout protocol
+* Fresh split seeds **150-159 only**, 10 random 20% component-hidden draws in each of the four existing quadrants (`NW`, `NE_LidarGapHeavy`, `SW`, `SE`), 40 paired cells. Seeds 140-149 belong to H28-1 and are not reused.
+* Score the equal-count annulus substitution against the frozen baseline with the existing DTI kernel. Report paired mean, per-fold and per-seed gains, gross addition/removal efficiencies, emitted-dot counts, and all data checks. Holdout truth remains catalogue pixels; the 600 m quadrant buffer blocks model-training leakage but not shared geomorphic/covariate structure.
+
+## Confirmatory gate (all conditions required; otherwise reject this annulus variant and spend no weekly slot)
+1. Mean paired DTI gain versus `H28_edge_best_Tv2_prune_r1` is **>= +0.001** across all 40 cells.
+2. At least **3 of 4** quadrant-fold means improve and at least **8 of 10** seed means improve.
+3. Pooled gross efficiency of the added annulus pixels is **>= m(0.2477)=0.0521** and exceeds the pooled efficiency of the removed >300 m pixels.
+4. Exactly the preregistered seed list `150-159` and 40 cells are present.
+5. All source/target swaps are exactly K; baseline and candidate dot counts match cell by cell; no prediction overlaps known labels; all scores and features are finite and in range; all annulus additions satisfy `1<d<=3` and the >=1.5 px spacing rule; prepared-feature and H28-1 edge-cache hashes/metadata match.
+
+Even a pass is only a catalogue-internal candidate-class result, not evidence of transfer to the organizer-created labels or a score increase. A pass may justify a geologist-reviewed, content-hashed research candidate, but it does **not** authorize a weekly slot; the prior live habitat evidence still makes a real live comparison necessary. No thresholds, annulus bounds, or ranking rules may be changed after unblinding these seeds.

@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-02 | Session 4 additions: 8 items added - the unregistered h18-4 score, the SGMC pixel-count discrepancy, the restore_data .part bug and its fix, the proxy's blindness to the far field, the signed/NaN prepared band, the underpowered D-4 control, a scratch AUC artefact, and the unverified second-moment threshold)",
+ "generated": "2026-10-03 | Session 5 correction: Hermant Fig. 2 supports only a local separation up to 400 m, not a 150-400 m distribution or H27-10 band.",
  "items": [
   {
    "id": "prompt-verbatim-unavailable",
@@ -22,8 +22,8 @@
   {
    "id": "hermant-2025-lidar-catalogue-offset",
    "severity": "medium",
-   "issue": "Hermant, Kiersnowski & Bellanger (2025, Stanford Geothermal Workshop, Fig. 2 & Fig. 9B) document 150-400 m positional offsets between USGS Quaternary fault traces and 3DEP LiDAR scarp breaks. When a scarp detector fires along a known fault and only the 1-px catalogue spine is masked (~labels), the unmasked 100-200 m flank survives as a dense band of dots (5,355 dots = 8.91% of the 0.2477 file sit at d_cat = 100 m; 8,769 dots = 14.60% sit at d_cat <= 200 m). On our non-leaky OOF detector B_oof (seeds 130-139), those d_cat = 100 m dots have hit efficiency 0.0034 (15x below break-even 0.0521).",
-   "action": "Validated H27-4 on B_oof (+0.0022 solo at 100 m, +0.0141 stacked with T-v2 in 4/4 folds) and shipped Tertiary Slot 3 candidate (d466b251f309, 55,992 px)."
+   "issue": "The earlier registry wording '150-400 m positional offsets' overstates the official Hermant et al. (2025) PDF. Figure 2 supports that a local distance between USGS Quaternary traces and TLS fault labels can be up to 400 m; it does not establish a general 150-400 m distribution, a 150 m lower bound, or the H27-10 100-300 m annulus. Separately, the local 0.2477 raster has 5,355 dots at d_cat=100 m and 8,769 at d_cat<=200 m; on B_oof (seeds 130-139) the d_cat=100 m removed band has efficiency 0.0034 vs the live 0.0521 break-even.",
+   "action": "Correct the source wording; retain H27-4's measured 100 m prune result, but treat H27-10's 100-300 m annulus as an unvalidated hypothesis. Do not cite failed habitat tomography as evidence. The H27-10 narrowed, model-ranked reallocation is frozen in Addendum F before seeds 150-159."
   },
   {
    "id": "sample-submission-has-ones",
