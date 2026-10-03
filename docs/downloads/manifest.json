@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-10-02T22:26:42Z",
+ "generated_utc": "2026-10-03T00:32:37Z",
  "status": "UNSCORED candidates; no leaderboard score is claimed",
  "primary": {
   "slug": "topo-gap-closure-t-v2-on-d1-5",
@@ -80,6 +80,41 @@
    "H27-4 r<=1 flank-shadow prune (OOF +0.0022 solo, +0.0141 stacked, 4/4 folds)",
    "live-anchored budget optimum d=2.25-2.8 (model 0.2550 vs 0.2477)"
   ],
+  "conditional_on": "5512495c6bd1"
+ },
+ "quinary_probe": {
+  "slug": "farfield-swap-augmented-detector-probe",
+  "hypothesis": "Addendum E probe",
+  "content_id": "a34b0799df59",
+  "note": "27GEMSDOE Addendum E probe | 0.2477 base with 9783 far-field dots swapped for the augmented detector's best; 1 variable, same 60,069 px; MEASUREMENT PROBE | id a34b0799df59 | not yet live-scored",
+  "nan": "gems27-farfield-swap-augmented-detector-probe-20261002-a34b0799df59-nan.tif",
+  "allfinite": "gems27-farfield-swap-augmented-detector-probe-20261002-a34b0799df59-allfinite.tif",
+  "zip": "gems27-farfield-swap-augmented-detector-probe-20261002-a34b0799df59-nan.zip",
+  "sha256_nan": "f8e6c76cf584c6fdae6610998d12da185ae858f2a41833b3f630f6f2dd03985c",
+  "bytes_nan": 1632158,
+  "emitted_px": 60069,
+  "base": "dotted H19-5 d1.5 (owner-reported live 0.2477) with 20% of its FAR-FIELD dots swapped",
+  "role": "MEASUREMENT PROBE - NOT THE RECOMMENDED SUBMISSION (Addendum E)",
+  "near_field_px_unchanged": 11153,
+  "far_field_px_kept": 39133,
+  "far_field_px_dropped": 9783,
+  "far_field_px_added": 9783,
+  "total_px": 60069,
+  "fraction_of_file_swapped": 0.16286270788593118,
+  "symmetric_difference_fraction": 0.32572541577186237,
+  "detector": "HistGradientBoostingClassifier on 32 prepared + 40 Addendum-D label-free bands (72 features), fitted on ALL published labels, random_state=2026",
+  "augmented_matrix_sha256": "98abf032a0df506c604efcfe0600895db11e21ab56bbacd3b63a78b7ba463e54",
+  "mean_p_aug_dropped": 0.028841136023402214,
+  "mean_p_aug_added": 0.43798309564590454,
+  "mean_p_aug_kept_far": 0.15096807479858398,
+  "median_d_cat_added_px": 6.4031242374328485,
+  "frac_added_ge_1km_from_catalogue": 0.3174895226413166,
+  "registered_interpretation": {
+   "adopt_if": "live >= 0.2507 (0.2477 + 0.003): the augmented detector carries far-field information",
+   "no_information_if": "0.2447 < live < 0.2507",
+   "refuted_if": "live <= 0.2447 (0.2477 - 0.003): re-ranking the far field destroys credit",
+   "declared_downside": "if the detector has no far-field information this randomises 16.3% of the best file's dots and should cost about 0.003-0.008 of live score"
+  },
   "conditional_on": "5512495c6bd1"
  },
  "reference_0_2477": {

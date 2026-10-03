@@ -17,6 +17,7 @@ import json
 import shutil
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
@@ -40,16 +41,50 @@ def sha256(path: Path) -> str:
     return h.hexdigest()
 
 
-def gh_raw(repo: str, path: str, ref: str, dest: Path) -> None:
+def gh_size(repo: str, path: str, ref: str) -> int:
+    """Byte size GitHub reports for a blob, used to detect truncated downloads."""
+    r = subprocess.run(["gh", "api", f"repos/{repo}/contents/{path}?ref={ref}", "--jq", ".size"],
+                       capture_output=True, text=True, check=True)
+    return int(r.stdout.strip())
+
+
+def gh_raw(repo: str, path: str, ref: str, dest: Path, retries: int = 3) -> None:
+    """Fetch one blob, verifying its size. Never leaves a truncated `.part` behind.
+
+    Session 4 irregularity `restore-part-truncation-bug`: a failed `gh api` download used to leave a
+    truncated `<name>.part` on disk (transient HTTP/2 INTERNAL_ERROR on the ~94 MB bridge parts). Any
+    later glob-based assembly then silently concatenated the truncated part, producing a corrupt
+    `training_features.tif` (492,887,617 B, sha256 c0e9b856...) instead of the pinned 418,912,844 B,
+    sha256 4371c82e.... The hash check at the end printed BAD but left the corrupt file in place, so
+    the next run skipped it (`dest.exists()`). Now: remove any stale `.part` first, retry, verify the
+    size against GitHub's own metadata, and on failure remove the partial file so a re-run refetches.
+    """
     dest.parent.mkdir(parents=True, exist_ok=True)
     tmp = dest.with_suffix(dest.suffix + ".part")
-    with open(tmp, "wb") as out:
-        subprocess.run(
-            ["gh", "api", f"repos/{repo}/contents/{path}?ref={ref}",
-             "-H", "Accept: application/vnd.github.raw"],
-            stdout=out, check=True,
-        )
-    tmp.replace(dest)
+    if tmp.exists():
+        tmp.unlink()
+    want = gh_size(repo, path, ref)
+    last: Exception | None = None
+    for attempt in range(1, retries + 1):
+        try:
+            with open(tmp, "wb") as out:
+                subprocess.run(
+                    ["gh", "api", f"repos/{repo}/contents/{path}?ref={ref}",
+                     "-H", "Accept: application/vnd.github.raw"],
+                    stdout=out, check=True,
+                )
+            got = tmp.stat().st_size
+            if got != want:
+                raise IOError(f"truncated download: {got} B, GitHub reports {want} B")
+            tmp.replace(dest)
+            return
+        except Exception as e:                                   # noqa: BLE001 - retry any fetch failure
+            last = e
+            if tmp.exists():
+                tmp.unlink()
+            print(f"  attempt {attempt}/{retries} failed for {path}: {e}", flush=True)
+            time.sleep(2 * attempt)
+    raise RuntimeError(f"could not fetch {repo}@{ref}:{path} after {retries} attempts") from last
 
 
 def main() -> int:
@@ -69,6 +104,9 @@ def main() -> int:
             gh_raw(s["repo"], f["path"], s["commit"], dest)
         ok = dest.exists() and sha256(dest) == f["sha256"]
         print(f"{'OK ' if ok else 'BAD'} {dest.name} {f['sha256'][:12]}")
+        if not ok and dest.exists() and not args.verify:
+            print(f"  removing corrupt {dest.name} so the next run refetches it")
+            dest.unlink()
         bad += not ok
     for a in man["assembled"]:
         dest = paths.DATA / a["assembled_name"]
@@ -87,6 +125,15 @@ def main() -> int:
                         shutil.copyfileobj(fh, out)
         ok = dest.exists() and sha256(dest) == a["sha256"]
         print(f"{'OK ' if ok else 'BAD'} {dest.name} {a['sha256'][:12]}")
+        if not ok and not args.verify:
+            # never leave a corrupt assembly (or a suspect part) where the next run would trust it
+            if dest.exists():
+                print(f"  removing corrupt {dest.name} so the next run reassembles it")
+                dest.unlink()
+            for pd_ in (paths.DATA / "parts").glob("*"):
+                if pd_.is_file():
+                    print(f"  removing part {pd_.name} (cannot be trusted after a bad assembly)")
+                    pd_.unlink()
         bad += not ok
     return 1 if bad else 0
 

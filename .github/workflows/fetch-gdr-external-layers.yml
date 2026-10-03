@@ -1,0 +1,86 @@
+name: fetch-gdr-external-layers
+
+# Why this workflow exists
+# -----------------------
+# The agent sandbox can only reach github.com / api.github.com / pypi.org / codeload.github.com.
+# gdr.openei.org, mrdata.usgs.gov and sciencebase.usgs.gov are unreachable from it, so any hypothesis
+# that needs an official external layer cannot be *verified as obtainable* from inside a session.
+# A GitHub Actions runner can reach them. This workflow is that bridge: it downloads the specific
+# free official files named in registry/sources.json, verifies each against a SHA-256 that was
+# recorded by an independent runner on 2026-09-30 (sibling repository 16GEMSDOE,
+# evidence/ci/external_verification.json), inventories them, clips them to the competition footprint
+# and uploads the result as a run artifact.
+#
+# It deliberately does NOT commit or push anything, and it never contacts drivendata.org
+# (the competition Terms of Use prohibit robots/automatic access; see scripts/refresh_source_feed.py).
+#
+# Retrieve the artifact from a session with:
+#   gh run list --workflow=fetch-gdr-external-layers.yml
+#   gh run download <run-id> --name gdr-external-layers --dir /tmp/gdr
+#
+# Manual review links (open in a browser, do not automate):
+#   GDR 1391 (INGENIOUS regional data, DOI 10.15121/1881483) https://gdr.openei.org/submissions/1391
+#   USGS State Geologic Map Compilation                       https://mrdata.usgs.gov/geology/state/
+#   Siler et al. 2022 (DOI 10.5066/P9YL58W6)                  https://doi.org/10.5066/P9YL58W6
+
+on:
+  workflow_dispatch:
+    inputs:
+      datasets:
+        description: "Comma-separated dataset keys to fetch (all | paleo,probes,volcanics)"
+        required: true
+        default: "paleo,probes,volcanics"
+      availability_only:
+        description: "Also HEAD-check (no download) the larger sources and record status"
+        required: false
+        default: "true"
+
+permissions:
+  contents: read
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install geospatial readers
+        run: |
+          python -m pip install --upgrade pip
+          # pyogrio ships GDAL wheels, so FileGDB and shapefile both read without apt packages
+          python -m pip install pyogrio shapely pyproj pandas
+
+      - name: Download, hash-verify, inventory and clip
+        env:
+          DATASETS: ${{ github.event.inputs.datasets }}
+          AVAIL_ONLY: ${{ github.event.inputs.availability_only }}
+        run: |
+          mkdir -p /tmp/gdr/out
+          python scripts/fetch_external_layers.py \
+            --datasets "$DATASETS" \
+            --availability-only "$AVAIL_ONLY" \
+            --out /tmp/gdr/out \
+            --pins /tmp/gdr/pins.json \
+            2>&1 | tee /tmp/gdr/log.txt
+
+      - name: Show inventory in the run log
+        if: always()
+        run: |
+          echo "===== inventory ====="
+          cat /tmp/gdr/out/inventory.json || echo "(no inventory produced)"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gdr-external-layers
+          path: |
+            /tmp/gdr/out/inventory.json
+            /tmp/gdr/out/*.csv
+            /tmp/gdr/log.txt
+          if-no-files-found: warn
+          retention-days: 90

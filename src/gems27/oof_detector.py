@@ -101,6 +101,42 @@ def fit_predict_oof_probabilities(
     return oof_prob
 
 
+def fit_predict_full_probabilities(foot: np.ndarray, labels: np.ndarray, *, extra: np.ndarray | None = None,
+                                   neg_ratio: int = 10, seed: int = 2026, chunk: int = 400_000) -> np.ndarray:
+    """Fit on ALL published labels and predict everywhere - the emission-time detector.
+
+    At submission time there is no held-out truth (every label is public), so out-of-fold fitting would
+    only weaken the surface. Hyper-parameters, negative subsample and seeds are identical to
+    `fit_predict_oof_probabilities`, so this is the same instrument trained on all four quadrants.
+    Used by Addendum E's far-field swap probe (`scripts/build_submission27.py`, slot 5).
+    """
+    X_foot = np.load(paths.PREPARED_FEATURES, mmap_mode="r")
+    foot_rc = np.argwhere(foot)
+    y_foot = labels[foot]
+
+    def assemble(idx: np.ndarray) -> np.ndarray:
+        base = np.asarray(X_foot[idx], dtype=np.float32)
+        if extra is None:
+            return base
+        return np.concatenate([base, np.asarray(extra[idx], dtype=np.float32)], axis=1)
+
+    pos = np.flatnonzero(y_foot)
+    neg = np.flatnonzero(~y_foot)
+    rng = np.random.default_rng(seed)
+    idx = np.sort(np.r_[pos, rng.choice(neg, size=min(len(neg), len(pos) * neg_ratio), replace=False)])
+    clf = HistGradientBoostingClassifier(max_iter=100, max_leaf_nodes=31, learning_rate=0.08,
+                                         l2_regularization=5.0, random_state=seed)
+    clf.fit(assemble(idx), y_foot[idx].astype(int))
+    prob = np.zeros(grid.SHAPE, dtype=np.float32)
+    all_idx = np.arange(len(y_foot))
+    out = np.empty(len(all_idx), np.float32)
+    for a in range(0, len(all_idx), chunk):
+        b = min(a + chunk, len(all_idx))
+        out[a:b] = clf.predict_proba(assemble(all_idx[a:b]))[:, 1].astype(np.float32)
+    prob[foot_rc[:, 0], foot_rc[:, 1]] = out
+    return prob
+
+
 def oof_pr_auc(oof_prob: np.ndarray, labels: np.ndarray, foot: np.ndarray) -> float:
     """Out-of-fold PR-AUC (average precision) against catalogue pixels, over footprint pixels."""
     from sklearn.metrics import average_precision_score

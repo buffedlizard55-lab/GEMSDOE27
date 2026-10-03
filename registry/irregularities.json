@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-02 (Session 3)",
+ "generated": "2026-10-02 (Session 4: 8 items added - the unregistered h18-4 score, the SGMC pixel-count discrepancy, the restore_data .part bug and its fix, the proxy's blindness to the far field, the signed/NaN prepared band, the underpowered D-4 control, a scratch AUC artefact, and the unverified second-moment threshold)",
  "items": [
   {
    "id": "prompt-verbatim-unavailable",
@@ -156,6 +156,54 @@
    "severity": "high",
    "issue": "CI was RED on `main` before Session 3 and nobody had noticed. `.github/workflows/ci.yml` runs `python -m pytest -q` on a bare checkout, but `data_cache/` is git-ignored by design and CI cannot restore it (`scripts/restore_data.py` reads the inputs from SIBLING repositories, which the workflow's `contents: read` GITHUB_TOKEN cannot access). `tests/test_vector_and_oof.py::test_vector_attribution_and_evidence_files` opens `paths.TEMPLATE`, so it failed with `RasterioIOError: data_cache/sample_submission.tif: No such file or directory`. Reproduced on the base commit `ce80ead` in a clean clone: 1 failed, 35 passed.",
    "action": "Fixed in Session 3 with `tests/conftest.py`: a `requires_rasters` marker plus a collection hook that skips with the missing file names in the reason. Applied to the pre-existing test and to the new `test_verify_downloads_still_passes_with_four_slots`. Verified in a clean clone without `data_cache`: 45 passed, 2 skipped; and locally after `restore_data.py`: 47 passed, 0 skipped. A red suite now always means a real failure. Consequence to record honestly: **CI does not exercise the two raster-dependent checks** - they run locally and must be re-run before any release. Adding a data-restore step to CI needs a token with read access to the sibling repositories, which is an access request for the owner, not something the agent can grant itself."
+  },
+  {
+   "id": "h18-4-score-unregistered",
+   "severity": "high",
+   "issue": "The group's single most informative live measurement was invisible to this repository for three sessions. 16GEMSDOE H18-4 (content id aef8f42c, sha256 736f62c2da58...) - 57,783 px of USGS State Geologic Map Compilation faults all >=300 m from the catalogue, owner-reported score 0.0360 - is the only scored emission anywhere in the programme whose pixels are all far-field, and it was not a row in registry/live_scores.json, so evidence/live_inversion.json inverted 20 pairs without it.",
+   "action": "Session 4 added the row with full provenance, hash-authenticated the raster against the sibling's record, re-fetched the scored corpus (21/26 matched, was 20/26) and inverted it: concentration 1.62x blind (exact bracket 0.76-1.65x) against 5.3-6.0x for the H19-5 family. evidence/sgmc_gap_inversion.json. Recorded so that 'emit on an independent second catalogue' is never re-proposed as a new idea."
+  },
+  {
+   "id": "sgmc-px-count-discrepancy",
+   "severity": "low",
+   "issue": "The sibling's exploratory record (19GEMSDOE evidence/hypothesis_h18_sgmc_exploratory.json) reports sgmc_fault_pixels_in_footprint = 110,732; the SGMC mask restored into this repo (data_cache/derived_sgmc_faults_100m_u8.tif) has 83,593 positive px; and the h18-4 probe's own 57,783 positives overlap our restored mask on 79.66% of pixels. Most likely a rasterisation/buffer difference (all_touched vs centre-in-cell, or a 100 m vs 300 m exclusion buffer). Unresolved.",
+   "action": "Does not affect any conclusion: the inversion reads the SCORED raster's bytes and verifies the construction claim from them (0 positives on catalogue px, min catalogue distance 3.16 px), not the restored layer. The restored layer is used only as a detector FEATURE (Addendum D +sgmc arm) and as a cross-check."
+  },
+  {
+   "id": "restore-part-truncation-bug",
+   "severity": "high",
+   "issue": "scripts/restore_data.py left a truncated <name>.part behind when a gh api download failed (transient HTTP/2 INTERNAL_ERROR on the ~94 MB bridge parts). Any later glob-based assembly then silently concatenated the truncated part: training_features.tif came out 492,887,617 B / sha256 c0e9b856... instead of the pinned 418,912,844 B / 4371c82e.... The final hash check printed BAD but left the corrupt file in place, so the next run skipped it (dest.exists()).",
+   "action": "FIXED in Session 4: stale .part files are removed before fetching, downloads are retried (3 attempts, backoff), every part is verified against the byte count GitHub itself reports, and a hash mismatch now deletes the corrupt assembly AND its parts so a re-run refetches. Session 4 re-assembled the file manually and confirmed sha256 4371c82e... before use."
+  },
+  {
+   "id": "proxy-blind-to-far-field",
+   "severity": "high",
+   "issue": "Every gate this programme has run hides pieces of the CATALOGUE, so 100% of hidden truth (120,983 px over the Addendum-D cells) lies at distance 0 from the published catalogue and Habitat A (>=300 m away) contains NO truth by construction. Measured credit shares for the base arm: 36.2% on the spine, 50.7% at 100 m, 11.2% at 200 m, 0.4% at 300 m-1 km, 0.0% beyond 1 km. The live-scored 0.2477 emission puts 81.4% of its dots >=300 m from the catalogue (median 1.5 km). The proxy is therefore blind to the habitat that carries the real credit - the standing caveat 'catalogue-internal truth overstates real-world enrichment', now with numbers.",
+   "action": "Two consequences, both acted on. (1) The Addendum-D arms that PASS both registered criteria (+sgmc +0.0285, +all +0.0341 paired DTI, 4/4 folds) are NOT promoted: their entire gain is catalogue proximity, and their far-field behaviour is the SGMC-gap habitat measured live at 1.62x blind. (2) The question is registered as a bounded live measurement instead - Addendum E, Slot 5 (gems27-...-a34b0799df59), which changes only WHICH far-field pixels are emitted at fixed pixel count. evidence/arm_habitat_decomposition.json."
+  },
+  {
+   "id": "det-local-relief-signed-with-nan",
+   "severity": "medium",
+   "issue": "data_cache/prepared/features.npy band 'det_local_relief' is SIGNED (min -207.686, max +299.416, mean -0.026, 64.7% negative) and carries 3,061 NaN; the lidar_* columns carry 24.63% NaN (the LiDAR-invalid footprint), not 0. Any code that assumes a non-negative descriptor silently misbehaves: the pre-registered anisotropy (max-mean)/max reached 6.6e7 on that band.",
+   "action": "Disclosed deviation in knowledge/03 Addendum D before the gate ran: signed layers use the bounded (max-mean)/(max-min) form in [0,1]; the three non-negative LiDAR layers keep the registered form (measured in [0,0.8]). nodata -> 0 before line integration; the LiDAR-invalid footprint is 0 by construction in the uint8 source raster. Band names, count, scales and orientations unchanged. tests/test_newinfo.py covers both."
+  },
+  {
+   "id": "d4-control-underpowered",
+   "severity": "low",
+   "issue": "The Addendum-D control for the step-over rule (same lateral-offset and overlap windows but strike difference 70-110 deg, i.e. kinematically wrong) finds only 3.75 links per cell against 148.8 real step-over links, so the registered '>=2x enrichment over control' criterion is measured against a very small sample.",
+   "action": "Reported as measured (enrichment 1.11x, control efficiency 0.0545 on 35 dots/cell). The verdict does not rest on it: the absolute pooled efficiency of step-over dots is 0.0605, below the break-even m(0.30)=0.0638 on its own."
+  },
+  {
+   "id": "scratch-lidar-auc-artifact",
+   "severity": "low",
+   "issue": "A Session-4 screening script (scratch, never committed) computed LiDAR descriptor statistics over ALL footprint pixels including the 24.7% LiDAR-invalid area where the descriptor is 0, which pushed an 'SGMC-only vs background' AUC to 0.4831 even though the means clearly favour SGMC-only (136.4 vs 86.2).",
+   "action": "Corrected by restricting descriptor statistics to lidar:valid; the corrected means are the ones quoted in knowledge/08 section 1. The repository's published evidence/channel_auc.json is NOT affected - scripts/channel_auc.py maps 0 -> NaN for every uint8 layer and drops non-finite values on both sides (verified: lidar:lappos_max n_pos = 48,441 of 60,988 catalogue px). Verified by reading the script, not assumed."
+  },
+  {
+   "id": "second-moment-threshold-unverified",
+   "severity": "low",
+   "issue": "The second-moment quantity sum(l^2)/area is the standard continuous connectivity measure for 2-D line networks, but no critical value for it could be verified from an official source inside this sandbox (only github.com and pypi.org are reachable; the Berkowitz et al. 2000 text available here gives the P criterion, not a sum(l^2) threshold).",
+   "action": "sum(l^2) = 56,580 km^2 (1.095 per unit area) is reported as a continuous RELATIVE measure and as the tie-break inside equal |dP| only. No pass/fail claim anywhere in the repo rests on it. The paper-verified threshold statement remains P = 5.784 -> 6.124 against Pc = 5.6-6.0."
   }
  ]
 }
