@@ -1,6 +1,6 @@
 {
   "generated": "2026-10-03",
-  "status": "Session 5 screen current as of 2026-10-03: four genuinely untried hypotheses remain. H27-10 was tested on seeds 150-159 and failed its frozen gate; it is excluded from the untried list. No weekly slot has been used.",
+  "status": "Session 5 screen current as of 2026-10-03: four genuinely untried hypotheses remain. H27-10 was tested on seeds 150-159 and failed its frozen gate; it is excluded from the untried list. No weekly slot has been used. H27-16 raw packages remain absent; the local fetch-workflow runs failed with zero jobs/no logs, so no new package verification is claimed.",
   "novelty_scope": "Screened against this checkout, its evidence ledger, and the owner-provided comparison list. The sibling score list does not include complete source methods; global novelty is unknown.",
   "target": "Fault-location pixels in the organizer-created test labels, which remain unobserved here. Catalogue-internal holdouts are only a proxy and cannot validate far-field behavior.",
   "baseline": {
@@ -28,8 +28,8 @@
         0.0,
         0.006
       ],
-      "cost": "medium-high; external fetch is automated, but requires verified vector reading, fold-safe rasterization, and separate feature arms",
-      "data_gate": "Official GDR #1391 page/package listing was verified; three resource packages are listed and hash pins exist in the sibling runner, but the raw packages are not present in this checkout. Prior retrieval/dispatch was blocked; obtain the official raw bytes and verify SHA-256 before use.",
+      "cost": "medium-high; requires authorized data retrieval and checksum verification, then fold-safe vector reading/rasterization and separate feature arms",
+      "data_gate": "Official GDR #1391 listing and hash pins exist; the sibling 16GEMSDOE runner record reports ok:true for the three packages on 2026-09-30. Raw packages are absent from this checkout. This repo's workflow runs 37099986237 and 37100053264 concluded failure with zero jobs and no logs, so there was no local download, re-hash, clip, or artifact. Cause is unknown; do not infer that the sources are unavailable. Obtain bytes through an authorized runner or official source and verify SHA-256 before any feature use.",
       "validation": "After raw-data inventory, preregister a separate spatial holdout with unused seeds; do not reuse 150-159 or treat catalogue-holdout success as a live score.",
       "status": "UNTRIED; official source packages are not yet present in this checkout."
     },

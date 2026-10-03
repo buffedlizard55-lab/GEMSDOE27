@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-03 | Session 5: corrected Hermant offset wording; logged and resolved the H27-10 first-run spacing-check self-distance diagnostic.",
+ "generated": "2026-10-03 | Session 5: H27-10 diagnostic disclosed; current GDR fetch workflow runs failed before jobs and are recorded without inferring source availability.",
  "items": [
   {
    "id": "prompt-verbatim-unavailable",
@@ -222,6 +222,12 @@
    "severity": "low",
    "issue": "The first H27-10 run (seeds 150-159) correctly generated the frozen equal-count candidate and measured mean paired ΔDTI +0.00084615, 4/4 fold means and 7/10 seed means improved, and annulus gross efficiency 0.03357 < m(0.2477)=0.05212. Its spacing integrity check incorrectly measured each added pixel against a mask that included itself, so it necessarily returned zero and marked the spacing data check false. This is a diagnostic false negative, not evidence of a spacing violation.",
    "action": "Preserved the first JSON as evidence/h27_10_annulus_holdout_initial.json. Corrected only the spacing-check implementation and added tests; the frozen masks, ranker, K, gate, and seeds are unchanged. The deterministic integrity rerun on the same used seeds passed all data checks; all 40 cell outcomes, aggregate metrics, and the frozen FAIL are unchanged in evidence/h27_10_annulus_holdout.json. This rerun is non-confirmatory and cannot change the negative gate result."
+  },
+  {
+   "id": "gdr-fetch-workflow-zero-job-runs",
+   "severity": "medium",
+   "issue": "GitHub Actions run 37099986237 for .github/workflows/fetch-gdr-external-layers.yml on feature commit 0ddaa3f and run 37100053264 on merge commit 733e2b2 both concluded failure. The Actions API reports zero jobs for each; gh run view --log-failed reports 'log not found'. No download script step ran and no fetch artifact/inventory was produced in this checkout. This does not show that the official GDR files are unavailable or fail their pins.",
+   "action": "Keep H27-16 UNTRIED and require a successful authorized runner job plus SHA-256 verification of the raw bytes before feature use. Have a repository maintainer investigate the Actions trigger, permissions, approval state, or runner configuration; the empty run records do not identify which, if any, caused the failure. The separate 2026-09-30 sibling-runner record is provenance for the pins, not evidence of a fetch in this checkout."
   }
  ]
 }

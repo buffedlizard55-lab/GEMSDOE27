@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-03 (Session 5 update: H27-10 frozen seeds 150-159 gate failed; corrected same-seed integrity rerun preserved; current untried screen is registry/next_hypotheses.json; H27-5b geologist-review class added separately)",
+ "generated": "2026-10-03 (Session 5 update and post-merge closeout: H27-10 failed its frozen gate; H27-5b review class added; GDR fetch workflow failure disclosed without inferring source availability)",
  "ranking_rule": "expected DTI gain x probability the test can actually validate it / cost. Session 4 ranks the two routes that add information or settle the question (H27-17, H27-16) above the shipped increments, because Session 3 proved that rearranging pixels cannot exceed ~0.2550 and Session 4 proved that the catalogue-internal proxy cannot see the far-field habitat where 81.4% of the live emission's dots sit.",
  "hypotheses": [
   {
@@ -18,29 +18,29 @@
   {
    "id": "H27-16",
    "rank": 2,
-   "title": "The three official GDR 1391 layers this sandbox cannot reach, fetched by a runner",
+   "title": "Three official GDR 1391 layers absent from this checkout; verified fetch pending",
    "layers": "GDR 1391 paleo-geothermal regional features (84,008 B, sha256 faffcf69...), INGENIOUS 2 m temperature-probe data (1,080,530 B, 1301f70d...), Great Basin Quaternary volcanics polygons (9,898,770 B, c4a2d2df...).",
    "signature": "Surface and shallow-subsurface thermal/chemical expression of fault-hosted fluid flow: sinter/tufa/travertine and altered bedrock, 2 m sediment temperature anomalies, and Quaternary volcanic unit boundaries and vent alignments.",
-   "why": "The only route left that adds genuinely NEW information rather than rearranging existing bands, and the only one whose sources are confirmed obtainable (hash-pinned from an independent runner verification of 2026-09-30).",
+   "why": "This is a possible route to new information rather than rearrangement of existing bands. The 2026-09-30 sibling-runner record reports the pinned sources obtainable, but the raw bytes are absent from this checkout and must be retrieved and verified before use.",
    "differs": "This repo holds only 21 vent points and 27,092 well/spring rows from GDR 1391; the paleo-geothermal features, the 2 m probe temperatures and the volcanic POLYGONS are in no layer here. H27-12 measured that the layers we DO hold add ~0 to a detector, so these must earn their place the same way - and, per H27-17, the only decisive test is live.",
-   "status": "PROPOSED, obtainability verified by pin and workflow, data NOT yet in hand. .github/workflows/fetch-gdr-external-layers.yml + scripts/fetch_external_layers.py download each file, verify size and sha256 against the 2026-09-30 pins (refusing to use a file that does not match), inventory every vector layer, clip to the footprint bounding box and upload CSVs + inventory.json as a run artifact (gh run download). The same workflow HEAD-checks the larger sources (wellspring FileGDB, both Qfaults releases, SGMC NV/CA, Siler 2022 and DeAngelo 2022 DOIs, the GeoDAWN ScienceBase item) so obtainability is a recorded fact. It never contacts drivendata.org and never commits or pushes.",
-   "gain": "unknown; the only remaining source of new information",
-   "cost": "workflow written; needs one dispatch and then one detector arm per layer group",
+   "status": "PROPOSED, UNTRIED; raw packages NOT present in this checkout. The sibling 16GEMSDOE runner record reports the 2026-09-30 pins as ok:true. This repo has a fetch/hash/clip workflow, but runs 37099986237 and 37100053264 concluded failure with zero jobs and no logs; no fresh download, SHA-256 verification, clip, or inventory artifact occurred here. Cause is unknown; do not infer source unavailability. An authorized Actions run or official bytes must be obtained and hash-verified before feature use. The workflow never contacts drivendata.org.",
+   "gain": "unknown; potential new external data, not yet verified or tested in this checkout",
+   "cost": "workflow implemented; requires an authorized Actions run (current attempts produced no jobs), verified local package bytes, then one detector arm per layer group",
    "external": [
     {
      "name": "GDR 1391 paleo-geothermal regional features (sinter/tufa/travertine, altered bedrock)",
      "url": "https://gdr.openei.org/files/1391/paleo_geothermal_regional.zip",
-     "obtainable": "hash-pinned 84,008 B sha256 faffcf697f32dbbf6cbb317cd1effb3e305538ce38eb239d72d0c6fa071e91ca, verified ok:true by an independent GitHub Actions runner 2026-09-30 (sibling 16GEMSDOE evidence/ci/external_verification.json); unreachable from the agent sandbox, fetched by .github/workflows/fetch-gdr-external-layers.yml"
+     "obtainable": "The sibling 16GEMSDOE/evidence/ci/external_verification.json reportedly records an ok:true check of this package\u2019s size/hash pin on 2026-09-30. Raw bytes are not in this checkout and were not re-downloaded/re-hashed here. Current fetch-workflow runs 37099986237 and 37100053264 failed before any job and produced no artifact; this does not establish source unavailability. Verify the raw bytes against the pin before use."
     },
     {
      "name": "GDR 1391 INGENIOUS 2 m temperature-probe regional data",
      "url": "https://gdr.openei.org/files/1391/2m_temperature_probe_INGENIOUS_regional_data.zip",
-     "obtainable": "hash-pinned 1,080,530 B sha256 1301f70d230058e616ea5d34d1c7a32fabf7d49198172f376c59c89bd652eca3, verified ok:true by the same runner record; fetched by the same workflow"
+     "obtainable": "The sibling 16GEMSDOE/evidence/ci/external_verification.json reportedly records an ok:true check of this package\u2019s size/hash pin on 2026-09-30. Raw bytes are not in this checkout and were not re-downloaded/re-hashed here. Current fetch-workflow runs 37099986237 and 37100053264 failed before any job and produced no artifact; this does not establish source unavailability. Verify the raw bytes against the pin before use."
     },
     {
      "name": "GDR 1391 Great Basin Quaternary volcanics (polygons)",
      "url": "https://gdr.openei.org/files/1391/great_basin_q_volcanics.zip",
-     "obtainable": "hash-pinned 9,898,770 B sha256 c4a2d2dfd5c44f42e0aba37290948881631aff312b8b9ca7934b6dc1e451e5be, verified ok:true by the same runner record; fetched by the same workflow. This repo currently holds only the 21 vent POINTS, not these polygons."
+     "obtainable": "The sibling 16GEMSDOE/evidence/ci/external_verification.json reportedly records an ok:true check of this package\u2019s size/hash pin on 2026-09-30. Raw bytes are not in this checkout and were not re-downloaded/re-hashed here. Current fetch-workflow runs 37099986237 and 37100053264 failed before any job and produced no artifact; this does not establish source unavailability. Verify the raw bytes against the pin before use."
     }
    ]
   },
