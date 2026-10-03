@@ -11,7 +11,7 @@ import numpy as np
 import rasterio
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from gems27 import candidates, grid, paths, vector_graph  # noqa: E402
+from gems27 import candidates, graph_value, grid, paths, vector_graph  # noqa: E402
 
 
 def load_mask(p):
@@ -60,7 +60,21 @@ def argument(r, gb) -> str:
             f"Base coverage: {100 * r.base_overlap:.0f}% of its dots already lie within 300 m of the 0.2477 emission. "
             + ("NOTE: the straight link passes within ~100 m of a THIRD mapped system (crossing/T-junction), so it is not a pure "
                "two-system gap; kept because it belongs to the validated rule. " if r.third_system_contact else "")
+            + graph_sentence(r)
             + "Status: validated on both 8-connected component holdout (0.293 vs 0.059 ctrl) and NBMG FID vector-trace holdout (0.100 vs 0.020 ctrl).")
+
+
+def graph_sentence(r) -> str:
+    """The graph consequence of THIS link, computed by src/gems27/graph_value.py (Addendum D, D-3)."""
+    bridge = ("It is a graph bridge: no other selected candidate joins these two sides, so this closure is what "
+              "actually merges them." if bool(r.bridge) else
+              "It is not a bridge: another selected candidate already joins these two sides, so its network value "
+              "is redundant with that one.")
+    return (f" Graph value (Berkowitz et al. 2000 connectivity parameter, computed on the catalogue graph plus all "
+            f"345 selected candidates with a=2.500 and D=1.566 held at their fitted values): this closure changes "
+            f"P by dP={r.delta_P:+.4f} (rank {int(r.connectivity_rank)} of 345 by |dP|) and the largest-system share "
+            f"of total mapped fault length by {r.delta_largest_share:+.5f}; the merged system would be "
+            f"{r.merge_len_km:.2f} km long. {bridge} ")
 
 
 def main() -> int:
@@ -74,17 +88,29 @@ def main() -> int:
     vec_summary = vector_graph.component_vector_summary(res["fg"], va, L)
     gr = json.loads((paths.EVIDENCE / "graph_report.json").read_text())["berkowitz_style_estimate"]
     gb = {"P": gr["P_at_domain_equivalent_side"]}
+    gv = graph_value.link_connectivity_values(res["fg"], L)
+    for c in ("bridge", "merge_len_km", "delta_largest_share", "delta_P", "delta_second_moment_km2",
+              "connectivity_rank"):
+        L[c] = gv[c].to_numpy()
     L["argument"] = [argument(r, gb) for r in L.itertuples(index=False)]
     keep = ["link_id", "z", "kind", "gap_km", "ang_src", "ang_tgt", "mutual", "strike", "strike_compat",
             "size_src_km", "size_tgt_km", "merged_km", "dots", "base_overlap", "dots_near_h19_5_raw_px3", "third_system_contact",
             "fid_src", "fid_tgt", "same_fid", "name_src", "name_tgt", "same_name", "num_src", "num_tgt",
             "ftype_src", "ftype_tgt", "slipsense_src", "slipsense_tgt", "dipdirect_src", "dipdirect_tgt",
             "mapscale_src", "mapscale_tgt", "kinematic_compat",
+            "bridge", "merge_len_km", "delta_largest_share", "delta_P", "delta_second_moment_km2",
+            "connectivity_rank",
             "lon_a", "lat_a", "lon_b", "lat_b", "e_row", "e_col", "q_row", "q_col", "argument"]
     df = L[keep].copy()
     for c in ("gap_km", "ang_src", "ang_tgt", "strike", "strike_compat", "size_src_km", "size_tgt_km", "merged_km",
               "lon_a", "lat_a", "lon_b", "lat_b"):
         df[c] = df[c].astype(float).round(5 if c.startswith(("lon", "lat")) else 3)
+    df["merge_len_km"] = df["merge_len_km"].astype(float).round(3)
+    df["delta_largest_share"] = df["delta_largest_share"].astype(float).round(6)
+    df["delta_P"] = df["delta_P"].astype(float).round(6)
+    df["delta_second_moment_km2"] = df["delta_second_moment_km2"].astype(float).round(4)
+    df["bridge"] = df["bridge"].astype(bool)
+    df["connectivity_rank"] = df["connectivity_rank"].astype(int)
     docs_data = paths.DOCS / "data"
     docs_data.mkdir(parents=True, exist_ok=True)
     df.drop(columns=["argument"]).to_csv(docs_data / "topology_links.csv", index=False)
@@ -108,10 +134,53 @@ def main() -> int:
                "closure": clo, "graph": res["graph"], "vector_attribution": vec_summary,
                "kind_counts": df.kind.value_counts().to_dict(),
                "mutual_links": int(df.mutual.sum()), "third_system_contact_links": int(df.third_system_contact.sum()),
-               "median_gap_km": float(df.gap_km.median()), "mean_base_overlap": float(df.base_overlap.mean())}
+               "median_gap_km": float(df.gap_km.median()), "mean_base_overlap": float(df.base_overlap.mean()),
+               "graph_value": {
+                   "method": ("Berkowitz-Bour-Davy-Odling (2000) connectivity parameter P = beta L^D lmin^(1-a)/(a-1) "
+                              "integrated over the domain, computed with this repo's own closed form "
+                              "(src/gems27/topology_theory.py, unit-tested against the paper); a = 2.5000 and "
+                              "D = 1.5662 held at the values fitted on the full catalogue "
+                              "(evidence/graph_report.json), lmin = 2 km, L = 227.319 km "
+                              "(domain-equivalent side). dP is exact for a single merge: dn = [lA+lB+gap >= lmin] "
+                              "- [lA >= lmin] - [lB >= lmin] and P is linear in n."),
+                   "P_with_all_345_candidates": float(gv.P_with_all_links.iloc[0]),
+                   "P_catalogue_only_published": gr["P_at_domain_equivalent_side"],
+                   "Pc_range": gr["Pc_range"],
+                   "largest_share_of_mapped_length_with_all_candidates": float(gv.largest_share_with_all_links.iloc[0]),
+                   "n_bridges": int(gv.bridge.sum()), "n_links": int(len(gv)),
+                   "delta_P_min": float(gv.delta_P.min()), "delta_P_max": float(gv.delta_P.max()),
+                   "delta_P_nonzero": int((gv.delta_P.abs() > 1e-12).sum()),
+                   "delta_P_is_quantised": ("dP takes only the values {-1, 0, +1} x P/n_ge because it counts "
+                                            "systems above lmin = 2 km; it is an ordinal. The continuous "
+                                            "tie-break is delta_second_moment_km2 (change in sum l^2 over "
+                                            "systems), and connectivity_rank = |dP| desc, |d(sum l^2)| desc, "
+                                            "merged length desc. Disclosed in knowledge/03 Addendum D before "
+                                            "the Stage-B gate ran."),
+                   "network_second_moment_km2_with_all_candidates": float(gv.network_second_moment_km2.iloc[0]),
+                   "second_moment_per_area_with_all_candidates": float(gv.second_moment_per_area.iloc[0]),
+                   "second_moment_caveat": ("No critical value is quoted for sum(l^2)/area: a threshold for it "
+                                            "could not be verified from an official source inside this sandbox "
+                                            "(only github.com and pypi.org are reachable). It is reported as a "
+                                            "continuous relative measure and as the tie-break inside equal |dP|, "
+                                            "never as a pass/fail criterion."),
+                   "delta_largest_share_max": float(gv.delta_largest_share.max()),
+                   "top10_by_abs_delta_P": [
+                       {"link_id": df.link_id.iloc[i], "delta_P": float(df.delta_P.iloc[i]),
+                        "bridge": bool(df.bridge.iloc[i]), "merge_len_km": float(df.merge_len_km.iloc[i]),
+                        "name_src": df.name_src.iloc[i], "kind": df.kind.iloc[i], "z": int(df.z.iloc[i])}
+                       for i in gv.connectivity_rank.sort_values().index[:10]],
+                   "gate": ("Addendum D, D-3: whether ranking by |dP| beats the shipped z>=3 rule is MEASURED on "
+                            "seeds 140-149 in evidence/addendum_d_gates.json; these values are documentation "
+                            "regardless of that gate's outcome.")}}
     (paths.EVIDENCE / "candidate_summary.json").write_text(json.dumps(summary, indent=1, default=float))
     (paths.REGISTRY / "topology_candidates.json").write_text(json.dumps({"summary": summary, "links": json.loads(df.to_json(orient="records"))},
                                                                          indent=1))
+    (paths.EVIDENCE / "link_graph_value.json").write_text(json.dumps(
+        {"summary": summary["graph_value"],
+         "links": json.loads(df[["link_id", "bridge", "merge_len_km", "delta_largest_share", "delta_P",
+                                 "delta_second_moment_km2", "connectivity_rank", "kind", "z", "gap_km",
+                                 "name_src", "name_tgt", "fid_src", "fid_tgt"]].to_json(orient="records"))},
+        indent=1))
     np.save(paths.DATA / "topology_dots_nonredundant.npy", res["dots_nonredundant"])
     print(json.dumps(summary, indent=1, default=float))
     return 0
