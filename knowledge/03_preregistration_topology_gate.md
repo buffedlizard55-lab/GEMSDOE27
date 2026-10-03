@@ -171,3 +171,27 @@ Session 3 proved arithmetically (`knowledge/07_live_score_inversion.md` section 
 
 ## Addendum D band-construction deviation, disclosed BEFORE the gate was run
 `det_local_relief` in `data_cache/prepared/features.npy` is **signed** (min -207.686, max +299.416, mean -0.026, 64.7 % negative, 3,061 NaN = 0.06 %) and the pre-registered anisotropy statistic `(max - mean)/max` is unbounded for signed inputs: measured values reached 6.6e7 (`dir_det_local_relief_aniso_L5`), which would swamp a gradient-boosted tree's binning. For that one layer the anisotropy is therefore the bounded, scale-free `(max - mean)/(max - min)` in [0, 1]. The three LiDAR input layers (`lappos_max`, `step_max`, `ex_max`, all non-negative after nodata -> 0) keep the pre-registered `(max - mean)/max`, measured in [0, 0.8]. Band names, count (24), scales (5/10/20 px), orientations (4) and across-strike sigma (0.8 px) are unchanged. No threshold or gate was chosen using holdout results; this is a numerical-definition fix, disclosed rather than silently applied.
+
+---
+
+# Addendum E - Session 4: the far-field swap probe (Slot 5), registered BEFORE it was built and before any score exists for it
+
+## Why a probe rather than another gate
+`scripts/diagnose_arm_habitats.py` decomposed the Addendum-D result on the same 40 cells and found the proxy's resolution limit: **100 % of the hidden truth (120,983 px) lies at distance 0 from the published catalogue**, because hidden truth *is* catalogue pixels. Consequently **98.1 % of every arm's credit is earned within 200 m of the published catalogue spine** (base arm: 36.2 % on the spine itself, 50.7 % at 100 m, 11.2 % at 200 m, 0.4 % at 300 m-1 km, **0.0 % beyond 1 km**) while the live-scored 0.2477 emission puts **81.4 % of its dots >= 300 m from the catalogue** (median 1.5 km) and earns 5.67x blind. The catalogue-internal holdout therefore cannot see the habitat that carries the real credit: it is not biased against far-field arms, it is **blind** to them. No further gate on this proxy can decide whether a better detector helps.
+
+The one live measurement that does speak to the far field is the h18-4 SGMC-gap probe (0.0360 -> 1.62x blind). So the decisive question for the rest of the programme is a *live* one, and it can be asked with a single bounded slot.
+
+## Frozen construction of Slot 5 (`slot5-farfield-swap-augmented-detector`)
+1. Fit the augmented detector (32 prepared bands + the 40 Addendum-D bands = 72 label-free features, including the SGMC distance/indicator bands) on **all** published labels - there is no held-out truth at submission time, so out-of-fold fitting would only weaken it. Identical `HistGradientBoostingClassifier(max_iter=100, max_leaf_nodes=31, learning_rate=0.08, l2_regularization=5.0)`, identical 10:1 negative subsample, `random_state=2026`.
+2. Take the owner-reported 0.2477 file (`dotted_h19_5_d1_5_nan.tif`, sha256 `68d0e2e4...`, 60,069 px) and split it into near-field (`d_cat < 3 px`, 18.6 %) and far-field (`d_cat >= 3 px`, 81.4 %).
+3. **Remove** the K = 20 % of far-field dots with the LOWEST augmented-detector probability and **add** the K highest-probability far-field ridge dots of that detector that are not already in the file, are >= 3 px from the catalogue, are inside the footprint and are >= 1.5 px from every kept dot (so the d1.5 emission geometry is preserved).
+4. Nothing else changes: the near-field dots, the total pixel count (60,069), the nodata convention, the CRS and the grid are identical to the 0.2477 file. A live comparison against 0.2477 therefore differs in exactly **one** variable: *which* far-field pixels are emitted.
+
+## Registered interpretation rule (fixed before any upload; the agent never uploads)
+* live(Slot 5) >= 0.2477 + 0.003  ->  the augmented detector carries **real far-field information**; adopt it and rebuild the whole emission from it.
+* |live(Slot 5) - 0.2477| < 0.003  ->  **no measurable far-field information**; the Addendum-D PR-AUC/DTI gains are catalogue-proximity artefacts and must not be promoted.
+* live(Slot 5) <= 0.2477 - 0.003  ->  **refuted**: re-ranking the proven emission's far field with this detector destroys credit.
+The 0.003 band is set from the smallest live difference this programme has ever resolved (0.2477 vs 0.1922 = 0.0555; the h18-4 probe 0.0360) and from the forward model's own sensitivity: replacing 9,778 of 60,069 dots at 5.67x blind concentration with blind dots moves the modelled score by about -0.006, so 0.003 is inside the range the experiment can actually resolve.
+
+## Declared downside (owned, not hidden)
+If the augmented detector has no far-field information, this probe **randomises 16.3 % of the best file's dots** and should lose roughly 0.003-0.008 of live score. That is the price of the only measurement that can settle whether detector work can pay at all. Slot 5 is therefore labelled `MEASUREMENT PROBE - NOT THE RECOMMENDED SUBMISSION` everywhere it appears, and **Slot 1 remains the one-click recommendation**. The group has 3 slots per week and about 9 weeks to the 2026-12-03 deadline; spending one on this is judged worth more than a fifth unscored rearrangement of the same pixels, which Session 3 proved cannot exceed ~0.2550 by geometry alone.
