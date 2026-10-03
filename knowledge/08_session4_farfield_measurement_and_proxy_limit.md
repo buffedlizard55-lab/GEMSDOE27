@@ -46,7 +46,7 @@ catalogue, so its score is a direct live measurement of the far-field/lithologic
 | quantity | value |
 |---|---|
 | c(S), credit per truth pixel if truth were uniform | **0.0384** |
-| ... versus a uniform spray of the same 57,783 px | 0.1050 - so the probe's c(S) is **2.73x BELOW blind** |
+| ... versus a uniform spray of the same 57,783 px | 0.1050 (= c(S) x rho, i.e. N x kernel area / footprint) - so the probe's c(S) is **2.73x BELOW blind** |
 | rho (matched mass / credit) | 2.731 |
 | credit TPw (uniform closure) | **758.7** |
 | exact bracket over MP in [0, N] | 354.7 - 773.7 |
@@ -66,11 +66,24 @@ Two things follow, and they point in opposite directions, so both are recorded:
    thing from the other side: the *union* arm (H16-1 U SGMC-gap) improved dense DTI by +0.0286 while
    the pure gap arm lost -0.0300. SGMC helps only where the catalogue already is.
 
-**The corollary that killed a plausible-sounding idea.** SGMC-gap pixels have a *higher* mean 1 m LiDAR
-positive-laplacian response than catalogued fault pixels (136.4 vs 99.7, p90 204 vs 172; random
-background 86.2 - measured on `lidar:valid` pixels only). Raw scarp-detector intensity therefore does
-**not** discriminate hidden truth; position relative to the Quaternary catalogue does. Any future
-"the geologic map sees scarps the catalogue misses, so emit there" argument is refuted by a live score.
+**The corollary that killed a plausible-sounding idea** (`scripts/sgmc_lidar_response.py` ->
+`evidence/sgmc_lidar_response.json`, computed on `lidar:valid` pixels only; the 24.6 % of the footprint
+without 1 m LiDAR carries 0 in every descriptor and flattens any pooled statistic):
+
+| population | px with LiDAR | lappos_max | step_max | ex_max | relief |
+|---|---|---|---|---|---|
+| catalogue pixels | 48,465 | 99.66 | 79.23 | 93.36 | 57.92 |
+| SGMC, all | 54,830 | 130.25 | 104.78 | 117.01 | 79.93 |
+| **SGMC only, >= 300 m from catalogue** | 40,564 | **136.41** | 111.02 | 122.15 | 84.13 |
+| SGMC only, >= 600 m from catalogue | 35,089 | 138.74 | 113.36 | 124.10 | 85.92 |
+| random background (200k) | 200,000 | 86.15 | 68.99 | 83.76 | 51.89 |
+
+SGMC-gap pixels show a **1.37x higher** mean 1 m LiDAR scarp response than catalogued fault pixels on
+every descriptor - and the emission built from exactly those pixels scored 0.0360, i.e. **1.62x blind**.
+Raw scarp-detector intensity therefore does **not** discriminate hidden truth; position relative to the
+Quaternary catalogue does. Any future "the geologic map sees scarps the catalogue misses, so emit
+there" argument is refuted by a live score, and the refutation is now reproducible from a committed
+script rather than a scratch one.
 
 **Far field is not empty.** 81.4 % of the 0.2477 emission's dots are >= 300 m from the catalogue
 (median 1.49 km) and that file earns 5.67x blind. So distance from the catalogue is not the problem -
@@ -140,8 +153,8 @@ detector's view**. Decomposing the same 40 cells by distance from the *full publ
 
 * truth: **120,983 px, 100 % at distance 0** from the published catalogue. Habitat A (>= 300 m) has
   **zero** truth, by construction.
-* base arm credit by band: 36.2 % on the catalogue spine itself, 50.7 % at 100 m, 11.2 % at 200 m,
-  0.4 % at 300 m-1 km, **0.0 % beyond 1 km**.
+* base arm credit by band: 36.8 % on the catalogue spine itself, 51.5 % at 100 m, 11.4 % at 200 m,
+  0.37 % at 300 m-1 km, **0.0 % beyond 1 km**.
 * `sgmc` arm: same shape, more dots near the spine (4,906 vs 3,799 on it; 71,070 vs 52,959 at 100 m;
   34,015 vs 25,711 at 200 m) at slightly *lower* per-band efficiency (0.2753 vs 0.2806 at 100 m).
   Its whole +0.0285 gain is catalogue proximity.
