@@ -1,5 +1,12 @@
 [
  {
+  "utc": "2026-10-03T05:29:41Z",
+  "id": "siler-2022",
+  "event": "recovered",
+  "from": null,
+  "to": "4fca5f6f08f45de0"
+ },
+ {
   "utc": "2026-10-03T00:51:30Z",
   "id": "siler-2022",
   "event": "unreachable",
