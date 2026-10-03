@@ -29,7 +29,7 @@
         0.006
       ],
       "cost": "medium-high; requires authorized data retrieval and checksum verification, then fold-safe vector reading/rasterization and separate feature arms",
-      "data_gate": "Official GDR #1391 listing and hash pins exist; the sibling 16GEMSDOE runner record reports ok:true for the three packages on 2026-09-30. Raw packages are absent from this checkout. This repo's workflow runs 37099986237, 37100053264, 37100608786, and 37100751573 concluded failure with zero jobs and no logs, so there was no local download, re-hash, clip, or artifact. Cause is unknown; do not infer that the sources are unavailable. Obtain bytes through an authorized runner or official source and verify SHA-256 before any feature use.",
+      "data_gate": "Official GDR #1391 listing and hash pins exist; the sibling 16GEMSDOE runner record reports ok:true for the three packages on 2026-09-30. Raw packages are absent from this checkout. This repo's workflow runs 37099986237, 37100053264, 37100608786, 37100751573, and 37100935082 concluded failure with zero jobs and no logs, so there was no local download, re-hash, clip, or artifact. Cause is unknown; do not infer that the sources are unavailable. Obtain bytes through an authorized runner or official source and verify SHA-256 before any feature use.",
       "validation": "After raw-data inventory, preregister a separate spatial holdout with unused seeds; do not reuse 150-159 or treat catalogue-holdout success as a live score.",
       "status": "UNTRIED; official source packages are not yet present in this checkout."
     },
