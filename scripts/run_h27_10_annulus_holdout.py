@@ -15,6 +15,7 @@ from pathlib import Path
 
 import numpy as np
 from scipy.ndimage import distance_transform_edt
+from scipy.spatial import cKDTree
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from gems27 import annulus, grid, holdout, links, metric, oof_detector, paths  # noqa: E402
@@ -65,6 +66,14 @@ def pooled_efficiency(records: list[dict]) -> float | None:
 
 def finite_ratio(numerator: float, denominator: float) -> float | None:
     return numerator / denominator if denominator > 0.0 else None
+
+
+def mask_respects_spacing(mask: np.ndarray, min_distance_px: float) -> bool:
+    points = np.argwhere(mask)
+    if len(points) < 2:
+        return True
+    distances, _ = cKDTree(points).query(points, k=2)
+    return bool(np.all(distances[:, 1] >= min_distance_px))
 
 
 def main() -> int:
@@ -225,13 +234,9 @@ def main() -> int:
             overlap = int((baseline & known).sum() + (candidate & known).sum())
             known_overlap_pixels += overlap
             distances_to_kept = distance_to(kept)
-            distances_to_additions = distance_to(additions)
             additions_spaced = bool(
-                not additions.any()
-                or (
-                    np.all(distances_to_kept[additions] >= MIN_DOT_DISTANCE_PX)
-                    and np.all(distances_to_additions[additions] >= MIN_DOT_DISTANCE_PX)
-                )
+                np.all(distances_to_kept[additions] >= MIN_DOT_DISTANCE_PX)
+                and mask_respects_spacing(additions, MIN_DOT_DISTANCE_PX)
             )
             additions_in_annulus = bool(
                 not additions.any()

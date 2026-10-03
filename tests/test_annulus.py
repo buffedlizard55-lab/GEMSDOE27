@@ -56,6 +56,18 @@ def test_spaced_selector_respects_existing_emissions_and_row_major_ties():
     assert selected[0, 2]
 
 
+def test_spaced_selector_excludes_candidates_too_close_to_blocked_pixels():
+    scores = np.ones((5, 5), dtype=np.float32)
+    eligible = np.ones(scores.shape, dtype=bool)
+    blocked = np.zeros(scores.shape, dtype=bool)
+    blocked[2, 2] = True
+
+    selected = select_score_ranked_spaced_candidates(scores, eligible, blocked, k=1)
+    assert selected.sum() == 1
+    assert not selected[2, 2]
+    assert np.linalg.norm(np.argwhere(selected)[0] - np.array([2, 2])) >= 1.5
+
+
 def test_spaced_selector_returns_shortfall_without_relaxing_rule():
     scores = np.ones((5, 5), dtype=np.float32)
     eligible = np.ones(scores.shape, dtype=bool)

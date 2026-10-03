@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-03 | Session 5 correction: Hermant Fig. 2 supports only a local separation up to 400 m, not a 150-400 m distribution or H27-10 band.",
+ "generated": "2026-10-03 | Session 5: corrected Hermant offset wording; logged H27-10 first-run spacing-check self-distance diagnostic.",
  "items": [
   {
    "id": "prompt-verbatim-unavailable",
@@ -216,6 +216,12 @@
    "severity": "low",
    "issue": "The second-moment quantity sum(l^2)/area is the standard continuous connectivity measure for 2-D line networks, but no critical value for it could be verified from an official source inside this sandbox (only github.com and pypi.org are reachable; the Berkowitz et al. 2000 text available here gives the P criterion, not a sum(l^2) threshold).",
    "action": "sum(l^2) = 56,580 km^2 (1.095 per unit area) is reported as a continuous RELATIVE measure and as the tie-break inside equal |dP| only. No pass/fail claim anywhere in the repo rests on it. The paper-verified threshold statement remains P = 5.784 -> 6.124 against Pc = 5.6-6.0."
+  },
+  {
+   "id": "h27-10-first-run-spacing-diagnostic-self-distance",
+   "severity": "low",
+   "issue": "The first H27-10 run (seeds 150-159) correctly generated the frozen equal-count candidate and measured mean paired ΔDTI +0.00084615, 3/4 folds and 7/10 seeds improved, and annulus gross efficiency 0.03357 < m(0.2477)=0.05219. Its spacing integrity check incorrectly measured each added pixel against a mask that included itself, so it necessarily returned zero and marked the spacing data check false. This is a diagnostic false negative, not evidence of a spacing violation.",
+   "action": "Preserved the first JSON as evidence/h27_10_annulus_holdout_initial.json. Corrected only the spacing-check implementation and added tests; the frozen masks, ranker, K, gate, and seeds are unchanged. A same-seed integrity rerun is documented as non-confirmatory and cannot change the negative gate result."
   }
  ]
 }
