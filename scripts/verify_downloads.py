@@ -39,6 +39,12 @@ def sha(p: Path) -> str:
 
 def main() -> int:
     man = json.loads((DL / "manifest.json").read_text())
+    research_manifest = DL / "h28_1_candidate_manifest.json"
+    if research_manifest.exists():
+        research = json.loads(research_manifest.read_text())
+        candidate = research.get("candidate")
+        if candidate and research.get("status", "").startswith("research candidate"):
+            man["h28_1_research"] = candidate
     with rasterio.open(DATA / "sample_submission.tif") as t:
         tpl = t.read(1)
         tprof = (t.crs.to_epsg(), t.shape, tuple(t.transform)[:6], t.dtypes[0])
@@ -48,7 +54,9 @@ def main() -> int:
     with rasterio.open(DATA / "dotted_h19_5_d1_5_nan.tif") as s:
         base = np.nan_to_num(s.read(1)) > 0
     ok(int(foot.sum()) == 5167373 and tprof[:2] == (32611, (3730, 3292)), "template: EPSG:32611, 3730x3292, 5,167,373 px footprint")
-    slots = tuple(s for s in ("primary", "secondary", "tertiary", "quaternary", "quinary_probe") if s in man)
+    # both Session-4's Addendum-E probe and Session-5's H28-1 research slot are verified here
+    slots = tuple(s for s in ("primary", "secondary", "tertiary", "quaternary", "quinary_probe",
+                              "h28_1_research") if s in man)
     for slot in slots:
         m = man[slot]
         for variant in ("nan", "allfinite"):

@@ -15,7 +15,7 @@ from sklearn.ensemble import HistGradientBoostingClassifier
 
 from . import grid, paths, thinning
 
-BUFFER_PX = 6           # 600 m buffer around each test quadrant
+BUFFER_PX = 6  # 600 m buffer around each test quadrant
 PRE_THIN_FRAC = 0.0245  # pre-thinning ridge budget matching the H19-5 -> d1.5 operating density
 
 
@@ -47,6 +47,7 @@ def fit_predict_oof_probabilities(
     labels: np.ndarray,
     fold: np.ndarray,
     *,
+    extra_features: np.ndarray | None = None,
     neg_ratio: int = 10,
     seed: int = 2026,
     extra: np.ndarray | None = None,
@@ -54,14 +55,23 @@ def fit_predict_oof_probabilities(
 ) -> np.ndarray:
     """Predict strictly out-of-fold fault probabilities across all 4 spatial quadrants.
 
-    `extra` optionally appends further label-free bands (shape (n_footprint_px, k), footprint order,
-    may be a memmap) to the 32-band prepared matrix; everything else - hyper-parameters, buffer,
-    negative subsample, seeds - is identical, so arms are directly comparable (Addendum D).
-    Rows are assembled and predicted in chunks: the box has 3 GB of RAM and the full augmented
-    matrix would not fit resident.
+    `extra_features` (Session-5 H28-1 arm) and `extra` (Session-4 Addendum-D arm) are aliases: both
+    append further label-free bands, in row-major footprint order, to the prepared matrix. `extra` may
+    be a memmap or a strided column view and is gathered in chunks, because the box has 3 GB of RAM and
+    the full augmented matrix would not fit resident. Everything else - hyper-parameters, 600 m buffer,
+    negative subsample, seeds - is identical across arms, so they are directly comparable.
     """
+    if extra is None and extra_features is not None:
+        extra = extra_features
     X_foot = np.load(paths.PREPARED_FEATURES, mmap_mode="r")
     foot_rc = np.argwhere(foot)
+    if X_foot.shape[0] != len(foot_rc):
+        raise ValueError(
+            f"prepared features have {X_foot.shape[0]} rows for {len(foot_rc)} footprint cells"
+        )
+    if extra is not None:
+        if extra.ndim != 2 or extra.shape[0] != len(foot_rc):
+            raise ValueError("extra/extra_features must be a 2-D row matrix in row-major footprint order")
     y_foot = labels[foot]
     oof_prob = np.zeros(grid.SHAPE, dtype=np.float32)
 

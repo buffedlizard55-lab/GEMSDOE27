@@ -1,0 +1,270 @@
+{
+  "status": "research-only full-map candidate; no weekly slot used; no live score",
+  "holdout_gate_passed": true,
+  "holdout_evidence": "evidence/h28_1_edge_holdout.json",
+  "holdout_mean_gain": 0.002948838794400959,
+  "holdout_folds_improved": 3,
+  "holdout_positive_seeds": 9,
+  "prepared_feature_metadata": {
+    "schema": 2,
+    "n_features": 32,
+    "lidar_names": [
+      "lidar_ex_max",
+      "lidar_ex_mean",
+      "lidar_step_max",
+      "lidar_lapneg_max",
+      "lidar_lappos_max",
+      "lidar_downface_max",
+      "lidar_upface_max",
+      "lidar_cross_max",
+      "lidar_relief",
+      "lidar_coh100"
+    ],
+    "sha256": "83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc"
+  },
+  "edge_feature_metadata": {
+    "schema": 1,
+    "feature_names": [
+      "potential_mag_edge_300m",
+      "potential_mag_edge_1000m",
+      "potential_grav_edge_300m",
+      "potential_grav_edge_1000m",
+      "potential_edge_concordance_1000m",
+      "potential_edge_orientation_agreement_1000m"
+    ],
+    "shape": [
+      5167373,
+      6
+    ],
+    "grid_shape": [
+      3730,
+      3292
+    ],
+    "crs": "EPSG:32611",
+    "source_bands": {
+      "magnetic": {
+        "band": 2,
+        "description": "rtp"
+      },
+      "gravity": {
+        "band": 13,
+        "description": "iso_grav_anom"
+      }
+    },
+    "valid_cells": 5164312,
+    "parameters": {
+      "pixel_size_m": 100.0,
+      "sigmas_px": [
+        3.0,
+        10.0
+      ],
+      "gradient_percentiles": [
+        5,
+        95
+      ],
+      "orientation_threshold_percentile": 10,
+      "outside_mask": 0.0
+    },
+    "inputs": {
+      "template": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+      "training_features": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+      "prepared_features": "83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc",
+      "transform_code": "96dbe727891f06cd42e0f111df3696d8995cf2e62bd522c8781677365e024cf1"
+    },
+    "sha256": "04c5fb77f07dacf35e508ba8668848b4c593840b840a89175ef87644a68b12a2"
+  },
+  "model": {
+    "estimator": "sklearn.ensemble.HistGradientBoostingClassifier",
+    "parameters": {
+      "max_iter": 100,
+      "max_leaf_nodes": 31,
+      "learning_rate": 0.08,
+      "l2_regularization": 5.0,
+      "random_state": 2026
+    },
+    "seed": 2026,
+    "positive_training_rows": 60988,
+    "negative_training_rows": 609880,
+    "negative_to_positive_cap": 10,
+    "prediction_chunk_rows": 100000,
+    "features": 38
+  },
+  "prediction": {
+    "prethin_budget_fraction": 0.0245,
+    "dot_thin_distance_px": 1.5,
+    "prune_catalogue_distance_px": 1.0,
+    "topology_rule": "T-v2, z>=3, mutual links deduplicated, at least 300 m from pruned model",
+    "catalogue_graph_components": 3199,
+    "selected_links": 345,
+    "base_pixels_before_prune": 67608,
+    "base_pixels_after_prune": 58092,
+    "base_pixels_pruned": 9516,
+    "topology_pixels_nonredundant": 983,
+    "emitted_pixels": 59075,
+    "known_catalogue_overlap_pixels": 0,
+    "outside_footprint_pixels": 0
+  },
+  "code_sha256": {
+    "builder": "12cee167a41067e4f41bab4ac0f85a22cb5ed87fa944e048a83d7313b8d46662",
+    "transform": "96dbe727891f06cd42e0f111df3696d8995cf2e62bd522c8781677365e024cf1",
+    "oof_detector": "8e4b6a19dfb40a2e4527b10001593cae1049acba494fee575108bb7a8a5dc905"
+  },
+  "input_sha256": {
+    "training_raster": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+    "template": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+    "labels": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+    "prepared_features": "83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc",
+    "prepared_metadata": "f394a1f04554805c62a6e95d5ed9fb77f064ca99d4f27ed1a675d44f280c4cfa",
+    "edge_features": "04c5fb77f07dacf35e508ba8668848b4c593840b840a89175ef87644a68b12a2",
+    "edge_metadata": "03a531975f718d2b97643f2bde9f473138a7db651a49057b8dd84edd432e2a17",
+    "holdout_evidence": "97c285a8c127e8e338a88b1d5a403669bc90f8dd462f754fc53ecd64f67491e3"
+  },
+  "geotiff": {
+    "nan": {
+      "file": "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.tif",
+      "bytes": 1630604,
+      "sha256": "61f9b53de42786e6d48afa50fd453a87c57d5d7b9b626c7dcf28c2dfbd20f411",
+      "variant": "nan",
+      "checks": {
+        "grid_matches_template": {
+          "pass": true,
+          "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+          "hard": true
+        },
+        "single_band_float32": {
+          "pass": true,
+          "detail": "count=1 dtype=float32",
+          "hard": true
+        },
+        "inside_footprint_all_finite": {
+          "pass": true,
+          "detail": "0 non-finite inside 5167373 px",
+          "hard": true
+        },
+        "inside_footprint_in_0_1": {
+          "pass": true,
+          "detail": "min=0 max=1",
+          "hard": true
+        },
+        "no_infinities_anywhere": {
+          "pass": true,
+          "detail": "np.isinf(whole array) is empty",
+          "hard": true
+        },
+        "outside_footprint_is_nan": {
+          "pass": true,
+          "detail": "7111787/7111787 NaN outside the footprint (as in the sample)",
+          "hard": true
+        },
+        "nodata_tag_is_nan": {
+          "pass": true,
+          "detail": "nodata=NaN declared, same as the sample submission",
+          "hard": true
+        },
+        "masked_read_in_0_1": {
+          "pass": true,
+          "detail": "masked count=5167373, min=0, max=1",
+          "hard": true
+        },
+        "nan_aware_range_in_0_1": {
+          "pass": true,
+          "detail": "nanmin=0 nanmax=1",
+          "hard": true
+        },
+        "strict_whole_array_range_ignoring_nan_is_informational": {
+          "pass": false,
+          "detail": "A validator that compares NaN directly would fail ANY file with NaN outside the footprint, including the sample. Informational only; use the allfinite fallback if the portal rejects.",
+          "hard": false
+        },
+        "profile_driver_gtiff": {
+          "pass": true,
+          "detail": "GTiff",
+          "hard": false
+        },
+        "compression_like_sample": {
+          "pass": true,
+          "detail": "Compression.lzw",
+          "hard": false
+        }
+      },
+      "hard_checks_passed": true,
+      "hard_failures": [],
+      "nonzero_inside_px": 59075,
+      "value_set_inside": [
+        0.0,
+        1.0
+      ]
+    },
+    "allfinite": {
+      "file": "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-allfinite.tif",
+      "bytes": 863814,
+      "sha256": "60a7930a5ac229bb8a3a81656de49c1e228eab8398e0b26316972d516a2951f5",
+      "variant": "allfinite",
+      "checks": {
+        "grid_matches_template": {
+          "pass": true,
+          "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+          "hard": true
+        },
+        "single_band_float32": {
+          "pass": true,
+          "detail": "count=1 dtype=float32",
+          "hard": true
+        },
+        "inside_footprint_all_finite": {
+          "pass": true,
+          "detail": "0 non-finite inside 5167373 px",
+          "hard": true
+        },
+        "inside_footprint_in_0_1": {
+          "pass": true,
+          "detail": "min=0 max=1",
+          "hard": true
+        },
+        "no_infinities_anywhere": {
+          "pass": true,
+          "detail": "np.isinf(whole array) is empty",
+          "hard": true
+        },
+        "outside_footprint_is_zero_and_finite": {
+          "pass": true,
+          "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+          "hard": true
+        },
+        "strict_whole_array_range": {
+          "pass": true,
+          "detail": "whole-array min=0 max=1",
+          "hard": true
+        },
+        "profile_driver_gtiff": {
+          "pass": true,
+          "detail": "GTiff",
+          "hard": false
+        },
+        "compression_like_sample": {
+          "pass": true,
+          "detail": "Compression.lzw",
+          "hard": false
+        }
+      },
+      "hard_checks_passed": true,
+      "hard_failures": [],
+      "nonzero_inside_px": 59075,
+      "value_set_inside": [
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "zip": {
+    "file": "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.zip",
+    "bytes": 355484,
+    "sha256": "6570c7a97db51c238750f66cb3e828935f75a091dca8f7252122a961ff5daa11"
+  },
+  "note": "27GEMSDOE H28-1 research | OOF +0.0029 paired DTI; 3/4 folds, 9/10 seeds; no live score | id 1113fba5f6cb | research only; not yet live-scored",
+  "note_chars": 142,
+  "content_id": "1113fba5f6cb",
+  "candidate_files_written": true,
+  "leaderboard_upload": false,
+  "weekly_slot_used": false
+}

@@ -60,6 +60,13 @@
     },
     {
       "source": "sibling24",
+      "path": "data/external/lidar_scarp_features.json",
+      "bytes": 3531,
+      "sha256": "9ef0df6e87598a8b0cd52fe821661e5fdb3a00568c5d9b1c5d61fd6b242dcd41",
+      "what": "owner-repository metadata for the 12-band LiDAR raster: embedded band names, quantization, source note and available descriptor semantics"
+    },
+    {
+      "source": "sibling24",
       "path": "data/external/geodawn_extensions_u8.tif",
       "bytes": 27132925,
       "sha256": "a35a9c6d2a14786f4dab85481ee59769213072f5dab5b2535ea82ae4d9bb7d9b",

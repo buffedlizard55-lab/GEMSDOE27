@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "generated_utc": "2026-10-02T23:12:22Z",
+  "status": "research candidate only; not one of the current four weekly slots; unscored",
+  "holdout_evidence": "evidence/h28_1_edge_holdout.json",
+  "candidate": {
+    "hypothesis": "H28-1 + T-v2 + H27-4 r1",
+    "content_id": "1113fba5f6cb",
+    "nan": "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.tif",
+    "allfinite": "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-allfinite.tif",
+    "zip": "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.zip",
+    "note": "27GEMSDOE H28-1 research | OOF +0.0029 paired DTI; 3/4 folds, 9/10 seeds; no live score | id 1113fba5f6cb | research only; not yet live-scored",
+    "sha256_nan": "61f9b53de42786e6d48afa50fd453a87c57d5d7b9b626c7dcf28c2dfbd20f411",
+    "bytes_nan": 1630604,
+    "emitted_px": 59075,
+    "checks": "checks-gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.json",
+    "format_verified": true,
+    "holdout_mean_gain": 0.002948838794400959,
+    "holdout_folds_improved": 3,
+    "holdout_positive_seeds": 9
+  }
+}

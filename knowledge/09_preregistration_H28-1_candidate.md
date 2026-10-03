@@ -1,0 +1,28 @@
+# Productionization preregistration: H28-1 full-map research candidate
+
+**Written after the frozen H28-1 gate passed and before implementing the full-area exporter.** Holdout evidence: `evidence/h28_1_edge_holdout.json`; protocol: `knowledge/08_preregistration_H28-1.md`. The intended artifact is an **unscored research candidate**, not an upload or a fourth weekly slot.
+
+## Why build it
+
+H28-1 + the already-gated T-v2/H27-4 stack cleared its pre-registered gate on seeds 140–149: mean paired ΔDTI `+0.00294884`, positive in 3/4 folds and 9/10 seeds against the current OOF best. This evidence is catalogue-internal only, with a negative NE fold and one negative seed. A full-area raster is useful for a future controlled A/B decision, but its live effect is unknown. No slot is used by generating, packaging, or publishing this file.
+
+## Frozen full-map model and candidate recipe
+
+1. Use only the existing 32-column matrix (`features.npy`, corrected metadata schema 2, SHA-256 `83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc`) plus the exact six H28-1 columns from `potential_edges.py` and its hash-pinned feature cache. The same verified source bands are training band 2 `rtp` and band 13 `iso_grav_anom`; no labels enter edge-feature construction.
+2. Train one `HistGradientBoostingClassifier` on all in-footprint catalogue-positive cells and a deterministic sample of at most 10 negatives per positive, without replacement, using RNG/model seed `2026`. Freeze the OOF model parameters: `max_iter=100`, `max_leaf_nodes=31`, `learning_rate=0.08`, `l2_regularization=5.0`. Predict all footprint rows in fixed-size chunks; no tuning from the holdout results.
+3. Apply the existing `ridge_nms(sigma=1)`, `PRE_THIN_FRAC=0.0245` footprint budget, and `dot_thin(d=1.5)`, excluding mapped labels as the current detector does. Remove base dots at catalogue distance `<=1` pixel (H27-4 r1). Build the existing labelled-catalogue graph and select the frozen T-v2 `z>=3`, mutual-deduplicated links. Add only T-v2 dots at least `metric.RADIUS_PX` (300 m) from the pruned base. This is exactly the full-map analogue of the passed `H28_edge_best_Tv2_prune_r1` variant; do not add any new layer, filter, or threshold.
+4. Fail closed if source descriptions/grid, feature-cache hashes, probabilities, footprint, labels, or no-known-label-overlap checks fail. Write a unique content-hashed single-band `float32` GeoTIFF with exact 0/1 in the footprint and `NaN` outside (`nodata=NaN`), an all-finite zero-outside fallback, a one-TIFF ZIP, note <=200 characters, and an independent format/range/label-overlap report.
+5. Keep the three existing weekly slot artifacts and their manifest entries untouched. Store this separately as a `research_candidate`; expose it on the Research page, not as Slot 1/2/3. Do not upload or claim a leaderboard score.
+
+The candidate is not itself a holdout result: the one full-area model is fit on all catalogue labels, and the organizers' expert-created labels remain unseen. Its presence on the site means only that the fixed research recipe was serialized and format-checked. A human may choose a future slot only after weighing the holdout result and the existing weekly decision tree; the agent will not access DrivenData.
+
+## Execution record (2026-10-02)
+
+The frozen recipe ran successfully with builder `scripts/build_h28_1_candidate.py` (SHA-256 `12cee167a41067e4f41bab4ac0f85a22cb5ed87fa944e048a83d7313b8d46662`). The full-fit estimator used 60,988 positive plus 609,880 sampled negative rows and all 38 inputs (32 prepared + 6 H28); seed 2026. The serialized raster contains 59,075 `1.0` cells, exactly 0/1 within the footprint and zero known-label overlap. T-v2 selected 345 links; 983 nonredundant graph pixels were added to the 58,092-pixel post-prune base.
+
+- Main GeoTIFF: `docs/downloads/gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.tif`; content id `1113fba5f6cb`; SHA-256 `61f9b53de42786e6d48afa50fd453a87c57d5d7b9b626c7dcf28c2dfbd20f411`; 1,630,604 bytes.
+- All-finite fallback SHA-256: `60a7930a5ac229bb8a3a81656de49c1e228eab8398e0b26316972d516a2951f5`; ZIP is recorded with checksum in `docs/downloads/checks-gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.json`.
+- Independent `scripts/verify_downloads.py` passed with 0 failures across the original three slots and this separate research candidate. It checked EPSG:32611, 3730×3292, 100 m transform `(100, 0, 243350, 0, -100, 4508550)`, one float32 band, inside `[0,1]`, no infinities, exact 0/1 values, all 7,111,787 outside pixels as NaN with nodata=NaN (matching the sample), a zero-outside no-nodata fallback, catalogue overlap, ZIP contents, note length, and the unchanged original-slot relationships. Original three GeoTIFF and `manifest.json` SHA-256 values were rechecked and unchanged.
+- Note (142 characters): `27GEMSDOE H28-1 research | OOF +0.0029 paired DTI; 3/4 folds, 9/10 seeds; no live score | id 1113fba5f6cb | research only; not yet live-scored`.
+
+This was a candidate-file build only: `weekly_slot_used=false`, `leaderboard_upload=false`, and no public score is claimed. At build time the branch carried three weekly candidates; the subsequent mainline merge added its independent Slot 4 (`23ad46a4d7ba`). The H28 builder writes only its uniquely named files and separate manifest; it does not touch any of the current four weekly artifacts or their manifest.

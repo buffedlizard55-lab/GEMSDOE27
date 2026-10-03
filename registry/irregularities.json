@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-02 (Session 4: 8 items added - the unregistered h18-4 score, the SGMC pixel-count discrepancy, the restore_data .part bug and its fix, the proxy's blindness to the far field, the signed/NaN prepared band, the underpowered D-4 control, a scratch AUC artefact, and the unverified second-moment threshold)",
+ "generated": "2026-10-02 | Session 4 additions: 8 items added - the unregistered h18-4 score, the SGMC pixel-count discrepancy, the restore_data .part bug and its fix, the proxy's blindness to the far field, the signed/NaN prepared band, the underpowered D-4 control, a scratch AUC artefact, and the unverified second-moment threshold)",
  "items": [
   {
    "id": "prompt-verbatim-unavailable",
@@ -158,6 +158,18 @@
    "action": "Fixed in Session 3 with `tests/conftest.py`: a `requires_rasters` marker plus a collection hook that skips with the missing file names in the reason. Applied to the pre-existing test and to the new `test_verify_downloads_still_passes_with_four_slots`. Verified in a clean clone without `data_cache`: 45 passed, 2 skipped; and locally after `restore_data.py`: 47 passed, 0 skipped. A red suite now always means a real failure. Consequence to record honestly: **CI does not exercise the two raster-dependent checks** - they run locally and must be re-run before any release. Adding a data-restore step to CI needs a token with read access to the sibling repositories, which is an access request for the owner, not something the agent can grant itself."
   },
   {
+   "id": "lidar-feature-name-mismatch",
+   "severity": "medium",
+   "issue": "The prior scripts/prepare_data.py assigned feature names that did not match positional bands 1-10 of the restored lidar_scarp_features_u8.tif. The pinned sibling sidecar and embedded raster descriptions provide the correct order. No numerical misread was demonstrated: rebuilding after correcting labels produced the identical feature-matrix SHA-256 83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc.",
+   "action": "Corrected scripts/prepare_data.py to assert the 12 embedded band descriptions and use the verified names; added the sidecar to data/manifest.json and a regression test. The corrected preparation evidence is evidence/data_preparation.json. Old prepared-feature name associations are withdrawn; raw-band channel_auc.py reads embedded raster descriptions directly and is unaffected. No claim of improved model performance follows from this metadata correction."
+  },
+  {
+   "id": "dem-inventory-count-corrected",
+   "severity": "low",
+   "issue": "Prior project prose reported 1,701 1 m DEM tiles. The restored data_cache/dem_links.json and pinned sidecar instead report 716 links/tiles total, with 706 successful derived tiles and 10 failures.",
+   "action": "Corrected active prose and evidence/review_passes.md. This is an owner-mirror inventory count; it is not an independent official USGS tile-download audit."
+  },
+  {
    "id": "h18-4-score-unregistered",
    "severity": "high",
    "issue": "The group's single most informative live measurement was invisible to this repository for three sessions. 16GEMSDOE H18-4 (content id aef8f42c, sha256 736f62c2da58...) - 57,783 px of USGS State Geologic Map Compilation faults all >=300 m from the catalogue, owner-reported score 0.0360 - is the only scored emission anywhere in the programme whose pixels are all far-field, and it was not a row in registry/live_scores.json, so evidence/live_inversion.json inverted 20 pairs without it.",
@@ -197,7 +209,7 @@
    "id": "scratch-lidar-auc-artifact",
    "severity": "low",
    "issue": "A Session-4 screening script (scratch, never committed) computed LiDAR descriptor statistics over ALL footprint pixels including the 24.7% LiDAR-invalid area where the descriptor is 0, which pushed an 'SGMC-only vs background' AUC to 0.4831 even though the means clearly favour SGMC-only (136.4 vs 86.2).",
-   "action": "Corrected by restricting descriptor statistics to lidar:valid; the corrected means are the ones quoted in knowledge/08 section 1. The repository's published evidence/channel_auc.json is NOT affected - scripts/channel_auc.py maps 0 -> NaN for every uint8 layer and drops non-finite values on both sides (verified: lidar:lappos_max n_pos = 48,441 of 60,988 catalogue px). Verified by reading the script, not assumed."
+   "action": "Corrected by restricting descriptor statistics to lidar:valid; the corrected means are the ones quoted in knowledge/10 section 1. The repository's published evidence/channel_auc.json is NOT affected - scripts/channel_auc.py maps 0 -> NaN for every uint8 layer and drops non-finite values on both sides (verified: lidar:lappos_max n_pos = 48,441 of 60,988 catalogue px). Verified by reading the script, not assumed."
   },
   {
    "id": "second-moment-threshold-unverified",

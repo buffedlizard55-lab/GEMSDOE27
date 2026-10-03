@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-02 (Session 4: added the three hash-pinned GDR 1391 layers the workflow fetches, and the sibling provenance record they are pinned to)",
+ "generated": "2026-10-02 | Session 4 additions: added the three hash-pinned GDR 1391 layers the workflow fetches, and the sibling provenance record they are pinned to)",
  "note": "Verification status is stated per row; 'not read' means exactly that. The agent never fetches drivendata.org after the three one-off reads recorded here.",
  "sources": [
   {
@@ -219,6 +219,18 @@
    "status": "secondary quote only - the underlying drivendata.org page was NOT fetched by this agent (AGENTS.md hard rule); copied verbatim through the GitHub API",
    "accessed": "2026-10-02",
    "evidence": "read_utc 2026-10-02, rows 1-50. top: 0.3195 DARD (12 subs), 0.3128 nchuzhoy (2), 0.3042 alexoktaba (19), 0.2998 Batik Shirt Brothers (17), 0.2941 xiaofanhu (7), 0.2919 joeyfezster (18), 0.2888 ndavis7 (7), 0.2868 GrigorSargsyan (8), 0.2862 mzoorob (21), 0.2854 HardcoreTechGod (6). gap_to_rank5 0.0464, gap_to_rank1 0.0718, relative gain needed 0.29. Five rows coincide by VALUE with owner-reported artifacts (0.2477 #16, 0.1922 #28, 0.1894 #30, 0.1855 #33, 0.1563 #41) - value matches only, no ownership inference drawn.",
+   "feed": false
+  },
+  {
+   "id": "usgs-3dep-1m",
+   "title": "USGS 3D Elevation Program (3DEP), 1-meter DEM downloadable data collection",
+   "publisher": "U.S. Geological Survey",
+   "url": "https://data.usgs.gov/datacatalog/data/USGS:77ae0551-c61e-4979-aedd-d797abdcde0e",
+   "category": "candidate-data-and-provenance",
+   "used_for": "Official provenance/context for the owner-mirrored LiDAR-derived terrain descriptors and H28-2 multi-scale scarp hypothesis",
+   "status": "official catalog page read 2026-10-02; public-domain description and 1-m bare-earth DEM coverage verified; tile binary not retrieved from this sandbox",
+   "accessed": "2026-10-02",
+   "evidence": "USGS record states 1-m 3DEP DEMs are a tiled bare-earth elevation collection produced from high-resolution lidar and identifies 3DEP products as public domain. Repository lidar_scarp_features_u8.tif is a hash-pinned owner mirror/derivative, not a direct USGS download in this session. The local DEM inventory has 716 confirmed links, 706 successful derived tiles, 10 failed tiles (see data_cache/dem_links.json and pinned sibling metadata).",
    "feed": false
   },
   {
