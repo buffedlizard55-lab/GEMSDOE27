@@ -20,7 +20,15 @@ import rasterio
 from scipy.ndimage import distance_transform_edt
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from gems27 import candidates, grid, newinfo, oof_detector, paths, submission, thinning  # noqa: E402
+from gems27 import (  # noqa: E402
+    candidates,
+    grid,
+    newinfo,
+    oof_detector,
+    paths,
+    submission,
+    thinning,
+)
 
 DATE = "20261002"
 FAMILY = "gems27"

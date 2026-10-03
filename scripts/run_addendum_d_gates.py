@@ -30,7 +30,16 @@ import numpy as np
 from scipy.ndimage import distance_transform_edt
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from gems27 import grid, graph_value, holdout, links, metric, newinfo, oof_detector, paths  # noqa: E402
+from gems27 import (  # noqa: E402
+    graph_value,
+    grid,
+    holdout,
+    links,
+    metric,
+    newinfo,
+    oof_detector,
+    paths,
+)
 from gems27.candidates import RULE, SPACING, dedupe_mutual, evidence_score  # noqa: E402
 from gems27.graph import build_graph  # noqa: E402
 

@@ -36,7 +36,7 @@ from scipy.spatial import cKDTree
 
 from . import paths
 from .graph import FaultGraph
-from .links import PX_KM, _angle_between, _azimuth_deg, local_strike_domain, strike_compat
+from .links import PX_KM, _azimuth_deg, local_strike_domain, strike_compat
 
 # (drow, dcol, name) - integer steps so the oriented mean is exact (no interpolation)
 ORIENTS = ((1, 0, "ns"), (1, 1, "ne"), (0, 1, "ew"), (1, -1, "nw"))

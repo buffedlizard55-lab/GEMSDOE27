@@ -171,7 +171,6 @@ def main() -> int:
             "efficiency_by_band": {bn: round(out["pooled"][f"{arm}_band_{bn}"]["efficiency"], 5)
                                    for bn in band_names},
         }
-    base_A = out["pooled"]["base_habitatA"]
     out["verdict"] = {
         "shippable_habitat_A_efficiency": {arm: out["pooled"][f"{arm}_habitatA"]["efficiency"] for arm in arms},
         "shippable_habitat_A_mean_dti": {arm: out["pooled"][f"{arm}_habitatA"]["mean_dti"] for arm in arms},

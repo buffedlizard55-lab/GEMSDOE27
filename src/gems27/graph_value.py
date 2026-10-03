@@ -124,7 +124,6 @@ def link_connectivity_values(fg: FaultGraph, links: pd.DataFrame, *,
                              L_m: float = L_DOMAIN_M) -> pd.DataFrame:
     """Per-link network value for a set of candidate links (see module docstring)."""
     links = links.reset_index(drop=True)
-    n = fg.n_components
     out = pd.DataFrame(index=links.index)
     out["merge_len_km"] = (fg.comp_length_px[links.comp_src.to_numpy(int)] * PX_KM
                            + fg.comp_length_px[links.comp_tgt.to_numpy(int)] * PX_KM
