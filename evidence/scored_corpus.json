@@ -1,7 +1,7 @@
 {
  "note": "Scored submission rasters recovered from sibling repos and authenticated by SHA-256 against registry/live_scores.json. Scores are owner-reported, not DrivenData receipts.",
- "n_wanted": 25,
- "n_matched": 20,
+ "n_wanted": 26,
+ "n_matched": 21,
  "matched": [
   {
    "sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
@@ -152,6 +152,16 @@
    "registry": "GEMSDOE27/registry/live_scores.json",
    "path": "docs/downloads/gems10-h16-continuation-20260927T065521077735Z-3431b83c7c.tif",
    "local": "scored_corpus/GEMSDOE10/gems10-h16-continuation-20260927T065521077735Z-3431b83c7c.tif"
+  },
+  {
+   "sha256": "736f62c2da585677ef472cab0f9bc63bd15c50c340beb4a0f4627fafd3d1c853",
+   "label": "16GEMSDOE h18-4 usgs-geologic-map-faults-gap (aef8f42c)",
+   "repo": "buffedlizard55-lab/16GEMSDOE",
+   "score": 0.036,
+   "corroboration": "task_statement_and_16GEMSDOE_site_listing",
+   "registry": "GEMSDOE27/registry/live_scores.json",
+   "path": "docs/downloads/gems16-h18-4-usgs-geologic-map-faults-gap-20260930-aef8f42c-nan.tif",
+   "local": "scored_corpus/16GEMSDOE/gems16-h18-4-usgs-geologic-map-faults-gap-20260930-aef8f42c-nan.tif"
   },
   {
    "sha256": "c11e495e5817730ad5f0fdc368b810f79050cbb6bd65e98c98123b7921ed336b",

@@ -192,6 +192,21 @@
    "owner_reported_public_score": null,
    "status": "UNSCORED candidate built 2026-10-02 (Session 3); modelled 0.2484 geometric / 0.2781 hybrid",
    "corroboration": "evidence/candidate_model_scores.json; 79 checks pass in scripts/verify_downloads.py"
+  },
+  {
+   "label": "16GEMSDOE h18-4 usgs-geologic-map-faults-gap (aef8f42c)",
+   "repo": "buffedlizard55-lab/16GEMSDOE",
+   "sha256": "736f62c2da585677ef472cab0f9bc63bd15c50c340beb4a0f4627fafd3d1c853",
+   "owner_reported_public_score": 0.036,
+   "corroboration": "task_statement_and_16GEMSDOE_site_listing",
+   "registered_utc": "2026-10-02 (Session 4)",
+   "provenance": {
+    "sibling_record": "16GEMSDOE docs/data/submissions.json, candidate key 'sgmc-gap' (hid 'H18-4', content_id 'aef8f42c'), files.tif.sha256 == this sha256; read through the GitHub API on 2026-10-02",
+    "construction_claim": "Faults from the USGS State Geologic Map Compilation (Nevada and California) lying >300 m from every catalogue fault, thinned to 1-pixel lines. No model, no training.",
+    "scored_pixels_claimed_by_sibling": 57783,
+    "external_data_provenance": "https://mrdata.usgs.gov/geology/state/shp/NV.zip (sha256 3b333ac025e59aae7f0d827db45ba32c425cf867eb341561a788af1de186b76b) and .../CA.zip (sha256 78765ba4428df9f25a84f86e0b2529bd0508fc8a2cf65d2f41a830e82bccfd58), both verified downloaded by a GitHub runner in 16GEMSDOE evidence/ci/external_verification.json (2026-09-30)"
+   },
+   "irregularity": "Absent from this registry in Sessions 1-3, so the Session-3 corpus of 20 hash-authenticated rasters never included it. It is the only live score in the group's history that measures an emission placed entirely >300 m from the catalogue. See registry/irregularities.json id 'h18-4-score-unregistered'."
   }
  ],
  "27GEMSDOE": [
@@ -309,5 +324,6 @@
   "relative_gain_needed_for_rank1": 0.29,
   "caution": "The five rows whose values coincide with owner-reported artifacts (0.2477 #16 wbg1, 0.1922 #28 smrtdoog5, 0.1894 #30 SDCF9, 0.1855 #33 extradr19, 0.1563 #41 smashi34) are matches BY VALUE ONLY. A 4-decimal coincidence does not identify an account and no inference about ownership is drawn or should be drawn.",
   "why_it_matters": "Rank 2 (nchuzhoy) reached 0.3128 with only TWO submissions, and rank 5 reached 0.2941 with seven. Session 3's inversion shows the group's best file ever earned 0.508|G| of credit while 0.3195 at 60,069 px needs 0.570|G|. A team scoring 0.31+ on two attempts is evidence of a materially better DETECTOR, not of a better emission schedule - which is exactly where this programme is stuck."
- }
+ },
+ "note_session4": "Session 4 (2026-10-02): added the 16GEMSDOE H18-4 SGMC-gap probe (0.0360), the 21st hash-authenticated (raster, score) pair; inverted in evidence/sgmc_gap_inversion.json."
 }

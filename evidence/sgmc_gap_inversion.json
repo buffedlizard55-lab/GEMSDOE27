@@ -1,0 +1,271 @@
+{
+  "instrument_reproduction_of_session3_anchors": {
+    "dotted_h19_5_d1_5 (0.2477)": {
+      "credit_TPw_published_session3": 5286.0,
+      "credit_TPw_this_script": 5286.130270299154,
+      "credit_rel_diff": 2.4644400142695823e-05,
+      "concentration_published_session3": 5.67,
+      "concentration_this_script": 5.666616120896697,
+      "rho_published_session3": 1.43,
+      "rho_this_script": 1.429104058177201,
+      "reproduced_within_2pct": true
+    },
+    "h19_5_solid (0.1922)": {
+      "credit_TPw_published_session3": 6189.0,
+      "credit_TPw_this_script": 6188.804163187549,
+      "credit_rel_diff": 3.164272296826298e-05,
+      "concentration_published_session3": 5.66,
+      "concentration_this_script": 5.663111557389405,
+      "rho_published_session3": 2.46,
+      "rho_this_script": 2.4599778597568105,
+      "reproduced_within_2pct": true
+    }
+  },
+  "probe": {
+    "label": "16GEMSDOE h18-4 usgs-geologic-map-faults-gap (aef8f42c)",
+    "repo": "buffedlizard55-lab/16GEMSDOE",
+    "file": "scored_corpus/16GEMSDOE/gems16-h18-4-usgs-geologic-map-faults-gap-20260930-aef8f42c-nan.tif",
+    "sha256": {
+      "n_scored_px": 121131,
+      "c_blind": 0.08938629147603268,
+      "frac_dots_ge_3px_from_catalogue": 0.8139865104721334,
+      "frac_dots_ge_10px_from_catalogue": 0.5940097910526619,
+      "median_dot_catalogue_distance_px": 14.560219778561036,
+      "score": 0.1922,
+      "rho": 2.4599778597568105,
+      "TPw": 6188.804163187549,
+      "credit_fraction": 0.5062045403300987,
+      "concentration": 5.663111557389405
+    },
+    "sha256_matches_registry_and_sibling_record": true,
+    "owner_reported_public_score": 0.036,
+    "score_provenance": "task statement + 16GEMSDOE site listing (owner-reported; not a DrivenData receipt)",
+    "construction_claim": "USGS State Geologic Map Compilation (NV+CA) faults >300 m from every catalogue fault, thinned to 1-px lines; no model, no training",
+    "external_source": [
+      "https://mrdata.usgs.gov/geology/state/shp/NV.zip",
+      "https://mrdata.usgs.gov/geology/state/shp/CA.zip"
+    ]
+  },
+  "construction_verified_from_raster": {
+    "profile": {
+      "crs_epsg": 32611,
+      "shape": [
+        3730,
+        3292
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "dtype": "float32",
+      "nodata_is_nan": true,
+      "count": 1
+    },
+    "value_set_finite": [
+      0.0,
+      1.0
+    ],
+    "values_are_0_1_only": true,
+    "n_positive_in_footprint": 57783,
+    "n_positive_outside_footprint": 0,
+    "n_positive_on_catalogue_pixels": 0,
+    "min_catalogue_distance_px_of_positives": 3.1622776601683795,
+    "frac_positives_at_least_3px_from_catalogue": 1.0,
+    "frac_positives_at_least_4px_from_catalogue": 0.9654915805686793,
+    "n_2x2_positive_blocks": 34,
+    "frac_positives_on_restored_sgmc_pixel": 0.7965664641849679,
+    "frac_positives_within_1px_of_restored_sgmc": 0.9998788571033003,
+    "matches_sibling_claimed_scored_px": true
+  },
+  "emission": {
+    "n_scored_px": 57783,
+    "crowding_dots_in_kernel": 4.314902305603027
+  },
+  "instrument": {
+    "kernel_area_px": 9.380297810508182,
+    "footprint_px": 5167373,
+    "catalogue_px": 60988,
+    "restored_sgmc_px_in_footprint": 83593
+  },
+  "inversion": {
+    "blind_lattice_this_repo": {
+      "abs_G": 12225.896194356133,
+      "c_blind_credit_per_truth_px": 0.038401427099129,
+      "credit_if_truth_uniform_TPw": 469.4918614290857,
+      "rho_matched_over_TP_uniform_truth": 2.7314895094712006,
+      "MPw_implied": 2072.3403708622322,
+      "TPw_central_uniform_closure": 758.6850923924743,
+      "TPw_upper_bound_MP0": 773.7141522939731,
+      "TPw_lower_bound_MPN": 354.6593577734253,
+      "concentration_central": 1.6159707009257065,
+      "concentration_upper_bound": 1.6479820330407124,
+      "concentration_lower_bound": 0.7554110878384093,
+      "credit_fraction_central": 0.06205558106592691
+    },
+    "sibling_lattice": {
+      "abs_G": 12503.0,
+      "c_blind_credit_per_truth_px": 0.038401427099129,
+      "credit_if_truth_uniform_TPw": 480.13304302040984,
+      "rho_matched_over_TP_uniform_truth": 2.7314895094712006,
+      "MPw_implied": 2093.870853051849,
+      "TPw_central_uniform_closure": 766.5674152478108,
+      "TPw_upper_bound_MP0": 781.7526188557614,
+      "TPw_lower_bound_MPN": 362.69782433521357,
+      "concentration_central": 1.5965729215917035,
+      "concentration_upper_bound": 1.6281999962717209,
+      "concentration_lower_bound": 0.7554110878384093,
+      "credit_fraction_central": 0.0613106786569472
+    },
+    "sibling_pair": {
+      "abs_G": 12769.0,
+      "c_blind_credit_per_truth_px": 0.038401427099129,
+      "credit_if_truth_uniform_TPw": 490.3478226287782,
+      "rho_matched_over_TP_uniform_truth": 2.7314895094712006,
+      "MPw_implied": 2114.538588917587,
+      "TPw_central_uniform_closure": 774.1338861400014,
+      "TPw_upper_bound_MP0": 789.4689766317485,
+      "TPw_lower_bound_MPN": 370.41418211120066,
+      "concentration_central": 1.578744414505264,
+      "concentration_upper_bound": 1.6100183180163166,
+      "concentration_lower_bound": 0.7554110878384093,
+      "credit_fraction_central": 0.06062603854178099
+    }
+  },
+  "anchors_same_instrument": {
+    "dotted_h19_5_d1_5 (0.2477)": {
+      "n_scored_px": 60069,
+      "c_blind": 0.07630155077189939,
+      "frac_dots_ge_3px_from_catalogue": 0.8143301869516723,
+      "frac_dots_ge_10px_from_catalogue": 0.5980622284372971,
+      "median_dot_catalogue_distance_px": 14.866068747318506,
+      "score": 0.2477,
+      "rho": 1.429104058177201,
+      "TPw": 5286.130270299154,
+      "credit_fraction": 0.43237159765346295,
+      "concentration": 5.666616120896697
+    },
+    "h19_5_solid (0.1922)": {
+      "n_scored_px": 121131,
+      "c_blind": 0.08938629147603268,
+      "frac_dots_ge_3px_from_catalogue": 0.8139865104721334,
+      "frac_dots_ge_10px_from_catalogue": 0.5940097910526619,
+      "median_dot_catalogue_distance_px": 14.560219778561036,
+      "score": 0.1922,
+      "rho": 2.4599778597568105,
+      "TPw": 6188.804163187549,
+      "credit_fraction": 0.5062045403300987,
+      "concentration": 5.663111557389405
+    },
+    "dotted_h19_5_d2_8 (unscored)": {
+      "n_scored_px": 44090,
+      "c_blind": 0.06787970273473934,
+      "frac_dots_ge_3px_from_catalogue": 0.8174869584939896,
+      "frac_dots_ge_10px_from_catalogue": 0.6013608528010886,
+      "median_dot_catalogue_distance_px": 15.0
+    }
+  },
+  "probe_thinning_sweep_model": {
+    "rule": "TP(d) = TP_1px * c(d)/c(1px), the retention rule validated live at -0.1% and +4.0% (evidence/budget_optimum.json)",
+    "sweep": [
+      {
+        "min_dist_px": 1.0,
+        "n_px": 57783,
+        "c_blind": 0.038401427099129,
+        "rho": 2.7314895094712006,
+        "retention_vs_1px_lines": 1.0,
+        "credit_TPw_model": 758.6850923924743,
+        "model_score": 0.036
+      },
+      {
+        "min_dist_px": 1.25,
+        "n_px": 35752,
+        "c_blind": 0.034536654384946235,
+        "rho": 1.8791735555794928,
+        "retention_vs_1px_lines": 0.8993586174751713,
+        "credit_TPw_model": 682.3299757931183,
+        "model_score": 0.040587966642359474
+      },
+      {
+        "min_dist_px": 1.5,
+        "n_px": 28788,
+        "c_blind": 0.033018161620319994,
+        "rho": 1.5827248462488355,
+        "retention_vs_1px_lines": 0.8598160046262681,
+        "credit_TPw_model": 652.3295849104082,
+        "model_score": 0.04218841667494264
+      },
+      {
+        "min_dist_px": 2.0,
+        "n_px": 28788,
+        "c_blind": 0.033018161620319994,
+        "rho": 1.5827248462488355,
+        "retention_vs_1px_lines": 0.8598160046262681,
+        "credit_TPw_model": 652.3295849104082,
+        "model_score": 0.04218841667494264
+      },
+      {
+        "min_dist_px": 2.25,
+        "n_px": 20090,
+        "c_blind": 0.02958175157507368,
+        "rho": 1.2328290696121493,
+        "retention_vs_1px_lines": 0.7703294853785431,
+        "credit_TPw_model": 584.4374967870672,
+        "model_score": 0.04243818070943836
+      },
+      {
+        "min_dist_px": 2.8,
+        "n_px": 20090,
+        "c_blind": 0.02958175157507368,
+        "rho": 1.2328290696121493,
+        "retention_vs_1px_lines": 0.7703294853785431,
+        "credit_TPw_model": 584.4374967870672,
+        "model_score": 0.04243818070943836
+      },
+      {
+        "min_dist_px": 3.0,
+        "n_px": 18864,
+        "c_blind": 0.028686142158159036,
+        "rho": 1.1937364544807336,
+        "retention_vs_1px_lines": 0.7470071902304297,
+        "credit_TPw_model": 566.7432191378163,
+        "model_score": 0.04188307458879716
+      },
+      {
+        "min_dist_px": 4.0,
+        "n_px": 14231,
+        "c_blind": 0.024350491201289955,
+        "rho": 1.060900141948838,
+        "retention_vs_1px_lines": 0.6341038091743799,
+        "credit_TPw_model": 481.0851070498843,
+        "model_score": 0.03811765485673194
+      }
+    ],
+    "best_budget": {
+      "min_dist_px": 2.25,
+      "n_px": 20090,
+      "c_blind": 0.02958175157507368,
+      "rho": 1.2328290696121493,
+      "retention_vs_1px_lines": 0.7703294853785431,
+      "credit_TPw_model": 584.4374967870672,
+      "model_score": 0.04243818070943836
+    },
+    "status": "MODEL, not a leaderboard score"
+  },
+  "reading": {
+    "concentration_band": [
+      0.7554110878384093,
+      1.6479820330407124
+    ],
+    "concentration_central": 1.6159707009257065,
+    "h19_5_family_concentration": [
+      5.3,
+      6.0
+    ],
+    "verdict": "REFUTED as a route to a higher score. The probe's live score 0.0360 inverts to a credit fraction of 0.062 of |G| and a concentration of 1.62x blind (exact bracket 0.76-1.65x over MP in [0, N]), against 5.3-6.0x for the H19-5 family that produced 0.2477. Even at its own best thinning budget the habitat models to 0.0424 (d = 2.25 px, 20,090 px), i.e. 5.8x below the 0.2477 file. Independently-mapped bedrock structure with no Quaternary-catalogue counterpart is therefore only marginally denser in hidden truth than a uniform spray.",
+    "consequence": "Do not spend a weekly slot on SGMC/geologic-map-gap emission, and do not re-propose it as a 'new data source': the group already spent a slot on it and the score is now inverted. Two positive facts survive. (1) The far field is NOT empty of truth: 81.4% of the 0.2477 emission's dots lie >= 300 m from the catalogue and their median distance is 1.5 km, yet that file earns ~6x blind - so what separates 6x from 1.6x is not distance from the catalogue but the detector that chose the pixels (geomorphic scarp evidence, not lithological map lines). (2) A 1-px line network has c_S = 0.0384 at N = 57,783, i.e. 2.7x BELOW a uniform spray of the same size: contiguous lines waste kernel coverage relative to spread dots, which is an independent confirmation of why dotting wins."
+  }
+}
