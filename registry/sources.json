@@ -240,9 +240,9 @@
    "url": "https://gdr.openei.org/files/1391/paleo_geothermal_regional.zip",
    "category": "external layer (not yet used by any detector here)",
    "used_for": "Proposed detector FEATURE for surface-geothermal evidence of fault-hosted fluid pathways. Never as an emission habitat: h18-4 live-refuted bedrock-map-gap emission at 1.62x blind (evidence/sgmc_gap_inversion.json).",
-   "status": "Hash-pinned; raw bytes NOT downloaded or re-hashed in this checkout. The sibling 16GEMSDOE runner record reports ok:true on 2026-09-30 for the stated pin. This checkout: GitHub Actions runs 37099986237, 37100053264, 37100608786, 37100751573, and 37100935082 all concluded failure with zero jobs and no downloadable logs; no fetch, hash check, clip, or inventory artifact was produced. Cause is unknown; this is not evidence that the source is unavailable.",
+   "status": "Hash-pinned; raw bytes NOT downloaded or re-hashed in this checkout. The sibling 16GEMSDOE runner record reports ok:true on 2026-09-30 for the stated pin. This checkout's reviewed run set through branch head a58e74d: GitHub Actions runs 37099986237, 37100053264, 37100608786, 37100751573, 37100935082, and 37101134684 all concluded failure with zero jobs and no downloadable logs; no fetch, hash check, clip, or inventory artifact was produced. Cause is unknown; this is not evidence that the source is unavailable.",
    "accessed": "pin read 2026-10-02; file not accessed from this sandbox",
-   "evidence": "Sibling runner provenance: 16GEMSDOE evidence/ci/external_verification.json (2026-09-30; retrieved by gh api on 2026-10-02); current checkout workflow run metadata for 37099986237, 37100053264, 37100608786, 37100751573, and 37100935082 (zero jobs, no logs); no run artifact.",
+   "evidence": "Sibling runner provenance: 16GEMSDOE evidence/ci/external_verification.json (2026-09-30; retrieved by gh api on 2026-10-02); checkout workflow run metadata through branch head a58e74d for 37099986237, 37100053264, 37100608786, 37100751573, 37100935082, and 37101134684 (zero jobs, no logs); no run artifact.",
    "feed": false
   },
   {
@@ -252,9 +252,9 @@
    "url": "https://gdr.openei.org/files/1391/2m_temperature_probe_INGENIOUS_regional_data.zip",
    "category": "external layer (not yet used by any detector here)",
    "used_for": "Proposed detector FEATURE: shallow (2 m) sediment/soil temperature anomalies are a direct, independently measured signature of permeable fault zones; absent from every layer this repo holds.",
-   "status": "Hash-pinned; raw bytes NOT downloaded or re-hashed in this checkout. The sibling 16GEMSDOE runner record reports ok:true on 2026-09-30 for the stated pin. This checkout: GitHub Actions runs 37099986237, 37100053264, 37100608786, 37100751573, and 37100935082 all concluded failure with zero jobs and no downloadable logs; no fetch, hash check, clip, or inventory artifact was produced. Cause is unknown; this is not evidence that the source is unavailable.",
+   "status": "Hash-pinned; raw bytes NOT downloaded or re-hashed in this checkout. The sibling 16GEMSDOE runner record reports ok:true on 2026-09-30 for the stated pin. This checkout's reviewed run set through branch head a58e74d: GitHub Actions runs 37099986237, 37100053264, 37100608786, 37100751573, 37100935082, and 37101134684 all concluded failure with zero jobs and no downloadable logs; no fetch, hash check, clip, or inventory artifact was produced. Cause is unknown; this is not evidence that the source is unavailable.",
    "accessed": "pin read 2026-10-02; file not accessed from this sandbox",
-   "evidence": "Sibling runner provenance: 16GEMSDOE evidence/ci/external_verification.json (2026-09-30; retrieved by gh api on 2026-10-02); current checkout workflow run metadata for 37099986237, 37100053264, 37100608786, 37100751573, and 37100935082 (zero jobs, no logs); no run artifact.",
+   "evidence": "Sibling runner provenance: 16GEMSDOE evidence/ci/external_verification.json (2026-09-30; retrieved by gh api on 2026-10-02); checkout workflow run metadata through branch head a58e74d for 37099986237, 37100053264, 37100608786, 37100751573, 37100935082, and 37101134684 (zero jobs, no logs); no run artifact.",
    "feed": false
   },
   {
@@ -264,9 +264,9 @@
    "url": "https://gdr.openei.org/files/1391/great_basin_q_volcanics.zip",
    "category": "external layer (not yet used by any detector here)",
    "used_for": "Proposed detector FEATURE: Quaternary volcanic units are cut by, and their vents sit on, young faults. This repo currently holds only 21 vent POINTS (data_cache/gdr_volcanic_vents_in_footprint.csv), not the polygons.",
-   "status": "Hash-pinned; raw bytes NOT downloaded or re-hashed in this checkout. The sibling 16GEMSDOE runner record reports ok:true on 2026-09-30 for the stated pin. This checkout: GitHub Actions runs 37099986237, 37100053264, 37100608786, 37100751573, and 37100935082 all concluded failure with zero jobs and no downloadable logs; no fetch, hash check, clip, or inventory artifact was produced. Cause is unknown; this is not evidence that the source is unavailable.",
+   "status": "Hash-pinned; raw bytes NOT downloaded or re-hashed in this checkout. The sibling 16GEMSDOE runner record reports ok:true on 2026-09-30 for the stated pin. This checkout's reviewed run set through branch head a58e74d: GitHub Actions runs 37099986237, 37100053264, 37100608786, 37100751573, 37100935082, and 37101134684 all concluded failure with zero jobs and no downloadable logs; no fetch, hash check, clip, or inventory artifact was produced. Cause is unknown; this is not evidence that the source is unavailable.",
    "accessed": "pin read 2026-10-02; file not accessed from this sandbox",
-   "evidence": "Sibling runner provenance: 16GEMSDOE evidence/ci/external_verification.json (2026-09-30; retrieved by gh api on 2026-10-02); current checkout workflow run metadata for 37099986237, 37100053264, 37100608786, 37100751573, and 37100935082 (zero jobs, no logs); no run artifact.",
+   "evidence": "Sibling runner provenance: 16GEMSDOE evidence/ci/external_verification.json (2026-09-30; retrieved by gh api on 2026-10-02); checkout workflow run metadata through branch head a58e74d for 37099986237, 37100053264, 37100608786, 37100751573, 37100935082, and 37101134684 (zero jobs, no logs); no run artifact.",
    "feed": false
   },
   {

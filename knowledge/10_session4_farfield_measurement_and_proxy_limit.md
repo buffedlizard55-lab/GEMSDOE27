@@ -265,8 +265,8 @@ the proxy cannot see the habitat that pays.
    implemented to download, hash-verify against the 2026-09-30 pins, inventory and footprint-clip
    three official GDR 1391 files no detector here has used: paleo-geothermal (84,008 B,
    `faffcf69...`), INGENIOUS 2 m temperature probes (1,080,530 B, `1301f70d...`) and Great Basin
-   Quaternary volcanics (9,898,770 B, `c4a2d2df...`). However, this checkout's Actions runs
-   37099986237, 37100053264, 37100608786, 37100751573, and 37100935082 concluded failure with zero jobs and no logs, so there was no local
+   Quaternary volcanics (9,898,770 B, `c4a2d2df...`). However, the reviewed run set through branch head a58e74d includes Actions runs
+   37099986237, 37100053264, 37100608786, 37100751573, 37100935082, and 37101134684, all of which concluded failure with zero jobs and no logs, so there was no local
    fetch, checksum verification, clipping, or artifact. The older sibling-runner pin record is
    provenance only; it does not put bytes in this checkout. The workflow also contains HEAD-checks
    for larger sources. A repository maintainer must investigate why the runs created no jobs, or
