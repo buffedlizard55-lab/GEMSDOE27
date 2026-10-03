@@ -69,6 +69,8 @@ def build() -> None:
     h28_hypotheses = J(h28_hypothesis_path).get("hypotheses", []) if h28_hypothesis_path.exists() else []
     h28_evidence_path = EV / "h28_1_edge_holdout.json"
     h28_eval = J(h28_evidence_path) if h28_evidence_path.exists() else None
+    h27_10_evidence_path = EV / "h27_10_annulus_holdout.json"
+    h27_10_eval = J(h27_10_evidence_path) if h27_10_evidence_path.exists() else None
     ms = J(EV / "candidate_model_scores.json") if (EV / "candidate_model_scores.json").exists() else None
     inv = J(EV / "live_inversion.json") if (EV / "live_inversion.json").exists() else None
     bo = J(EV / "budget_optimum.json") if (EV / "budget_optimum.json").exists() else None
@@ -143,6 +145,11 @@ def build() -> None:
     oof = J(EV / "oof_hypothesis_gates.json")
     gr = J(EV / "graph_report.json")
     cs = J(EV / "candidate_summary.json")
+    relay_summary = (
+        J(EV / "structural_relay_classes.json")
+        if (EV / "structural_relay_classes.json").exists()
+        else cs.get("structural_review_classes", {})
+    )
     op = J(EV / "operating_point_model.json")
     hyp = J(REG / "hypotheses.json")["hypotheses"]
     src = J(REG / "sources.json")["sources"]
@@ -194,6 +201,52 @@ Note ({len(h28_candidate['note'])} chars): <code>{e(h28_candidate['note'])}</cod
 The organizer-created test labels remain unobserved; this is not a fifth weekly slot or a score.</div>"""
     elif h28_eval:
         h28_research_box = f'<div class="warnbox"><b>H28-1 holdout:</b> {e(h28_gate_summary)} The separate full-map research candidate has not been built.</div>'
+    h27_10_box = ""
+    if h27_10_eval:
+        h27_10_box = f"""
+<div class="warnbox"><b>Session 5 H27-10 annulus result — REJECTED; no weekly slot.</b>
+Registered holdout on seeds 150-159 (first use): mean paired ΔDTI <b>{h27_10_eval['candidate_minus_baseline_mean_gain']:+.6f}</b> vs the current H28-1 + T-v2 + H27-4 r1 best;
+{h27_10_eval['improved_fold_count']}/4 fold means improved but only {h27_10_eval['positive_seed_count']}/10 seed means improved.
+The annulus addition efficiency was {h27_10_eval['gross_annulus_add_efficiency']:.5f} versus m(0.2477)={h27_10_eval['m_live_0_2477']:.5f};
+removed far-field efficiency was {h27_10_eval['gross_removed_farfield_efficiency']:.5f}. The frozen gate <b>failed</b>, so the annulus is not promoted.
+The deterministic integrity rerun passed all data checks; the first run's self-distance diagnostic false-negative is preserved and disclosed, with no change to the candidate or gate.
+<a href="{REPO_URL}/blob/main/knowledge/03_preregistration_topology_gate.md#addendum-f-h27-10">Protocol</a> ·
+<a href="{REPO_URL}/blob/main/evidence/h27_10_annulus_holdout.json">corrected cell-level evidence</a> ·
+<a href="{REPO_URL}/blob/main/evidence/h27_10_annulus_holdout_initial.json">preserved first-run record</a> ·
+<a href="{REPO_URL}/blob/main/registry/irregularities.json">diagnostic disclosure</a>.
+Catalogue-internal result only; no organizer-label score is known.</div>"""
+    priority_basis = relay_summary.get("priority_basis", {})
+    priority_n = int(relay_summary.get("priority_candidate_count", 0))
+    priority_total = int(relay_summary.get("candidate_count", cs.get("selected_links", 345)))
+    exclusive_counts = relay_summary.get("counts_by_exclusive_review_class", {})
+    class_count_text = " · ".join((
+        f"{exclusive_counts.get('same-FID_multipart-continuity', 0)} same-FID",
+        f"{exclusive_counts.get('H27-5b_inter-FID_same-name_kinematic-compatible', 0)} H27-5b",
+        f"{exclusive_counts.get('inter-FID_other-name_kinematic-compatible', 0)} other-name compatible",
+        f"{exclusive_counts.get('inter-FID_kinematic-conflict-or-unknown', 0)} conflict/unknown",
+    ))
+    priority_holdout = ""
+    if priority_basis:
+        priority_holdout = (
+            f" Tier-2 whole-FID holdout, seeds {e(priority_basis.get('seeds', []))}: "
+            f"efficiency {priority_basis['h27_5b_efficiency']:.4f} vs rotated control "
+            f"{priority_basis['rotated_control_efficiency']:.4f} ({priority_basis['enrichment_over_control']:.2f}×)."
+        )
+    topology_priority_box = f"""
+<div class="card"><h2>Geologist-review priority class: H27-5b ({priority_n} / {priority_total} links)</h2>
+<p>Population: the existing 345 shipped T-v2 links (z ≥ 3, deduplicated; each gap is 1–4 km); this review filter generates no new links. Frozen filter: <code>fid_src != fid_tgt</code>, equal NBMG <code>NAME</code> other than the generic <code>Unnamed fault</code> sentinel, and <code>kinematic_compat=true</code>.
+This identifies distinct vector records within one named zone, not independently sourced maps or confirmed separate faults.{e(priority_holdout)}</p>
+<p class="small">Exclusive partition of all {priority_total}: {e(class_count_text)}.</p>
+<p>Rows expose FID/NAME/NUM, slip sense, dip direction, map scale, gap geometry, local strike compatibility, graph consequences and a cautious setting hint.
+End-to-end, abutting and oblique geometries are review cues only; they do not prove a favorable relay, step-over or termination. Faulds &amp; Hinz setting frequencies are context about characterized systems, not evidence for an individual candidate.
+The prior graph-ΔP ranking and the separate overlapping en-echelon step-over test were both refuted as holdout-improvement signals; this class does not revive either claim.</p>
+<p>Download the focused <a href="data/topology_priority_h27_5b.csv">81-row CSV with per-link arguments and official source links</a> ·
+<a href="data/topology_priority_h27_5b.geojson">GeoJSON</a> ·
+<a href="data/topology_review_classes.json">class definition, counts and limitations</a>.
+Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0">NBMG Qfaults feature layer</a> ·
+<a href="https://www.osti.gov/servlets/purl/1724082">Faulds &amp; Hinz 2015</a> ·
+<a href="https://agupubs.onlinelibrary.wiley.com/doi/10.1029/1999GL011241">Berkowitz et al. 2000 publisher abstract</a>.</p>
+<p class="small">The Tier-2 result is catalogue-internal evidence from held-out FID records, not a score or proof of transfer to the organizer-created labels. The full 345-link rule and all four weekly files are unchanged.</p></div>""" if priority_n else ""
     pages: dict[str, tuple[str, str]] = {}
 
     # ---------------------------------------------------------------- index
@@ -323,7 +376,8 @@ If all three are rejected, paste the exact message and the file name – that is
             fname_cell += f" → {e(r.get('name_tgt') or 'unnamed')}"
         fid_tag = f"FID {r.get('fid_src')}" if r.get("same_fid") else f"FID {r.get('fid_src')}→{r.get('fid_tgt')}"
         kin_tag = f"{e(r.get('slipsense_src') or '?')}/{e(r.get('dipdirect_src') or '?')}"
-        rows.append(f"<tr class='link' data-id='{e(r['link_id'])}'><td>{e(r['link_id'])}</td><td class='num'>{r['z']}</td><td>{e(r['kind'])}</td>"
+        review_tag = e(r.get("review_class", "unclassified"))
+        rows.append(f"<tr class='link' data-id='{e(r['link_id'])}' data-class='{review_tag}'><td>{e(r['link_id'])}</td><td class='num'>{r['z']}</td><td>{e(r['kind'])}</td>"
                     f"<td>{fname_cell}<br><span class='small mono'>{fid_tag} · {kin_tag}</span></td>"
                     f"<td class='num'>{r['gap_km']:.2f}</td><td>{'✓' if r['mutual'] else ''}</td><td class='num'>{r['strike']:.0f}°</td>"
                     f"<td class='num' data-v='{r['strike_compat']:.3f}'>{100 * r['strike_compat']:.0f}%</td><td class='num'>{r['merged_km']:.1f}</td>"
@@ -331,6 +385,7 @@ If all three are rejected, paste the exact message and the file name – that is
                     f"<td class='mono'>{mlat:.4f}, {mlon:.4f}</td>"
                     f"<td class='num' data-v='{r.get('delta_P', 0.0):+.6f}'>{r.get('delta_P', 0.0):+.4f}</td>"
                     f"<td>{'&#10003;' if r.get('bridge') else ''}</td>"
+                    f"<td><span class='small'>{review_tag}</span></td>"
                     f"<td><a href='https://www.openstreetmap.org/#map=14/{mlat:.4f}/{mlon:.4f}'>map</a></td></tr>")
     sl = {s["radius_px"]: s for s in gr["single_linkage"]}   # keyed by radius in pixels (1 px = 100 m)
     claims = [("The paper analyses the San Andreas fault system", "verified", "publisher abstract"),
@@ -346,6 +401,8 @@ If all three are rejected, paste the exact message and the file name – that is
 <div class="stat"><b>{gr['graph']['end_nodes']:,} / {gr['graph']['junction_nodes']} / {gr['graph']['edges']:,}</b><span>tips / junctions / edges; nearly acyclic (only {gr['graph']['enclosed_regions_ge_20px']} enclosed regions ≥ 20 px)</span></div>
 <div class="stat"><b>{be['P_at_domain_equivalent_side']:.2f}</b><span>Berkowitz-style connectivity P at the study-area scale vs threshold 5.6–6.0</span></div>
 <div class="stat"><b>{cs['selected_links']} links</b><span>shipped (z ≥ 3): {cs['selected_dots']:,} dots, {cs['nonredundant_dots_vs_0_2477']:,} not already near the 0.2477 emission</span></div></div>
+{topology_priority_box}
+<figure><img class="fig" src="assets/fig_map_h27_5b_priority.png" alt="Map of 81 H27-5b candidate gaps highlighted in red across the GeoDAWN fault catalogue"><figcaption>H27-5b priority gaps in red; other T-v2 candidate gaps in gray; mapped catalogue pixels in dark ink. These lines are review candidates, not mapped fault traces. Load the focused GeoJSON for inspection in GIS.</figcaption></figure>
 
 <h2>The argument</h2>
 <p>The mapped network is <b>fragmented and near its connectivity threshold</b>: exponent a ≈ {be['a']:.2f}±{be['a_se']:.2f} (lmin 2 km; 2.2–2.8 depending on lmin – not a clean power law), correlation dimension D ≈ {be['D']:.2f}, so a straddles D+1 = {be['D_plus_1']:.2f}.
@@ -373,9 +430,9 @@ Where a network sits near threshold, individual closures matter more than in a w
 <figure><img class="fig" src="assets/fig_map_overview.png" alt="Footprint map with all 345 links"><figcaption>All {cs['selected_links']} shipped links over the catalogue.</figcaption></figure>
 
 <h2>All {cs['selected_links']} candidates</h2>
-<p class="small">Click a row for its written argument (including official NBMG/USGS fault zone name, FID, slip sense, and dip direction). Downloads: <a href="data/topology_links.csv">CSV</a> · <a href="data/topology_links.geojson">GeoJSON (WGS84)</a>. Review against the official <a href="https://doi.org/10.5066/F7S75FJM">USGS Interactive Fault Map</a> (Quaternary faults only) and the map link in each row. z = evidence score 0–5; compat = share of nearby catalogued fault length within 20° of the link strike; base overlap = share of the link's dots already within 300 m of the 0.2477 emission. <b>dP</b> = change in the Berkowitz et al. (2000) connectivity parameter P if this gap is closed; it is quantised to &plusmn;P/n<sub>ge</sub> because it counts systems above l<sub>min</sub>&nbsp;=&nbsp;2&nbsp;km, so a link joining two systems that are <i>both</i> already &ge;2&nbsp;km has dP&nbsp;&lt;&nbsp;0. <b>bridge</b> = no other candidate joins those two sides. Closing all {cs['selected_links']} moves P from {gP0:.3f} to {gP1:.3f} against Pc 5.6&ndash;6.0. Ranking by |dP| was gated on seeds 140&ndash;149 and <b>refuted</b> (Addendum D): these columns are for a reviewing geologist, not a selection rule.</p>
-<p><input id="filter" class="filter" placeholder="filter (id, fault name, FID, kind, z …)" aria-label="filter candidates"></p>
-<div class="tw"><table id="links"><thead><tr><th data-k="0">ID</th><th class="num" data-k="1">z</th><th data-k="2">kind</th><th data-k="3">NBMG Fault Zone · FID · Slip/Dip</th><th class="num" data-k="4">gap km</th><th>mutual</th><th class="num" data-k="6">strike</th><th class="num" data-k="7">compat</th><th class="num" data-k="8">merged km</th><th class="num" data-k="9">base overlap</th><th>mid lat, lon</th><th class="num" data-k="11">dP</th><th data-k="12">bridge</th><th></th></tr></thead><tbody>{''.join(rows)}</tbody></table></div>
+<p class="small">Click a row for its written graph argument and geometry cue. The filter searches the review class as well as ID, name, FID, kind and z. Downloads: <a href="data/topology_links.csv">all-link CSV</a> · <a href="data/topology_links.geojson">all-link GeoJSON (WGS84)</a> · <a href="data/topology_priority_h27_5b.csv">focused H27-5b priority CSV</a>. Review against the official <a href="https://doi.org/10.5066/F7S75FJM">USGS Interactive Fault Map</a> (Quaternary faults only) and the official NBMG source-layer link in each row. z = evidence score 0–5; compat = share of nearby catalogued fault length within 20° of the link strike; base overlap = share of the link's dots already within 300 m of the 0.2477 emission. <b>dP</b> = change in the Berkowitz et al. (2000) connectivity parameter P if this gap is closed; it is quantised to &plusmn;P/n<sub>ge</sub> because it counts systems above l<sub>min</sub>&nbsp;=&nbsp;2&nbsp;km, so a link joining two systems that are <i>both</i> already &ge;2&nbsp;km has dP&nbsp;&lt;&nbsp;0. <b>bridge</b> = no other candidate joins those two sides. Closing all {cs['selected_links']} moves P from {gP0:.3f} to {gP1:.3f} against Pc 5.6&ndash;6.0. Ranking by |dP| was gated on seeds 140&ndash;149 and <b>refuted</b> (Addendum D): these columns are for a reviewing geologist, not a selection rule.</p>
+<p><input id="filter" class="filter" placeholder="filter (id, fault name, FID, kind, review class, z …)" aria-label="filter candidates"></p>
+<div class="tw"><table id="links"><thead><tr><th data-k="0">ID</th><th class="num" data-k="1">z</th><th data-k="2">kind</th><th data-k="3">NBMG Fault Zone · FID · Slip/Dip</th><th class="num" data-k="4">gap km</th><th>mutual</th><th class="num" data-k="6">strike</th><th class="num" data-k="7">compat</th><th class="num" data-k="8">merged km</th><th class="num" data-k="9">base overlap</th><th>mid lat, lon</th><th class="num" data-k="11">dP</th><th data-k="12">bridge</th><th data-k="13">review class</th><th></th></tr></thead><tbody>{''.join(rows)}</tbody></table></div>
 """)
 
     # ---------------------------------------------------------------- research
@@ -397,9 +454,10 @@ Where a network sits near threshold, individual closures matter more than in a w
 <p>The H28-1 transform uses label-free, multiscale edge strength and orientation agreement in the existing RTP magnetic and isostatic gravity grids. It tests a feature representation of geophysical boundaries that differs from the earlier pixelwise/tabular detector; it does not itself prove that any edge is a fault. The T-v2 additions remain a separate, geology-reviewable graph hypothesis.</p>
 <p><b>{e(h28_gate_summary) if h28_gate_summary else 'No frozen H28-1 holdout evidence is available.'}</b></p>
 {h28_research_box}
-<p class="small">Ranked hypotheses and result: <a href="{REPO_URL}/blob/main/knowledge/07_untried_hypotheses.md">H28 knowledge record</a>. Frozen protocol: <a href="{REPO_URL}/blob/main/knowledge/08_preregistration_H28-1.md">H28-1 preregistration</a> · full-map recipe/results: <a href="{REPO_URL}/blob/main/knowledge/09_preregistration_H28-1_candidate.md">candidate record</a> · <a href="{REPO_URL}/blob/main/evidence/h28_1_edge_holdout.json">cell-level holdout evidence</a>. The 1 km label-free filters can share covariate values across the existing 600 m quadrant buffer; no labels enter the transform, but spatial covariate correlation remains a limitation.</p>
-<h3>Five distinct H28 geological hypotheses, ranked</h3>
-<p class="small">Expected ΔDTI ranges are expert priors for the next holdout, not measurements or score guarantees. H28-1 is now tested; H28-2 to H28-4 remain untried and H28-5 is conditional on raw-data access. The grid-based result does not replace the graph-based structural argument for T-v2 gap closures.</p>
+{h27_10_box}
+<p class="small">Session 5 screen, H27-10 outcome and remaining candidates: <a href="{REPO_URL}/blob/main/knowledge/07_untried_hypotheses.md">hypothesis ledger</a>. H28-1 protocol: <a href="{REPO_URL}/blob/main/knowledge/08_preregistration_H28-1.md">frozen preregistration</a> · full-map recipe: <a href="{REPO_URL}/blob/main/knowledge/09_preregistration_H28-1_candidate.md">candidate record</a> · <a href="{REPO_URL}/blob/main/evidence/h28_1_edge_holdout.json">cell-level H28-1 evidence</a>. The 1 km label-free filters can share covariate values across the existing 600 m quadrant buffer; no labels enter the transform, but spatial covariate correlation remains a limitation.</p>
+<h3>Current Session 5 untried screen ({len(h28_hypotheses)} hypotheses)</h3>
+<p class="small">Expected ΔDTI ranges are expert priors, not measurements or score guarantees. H27-10 was tested and rejected under its frozen gate; H28-1 is already tested. The graph-based structural class is separately documented below and in Topology.</p>
 <div class="tw"><table><thead><tr><th>ID · rank</th><th>Hypothesis · layers</th><th>Physical signature</th><th>Why a missing fault</th><th>Differs from repo</th><th>Confounders</th><th>Status</th><th>Prior ΔDTI · cost</th></tr></thead><tbody>{h28rows}</tbody></table></div>
 <h2 id="inversion">Session 3 &mdash; inverting all 20 live scores</h2>
 <p class="lead">The owner's scored rasters are still in the sibling repositories. All <b>20</b> that could be

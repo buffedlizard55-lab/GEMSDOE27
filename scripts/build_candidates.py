@@ -11,7 +11,14 @@ import numpy as np
 import rasterio
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from gems27 import candidates, graph_value, grid, paths, vector_graph  # noqa: E402
+from gems27 import (  # noqa: E402
+    candidates,
+    graph_value,
+    grid,
+    paths,
+    topology_classes,
+    vector_graph,
+)
 
 
 def load_mask(p):
@@ -26,6 +33,12 @@ def argument(r, gb) -> str:
     mut = "mutual nearest tips" if r.mutual else "one-sided"
     ns = r.name_src or "unnamed trace"
     nt = r.name_tgt or "unnamed trace"
+    review_class = topology_classes.classify_review_class(r.same_fid, r.same_name, r.kinematic_compat)
+    review_limit = (
+        " Different FIDs are records in this same NBMG compilation, not independent source confirmation."
+        if review_class == topology_classes.H27_5B_PRIORITY_CLASS
+        else ""
+    )
     if r.same_fid:
         vec_desc = (
             f"NBMG INGENIOUS vector attribution: intra-FID raster/discretisation gap within multipart polyline "
@@ -61,7 +74,9 @@ def argument(r, gb) -> str:
             + ("NOTE: the straight link passes within ~100 m of a THIRD mapped system (crossing/T-junction), so it is not a pure "
                "two-system gap; kept because it belongs to the validated rule. " if r.third_system_contact else "")
             + graph_sentence(r)
-            + "Status: validated on both 8-connected component holdout (0.293 vs 0.059 ctrl) and NBMG FID vector-trace holdout (0.100 vs 0.020 ctrl).")
+            + "Status: validated on both 8-connected component holdout (0.293 vs 0.059 ctrl) and NBMG FID vector-trace holdout (0.100 vs 0.020 ctrl). "
+            + f"Reviewer geometry cue only: {topology_classes.geometry_setting_hint(r.kind)}; this is not proof of a step-over or termination. "
+            + f"Exclusive review class: {review_class}.{review_limit}")
 
 
 def graph_sentence(r) -> str:
@@ -92,12 +107,20 @@ def main() -> int:
     for c in ("bridge", "merge_len_km", "delta_largest_share", "delta_P", "delta_second_moment_km2",
               "connectivity_rank"):
         L[c] = gv[c].to_numpy()
+    L["review_class"] = [
+        topology_classes.classify_review_class(r.same_fid, r.same_name, r.kinematic_compat)
+        for r in L.itertuples(index=False)
+    ]
+    L["setting_hint"] = [topology_classes.geometry_setting_hint(kind) for kind in L.kind]
+    L["nbmg_source_layer_url"] = topology_classes.NBMG_LAYER_URL
+    L["setting_context_url"] = topology_classes.FAULDS_HINZ_URL
     L["argument"] = [argument(r, gb) for r in L.itertuples(index=False)]
     keep = ["link_id", "z", "kind", "gap_km", "ang_src", "ang_tgt", "mutual", "strike", "strike_compat",
             "size_src_km", "size_tgt_km", "merged_km", "dots", "base_overlap", "dots_near_h19_5_raw_px3", "third_system_contact",
             "fid_src", "fid_tgt", "same_fid", "name_src", "name_tgt", "same_name", "num_src", "num_tgt",
             "ftype_src", "ftype_tgt", "slipsense_src", "slipsense_tgt", "dipdirect_src", "dipdirect_tgt",
-            "mapscale_src", "mapscale_tgt", "kinematic_compat",
+            "mapscale_src", "mapscale_tgt", "kinematic_compat", "review_class", "setting_hint",
+            "nbmg_source_layer_url", "setting_context_url",
             "bridge", "merge_len_km", "delta_largest_share", "delta_P", "delta_second_moment_km2",
             "connectivity_rank",
             "lon_a", "lat_a", "lon_b", "lat_b", "e_row", "e_col", "q_row", "q_col", "argument"]
@@ -114,24 +137,98 @@ def main() -> int:
     docs_data = paths.DOCS / "data"
     docs_data.mkdir(parents=True, exist_ok=True)
     df.drop(columns=["argument"]).to_csv(docs_data / "topology_links.csv", index=False)
+    priority_df = df[df.review_class == topology_classes.H27_5B_PRIORITY_CLASS].copy()
+    priority_df = priority_df.sort_values(["gap_km", "link_id"], ascending=[True, True])
+    priority_df.to_csv(docs_data / "topology_priority_h27_5b.csv", index=False)
     feats = []
     for r in df.itertuples(index=False):
         feats.append({"type": "Feature", "geometry": {"type": "LineString", "coordinates": [[r.lon_a, r.lat_a], [r.lon_b, r.lat_b]]},
                       "properties": {"id": r.link_id, "z": int(r.z), "kind": r.kind, "gap_km": r.gap_km, "mutual": bool(r.mutual),
                                      "strike": r.strike, "strike_compat": r.strike_compat, "merged_km": r.merged_km,
                                      "base_overlap": r.base_overlap, "fid_src": int(r.fid_src), "fid_tgt": int(r.fid_tgt),
-                                     "same_fid": bool(r.same_fid), "name_src": r.name_src, "name_tgt": r.name_tgt,
-                                     "same_name": bool(r.same_name), "slipsense_src": r.slipsense_src,
-                                     "slipsense_tgt": r.slipsense_tgt, "dipdirect_src": r.dipdirect_src,
-                                     "dipdirect_tgt": r.dipdirect_tgt, "kinematic_compat": bool(r.kinematic_compat),
-                                     "argument": r.argument}})
-    (docs_data / "topology_links.geojson").write_text(json.dumps({"type": "FeatureCollection", "crs_note": "WGS84 lon/lat",
-                                                                   "features": feats}))
+                                     "name_src": r.name_src, "name_tgt": r.name_tgt, "num_src": r.num_src, "num_tgt": r.num_tgt,
+                                     "ftype_src": r.ftype_src, "ftype_tgt": r.ftype_tgt,
+                                     "mapscale_src": r.mapscale_src, "mapscale_tgt": r.mapscale_tgt,
+                                     "same_fid": bool(r.same_fid), "same_name": bool(r.same_name),
+                                     "slipsense_src": r.slipsense_src, "slipsense_tgt": r.slipsense_tgt,
+                                     "dipdirect_src": r.dipdirect_src, "dipdirect_tgt": r.dipdirect_tgt,
+                                     "kinematic_compat": bool(r.kinematic_compat), "review_class": r.review_class,
+                                     "setting_hint": r.setting_hint, "third_system_contact": bool(r.third_system_contact),
+                                     "bridge": bool(r.bridge), "delta_P": float(r.delta_P),
+                                     "delta_largest_share": float(r.delta_largest_share),
+                                     "delta_second_moment_km2": float(r.delta_second_moment_km2),
+                                     "connectivity_rank": int(r.connectivity_rank), "nbmg_source_layer_url": r.nbmg_source_layer_url,
+                                     "setting_context_url": r.setting_context_url, "argument": r.argument}})
+    geojson = {"type": "FeatureCollection", "crs_note": "WGS84 lon/lat", "features": feats}
+    (docs_data / "topology_links.geojson").write_text(json.dumps(geojson))
+    priority_features = [
+        feature for feature in feats
+        if feature["properties"]["review_class"] == topology_classes.H27_5B_PRIORITY_CLASS
+    ]
+    (docs_data / "topology_priority_h27_5b.geojson").write_text(
+        json.dumps({"type": "FeatureCollection", "crs_note": "WGS84 lon/lat", "features": priority_features})
+    )
     clo = {k: v for k, v in res["closure"].items() if k != "cluster_km_after_each_link"}
+    vector_eval = json.loads((paths.EVIDENCE / "vector_topology_validation.json").read_text())
+    tier2 = vector_eval["tiers"]["FID_trace"]["efficiency_pooled"]
+    h27_5b_key = "z>=3 inter-FID + same_name + kinematic_compat (H27-5b)"
+    priority_count = int((df.review_class == topology_classes.H27_5B_PRIORITY_CLASS).sum())
+    class_counts = {name: int((df.review_class == name).sum()) for name in topology_classes.REVIEW_CLASS_NAMES}
+    structural_classes = {
+        "schema": 1,
+        "candidate_count": int(len(df)),
+        "priority_class": topology_classes.H27_5B_PRIORITY_CLASS,
+        "priority_candidate_count": priority_count,
+        "priority_population": "existing z>=3 deduplicated T-v2 candidate set; all 345 links have a 1-4 km gap; no new links generated",
+        "priority_rule": "different NBMG FID AND same non-unnamed NAME AND kinematic_compat=true",
+        "same_name_semantics": "vector_graph.annotate_links: name_src == name_tgt and name_src != 'Unnamed fault'",
+        "kinematic_compatibility_semantics": (
+            "vector_graph.is_kinematically_compatible: reject differing non-empty slip senses; also reject "
+            "registered opposite dip-direction pairs when the senses differ and at least one is RL/LL. "
+            "Blank/Unspecified values are normalized to unknown and may pass; this is a permissive screen."
+        ),
+        "counts_by_exclusive_review_class": class_counts,
+        "priority_basis": {
+            "validation": "Tier-2 whole NBMG FID_trace component holdout; not organizer-created test labels",
+            "seeds": vector_eval["seeds"],
+            "h27_5b_efficiency": float(tier2[h27_5b_key]),
+            "rotated_control_efficiency": float(tier2["ctrl"]),
+            "enrichment_over_control": float(tier2[h27_5b_key] / tier2["ctrl"]),
+            "graph_delta_P_used_for_priority": False,
+            "graph_value_ranking_status": "refuted as a predictive ranking signal in Addendum D (seeds 140-149)",
+        },
+        "geometry_setting_hints": {
+            "end-to-end": topology_classes.geometry_setting_hint("end-to-end"),
+            "abutting": topology_classes.geometry_setting_hint("abutting"),
+            "tip-to-tip oblique": topology_classes.geometry_setting_hint("tip-to-tip oblique"),
+        },
+        "files": {
+            "full_csv": "docs/data/topology_links.csv",
+            "full_geojson": "docs/data/topology_links.geojson",
+            "priority_csv": "docs/data/topology_priority_h27_5b.csv",
+            "priority_geojson": "docs/data/topology_priority_h27_5b.geojson",
+            "priority_map_preview": "docs/assets/fig_map_h27_5b_priority.png",
+        },
+        "official_sources": {
+            "nbmg_qfaults_layer": topology_classes.NBMG_LAYER_URL,
+            "faulds_hinz_2015_context": topology_classes.FAULDS_HINZ_URL,
+            "berkowitz_2000_publisher": "https://agupubs.onlinelibrary.wiley.com/doi/10.1029/1999GL011241",
+        },
+        "limitations": [
+            "Different FIDs are distinct records in one NBMG INGENIOUS compilation, not independent surveys; same-name records may be named segments of one fault zone.",
+            "Nearest-polyline vector attribution and the compatibility rule are screening annotations, not verified slip histories or fault truth.",
+            "H27-5b enrichment is catalogue-internal whole-FID holdout evidence; no hidden organizer labels or public score were observed.",
+            "Geometry hints only nominate map-review context. Faulds and Hinz setting frequencies describe characterized geothermal systems, not any individual link.",
+            "The separate overlapping en-echelon step-over test was refuted as a holdout-improvement signal; a tip-to-tip oblique cue does not reverse that result.",
+        ],
+    }
+    (paths.EVIDENCE / "structural_relay_classes.json").write_text(json.dumps(structural_classes, indent=2) + "\n")
+    (docs_data / "topology_review_classes.json").write_text(json.dumps(structural_classes, indent=2) + "\n")
     summary = {"rule": candidates.RULE, "spacing": candidates.SPACING, "z_min": candidates.Z_MIN, "dedupe_mutual": True,
                "links_all_forward": res["links_all_forward"], "z_counts": res["z_counts"], "selected_links": int(len(df)),
                "selected_dots": int(res["dots"].sum()), "nonredundant_dots_vs_0_2477": int(res["dots_nonredundant"].sum()),
                "closure": clo, "graph": res["graph"], "vector_attribution": vec_summary,
+               "structural_review_classes": structural_classes,
                "kind_counts": df.kind.value_counts().to_dict(),
                "mutual_links": int(df.mutual.sum()), "third_system_contact_links": int(df.third_system_contact.sum()),
                "median_gap_km": float(df.gap_km.median()), "mean_base_overlap": float(df.base_overlap.mean()),

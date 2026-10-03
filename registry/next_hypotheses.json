@@ -1,76 +1,41 @@
 {
-  "generated": "2026-10-02",
-  "status": "H28-1 preregistered gate passed; separate unscored full-area research candidate 1113fba5f6cb verified; four current weekly slots unchanged; no public score claimed",
-  "novelty_scope": "Scanned this checkout and the owner-provided comparison list. The sibling score list does not provide source code or complete method descriptions, so global novelty is unknown.",
-  "target": "100 m fault-location pixels scored against newly expert-mapped faults; geothermal vents, wells and thermal favorability are contextual evidence, not the label target.",
+  "generated": "2026-10-03",
+  "status": "Session 5 screen current as of 2026-10-03: four genuinely untried hypotheses remain. H27-10 was tested on seeds 150-159 and failed its frozen gate; it is excluded from the untried list. No weekly slot has been used.",
+  "novelty_scope": "Screened against this checkout, its evidence ledger, and the owner-provided comparison list. The sibling score list does not include complete source methods; global novelty is unknown.",
+  "target": "Fault-location pixels in the organizer-created test labels, which remain unobserved here. Catalogue-internal holdouts are only a proxy and cannot validate far-field behavior.",
   "baseline": {
     "name": "Current in-repo OOF best",
-    "definition": "B_oof + T-v2 + H27-4 r1 (100 m flank-shadow pruning)",
-    "evidence": "evidence/oof_hypothesis_gates.json, seeds 130-139; paired mean DTI gain +0.0141 over B_oof, 4/4 folds",
-    "limitation": "Catalogue-internal, component-hidden spatial holdout; not the organizer-created expert-label set"
+    "definition": "H28-1 multiscale potential-field edge features + T-v2 gap closures + H27-4 100 m flank-shadow prune (r1)",
+    "evidence": "evidence/h28_1_edge_holdout.json; seeds 140-149; +0.00294884 mean paired DTI over base_oof + T-v2 + H27-4 r1, 3/4 folds and 9/10 seeds",
+    "limitation": "Catalogue-internal component-hidden, four-quadrant holdout. It is not the organizer-created expert-label set and is especially weak for the far field."
   },
-  "ranking_basis": "Expert prior on expected paired holdout \u0394DTI multiplied by testability and divided by engineering cost; ranges are not observations or score guarantees.",
+  "ranking_basis": "Expert priors on potential paired catalogue-holdout \u0394DTI \u00d7 testability / engineering cost. These ranges are planning priors only, not measurements or leaderboard predictions. H27-10 is a completed, rejected test, not part of this untried ranking.",
   "hypotheses": [
     {
-      "id": "H28-1",
+      "id": "H27-16",
       "rank": 1,
-      "title": "Multiscale, cross-potential-field edge coherence",
+      "title": "Add three official GDR 1391 layers that are absent from the detector",
       "layers": [
-        "training_features.tif band 2: rtp",
-        "band 13: iso_grav_anom",
-        "band 3: tmi_hg",
-        "band 9: tmi_vg",
-        "bands 11 and 18: iso_grav_anom_vg and iso_grav_anom_hg"
+        "Paleo-geothermal sinter/tufa/travertine and altered-bedrock regional vectors",
+        "INGENIOUS 2 m temperature-probe records",
+        "Great Basin Quaternary volcanics polygons"
       ],
-      "signature": "Gaussian scale-space edge magnitude at sigma 3 and 10 100-m cells, normalized within the footprint, with co-location and absolute gradient-orientation agreement between reduced-to-pole magnetic and isostatic-gravity fields.",
-      "why_missing_faults": "A buried or alluvium-covered fault without a young surface scarp can juxtapose contrasting magnetic susceptibility or density units; a persistent, cross-field boundary may provide subsurface structural evidence where the Quaternary-trace catalogue has no line.",
-      "confounders": "Lithologic contacts that are not faults, magnetic remanence, survey seams and differing source depths/resolution.",
-      "differs_from_repo": "No current script derives multiscale gradient-orientation concordance across magnetic and gravity fields. Existing per-channel AUC is univariate and ridge NMS acts on the prediction surface, not on cross-physics edge features.",
+      "signature": "Independent surface and shallow-subsurface thermal/chemical/volcanic evidence for fault-focused fluid flow and young deformation; test each layer family separately before any combination.",
+      "why_missing_faults": "A permeable fault can localize hydrothermal alteration, thermal anomalies, or young volcanic alignments even where no Quaternary surface trace is catalogued.",
+      "confounders": "Sampling density, groundwater transport, non-fault heat sources, volcanic contacts unrelated to the target fault, and the fact that prior thermal-point-distance features were nearly null.",
+      "differs_from_repo": "The checkout currently holds 21 vent points and 27,092 well/spring rows, but not these regional paleo-geothermal features, 2 m probes, or volcanics polygons. The existing thermal-distance feature arm was measured near zero; this tests new records and polygon geometry instead.",
       "expected_holdout_delta_dti": [
         0.0,
-        0.01
+        0.006
       ],
-      "cost": "medium (approximately 1-2 engineering days plus validation runtime)",
-      "data_gate": "Uses the existing hash-pinned training-feature owner mirror; no new external data. Original competition-file provenance remains the caveat in data/manifest.json.",
-      "validation": "knowledge/08_preregistration_H28-1.md; fresh seeds 140-149; paired comparison to B_oof + T-v2 + H27-4 r1",
-      "status": "preregistered gate passed (+0.00295 mean paired DTI); full-area research candidate 1113fba5f6cb built and format/range verified; unscored, not a current weekly slot",
-      "implementation_result": "Mean \u0394DTI +0.0029488388 across 40 paired cells; mean baseline 0.1045377979, H28-1+T-v2+H27-4 mean 0.1074866367; one quadrant and one seed were negative. No submission written by the holdout runner.",
-      "holdout_evidence": "evidence/h28_1_edge_holdout.json; code SHA-256 runner 989dd1b03e448cc0ab84e1401dd197b4d25213b956163c2a3f33a8959d1e9bbd, transform 96dbe727891f06cd42e0f111df3696d8995cf2e62bd522c8781677365e024cf1",
-      "full_map_candidate": {
-        "manifest": "docs/downloads/h28_1_candidate_manifest.json",
-        "geotiff": "docs/downloads/gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.tif",
-        "content_id": "1113fba5f6cb",
-        "sha256": "61f9b53de42786e6d48afa50fd453a87c57d5d7b9b626c7dcf28c2dfbd20f411",
-        "emitted_px": 59075,
-        "format_verified": true,
-        "weekly_slot_used": false,
-        "leaderboard_upload": false,
-        "public_score": null
-      }
-    },
-    {
-      "id": "H28-2",
-      "rank": 2,
-      "title": "Multiscale LiDAR scarp persistence and structural-tensor coherence",
-      "layers": [
-        "3DEP-derived 100 m bands ex_max, ex_mean, step_max, lapneg_max, lappos_max, downface_max, upface_max, cross_max, relief, coh100",
-        "detrended elevation and strike orientation"
-      ],
-      "signature": "Scale persistence of short-wavelength slope/curvature edges plus local line-orientation coherence over 0.3-2 km, not a pointwise high-slope threshold.",
-      "why_missing_faults": "Previously unmapped subtle scarps may be visible in bare-earth LiDAR even when absent from a legacy or Quaternary trace catalogue; continuity can suppress isolated non-tectonic relief.",
-      "confounders": "Channels, roads, terrace risers, paleo-shorelines, landslides, mines, vegetation artifacts and tiled DEM seams.",
-      "differs_from_repo": "The current OOF workflow applies one-scale ridge NMS to a classifier score; this tests terrain-scale persistence/coherence before classification. It is not the already tested isolated-dot filter.",
-      "expected_holdout_delta_dti": [
-        0.0,
-        0.008
-      ],
-      "cost": "medium; existing derived terrain grid available, raw 1-m DEM is optional higher-cost follow-up",
-      "data_gate": "Existing hash-pinned LiDAR descriptor raster. Official USGS 3DEP catalog page read; the local derivative remains an owner mirror.",
-      "status": "untried"
+      "cost": "medium-high; external fetch is automated, but requires verified vector reading, fold-safe rasterization, and separate feature arms",
+      "data_gate": "Official GDR #1391 page/package listing was verified; three resource packages are listed and hash pins exist in the sibling runner, but the raw packages are not present in this checkout. Prior retrieval/dispatch was blocked; obtain the official raw bytes and verify SHA-256 before use.",
+      "validation": "After raw-data inventory, preregister a separate spatial holdout with unused seeds; do not reuse 150-159 or treat catalogue-holdout success as a live score.",
+      "status": "UNTRIED; official source packages are not yet present in this checkout."
     },
     {
       "id": "H28-3",
-      "rank": 3,
+      "rank": 2,
       "title": "Dilatational-strain and conductivity intersection corridors",
       "layers": [
         "geod_2ndinv",
@@ -79,58 +44,129 @@
         "cond_surf",
         "depth_to_base_surf"
       ],
-      "signature": "Joint spatial support from dilatational-strain gradients and conductive anomalies, restricted to narrow lineaments rather than broad high-value regions.",
-      "why_missing_faults": "Buried, fluid-bearing or active faults can have weak surface relief but express stress concentration and conductive alteration at depth.",
-      "confounders": "Clay caps, basin-scale conductivity, non-fault conductive alteration, strain-field smoothing and depth mismatch.",
-      "differs_from_repo": "The current model uses these as individual raster features and H27-5 types known mapped faults; it does not test explicit strain-conductivity spatial conjunction for new line candidates.",
+      "signature": "Narrow, spatially coincident strain-gradient and conductivity corridors, rather than a high-value threshold on either raster alone.",
+      "why_missing_faults": "A buried active or fluid-bearing strand may have weak surface relief but express local strain concentration and conductive alteration at depth.",
+      "confounders": "Broad basin conductivity, clay caps, regional strain smoothness, source-depth mismatch, and the fact that a strain anomaly is not a fault trace.",
+      "differs_from_repo": "The current detector uses these layers as scalar channels; no in-repo rule tests their spatial conjunction as a candidate corridor. It is distinct from refuted scalar thermal/radiometric arms and from endpoint graph links.",
       "expected_holdout_delta_dti": [
         0.0,
-        0.006
+        0.003
       ],
-      "cost": "low-medium; existing raster layers only",
-      "data_gate": "No new external data for first test.",
-      "status": "untried"
+      "cost": "low-medium; existing raster layers only, but a fold-safe joint-feature definition needs preregistration",
+      "data_gate": "All listed bands are in the locally restored hash-pinned training-feature mirror.",
+      "validation": "No run registered yet; use a fresh seed range and preregister the exact transform, controls, and gate against the current-best holdout baseline.",
+      "status": "UNTRIED."
     },
     {
       "id": "H28-4",
-      "rank": 4,
-      "title": "Seismicity-fabric lineaments",
+      "rank": 3,
+      "title": "Anisotropic seismicity-fabric lineaments",
       "layers": [
         "deq_n100a15",
         "ieq_n100a15",
         "geod_shearrate"
       ],
-      "signature": "Directional anisotropy and line support in earthquake-density gradients, assessed across scales wider than a single hypocenter.",
-      "why_missing_faults": "Linear seismicity concentrations can reveal blind active structures missing from a surface-trace database.",
-      "confounders": "Aseismic faults, spatially variable catalog completeness, diffuse swarms, broad smoothing in the delivered density layers.",
-      "differs_from_repo": "The raw earthquake channels were included in the current feature set and channel audit, but directional seismicity-fabric transforms have not been tested.",
+      "signature": "Directional persistence of earthquake-density ridges and their alignment with local shear-rate gradients over scales wider than individual hypocenters.",
+      "why_missing_faults": "A linear earthquake fabric may expose a blind active strand without a clear young surface scarp.",
+      "confounders": "Aseismic faults, catalog-completeness gradients, earthquake swarms unrelated to a single fault, and over-smoothed density products.",
+      "differs_from_repo": "The source channels were included in the scalar model and channel audit, but no directional seismicity-fabric transform has been tested. It differs from the already refuted oriented LiDAR/geophysics line-integral arm in both signal and physical target.",
       "expected_holdout_delta_dti": [
         0.0,
-        0.004
+        0.002
       ],
-      "cost": "low-medium; existing raster layers only",
-      "data_gate": "No new external data for first test.",
-      "status": "untried"
+      "cost": "low-medium; current feature raster only",
+      "data_gate": "Existing hash-pinned raster bands; no new external data.",
+      "validation": "No run registered yet; preregister a distinct unused seed range and compare against the current-best holdout baseline.",
+      "status": "UNTRIED."
     },
     {
       "id": "H28-5",
-      "rank": 5,
-      "title": "Hydrothermal observation corridors from well/spring temperatures and chemistry",
+      "rank": 4,
+      "title": "Quality-filtered hydrothermal chemistry gradients, not point-distance buffers",
       "layers": [
-        "INGENIOUS/GDR well and spring points: temp_c, geothermquartz_c, geothermchalc_c, geothermcat_c",
-        "optional GDR 2-m temperature probes"
+        "GDR/INGENIOUS wellspring CSV: temp_c, geothermquartz_c, geothermchalc_c, geothermcat_c, thermalclass, station name, and coordinates",
+        "Optional H27-16 2 m temperature probes after provenance verification"
       ],
-      "signature": "Spatially coherent thermal/geochemical observations rasterized as narrow, directionally constrained corridors rather than isotropic point buffers.",
-      "why_missing_faults": "Fault-focused discharge and hydrothermal chemistry may indicate permeable structures absent from the compiled surface-fault traces.",
-      "confounders": "Hydrogeologic flow away from the source fault, sparse and biased sampling, duplicate station records, non-fault heat sources, and geothermometer uncertainty.",
-      "differs_from_repo": "The point observations are not among the current 32 raster-model features; this would add independent observation-driven line evidence rather than another pixel transform or catalogue graph link.",
+      "signature": "Quality-controlled, de-duplicated geothermometer/temperature contrasts along short spatial gradients and locally fault-aligned corridors, instead of isotropic distance-to-point surfaces.",
+      "why_missing_faults": "A chemically distinct upflow zone can reveal permeable fault pathways where the surface trace is absent; the target is the spatial contrast and alignment, not proximity to a spring by itself.",
+      "confounders": "Duplicate sampling, geothermometer validity, groundwater flow away from the fault, sparse biased stations, and non-fault heat sources.",
+      "differs_from_repo": "H27-12 tested simple well/spring distance features and found nearly zero benefit. This candidate instead uses screened measurement values and local contrasts; that distinct transform remains untried and must not be represented as already supported.",
       "expected_holdout_delta_dti": [
         0.0,
-        0.006
+        0.003
       ],
-      "cost": "high; requires station deduplication, quality filters, spatial fold controls and provenance review",
-      "data_gate": "GDR #1391 page and package listing verified; public/CC BY. Direct binary ZIP retrieval failed in this sandbox (page fetch HTTP 500; shell TLS egress failure), so a new raw package is not verified obtainable here. The current point CSV is an owner-repository hash-pinned mirror, not an independently fetched GDR binary. Not viable for confirmatory use until that gap is closed.",
-      "status": "conditional; not viable this session"
+      "cost": "medium; point QA/deduplication and fold-safe spatial encoding",
+      "data_gate": "The in-footprint wellspring CSV is present as an owner-repository mirror; its official GDR package listing is verified, but this session did not independently fetch or re-hash the raw GDR binary.",
+      "validation": "No run registered yet; preregister quality filters and a fresh spatial holdout before feature construction.",
+      "status": "UNTRIED; separate from the refuted distance-only feature arm."
     }
-  ]
+  ],
+  "tested_hypotheses": [
+    {
+      "id": "H27-10",
+      "title": "Model-ranked 100-300 m offset-scarp annulus substitution",
+      "status": "TESTED \u2014 FROZEN GATE FAILED; not untried and not eligible to justify a weekly slot",
+      "validation": "knowledge/03_preregistration_topology_gate.md#addendum-f-h27-10; evidence/h27_10_annulus_holdout.json; initial diagnostic output preserved at evidence/h27_10_annulus_holdout_initial.json",
+      "seeds": [
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159
+      ],
+      "baseline_mean_dti": 0.10937684901995678,
+      "candidate_mean_dti": 0.11022299884251226,
+      "mean_paired_delta_dti": 0.0008461498225554992,
+      "improved_folds": "4/4",
+      "improved_seeds": "7/10",
+      "annulus_add_efficiency": 0.03356785533811333,
+      "live_break_even_efficiency": 0.052122130336889505,
+      "removed_farfield_efficiency": 0.033406434892356694,
+      "integrity_note": "The first-run self-distance spacing check produced a false negative. It was corrected and rerun on the same used seeds solely as an integrity check; data checks then passed, numerical results and the frozen FAIL outcome were unchanged. Not fresh confirmation."
+    }
+  ],
+  "separate_review_class": {
+    "id": "H27-5b",
+    "status": "Geologist-review prioritization class; already measured in catalogue-internal whole-FID holdout; not a new untried score hypothesis or a weekly-slot authorization.",
+    "definition": "Different NBMG FIDs AND same non-unnamed NAME AND kinematic_compat=true.",
+    "candidate_count": 81,
+    "catalogue_candidate_count": 345,
+    "interpretation": "Review prioritization only. Graph importance is not evidence of hidden-label truth or a live-score gain. Graph-value ranking and overlapping step-over as holdout-improvement signals remain refuted.",
+    "population": "Existing z>=3 deduplicated T-v2 candidate set; all 345 links have 1-4 km gaps; no new links generated.",
+    "holdout_evidence": {
+      "tier": "Tier-2 whole NBMG FID_trace holdout; catalogue-internal only",
+      "seeds": [
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129
+      ],
+      "priority_efficiency": 0.17829598184006035,
+      "rotated_control_efficiency": 0.020384388176087564,
+      "enrichment_over_control": 8.746692826876947,
+      "not_evidence_of": "candidate-specific hidden-label truth, transfer to organizer-created labels, or live-score gain"
+    },
+    "artifacts": [
+      "docs/data/topology_priority_h27_5b.csv",
+      "docs/data/topology_priority_h27_5b.geojson",
+      "docs/data/topology_review_classes.json",
+      "knowledge/11_h27_5b_geologist_review_class.md",
+      "docs/assets/fig_map_h27_5b_priority.png"
+    ],
+    "refuted_signals": [
+      "graph-\u0394P ranking as a holdout-improvement signal (Addendum D-3)",
+      "overlapping en-echelon step-over as a holdout-improvement signal (Addendum D-4)"
+    ]
+  }
 }

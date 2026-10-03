@@ -16,7 +16,7 @@ import rasterio  # noqa: E402
 from scipy import ndimage as ndi  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from gems27 import grid, links, paths  # noqa: E402
+from gems27 import grid, links, paths, topology_classes  # noqa: E402
 
 A = paths.DOCS / "assets"
 INK, BLUE, RED, GREY, GREEN = "#1b2733", "#1f6feb", "#d1242f", "#8c959f", "#1a7f37"
@@ -99,6 +99,33 @@ def load_mask(p):
         return np.nan_to_num(s.read(1)) > 0
 
 
+def fig_priority_map():
+    """Highlight the geologist-review H27-5b subset without implying these are mapped fault traces."""
+    foot = grid.load_footprint(paths.TEMPLATE)
+    labels = grid.load_labels(paths.LABELS)
+    reg = json.loads((paths.REGISTRY / "topology_candidates.json").read_text())["links"]
+    priority = [r for r in reg if r.get("review_class") == topology_classes.H27_5B_PRIORITY_CLASS]
+    other = [r for r in reg if r.get("review_class") != topology_classes.H27_5B_PRIORITY_CLASS]
+    if len(priority) != 81:
+        raise ValueError(f"expected 81 H27-5b review links, found {len(priority)}")
+    h, w = labels.shape
+    fig, ax = plt.subplots(figsize=(8.2, 9.2))
+    fy, fx = np.nonzero(foot[::8, ::8])
+    ax.scatter(fx * 8, fy * 8, s=0.2, c="#eef1f4", marker="s", linewidths=0)
+    ly, lx = np.nonzero(labels)
+    ax.scatter(lx, ly, s=0.35, c=INK, linewidths=0, label="mapped catalogue pixels")
+    for r in other:
+        ax.plot([r["e_col"], r["q_col"]], [r["e_row"], r["q_row"]], "-", color=GREY, lw=0.35, alpha=0.3)
+    for r in priority:
+        ax.plot([r["e_col"], r["q_col"]], [r["e_row"], r["q_row"]], "-", color=RED, lw=1.15, alpha=0.9)
+    ax.plot([], [], "-", color=RED, lw=1.15, label="81 H27-5b review-priority gaps")
+    ax.plot([], [], "-", color=GREY, lw=0.8, label="264 other T-v2 candidate gaps")
+    ax.set_xlim(0, w); ax.set_ylim(h, 0); ax.set_aspect("equal")
+    ax.set_xticks([]); ax.set_yticks([]); ax.legend(loc="lower left", frameon=True, fontsize=8)
+    ax.set_title("H27-5b review subset across the GeoDAWN footprint\nCandidate gaps are not mapped fault traces", fontsize=9)
+    fig.tight_layout(); fig.savefig(A / "fig_map_h27_5b_priority.png", dpi=125); plt.close(fig)
+
+
 def fig_map_and_examples():
     foot = grid.load_footprint(paths.TEMPLATE)
     labels = grid.load_labels(paths.LABELS)
@@ -160,6 +187,7 @@ def main() -> int:
     fig_connectivity(); print("connectivity ok")
     fig_validation(); print("validation ok")
     fig_map_and_examples(); print("map+examples ok")
+    fig_priority_map(); print("H27-5b priority map ok")
     return 0
 
 

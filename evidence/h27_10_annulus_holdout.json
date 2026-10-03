@@ -1,0 +1,1792 @@
+{
+  "preregistration": "knowledge/03_preregistration_topology_gate.md#addendum-f-h27-10",
+  "candidate": "H27-10 model-ranked 100-300 m offset-scarp annulus substitution",
+  "seeds": [
+    150,
+    151,
+    152,
+    153,
+    154,
+    155,
+    156,
+    157,
+    158,
+    159
+  ],
+  "fold_names": [
+    "NW",
+    "NE_LidarGapHeavy",
+    "SW",
+    "SE"
+  ],
+  "baseline": "H28_edge_best_Tv2_prune_r1",
+  "candidate_variant": "H27_10_annulus_reallocation",
+  "baseline_summary": {
+    "mean_dti": 0.10937684901995678,
+    "mean_dots": 16405.275,
+    "mean_tp": 623.7364994079742,
+    "mean_fp": 16064.926560295247
+  },
+  "candidate_summary": {
+    "mean_dti": 0.11022299884251226,
+    "mean_dots": 16405.275,
+    "mean_tp": 628.9939938935506,
+    "mean_fp": 16061.509334441716
+  },
+  "candidate_minus_baseline_mean_gain": 0.0008461498225554992,
+  "gain_by_seed": {
+    "150": 0.0014490536742506437,
+    "151": 0.0006798502010742745,
+    "152": 0.0017023560097820661,
+    "153": -0.0002974129008249393,
+    "154": 0.002091414101439301,
+    "155": -0.00013140229099305178,
+    "156": 0.0016932983037140845,
+    "157": 0.0014320651829437536,
+    "158": 0.0001799188302375153,
+    "159": -0.00033764288606865506
+  },
+  "gain_by_fold": {
+    "NW": 0.0001963764200268281,
+    "NE_LidarGapHeavy": 0.0008606996000667597,
+    "SW": 0.001551185737461222,
+    "SE": 0.0007763375326671873
+  },
+  "positive_seed_count": 7,
+  "improved_fold_count": 4,
+  "gross_annulus_add_efficiency": 0.03356785533811333,
+  "gross_removed_farfield_efficiency": 0.033406434892356694,
+  "m_live_0_2477": 0.052122130336889505,
+  "code_sha256": {
+    "runner": "bedf96dcdc15a5b29ac907530e9df1b3e305d344f8860953523547e2d5eff28f",
+    "annulus_transform": "6568357c8ad8415a814d3e46a6f888dce43690ec6608af1046166b564338086e",
+    "h28_runner_helpers": "989dd1b03e448cc0ab84e1401dd197b4d25213b956163c2a3f33a8959d1e9bbd",
+    "oof_detector": "6c041479cf92d28d7a084f5d69407963bde45b7463e0fea624673efa3506b235"
+  },
+  "edge_feature_cache": {
+    "schema": 1,
+    "feature_names": [
+      "potential_mag_edge_300m",
+      "potential_mag_edge_1000m",
+      "potential_grav_edge_300m",
+      "potential_grav_edge_1000m",
+      "potential_edge_concordance_1000m",
+      "potential_edge_orientation_agreement_1000m"
+    ],
+    "shape": [
+      5167373,
+      6
+    ],
+    "grid_shape": [
+      3730,
+      3292
+    ],
+    "crs": "EPSG:32611",
+    "source_bands": {
+      "magnetic": {
+        "band": 2,
+        "description": "rtp"
+      },
+      "gravity": {
+        "band": 13,
+        "description": "iso_grav_anom"
+      }
+    },
+    "valid_cells": 5164312,
+    "parameters": {
+      "pixel_size_m": 100.0,
+      "sigmas_px": [
+        3.0,
+        10.0
+      ],
+      "gradient_percentiles": [
+        5,
+        95
+      ],
+      "orientation_threshold_percentile": 10,
+      "outside_mask": 0.0
+    },
+    "inputs": {
+      "template": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+      "training_features": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+      "prepared_features": "83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc",
+      "transform_code": "96dbe727891f06cd42e0f111df3696d8995cf2e62bd522c8781677365e024cf1"
+    },
+    "sha256": "04c5fb77f07dacf35e508ba8668848b4c593840b840a89175ef87644a68b12a2"
+  },
+  "data_checks": {
+    "footprint_cells": 5167373,
+    "label_positive_cells": 60988,
+    "fold_cells": {
+      "NW": 1154738,
+      "NE_LidarGapHeavy": 1427727,
+      "SW": 1428627,
+      "SE": 1156281
+    },
+    "prepared_feature_metadata": {
+      "schema": 2,
+      "n_features": 32,
+      "lidar_names": [
+        "lidar_ex_max",
+        "lidar_ex_mean",
+        "lidar_step_max",
+        "lidar_lapneg_max",
+        "lidar_lappos_max",
+        "lidar_downface_max",
+        "lidar_upface_max",
+        "lidar_cross_max",
+        "lidar_relief",
+        "lidar_coh100"
+      ],
+      "sha256": "83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc"
+    },
+    "h28_edge_source_bands": {
+      "magnetic": {
+        "band": 2,
+        "description": "rtp"
+      },
+      "gravity": {
+        "band": 13,
+        "description": "iso_grav_anom"
+      }
+    },
+    "h28_edge_parameters": {
+      "pixel_size_m": 100.0,
+      "sigmas_px": [
+        3.0,
+        10.0
+      ],
+      "gradient_percentiles": [
+        5,
+        95
+      ],
+      "orientation_threshold_percentile": 10,
+      "outside_mask": 0.0
+    },
+    "h28_edge_cache_sha256": "04c5fb77f07dacf35e508ba8668848b4c593840b840a89175ef87644a68b12a2",
+    "all_oof_probabilities_finite_and_in_0_1": true,
+    "h28_edge_values_finite_and_in_0_1": true,
+    "cells_total": 40,
+    "cells_with_exact_swap": 40,
+    "all_swaps_exact_K": true,
+    "same_dot_count_every_cell": true,
+    "no_known_catalogue_overlap": true,
+    "known_catalogue_overlap_pixels_across_variants": 0,
+    "all_additions_inside_annulus": true,
+    "all_additions_respect_minimum_spacing": true,
+    "submission_written": false
+  },
+  "gate": {
+    "mean_gain_at_least_0_001": false,
+    "at_least_3_of_4_folds_improve": true,
+    "at_least_8_of_10_seeds_improve": false,
+    "annulus_efficiency_at_least_m_live_0_2477": false,
+    "annulus_efficiency_exceeds_removed_farfield_efficiency": true,
+    "exactly_10_preregistered_seeds": true,
+    "data_checks_passed": true,
+    "pass": false
+  },
+  "cell_results": [
+    {
+      "seed": 150,
+      "fold": "NW",
+      "n_truth": 1866,
+      "link_dots": 244,
+      "r1_dots_reallocated": 656,
+      "source_pool_dots": 13272,
+      "annulus_ridge_pool_dots": 6319,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 387.39212823254513,
+        "fp": 14229.474620339413,
+        "dti": 0.08772122322798467,
+        "dots": 14457
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 395.42782082354773,
+        "fp": 14219.877562015614,
+        "dti": 0.08954716055558837,
+        "dots": 14457
+      },
+      "annulus_additions": {
+        "tp": 21.272074539223,
+        "fp": 643.8743461969918,
+        "dti": 0.013083830353733566,
+        "dots": 656
+      },
+      "farfield_removed": {
+        "tp": 8.620747594420967,
+        "fp": 653.471404520791,
+        "dti": 0.0053043624367750735,
+        "dots": 656
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 150,
+      "fold": "NE_LidarGapHeavy",
+      "n_truth": 2437,
+      "link_dots": 298,
+      "r1_dots_reallocated": 1114,
+      "source_pool_dots": 16484,
+      "annulus_ridge_pool_dots": 6949,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 753.446731313783,
+        "fp": 17542.836218137636,
+        "dti": 0.13433160916583325,
+        "dots": 17970
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 754.7844464535292,
+        "fp": 17538.943709974712,
+        "dti": 0.13458236992912387,
+        "dots": 17970
+      },
+      "annulus_additions": {
+        "tp": 26.42653085347448,
+        "fp": 1099.345750717783,
+        "dti": 0.012151500954754545,
+        "dots": 1114
+      },
+      "farfield_removed": {
+        "tp": 28.631605416524398,
+        "fp": 1103.2382588807063,
+        "dti": 0.013158064284006035,
+        "dots": 1114
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 150,
+      "fold": "SW",
+      "n_truth": 3757,
+      "link_dots": 492,
+      "r1_dots_reallocated": 815,
+      "source_pool_dots": 16757,
+      "annulus_ridge_pool_dots": 12121,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 484.5623418251486,
+        "fp": 18168.64880158136,
+        "dti": 0.07193362788452072,
+        "dots": 18428
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 501.4300152191728,
+        "fp": 18160.403652620895,
+        "dti": 0.0744185946650117,
+        "dots": 18428
+      },
+      "annulus_additions": {
+        "tp": 38.55907473624183,
+        "fp": 797.7406568159472,
+        "dti": 0.012152781839571898,
+        "dots": 815
+      },
+      "farfield_removed": {
+        "tp": 22.700482325183376,
+        "fp": 805.9858057764127,
+        "dti": 0.00715801584013848,
+        "dots": 815
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 150,
+      "fold": "SE",
+      "n_truth": 3802,
+      "link_dots": 327,
+      "r1_dots_reallocated": 992,
+      "source_pool_dots": 13073,
+      "annulus_ridge_pool_dots": 8540,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 698.5803138026411,
+        "fp": 14253.202959864258,
+        "dti": 0.1158132184591996,
+        "dots": 14627
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 706.1810224986448,
+        "fp": 14252.178953223496,
+        "dti": 0.11704776828481689,
+        "dots": 14627
+      },
+      "annulus_additions": {
+        "tp": 39.694955020493026,
+        "fp": 974.4525111206509,
+        "dti": 0.012234802791098042,
+        "dots": 992
+      },
+      "farfield_removed": {
+        "tp": 43.74922364149592,
+        "fp": 975.4765177614127,
+        "dti": 0.013480191974073567,
+        "dots": 992
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 151,
+      "fold": "NW",
+      "n_truth": 1933,
+      "link_dots": 218,
+      "r1_dots_reallocated": 627,
+      "source_pool_dots": 13349,
+      "annulus_ridge_pool_dots": 6386,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 534.3594717629817,
+        "fp": 14158.43276910286,
+        "dti": 0.11914479875922256,
+        "dots": 14453
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 531.7627308093224,
+        "fp": 14152.837170248058,
+        "dti": 0.11860914080292313,
+        "dots": 14453
+      },
+      "annulus_additions": {
+        "tp": 25.246194365394675,
+        "fp": 613.2499448309474,
+        "dti": 0.015080464732351298,
+        "dots": 627
+      },
+      "farfield_removed": {
+        "tp": 20.808705596468556,
+        "fp": 618.8455436857485,
+        "dti": 0.012428072741423761,
+        "dots": 627
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 151,
+      "fold": "NE_LidarGapHeavy",
+      "n_truth": 2820,
+      "link_dots": 370,
+      "r1_dots_reallocated": 1100,
+      "source_pool_dots": 16433,
+      "annulus_ridge_pool_dots": 6958,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 804.8452911835708,
+        "fp": 17602.30752936392,
+        "dti": 0.13555447638160747,
+        "dots": 18048
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 810.3228543499124,
+        "fp": 17602.208073104877,
+        "dti": 0.13645230450648674,
+        "dots": 18048
+      },
+      "annulus_additions": {
+        "tp": 26.582450036143054,
+        "fp": 1085.7125857389124,
+        "dti": 0.01072539427052463,
+        "dots": 1100
+      },
+      "farfield_removed": {
+        "tp": 37.90847922564834,
+        "fp": 1085.8120419979523,
+        "dti": 0.015281092136531244,
+        "dots": 1100
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 151,
+      "fold": "SW",
+      "n_truth": 3857,
+      "link_dots": 513,
+      "r1_dots_reallocated": 810,
+      "source_pool_dots": 16715,
+      "annulus_ridge_pool_dots": 11928,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 451.7540570915872,
+        "fp": 18217.69284372112,
+        "dti": 0.06624455760560113,
+        "dots": 18455
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 476.3838856689739,
+        "fp": 18204.091403590908,
+        "dti": 0.06983365301761156,
+        "dots": 18455
+      },
+      "annulus_additions": {
+        "tp": 39.60645327748548,
+        "fp": 791.9129611254095,
+        "dti": 0.012179466153588652,
+        "dots": 810
+      },
+      "farfield_removed": {
+        "tp": 11.315071274053652,
+        "fp": 805.5144012556217,
+        "dti": 0.003482668529343257,
+        "dots": 810
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 151,
+      "fold": "SE",
+      "n_truth": 3873,
+      "link_dots": 365,
+      "r1_dots_reallocated": 904,
+      "source_pool_dots": 13145,
+      "annulus_ridge_pool_dots": 8737,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 987.0153181871543,
+        "fp": 14231.274031075543,
+        "dti": 0.16069782133048854,
+        "dots": 14711
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 979.2692307604459,
+        "fp": 14233.379332009412,
+        "dti": 0.15946595655419538,
+        "dots": 14711
+      },
+      "annulus_additions": {
+        "tp": 26.734715447188037,
+        "fp": 891.1839902597034,
+        "dti": 0.008145901246017719,
+        "dots": 904
+      },
+      "farfield_removed": {
+        "tp": 46.68295170011224,
+        "fp": 889.0786893258332,
+        "dti": 0.014208555224622783,
+        "dots": 904
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 152,
+      "fold": "NW",
+      "n_truth": 1915,
+      "link_dots": 229,
+      "r1_dots_reallocated": 658,
+      "source_pool_dots": 13282,
+      "annulus_ridge_pool_dots": 6349,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 467.634986196456,
+        "fp": 14192.148273779767,
+        "dti": 0.10475795860987192,
+        "dots": 14448
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 472.198542832459,
+        "fp": 14187.291458207847,
+        "dti": 0.1057816605128235,
+        "dots": 14448
+      },
+      "annulus_additions": {
+        "tp": 21.467336685098633,
+        "fp": 646.2269869945341,
+        "dti": 0.012889123837535545,
+        "dots": 658
+      },
+      "farfield_removed": {
+        "tp": 14.47025902251368,
+        "fp": 651.0838025664548,
+        "dti": 0.008690267887638303,
+        "dots": 658
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 152,
+      "fold": "NE_LidarGapHeavy",
+      "n_truth": 2374,
+      "link_dots": 383,
+      "r1_dots_reallocated": 1119,
+      "source_pool_dots": 16471,
+      "annulus_ridge_pool_dots": 7056,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 742.8650093124293,
+        "fp": 17644.346554956985,
+        "dti": 0.13321008729335956,
+        "dots": 18059
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 753.3232650145621,
+        "fp": 17644.51885926645,
+        "dti": 0.13503397302613013,
+        "dots": 18059
+      },
+      "annulus_additions": {
+        "tp": 36.14089343152454,
+        "fp": 1102.7912750647456,
+        "dti": 0.01699159564782421,
+        "dots": 1119
+      },
+      "farfield_removed": {
+        "tp": 43.00752142061958,
+        "fp": 1102.618970755283,
+        "dti": 0.02020721242669976,
+        "dots": 1119
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 152,
+      "fold": "SW",
+      "n_truth": 4113,
+      "link_dots": 514,
+      "r1_dots_reallocated": 772,
+      "source_pool_dots": 16828,
+      "annulus_ridge_pool_dots": 11942,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 572.7924786321466,
+        "fp": 18162.75210160046,
+        "dti": 0.08139136809020009,
+        "dots": 18479
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 576.7341421754513,
+        "fp": 18159.07343161342,
+        "dti": 0.08195084916243278,
+        "dots": 18479
+      },
+      "annulus_additions": {
+        "tp": 31.515032596482026,
+        "fp": 757.916611497614,
+        "dti": 0.009139331711576078,
+        "dots": 772
+      },
+      "farfield_removed": {
+        "tp": 28.258197685775464,
+        "fp": 761.5952814846614,
+        "dti": 0.008194651961024436,
+        "dots": 772
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 152,
+      "fold": "SE",
+      "n_truth": 3437,
+      "link_dots": 365,
+      "r1_dots_reallocated": 958,
+      "source_pool_dots": 13125,
+      "annulus_ridge_pool_dots": 8573,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 798.3499904066232,
+        "fp": 14271.113823380972,
+        "dti": 0.13851843374412498,
+        "dots": 14694
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 818.325155637724,
+        "fp": 14264.023130734757,
+        "dti": 0.1419207890752984,
+        "dots": 14694
+      },
+      "annulus_additions": {
+        "tp": 52.22605877304824,
+        "fp": 936.8765371001984,
+        "dti": 0.017719242446578645,
+        "dots": 958
+      },
+      "farfield_removed": {
+        "tp": 37.26873813773915,
+        "fp": 943.9672297464124,
+        "dti": 0.0126512801538842,
+        "dots": 958
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 153,
+      "fold": "NW",
+      "n_truth": 2197,
+      "link_dots": 180,
+      "r1_dots_reallocated": 612,
+      "source_pool_dots": 13395,
+      "annulus_ridge_pool_dots": 6252,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 547.5860446934471,
+        "fp": 14135.595989029936,
+        "dti": 0.11665071744043624,
+        "dots": 14440
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 539.2199411065262,
+        "fp": 14133.681982499598,
+        "dti": 0.11491884302889409,
+        "dots": 14440
+      },
+      "annulus_additions": {
+        "tp": 14.4494920893069,
+        "fp": 603.657585683701,
+        "dti": 0.007680909843501311,
+        "dots": 612
+      },
+      "farfield_removed": {
+        "tp": 17.846589090677668,
+        "fp": 605.5715922140396,
+        "dti": 0.009481349540487339,
+        "dots": 612
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 153,
+      "fold": "NE_LidarGapHeavy",
+      "n_truth": 2144,
+      "link_dots": 370,
+      "r1_dots_reallocated": 1188,
+      "source_pool_dots": 16342,
+      "annulus_ridge_pool_dots": 7098,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 587.4461932674325,
+        "fp": 17658.781442158055,
+        "dti": 0.10950734615357069,
+        "dots": 17994
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 587.0319797050595,
+        "fp": 17660.384345156686,
+        "dti": 0.10942528210882971,
+        "dots": 17994
+      },
+      "annulus_additions": {
+        "tp": 26.920896610097934,
+        "fp": 1174.3956375323728,
+        "dti": 0.013767017010604714,
+        "dots": 1188
+      },
+      "farfield_removed": {
+        "tp": 42.84106178598732,
+        "fp": 1172.7927345337437,
+        "dti": 0.02187636030664354,
+        "dots": 1188
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 153,
+      "fold": "SW",
+      "n_truth": 4113,
+      "link_dots": 530,
+      "r1_dots_reallocated": 767,
+      "source_pool_dots": 16808,
+      "annulus_ridge_pool_dots": 11929,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 553.085106227204,
+        "fp": 18207.997888700625,
+        "dti": 0.07853403609945461,
+        "dots": 18512
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 568.6333231413425,
+        "fp": 18200.657665287537,
+        "dti": 0.0807229529604808,
+        "dots": 18512
+      },
+      "annulus_additions": {
+        "tp": 39.04070573827595,
+        "fp": 749.452511120651,
+        "dti": 0.011322386559964264,
+        "dots": 767
+      },
+      "farfield_removed": {
+        "tp": 26.272074539222995,
+        "fp": 756.7927345337437,
+        "dti": 0.0076216929931793905,
+        "dots": 767
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 153,
+      "fold": "SE",
+      "n_truth": 3204,
+      "link_dots": 372,
+      "r1_dots_reallocated": 1025,
+      "source_pool_dots": 12972,
+      "annulus_ridge_pool_dots": 8929,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 602.2102458727952,
+        "fp": 14340.841141389821,
+        "dti": 0.1084709699659037,
+        "dots": 14646
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 593.4047765844623,
+        "fp": 14344.083782076941,
+        "dti": 0.10690633995786089,
+        "dots": 14646
+      },
+      "annulus_additions": {
+        "tp": 33.374770505817835,
+        "fp": 1010.7570419427409,
+        "dti": 0.01203984599722136,
+        "dots": 1025
+      },
+      "farfield_removed": {
+        "tp": 57.36308115615765,
+        "fp": 1007.5144012556216,
+        "dti": 0.020662627858640474,
+        "dots": 1025
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 154,
+      "fold": "NW",
+      "n_truth": 1986,
+      "link_dots": 181,
+      "r1_dots_reallocated": 666,
+      "source_pool_dots": 13269,
+      "annulus_ridge_pool_dots": 6355,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 380.8857591555409,
+        "fp": 14170.689189949497,
+        "dti": 0.0846579293947382,
+        "dots": 14390
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 391.1746362850456,
+        "fp": 14162.227280475741,
+        "dti": 0.08693773568247513,
+        "dots": 14390
+      },
+      "annulus_additions": {
+        "tp": 26.053854556934084,
+        "fp": 652.7169675453254,
+        "dti": 0.015107588438185644,
+        "dots": 666
+      },
+      "farfield_removed": {
+        "tp": 12.418181304717288,
+        "fp": 661.1788770190818,
+        "dti": 0.007205129933524778,
+        "dots": 666
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 154,
+      "fold": "NE_LidarGapHeavy",
+      "n_truth": 2594,
+      "link_dots": 337,
+      "r1_dots_reallocated": 1078,
+      "source_pool_dots": 16585,
+      "annulus_ridge_pool_dots": 6918,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 854.5442173458272,
+        "fp": 17556.43598152206,
+        "dti": 0.1484254707210643,
+        "dots": 18049
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 868.1310491883833,
+        "fp": 17553.774428096018,
+        "dti": 0.15072815796587818,
+        "dots": 18049
+      },
+      "annulus_additions": {
+        "tp": 32.09643722769594,
+        "fp": 1062.657585683701,
+        "dti": 0.01399055247902111,
+        "dots": 1078
+      },
+      "farfield_removed": {
+        "tp": 32.708103839151164,
+        "fp": 1065.319139109746,
+        "dti": 0.01425310535924772,
+        "dots": 1078
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 154,
+      "fold": "SW",
+      "n_truth": 3843,
+      "link_dots": 579,
+      "r1_dots_reallocated": 766,
+      "source_pool_dots": 16828,
+      "annulus_ridge_pool_dots": 12179,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 575.43628075691,
+        "fp": 18233.770170271884,
+        "dti": 0.0841743666322774,
+        "dots": 18558
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 587.2187888094104,
+        "fp": 18225.301688088508,
+        "dti": 0.08588957525346405,
+        "dots": 18558
+      },
+      "annulus_additions": {
+        "tp": 27.965352813926536,
+        "fp": 752.2433721213279,
+        "dti": 0.008656820032881589,
+        "dots": 766
+      },
+      "farfield_removed": {
+        "tp": 14.470990456722229,
+        "fp": 760.7118543047038,
+        "dti": 0.004480964449154331,
+        "dots": 766
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 154,
+      "fold": "SE",
+      "n_truth": 3595,
+      "link_dots": 360,
+      "r1_dots_reallocated": 968,
+      "source_pool_dots": 13122,
+      "annulus_ridge_pool_dots": 8724,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 775.2290391795871,
+        "fp": 14269.078765530248,
+        "dti": 0.13173275720054933,
+        "dots": 14679
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 787.6406443752657,
+        "fp": 14265.70973960591,
+        "dti": 0.13380071145256905,
+        "dots": 14679
+      },
+      "annulus_additions": {
+        "tp": 41.8159096469484,
+        "fp": 949.4215177062011,
+        "dti": 0.013601998486854642,
+        "dots": 968
+      },
+      "farfield_removed": {
+        "tp": 42.79222037632657,
+        "fp": 952.7905436305371,
+        "dti": 0.01391564177817979,
+        "dots": 968
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 155,
+      "fold": "NW",
+      "n_truth": 1999,
+      "link_dots": 221,
+      "r1_dots_reallocated": 633,
+      "source_pool_dots": 13332,
+      "annulus_ridge_pool_dots": 6226,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 457.12610884610547,
+        "fp": 14187.598911367351,
+        "dti": 0.10095217985022381,
+        "dots": 14456
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 454.71189528373236,
+        "fp": 14185.49402449755,
+        "dti": 0.10043907024107908,
+        "dots": 14456
+      },
+      "annulus_additions": {
+        "tp": 11.646945138389036,
+        "fp": 624.661967490114,
+        "dti": 0.00674613550997677,
+        "dots": 633
+      },
+      "farfield_removed": {
+        "tp": 14.491757389929006,
+        "fp": 626.7668543599152,
+        "dti": 0.008389095452911402,
+        "dots": 633
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 155,
+      "fold": "NE_LidarGapHeavy",
+      "n_truth": 3319,
+      "link_dots": 391,
+      "r1_dots_reallocated": 960,
+      "source_pool_dots": 16672,
+      "annulus_ridge_pool_dots": 6686,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 1141.706098386769,
+        "fp": 17579.490884883344,
+        "dti": 0.17840720531955892,
+        "dots": 18205
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 1142.6164511454845,
+        "fp": 17583.31273929847,
+        "dti": 0.1785230578331551,
+        "dots": 18205
+      },
+      "annulus_additions": {
+        "tp": 25.289191100225327,
+        "fp": 947.9479222822036,
+        "dti": 0.00887387545666818,
+        "dots": 960
+      },
+      "farfield_removed": {
+        "tp": 43.66510710432051,
+        "fp": 944.1260678670769,
+        "dti": 0.015306276770024798,
+        "dots": 960
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 155,
+      "fold": "SW",
+      "n_truth": 4634,
+      "link_dots": 432,
+      "r1_dots_reallocated": 759,
+      "source_pool_dots": 16822,
+      "annulus_ridge_pool_dots": 11587,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 580.6139155837855,
+        "fp": 18109.235095377568,
+        "dti": 0.0779853154464015,
+        "dots": 18411
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 576.9191778400839,
+        "fp": 18107.863878550022,
+        "dti": 0.07749960243424912,
+        "dots": 18411
+      },
+      "annulus_additions": {
+        "tp": 25.736906350394534,
+        "fp": 746.0859934696613,
+        "dti": 0.006664890827740063,
+        "dots": 759
+      },
+      "farfield_removed": {
+        "tp": 32.39772834223111,
+        "fp": 747.4572102972037,
+        "dti": 0.008386304526594902,
+        "dots": 759
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 155,
+      "fold": "SE",
+      "n_truth": 3076,
+      "link_dots": 309,
+      "r1_dots_reallocated": 1082,
+      "source_pool_dots": 12958,
+      "annulus_ridge_pool_dots": 8891,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 475.06255565602135,
+        "fp": 14299.79230337958,
+        "dti": 0.08771836145218895,
+        "dots": 14552
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 477.04032585439745,
+        "fp": 14300.22071116554,
+        "dti": 0.08807572239591765,
+        "dots": 14552
+      },
+      "annulus_additions": {
+        "tp": 28.28845966601678,
+        "fp": 1069.5144012556216,
+        "dti": 0.010553975445888627,
+        "dots": 1082
+      },
+      "farfield_removed": {
+        "tp": 36.79514271374162,
+        "fp": 1069.0859934696614,
+        "dti": 0.013719414191184241,
+        "dots": 1082
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 156,
+      "fold": "NW",
+      "n_truth": 1821,
+      "link_dots": 283,
+      "r1_dots_reallocated": 673,
+      "source_pool_dots": 13247,
+      "annulus_ridge_pool_dots": 6442,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 415.258752822221,
+        "fp": 14255.217785428706,
+        "dti": 0.09457268363681211,
+        "dots": 14485
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 415.96184351409886,
+        "fp": 14250.48192448324,
+        "dti": 0.09475021277498627,
+        "dots": 14485
+      },
+      "annulus_additions": {
+        "tp": 14.07827526176446,
+        "fp": 664.6976600811165,
+        "dti": 0.008840054884876172,
+        "dots": 673
+      },
+      "farfield_removed": {
+        "tp": 6.892508162923367,
+        "fp": 669.433521026582,
+        "dti": 0.00432928760531697,
+        "dots": 673
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 156,
+      "fold": "NE_LidarGapHeavy",
+      "n_truth": 2104,
+      "link_dots": 378,
+      "r1_dots_reallocated": 1165,
+      "source_pool_dots": 16307,
+      "annulus_ridge_pool_dots": 7307,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 572.4411801201592,
+        "fp": 17691.372973177167,
+        "dti": 0.10727982901610351,
+        "dots": 18014
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 582.802901900667,
+        "fp": 17683.04037127804,
+        "dti": 0.10921338828108525,
+        "dots": 18014
+      },
+      "annulus_additions": {
+        "tp": 31.61302938652412,
+        "fp": 1147.5366310572456,
+        "dti": 0.0164734425744302,
+        "dots": 1165
+      },
+      "farfield_removed": {
+        "tp": 27.414844903233437,
+        "fp": 1155.8692329563703,
+        "dti": 0.01427962995961168,
+        "dots": 1165
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 156,
+      "fold": "SW",
+      "n_truth": 3972,
+      "link_dots": 491,
+      "r1_dots_reallocated": 732,
+      "source_pool_dots": 16870,
+      "annulus_ridge_pool_dots": 11907,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 644.6291620111401,
+        "fp": 18137.750228067394,
+        "dti": 0.09296540351478158,
+        "dots": 18487
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 658.8134662415642,
+        "fp": 18128.600884993764,
+        "dti": 0.09499720170014261,
+        "dots": 18487
+      },
+      "annulus_additions": {
+        "tp": 30.66729800752701,
+        "fp": 716.4459384110315,
+        "dti": 0.009217640292182264,
+        "dots": 732
+      },
+      "farfield_removed": {
+        "tp": 16.3158027082622,
+        "fp": 725.5952814846614,
+        "dti": 0.004905559213506606,
+        "dots": 732
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 156,
+      "fold": "SE",
+      "n_truth": 3283,
+      "link_dots": 353,
+      "r1_dots_reallocated": 994,
+      "source_pool_dots": 13054,
+      "annulus_ridge_pool_dots": 8877,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 667.0892878469207,
+        "fp": 14286.432455132139,
+        "dti": 0.1187603516751129,
+        "dots": 14639
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 682.0487993854363,
+        "fp": 14279.084927575217,
+        "dti": 0.1213906583014523,
+        "dots": 14639
+      },
+      "annulus_additions": {
+        "tp": 39.17147278190561,
+        "fp": 976.9716115528254,
+        "dti": 0.013843326487096798,
+        "dots": 994
+      },
+      "farfield_removed": {
+        "tp": 25.99227839268401,
+        "fp": 984.3191391097461,
+        "dti": 0.009189543924056567,
+        "dots": 994
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 157,
+      "fold": "NW",
+      "n_truth": 1794,
+      "link_dots": 201,
+      "r1_dots_reallocated": 636,
+      "source_pool_dots": 13309,
+      "annulus_ridge_pool_dots": 6448,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 410.03980140572355,
+        "fp": 14201.617073333284,
+        "dti": 0.09409910477150046,
+        "dots": 14437
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 411.8186590860196,
+        "fp": 14196.20797301153,
+        "dti": 0.0945230801521734,
+        "dots": 14437
+      },
+      "annulus_additions": {
+        "tp": 21.817786579434298,
+        "fp": 621.9293462522032,
+        "dti": 0.01395044251906566,
+        "dots": 636
+      },
+      "farfield_removed": {
+        "tp": 20.11542732176502,
+        "fp": 627.3384465739549,
+        "dti": 0.012855848353371115,
+        "dots": 636
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 157,
+      "fold": "NE_LidarGapHeavy",
+      "n_truth": 2760,
+      "link_dots": 317,
+      "r1_dots_reallocated": 1038,
+      "source_pool_dots": 16611,
+      "annulus_ridge_pool_dots": 6859,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 860.0950358278217,
+        "fp": 17559.195852507706,
+        "dti": 0.14598026800329061,
+        "dots": 18056
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 876.4122980050818,
+        "fp": 17553.376920429997,
+        "dti": 0.1486967367655899,
+        "dots": 18056
+      },
+      "annulus_additions": {
+        "tp": 37.31246630677835,
+        "fp": 1020.4645144410317,
+        "dti": 0.015421207699817344,
+        "dots": 1038
+      },
+      "farfield_removed": {
+        "tp": 31.586417778487245,
+        "fp": 1026.2834465187434,
+        "dti": 0.013054536927363726,
+        "dots": 1038
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 157,
+      "fold": "SW",
+      "n_truth": 4226,
+      "link_dots": 564,
+      "r1_dots_reallocated": 781,
+      "source_pool_dots": 16801,
+      "annulus_ridge_pool_dots": 11809,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 556.9195919041528,
+        "fp": 18215.113409316902,
+        "dti": 0.07805234285399476,
+        "dots": 18519
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 562.0689349777826,
+        "fp": 18210.806687591605,
+        "dti": 0.07877216336375845,
+        "dots": 18519
+      },
+      "annulus_additions": {
+        "tp": 24.563142571934225,
+        "fp": 769.7956568711586,
+        "dti": 0.006939384281217422,
+        "dots": 781
+      },
+      "farfield_removed": {
+        "tp": 17.258611749844263,
+        "fp": 774.1023785964551,
+        "dti": 0.0048765921641191826,
+        "dots": 781
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 157,
+      "fold": "SE",
+      "n_truth": 3692,
+      "link_dots": 356,
+      "r1_dots_reallocated": 971,
+      "source_pool_dots": 13153,
+      "annulus_ridge_pool_dots": 8642,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 773.9596833916635,
+        "fp": 14284.8536554682,
+        "dti": 0.12974226823794413,
+        "dots": 14686
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 785.3053340160982,
+        "fp": 14281.196483848567,
+        "dti": 0.13161026431698325,
+        "dots": 14686
+      },
+      "annulus_additions": {
+        "tp": 51.60092597279513,
+        "fp": 950.8980354676137,
+        "dti": 0.016359953511086038,
+        "dots": 971
+      },
+      "farfield_removed": {
+        "tp": 44.8137187437419,
+        "fp": 954.5552070872458,
+        "dti": 0.01421090574880393,
+        "dots": 971
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 158,
+      "fold": "NW",
+      "n_truth": 1963,
+      "link_dots": 226,
+      "r1_dots_reallocated": 640,
+      "source_pool_dots": 13312,
+      "annulus_ridge_pool_dots": 6285,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 416.5195554752718,
+        "fp": 14217.843328893607,
+        "dti": 0.09261603524052986,
+        "dots": 14457
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 416.1588824991122,
+        "fp": 14212.012393495515,
+        "dti": 0.09256132379521724,
+        "dots": 14457
+      },
+      "annulus_additions": {
+        "tp": 23.4013821138547,
+        "fp": 626.388016018405,
+        "dti": 0.013762621617996934,
+        "dots": 640
+      },
+      "farfield_removed": {
+        "tp": 19.782093988431686,
+        "fp": 632.2189514164975,
+        "dti": 0.01163105100860593,
+        "dots": 640
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 158,
+      "fold": "NE_LidarGapHeavy",
+      "n_truth": 2300,
+      "link_dots": 368,
+      "r1_dots_reallocated": 1197,
+      "source_pool_dots": 16322,
+      "annulus_ridge_pool_dots": 7091,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 592.4891934016823,
+        "fp": 17654.552264260317,
+        "dti": 0.1079331618136009,
+        "dots": 17979
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 587.1693228577276,
+        "fp": 17658.005092751104,
+        "dti": 0.10697132289184705,
+        "dots": 17979
+      },
+      "annulus_additions": {
+        "tp": 21.038928899138256,
+        "fp": 1185.9672297464124,
+        "dti": 0.010108060174755207,
+        "dots": 1197
+      },
+      "farfield_removed": {
+        "tp": 43.42611678940568,
+        "fp": 1182.5144012556216,
+        "dti": 0.020825994888500447,
+        "dots": 1197
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 158,
+      "fold": "SW",
+      "n_truth": 3538,
+      "link_dots": 548,
+      "r1_dots_reallocated": 766,
+      "source_pool_dots": 16801,
+      "annulus_ridge_pool_dots": 12267,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 544.7499926553139,
+        "fp": 18212.83539680834,
+        "dti": 0.08276463926851002,
+        "dots": 18514
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 557.8341091924892,
+        "fp": 18203.078768929667,
+        "dti": 0.08474395919463236,
+        "dots": 18514
+      },
+      "annulus_additions": {
+        "tp": 24.6381781261439,
+        "fp": 752.5625112310738,
+        "dti": 0.00825167356176104,
+        "dots": 766
+      },
+      "farfield_removed": {
+        "tp": 10.204343128841373,
+        "fp": 762.3191391097461,
+        "dti": 0.0034186495604511314,
+        "dots": 766
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 158,
+      "fold": "SE",
+      "n_truth": 3113,
+      "link_dots": 293,
+      "r1_dots_reallocated": 969,
+      "source_pool_dots": 13092,
+      "annulus_ridge_pool_dots": 8994,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 758.4166798114948,
+        "fp": 14237.556328696588,
+        "dti": 0.13815531652603125,
+        "dots": 14613
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 757.0734373670582,
+        "fp": 14238.582208870419,
+        "dti": 0.13791222228792543,
+        "dots": 14613
+      },
+      "annulus_additions": {
+        "tp": 38.46034991141033,
+        "fp": 954.011685950241,
+        "dti": 0.01430340656270891,
+        "dots": 969
+      },
+      "farfield_removed": {
+        "tp": 56.517537470409124,
+        "fp": 952.9858057764127,
+        "dti": 0.020992282966917963,
+        "dots": 969
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 159,
+      "fold": "NW",
+      "n_truth": 2316,
+      "link_dots": 207,
+      "r1_dots_reallocated": 663,
+      "source_pool_dots": 13248,
+      "annulus_ridge_pool_dots": 6146,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 406.65042261224966,
+        "fp": 14190.819225558918,
+        "dti": 0.0852106824515932,
+        "dots": 14420
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 402.13602135662796,
+        "fp": 14191.33362681454,
+        "dti": 0.0842788500370211,
+        "dots": 14420
+      },
+      "annulus_additions": {
+        "tp": 12.863705651679997,
+        "fp": 655.3406374771614,
+        "dti": 0.0064757556362257124,
+        "dots": 663
+      },
+      "farfield_removed": {
+        "tp": 20.35587710567781,
+        "fp": 654.8262362215396,
+        "dti": 0.010240217390402307,
+        "dots": 663
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 159,
+      "fold": "NE_LidarGapHeavy",
+      "n_truth": 2664,
+      "link_dots": 301,
+      "r1_dots_reallocated": 1116,
+      "source_pool_dots": 16450,
+      "annulus_ridge_pool_dots": 6911,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 807.3118964344608,
+        "fp": 17538.33884014851,
+        "dti": 0.13918378366687092,
+        "dots": 17982
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 805.1085987105487,
+        "fp": 17542.69148094605,
+        "dti": 0.13879364022740182,
+        "dots": 17982
+      },
+      "annulus_additions": {
+        "tp": 22.81997748264079,
+        "fp": 1104.7504692331215,
+        "dti": 0.00968296391355335,
+        "dots": 1116
+      },
+      "farfield_removed": {
+        "tp": 43.622838404279264,
+        "fp": 1100.3978284355794,
+        "dti": 0.01848422118658602,
+        "dots": 1116
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 159,
+      "fold": "SW",
+      "n_truth": 4010,
+      "link_dots": 574,
+      "r1_dots_reallocated": 768,
+      "source_pool_dots": 16854,
+      "annulus_ridge_pool_dots": 11794,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 605.4945171202571,
+        "fp": 18211.353131066026,
+        "dti": 0.08685445729672539,
+        "dots": 18554
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 610.6419866608203,
+        "fp": 18209.950603453894,
+        "dti": 0.08758342031529598,
+        "dots": 18554
+      },
+      "annulus_additions": {
+        "tp": 14.96786108727278,
+        "fp": 760.8357312685741,
+        "dti": 0.004450533988643826,
+        "dots": 768
+      },
+      "farfield_removed": {
+        "tp": 13.296495244053371,
+        "fp": 762.2382588807062,
+        "dti": 0.003953634373832937,
+        "dots": 768
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    },
+    {
+      "seed": 159,
+      "fold": "SE",
+      "n_truth": 3319,
+      "link_dots": 333,
+      "r1_dots_reallocated": 984,
+      "source_pool_dots": 13060,
+      "annulus_ridge_pool_dots": 8860,
+      "source_shortfall": 0,
+      "annulus_shortfall": 0,
+      "candidate_build_ok": true,
+      "H28_edge_best_Tv2_prune_r1": {
+        "tp": 702.8655405599413,
+        "fp": 14278.672173481842,
+        "dti": 0.12436779659648749,
+        "dots": 14648
+      },
+      "H27_10_annulus_reallocation": {
+        "tp": 698.51905840795,
+        "fp": 14280.384027786546,
+        "dti": 0.1236102378876835,
+        "dots": 14648
+      },
+      "annulus_additions": {
+        "tp": 33.05709086506974,
+        "fp": 970.1074918370766,
+        "dti": 0.011575288831658169,
+        "dots": 984
+      },
+      "farfield_removed": {
+        "tp": 44.13066695028145,
+        "fp": 968.3956375323728,
+        "dti": 0.015442693671947234,
+        "dots": 984
+      },
+      "same_dot_count": true,
+      "no_known_overlap": true,
+      "annulus_additions_in_band": true,
+      "annulus_additions_spaced": true
+    }
+  ],
+  "seconds": 192.28864312171936
+}
