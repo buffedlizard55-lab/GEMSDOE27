@@ -1,5 +1,12 @@
 [
  {
+  "utc": "2026-10-08T13:24:54Z",
+  "id": "nbmg-qfaults",
+  "event": "recovered",
+  "from": null,
+  "to": "c9f994c101cdb30c"
+ },
+ {
   "utc": "2026-10-07T13:18:40Z",
   "id": "nbmg-qfaults",
   "event": "unreachable",
