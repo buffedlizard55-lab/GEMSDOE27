@@ -1,5 +1,12 @@
 [
  {
+  "utc": "2026-10-22T11:47:27Z",
+  "id": "geodawn",
+  "event": "unreachable",
+  "from": "2041504b9c2fc724",
+  "to": null
+ },
+ {
   "utc": "2026-10-20T11:32:05Z",
   "id": "hermant-2025",
   "event": "recovered",
