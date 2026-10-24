@@ -1,5 +1,19 @@
 [
  {
+  "utc": "2026-10-24T10:54:42Z",
+  "id": "siler-2022",
+  "event": "recovered",
+  "from": null,
+  "to": "4fca5f6f08f45de0"
+ },
+ {
+  "utc": "2026-10-24T10:54:42Z",
+  "id": "geodawn",
+  "event": "recovered",
+  "from": null,
+  "to": "2041504b9c2fc724"
+ },
+ {
   "utc": "2026-10-23T11:38:16Z",
   "id": "siler-2022",
   "event": "unreachable",
