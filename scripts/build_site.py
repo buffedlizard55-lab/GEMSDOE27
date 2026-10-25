@@ -87,6 +87,51 @@ def build() -> None:
 </div>
 """
 
+    # ---- Lane L-DCONFIRM (JSON-driven badge; knowledge/15-16) ----
+    dc_path = DOCS / "downloads" / "dconfirm_candidate_manifest.json"
+    dc = J(dc_path) if dc_path.exists() else None
+    dconfirm_box = ""
+    if dc:
+        r, u = dc["raster"], dc["uniqueness_vs_registry"]
+        conf = dc["holdout"]["confirmation"]
+        stats = conf["paired_candidate_minus_B"]
+        rel_dir = r["directory"].replace("docs/", "", 1)
+        tif_href = f"{rel_dir}/{r['primary_allfinite']}"
+        zip_href = f"{rel_dir}/{r['zip']}"
+        checks_href = f"{rel_dir}/checks-{dc['stem']}-allfinite.json"
+        if dc.get("ok_to_submit"):
+            badge = ('<span class="badge ok" style="font-size:1.05rem">&#9989; VALIDATED &mdash; OK TO DOWNLOAD &amp; SUBMIT '
+                     '(holdout + uniqueness + format gates PASS; still UNSCORED)</span>')
+            dl = (f'<div class="row"><a class="btn" href="{e(tif_href)}" download>&#11015; Download submission (.tif)</a>'
+                  f'<a class="btn alt" href="{e(zip_href)}" download>.zip (same single GeoTIFF)</a></div>')
+        else:
+            badge = ('<span class="badge bad" style="font-size:1.05rem">&#9940; DO NOT SUBMIT YET &mdash; selector gate '
+                     '(holdout PASS, format PASS, peer-uniqueness PASS; self-registry duplicate vs audit-only H28-1)</span>')
+            # STOP policy (tests/test_site.py): while not approved, research bytes are
+            # linked for audit but never offered with a one-click download attribute.
+            dl = (f'<p class="small">Research bytes for audit (<b>not</b> a submission download until the selector gate '
+                  f'below is recorded): <a href="{e(tif_href)}">all-finite GeoTIFF in downloads/research/</a> · '
+                  f'<a href="{e(zip_href)}">single-TIFF ZIP</a> (sha256 {e(r["sha256"][:16])}&hellip;).</p>')
+        dconfirm_box = f"""
+<div class="card hero" style="border-left:4px solid #1565c0">
+ <h2 style="margin-top:0">Newest unique TIF &mdash; Lane L-DCONFIRM hybrid detector (arm {e(dc['arm'])}, B2, {r['dots']:,} dots)</h2>
+ <p>{badge}</p>
+ {dl}
+ <p>First GEMSDOE27 detector to <b>confirm</b> a gain on untouched spatial-holdout seeds: pooled
+ <b>HOLDOUT-DTI {conf['pooled_holdout_dti'][dc['arm']]:.4f} vs {conf['pooled_holdout_dti']['B']:.4f}</b>
+ (paired &Delta; {stats['mean_delta']:+.4f}, 95% CI [{stats['ci95'][0]:+.4f}, {stats['ci95'][1]:+.4f}],
+ {stats['folds_positive']}/4 folds, {stats['seeds_positive']}/{stats['n_seeds']} seeds,
+ {conf['n_withheld_positives']:,} withheld positives; evaluator {e(dc['holdout']['evaluator'])}).
+ This is catalogue-internal evidence, <b>not</b> a leaderboard score; no live score is claimed.</p>
+ <ul class="tight">
+ <li><b>Unique vs every scored peer site (measured):</b> max {u['max_dot_overlap_peer_registry_12']:.1%} of dots within 3&nbsp;px of any of the 12 pinned GEMSDOE24/25/27/28/30/31/32/33/36 rasters (limit 70%); surface Spearman max {u['max_surface_spearman']:.3f} (limit 0.90). It is <b>not</b> an edit of the 0.2778 H19-5 dot field.</li>
+ <li><b>Why the badge is not green:</b> {u['max_dot_overlap_self_repo']:.1%} of its dots lie within 3&nbsp;px of this repo&rsquo;s own <i>unsubmitted, audit-only</i> H28-1 research raster &mdash; the same mechanism family &mdash; which fails this lane&rsquo;s frozen self-registry duplicate rule (knowledge/15 &sect;4). No post-hoc gate edit was made. The separate selector step can retire that audit artifact from the self-registry; the file bytes would not change.</li>
+ <li><b>Format (machine-validated, no human inspection):</b> single-band float32, EPSG:32611, 3730&times;3292, values exactly 0/1, all-finite with nodata=None (fixes &ldquo;Predicted values must be in range [0, 1]&rdquo;), 0 dots on the catalogue, min distance &gt;200&nbsp;m (B2), spacing &ge;280&nbsp;m (<a href="{e(checks_href)}">re-read receipt</a>). Full run card: <a href="{REPO_URL}/blob/main/evidence/dconfirm_run_card_2026-10-25.json">evidence/dconfirm_run_card_2026-10-25.json</a>; analysis: <a href="{REPO_URL}/blob/main/knowledge/16_dconfirm_result.md">knowledge/16</a>.</li>
+ <li><b>Submission name &amp; note (use only if the badge turns green):</b> <code>{e(dc['submission_name'])}</code> &middot; <code>{e(dc['note_max_140_chars'])}</code> ({dc['note_chars']} chars).</li>
+ </ul>
+</div>
+"""
+
     h28_manifest_path = DOCS / "downloads" / "h28_1_candidate_manifest.json"
     h28_manifest = J(h28_manifest_path) if h28_manifest_path.exists() else None
     h28_candidate = h28_manifest.get("candidate") if h28_manifest else None
@@ -302,6 +347,7 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
  <div class="row"><span class="badge ok">research TIFF format verified: float32 · single band · values [0,1]</span><span class="badge ok">unique versus 12 pinned peer rasters</span><span class="badge bad">predictive gate failed</span></div>
  <p class="small">The exact gate, 95% CI, validation receipt and duplicate report are on the <a href="research.html#h28-3"><b>Research page</b></a>. The executive summary explains the rule used to decide when a future TIFF is actually okay to submit.</p>
 </div>
+{dconfirm_box}
 {h28_3_box}
 {lane_box}
 <p><b>Legacy files below are retained only for audit and must not be submitted as a new unique candidate:</b> peer repositories now contain overlapping copies and no organizer receipt verifies their score/file pairing. The next action is a new pre-registered, data-ready hypothesis—not a renamed legacy raster.</p>
@@ -350,6 +396,8 @@ The agent never uploads anything; you press the button.</div>
 <p><span class="badge bad">NO TIFF IS APPROVED TO SUBMIT</span></p>
 <p>The unique H28-3 research TIFF is intentionally not offered as a submission download because it lost to the current baseline on its frozen holdout. Its all-finite GeoTIFF and ZIP passed format checks, but validity does not cure a negative model result.</p>
 <p>Read the <a href="research.html#h28-3">H28-3 result and run card</a>, <a href="downloads/research/h28_3_negative_research_manifest.json">format receipt</a>, and <a href="{REPO_URL}/blob/main/evidence/h28_3_negative_uniqueness.json">peer-registry uniqueness report</a>. The receipt says <b>NOT APPROVED FOR SUBMISSION</b> on every file variant.</p></div>
+
+{dconfirm_box}
 
 <h2>Exact submission steps</h2>
 <ol class="steps">

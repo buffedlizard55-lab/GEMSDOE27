@@ -252,6 +252,24 @@
    "severity": "medium",
    "issue": "Shared holdout harness buffered training but scored up to hidden segments (feature support could overlap hidden neighbourhoods). Protocol \u00a72 requires segments withheld WITH a buffer.",
    "action": "Fixed once in the template: gems27.holdout.buffered_scoring_mask() excludes the 600 m ring around hidden segments from scoring; catalogue-derived masks use visible faults only. Reported here per protocol \u00a72; siblings should adopt."
+  },
+  {
+   "id": "IR-2026-10-25-05-lane-paragraph-missing-sessionB",
+   "severity": "medium",
+   "issue": "Second 2026-10-25 session prompt again contains no delimited single method paragraph for the parallel-run lane rule (same class as IR-2026-10-25-01).",
+   "action": "Session declared Lane L-DCONFIRM explicitly in knowledge/15 \u00a72 before implementation and stayed inside it; numeric uniqueness tests enforced on surface and final dots."
+  },
+  {
+   "id": "IR-2026-10-25-06-duplicate-registry-precedent-conflict",
+   "severity": "high",
+   "issue": "Two frozen repo precedents define the duplicate-screen registry differently: Lane L-2026-10-25 used 5 peer top files + this repo's 6 shipped candidates, while the H28-3 session used the 12-peer parallel_submission_registry only. Lane L-DCONFIRM arm D passes the 12-peer screen (max 46.6% dots within 3px) but fails the union screen against this repo's own unsubmitted audit-only H28-1 research raster (85.2%).",
+   "action": "knowledge/15 \u00a74 froze the stricter union before results; verdict recorded as negative with full peer/self decomposition in evidence/dconfirm_run_card_2026-10-25.json. No post-hoc gate edit. A selector decision retiring the audit-only H28-1 artifact from the self-registry is the documented path to re-screen the identical bytes; not taken unilaterally."
+  },
+  {
+   "id": "IR-2026-10-25-07-frontpage-hero-stale-vs-newest-run",
+   "severity": "low",
+   "issue": "Front-page hero still describes the H28-3 run as 'the only newly generated TIFF in this run'; after L-DCONFIRM there is a newer research TIFF. Headline 'no new file is approved' remains accurate.",
+   "action": "L-DCONFIRM JSON-driven box added immediately below the hero on index and executive-summary (scripts/build_site.py). Hero wording left as the H28-3 record; consider rewording next session."
   }
  ]
 }
