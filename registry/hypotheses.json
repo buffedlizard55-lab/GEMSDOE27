@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-25 (Session 6: H28-3 strain-conductivity corridor gate failed; unique format-valid negative research artifact preserved as NOT APPROVED FOR SUBMISSION)",
+ "generated": "2026-10-25 | H28-6 added to the historical evidence ledger as a frozen negative; current untried list is in registry/next_hypotheses.json.",
  "ranking_rule": "expected DTI gain x probability the test can actually validate it / cost. Session 4 ranks the two routes that add information or settle the question (H27-17, H27-16) above the shipped increments, because Session 3 proved that rearranging pixels cannot exceed ~0.2550 and Session 4 proved that the catalogue-internal proxy cannot see the far-field habitat where 81.4% of the live emission's dots sit.",
  "hypotheses": [
   {
@@ -298,6 +298,25 @@
    "gain": "negative: pooled \u0394DTI -0.002594",
    "cost": "one local pre-registered holdout experiment; 0 weekly slots",
    "external": []
+  },
+  {
+   "id": "H28-6",
+   "rank": 100,
+   "title": "Multiscale radiometric alteration-front edges (ThK, UTh, TC)",
+   "layers": "GeoDAWN ThK, UTh, and radiometric total count TC; fixed 300/800 m gradient magnitudes and 300 m cross-channel edge-normal agreement.",
+   "signature": "Persistent radiometric rank-change edges with cross-channel gradient-normal agreement; inputs are relative uint8 grids, not calibrated concentrations.",
+   "why": "Hydrothermal alteration fronts may mark a buried or older fault without a young surface rupture; lithologic/regolith boundaries, flight-line seams, moisture, and non-tectonic alteration are strong mimics.",
+   "differs": "Adds label-free multiscale radiometric edge features to the shared H28-1 + 32-band OOF stack; it is not a pixel-ratio threshold, catalogue-flank deletion, or re-thinning of a peer raster.",
+   "status": "TESTED \u2014 FROZEN GATE FAILED. HOLDOUT-DTI \u0394 +0.000202 pooled, mean seed \u0394 +0.000182, 95% seed-bootstrap CI [-0.001239, +0.001534], 5/10 seeds and 1/4 folds improved. Unique, format-valid negative research TIFF da120b7ee1c8; NOT APPROVED FOR SUBMISSION. No full-fit model or weekly slot.",
+   "gain": "negative for promotion: failed preregistered +0.001 mean-gain, CI, fold, and seed gates; HOLDOUT-DTI only.",
+   "cost": "One frozen 40-cell holdout; cached-OOF evidence recovery after the E3 writer failure; 0 weekly slots.",
+   "external": [
+    {
+     "name": "USGS GeoDAWN ScienceBase record",
+     "url": "https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7",
+     "obtainable": "Official provenance page linked; local binary inputs were SHA-pinned owner-repository mirrors, not freshly fetched official bytes."
+    }
+   ]
   }
  ]
 }

@@ -1,0 +1,73 @@
+H28-6 first execution (stdout/stderr captured from Arena process `h28-6-spatial-holdout-37b9a285`)
+
+E1 completed before E2. Feature-canary maximum direction-invariant AUC by seed/fold, printed to four decimals:
+210: 0.5958, 0.6079, 0.5782, 0.6044
+211: 0.6021, 0.5774, 0.5485, 0.6037
+212: 0.6239, 0.5762, 0.5940, 0.6118
+213: 0.5720, 0.5967, 0.5326, 0.5987
+214: 0.5797, 0.5788, 0.5658, 0.6306
+215: 0.5739, 0.5652, 0.5570, 0.6129
+216: 0.5941, 0.5907, 0.5315, 0.5583
+217: 0.5573, 0.6282, 0.5560, 0.5728
+218: 0.5752, 0.5707, 0.5840, 0.5789
+219: 0.5788, 0.5982, 0.5535, 0.6141
+
+OOF candidate surface pre-placement Spearman versus pinned peers:
+g24_d15 0.10941
+g25_d28 0.09240
+g27_tv2_d15 0.10863
+g28_h27_4_r1 0.08675
+g28_h32_1 0.08969
+g28_h36_1 0.08370
+g28_h38_1 0.08392
+g30_d28 0.09240
+g31_h27_4 0.08675
+g32_h33_2_b2 0.08297
+g33_h33d 0.08831
+g36_anderson 0.08119
+
+E2: printed cell DTI (rounded to 5 decimals) for baseline/candidate/random control:
+seed 210 fold 0: 0.05379 / 0.05701 / 0.02843
+seed 210 fold 1: 0.07038 / 0.07037 / 0.03099
+seed 210 fold 2: 0.03197 / 0.02784 / 0.02705
+seed 210 fold 3: 0.06318 / 0.05455 / 0.03892
+seed 211 fold 0: 0.04189 / 0.04666 / 0.02583
+seed 211 fold 1: 0.06238 / 0.06541 / 0.02619
+seed 211 fold 2: 0.03276 / 0.02943 / 0.03214
+seed 211 fold 3: 0.06401 / 0.06625 / 0.04532
+seed 212 fold 0: 0.05040 / 0.05390 / 0.02198
+seed 212 fold 1: 0.05489 / 0.05116 / 0.02923
+seed 212 fold 2: 0.03214 / 0.03287 / 0.02620
+seed 212 fold 3: 0.06769 / 0.06740 / 0.04655
+seed 213 fold 0: 0.04020 / 0.04957 / 0.02389
+seed 213 fold 1: 0.06187 / 0.07074 / 0.02802
+seed 213 fold 2: 0.03415 / 0.03412 / 0.03140
+seed 213 fold 3: 0.05984 / 0.05762 / 0.03718
+seed 214 fold 0: 0.04838 / 0.05065 / 0.02240
+seed 214 fold 1: 0.06316 / 0.07046 / 0.03378
+seed 214 fold 2: 0.03212 / 0.02867 / 0.03311
+seed 214 fold 3: 0.04471 / 0.04853 / 0.03472
+seed 215 fold 0: 0.04375 / 0.05204 / 0.02766
+seed 215 fold 1: 0.06541 / 0.05804 / 0.02947
+seed 215 fold 2: 0.03110 / 0.02992 / 0.03100
+seed 215 fold 3: 0.05328 / 0.04855 / 0.04627
+seed 216 fold 0: 0.04515 / 0.05627 / 0.03190
+seed 216 fold 1: 0.06671 / 0.06456 / 0.02226
+seed 216 fold 2: 0.03577 / 0.03251 / 0.03617
+seed 216 fold 3: 0.05348 / 0.05897 / 0.03538
+seed 217 fold 0: 0.04020 / 0.04996 / 0.02145
+seed 217 fold 1: 0.07479 / 0.07544 / 0.02878
+seed 217 fold 2: 0.03091 / 0.02758 / 0.03028
+seed 217 fold 3: 0.06194 / 0.06544 / 0.04305
+seed 218 fold 0: 0.03762 / 0.04318 / 0.02935
+seed 218 fold 1: 0.04965 / 0.04461 / 0.02277
+seed 218 fold 2: 0.04237 / 0.04049 / 0.02896
+seed 218 fold 3: 0.05907 / 0.05973 / 0.04290
+seed 219 fold 0: 0.03795 / 0.03470 / 0.02165
+seed 219 fold 1: 0.07087 / 0.06494 / 0.02752
+seed 219 fold 2: 0.04167 / 0.03664 / 0.02953
+seed 219 fold 3: 0.03938 / 0.03901 / 0.02731
+
+E2 reached completion and printed: "E2 gate failed; E3 will make only a negative OOF research artifact (no full-fit model, no slot)."
+
+E3 artifact writer then failed before creating a valid TIFF. rasterio/GDAL error: `CPLError: ... Bad value 3292 for "TileWidth" tag`, followed by `RasterBlockError: The height and width of TIFF dataset blocks must be multiples of 16`. Cause: the writer copied the template's whole-raster block dimensions, then set `tiled=True`. No E2 evidence JSON was persisted by the first implementation. This failure is preserved, not suppressed. Recovery will use only the already-cached, SHA-verified OOF probability arrays and the exact frozen evaluator/splits; it is a deterministic evidence/artifact recovery, not a new hypothesis, tuning run, or independent confirmation. The source code now persists an E1/E2 checkpoint before E3 and writes untiled GeoTIFFs.

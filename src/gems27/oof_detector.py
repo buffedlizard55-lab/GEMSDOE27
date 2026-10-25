@@ -171,8 +171,14 @@ def build_oof_dotted_base(
     *,
     budget_frac: float = PRE_THIN_FRAC,
     thin_d: float = 1.5,
+    random_state: int | None = None,
 ) -> np.ndarray:
-    """Select top-budget OOF ridge pixels outside `known` in `fold_mask` and dot-thin them."""
+    """Select a budgeted OOF ridge set outside `known`, then apply shared dot-thinning.
+
+    The default selects the highest OOF scores. A non-None ``random_state`` instead selects a seeded
+    uniform sample from the exact same ridge pool and applies the identical thinning algorithm; this
+    is an ablation/control path, not a submission mode.
+    """
     active = fold_mask & ~known
     cand = ridge_mask & active
     k = int(round(budget_frac * int(fold_mask.sum())))
@@ -180,9 +186,12 @@ def build_oof_dotted_base(
     if len(ys) == 0 or k <= 0:
         return np.zeros_like(fold_mask, bool)
     if len(ys) > k:
-        sc = oof_prob[ys, xs]
-        top = np.argpartition(-sc, k - 1)[:k]
-        ys, xs = ys[top], xs[top]
+        if random_state is None:
+            sc = oof_prob[ys, xs]
+            selected = np.argpartition(-sc, k - 1)[:k]
+        else:
+            selected = np.random.default_rng(random_state).choice(len(ys), size=k, replace=False)
+        ys, xs = ys[selected], xs[selected]
     raw = np.zeros_like(fold_mask, bool)
     raw[ys, xs] = True
     return thinning.dot_thin(raw, thin_d)

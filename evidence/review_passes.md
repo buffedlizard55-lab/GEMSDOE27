@@ -366,3 +366,35 @@ do not carry standalone detection at 100 m. The lane transforms as an ADD-ON gai
 Merge alignment: lane artifact filed under docs/downloads/research/; front page keeps PR #11's
 STOP policy (no TIFF approved); lane box added as second parallel negative. Passes 1-3 detail
 for this lane: knowledge/14 + evidence/lane_run_card_2026-10-25.json. 86+ tests green post-merge.
+
+---
+
+# Session 7 (2026-10-25) — H28-6 recovered negative result, unique research TIFF, site/status correction
+
+## Pass 1 — implement and verify
+
+- Re-read `README.md`, its verbatim task prompt/Core Values, `AGENTS.md`, and the latest limitations and H33-2-B2 forensic notes. Preserved the user-reported GEMSDOE32 0.2778 as **OWNER-REPORTED**; hash authentication and pixel-exact construction do not authenticate its score. No DrivenData endpoint was accessed.
+- Kept the preregistered H28-6 radiometric-edge lane and seeds 210–219. Frozen E1 canaries and surface check passed, then E2 failed the promotion gate. The initial E3 writer error and recovery are recorded as IR-2026-10-25-07; recovery replayed original SHA-verified cached OOF probabilities, matched 12 surface correlations and all 40 DTI cells to the original log to five decimals, and did not refit. This is not an independent replication.
+- Retained the unique 64,070-dot all-finite GeoTIFF only as **NEGATIVE RESEARCH ARTIFACT — NOT APPROVED FOR SUBMISSION**. Updated the complete evidence, compact JSON run card, final peer audit, first-execution log, result note, post-screen note, and both hypothesis registries. Current untried list is H28-2, H28-5, H27-16; unchanged H28-4 sigma-5 coherence is not called untried.
+
+## Pass 2 — review for bugs, assumptions, and edge cases
+
+- Compared `scripts/build_site.py` against the recovered evidence and run-card schemas. Added required-field / negative-eligibility / 140-character note checks; fixed the missing-result fallback's literal `{REPO_URL}` placeholder.
+- Replaced the stale H28-3-as-latest front-page rationale with H28-6's negative HOLDOUT-DTI, and made the first screen and executive summary say **NO TIFF IS APPROVED TO SUBMIT** and **DO NOT SUBMIT H28-6**. The unique raster is linked only as “Download research-only GeoTIFF — NOT APPROVED TO SUBMIT”; no submission-download affordance was added. Added the reported 0.2778 forensic link with explicit owner-reported status.
+- Updated historical and current hypothesis views, `AGENTS.md`, and `knowledge/06` carry-forward priorities. The old pre-run screen remains labelled as historical; it records that H28-6 was pending at that point, while the post-run result and current three-candidate screen are separate.
+- First acceptance run exposed two stale site expectations (H28-6 badge absent from the executive-summary decision box, and a Session-6 screen label in a regression test); both were corrected. The final test run passed. `scripts/verify_downloads.py` covers weekly files and H28-1, not H28-6, so the new TIFF was separately re-read against the template and labels and verified for SHA-256, exact grid, float32/single-band, finite [0,1] binary values, zero outside, `nodata=None`, 64,070 positives, and zero catalogue overlap.
+- Checked the H28-6 / H33-2-B2 source and score labels against `registry/sources.json`, `registry/parallel_submission_registry.json`, `registry/live_scores.json`, and `knowledge/12_why_02778_won.md`. Official GeoDAWN/3DEP/GDR links are retained for manual review; this pass did not freshly fetch those external pages or GeoDAWN binaries. Local radiometric inputs remain owner mirrors.
+
+## Pass 3 — recheck against the original request
+
+| request / constraint | evidence and result | limitation / disposition |
+|---|---|---|
+| Study GEMSDOE32 H33-2-B2 and keep score claims cautious | `knowledge/12_why_02778_won.md`; hash-authenticated raster and pixel-exact two-pixel catalogue-flank deletion reconstruction; executive-summary link | The 0.2778 score remains OWNER-REPORTED; no organizer receipt/hash-to-score crosswalk. |
+| Unique TIFF plus unmistakable eligibility | `docs/downloads/research/gems27-h28-6-radiometric-fronts-negative-research-20261025-da120b7ee1c8-allfinite.tif`; `evidence/h28_6_run_card.json`; front page and executive summary | Unique/format-valid but failed holdout; explicitly **NOT APPROVED** and must not be submitted. |
+| Holdout DTI + CI, counts, leakage canary, registry correlation/overlap | `evidence/h28_6_radiometric_holdout.json`, run card and final peer audit; 118,673 withheld-positive occurrences; 11 AUC canaries; surface max Spearman 0.109410; final max directed 3-px overlap 0.491743 | Catalogue-internal proxy only; no organizer-created labels or score. |
+| Preserve result, controls, irregularities, and one-lane/budget constraints | H28-6 failed frozen efficacy gates; recovery did not refit; IR-2026-10-25-07; no slot selected | Do not rerun H28-6 or refit seeds 210–219; no upload. |
+| Maintain 3–5 genuinely untried geological candidates before future implementation | `knowledge/18_post_screen_status_2026-10-25.md`, `knowledge/07_untried_hypotheses.md`, `registry/next_hypotheses.json` now list H28-2/H28-5/H27-16 | H28-5 raw package and H27-16 source-byte gates remain; no new candidate implemented. |
+| Clean Pages site and executive guidance | Rebuilt `docs/index.html`, `docs/executive-summary.html`, `docs/research.html`, `docs/sources.html`, `docs/topology.html`, plus root `index.html`; local links resolve | Pages deployment itself was not checked; no organizer-facing file is approved. |
+| Three implementation/review passes and verification | `python scripts/build_site.py`; `python -m pytest -q`: **92 passed**; `ruff check src scripts tests`; Python compile; `git diff --check`; `scripts/verify_downloads.py`: **0 failures**; independent H28-6 raster re-read passed | Full tests use restored local caches; source webpages were not live-fetched in this pass. |
+
+No DrivenData access/upload, weekly slot, organizer receipt, or 27GEMSDOE score is claimed. PR/merge status is recorded only after an explicit GitHub operation below.

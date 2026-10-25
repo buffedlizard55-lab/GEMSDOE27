@@ -24,8 +24,8 @@ python scripts/build_site.py                   # rebuilds docs/*.html from JSON 
 Exact 0.0/1.0 (or sanitised probabilities) inside the footprint, NaN outside with nodata=NaN, an all-finite fallback, a zip with exactly one GeoTIFF, a checks JSON,
 `verify_downloads.py` passing, no pixel on a catalogue cell, a documented hypothesis and its holdout gate result, and an entry in the correct manifest (`docs/downloads/manifest.json` for a weekly slot; `docs/downloads/h28_1_candidate_manifest.json` for the separate H28-1 research file).
 
-## Next steps inherited from this session
-`knowledge/06_limitations_and_access.md` -> the latest "Prioritised next steps for Session 5" / Session 5 outcome addendum. Read the newest dated section and do those first.
+## Current carry-forward state (2026-10-25)
+Read the latest dated outcome in `knowledge/06_limitations_and_access.md`, then `knowledge/17_h28_6_result_2026-10-25.md` and `knowledge/18_post_screen_status_2026-10-25.md`. H28-6 is a completed negative gate; do not rerun its ordinary runner or refit seeds 210–219. The current untried candidates are H28-2, H28-5, and H27-16; each requires a fresh pre-code screen and preregistration before implementation. No weekly slot is selected.
 
 ## Session-3 additions to the hard rules
 * **Every scored raster used in an argument must be hash-authenticated.** `scripts/fetch_scored_corpus.py` accepts a sibling file only if its SHA-256 equals a `registry/live_scores.json` row; unmatched rows stay listed as unmatched. Never match by filename.

@@ -1,5 +1,22 @@
 # Limitations, access needed, and work for the next session
 
+## Session 7 outcome (2026-10-25) — H28-6 rejected; no currently approved submission
+
+H28-6's frozen spatial holdout failed its efficacy gate on seeds 210–219 × four quadrants: pooled HOLDOUT-DTI 0.0494643 vs 0.0492624 baseline (Δ +0.0002019); mean paired seed Δ +0.0001820; deterministic 95% seed-bootstrap CI [−0.0012386, +0.0015340]; 5/10 seeds and 1/4 folds improved. All 11 source/derived canaries passed (maximum direction-invariant AUC 0.630593); pre-placement surface max Spearman was 0.109410; final 12-peer dot audit passed (max directed 3-px overlap 0.491743). The unique 64,070-dot all-finite GeoTIFF is **NEGATIVE RESEARCH ARTIFACT — NOT APPROVED FOR SUBMISSION**. It was emitted from cached OOF probabilities after the efficacy gate failed; no full-fit model was trained and no weekly slot was selected. HOLDOUT-DTI is catalogue-internal, not an organizer score. Full record: `knowledge/17_h28_6_result_2026-10-25.md` and `evidence/h28_6_radiometric_holdout.json`.
+
+The first E3 writer failed because an inherited 3292-pixel block width was used with `tiled=True`. The original log is retained, the invalid partial TIFF was removed, and deterministic recovery from SHA-verified OOF caches reproduced all 40 logged cells to five decimals without refitting. This is evidence recovery, not independent replication; see IR-2026-10-25-07 in `registry/irregularities.json`.
+
+**Current untried screen:** H28-2 multiscale LiDAR scarp persistence, H28-5 screened hydrothermal chemistry contrasts, and H27-16 new GDR geometries. H28-4's unchanged sigma-5 seismicity coherence is already implemented and included in the earlier lane stack; its standalone contribution is unknown. Full ranking, layers, mimics, priors, costs and data gates: `knowledge/18_post_screen_status_2026-10-25.md`. The owner-reported H33-2-B2 0.2778 remains unverified by an organizer receipt; no score is claimed here.
+
+## Prioritised next steps after Session 7
+
+1. **Do not rerun H28-6 or refit seeds 210–219.** Preserve the negative result and current TIFF's ineligible status; never select a weekly slot based on its uniqueness or format validity.
+2. **Before any new feature code, refresh the candidate screen and preregister one method lane using fresh unused seeds.** H28-2 is currently the leading data-ready candidate; compare its exact transform against the current OOF baseline and same-count control, run feature-alone AUC canaries, and apply surface plus final-dot registry checks.
+3. **Resolve provenance before data-dependent work:** H28-5's local CSV is an owner mirror and raw GDR bytes were not independently refetched/re-hashed; H27-16's packages are absent locally and require successful authorized retrieval plus SHA-256 verification. Official source listings do not prove the local bytes were obtained.
+4. **Keep submission promotion separate.** No weekly slot, DrivenData access/upload, organizer receipt, or 27GEMSDOE score is claimed; a future internal holdout pass is necessary but not sufficient for organizer-label performance.
+
+---
+
 ## Session 6 outcome (2026-10-25) — H28-3 rejected; no currently approved submission
 
 H28-3 (label-free strain/conductivity intersection corridors) completed its pre-registered spatially blocked test on fresh seeds 160–169 and **failed** its frozen promotion gate. Pooled **HOLDOUT-DTI** was 0.1033523 for the candidate versus 0.1059458 baseline (Δ −0.0025935); mean paired seed Δ was −0.0025884 with deterministic 95% bootstrap CI [−0.0042399, −0.0009065], and only 2/10 seeds and 1/4 folds improved. Leakage canary, integrity, and uniform-control checks passed; the efficacy gates did not. Full result: `evidence/h28_3_strain_holdout.json`; protocol: `knowledge/13_preregistration_H28-3.md`. Do not tune or re-run H28-3.

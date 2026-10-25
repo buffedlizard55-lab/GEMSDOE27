@@ -243,6 +243,50 @@ The 59,243-dot all-finite research TIFF is format-valid and cleared the duplicat
 <a href="{REPO_URL}/blob/main/evidence/h28_3_strain_holdout.json">cell-level evidence</a> ·
 <a href="{REPO_URL}/blob/main/evidence/h28_3_negative_uniqueness.json">duplicate check</a> ·
 <a href="{REPO_URL}/blob/main/knowledge/13_preregistration_H28-3.md">frozen protocol</a>.</div>"""
+    h28_6_evidence_path = EV / "h28_6_radiometric_holdout.json"
+    h28_6_result = J(h28_6_evidence_path) if h28_6_evidence_path.exists() else None
+    h28_6_card_path = EV / "h28_6_run_card.json"
+    h28_6_card = J(h28_6_card_path) if h28_6_card_path.exists() else None
+    if h28_6_card is not None:
+        required_card_fields = {
+            "hypothesis", "mechanism", "named_non_fault_mimic", "holdout",
+            "leakage_canary", "parallel_uniqueness", "raster", "validator",
+            "submission", "verdict", "limitations",
+        }
+        missing_card_fields = required_card_fields - h28_6_card.keys()
+        if missing_card_fields:
+            raise ValueError(f"H28-6 JSON run card is missing fields: {sorted(missing_card_fields)}")
+        if h28_6_card["submission"].get("ok_to_submit") is not False:
+            raise ValueError("The failed H28-6 artifact must never be rendered as approved to submit")
+        if h28_6_card["submission"].get("note_characters", 10**9) > 140:
+            raise ValueError("The H28-6 run-card note exceeds the prompt's 140-character limit")
+    h28_6_card_href = (
+        f'<a href="{REPO_URL}/blob/main/evidence/h28_6_run_card.json">compact JSON run card</a>'
+        if h28_6_card is not None else ""
+    )
+    h28_6_preflight_path = EV / "h28_6_preflight.json"
+    h28_6_preflight = J(h28_6_preflight_path) if h28_6_preflight_path.exists() else None
+    h28_6_box = ""
+    if h28_6_result:
+        e2 = h28_6_result["e2_holdout"]
+        h = e2["paired_seed_summary"]
+        gate_label = "HOLDOUT GATE PASSED — SELECTOR REVIEW ONLY" if e2["gate_pass"] else "NEGATIVE HOLDOUT"
+        artifact = h28_6_result["artifact"]
+        artifact_href = artifact["path"].removeprefix("docs/")
+        uniqueness = h28_6_result["parallel_uniqueness_final"]
+        max_dot_overlap = max((x["candidate_dot_fraction_within_3px"] for x in uniqueness.get("entries", [])), default=0.0)
+        max_surface = h28_6_result["e1"]["preplacement_surface_uniqueness"]["max_correlation"]
+        h28_6_box = f"""
+<div class="warnbox" id="h28-6"><b>Session 7 H28-6 radiometric-front result — {e(gate_label)}; DO NOT SUBMIT. NOT APPROVED FOR SUBMISSION.</b>
+<p><b>HOLDOUT-DTI</b> ({e(e2['evaluator'])}; seeds 210–219 × four quadrants; {e2['withheld_positive_occurrences']:,} withheld-positive occurrences): baseline {e2['pooled_holdout_dti']['baseline']:.6f}, candidate {e2['pooled_holdout_dti']['candidate']:.6f}, pooled Δ {e2['candidate_minus_baseline_pooled_dti']:+.6f}; seed-level paired mean Δ {h['mean_seed_level_delta']:+.6f}, deterministic seed-bootstrap 95% CI [{h['ci95_seed_resampling'][0]:+.6f}, {h['ci95_seed_resampling'][1]:+.6f}], {h['positive_seeds']}/10 seeds and {sum(v > 0 for v in e2['candidate_minus_baseline_by_fold'].values())}/4 folds improved. This is catalogue-internal HOLDOUT-DTI, not a leaderboard result.</p>
+<p>All 11 feature-only AUC canaries passed; maximum direction-invariant AUC {max(h28_6_result['e1']['feature_only_canary']['max_direction_invariant_auc_by_feature'].values()):.4f}. OOF pre-placement surface max Spearman {max_surface:.4f}. Final directed 3-px dot overlap max {max_dot_overlap:.1%} against the pinned registry ({'PASS' if uniqueness.get('pass') else 'FAIL'}); TIFF checks: one band, all finite, [0,1], exact template grid, zeros outside.</p>
+<p><b>Eligibility: {e(h28_6_result['eligibility']['status'])}</b> — no weekly slot was selected and no upload/organizer receipt is claimed. <a href="{artifact_href}">Download research-only GeoTIFF — NOT APPROVED TO SUBMIT</a> · {h28_6_card_href} · <a href="{REPO_URL}/blob/main/evidence/h28_6_radiometric_holdout.json">cell-level evidence</a> · <a href="{REPO_URL}/blob/main/knowledge/16_preregistration_H28-6.md">frozen protocol</a>.</p>
+<p class="small">Official provenance: <a href="https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7">USGS GeoDAWN ScienceBase record</a>. Local bytes are hash-pinned owner-repository mirrors, not a fresh official download. The unique/valid raster does not become eligible merely by passing these checks.</p></div>"""
+    elif h28_6_preflight:
+        status = h28_6_preflight.get("status", "E1 preflight complete; holdout not run")
+        h28_6_box = f'<div class="warnbox" id="h28-6"><b>Session 7 H28-6 E1 preflight — {e(status)}.</b> The canary/surface stop rule prevented the efficacy holdout. No TIFF is approved for submission. <a href="{REPO_URL}/blob/main/evidence/h28_6_preflight.json">Preflight receipt</a> · <a href="{REPO_URL}/blob/main/knowledge/16_preregistration_H28-6.md">protocol</a>.</div>'
+    else:
+        h28_6_box = f'<div class="warnbox" id="h28-6"><b>Session 7 H28-6 radiometric-front experiment is preregistered; E1/E2 are pending.</b> No TIFF is approved for submission. <a href="{REPO_URL}/blob/main/knowledge/15_candidate_screen_2026-10-25.md">Candidate screen</a> · <a href="{REPO_URL}/blob/main/knowledge/16_preregistration_H28-6.md">frozen protocol</a>.</div>'
     h27_10_box = ""
     if h27_10_eval:
         h27_10_box = f"""
@@ -294,14 +338,15 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
     # ---------------------------------------------------------------- index
     pages["index.html"] = ("Submit", f"""
 <h1>Submission status: no new file is approved.</h1>
-<p class="lead">27GEMSDOE · DrivenData #306 DOE GEMS. The only newly generated TIFF in this run is a reproducible <b>negative research artifact</b>: its format and uniqueness checks pass, but its frozen spatial holdout is negative.
-<span class="badge bad">NO TIFF IS APPROVED TO SUBMIT</span> <span class="badge bad">DO NOT SUBMIT H28-3</span></p>
+<p class="lead">27GEMSDOE · DrivenData #306 DOE GEMS. The latest H28-6 TIFF is a distinct, reproducible <b>negative research artifact</b>: format and peer-uniqueness checks pass, but its frozen spatial holdout failed.
+<span class="badge bad">NO TIFF IS APPROVED TO SUBMIT</span> <span class="badge bad">DO NOT SUBMIT H28-6</span> <span class="badge bad">DO NOT SUBMIT H28-3</span></p>
 <div class="card hero">
- <h2 style="margin-top:0">There is no one-click submission download for this run.</h2>
- <p><b>Why:</b> H28-3 dilatational-strain × conductivity corridors reduced pooled HOLDOUT-DTI relative to the current H28-1 baseline. A TIFF that is merely valid GeoTIFF syntax is not an eligible competition candidate.</p>
- <div class="row"><span class="badge ok">research TIFF format verified: float32 · single band · values [0,1]</span><span class="badge ok">unique versus 12 pinned peer rasters</span><span class="badge bad">predictive gate failed</span></div>
- <p class="small">The exact gate, 95% CI, validation receipt and duplicate report are on the <a href="research.html#h28-3"><b>Research page</b></a>. The executive summary explains the rule used to decide when a future TIFF is actually okay to submit.</p>
+ <h2 style="margin-top:0">No submission download is approved. One research-only TIFF is linked below.</h2>
+ <p><b>Why:</b> H28-6 radiometric alteration-front features gained only +0.000202 pooled HOLDOUT-DTI vs baseline and failed the frozen promotion gate. The earlier H28-3 strain × conductivity test was also negative. Format validity and uniqueness do not establish predictive eligibility.</p>
+ <div class="row"><span class="badge ok">H28-6 research TIFF format verified: float32 · single band · values [0,1]</span><span class="badge ok">unique versus 12 pinned peer rasters</span><span class="badge bad">HOLDOUT-DTI gate failed</span></div>
+ <p class="small">The exact H28-6 gate, 95% CI, validation receipt and duplicate report are on the <a href="research.html#h28-6"><b>Research page</b></a>. The executive summary explains when a future TIFF could be approved for submission.</p>
 </div>
+{h28_6_box}
 {h28_3_box}
 {lane_box}
 <p><b>Legacy files below are retained only for audit and must not be submitted as a new unique candidate:</b> peer repositories now contain overlapping copies and no organizer receipt verifies their score/file pairing. The next action is a new pre-registered, data-ready hypothesis—not a renamed legacy raster.</p>
@@ -339,21 +384,22 @@ The agent never uploads anything; you press the button.</div>
 <p class="lead">What to submit, exactly how, what it can and cannot do, and what to do next.</p>
 <div class="card"><h2 style="margin-top:0">Decision in one table</h2>
 <table><tr><th>Question</th><th>Answer</th></tr>
-<tr><td>What to submit now</td><td><b>Nothing.</b> No current raster is marked okay to submit. H28-3 is format-valid but its frozen HOLDOUT-DTI gate failed; legacy slot rasters are peer-overlapping audit artifacts.</td></tr>
-<tr><td>What the new H28-3 file is</td><td>A unique, reproducible <b>negative research artifact</b> generated from strain–conductivity corridors. It has valid GeoTIFF bytes but an adverse paired holdout result, so its status is <b>DO NOT SUBMIT</b>.</td></tr>
-<tr><td>HOLDOUT-DTI evidence</td><td>H28-3 candidate minus current H28-1 baseline: {h28_3_eval['HOLDOUT_DTI']['candidate_minus_baseline_pooled']:+.6f} pooled; 95% seed-bootstrap CI [{h28_3_eval['HOLDOUT_DTI']['bootstrap_95_ci_seed_resampling'][0]:+.6f}, {h28_3_eval['HOLDOUT_DTI']['bootstrap_95_ci_seed_resampling'][1]:+.6f}]; only {sum(v > 0 for v in h28_3_eval['HOLDOUT_DTI']['seed_level_paired_deltas'].values())}/10 seeds improved. Negative result retained; no slot spent.</td></tr>
+<tr><td>What to submit now</td><td><b>Nothing.</b> No current raster is marked OK to download and submit. The latest H28-6 GeoTIFF, if present, is explicitly a research/review artifact, not an approved weekly submission; historical files remain audit-only.</td></tr>
+<tr><td>Latest experiment</td><td>H28-6 radiometric alteration-front ridges: see the result block below. Any HOLDOUT-DTI is catalogue-internal evidence, not a leaderboard score. No weekly slot was selected or spent.</td></tr>
+<tr><td>H28-3 prior negative result</td><td>Candidate minus H28-1 baseline: {h28_3_eval['HOLDOUT_DTI']['candidate_minus_baseline_pooled']:+.6f} pooled HOLDOUT-DTI; 95% seed-bootstrap CI [{h28_3_eval['HOLDOUT_DTI']['bootstrap_95_ci_seed_resampling'][0]:+.6f}, {h28_3_eval['HOLDOUT_DTI']['bootstrap_95_ci_seed_resampling'][1]:+.6f}]; {sum(v > 0 for v in h28_3_eval['HOLDOUT_DTI']['seed_level_paired_deltas'].values())}/10 seeds improved. Retained as a negative result; no slot spent.</td></tr>
+<tr><td>GEMSDOE32 H33-2-B2, reported 0.2778</td><td><b>OWNER-REPORTED, not organizer-confirmed.</b> The hash-authenticated raster is pixel-exactly reconstructed as a two-pixel catalogue-flank deletion from the H27-4 r1 base; this explains a file relationship, not the score. <a href="{REPO_URL}/blob/main/knowledge/12_why_02778_won.md">Forensic audit</a>.</td></tr>
 <tr><td>What qualifies in future</td><td>A new candidate must pass its pre-registered holdout gate, format validation, and the pinned peer-raster duplicate screen before this table changes to <b>APPROVED TO SUBMIT</b>.</td></tr>
 <tr><td>Is 0.3195 reachable?</td><td>Not with verified/modelled increments (they reach ≈0.26–0.27). It needs ≈31% more weighted recall at equal false positives, or ≈46% fewer false-positive pixels at equal recall – i.e. new information. <a href="research.html">Why</a>.</td></tr>
 <tr><td>What is unknown</td><td>The real hidden-set effect; the cause of the portal's "[0, 1]" rejection; the live scores of all 27GEMSDOE files.</td></tr></table></div>
-
+{h28_6_box}
 <div class="card hero"><h2 style="margin-top:0">Current submission decision: STOP</h2>
-<p><span class="badge bad">NO TIFF IS APPROVED TO SUBMIT</span></p>
-<p>The unique H28-3 research TIFF is intentionally not offered as a submission download because it lost to the current baseline on its frozen holdout. Its all-finite GeoTIFF and ZIP passed format checks, but validity does not cure a negative model result.</p>
-<p>Read the <a href="research.html#h28-3">H28-3 result and run card</a>, <a href="downloads/research/h28_3_negative_research_manifest.json">format receipt</a>, and <a href="{REPO_URL}/blob/main/evidence/h28_3_negative_uniqueness.json">peer-registry uniqueness report</a>. The receipt says <b>NOT APPROVED FOR SUBMISSION</b> on every file variant.</p></div>
+<p><span class="badge bad">NO TIFF IS APPROVED TO SUBMIT</span> <span class="badge bad">DO NOT SUBMIT H28-6 OR H28-3</span></p>
+<p>The H28-6 GeoTIFF is linked above only as a clearly marked research artifact. It is not marked OK to download and submit: no weekly slot was selected, and internal catalogue holdout is not organizer-created truth. The earlier H28-3 negative TIFF also remains research-only.</p>
+<p>Read the <a href="research.html#h28-6">H28-6 result/run card and frozen protocol</a> and the <a href="research.html#h28-3">H28-3 result</a>. Format validity or uniqueness cannot alone establish submission eligibility.</p></div>
 
 <h2>Exact submission steps</h2>
 <ol class="steps">
-<li><b>Gate first:</b> use a file only when the front page explicitly says <b>APPROVED TO SUBMIT</b>. The current H28-3 research files are explicitly ineligible; do not upload them.</li>
+<li><b>Gate first:</b> use a file only when the front page explicitly says <b>APPROVED TO SUBMIT</b>. The current H28-6 and H28-3 research files are explicitly ineligible; do not upload either.</li>
 <li>Download the approved <b>.tif</b> without opening/re-saving it in GIS software. Keep its content-hashed file name and the short note shown beside it.</li>
 <li>Sign in at DrivenData and open <a href="{DD_COMP}">the competition page</a>.</li>
 <li>Open the submission form (the tab/button label depends on the logged-in view; this project does not automate that site).</li>
@@ -457,7 +503,7 @@ Where a network sits near threshold, individual closures matter more than in a w
 
     # ---------------------------------------------------------------- research
     def historical_status(item: dict) -> str:
-        if item["id"] == "H28-3":
+        if item["id"] in {"H28-3", "H28-6"}:
             return "TESTED — FROZEN GATE FAILED; negative research artifact is NOT APPROVED FOR SUBMISSION."
         return "Historical evidence-ledger entry — audit only; it does not approve a current submission."
 
@@ -474,7 +520,10 @@ Where a network sits near threshold, individual closures matter more than in a w
     )
     pages["research.html"] = ("Research", f"""
 <h1>Research</h1>
-<p class="lead">Why the 0.2477 file won, what a higher score needs, and the ranked hypotheses.</p>
+<p class="lead">Why the owner-reported 0.2477 file won, what a higher score needs, the preregistered H28-6 test, and the remaining ranked hypotheses.</p>
+<h2 id="h28-6">Session 7 H28-6 — multiscale radiometric alteration fronts</h2>
+{h28_6_box}
+<p>H28-6 tests 300 m and 800 m edge magnitudes in GeoDAWN Th/K, U/Th, and total-count rank grids, plus 300 m gradient-normal agreement. It asks whether hydrothermal alteration boundaries might reveal buried/older structures missed by a surface-rupture catalogue. Named non-fault mimics are lithologic/regolith contacts, flight-line/processing seams, soil moisture, and non-tectonic alteration. These uint8 products are rank-like and are not calibrated concentrations. See the frozen <a href="{REPO_URL}/blob/main/knowledge/16_preregistration_H28-6.md">preregistration</a>, <a href="{REPO_URL}/blob/main/knowledge/15_candidate_screen_2026-10-25.md">ranked candidate screen</a>, and official <a href="https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7">USGS GeoDAWN source record</a>. Local inputs are hash-pinned owner mirrors, not fresh official bytes.</p>
 <h2 id="h28-3">Session 6 H28-3 — dilatational-strain × conductivity corridors</h2>
 {h28_3_box}
 <p>Mechanism: a blind or alluvium-covered fault could co-locate deformation and conductive fluid alteration. Named non-fault alternative: a conductive/clayey basin boundary coincident with smooth regional strain. The six label-free corridor features used the five geophysical grids listed in the frozen protocol; every source and derived feature passed the AUC > 0.90 leakage canary, but the paired DTI result was negative. This is a valid negative result, not an upload recommendation.</p>
@@ -484,9 +533,9 @@ Where a network sits near threshold, individual closures matter more than in a w
 <p><b>{e(h28_gate_summary) if h28_gate_summary else 'No frozen H28-1 holdout evidence is available.'}</b></p>
 {h28_research_box}
 {h27_10_box}
-<p class="small">Session 5 screen, H27-10 outcome and remaining candidates: <a href="{REPO_URL}/blob/main/knowledge/07_untried_hypotheses.md">hypothesis ledger</a>. H28-1 protocol: <a href="{REPO_URL}/blob/main/knowledge/08_preregistration_H28-1.md">frozen preregistration</a> · full-map recipe: <a href="{REPO_URL}/blob/main/knowledge/09_preregistration_H28-1_candidate.md">candidate record</a> · <a href="{REPO_URL}/blob/main/evidence/h28_1_edge_holdout.json">cell-level H28-1 evidence</a>. The 1 km label-free filters can share covariate values across the existing 600 m quadrant buffer; no labels enter the transform, but spatial covariate correlation remains a limitation.</p>
-<h3>Current Session 6 untried screen ({len(h28_hypotheses)} hypotheses)</h3>
-<p class="small">Expected ΔDTI ranges are expert priors, not measurements or score guarantees. H27-10 and H28-3 were tested and rejected under frozen gates; H28-1 is already tested. The graph-based structural class is separately documented below and in Topology.</p>
+<p class="small">Session 7 screen and result: <a href="{REPO_URL}/blob/main/knowledge/07_untried_hypotheses.md">hypothesis ledger</a> · <a href="{REPO_URL}/blob/main/knowledge/15_candidate_screen_2026-10-25.md">full 3-candidate screen</a> · <a href="{REPO_URL}/blob/main/knowledge/16_preregistration_H28-6.md">H28-6 frozen protocol</a> · <a href="{REPO_URL}/blob/main/evidence/h28_6_radiometric_holdout.json">H28-6 cell-level evidence</a>. Earlier H28-1 protocol: <a href="{REPO_URL}/blob/main/knowledge/08_preregistration_H28-1.md">frozen preregistration</a> · <a href="{REPO_URL}/blob/main/evidence/h28_1_edge_holdout.json">H28-1 evidence</a>.</p>
+<h3>Current Session 7 untried screen ({len(h28_hypotheses)} hypotheses)</h3>
+<p class="small">Expected ΔDTI ranges are expert priors, not measurements or score guarantees. H27-10, H28-3, and H28-6 have frozen outcomes; H28-1 is already tested. H28-4 is not wholly untried because its existing sigma-5 transforms were in the bundled Session 6 lane. The graph-based review class is separately documented below and in Topology.</p>
 <div class="tw"><table><thead><tr><th>ID · rank</th><th>Hypothesis · layers</th><th>Physical signature</th><th>Why a missing fault</th><th>Differs from repo</th><th>Confounders</th><th>Status</th><th>Prior ΔDTI · cost</th></tr></thead><tbody>{h28rows}</tbody></table></div>
 <h2 id="inversion">Session 3 &mdash; inverting all 20 live scores</h2>
 <p class="lead">The owner's scored rasters are still in the sibling repositories. All <b>20</b> that could be

@@ -1,6 +1,6 @@
-# Session 6 current hypothesis screen (2026-10-25)
+# Session 7 current hypothesis screen (2026-10-25)
 
-**Status:** Three genuinely untried geological hypotheses remain. H27-10 and H28-3 have both been tested and failed their frozen gates; neither is untried, nor has a weekly-slot justification. They are recorded below as completed negative results. H27-5b is a separate geologist-review prioritization class, not a new holdout-improvement claim. No weekly slot has been used. Expected ΔDTI ranges below are subjective planning priors for catalogue-internal holdouts, not measurements or leaderboard predictions. Novelty is only relative to this checkout and available method descriptions; sibling-code novelty is unknown.
+**Session 7 status:** The pre-code screen of three untried candidates is preserved in `knowledge/15_candidate_screen_2026-10-25.md`; selected H28-6 was preregistered before predictive feature code and is now a completed negative holdout result (`knowledge/17_h28_6_result_2026-10-25.md`). Current genuinely untried candidates for a future session are H28-2, H28-5, and H27-16 (`knowledge/18_post_screen_status_2026-10-25.md`). H27-10 and H28-3 remain completed negative tests. H28-4 is not wholly untried: its sigma-5 seismicity-coherence transforms exist in `src/gems27/subsurface_features.py` and were included in the Session 6 lane stack; their standalone incremental effect is not isolated. H27-5b remains a separate geologist-review prioritization class. No weekly slot has been used. Expected ΔDTI ranges are subjective planning priors for catalogue-internal holdouts, not measurements or leaderboard predictions. Novelty is limited to this checkout; sibling-code novelty is unknown.
 
 **Current paired baseline method:** H28-1 multiscale potential-field edges + T-v2 + H27-4 r1, which improved mean paired DTI by +0.00294884 on seeds 140-149 (3/4 folds, 9/10 seeds; `evidence/h28_1_edge_holdout.json`). That is a catalogue-internal component-hidden test, not organizer truth; the far-field limitation in `knowledge/10_session4_farfield_measurement_and_proxy_limit.md` remains binding. The H27-10 seeds 150-159 measured this baseline at mean DTI 0.10937685; do not compare raw means across different seed sets as a gain.
 
@@ -20,15 +20,33 @@ The first-run spacing diagnostic measured each selected pixel against a set cont
 
 The H27-5b review class is deliberately distinct: it contains 81 of 345 short links satisfying different FIDs + same non-unnamed NAME + `kinematic_compat=true`. Whole-FID holdout enrichment supports map-review prioritization only; it is not evidence of hidden-label truth, transfer or live-score gain. Graph-ΔP ranking and overlapping en-echelon step-over geometry remain refuted as holdout-improvement signals. See `knowledge/11_h27_5b_geologist_review_class.md` and `docs/topology.html`.
 
-## Current untried hypotheses (ranked)
+## Session 7 historical pre-run screen (ranked by testability-adjusted prior)
 
-| Rank | ID / hypothesis | Layers and physical signature | Why it may detect a missing fault | Novelty / confounders | Prior ΔDTI / cost / data gate |
-|---:|---|---|---|---|---|
-| 1 | **H27-16: three new official GDR 1391 layers** | Paleo-geothermal sinter/tufa/travertine and altered-bedrock vectors; 2 m temperature probes; Quaternary volcanics polygons. | Independent thermal, chemical and volcanic observations may mark fluid pathways or young structures not mapped as surface faults. | New geometries differ from tested thermal-point-distance features; sampling density, groundwater transport and non-fault volcanic boundaries confound. | **0.000 to +0.006** prior; medium-high. GDR listing and 2026-09-30 sibling-runner pins are recorded, but raw packages are absent here. This checkout's reviewed fetch-run set through branch head a58e74d includes runs 37099986237, 37100053264, 37100608786, 37100751573, 37100935082, and 37101134684, all of which failed with zero jobs/no logs; no local fetch or checksum verification occurred. Cause unknown; obtain and verify actual bytes before use. |
-| 2 | **H28-4: anisotropic seismicity-fabric lineaments** | `deq_n100a15`, `ieq_n100a15`, `geod_shearrate`; directional persistence across scales. | A linear seismicity fabric may reveal a blind active strand lacking surface expression. | Directional seismicity transform is untested and differs from refuted LiDAR/geophysics line integration. Aseismic faults, completeness gradients, unrelated swarms and smoothing confound. | **0.000 to +0.002** prior; low-medium; existing hash-pinned raster. |
-| 3 | **H28-5: quality-filtered hydrothermal chemistry gradients** | In-footprint well/spring `temp_c`, quartz/chalcedony/cation geothermometers and quality/class fields; optional 2 m probes after H27-16. | Measurement contrasts aligned into narrow corridors may locate fluid upflow tied to unmapped faults, not simply proximity to a spring. | H27-12 refuted simple thermal-distance features; this distinct quality-filtered gradient is untested. Duplicate sampling, geothermometer validity and groundwater displacement are risks. | **0.000 to +0.003** prior; medium; local wellspring CSV is an owner mirror; raw GDR binary was not independently fetched/re-hashed this session. |
+See `knowledge/15_candidate_screen_2026-10-25.md` for full physical signatures, why each could reveal faults missing from USGS/INGENIOUS, precise novelty audit, confounders, expected HOLDOUT-DTI ranges, implementation cost, data gates, and external-source links. These are priors, not scores.
 
-## Tested this session (2026-10-25) — unique scatter-smoothed far-field emission
+| Rank | ID / hypothesis | Layers | Prior ΔHOLDOUT-DTI / cost / gate | Status before experiment |
+|---:|---|---|---|---|
+| 1 | **H28-6: multiscale radiometric alteration-front ridges** | GeoDAWN `ThK`, `UTh`, and radiometric `TC`; 300/800 m gradient magnitudes and 300 m edge-normal agreements. | **0.000 to +0.008**; low-medium; hash-pinned local owner mirrors, official GeoDAWN provenance link, no fresh official binary download. | At preregistration: selected and preregistered in `knowledge/16_preregistration_H28-6.md`; E1/E2 pending at that time. The completed negative result is recorded below. |
+| 2 | **H28-5: quality-filtered hydrothermal chemistry gradients** | GDR well/spring `temp_c`, quartz/chalcedony/cation geothermometers, quality/class fields. | **0.000 to +0.003**; medium; local owner-mirror CSV exists, raw GDR package not independently fetched/re-hashed. | Untried; prior distance-only thermal arm was near-null, this is a distinct screened-gradient transform. |
+| 3 | **H27-16: paleo-geothermal, 2 m temperature, Quaternary-volcanics geometries** | GDR #1391 paleo-geothermal/altered-bedrock vectors, 2 m probes, Great Basin Quaternary-volcanics polygons. | **0.000 to +0.006**; high; official listing linked, raw packages absent; checksum verification is a hard gate. | Untried; not viable for a confirmatory run until bytes are obtained and verified. |
+
+H28-4 is not listed as untried: the unchanged sigma-5 seismicity-coherence transform is already implemented and was included in the Lane L-2026-10-25 A/D stacks. The bundled lane result does not isolate its incremental contribution.
+
+## H28-6 completed result — frozen gate FAILED; no submission
+
+H28-6 tested multiscale Th/K, U/Th, and total-count radiometric edges. All 11 source/derived feature canaries passed (maximum direction-invariant AUC 0.630593); pre-placement OOF surface maximum Spearman was 0.109410; final 12-peer dot check passed (max directed overlap 0.491743). On seeds 210–219 × four quadrants, 118,673 withheld-positive occurrences, pooled HOLDOUT-DTI was 0.0494643 vs 0.0492624 baseline (Δ +0.0002019). Mean paired seed Δ +0.0001820, 95% deterministic bootstrap CI [−0.0012386, +0.0015340]; 5/10 seeds and 1/4 folds improved. It beat the random placement control (0.0311226) but failed the preregistered +0.001, CI, fold and seed gates. This is a negative result; the 64,070-dot all-finite unique GeoTIFF is **NOT APPROVED FOR SUBMISSION**. It was emitted from the cached OOF surface only; no full-fit model or weekly slot was selected. Details and the documented writer-recovery irregularity are in `knowledge/17_h28_6_result_2026-10-25.md`, `evidence/h28_6_radiometric_holdout.json`, `evidence/h28_6_first_execution.log`, and `registry/irregularities.json`.
+
+## Current untried hypotheses after H28-6
+
+See `knowledge/18_post_screen_status_2026-10-25.md` for layers, physical signatures, missing-catalogue rationale, novelty, mimics, expected ΔDTI, cost, and data gates.
+
+| Rank | ID | Hypothesis | Status / gate |
+|---:|---|---|---|
+| 1 | H28-2 | Multiscale LiDAR scarp persistence and terrain structural-tensor coherence. | Untried exact transform; local owner-mirror descriptors, USGS 3DEP provenance linked; medium cost. |
+| 2 | H28-5 | Quality-filtered well/spring chemistry contrasts and fault-aligned corridors. | Untried; local owner-mirror CSV, raw GDR binary not independently re-fetched/re-hashed. |
+| 3 | H27-16 | Paleo-geothermal, 2 m temperature, and Quaternary-volcanics geometries. | Untried; official GDR listing linked, but raw package bytes are absent and hash verification is mandatory. |
+
+## Archived Session 6 test — unique scatter-smoothed far-field emission
 
 **Hypothesis:** emit on a scatter-smoothed (gaussian sigma = 1.85 px, the inferred truth-scatter scale) off-catalogue far-field detector surface (catalogue distance >= 3 px = 300 m excluded), dot-thinned at d = 1.5 px, written all-finite [0,1]. Built from the cached 32-band label-free feature stack (emission-time HistGradientBoosting on all labels). Lane-deconflicted with a 3 px anti-overlap buffer vs every GEMSDOE27 registry raster.
 

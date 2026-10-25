@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-03 | Session 5: H27-10 diagnostic disclosed; current GDR fetch workflow runs failed before jobs and are recorded without inferring source availability.",
+ "generated": "2026-10-25 | Session 7: recorded the H28-6 E3 GeoTIFF writer failure before metric-evidence persistence; preserving first-run E1/E2 logs for exact recovery.",
  "items": [
   {
    "id": "prompt-verbatim-unavailable",
@@ -252,6 +252,24 @@
    "severity": "medium",
    "issue": "Shared holdout harness buffered training but scored up to hidden segments (feature support could overlap hidden neighbourhoods). Protocol \u00a72 requires segments withheld WITH a buffer.",
    "action": "Fixed once in the template: gems27.holdout.buffered_scoring_mask() excludes the 600 m ring around hidden segments from scoring; catalogue-derived masks use visible faults only. Reported here per protocol \u00a72; siblings should adopt."
+  },
+  {
+   "id": "IR-2026-10-25-05-h28-4-status-stale",
+   "severity": "medium",
+   "issue": "registry/next_hypotheses.json and knowledge/07_untried_hypotheses.md describe H28-4 seismicity-fabric coherence as untried, but src/gems27/subsurface_features.py already implements sigma-5 structure coherence for ieq/deq, and the Lane L-2026-10-25 A/D arms included the 15-transform stack. Its standalone incremental effect was not isolated; the unchanged transform is not genuinely untried.",
+   "action": "Correct the hypothesis status and exclude the unchanged sigma-5 transform from new-candidate screens. Any genuinely new cross-scale/persistence variant must be preregistered with a precise definition and evaluated separately; do not claim standalone efficacy from the bundled lane control."
+  },
+  {
+   "id": "IR-2026-10-25-06-stale-public-submission-page",
+   "severity": "high",
+   "issue": "At branch start, docs/index.html and root index.html advertised the unique-scatter raster as \u201cready to download and submit\u201d and said \u201cYes\u201d to eligibility, while README.md, evidence/run_card_unique_scatter_farfield.json, and the current build_site.py policy say no TIFF is approved and the catalogue holdout for this far-field file is negative by construction. The public Pages source was stale and gave contradictory download/eligibility guidance.",
+   "action": "Rebuild docs and root index from scripts/build_site.py, then add regression tests that compare page eligibility against the current candidate manifest/run card and forbid positive download wording when ok_to_submit is false. Keep the existing artifact, if linked, explicitly research-only."
+  },
+  {
+   "id": "IR-2026-10-25-07-h28-6-tiff-writer-blocks",
+   "severity": "medium",
+   "issue": "H28-6 first execution completed its frozen E1 feature canaries, OOF surface check, and E2 seeds 210-219, then E3 failed before persisting the DTI JSON: rasterio/GDAL rejected the template profile block width 3292 when the writer set tiled=True (TIFF tiles must be multiples of 16). The incomplete .partial.tif is not a valid artifact. Exact rounded cell outputs, canary maxima, and surface correlations are preserved in evidence/h28_6_first_execution.log.",
+   "action": "Fail closed on the incomplete TIFF. Correct the writer to untiled output and persist E1/E2 before E3. Recover the full metrics only from the original SHA-verified cached OOF arrays and verify all 40 cell DTIs against the first-run log to 5 decimals; do not refit, tune, change seeds, or claim the recovery as independent confirmation. Keep eligibility false."
   }
  ]
 }

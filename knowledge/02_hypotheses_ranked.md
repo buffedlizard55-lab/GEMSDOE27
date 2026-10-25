@@ -185,3 +185,14 @@ Ranking rule: expected DTI gain x probability the test can validate it / cost. B
 * **Status:** TESTED — FROZEN GATE FAILED. HOLDOUT-DTI pooled candidate 0.103352 vs baseline 0.105946, Δ -0.002594; 95% seed-bootstrap CI [-0.004240, -0.000907], 2/10 seeds and 1/4 folds improved. No slot. Negative research TIFF 27d6875f3b22 is format-valid and unique against the pinned peer registry but NOT APPROVED FOR SUBMISSION.
 * **Expected gain:** negative: pooled ΔDTI -0.002594
 * **Cost:** one local pre-registered holdout experiment; 0 weekly slots
+
+## H28-6 (rank 100): Multiscale radiometric alteration-front edges (ThK, UTh, TC)
+
+* **Layers:** GeoDAWN ThK, UTh, and radiometric total count TC; fixed 300/800 m gradient magnitudes and 300 m cross-channel edge-normal agreement.
+* **Physical signature:** Persistent radiometric rank-change edges with cross-channel gradient-normal agreement; inputs are relative uint8 grids, not calibrated concentrations.
+* **Why it catches a fault missing from USGS/INGENIOUS:** Hydrothermal alteration fronts may mark a buried or older fault without a young surface rupture; lithologic/regolith boundaries, flight-line seams, moisture, and non-tectonic alteration are strong mimics.
+* **How it differs from the repo:** Adds label-free multiscale radiometric edge features to the shared H28-1 + 32-band OOF stack; it is not a pixel-ratio threshold, catalogue-flank deletion, or re-thinning of a peer raster.
+* **Status:** TESTED — FROZEN GATE FAILED. HOLDOUT-DTI Δ +0.000202 pooled, mean seed Δ +0.000182, 95% seed-bootstrap CI [-0.001239, +0.001534], 5/10 seeds and 1/4 folds improved. Unique, format-valid negative research TIFF da120b7ee1c8; NOT APPROVED FOR SUBMISSION. No full-fit model or weekly slot.
+* **Expected gain:** negative for promotion: failed preregistered +0.001 mean-gain, CI, fold, and seed gates; HOLDOUT-DTI only.
+* **Cost:** One frozen 40-cell holdout; cached-OOF evidence recovery after the E3 writer failure; 0 weekly slots.
+* **External data (free, official):** [USGS GeoDAWN ScienceBase record](https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7) - Official provenance page linked; local binary inputs were SHA-pinned owner-repository mirrors, not freshly fetched official bytes.

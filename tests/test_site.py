@@ -52,7 +52,7 @@ def test_repository_root_front_page_shows_current_submission_decision():
 def test_front_page_does_not_offer_failed_h28_3_as_submission():
     idx = (DOCS / "index.html").read_text()
     assert "NO TIFF IS APPROVED TO SUBMIT" in idx
-    assert "There is no one-click submission download for this run." in idx
+    assert "No submission download is approved. One research-only TIFF is linked below." in idx
     assert "NOT APPROVED FOR SUBMISSION" in idx
     assert "h28_3_negative_research_manifest.json" not in idx or "NOT APPROVED" in idx
     assert 'download class="mono"' not in idx
@@ -60,6 +60,51 @@ def test_front_page_does_not_offer_failed_h28_3_as_submission():
     summary = (DOCS / "executive-summary.html").read_text()
     assert "NO TIFF IS APPROVED TO SUBMIT" in summary
     assert ".tif\" download" not in summary
+
+
+def test_h28_6_json_run_card_and_public_eligibility_are_explicit():
+    card = json.loads((ROOT / "evidence" / "h28_6_run_card.json").read_text())
+    result = json.loads((ROOT / "evidence" / "h28_6_radiometric_holdout.json").read_text())
+    assert card["holdout"]["pooled_delta"] == result["e2_holdout"]["candidate_minus_baseline_pooled_dti"]
+    assert card["holdout"]["seed_bootstrap_95_ci"] == result["e2_holdout"]["paired_seed_summary"]["ci95_seed_resampling"]
+    assert card["raster"]["sha256"] == result["artifact"]["sha256"]
+    assert card["submission"]["ok_to_submit"] is result["eligibility"]["ok_to_submit"]
+    assert card["verdict"] == "negative"
+    assert card["holdout"]["label"].startswith("HOLDOUT-DTI")
+    assert card["holdout"]["seed_bootstrap_95_ci"][0] < 0 < card["holdout"]["seed_bootstrap_95_ci"][1]
+    assert card["holdout"]["withheld_positive_occurrences"] > 0
+    assert card["parallel_uniqueness"]["preplacement_max_spearman"] < 0.90
+    assert card["parallel_uniqueness"]["final_max_spearman"] < 0.90
+    assert card["parallel_uniqueness"]["final_max_directed_dot_overlap_within_3px"] < 0.70
+    assert card["raster"]["sha256"] == card["validator"]["sha256"]
+    assert card["validator"]["no_nan_inside_footprint"] is True
+    assert card["validator"]["inside_range_0_1"] is True
+    assert card["validator"]["crs_shape_transform_match_template"] is True
+    assert card["submission"]["ok_to_submit"] is False
+    assert card["submission"]["note_characters"] == len(card["submission"]["note"])
+    assert card["submission"]["note_characters"] <= 140
+
+    research = (DOCS / "research.html").read_text()
+    hypothesis_ledger = json.loads((ROOT / "registry" / "hypotheses.json").read_text())
+    h28_6_entry = next(h for h in hypothesis_ledger["hypotheses"] if h["id"] == "H28-6")
+    assert "FROZEN GATE FAILED" in h28_6_entry["status"]
+    assert "NOT APPROVED FOR SUBMISSION" in h28_6_entry["status"]
+    assert "DO NOT SUBMIT. NOT APPROVED FOR SUBMISSION" in research
+    assert "Download research-only GeoTIFF" in research
+    assert "NOT APPROVED TO SUBMIT" in research
+    assert card["raster"]["path"].removeprefix("docs/") in research
+    assert "da120b7ee1c8" in research
+    assert card["submission"]["name"] == Path(card["raster"]["path"]).name
+    summary = (DOCS / "executive-summary.html").read_text()
+    assert "GEMSDOE32 H33-2-B2, reported 0.2778" in summary
+    assert "OWNER-REPORTED, not organizer-confirmed" in summary
+    assert "knowledge/12_why_02778_won.md" in summary
+    for page in (DOCS / "index.html", DOCS / "executive-summary.html"):
+        text = page.read_text()
+        assert "DO NOT SUBMIT H28-6" in text
+        assert "NO TIFF IS APPROVED TO SUBMIT" in text
+        assert "NOT APPROVED FOR SUBMISSION" in text
+        assert 'download class="mono"' not in text
 
 
 def test_research_page_lists_preregistered_h28_hypotheses_and_evidence_link():

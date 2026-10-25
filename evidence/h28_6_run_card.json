@@ -1,0 +1,221 @@
+{
+  "hypothesis": "H28-6 multiscale radiometric alteration-front edges",
+  "mechanism": "Hydrothermal alteration can redistribute mobile elements and form spatial fronts in airborne radiometric rank grids; cross-channel edge geometry may reveal a buried or older fault without a catalogued young surface rupture.",
+  "named_non_fault_mimic": "Lithologic/regolith contacts, airborne flight-line or processing seams, soil moisture, and non-tectonic hydrothermal alteration can create radiometric boundaries without faults.",
+  "holdout": {
+    "label": "HOLDOUT-DTI (catalogue-internal whole-component hide-and-recover; not a leaderboard score)",
+    "evaluator": "gems27.metric.dti_binary; alpha=0.2, beta=0.8, Euclidean 300 m triangular kernel",
+    "withheld_positive_occurrences": 118673,
+    "pooled_baseline": 0.04926243226906767,
+    "pooled_candidate": 0.049464328351869626,
+    "pooled_delta": 0.00020189608280195281,
+    "seed_level_mean_delta": 0.00018196277445129279,
+    "seed_bootstrap_95_ci": [
+      -0.0012385830216340681,
+      0.0015339615364569532
+    ],
+    "positive_seeds": 5,
+    "positive_folds": 1,
+    "pooled_random_control": 0.031122620483515395,
+    "gate_pass": false,
+    "seeds": [
+      210,
+      211,
+      212,
+      213,
+      214,
+      215,
+      216,
+      217,
+      218,
+      219
+    ],
+    "folds": [
+      "NW",
+      "NE_LidarGapHeavy",
+      "SW",
+      "SE"
+    ],
+    "n_seed_fold_cells": 40,
+    "buffered_scoring_distance_m": 600,
+    "visible_catalogue_mask": "pixel-exact; catalogue-derived quantities use only split.known",
+    "confidence_interval_method": "10,000 deterministic bootstrap resamples of 10 paired seed deltas; RNG seed 20261025; percentile 95% interval"
+  },
+  "leakage_canary": {
+    "pass": true,
+    "threshold": 0.9,
+    "max_direction_invariant_auc_by_feature": {
+      "ThK": 0.5637133848273861,
+      "UTh": 0.613703240611961,
+      "TC": 0.630592737833595,
+      "rad_thk_edge_300m": 0.5936266630434782,
+      "rad_thk_edge_800m": 0.6132386214285714,
+      "rad_uth_edge_300m": 0.589054683137399,
+      "rad_uth_edge_800m": 0.6114042628650904,
+      "rad_tc_edge_300m": 0.56448165625,
+      "rad_tc_edge_800m": 0.5906632544444445,
+      "rad_ratio_edge_orientation_agreement_300m": 0.5638420244565218,
+      "rad_total_ratio_edge_orientation_agreement_300m": 0.5622049042821159
+    }
+  },
+  "parallel_uniqueness": {
+    "preplacement_oof_surface": {
+      "max_spearman": 0.10941030465069077,
+      "duplicates": []
+    },
+    "final_dots": {
+      "pass": true,
+      "duplicates": [],
+      "entries": [
+        {
+          "id": "g24_d15",
+          "reference_sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
+          "spearman_rank_correlation": 0.05208190078021006,
+          "candidate_dot_fraction_within_3px": 0.47234275011705945,
+          "duplicate": false
+        },
+        {
+          "id": "g25_d28",
+          "reference_sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
+          "spearman_rank_correlation": 0.04398556695993527,
+          "candidate_dot_fraction_within_3px": 0.45801467145309815,
+          "duplicate": false
+        },
+        {
+          "id": "g27_tv2_d15",
+          "reference_sha256": "33003374335d84bf885f2d8f5e9dd4c57044c8ec58fa6a0d7fa581e8bc41c11d",
+          "spearman_rank_correlation": 0.06802914080443709,
+          "candidate_dot_fraction_within_3px": 0.49174340565007024,
+          "duplicate": false
+        },
+        {
+          "id": "g28_h27_4_r1",
+          "reference_sha256": "ab02300152248fdda04e988e2cd2a0c13f35eec42fcf670a15e8b76b19e24a73",
+          "spearman_rank_correlation": 0.04692838019862221,
+          "candidate_dot_fraction_within_3px": 0.44693304198532857,
+          "duplicate": false
+        },
+        {
+          "id": "g28_h32_1",
+          "reference_sha256": "04d31922f5c1ea4016984fc470ab2b0ff8e266c615792f0e86020da3b940d3ff",
+          "spearman_rank_correlation": 0.046265820513755704,
+          "candidate_dot_fraction_within_3px": 0.4543468081785547,
+          "duplicate": false
+        },
+        {
+          "id": "g28_h36_1",
+          "reference_sha256": "5556aa1438fd67376b60d5ffc99228ec09dcc11a8408298a743ccb88d6163641",
+          "spearman_rank_correlation": 0.04663197031389629,
+          "candidate_dot_fraction_within_3px": 0.44143905103792724,
+          "duplicate": false
+        },
+        {
+          "id": "g28_h38_1",
+          "reference_sha256": "81d5b87bc8424f162a8f56aa9aac8fbe630c61646b9cac24d5ebbdc1b1951783",
+          "spearman_rank_correlation": 0.04684831363793067,
+          "candidate_dot_fraction_within_3px": 0.4440299672233495,
+          "duplicate": false
+        },
+        {
+          "id": "g30_d28",
+          "reference_sha256": "8cf893ead5667df21d3288a9968c35fd5385c425b029d82ee71d311715b129fd",
+          "spearman_rank_correlation": 0.04398556695993527,
+          "candidate_dot_fraction_within_3px": 0.45801467145309815,
+          "duplicate": false
+        },
+        {
+          "id": "g31_h27_4",
+          "reference_sha256": "07b6db440535404bb41ec8ddc797713e200d308e3da35937393efde5eb84bc40",
+          "spearman_rank_correlation": 0.04692838019862221,
+          "candidate_dot_fraction_within_3px": 0.44693304198532857,
+          "duplicate": false
+        },
+        {
+          "id": "g32_h33_2_b2",
+          "reference_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+          "spearman_rank_correlation": 0.044539868360526876,
+          "candidate_dot_fraction_within_3px": 0.4304822850007804,
+          "duplicate": false
+        },
+        {
+          "id": "g33_h33d",
+          "reference_sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+          "spearman_rank_correlation": 0.04514095289967534,
+          "candidate_dot_fraction_within_3px": 0.45397221788668646,
+          "duplicate": false
+        },
+        {
+          "id": "g36_anderson",
+          "reference_sha256": "e15891020b9c57056ac7fa874a5e506fbd6ed9314a4ea8e73af0753887a3708a",
+          "spearman_rank_correlation": 0.04379352180313276,
+          "candidate_dot_fraction_within_3px": 0.43223037302949896,
+          "duplicate": false
+        }
+      ]
+    },
+    "preplacement_max_spearman": 0.10941030465069077,
+    "final_max_spearman": 0.06802914080443709,
+    "final_max_directed_dot_overlap_within_3px": 0.49174340565007024,
+    "pinned_registry_raster_count": 12
+  },
+  "raster": {
+    "path": "docs/downloads/research/gems27-h28-6-radiometric-fronts-negative-research-20261025-da120b7ee1c8-allfinite.tif",
+    "sha256": "da120b7ee1c841bd561f4120b8fc9265d2ddfe9686eda6ed639b27d31c1f51d3",
+    "content_id": "da120b7ee1c8",
+    "dots": 64070,
+    "artifact_source": "cached OOF candidate surface"
+  },
+  "validator": {
+    "format": "GeoTIFF",
+    "single_band": true,
+    "crs_shape_transform_match_template": true,
+    "no_nan_inside_footprint": true,
+    "all_values_finite_including_outside": true,
+    "inside_range_0_1": true,
+    "binary_values_only": true,
+    "outside_footprint_all_zero": true,
+    "nodata_none": true,
+    "positive_dot_count": 64070,
+    "sha256": "da120b7ee1c841bd561f4120b8fc9265d2ddfe9686eda6ed639b27d31c1f51d3",
+    "content_id": "da120b7ee1c8"
+  },
+  "submission": {
+    "ok_to_submit": false,
+    "status": "NEGATIVE RESEARCH ARTIFACT — NOT APPROVED FOR SUBMISSION",
+    "filename": "gems27-h28-6-radiometric-fronts-negative-research-20261025-da120b7ee1c8-allfinite.tif",
+    "maximum_note_characters": 140,
+    "name": "gems27-h28-6-radiometric-fronts-negative-research-20261025-da120b7ee1c8-allfinite.tif",
+    "note": "H28-6 radiometric fronts; research only, not slot-approved.",
+    "note_characters": 59,
+    "note_limit_characters": 140
+  },
+  "verdict": "negative",
+  "integrity_recovery": {
+    "initial_attempt": "E1/E2 completed; the original E3 GeoTIFF writer failed before evidence persistence.",
+    "writer_error": "Inherited template block width 3292 was reused with tiled=True; TIFF tile dimensions must be multiples of 16.",
+    "recovery_method": "Replayed deterministic E1 canaries and E2 DTI using the original SHA-verified cached OOF arrays; no model refit, feature change, threshold change, or seed change.",
+    "original_stdout_log": "evidence/h28_6_first_execution.log",
+    "surface_values_match_first_execution_log": true,
+    "all_40_cell_dti_values_match_first_execution_log_to_5_decimals": true,
+    "this_is_not_a_new_confirmation_or_independent_replication": true,
+    "artifact_writer_fixed_to_untiled_geotiff": true
+  },
+  "limitations": [
+    "Catalogue-internal holdout is not organizer-created expert truth.",
+    "GeoDAWN bytes are hash-pinned owner-repository mirrors, not freshly downloaded official bytes.",
+    "No weekly slot, upload, organizer receipt, or leaderboard score is claimed."
+  ],
+  "run_card_version": 1,
+  "run_id": "H28-6-2026-10-25",
+  "sources": {
+    "official_provenance": "https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7",
+    "local_data_caveat": "Hash-pinned owner-repository mirrors; no fresh official binary download in this run."
+  },
+  "evidence": {
+    "pre_registration": "knowledge/16_preregistration_H28-6.md",
+    "full_result": "evidence/h28_6_radiometric_holdout.json",
+    "first_execution_log": "evidence/h28_6_first_execution.log",
+    "final_peer_audit": "evidence/h28_6_parallel_uniqueness.json",
+    "irregularity": "registry/irregularities.json#IR-2026-10-25-07-h28-6-tiff-writer-blocks"
+  }
+}
