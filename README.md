@@ -1,6 +1,6 @@
 # 27GEMSDOE - topology-first research and submission lab for DrivenData #306 (DOE GEMS)
 
-## Session 9 addendum (2026-10-25; read at every session start)
+## Session 9 addendum (2026-10-25, merged with the parallel Lane L-S7 session; read at every session start)
 **A new unique TIFF was generated (H30) and it is NOT certified for submission — ⛔ DO NOT SUBMIT it.**
 H30 = the twice-confirmed Arm-D subsurface detector, re-ranked by a label-free hydrothermal-chemistry
 field (measured well/spring temperatures; canary AUC 0.499) and emitted with deconflicted placement
@@ -10,38 +10,48 @@ paired **L−B −0.00445 [−0.00800, −0.00112]** (7/20 cells) and **L−D �
 the frozen promote gate FAILED (negative; no post-hoc tuning; seeds consumed). D−B replicated
 **+0.00217 [−0.00126, +0.00531]** (15/20 cells, 5/5 seeds) — third disjoint seed set with positive sign.
 **Measured consequence (the session's real deliverable): buying strict self-registry uniqueness costs
-more than the confirmed detector gain** — IR-2026-10-25-06's tension is now a number. The H30 bytes
-(`docs/downloads/research/gems27-h30-chem-deconf-b2-38k-20261025-ad5a68bb0535-allfinite.tif`,
-sha256 `047f383d9f76…`, validator hard-PASS) are **the first file to clear BOTH uniqueness screens**
-(≤0.320 vs all 12 pinned peers; ≤0.648 vs all 12 repo-shipped rasters; Spearman ≤0.465) — unique and
-valid are necessary, not sufficient. **Selector decision recorded (IR-2026-10-25-11):** the current
-owner prompt's focus sites = the 12-peer parallel registry = the operative duplicate screen (strict
-screen reported alongside); under it the holdout-passed H29-1 D-refill family is eligible, and its
-badge flip is a recorded owner action touching no bytes — **this session flipped nothing**. Evidence:
-`evidence/h30_holdout.json`, `evidence/h30_run_card.json`, `knowledge/20` (prereg), `knowledge/21`
-(hypothesis screen), `knowledge/22` (result). Data cache was fully restored and hash-verified this
-session (16/16 artifacts, `scripts/restore_data.py`); 112 tests pass; ruff clean.
+more than the confirmed detector gain** — IR-2026-10-25-06's tension is now a number (IR-2026-10-25-14).
+The H30 bytes (`docs/downloads/research/gems27-h30-chem-deconf-b2-38k-20261025-ad5a68bb0535-allfinite.tif`,
+sha256 `047f383d9f76…`, validator hard-PASS) are **unique vs every screened raster in the merged repo**:
+≤0.320 vs all 12 pinned peers; ≤0.648 vs all 12 repo rasters at build time; **0.302 vs the parallel
+session's H29-S** (re-screened post-merge; exact shared pixels 1,812/38,000) — unique and valid are
+necessary, not sufficient. **Selector decision recorded (IR-2026-10-25-15):** the current owner prompt's
+focus sites = the 12-peer parallel registry = the operative duplicate screen (strict screen reported
+alongside); under it the holdout-passed H29-1 D-refill family is eligible, and its badge flip is a
+recorded owner action touching no bytes — **this session flipped nothing**. Instrument disclosure: H30's
+E2 used the pre-fix `emit()` candidate domain (`valid ∪ hidden`, as in H29-1/L-DCONFIRM); the parallel
+session's ring-leak fix (whole-fold domain) post-dates the frozen run, all three arms shared the same
+instrument so the paired deltas stand, and no re-run was performed (that would be a 4th experiment).
+Evidence: `evidence/h30_holdout.json`, `evidence/h30_run_card.json`, `knowledge/20` (prereg),
+`knowledge/21` (hypothesis screen), `knowledge/22` (result). 112 tests pass; ruff clean.
 
-## Current audit addendum (2026-10-25; read at every session start)
-**No newly certified unique TIFF was produced in this audit. DO NOT SUBMIT research files.**
-The current request requires a genuinely new TIFF, visible machine-based eligibility,
-whole-segment buffered holdout, feature canaries, pre-placement surface and final-dot
-registry checks, at most three experiments/two hours, and no automated slot use.
-These requirements are not fulfilled by renaming a prior raster or waiving duplicates.
-See [the three-pass audit and ranked prospective hypotheses](knowledge/19_readiness_audit_20261025.md).
-Run `.venv/bin/python scripts/audit_submission_readiness.py` to refresh the public
-[byte-bound submission evidence audit](docs/data/submission_readiness_audit.json).
-Badges now fail closed on contradictory/missing evidence, hash mismatch, failed
-efficacy or uniqueness, leakage canary, and invalid notes. The official reference
-supports CPU execution; earlier blanket “GPU needed” statements are too strong.
-The historical verbatim prompt below remains preserved; this paragraph summarizes
-the current request rather than purporting to reproduce it verbatim.
+**Site:** https://buffedlizard55-lab.github.io/GEMSDOE27/ — first screen (`index.html`) and `executive-summary.html` render the automated fail-closed machine gate (`gems27.readiness.publication_decision`), one-click GeoTIFF/ZIP links, unique submission name, and copyable `<= 140`-char note directly from byte-bound JSON receipts.
 
+## Current Automated Gate & Unique Candidate GeoTIFF (`Lane L-S7-2026-10-25` / `H29-HPVC`, `2026-10-25`)
+* **Unique Submission Name:** `27GEMSDOE-H29S-20261025-511898747886` (`content_id = 511898747886`)
+* **One-Click All-Finite GeoTIFF (`[0, 1]` fix):** `docs/downloads/gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-allfinite.tif` (`825,276 B`, SHA-256 `8585c5e870f197f84fda5bac7f22047d646fb73d455eb8b1129486c79bb976cf`) + single-member ZIP `gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-allfinite.zip` (`174,419 B`)
+* **Copyable Short Note (`110 / 140` chars):** `27GEMSDOE H29-S | stitchedOOF hydro+piedmont+Frangi+CELF300m B2 37654px | id 511898747886 | unscored hold-slot`
+* **Automated Machine Verdicts (`evidence/h29_run_card_2026-10-25.json`, `docs/data/submission_readiness_audit.json`, `scripts/verify_downloads.py` `162/162 PASS`):**
+  1. **Technical Format & `[0, 1]` Range Gate — `PASS`:** Single-band `float32`, `EPSG:32611`, `3730×3292`, exact `{0.0, 1.0}` across all `12,279,160` cells (`0` NaN, `nodata=None` per official reference notebook Cell 19), `0` catalogue overlap, strict `B2` (`d_cat > 200 m`), `37,654` dots (`min_self_spacing = 2.0 px`).
+  2. **24-Raster Uniqueness Gate (All 12 Peer Rasters + All 12 In-House Rasters) — `PASS`:** Unlike `H29-1 D-refill` (`c24b6371179c`) and `L-DCONFIRM` (`5ea0385b7e70`) which failed the self-registry screen against dense `H28-1` (`85.4% > 70%`), **`H29-S` (`511898747886`) clears ALL 24 rasters**: max 3-px dot overlap = **`64.21% <= 70%`** (`56.12%` vs `GEMSDOE32` `0.2778`, `56.43%` vs dense `H28-1`, `53.01%` vs `L-DCONFIRM`, `52.56%` vs `H29-1 D-refill`, `51.33%` vs `H29-1b`), pre-placement surface Spearman `max = 0.4776 <= 0.90`, post-placement Spearman `max = 0.0563 <= 0.90`.
+  3. **Leakage Canary Gate — `PASS`:** Max direction-invariant holdout ROC-AUC across all 20 `H29` features = **`0.5765 <= 0.90`** (`evidence/h29_e1_canary_and_surface.json`; `dist_known_fault_px` strictly banned and unit-tested).
+  4. **Blind Spatial Holdout (`HOLDOUT-DTI`, frozen unused seeds `210–219`, `40` cells, `118,673` withheld positive occurrences, `gems27.metric v1 + holdout-blind-buffered-v2`):**
+     - **`H29-S` sets a NEW REPOSITORY #1 BLIND POOLED `HOLDOUT-DTI = 0.042198`** (unbuffered diagnostic `0.103907`), vs `D0 = 0.040902`, `H29-A = 0.039698`, `H28_1_B2 = 0.037578`, `B0 = 0.036368`, `U0 = 0.015341`.
+     - **Beats `B0`:** **`+0.005829`** (`95% CI [+0.004420, +0.007417]`, **`10/10` seeds, `4/4` folds**).
+     - **Beats prior promoted repo champion `H28-1`:** **`+0.004620`** (`95% CI [+0.003442, +0.005974]`, **`10/10` seeds, `3/4` folds**).
+     - **Fixes `H27-6` (`H29-S` weighted 300 m CELF cover minus `H29-A` Poisson `d=2.8` on identical surface):** **`+0.002500` buffered / `+0.005716` unbuffered** (`95% CI [+0.000736, +0.004311]`, **`8/10` seeds**).
+     - **Edges Session-6 internal control `D0`:** **`+0.001295` buffered / `+0.005399` unbuffered** (`3/4` folds: `NW +0.0022`, `NE_LidarGap +0.0024`, `SW +0.0032`), **but `SE` Walker Lane lagged `-0.0025`**, leaving the strict seed-bootstrap 95% CI vs `D0` at `[-0.000986, +0.003695]` (`3/6` strict composite gate clauses at commit `30accf8`).
+  5. **Fail-Closed Weekly Live Slot Decision (`gems27.readiness.publication_decision` + `AGENTS.md` Hard Rule #3) — `HOLD WEEKLY SLOT` (`NO TIFF IS APPROVED TO SUBMIT` for a scarce `5/week` live slot yet):** Thresholds are never relaxed post-hoc. Preserve the weekly live slot and run `H29-6` (appending `ieq_n100a15`/`deq_n100a15` Walker Lane seismic-fabric coherence to `H29-S` on fresh unused seeds `220–229`) to clear the `SE` CI sub-clause first (`knowledge/16_h29_results_and_next_steps.md`).
+* **Live Forensic Proofs (`OWNER-REPORTED`, no organizer receipt stored in repo):**
+  - **`GEMSDOE32` (`h33-h33-2-b2-...-zeros`, `0.2778`):** Byte-verified (`c55bafc4…`, `37,654` dots) = `(GEMSDOE25_D2.8 > 0) & (EDT(~existing_faults) > 2.0)` — zero new geology, removing `7,865` zero-credit `0–200 m` collar FPs (`0.2586 -> 0.2778`).
+  - **`27GEMSDOE` Slot 1 (`5512495c6bd1`, `0.2449` vs `24GEMSDOE` `0.2477`):** Byte diff (`evidence/slot1_live_ab_inversion.json`) proves Slot 1 adds `1,259` `T-v2` straight-line continuation dots (`0` removed); pure zero-hit FP dilution predicts `0.24491`, matching `0.2449` to 4 decimal places (`-0.00018` credit/dot vs `+0.05024` break-even).
+  - **Template Bugs Fixed in Place (`IR-2026-10-25-10..13`):** Fixed `emit()` `600 m` hidden-ring mask leak and `parallel_registry` path typo in `scripts/run_lane_holdout.py`, fixed streaming memory footprint in `src/gems27/subsurface_features.py`, and audited PR #14's `98e59bf8e3ce` (`HOLDOUT-DTI = 0.0`, `evidence/audit_98e59bf8e3ce_uniqueness.json`).
 
-**Site:** https://buffedlizard55-lab.github.io/GEMSDOE27/ — current front page states research status and submission eligibility.
-**Session 8 review (2026-10-25):** no new experiment or slot was used. Environment verification: 92 tests passed, 3 skipped; Ruff passed. The standalone download verifier could not run because `data_cache/sample_submission.tif` is absent, so no fresh byte/template validation is claimed. Current arm-D candidates still fail the extended self-registry uniqueness gate; **no TIFF is currently certified OK to submit**. Full review, ranked next hypotheses and precise blockers: `knowledge/18_session8_repo_review_2026-10-25.md`.
-**Status (2026-10-25, Session 7): NO TIFF IS CERTIFIED OK TO SUBMIT — machine gates decide, no human inspection.** The new H29-1 D-refill candidate (38,000 dots, B2, all-finite [0,1], validator PASS) **beat its frozen fresh-seed holdout gate** (pooled **HOLDOUT-DTI** 0.1088 vs 0.1002 control; paired +0.00857, 95% CI [+0.00513, +0.01249], 18/20 cells, seeds 210–214) and is **unique vs every scored rival** (≤3 px dot overlap ≤46.2% vs all 12 pinned peers; 40.9% vs the 0.2778 file), but it **fails the frozen extended duplicate screen** vs this repo's own unscored H28-1 research file (85.4% > 70%), and deconfliction H29-1b proved geometrically infeasible. Verdict: **negative — ⛔ NOT CERTIFIED UNIQUE, DO NOT SUBMIT AS THE UNIQUE LANE FILE** (`knowledge/17`, `evidence/h29_1_run_card.json`). Spending a slot on it is the owner's separate selector decision (IR-2026-10-25-06). H28-3 remains a failed-gate negative artifact. A parallel session (Lane L-DCONFIRM, `knowledge/15_lane_dconfirm_preregistration.md`, `knowledge/16_dconfirm_result.md`) independently confirmed the same arm-D gain on disjoint seeds 215–224 (paired Δ +0.00760 [+0.00489, +0.01038], 10/10 seeds) and rejected 8 new dip/rad/polarity transforms at selection; its file is a measured cross-session duplicate of H29-1 (87.5% within 3 px, `evidence/dconfirm_cross_session_overlap.json`) and is likewise **negative / not certified** — the selector must treat H29-1, H29-1b and L-DCONFIRM as one candidate family (IR-2026-10-25-09). No DrivenData upload, organiser receipt, or score occurred in either session. **How OK-to-submit will look when earned:** front page + executive summary show a green ✅ VALIDATED badge and one-click .tif/.zip + ≤140-char note, rendered from the run-card JSON only when holdout + uniqueness + format gates all PASS; otherwise the red ⛔ badge above. Submission steps (when green): download primary all-finite .tif → DrivenData #306 submission form → upload .tif (or single-TIFF .zip) → paste note → submit → record receipt in `registry/live_scores.json`.
-Owner-reported reference: the 24GEMSDOE file scored **0.2477** (owner-reported); the owner-stated leaderboard high is **0.3195** (unconfirmed; the agent does not access drivendata.org). The user additionally reported sibling `GEMSDOE32` H33-2-B2 at 0.2778; no organiser receipt/hash crosswalk was found in reviewed sibling records, so it is not treated as verified.
+---
+
+## Parallel Session Audit Addendum (`2026-10-25`; read at every session start)
+Run `.venv/bin/python scripts/audit_submission_readiness.py` to refresh the public [byte-bound submission evidence audit](docs/data/submission_readiness_audit.json). Badges fail closed on contradictory/missing evidence, hash mismatch, failed efficacy or uniqueness, leakage canary, and invalid notes (`knowledge/19_readiness_audit_20261025.md`, `knowledge/18_session8_repo_review_2026-10-25.md`). Note: parallel lanes `H29-1 D-refill` (`c24b6371179c`, seeds `210–214`) and `L-DCONFIRM` (`5ea0385b7e70`, seeds `215–224`) confirmed `D0` vs `B0` (`+0.0086` / `+0.0076`) but failed the extended self-registry uniqueness screen (`85.4%` vs `H28-1`, `87.5%` cross-session overlap; `IR-2026-10-25-06/09`), whereas `H29-HPVC` (`511898747886` above) clears all 24 rasters (`<= 64.21%`) and holds its weekly slot solely pending `H29-6` SE Walker Lane closure on fresh seeds `220–229` (seeds `210–224` are now consumed; use `225–234` for `H29-6`!).
+Owner-reported reference: `24GEMSDOE` scored **0.2477** (`OWNER-REPORTED`); `27GEMSDOE` Slot 1 scored **0.2449** (`OWNER-REPORTED`); `GEMSDOE32` `H33-2-B2` scored **0.2778** (`OWNER-REPORTED`); leaderboard #1 is cited as **0.3195** / **0.4413** (`IR-2026-10-25-02`; unconfirmed; the agent never accesses `drivendata.org`).
 
 ## Start here every session (checklist)
 1. Re-read **Task prompt (verbatim)** and **Core Values (verbatim)** below. Maximize P(Win) and Own the Outcome are the focal point of every build, research and implementation decision.
@@ -163,32 +173,24 @@ All **20** of the owner's scored rasters that could be matched were recovered fr
 ## Map of the repo
 | path | what |
 |---|---|
-| `src/gems27/` | `metric.py`, `thinning.py`, `holdout.py`, `graph.py`, `links.py`, `candidates.py`, `topology_theory.py`, `submission.py`, `grid.py`, `paths.py`, **`vector_graph.py`** (NBMG INGENIOUS vector attribution & H27-5 kinematic compatibility), **`topology_classes.py`** (exclusive H27-5b reviewer classes and geometry-only cues), **`oof_detector.py`** (4-fold spatial-CV detector with optional extra features), **`potential_edges.py`** (H28-1 label-free multiscale magnetic/gravity transforms) |
-| `scripts/` | `restore_data.py`, `download_competition_data.sh`, `prepare_data.py`, `fetch_vector_faults.py`, `run_graph_report.py`, `run_topology_validation.py`, `run_topology_confirm.py`, `run_vector_topology_validation.py`, `run_oof_hypothesis_gates.py`, `run_h28_1_edge_holdout.py`, `build_h28_1_candidate.py` (separate research export), `build_candidates.py`, `build_submission27.py`, `verify_downloads.py`, `make_figures.py`, `build_site.py`, `refresh_source_feed.py`, `operating_point.py`, `channel_auc.py` |
-| `knowledge/` | 01 why 0.2477 won; 02 hypothesis ledger; 03 pre-registration; 04 topology & vector argument; 05 sources; 06 limitations/access and current priorities; 07 current untried screen and negative results; 08/09 H28-1 historical protocol/export; 10 far-field limit; 11 H27-5b review class; 12 peer audit; 13 frozen H28-3 protocol |
-| `registry/` | `sources.json`, `hypotheses.json` (historical evidence ledger), `next_hypotheses.json` (current three-item untried screen plus tested H27-10 and H28-3 negative results), `parallel_submission_registry.json` (pinned peer artifacts for duplicate checks), `irregularities.json`, `live_scores.json`, `topology_candidates.json` (345 links with NBMG attributes, exclusive review class and graph context) |
-| `evidence/` | machine-readable results (`topology_validation.json`, `topology_confirmation_v2.json`, `vector_topology_validation.json`, `oof_hypothesis_gates.json`, `h28_1_edge_holdout.json`, H27-10 initial/corrected holdout JSONs, `h28_3_strain_holdout.json`, `h28_3_negative_uniqueness.json`, `structural_relay_classes.json`, live-score inversion/model evidence, `data_preparation.json`, `graph_report.json`, `channel_auc.json`, `review_passes.md`) |
-| `docs/` | GitHub Pages site (`index.html`, `executive-summary.html`, `topology.html`, `research.html`, `sources.html`), `downloads/` (historic audit manifests plus `research/` negative-result package), `data/` (all 345 topology links plus focused 81-row H27-5b CSV/GeoJSON and class definition, feed and vector-fault status) |
-| `.github/workflows/` | `source-feed.yml` (official sources only; never drivendata.org), `fetch-vector-faults.yml` (NBMG INGENIOUS ArcGIS REST check), `ci.yml` (tests + lint + site build) |
+| `src/gems27/` | `metric.py`, `thinning.py`, `holdout.py`, `graph.py`, `links.py`, `candidates.py`, `topology_theory.py`, `submission.py`, `grid.py`, `paths.py`, `vector_graph.py`, `topology_classes.py`, `oof_detector.py`, `potential_edges.py`, `subsurface_features.py` (streamed `<500 MB`), **`coverage_thin.py`** (`weighted_celf_cover` & `expected_weighted_coverage`), **`hydrothermal_piedmont.py`** (`H29-1` 20 hydrothermal/piedmont/destriped-magnetic features + 10 Stage-2 Frangi vesselness + 45°-rotated sectors + 2-stage nested spatial cross-fitting) |
+| `scripts/` | `restore_data.py`, `fetch_parallel_registry.py`, `download_competition_data.sh`, `prepare_data.py`, `fetch_vector_faults.py`, `run_h29_holdout.py` (`E1` canary/surface + `E2` 40-cell blind holdout), `build_h29_submission.py` (`E3` dual-partition stitched-OOF GeoTIFF + Run Card builder), `run_lane_holdout.py` (`IR-2026-10-25-06/07` fixes), `verify_downloads.py` (`162/162` checks), `check_parallel_uniqueness.py`, `build_site.py`, `refresh_source_feed.py` |
+| `knowledge/` | `01` why `0.2477` won; `02` hypothesis ledger; `03` pre-registration; `04` topology & vector argument; `05` verified sources; `06` limitations/access; `07` live-score inversion; `08/09` `H28-1`; `10` far-field limit; `11` `H27-5b` review class; `12` why `0.2778` won; `13/14` `H28-3` & subsurface lane; **`15` geothermal vent discovery & frozen `H29-1` preregistration (`30accf8`)**; **`16` Session 7 `H29-1` results, limitations & next steps (`H29-6`)** |
+| `registry/` | `sources.json` (first-hand verified official links), `hypotheses.json` (historical ledger through `H29-1`), `next_hypotheses.json` (5 untried hypotheses `H29-6, H29-2, H29-3, H27-16, H29-5` + tested `H27-10, H28-3, H29-1`), `parallel_submission_registry.json` (12 SHA-256-pinned peer rasters), `irregularities.json` (`IR-2026-10-25-01..09`), `live_scores.json`, `topology_candidates.json` |
+| `evidence/` | **`h29_e1_canary_and_surface.json`**, **`h29_e2_holdout_210_219.json`**, **`h29_uniqueness_vs_peers.json`**, **`h29_run_card_2026-10-25.json`**, **`slot1_live_ab_inversion.json`**, **`audit_98e59bf8e3ce_uniqueness.json`**, plus historical validation/inversion JSONs and `review_passes.md` |
+| `docs/` | GitHub Pages site (`index.html`, `executive-summary.html`, `topology.html`, `research.html`, `sources.html`), `downloads/` (`gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-{allfinite.tif,allfinite.zip,nan.tif}`, `checks-*.json`, `note-*.txt`, `h29_candidate_manifest.json`, plus historic audit manifests), `data/` |
+| `.github/workflows/` | `source-feed.yml` (official sources only; never drivendata.org), `fetch-vector-faults.yml`, `build-site.yml` (stdlib Python 3.11), `ci.yml` (tests + lint + site build) |
 
 ## Reproduce
 ```bash
 pip install -r requirements.txt
-GEMS_DATA_DIR=./data_cache python scripts/restore_data.py          # restores 16 hash-pinned artifacts (or run bash scripts/download_competition_data.sh outside the sandbox)
+GEMS_DATA_DIR=./data_cache python scripts/restore_data.py          # restores 17 hash-pinned artifacts (or run bash scripts/download_competition_data.sh outside the sandbox)
+python scripts/fetch_parallel_registry.py                          # fetches & SHA-256-authenticates all 12 peer rasters
 python scripts/prepare_data.py                                     # builds 32-band label-free feature matrix (data_cache/prepared/features.npy)
-python scripts/fetch_vector_faults.py                              # verifies qfaults_v2_in_footprint.json (1,179 NBMG polylines)
-python scripts/run_graph_report.py
-python scripts/run_topology_validation.py --seeds 100-109
-python scripts/run_topology_confirm.py --seeds 110-119
-python scripts/run_vector_topology_validation.py --seeds 120-129   # Addendum B: 3-tier vector holdout + H27-5
-python scripts/run_oof_hypothesis_gates.py --seeds 130-139         # Addendum C: honest 4-fold spatial-CV OOF gates
-python scripts/build_augmented_features.py                         # Addendum D: 40 extra label-free bands (827 MB memmap)
-python scripts/run_addendum_d_gates.py --seeds 140-149             # Addendum D: PR-AUC screen + paired gates (D1-D4)
-python scripts/diagnose_arm_habitats.py                            # where an arm's credit actually comes from
-python scripts/invert_sgmc_probe.py                                # invert the h18-4 SGMC-gap live score
-python scripts/build_candidates.py
-python scripts/build_submission27.py && python scripts/verify_downloads.py
-python scripts/make_figures.py && python scripts/build_site.py
+python scripts/run_h29_holdout.py                                  # E1 (canary + surface Spearman) + E2 (40-cell blind holdout, seeds 210-219)
+python scripts/build_h29_submission.py                             # E3 (dual-partition stitched-OOF GeoTIFF + 12-peer uniqueness + JSON Run Card)
+python scripts/verify_downloads.py                                 # 162/162 automated GeoTIFF, [0,1] range, CRS, transform, ZIP & note checks
+python scripts/build_site.py && python -m pytest -q
 ```
 
 ## Task prompt (verbatim, owner-supplied)

@@ -130,7 +130,8 @@
       "repo:gems27-h28-3-strain-conductivity-negative-research-20261025-27d6875f3b22-nan.tif": 0.6091315789473685,
       "repo:gems27-h29-1-drefill-b2-38k-20261025-c24b6371179c-nan.tif": 0.6481578947368422,
       "repo:gems27-h29-1b-drefill-deconf-b2-38k-20261025-14e416a1a380-nan.tif": 0.6477105263157895,
-      "repo:gems27-lane-subsurface-buried-fault-20261025-fc6d8c3acf6c-nan.tif": 0.3385526315789474
+      "repo:gems27-lane-subsurface-buried-fault-20261025-fc6d8c3acf6c-nan.tif": 0.3385526315789474,
+      "repo:gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-nan.tif": 0.3021
     },
     "max_surface_spearman": 0.46495210421716454,
     "max_surface_spearman_L": 0.46495210421716454,
@@ -154,7 +155,8 @@
     },
     "pass_operative_12peer_registry": true,
     "pass_strict_self_registry": true,
-    "pass": true
+    "pass": true,
+    "post_merge_rescreen_note": "Merged-state re-screen (Session 9 merge with parallel Lane L-S7): the parallel session shipped H29-S (cid 511898747886) to docs/downloads after H30 was built; H30 vs H29-S directed 3-px overlap = 0.3021 (exact shared pixels 1,812/38,000, Jaccard 0.0245) - PASS. Repo-raster count in the merged state: 13; the maxima above are unchanged."
   },
   "placement": {
     "dots_total": 38000,

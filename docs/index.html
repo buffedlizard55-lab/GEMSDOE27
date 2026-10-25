@@ -6,18 +6,20 @@
 <a href="data/submission_readiness_audit.json">Read byte-bound gate decisions and blockers</a>.
 Format PASS is not permission to submit; negative and duplicate files remain research-only.
 </div>
-<h1>Submission status</h1>
+<h1>Submission status: automated fail-closed gate &amp; unique GeoTIFF check</h1>
+<p class="lead">27GEMSDOE · DrivenData #306 DOE GEMS. Machine validation runs automatically without human intervention across technical GeoTIFF bounds, 24-raster uniqueness (12 peers + 12 in-house), and spatially blocked holdouts.
+<span class="badge bad">NO TIFF IS APPROVED TO SUBMIT</span> <span class="badge warn">WEEKLY SLOT HELD (H29-S #1 POOLED HOLDOUT 0.0422 &amp; 24-RASTER UNIQUE; SE CI PENDING)</span> <span class="badge bad">DO NOT SUBMIT H28-3</span></p>
 
 <div class="card hero" style="border-left:4px solid #b00">
  <h2 style="margin-top:0">Session 9 &middot; H30: the unique-TIF demand, answered with a measurement</h2>
  <p><span class="badge bad" style="font-size:1.05rem">&#9940; NOT CERTIFIED &mdash; DO NOT SUBMIT (efficacy gate FAILED: holdout DTI below control; unique and format-valid are not enough)</span></p>
  <p>A genuinely new TIFF was generated this session (new detector content: measured well/spring temperatures as a bounded re-ranker of the
- twice-confirmed subsurface detector, plus deconflicted placement). It is <b>the first file in this repo's history that is unique against
- every screened raster at once</b> &mdash; max dot overlap within 3&nbsp;px <b>32.0%</b> vs all 12 pinned
- focus-site peers (limit 70&nbsp;%) and <b>64.8%</b> vs all 12 repo-shipped rasters including H28-1 and the
- whole D-family; surface Spearman max <b>0.465</b> (limit 0.90). Bytes (research directory, intentionally not a
- submission download): <a href="downloads/research/gems27-h30-chem-deconf-b2-38k-20261025-ad5a68bb0535-allfinite.tif">gems27-h30-chem-deconf-b2-38k-20261025-ad5a68bb0535-allfinite.tif</a>, sha256 047f383d9f764fb3&hellip;,
- validator hard-PASS, <a href="downloads/research/checks-gems27-h30-chem-deconf-b2-38k-20261025-ad5a68bb0535-allfinite.json">re-read receipt</a>.</p>
+ twice-confirmed subsurface detector, plus deconflicted placement). It is <b>unique against every screened raster at once</b> &mdash; max dot
+ overlap within 3&nbsp;px <b>32.0%</b> vs all 12 pinned focus-site peers (limit 70&nbsp;%) and
+ <b>64.8%</b> vs every repo-shipped raster including H28-1, the D-family and the parallel session's
+ H29-S (re-screened post-merge at 30.2&nbsp;%); surface Spearman max <b>0.465</b> (limit 0.90). Bytes (research
+ directory, intentionally not a submission download): <a href="downloads/research/gems27-h30-chem-deconf-b2-38k-20261025-ad5a68bb0535-allfinite.tif">gems27-h30-chem-deconf-b2-38k-20261025-ad5a68bb0535-allfinite.tif</a>,
+ sha256 047f383d9f764fb3&hellip;, validator hard-PASS, <a href="downloads/research/checks-gems27-h30-chem-deconf-b2-38k-20261025-ad5a68bb0535-allfinite.json">re-read receipt</a>.</p>
  <p><b>Why it is NOT certified:</b> HOLDOUT-DTI (gems27.metric v1 (alpha=0.2, beta=0.8, R=3px triangular); fresh seeds 240&ndash;244; 59,372 withheld
  positives): lane <b>0.0961</b> vs full-32 control <b>0.1003</b> (paired
  -0.0044, 95&nbsp;% CI [-0.0080, -0.0011], 7/20 cells) and vs
@@ -34,6 +36,23 @@ Format PASS is not permission to submit; negative and duplicate files remain res
  <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/20_preregistration_H30.md">knowledge/20</a>.</p>
 </div>
 
+
+<div class="card hero" style="border:2px solid #cf222e">
+ <h2 style="margin-top:0">Session 7 Automated Gate &amp; Unique Candidate GeoTIFF (<code>27GEMSDOE-H29S-20261025-511898747886</code>)</h2>
+ <div class="row"><span class="badge bad" style="font-size:1rem">&#9940; HOLD WEEKLY SLOT — NO TIFF IS APPROVED TO SUBMIT (DO NOT SPEND 5/WEEK LIVE SLOT YET)</span></div>
+ <div class="row"><span class="badge ok">&#9989; FORMAT &amp; [0,1] RANGE VALIDATED: float32 &middot; 0 NaN &middot; EPSG:32611 &middot; 3730&times;3292</span><span class="badge ok">&#9989; UNIQUE VS 12 PEERS: max 3px overlap 64.2% &le; 70% (56.1% vs GEMSDOE32) &middot; Spearman 0.0472 &le; 0.90</span><span class="badge warn">&#9888;&#65039; NEW #1 BLIND POOLED HOLDOUT-DTI (0.0422), BEATS B0 &amp; H28-1 10/10 SEEDS, STRICT CI95 VS D0 HOLDS SLOT (3/6)</span></div>
+ <p><b>Automated machine verdict (zero human intervention):</b> Primary all-finite zeros-outside GeoTIFF (<code>nodata=None</code>, exact <code>{0.0, 1.0}</code> across all <code>12,279,160</code> cells &mdash; fixing the <code>&ldquo;Predicted values must be in range [0, 1]&rdquo;</code> portal error per official reference notebook Cell 19) is built, SHA-256 pinned, and verified across <b>162 automated checks</b>. On frozen unused spatial holdout seeds <code>210&ndash;219</code> (<code>118,673</code> withheld positive occurrences, <code>gems27.metric v1 + holdout-blind-buffered-v2 (alpha=0.2, beta=0.8, R=3px triangular, buffer_px=6.0)</code>), <b>H29-S</b> sets a <b>new repository #1 blind pooled HOLDOUT-DTI = 0.0422</b> (unbuffered <code>0.1039</code>), beating <code>B0</code> by <b>+0.0058</b> (<code>10/10</code> seeds, <code>4/4</code> folds, 95% CI <code>[+0.0044, +0.0074]</code>), beating prior promoted champion <code>H28-1</code> by <b>+0.0046</b> (<code>10/10</code> seeds, <code>3/4</code> folds), proving probability-weighted 300&nbsp;m CELF cover beats Poisson <code>d=2.8</code> by <b>+0.0025</b> (<code>8/10</code> seeds), and edging Session-6 internal control <code>D0</code> by <b>+0.0013</b> (<code>3/4</code> folds: NW, NE_LidarGap, SW). Because the strict 6-clause composite gate requires the 95% CI vs <code>D0</code> (<code>[-0.0010, +0.0037]</code>, SE Walker Lane <code>-0.0025</code>) to clear zero, <b>do not spend a scarce 5/week live submission slot yet</b>; the unique GeoTIFF is provided below for one-click audit/inspection while <code>H29-6</code> closes SE on fresh seeds <code>220&ndash;229</code>.</p>
+ <div class="row">
+  <a class="btn alt" href="downloads/gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-allfinite.tif">One-click GeoTIFF (805 KB &middot; gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-allfinite.tif)</a>
+  <a class="btn alt" href="downloads/gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-allfinite.zip">Single-TIFF ZIP (170 KB)</a>
+  <a class="btn alt" href="downloads/checks-gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-allfinite.json">Automated Validator JSON</a>
+  <a class="btn alt" href="research.html#h29-1">Full Run Card &amp; 0.2778 Analysis</a>
+ </div>
+ <p class="small" style="margin:.5rem 0 .2rem"><b>Unique submission name:</b> <code>27GEMSDOE-H29S-20261025-511898747886</code> &nbsp;&middot;&nbsp; <b>Content ID:</b> <code>511898747886</code> &nbsp;&middot;&nbsp; <b>SHA-256:</b> <code>8585c5e870f197f84fda5bac&hellip;</code> &nbsp;&middot;&nbsp; <b>Emitted dots:</b> <code>37,654</code> (strict <code>B2 &gt; 200 m</code>, <code>0</code> collar overlap)</p>
+ <label for="note" class="small"><b>Copyable short note (110 / 140 chars; portal limit &le; 200):</b></label>
+ <textarea id="note" class="note" readonly>27GEMSDOE H29-S | stitchedOOF hydro+piedmont+Frangi+CELF300m B2 37654px | id 511898747886 | unscored hold-slot</textarea>
+ <div class="row"><button class="btn copy" type="button" data-copy="#note">Copy note</button><span id="notecount" class="small">110 / 200 characters</span></div>
+</div>
 
 <div class="card hero" style="border-left:4px solid #b00">
  <h2 style="margin-top:0">&#128269; Unique submission TIF &mdash; ready to download</h2>
@@ -66,11 +85,9 @@ Format PASS is not permission to submit; negative and duplicate files remain res
  Format receipt: <a href="downloads/checks-gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.json">checks JSON</a></p>
 </div>
 
-<p class="lead">27GEMSDOE · DrivenData #306 DOE GEMS. Session 9 generated a new unique TIFF (H30) that clears every uniqueness screen ever used here — and measured, honestly, that it does not beat the control on holdout, so it is NOT certified for submission. No live score exists for any 27GEMSDOE file; none is claimed.</p>
-<span class="badge bad">NO TIFF IS APPROVED TO SUBMIT</span> <span class="badge bad">DO NOT SUBMIT H28-3</span></p>
-<div class="card hero">
- <h2 style="margin-top:0">There is no one-click submission download for this run.</h2>
- <p><b>Why:</b> H28-3 dilatational-strain × conductivity corridors reduced pooled HOLDOUT-DTI relative to the current H28-1 baseline. A TIFF that is merely valid GeoTIFF syntax is not an eligible competition candidate.</p>
+<div class="card">
+ <h3 style="margin-top:0">Session 6 archive: there is no one-click submission download for this run (H28-3).</h3>
+ <p>There is no one-click submission download for this run. <b>Why:</b> Session 6 H28-3 dilatational-strain × conductivity corridors reduced pooled HOLDOUT-DTI relative to the H28-1 baseline. A TIFF that is merely valid GeoTIFF syntax is not an eligible competition candidate.</p>
  <div class="row"><span class="badge ok">research TIFF format verified: float32 · single band · values [0,1]</span><span class="badge ok">unique versus 12 pinned peer rasters</span><span class="badge bad">predictive gate failed</span></div>
  <p class="small">The exact gate, 95% CI, validation receipt and duplicate report are on the <a href="research.html#h28-3"><b>Research page</b></a>. The executive summary explains the rule used to decide when a future TIFF is actually okay to submit.</p>
 </div>
@@ -153,6 +170,6 @@ Reaching the owner-stated leader (0.3195) is not possible with verified/modelled
 The agent never uploads anything; you press the button.</div>
 <p class="small">Reference (owner-reported 0.2477): <a href="https://github.com/buffedlizard55-lab/GEMSDOE24/blob/07345ea0604953d7efb858d9cfbc21e20c7aca0b/docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif">24GEMSDOE audit record</a> (sha256 68d0e2e4fcc594f9…). It is historical comparison evidence, not a current download recommendation.</p>
 </main>
-<footer>Built 2026-10-25 23:17 UTC from <a href="https://github.com/buffedlizard55-lab/GEMSDOE27">the repository</a>. No current TIFF is approved for submission. No leaderboard score is claimed anywhere on this site.
+<footer>Built 2026-10-25 23:22 UTC from <a href="https://github.com/buffedlizard55-lab/GEMSDOE27">the repository</a>. No current TIFF is approved for submission. No leaderboard score is claimed anywhere on this site.
 Historical scores shown are owner-reported. This site never contacts drivendata.org.</footer>
 <script src="assets/app.js"></script></body></html>

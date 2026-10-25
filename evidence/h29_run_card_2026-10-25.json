@@ -1,0 +1,372 @@
+{
+  "schema": "parallel-run-card-v2",
+  "date_utc": "2026-10-25",
+  "lane": "L-S7-2026-10-25",
+  "hypothesis_id": "H29-1",
+  "hypothesis": "Hydrothermal Upflow Disequilibrium x Piedmont-Toe Concave Flexure x Flight-Line-Destriped Shallow Geophysical Vesselness + Probability-Weighted 300 m CELF Submodular Cover (H29-HPVC)",
+  "preregistration_commit": "30accf8",
+  "physical_mechanism": "Unmapped NW Great Basin geothermal faults occupy upward-concave piedmont breaks-in-slope, shallow-basement intra-basin horst steps (Siler et al. 2022), shallow magnetite-destruction and K/Th alteration zones along 90-deg destriped GeoDAWN lines (Glen & Earney 2024), and chemical geothermometer disequilibrium conduits (dT = T_eq - T_meas; Kraal et al. 2022), refined by 2-stage nested out-of-fold Frangi/line-integral vesselness and allocated via probability-weighted 300 m triangular-kernel CELF submodular cover outside the 200 m collar.",
+  "named_non_fault_mimics": [
+    "Pleistocene Lake Lahontan horizontal wave-cut paleo-shoreline benches (~1,335 m)",
+    "Stratiform Tertiary felsic ash-flow tuff contacts and welded-tuff hogbacks",
+    "Lateral down-gradient thermal outflow plumes in alluvial-fan phreatic aquifers"
+  ],
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "evaluator": "gems27.metric v1 + holdout-blind-buffered-v2 (alpha=0.2, beta=0.8, R=3px triangular, buffer_px=6.0)",
+    "n_withheld_positives_total": 118673,
+    "gate_efficacy_pass": false,
+    "paired_D_minus_B": {
+      "ci95": [
+        -0.000986,
+        0.003695
+      ]
+    },
+    "canary_max_auc": 0.57647
+  },
+  "holdout_dti": {
+    "provenance": "HOLDOUT-DTI",
+    "evaluator_version": "gems27.metric v1 + holdout-blind-buffered-v2 (alpha=0.2, beta=0.8, R=3px triangular, buffer_px=6.0)",
+    "seeds": [
+      210,
+      211,
+      212,
+      213,
+      214,
+      215,
+      216,
+      217,
+      218,
+      219
+    ],
+    "n_cells": 40,
+    "n_withheld_positive_occurrences": 118673,
+    "candidate_H29S_buffered_pooled": 0.042198,
+    "candidate_H29S_unbuffered_pooled": 0.103907,
+    "ablation_H29A_buffered_pooled": 0.039698,
+    "control_B0_buffered_pooled": 0.036368,
+    "control_H28_1_B2_buffered_pooled": 0.037578,
+    "control_D0_buffered_pooled": 0.040902,
+    "control_U0_buffered_pooled": 0.015341,
+    "paired_vs_B0": {
+      "pooled_delta_dti": 0.005829,
+      "mean_seed_paired_delta_dti": 0.005854,
+      "seed_bootstrap_95_ci": [
+        0.00442,
+        0.007417
+      ],
+      "positive_seeds": 10,
+      "n_seeds": 10,
+      "positive_folds": 4,
+      "n_folds": 4,
+      "per_fold_pooled_delta_dti": {
+        "NW": 0.008605,
+        "NE_LidarGapHeavy": 0.007225,
+        "SW": 0.003431,
+        "SE": 0.005472
+      },
+      "positive_cells": 33,
+      "n_cells": 40
+    },
+    "paired_vs_H28_1_B2": {
+      "pooled_delta_dti": 0.00462,
+      "mean_seed_paired_delta_dti": 0.004647,
+      "seed_bootstrap_95_ci": [
+        0.003442,
+        0.005974
+      ],
+      "positive_seeds": 10,
+      "n_seeds": 10,
+      "positive_folds": 3,
+      "n_folds": 4,
+      "per_fold_pooled_delta_dti": {
+        "NW": 0.013715,
+        "NE_LidarGapHeavy": 0.005353,
+        "SW": 0.003813,
+        "SE": -0.001659
+      },
+      "positive_cells": 30,
+      "n_cells": 40
+    },
+    "paired_vs_D0": {
+      "pooled_delta_dti": 0.001295,
+      "mean_seed_paired_delta_dti": 0.001334,
+      "seed_bootstrap_95_ci": [
+        -0.000986,
+        0.003695
+      ],
+      "positive_seeds": 6,
+      "n_seeds": 10,
+      "positive_folds": 3,
+      "n_folds": 4,
+      "per_fold_pooled_delta_dti": {
+        "NW": 0.002172,
+        "NE_LidarGapHeavy": 0.002384,
+        "SW": 0.003205,
+        "SE": -0.002526
+      },
+      "positive_cells": 26,
+      "n_cells": 40
+    },
+    "frozen_gate_clauses": {
+      "pooled_beats_all_baselines": true,
+      "mean_paired_delta_vs_best_ge_0p0020": false,
+      "ci95_lower_gt_zero_vs_best": false,
+      "folds_ge_3_of_4_vs_every_baseline": true,
+      "seeds_ge_8_of_10_vs_every_baseline": false,
+      "detector_ablation_H29A_beats_B0": true
+    },
+    "frozen_gate_clauses_passed": "3/6"
+  },
+  "canary_leakage": {
+    "max_h29_direction_invariant_auc": 0.57647,
+    "threshold_auc": 0.9,
+    "pass": true
+  },
+  "uniqueness_vs_registry": {
+    "n_peer_rasters_checked": 12,
+    "max_surface_spearman_preplacement": 0.47761,
+    "max_surface_spearman": 0.47761,
+    "max_postplacement_spearman_vs_peers": 0.047173,
+    "max_dot_overlap_within_3px_vs_peers": 0.642136,
+    "max_dot_overlap_within_3px_vs_local_repo": 0.642136,
+    "max_dot_overlap_within_3px_euclidean": 0.642136,
+    "peer_entries": [
+      {
+        "id": "g24_d15",
+        "reference_sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
+        "spearman_rank_correlation": 0.04717328379267658,
+        "candidate_dot_fraction_within_3px": 0.6396664365007702,
+        "duplicate": false
+      },
+      {
+        "id": "g25_d28",
+        "reference_sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
+        "spearman_rank_correlation": 0.038783072267927744,
+        "candidate_dot_fraction_within_3px": 0.6204387316088597,
+        "duplicate": false
+      },
+      {
+        "id": "g27_tv2_d15",
+        "reference_sha256": "33003374335d84bf885f2d8f5e9dd4c57044c8ec58fa6a0d7fa581e8bc41c11d",
+        "spearman_rank_correlation": 0.046709670441728024,
+        "candidate_dot_fraction_within_3px": 0.6421362936208637,
+        "duplicate": false
+      },
+      {
+        "id": "g28_h27_4_r1",
+        "reference_sha256": "ab02300152248fdda04e988e2cd2a0c13f35eec42fcf670a15e8b76b19e24a73",
+        "spearman_rank_correlation": 0.041335584709955825,
+        "candidate_dot_fraction_within_3px": 0.5905879853402028,
+        "duplicate": false
+      },
+      {
+        "id": "g28_h32_1",
+        "reference_sha256": "04d31922f5c1ea4016984fc470ab2b0ff8e266c615792f0e86020da3b940d3ff",
+        "spearman_rank_correlation": 0.0397194992956489,
+        "candidate_dot_fraction_within_3px": 0.6085940404737876,
+        "duplicate": false
+      },
+      {
+        "id": "g28_h36_1",
+        "reference_sha256": "5556aa1438fd67376b60d5ffc99228ec09dcc11a8408298a743ccb88d6163641",
+        "spearman_rank_correlation": 0.03877678972500845,
+        "candidate_dot_fraction_within_3px": 0.584453178945132,
+        "duplicate": false
+      },
+      {
+        "id": "g28_h38_1",
+        "reference_sha256": "81d5b87bc8424f162a8f56aa9aac8fbe630c61646b9cac24d5ebbdc1b1951783",
+        "spearman_rank_correlation": 0.038876225275099985,
+        "candidate_dot_fraction_within_3px": 0.5877728793753652,
+        "duplicate": false
+      },
+      {
+        "id": "g30_d28",
+        "reference_sha256": "8cf893ead5667df21d3288a9968c35fd5385c425b029d82ee71d311715b129fd",
+        "spearman_rank_correlation": 0.038783072267927744,
+        "candidate_dot_fraction_within_3px": 0.6204387316088597,
+        "duplicate": false
+      },
+      {
+        "id": "g31_h27_4",
+        "reference_sha256": "07b6db440535404bb41ec8ddc797713e200d308e3da35937393efde5eb84bc40",
+        "spearman_rank_correlation": 0.041335584709955825,
+        "candidate_dot_fraction_within_3px": 0.5905879853402028,
+        "duplicate": false
+      },
+      {
+        "id": "g32_h33_2_b2",
+        "reference_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+        "spearman_rank_correlation": 0.0431951961054194,
+        "candidate_dot_fraction_within_3px": 0.5612152759334997,
+        "duplicate": false
+      },
+      {
+        "id": "g33_h33d",
+        "reference_sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+        "spearman_rank_correlation": 0.038553396506222935,
+        "candidate_dot_fraction_within_3px": 0.604955648802252,
+        "duplicate": false
+      },
+      {
+        "id": "g36_anderson",
+        "reference_sha256": "e15891020b9c57056ac7fa874a5e506fbd6ed9314a4ea8e73af0753887a3708a",
+        "spearman_rank_correlation": 0.04235026207995773,
+        "candidate_dot_fraction_within_3px": 0.5624634832952674,
+        "duplicate": false
+      }
+    ],
+    "local_repo_entries": {
+      "gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-allfinite.tif": {
+        "dot_overlap_within_3px": 0.593722,
+        "spearman_rank_correlation": 0.040849
+      },
+      "gems27-farfield-swap-augmented-detector-probe-20261002-a34b0799df59-allfinite.tif": {
+        "dot_overlap_within_3px": 0.607691,
+        "spearman_rank_correlation": 0.046261
+      },
+      "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-allfinite.tif": {
+        "dot_overlap_within_3px": 0.564323,
+        "spearman_rank_correlation": 0.048233
+      },
+      "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-allfinite.tif": {
+        "dot_overlap_within_3px": 0.642136,
+        "spearman_rank_correlation": 0.04671
+      },
+      "gems27-topo-gap-closure-t-v2-on-d2-8-20261002-3ebd51534bb1-allfinite.tif": {
+        "dot_overlap_within_3px": 0.62328,
+        "spearman_rank_correlation": 0.038348
+      },
+      "gems27-topo-gap-closure-t-v2-plus-h27-4-r1-on-d1-5-20261002-d466b251f309-allfinite.tif": {
+        "dot_overlap_within_3px": 0.61595,
+        "spearman_rank_correlation": 0.049758
+      },
+      "gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.tif": {
+        "dot_overlap_within_3px": 0.096643,
+        "spearman_rank_correlation": 0.00456
+      },
+      "gems27-dconfirm-hybrid-armd-b2-38k-20261025-5ea0385b7e70-allfinite.tif": {
+        "dot_overlap_within_3px": 0.530063,
+        "spearman_rank_correlation": 0.052307
+      },
+      "gems27-h28-3-strain-conductivity-negative-research-20261025-27d6875f3b22-allfinite.tif": {
+        "dot_overlap_within_3px": 0.562835,
+        "spearman_rank_correlation": 0.048523
+      },
+      "gems27-h29-1-drefill-b2-38k-20261025-c24b6371179c-allfinite.tif": {
+        "dot_overlap_within_3px": 0.525575,
+        "spearman_rank_correlation": 0.051747
+      },
+      "gems27-h29-1b-drefill-deconf-b2-38k-20261025-14e416a1a380-allfinite.tif": {
+        "dot_overlap_within_3px": 0.513332,
+        "spearman_rank_correlation": 0.048232
+      },
+      "gems27-lane-subsurface-buried-fault-20261025-fc6d8c3acf6c-allfinite.tif": {
+        "dot_overlap_within_3px": 0.233601,
+        "spearman_rank_correlation": 0.009324
+      }
+    },
+    "pass": true
+  },
+  "raster": {
+    "content_id": "511898747886",
+    "directory": "docs/downloads",
+    "primary_allfinite": "gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-allfinite.tif",
+    "sha256": "8585c5e870f197f84fda5bac7f22047d646fb73d455eb8b1129486c79bb976cf",
+    "allfinite_tif": "docs/downloads/gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-allfinite.tif",
+    "allfinite_sha256": "8585c5e870f197f84fda5bac7f22047d646fb73d455eb8b1129486c79bb976cf",
+    "allfinite_bytes": 825276,
+    "allfinite_zip": "docs/downloads/gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-allfinite.zip",
+    "allfinite_zip_sha256": "1ab0a03ef137b987408b81de5faa4aa0631362ea794aec55c2cd1def0d486113",
+    "allfinite_zip_bytes": 174419,
+    "nan_tif": "docs/downloads/gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-nan.tif",
+    "nan_sha256": "a47d3e5e61ae985e965125bd6c71f2d1ecaac76aa391621d01182a987915df48",
+    "nan_bytes": 1590668,
+    "emitted_dots_px": 37654,
+    "min_self_spacing_px": 2.0,
+    "distance_to_catalogue_breakdown": {
+      "collar_le_2px": 0,
+      "near_2_to_10px": 14402,
+      "mid_10_to_30px": 10972,
+      "far_gt_30px": 12280,
+      "median_dist_to_catalogue_px": 16.155
+    }
+  },
+  "validator": {
+    "zeros_hard_pass": true,
+    "zeros_checks": {
+      "grid_matches_template": {
+        "pass": true,
+        "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+        "hard": true
+      },
+      "single_band_float32": {
+        "pass": true,
+        "detail": "count=1 dtype=float32",
+        "hard": true
+      },
+      "inside_footprint_all_finite": {
+        "pass": true,
+        "detail": "0 non-finite inside 5167373 px",
+        "hard": true
+      },
+      "inside_footprint_in_0_1": {
+        "pass": true,
+        "detail": "min=0 max=1",
+        "hard": true
+      },
+      "no_infinities_anywhere": {
+        "pass": true,
+        "detail": "np.isinf(whole array) is empty",
+        "hard": true
+      },
+      "outside_footprint_is_zero_and_finite": {
+        "pass": true,
+        "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+        "hard": true
+      },
+      "strict_whole_array_range": {
+        "pass": true,
+        "detail": "whole-array min=0 max=1",
+        "hard": true
+      },
+      "profile_driver_gtiff": {
+        "pass": true,
+        "detail": "GTiff",
+        "hard": false
+      },
+      "compression_like_sample": {
+        "pass": true,
+        "detail": "Compression.lzw",
+        "hard": false
+      }
+    },
+    "allfinite_hard_pass": true,
+    "nan_hard_pass": true,
+    "crs_epsg": 32611,
+    "shape": [
+      3730,
+      3292
+    ],
+    "inside_footprint_nan_count": 0,
+    "whole_array_nan_count_allfinite": 0,
+    "value_set_allfinite": [
+      0.0,
+      1.0
+    ],
+    "range_in_0_1": true,
+    "catalogue_overlap_px": 0,
+    "checks_json": "docs/downloads/checks-gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-allfinite.json",
+    "technical_validator_pass": true
+  },
+  "submission_name": "27GEMSDOE-H29S-20261025-511898747886",
+  "note_max_140_chars": "27GEMSDOE H29-S | stitchedOOF hydro+piedmont+Frangi+CELF300m B2 37654px | id 511898747886 | unscored hold-slot",
+  "note_length": 110,
+  "live_score": null,
+  "live_score_label": "UNSCORED (not uploaded; weekly submission slot preserved)",
+  "verdict": "negative",
+  "ok_to_submit": false,
+  "status_headline": "HOLD WEEKLY SUBMISSION SLOT \u2014 TECHNICAL FORMAT & UNIQUENESS 100% PASS ([0, 1] ALL-FINITE), NEW HIGHEST POOLED HOLDOUT-DTI (0.0422 vs B0 0.0364 [+0.0058, 10/10 SEEDS] & PRIOR CHAMPION H28-1 0.0376 [+0.0046, 10/10 SEEDS]), BUT STRICT 95% CI vs INTERNAL CONTROL D0 [-0.0010, +0.0037] SPANS ZERO (3/6 FROZEN GATE CLAUSES)",
+  "runtime_s": 44.2
+}

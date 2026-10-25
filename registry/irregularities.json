@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-25 | Session 9: H30 negative retained (deconfliction cost measured); selector screen decision recorded but H29-1 badge flip NOT taken (separate owner action).",
+  "generated": "2026-10-25 | Merged parallel sessions (Lane L-S7 IR-10..13 + Session 9 H30 IR-14/15, renumbered to avoid collision).",
   "items": [
     {
       "id": "prompt-verbatim-unavailable",
@@ -284,13 +284,37 @@
       "action": "Both files remain verdict=negative, ok_to_submit=false. Selector must treat H29-1/H29-1b/L-DCONFIRM as ONE candidate family (evidence/dconfirm_cross_session_overlap.json). No slot may be spent twice on this family."
     },
     {
-      "id": "IR-2026-10-25-10-h30-deconfliction-cost-measured",
+      "id": "IR-2026-10-25-10-holdout-emit-ring-leak-fixed",
+      "severity": "high",
+      "issue": "In `scripts/run_lane_holdout.py`, `emit(prob, valid_scoring, known, hidden, ...)` built candidate masks on `valid_scoring | hidden`. Because `valid_scoring = foot & fold_mask & ~ring` (where `ring = (d_hidden <= 6) & ~hidden`), `valid_scoring | hidden` equalled `True` on `hidden` (`d_hidden == 0`) and `False` on `0 < d_hidden <= 6`, leaking the complement of the 6-px ring around withheld segments into candidate placement.",
+      "action": "Fixed in place in `scripts/run_lane_holdout.py` and enforced in `scripts/run_h29_holdout.py`: `emit()` receives ONLY `fold_domain = foot & sp.fold_mask` and `sp.known` (zero access to `sp.hidden` or `valid_scoring`)."
+    },
+    {
+      "id": "IR-2026-10-25-11-lane-registry-path-typo-fixed",
+      "severity": "medium",
+      "issue": "`scripts/run_lane_holdout.py` looked for peer rasters in `data_cache/registry` rather than `data_cache/parallel_registry`, causing `surface_spearman_vs_registry` to silently evaluate 0 files (`{}`) in Session 6.",
+      "action": "Fixed path in `scripts/run_lane_holdout.py` and added `assert len(peer_spearman) == 12` in `scripts/run_h29_holdout.py` (`evidence/h29_e1_canary_and_surface.json`)."
+    },
+    {
+      "id": "IR-2026-10-25-12-slot1-live-zero-hit-confirmation",
+      "severity": "medium",
+      "issue": "2026-10-25 prompt reports `27GEMSDOE: 0.2449` (OWNER-REPORTED; no DrivenData receipt stored in repo) alongside `24GEMSDOE: 0.2477`. Byte diff (`evidence/slot1_live_ab_inversion.json`) confirms `5512495c6bd1` (61,328 px) adds solely 1,259 `T-v2` straight-line catalogue-tip gap-closure dots to `989f59505db1` (60,069 px); pure zero-hit FP dilution predicts `0.24491`, matching `0.2449` to 4 decimal places (empirical marginal efficiency `-0.00018` credit/dot vs `0.05024` break-even).",
+      "action": "Recorded in `registry/live_scores.json` under `owner_reported_prompt_2026_10_25` (preserving `27GEMSDOE[*].score = null` until an organizer receipt exists) and permanently retired `T-v2` straight-line continuation."
+    },
+    {
+      "id": "IR-2026-10-25-13-h29s-clears-24-raster-uniqueness-including-self-registry",
+      "severity": "low",
+      "issue": "Unlike `H29-1 D-refill` (`c24b6371179c`) and `L-DCONFIRM` (`5ea0385b7e70`) which overlapped 85.4%/85.2% with dense `H28-1` and 87.5% with each other, `Lane L-S7-2026-10-25` (`H29-HPVC` + weighted 300 m CELF cover, content id `511898747886`) clears BOTH the 12-peer registry (max 64.21% <= 70%; 56.12% vs GEMSDOE32) AND all 12 in-house rasters (56.43% vs dense H28-1, 53.01% vs L-DCONFIRM, 52.56% vs H29-1 D-refill, 51.33% vs H29-1b).",
+      "action": "Recorded in `evidence/h29_run_card_2026-10-25.json`; weekly slot remains held solely on the strict SE Walker Lane CI95 sub-clause vs internal control D0 (`[-0.000986, +0.003695]`)."
+    },
+    {
+      "id": "IR-2026-10-25-14-h30-deconfliction-cost-measured",
       "severity": "high",
       "issue": "H30's frozen promote gate failed: buying strict self-registry uniqueness (65% cap vs 12 repo rasters) cost -0.00662 HOLDOUT-DTI vs Arm D and made L-B significantly negative (-0.00445 [-0.00800,-0.00112]). This quantifies IR-2026-10-25-06's suspicion: for the arm-D family, strict uniqueness and catalogue-internal efficacy are in direct conflict.",
       "action": "Negative retained per protocol (no cap relaxation, no seed shopping, no post-hoc tuning). The H30 bytes are retained as a unique-but-not-certified research artifact (first file to clear both uniqueness screens). The screen choice is explicitly framed as the selector's strategy decision in knowledge/22 and on the site."
     },
     {
-      "id": "IR-2026-10-25-11-selector-screen-decision-recorded",
+      "id": "IR-2026-10-25-15-selector-screen-decision-recorded",
       "severity": "medium",
       "issue": "The current owner prompt (2026-10-25) demands a unique TIF and names the focus sites whose highest-scoring submissions form exactly the 12-peer parallel registry; the prompt's duplicate rule references 'registry raster'. Recorded decision: the 12-peer registry is the OPERATIVE screen; the stricter self-registry screen is reported alongside (H30 clears both). Under the operative screen the previously holdout-passed H29-1 family is eligible.",
       "action": "The H29-1 badge was NOT flipped: that remains a separate, explicit owner action (retire the unscored H28-1/H29-1/H29-1b/L-DCONFIRM family from the self-registry or confirm the 12-peer screen governs). No bytes were touched; no new experiment is needed for that flip (knowledge/16 E3). Cross-session duplicate caveat IR-2026-10-25-09 stands."

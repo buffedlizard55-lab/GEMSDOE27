@@ -89,3 +89,22 @@ margin of the D family (MODEL: live 0.26–0.29 band unchanged).
   current prompt; strict screen reported alongside); the H29-1 badge flip remains a separate,
   explicit owner action and was NOT taken here.
 - Leaderboard-high conflict (0.4413 vs 0.3195) remains IR-2026-10-25-02 (unresolved).
+
+
+## Post-merge addendum (recorded during the PR #24 merge, not part of frozen E1-E3)
+
+The parallel Lane L-S7 session (PR #22) landed on `main` while this session ran. Its H29-S
+hydrothermal-piedmont CELF raster (cid `511898747886`, 37,654 px) is a new repo-shipped raster and a
+same-data-family neighbour (hydrothermal chemistry). **Post-merge re-screen (MEASURED):** H30 vs H29-S
+directed 3-px dot overlap **0.3021** (exact shared pixels 1,812/38,000; Jaccard 0.0245) - PASS with
+margin; the merged-state screen is 12 peers + 13 repo rasters and no maximum changed (peers 0.320,
+repo 0.648). "First file to clear both screens" is therefore amended: H29-S cleared the 24-raster
+screen first (IR-2026-10-25-13); H30 clears all 25 with larger margins vs the peers.
+
+Cross-session numbering and instruments: this session's irregularities were renumbered
+IR-2026-10-25-14/-15 (the parallel session consumed -10..-13). H30's E2 used the pre-fix `emit()`
+candidate domain (`valid | hidden`, identical to H29-1/L-DCONFIRM); the parallel session's whole-fold
+`emit()` fix post-dates the frozen run. All three arms (B, D, L) shared the same instrument, so the
+paired deltas stand as frozen; no re-run was performed (it would be a 4th experiment against the
+protocol budget). The parallel session's H29-S evidence (seeds 210-219, buffered-v2 evaluator) is NOT
+numerically comparable to H30's (seeds 240-244, unbuffered pooled) - different masks, different seeds.
