@@ -396,3 +396,11 @@ for this lane: knowledge/14 + evidence/lane_run_card_2026-10-25.json. 86+ tests 
   numbers HOLDOUT-DTI with evaluator/n/CI; run card complete (evidence/
   dconfirm_run_card_2026-10-25.json). Remaining known gap: frozen self-registry duplicate
   vs audit-only H28-1 keeps ok_to_submit=false pending a selector decision (IR-2026-10-25-06).
+
+# Session 8 (2026-10-25) — repo review and validation boundary
+
+See `knowledge/18_session8_repo_review_2026-10-25.md` for the full candidate screen and blockers.
+
+* Pass 1: reviewed the full prior task, current H29-1 and L-DCONFIRM cards, the parallel uniqueness registry, site-generation logic, download receipts, and input availability. No candidate passed all gates; no experimental run or submission-slot use was justified.
+* Pass 2: installed project dependencies into the ignored `.venv/`; `pytest -q` reported **92 passed, 3 skipped**, Ruff passed. The strict standalone raster verifier stopped because `data_cache/sample_submission.tif` is missing. This must not be represented as successful TIFF validation.
+* Pass 3: README now points to the fresh review and makes the missing-data prerequisite the first next-session action. The existing site STOP badge remains appropriate. No false positive submit-ready badge, organizer-confirmed score, upload, or source download was introduced.

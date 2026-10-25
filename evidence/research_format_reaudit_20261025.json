@@ -1,0 +1,302 @@
+{
+  "gems27-dconfirm-hybrid-armd-b2-38k-20261025-5ea0385b7e70-allfinite.tif": {
+    "file": "gems27-dconfirm-hybrid-armd-b2-38k-20261025-5ea0385b7e70-allfinite.tif",
+    "bytes": 826788,
+    "sha256": "40b88a6477b1914a525c587ef139f1016f3d52188442099e5fa5eeab716008c2",
+    "variant": "allfinite",
+    "checks": {
+      "grid_matches_template": {
+        "pass": true,
+        "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+        "hard": true
+      },
+      "single_band_float32": {
+        "pass": true,
+        "detail": "count=1 dtype=float32",
+        "hard": true
+      },
+      "inside_footprint_all_finite": {
+        "pass": true,
+        "detail": "0 non-finite inside 5167373 px",
+        "hard": true
+      },
+      "inside_footprint_in_0_1": {
+        "pass": true,
+        "detail": "min=0 max=1",
+        "hard": true
+      },
+      "no_infinities_anywhere": {
+        "pass": true,
+        "detail": "np.isinf(whole array) is empty",
+        "hard": true
+      },
+      "outside_footprint_is_zero_and_finite": {
+        "pass": true,
+        "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+        "hard": true
+      },
+      "strict_whole_array_range": {
+        "pass": true,
+        "detail": "whole-array min=0 max=1",
+        "hard": true
+      },
+      "profile_driver_gtiff": {
+        "pass": true,
+        "detail": "GTiff",
+        "hard": false
+      },
+      "compression_like_sample": {
+        "pass": true,
+        "detail": "Compression.lzw",
+        "hard": false
+      }
+    },
+    "hard_checks_passed": true,
+    "hard_failures": [],
+    "nonzero_inside_px": 38000,
+    "value_set_inside": [
+      0.0,
+      1.0
+    ]
+  },
+  "gems27-h28-3-strain-conductivity-negative-research-20261025-27d6875f3b22-allfinite.tif": {
+    "file": "gems27-h28-3-strain-conductivity-negative-research-20261025-27d6875f3b22-allfinite.tif",
+    "bytes": 864136,
+    "sha256": "fa2a8525f5235a55ad3dc16e62b0912ec8391e6076bbd372b126ac8d8ad0b3f9",
+    "variant": "allfinite",
+    "checks": {
+      "grid_matches_template": {
+        "pass": true,
+        "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+        "hard": true
+      },
+      "single_band_float32": {
+        "pass": true,
+        "detail": "count=1 dtype=float32",
+        "hard": true
+      },
+      "inside_footprint_all_finite": {
+        "pass": true,
+        "detail": "0 non-finite inside 5167373 px",
+        "hard": true
+      },
+      "inside_footprint_in_0_1": {
+        "pass": true,
+        "detail": "min=0 max=1",
+        "hard": true
+      },
+      "no_infinities_anywhere": {
+        "pass": true,
+        "detail": "np.isinf(whole array) is empty",
+        "hard": true
+      },
+      "outside_footprint_is_zero_and_finite": {
+        "pass": true,
+        "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+        "hard": true
+      },
+      "strict_whole_array_range": {
+        "pass": true,
+        "detail": "whole-array min=0 max=1",
+        "hard": true
+      },
+      "profile_driver_gtiff": {
+        "pass": true,
+        "detail": "GTiff",
+        "hard": false
+      },
+      "compression_like_sample": {
+        "pass": true,
+        "detail": "Compression.lzw",
+        "hard": false
+      }
+    },
+    "hard_checks_passed": true,
+    "hard_failures": [],
+    "nonzero_inside_px": 59243,
+    "value_set_inside": [
+      0.0,
+      1.0
+    ]
+  },
+  "gems27-h29-1-drefill-b2-38k-20261025-c24b6371179c-allfinite.tif": {
+    "file": "gems27-h29-1-drefill-b2-38k-20261025-c24b6371179c-allfinite.tif",
+    "bytes": 826752,
+    "sha256": "40dc48a9f512c6b92415e5b2349e809be33107f9fec6661cc67c3a9871b8c84f",
+    "variant": "allfinite",
+    "checks": {
+      "grid_matches_template": {
+        "pass": true,
+        "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+        "hard": true
+      },
+      "single_band_float32": {
+        "pass": true,
+        "detail": "count=1 dtype=float32",
+        "hard": true
+      },
+      "inside_footprint_all_finite": {
+        "pass": true,
+        "detail": "0 non-finite inside 5167373 px",
+        "hard": true
+      },
+      "inside_footprint_in_0_1": {
+        "pass": true,
+        "detail": "min=0 max=1",
+        "hard": true
+      },
+      "no_infinities_anywhere": {
+        "pass": true,
+        "detail": "np.isinf(whole array) is empty",
+        "hard": true
+      },
+      "outside_footprint_is_zero_and_finite": {
+        "pass": true,
+        "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+        "hard": true
+      },
+      "strict_whole_array_range": {
+        "pass": true,
+        "detail": "whole-array min=0 max=1",
+        "hard": true
+      },
+      "profile_driver_gtiff": {
+        "pass": true,
+        "detail": "GTiff",
+        "hard": false
+      },
+      "compression_like_sample": {
+        "pass": true,
+        "detail": "Compression.lzw",
+        "hard": false
+      }
+    },
+    "hard_checks_passed": true,
+    "hard_failures": [],
+    "nonzero_inside_px": 38000,
+    "value_set_inside": [
+      0.0,
+      1.0
+    ]
+  },
+  "gems27-h29-1b-drefill-deconf-b2-38k-20261025-14e416a1a380-allfinite.tif": {
+    "file": "gems27-h29-1b-drefill-deconf-b2-38k-20261025-14e416a1a380-allfinite.tif",
+    "bytes": 826586,
+    "sha256": "ad7d90f43c5d913f029b748d9b15ae9a4e9368e3d2e953aafac67ce91ced460a",
+    "variant": "allfinite",
+    "checks": {
+      "grid_matches_template": {
+        "pass": true,
+        "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+        "hard": true
+      },
+      "single_band_float32": {
+        "pass": true,
+        "detail": "count=1 dtype=float32",
+        "hard": true
+      },
+      "inside_footprint_all_finite": {
+        "pass": true,
+        "detail": "0 non-finite inside 5167373 px",
+        "hard": true
+      },
+      "inside_footprint_in_0_1": {
+        "pass": true,
+        "detail": "min=0 max=1",
+        "hard": true
+      },
+      "no_infinities_anywhere": {
+        "pass": true,
+        "detail": "np.isinf(whole array) is empty",
+        "hard": true
+      },
+      "outside_footprint_is_zero_and_finite": {
+        "pass": true,
+        "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+        "hard": true
+      },
+      "strict_whole_array_range": {
+        "pass": true,
+        "detail": "whole-array min=0 max=1",
+        "hard": true
+      },
+      "profile_driver_gtiff": {
+        "pass": true,
+        "detail": "GTiff",
+        "hard": false
+      },
+      "compression_like_sample": {
+        "pass": true,
+        "detail": "Compression.lzw",
+        "hard": false
+      }
+    },
+    "hard_checks_passed": true,
+    "hard_failures": [],
+    "nonzero_inside_px": 38000,
+    "value_set_inside": [
+      0.0,
+      1.0
+    ]
+  },
+  "gems27-lane-subsurface-buried-fault-20261025-fc6d8c3acf6c-allfinite.tif": {
+    "file": "gems27-lane-subsurface-buried-fault-20261025-fc6d8c3acf6c-allfinite.tif",
+    "bytes": 827016,
+    "sha256": "d648a3cc02713612eb5c59637a4732418ae555aa4037ac9dbc815d2e7ab00528",
+    "variant": "allfinite",
+    "checks": {
+      "grid_matches_template": {
+        "pass": true,
+        "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+        "hard": true
+      },
+      "single_band_float32": {
+        "pass": true,
+        "detail": "count=1 dtype=float32",
+        "hard": true
+      },
+      "inside_footprint_all_finite": {
+        "pass": true,
+        "detail": "0 non-finite inside 5167373 px",
+        "hard": true
+      },
+      "inside_footprint_in_0_1": {
+        "pass": true,
+        "detail": "min=0 max=1",
+        "hard": true
+      },
+      "no_infinities_anywhere": {
+        "pass": true,
+        "detail": "np.isinf(whole array) is empty",
+        "hard": true
+      },
+      "outside_footprint_is_zero_and_finite": {
+        "pass": true,
+        "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+        "hard": true
+      },
+      "strict_whole_array_range": {
+        "pass": true,
+        "detail": "whole-array min=0 max=1",
+        "hard": true
+      },
+      "profile_driver_gtiff": {
+        "pass": true,
+        "detail": "GTiff",
+        "hard": false
+      },
+      "compression_like_sample": {
+        "pass": true,
+        "detail": "Compression.lzw",
+        "hard": false
+      }
+    },
+    "hard_checks_passed": true,
+    "hard_failures": [],
+    "nonzero_inside_px": 38000,
+    "value_set_inside": [
+      0.0,
+      1.0
+    ]
+  }
+}
