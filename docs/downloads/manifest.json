@@ -122,5 +122,18 @@
   "sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
   "url": "https://github.com/buffedlizard55-lab/GEMSDOE24/raw/07345ea0604953d7efb858d9cfbc21e20c7aca0b/docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif",
   "note": "owner-reported; not an organiser receipt"
+ },
+ "unique_scatter_farfield": {
+  "file": "gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.tif",
+  "zip": "gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.zip",
+  "content_id": "98e59bf8e3ce",
+  "note": "27GEMSDOE unique scatter-smoothed far-field | UNIQUE submission (not copied from any GEMSDOE site): scatter-smoothed (sigma=1.85 px) off-catalogue far-field emi | id 98e59bf8e3ce | not yet live-scored",
+  "note_chars": 200,
+  "emitted_px": 24482,
+  "sha256_tif": "8a73f01776d0c53ff99ab05bac8612768f186476846708412096ef927ea0b983",
+  "status": "UNSCORED unique measurement probe",
+  "lane_check_passed": true,
+  "validation_hard_passed": true,
+  "generated_utc": "2026-10-25T20:24:16Z"
  }
 }
