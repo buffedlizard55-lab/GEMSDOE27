@@ -130,7 +130,7 @@ def build() -> None:
 """
 
     # ---- Lane L-H30: dip-advection / gap-flanking / soft emission vs Arm-D (JSON-driven) ----
-    h30_box = ""
+    h30_dipgap_box = ""
     h30_card_path = EV / "h30_dipgap_run_card.json"
     if h30_card_path.exists():
         c30 = J(h30_card_path)
@@ -145,7 +145,7 @@ def build() -> None:
         dl30 = (f'<p><b>One-click download:</b> <a href="{e(rel30)}/{e(r30["primary_allfinite"])}" class="btn">Download .tif</a> '
                 f'<a href="{e(rel30)}/{e(r30["zip"])}" class="btn">Download .zip</a></p>'
                 f'<p><b>Note to paste (&le;140 chars):</b> <code>{e(c30["note_max_140_chars"])}</code></p>') if ok30 else ""
-        h30_box = f"""
+        h30_dipgap_box = f"""
 <div class="card hero" style="border-left:4px solid #b00">
  <h2 style="margin-top:0">Newest unique TIF (Lane L-H30, 2026-10-25): dip-advection / gap-flanking / soft emission &mdash; NEGATIVE</h2>
  <p>{badge30}</p>
@@ -207,6 +207,46 @@ def build() -> None:
  <li><b>Vs scored rivals:</b> max {u['max_dot_overlap_peer_registry_12']:.1%} within 3&nbsp;px of any of the 12 pinned peer rasters; surface Spearman max {u['max_surface_spearman']:.3f}. Vs audit-only H28-1: {u['max_dot_overlap_self_repo']:.1%} (same failure as H29-1).</li>
  <li><b>Format:</b> all-finite, nodata=None, every cell in [0,1], EPSG:32611 3730&times;3292 (<a href="{e(checks_href)}">re-read receipt</a>); research bytes in <a href="{e(tif_href)}">downloads/research/</a> (sha256 {e(r['sha256'][:16])}&hellip;). Run card: <a href="{REPO_URL}/blob/main/evidence/dconfirm_run_card_2026-10-25.json">evidence/dconfirm_run_card_2026-10-25.json</a>; analysis <a href="{REPO_URL}/blob/main/knowledge/16_dconfirm_result.md">knowledge/16 (L-DCONFIRM)</a>.</li>
  </ul>
+</div>
+"""
+
+    # ---- H30 chemistry-verified deconflicted emission (Session 9; JSON-driven badge) ----
+    h30_box = ""
+    h30_card_path = EV / "h30_run_card.json"
+    if h30_card_path.exists():
+        h30 = J(h30_card_path)
+        r30, hh30, u30 = h30["raster"], h30["holdout"], h30["uniqueness_vs_registry"]
+        ok30 = publication_decision(h30, ROOT)["ok_to_publish_as_submission"]
+        badge30 = ('<span class="badge ok" style="font-size:1.05rem">&#9989; VALIDATED &mdash; OK TO DOWNLOAD &amp; SUBMIT '
+                   '(holdout + uniqueness + format gates PASS; still UNSCORED)</span>') if ok30 else (
+                   '<span class="badge bad" style="font-size:1.05rem">&#9940; NOT CERTIFIED &mdash; DO NOT SUBMIT '
+                   '(efficacy gate FAILED: holdout DTI below control; unique and format-valid are not enough)</span>')
+        lb30, ld30 = hh30["paired_L_minus_B"], hh30["paired_L_minus_D"]
+        h30_box = f"""
+<div class="card hero" style="border-left:4px solid #b00">
+ <h2 style="margin-top:0">Session 9 &middot; H30: the unique-TIF demand, answered with a measurement</h2>
+ <p>{badge30}</p>
+ <p>A genuinely new TIFF was generated this session (new detector content: measured well/spring temperatures as a bounded re-ranker of the
+ twice-confirmed subsurface detector, plus deconflicted placement). It is <b>unique against every screened raster at once</b> &mdash; max dot
+ overlap within 3&nbsp;px <b>{u30['max_dot_overlap_peers_operative']:.1%}</b> vs all 12 pinned focus-site peers (limit 70&nbsp;%) and
+ <b>{u30['max_dot_overlap_repo_self_screen']:.1%}</b> vs every repo-shipped raster including H28-1, the D-family and the parallel session's
+ H29-S (re-screened post-merge at 30.2&nbsp;%); surface Spearman max <b>{u30['max_surface_spearman']:.3f}</b> (limit 0.90). Bytes (research
+ directory, intentionally not a submission download): <a href="downloads/research/{e(r30['primary_allfinite'])}">{e(r30['primary_allfinite'])}</a>,
+ sha256 {e(r30['sha256'][:16])}&hellip;, validator hard-PASS, <a href="downloads/research/checks-{e(r30['primary_allfinite'][:-len('-allfinite.tif')])}-allfinite.json">re-read receipt</a>.</p>
+ <p><b>Why it is NOT certified:</b> HOLDOUT-DTI ({e(hh30['evaluator'])}; fresh seeds 240&ndash;244; {hh30['n_withheld_positives_total']:,} withheld
+ positives): lane <b>{hh30['pooled_dti_L_lane']:.4f}</b> vs full-32 control <b>{hh30['pooled_dti_B_control']:.4f}</b> (paired
+ {lb30['mean_delta']:+.4f}, 95&nbsp;% CI [{lb30['ci95'][0]:+.4f}, {lb30['ci95'][1]:+.4f}], {lb30['cells_positive']}/{lb30['n_cells']} cells) and vs
+ the subsurface-augmented control <b>{hh30['pooled_dti_D_control']:.4f}</b> (paired {ld30['mean_delta']:+.4f}, CI
+ [{ld30['ci95'][0]:+.4f}, {ld30['ci95'][1]:+.4f}]). <b>The deconfliction that buys strict uniqueness costs more than the confirmed detector
+ gain</b> &mdash; the uniqueness/efficacy conflict flagged in IR-2026-10-25-06 is now a measured number, not a suspicion.</p>
+ <p><b>The decision this forces (selector-owned):</b> if the <b>12-peer parallel registry governs</b> (the operative reading of the current owner
+ prompt), the previously holdout-passed D-refill family (H29-1: +0.0086 [+0.0051, +0.0125], 18/20 cells, canary clean, &le;46.2&nbsp;% vs all peers)
+ is eligible and its badge flip touches no bytes; if the <b>strict self-registry governs</b>, no arm-D-family file can be both unique and
+ efficacious (measured), and the next certifiable file needs a ridge-decorrelated detector (H28-6 is the cheapest untried lane). This session
+ flipped nothing by itself. Full run card:
+ <a href="{REPO_URL}/blob/main/evidence/h30_run_card.json">evidence/h30_run_card.json</a>; analysis
+ <a href="{REPO_URL}/blob/main/knowledge/22_h30_result.md">knowledge/22</a>; preregistration
+ <a href="{REPO_URL}/blob/main/knowledge/20_preregistration_H30.md">knowledge/20</a>.</p>
 </div>
 """
 
@@ -577,6 +617,7 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
 <h1>Submission status: automated fail-closed gate &amp; unique GeoTIFF check</h1>
 <p class="lead">27GEMSDOE · DrivenData #306 DOE GEMS. Machine validation runs automatically without human intervention across technical GeoTIFF bounds, 24-raster uniqueness (12 peers + 12 in-house), and spatially blocked holdouts.
 <span class="badge bad">NO TIFF IS APPROVED TO SUBMIT</span> <span class="badge warn">WEEKLY SLOT HELD (H29-S #1 POOLED HOLDOUT 0.0422 &amp; 24-RASTER UNIQUE; SE CI PENDING)</span> <span class="badge bad">DO NOT SUBMIT H28-3</span></p>
+{h30_dipgap_box}
 {h29_hero_index}
 {unique_tif_box}
 <div class="card">
@@ -623,11 +664,12 @@ The agent never uploads anything; you press the button.</div>
     pages["executive-summary.html"] = ("Executive summary", f"""
 <h1>Executive summary</h1>
 <p class="lead">Automated submit-readiness verdict, unique Session-7 GeoTIFF download &amp; copyable note, exact upload steps, and what to do next.</p>
+{h30_box}
 {h29_hero_exec}
 {unique_tif_box}
 <div class="card"><h2 style="margin-top:0">Decision in one table</h2>
 <table><tr><th>Question</th><th>Answer</th></tr>
-<tr><td>What to submit now</td><td><b>Hold weekly live slot for now (`NO TIFF IS APPROVED TO SUBMIT` for a scarce 5/week slot).</b> Session-7 <code>H29-S</code> (<code>511898747886</code>) passed 100% of GeoTIFF format &amp; <code>[0,1]</code> checks, cleared all 12 peer rasters (<code>max 3-px overlap 64.2% &le; 70%</code>, <code>56.1%</code> vs <code>GEMSDOE32</code>), and set a <b>new repository #1 blind pooled HOLDOUT-DTI (<code>0.0422</code> buffered / <code>0.1039</code> unbuffered)</b>, beating <code>B0</code> (<code>10/10</code> seeds) and prior champion <code>H28-1</code> (<code>10/10</code> seeds), while its strict 95% CI vs Session-6 control <code>D0</code> (<code>[-0.0010, +0.0037]</code>) awaits <code>H29-6</code> Walker Lane seismic-fabric closure on fresh seeds <code>220&ndash;229</code>.</td></tr>
+<tr><td>What to submit now</td><td><b>Hold weekly live slot for now (`NO TIFF IS APPROVED TO SUBMIT` for a scarce 5/week slot).</b> Session-7 <code>H29-S</code> (<code>511898747886</code>) passed 100% of GeoTIFF format &amp; <code>[0,1]</code> checks, cleared all 12 peer rasters (<code>max 3-px overlap 64.2% &le; 70%</code>, <code>56.1%</code> vs <code>GEMSDOE32</code>), and set a <b>new repository #1 blind pooled HOLDOUT-DTI (<code>0.0422</code> buffered / <code>0.1039</code> unbuffered)</b>, beating <code>B0</code> (<code>10/10</code> seeds) and prior champion <code>H28-1</code> (<code>10/10</code> seeds), while its strict 95% CI vs Session-6 control <code>D0</code> (<code>[-0.0010, +0.0037]</code>) awaits <code>H29-6</code> Walker Lane seismic-fabric closure on fresh seeds <code>220&ndash;229</code>. <b>Merged Session 9 (H30):</b> a second unique file (unique vs all 25 screened rasters incl. H29-S) FAILED its efficacy gate &mdash; and measured that buying strict uniqueness costs more than the detector gain (IR-2026-10-25-14) &mdash; so the screen choice is now the strategy choice.</td></tr>
 <tr><td>What fixed the <code>[0, 1]</code> portal error</td><td>Verified first-hand against official reference notebook Cell 19 (<code>drivendataorg/gems-prize-reference-solution</code>): input <code>-3.4028235e+38</code> sentinels occur on <code>3,061</code> inside-footprint cells, and strict whole-array validators reject NaN-outside rasters. Primary <code>511898747886-allfinite.tif</code> writes <code>0.0</code> outside footprint with <code>nodata=None</code> (<code>0</code> NaN across all <code>12,279,160</code> cells).</td></tr>
 <tr><td>Why <code>GEMSDOE32</code> scored <code>0.2778</code> and Slot 1 scored <code>0.2449</code> (OWNER-REPORTED)</td><td><code>GEMSDOE32</code> (<code>37,654</code> dots) = <code>(GEMSDOE25_D2.8 &gt; 0) &amp; (EDT(~existing_faults) &gt; 2.0)</code>, removing <code>7,865</code> zero-credit <code>0&ndash;200 m</code> collar FPs. Slot 1 (<code>5512495c6bd1</code>, <code>61,328</code> dots) = <code>24GEMSDOE</code> + <code>1,259</code> <code>T-v2</code> dots, matching pure zero-hit dilution (<code>0.24491</code> vs <code>0.2449</code>).</td></tr>
 <tr><td>Session 6 H28-3 archive</td><td>H28-3 candidate minus H28-1 baseline: {h28_3_eval['HOLDOUT_DTI']['candidate_minus_baseline_pooled']:+.6f} pooled; 95% seed-bootstrap CI [{h28_3_eval['HOLDOUT_DTI']['bootstrap_95_ci_seed_resampling'][0]:+.6f}, {h28_3_eval['HOLDOUT_DTI']['bootstrap_95_ci_seed_resampling'][1]:+.6f}]; NOT APPROVED FOR SUBMISSION.</td></tr>
@@ -655,7 +697,7 @@ The agent never uploads anything; you press the button.</div>
 </div>
 
 <h2>Historical weekly-slot decision tree — archived and suspended</h2>
-{h30_box}
+{h30_dipgap_box}
 {h29_box}
 {dconfirm_box}
 {h28_3_box}

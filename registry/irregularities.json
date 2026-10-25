@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-03 | Session 5: H27-10 diagnostic disclosed; current GDR fetch workflow runs failed before jobs and are recorded without inferring source availability.",
+ "generated": "2026-10-25 | Merged parallel sessions (Lane L-S7 IR-10..13 + Session 9 H30 IR-14/15, renumbered to avoid collision).",
  "items": [
   {
    "id": "prompt-verbatim-unavailable",
@@ -308,16 +308,34 @@
    "action": "Recorded in `evidence/h29_run_card_2026-10-25.json`; weekly slot remains held solely on the strict SE Walker Lane CI95 sub-clause vs internal control D0 (`[-0.000986, +0.003695]`)."
   },
   {
-   "id": "IR-2026-10-25-14-h30-registry-screen-scoped",
+   "id": "IR-2026-10-25-14-h30-deconfliction-cost-measured",
+   "severity": "high",
+   "issue": "H30's frozen promote gate failed: buying strict self-registry uniqueness (65% cap vs 12 repo rasters) cost -0.00662 HOLDOUT-DTI vs Arm D and made L-B significantly negative (-0.00445 [-0.00800,-0.00112]). This quantifies IR-2026-10-25-06's suspicion: for the arm-D family, strict uniqueness and catalogue-internal efficacy are in direct conflict.",
+   "action": "Negative retained per protocol (no cap relaxation, no seed shopping, no post-hoc tuning). The H30 bytes are retained as a unique-but-not-certified research artifact (first file to clear both uniqueness screens). The screen choice is explicitly framed as the selector's strategy decision in knowledge/22 and on the site."
+  },
+  {
+   "id": "IR-2026-10-25-15-selector-screen-decision-recorded",
+   "severity": "medium",
+   "issue": "The current owner prompt (2026-10-25) demands a unique TIF and names the focus sites whose highest-scoring submissions form exactly the 12-peer parallel registry; the prompt's duplicate rule references 'registry raster'. Recorded decision: the 12-peer registry is the OPERATIVE screen; the stricter self-registry screen is reported alongside (H30 clears both). Under the operative screen the previously holdout-passed H29-1 family is eligible.",
+   "action": "The H29-1 badge was NOT flipped: that remains a separate, explicit owner action (retire the unscored H28-1/H29-1/H29-1b/L-DCONFIRM family from the self-registry or confirm the 12-peer screen governs). No bytes were touched; no new experiment is needed for that flip (knowledge/16 E3). Cross-session duplicate caveat IR-2026-10-25-09 stands."
+  },
+  {
+   "id": "IR-2026-10-25-17-h30dipgap-registry-screen-scoped",
    "severity": "medium",
    "issue": "Lane L-H30 (knowledge/20 section 5, committed d87283f before any result) scoped the PROMOTION uniqueness gate to the 12 pinned parallel-registry peer rasters named by the session protocol, and measures/reports overlaps vs this repo's own UNSUBMITTED research artifacts (H28-1/H29-1/L-DCONFIRM etc.) separately instead of gating on them. This prospectively supersedes the extended self-screen frozen by the H29-1/L-DCONFIRM lanes (see IR-2026-10-25-06), because the dense unscored H28-1 file makes the 70% rule geometrically near-impossible for any accurate 38k emission (H29-1b proof). The H30 candidate failed its efficacy gate, so the scoping did not change its negative verdict (extended max overlap 0.8467, reported in evidence/h30_dipgap_run_card.json).",
    "action": "Selector should record a standing registry-scope rule before any future lane relies on it for a PASS. No file was promoted under the scoped rule this session."
   },
   {
-   "id": "IR-2026-10-25-15-h28-4-evidence-file-missing",
+   "id": "IR-2026-10-25-18-h28-4-evidence-file-missing",
    "severity": "low",
    "issue": "knowledge/19_untried_hypotheses_ranked.md states H28-4 was tested (2 seeds 230-231, mean paired gain -0.00067) with 'Full evidence: evidence/h28_4_quick.json', but neither that file nor the runner's default output evidence/h28_4_seismicity_holdout.json exists in this checkout (verified this session).",
    "action": "Treat the H28-4 numbers as unverifiable locally; do not cite them as evidence until the JSON is restored. H28-4 was not used in Lane L-H30."
+  },
+  {
+   "id": "IR-2026-10-25-16-parallel-h30-lanes-numbering-seed-filename-collision",
+   "severity": "high",
+   "issue": "Two parallel Session-9 lanes both used the H30 label, the same evidence/script filenames, and fresh holdout seeds 240-244 PR #24 (merged, commit b7dc19f): chemistry-verified deconflicted emission, evidence/h30_holdout.json + evidence/h30_run_card.json, knowledge/20_preregistration_H30.md (seeds 240-244). PR #25 lane L-H30-DIPGAP: dip-advection/gap-flanking/soft emission, originally identical filenames and the same seeds 240-244 (knowledge/20_lane_h30_preregistration_2026-10-25.md); its files were renamed to evidence/h30_dipgap_*.json and scripts/*_h30_dipgap_*.py before merging (commit 5383045) so neither lane overwrote the other. Both lanes gated different arms against closely related controls on the same seed block, so the two selection results are NOT independent replications; neither used the other's outcomes before running (parallel sessions). knowledge/20 and knowledge/21 numeric prefixes now each cover two different files. Recommend: the selector assigns hypothesis numbers, knowledge-file numbers, seed blocks and unique evidence filename prefixes before parallel sessions start.",
+   "action": "flagged for manual review; L-H30-DIPGAP files renamed (h30_dipgap_*) before merge so neither lane overwrote the other; selector must pre-assign hypothesis/knowledge numbers, seed blocks and filename prefixes to parallel lanes"
   }
  ]
 }

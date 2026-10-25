@@ -1,5 +1,30 @@
 # 27GEMSDOE - topology-first research and submission lab for DrivenData #306 (DOE GEMS)
 
+## Session 9 addendum (2026-10-25, merged with the parallel Lane L-S7 session; read at every session start)
+**A new unique TIFF was generated (H30) and it is NOT certified for submission — ⛔ DO NOT SUBMIT it.**
+H30 = the twice-confirmed Arm-D subsurface detector, re-ranked by a label-free hydrothermal-chemistry
+field (measured well/spring temperatures; canary AUC 0.499) and emitted with deconflicted placement
+(≤65 % of the 38,000-dot budget within 3 px of repo-shipped rasters). Fresh seeds 240–244 (first use),
+20 cells, 59,372 withheld positives: pooled HOLDOUT-DTI **L 0.09608 vs B 0.10031 vs D 0.10234**;
+paired **L−B −0.00445 [−0.00800, −0.00112]** (7/20 cells) and **L−D −0.00662 [−0.00845, −0.00463]** —
+the frozen promote gate FAILED (negative; no post-hoc tuning; seeds consumed). D−B replicated
+**+0.00217 [−0.00126, +0.00531]** (15/20 cells, 5/5 seeds) — third disjoint seed set with positive sign.
+**Measured consequence (the session's real deliverable): buying strict self-registry uniqueness costs
+more than the confirmed detector gain** — IR-2026-10-25-06's tension is now a number (IR-2026-10-25-14).
+The H30 bytes (`docs/downloads/research/gems27-h30-chem-deconf-b2-38k-20261025-ad5a68bb0535-allfinite.tif`,
+sha256 `047f383d9f76…`, validator hard-PASS) are **unique vs every screened raster in the merged repo**:
+≤0.320 vs all 12 pinned peers; ≤0.648 vs all 12 repo rasters at build time; **0.302 vs the parallel
+session's H29-S** (re-screened post-merge; exact shared pixels 1,812/38,000) — unique and valid are
+necessary, not sufficient. **Selector decision recorded (IR-2026-10-25-15):** the current owner prompt's
+focus sites = the 12-peer parallel registry = the operative duplicate screen (strict screen reported
+alongside); under it the holdout-passed H29-1 D-refill family is eligible, and its badge flip is a
+recorded owner action touching no bytes — **this session flipped nothing**. Instrument disclosure: H30's
+E2 used the pre-fix `emit()` candidate domain (`valid ∪ hidden`, as in H29-1/L-DCONFIRM); the parallel
+session's ring-leak fix (whole-fold domain) post-dates the frozen run, all three arms shared the same
+instrument so the paired deltas stand, and no re-run was performed (that would be a 4th experiment).
+Evidence: `evidence/h30_holdout.json`, `evidence/h30_run_card.json`, `knowledge/20` (prereg),
+`knowledge/21` (hypothesis screen), `knowledge/22` (result). 112 tests pass; ruff clean.
+
 **Site:** https://buffedlizard55-lab.github.io/GEMSDOE27/ — first screen (`index.html`) and `executive-summary.html` render the automated fail-closed machine gate (`gems27.readiness.publication_decision`), one-click GeoTIFF/ZIP links, unique submission name, and copyable `<= 140`-char note directly from byte-bound JSON receipts.
 
 ## Parallel Session 9 addendum — Lane L-H30 (merged after H29-S above)

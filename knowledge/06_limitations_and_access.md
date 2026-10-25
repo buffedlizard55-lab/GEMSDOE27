@@ -158,7 +158,7 @@ This H28 run used seeds 140–149. At the time, H27-10 was reserved for seeds **
   efficacy FAIL → `docs/downloads/research/`, badge **⛔ DO NOT SUBMIT**.
   H30-1/2/3 must not be re-proposed in this form (recorded in
   `registry/hypotheses.json` + `registry/next_hypotheses.json`).
-* **Registry-scope note (IR-2026-10-25-14)**: H30's promotion uniqueness gate
+* **Registry-scope note (IR-2026-10-25-17)**: H30's promotion uniqueness gate
   was scoped *before results* to the 12 pinned parallel peers, with extended
   self-overlaps (max 84.7 %) reported in the run card. The candidate failed
   efficacy, so nothing was promoted by that scoping; the selector should
@@ -180,7 +180,7 @@ This H28 run used seeds 140–149. At the time, H27-10 was reserved for seeds **
    (allowlist excludes gdr.openei.org). Obtain via an authorized runner,
    verify SHA-256 against the recorded pins, *then* preregister.
 4. Restore the missing H28-4 evidence JSON or retract its numbers
-   (IR-2026-10-25-15).
+   (IR-2026-10-25-18).
 5. If the owner ever submits any file, record the exact portal receipt in
    `registry/live_scores.json` — until then every score here stays
    OWNER-REPORTED and every 27GEMSDOE file UNSCORED.
