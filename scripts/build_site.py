@@ -62,6 +62,37 @@ def build() -> None:
     hab = J(EV / "arm_habitat_decomposition.json") if (EV / "arm_habitat_decomposition.json").exists() else None
     addD = J(EV / "addendum_d_gates.json") if (EV / "addendum_d_gates.json").exists() else None
     gval = J(REG / "topology_candidates.json")["summary"].get("graph_value", {})
+    # ---- Lane L-2026-10-25 unique candidate (JSON-driven; absent in older checkouts) ----
+    lane_path = DOCS / "downloads" / "lane_candidate_manifest.json"
+    lane = J(lane_path) if lane_path.exists() else None
+    lane_box = ""
+    if lane:
+        r, h, u = lane["raster"], lane["holdout"], lane["uniqueness_vs_registry"]
+        ok = bool(lane.get("ok_to_submit"))
+        badge = ('<span class="badge ok" style="font-size:1.05rem">&#9989; VALIDATED &mdash; OK TO DOWNLOAD &amp; SUBMIT '
+                 '(format + uniqueness + holdout gates PASS; still UNSCORED)</span>') if ok else (
+                 '<span class="badge warn" style="font-size:1.05rem">&#9940; RESEARCH ONLY &mdash; DO NOT SUBMIT '
+                 '(a gate failed; see run card)</span>')
+        lane_box = f"""
+<div class="card hero" style="border:3px solid #1a7f37">
+ <h2 style="margin-top:0">NEW UNIQUE LANE CANDIDATE &mdash; L-2026-10-25 subsurface-only buried-fault detector (gate verdict below)</h2>
+ <p>{badge}</p>
+ <div class="row"><a class="btn" href="downloads/{e(r['primary_allfinite'])}" download>&#11015; Download submission (.tif, all-finite)</a>
+ <a class="btn alt" href="downloads/{e(r['zip'])}" download>.zip (same file)</a>
+ <a class="btn alt" href="downloads/{e(r['nan_twin'])}" download>NaN-outside twin</a></div>
+ <p class="small mono">{e(r['primary_allfinite'])} &middot; {r['dots']:,} dots &middot; sha256 {e(r['sha256'])}<br>
+ Submission name: <b>{e(lane['submission_name'])}</b></p>
+ <h3>Note to paste into the form ({lane['note_chars']} / 140 characters)</h3>
+ <textarea id="lanenote" class="note" readonly>{e(lane['note_max_140_chars'])}</textarea>
+ <div class="row"><button class="btn copy" data-copy="#lanenote">Copy note</button></div>
+ <ul class="tight">
+ <li><b>Why unique:</b> fresh detector, no lidar/scarp bands, no H19-5 dots reused. Max dot overlap within 3&nbsp;px vs any registry raster: <b>{u['max_dot_overlap_within_3px_euclidean']:.1%}</b> (limit 70&nbsp;%); surface Spearman max <b>{u['max_surface_spearman']:.3f}</b> (limit 0.90).</li>
+ <li><b>Format (fixes &ldquo;Predicted values must be in range [0, 1]&rdquo;):</b> primary file is all-finite, nodata=None, min 0.0 / max 1.0 over every cell &mdash; verified by independent re-read (<a href="downloads/checks-{e(lane['stem'])}-allfinite.json">receipt</a>). Upload the .tif first, then the .zip, then the NaN twin.</li>
+ <li><b>Evidence class:</b> HOLDOUT-DTI {h['pooled_dti_lane_A']:.4f} (lane) vs {h['pooled_dti_full_B']:.4f} (full-32 control), {h['n_withheld_positives_total']:,} withheld positives, {e(h['evaluator'])}. No live score exists; none is claimed. Full run card: <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/evidence/lane_run_card_2026-10-25.json">evidence/lane_run_card_2026-10-25.json</a>; why 0.2778 won: <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/12_why_02778_won.md">knowledge/12</a>.</li>
+ </ul>
+</div>
+"""
+
     h28_manifest_path = DOCS / "downloads" / "h28_1_candidate_manifest.json"
     h28_manifest = J(h28_manifest_path) if h28_manifest_path.exists() else None
     h28_candidate = h28_manifest.get("candidate") if h28_manifest else None
@@ -250,7 +281,7 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
     pages: dict[str, tuple[str, str]] = {}
 
     # ---------------------------------------------------------------- index
-    pages["index.html"] = ("Submit", f"""
+    pages["index.html"] = ("Submit", f"""{lane_box}
 <h1>Submit this file.</h1>
 <p class="lead">27GEMSDOE · DrivenData #306 DOE GEMS. The owner's 0.2477 file plus one controlled change: <b>{P['added_px']:,}</b> topology gap-closure dots on <b>{P['links']}</b> links.
 <span class="badge warn">UNSCORED – no score is claimed</span></p>
@@ -313,6 +344,7 @@ score(A) − 0.2477 isolates the effect of the new class.</td></tr>
 <tr><td>Is 0.3195 reachable?</td><td>Not with verified/modelled increments (they reach ≈0.26–0.27). It needs ≈31% more weighted recall at equal false positives, or ≈46% fewer false-positive pixels at equal recall – i.e. new information. <a href="research.html">Why</a>.</td></tr>
 <tr><td>What is unknown</td><td>The real hidden-set effect; the cause of the portal's "[0, 1]" rejection; the live scores of all 27GEMSDOE files.</td></tr></table></div>
 
+{lane_box}
 <div class="card hero"><h2 style="margin-top:0">One-click: current Slot 1 TIFF</h2>
 <p><a class="btn" href="downloads/{e(P['nan'])}" download>⬇ Download current submission (.tif)</a>
 <a class="btn alt" href="downloads/{e(P['zip'])}" download>.zip</a>

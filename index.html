@@ -3,6 +3,24 @@
 <link rel="stylesheet" href="docs/assets/style.css"></head><body>
 <header class="top"><div class="in"><a class="brand" href="docs/index.html">27GEMSDOE · DOE GEMS</a><nav><a href="docs/index.html" class=on>Submit</a><a href="docs/executive-summary.html">Executive summary</a><a href="docs/topology.html">Topology candidates</a><a href="docs/research.html">Research</a><a href="docs/sources.html">Sources &amp; feed</a></nav></div></header>
 <main><div class="okbox small">This is the repository-root copy of the front page (Pages is served from the repository root). All other pages are under <a href="docs/executive-summary.html">docs/</a>.</div>
+<div class="card hero" style="border:3px solid #1a7f37">
+ <h2 style="margin-top:0">NEW UNIQUE LANE CANDIDATE &mdash; L-2026-10-25 subsurface-only buried-fault detector (gate verdict below)</h2>
+ <p><span class="badge warn" style="font-size:1.05rem">&#9940; RESEARCH ONLY &mdash; DO NOT SUBMIT (a gate failed; see run card)</span></p>
+ <div class="row"><a class="btn" href="docs/downloads/gems27-lane-subsurface-buried-fault-20261025-fc6d8c3acf6c-allfinite.tif" download>&#11015; Download submission (.tif, all-finite)</a>
+ <a class="btn alt" href="docs/downloads/gems27-lane-subsurface-buried-fault-20261025-fc6d8c3acf6c-allfinite.zip" download>.zip (same file)</a>
+ <a class="btn alt" href="docs/downloads/gems27-lane-subsurface-buried-fault-20261025-fc6d8c3acf6c-nan.tif" download>NaN-outside twin</a></div>
+ <p class="small mono">gems27-lane-subsurface-buried-fault-20261025-fc6d8c3acf6c-allfinite.tif &middot; 38,000 dots &middot; sha256 d648a3cc02713612eb5c59637a4732418ae555aa4037ac9dbc815d2e7ab00528<br>
+ Submission name: <b>GEMSDOE27-LANE-A-SUBSURFACE-B2-38K</b></p>
+ <h3>Note to paste into the form (131 / 140 characters)</h3>
+ <textarea id="lanenote" class="note" readonly>27GEMSDOE Lane-A subsurface-only buried-fault detector, B2, 38k dots; HOLDOUT-DTI 0.0752 vs full 0.1001; UNSCORED | id fc6d8c3acf6c</textarea>
+ <div class="row"><button class="btn copy" data-copy="#lanenote">Copy note</button></div>
+ <ul class="tight">
+ <li><b>Why unique:</b> fresh detector, no lidar/scarp bands, no H19-5 dots reused. Max dot overlap within 3&nbsp;px vs any registry raster: <b>51.0%</b> (limit 70&nbsp;%); surface Spearman max <b>0.100</b> (limit 0.90).</li>
+ <li><b>Format (fixes &ldquo;Predicted values must be in range [0, 1]&rdquo;):</b> primary file is all-finite, nodata=None, min 0.0 / max 1.0 over every cell &mdash; verified by independent re-read (<a href="docs/downloads/checks-gems27-lane-subsurface-buried-fault-20261025-fc6d8c3acf6c-allfinite.json">receipt</a>). Upload the .tif first, then the .zip, then the NaN twin.</li>
+ <li><b>Evidence class:</b> HOLDOUT-DTI 0.0752 (lane) vs 0.1001 (full-32 control), 60,423 withheld positives, gems27.metric v1 (alpha=0.2, beta=0.8, R=3px triangular). No live score exists; none is claimed. Full run card: <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/evidence/lane_run_card_2026-10-25.json">evidence/lane_run_card_2026-10-25.json</a>; why 0.2778 won: <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/12_why_02778_won.md">knowledge/12</a>.</li>
+ </ul>
+</div>
+
 <h1>Submit this file.</h1>
 <p class="lead">27GEMSDOE · DrivenData #306 DOE GEMS. The owner's 0.2477 file plus one controlled change: <b>1,259</b> topology gap-closure dots on <b>345</b> links.
 <span class="badge warn">UNSCORED – no score is claimed</span></p>
@@ -58,6 +76,6 @@ Reaching the owner-stated leader (0.3195) is not possible with verified/modelled
 The agent never uploads anything; you press the button.</div>
 <p class="small">Reference (owner-reported 0.2477): <a href="https://github.com/buffedlizard55-lab/GEMSDOE24/raw/07345ea0604953d7efb858d9cfbc21e20c7aca0b/docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif">24GEMSDOE file</a> (sha256 68d0e2e4fcc594f9…).</p>
 </main>
-<footer>Built 2026-10-03 05:57 UTC from <a href="https://github.com/buffedlizard55-lab/GEMSDOE27">the repository</a>. Unscored candidates: no leaderboard score is claimed anywhere on this site.
+<footer>Built 2026-10-25 20:24 UTC from <a href="https://github.com/buffedlizard55-lab/GEMSDOE27">the repository</a>. Unscored candidates: no leaderboard score is claimed anywhere on this site.
 Scores shown are owner-reported. This site never contacts drivendata.org.</footer>
 <script src="docs/assets/app.js"></script></body></html>

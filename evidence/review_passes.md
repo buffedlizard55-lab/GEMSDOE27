@@ -311,3 +311,48 @@ While this branch was open, PR #5 (`arena/01a0fec2-gemsdoe27`, the H28-1 edge-co
 - **External-layer workflow irregularity:** GDR fetch runs `37099986237` (feature push, head `0ddaa3f`) and `37100053264` (main push, head `733e2b2`) concluded failure with zero jobs; `gh run view --log-failed` returned “log not found.” No fetch step or inventory artifact ran. Cause is unknown. This does not establish that GDR files are unavailable or fail their pins; the sibling 2026-09-30 pin record is provenance only. The issue is recorded in `registry/irregularities.json`, and H27-16 remains untried with packages absent from this checkout.
 - **Post-pull/follow-up local recheck:** with the branch based on PR head `bba5de0` and the source-status documentation corrections in the worktree, `./.venv/bin/python -m pytest -q` passed (**82 tests**), Ruff passed, Python compilation passed, `git diff --check` passed, and `scripts/verify_downloads.py` reported **0 failures** across the weekly files and the separate H28-1 research candidate. No submission artifact or manifest was changed.
 - **Source audit:** fetched and read all four OSTI page-service chunks (0–3) for Faulds & Hinz (2015); the full-paper status is supported. The GDR #1391 raw packages were not fetched or re-hashed in this checkout. No DrivenData access, upload, or score claim occurred. GitHub Pages deployment status was not checked in this closeout.
+
+## Session 6 (2026-10-25) — 0.2778 forensics + Lane L-2026-10-25 (negative)
+
+### Pass 1 — implement + verify
+* Restored all 16 hash-pinned inputs + assembled training_features.tif (SHA-256 OK) and the
+  32-band prepared stack; fetched 5 registry rasters (0.2600/0.2632/0.2708/0.2750/0.2778)
+  via gh api; 0.2778 sha256 matches GEMSDOE32's published prefix.
+* MEASURED: 0.2778 == 0.2708 file with d(catalogue)<=2px dots deleted (pixel-exact);
+  all top files 91-100% within 3px (Chebyshev) of each other; training sentinel occupies
+  3,061 in-footprint cells (knowledge/12).
+* Declared Lane L-2026-10-25 + 5 ranked untried hypotheses + frozen gate BEFORE code
+  (knowledge/13). E1 canary PASS (AUC 0.499-0.576). E2 buffered holdout (seeds 200-204,
+  60,423 withheld positives): pooled HOLDOUT-DTI A 0.0752 / B 0.1001 / D 0.1047 / R 0.0680;
+  A-B -0.0262 [-0.0368,-0.0163] -> gate FAIL, verdict negative (knowledge/14). D-B +0.0045
+  [+0.0003,+0.0090] recorded as future-lane evidence only.
+* E3 built the unique TIF (38,000 dots, sha256 d648a3cc...): uniqueness PASS (surface
+  Spearman <=0.100; dot overlap <=51.0%), format PASS, ok_to_submit=false. Site first
+  screen shows the machine-driven DO-NOT-SUBMIT badge; Slot 1 remains the recommendation.
+
+### Pass 2 — bugs / assumptions / edge cases found and fixed
+* _rank01 tie loop was O(n) Python over 5.17M values (transforms stalled): vectorised via
+  np.unique group means; unit-tested incl. ties. Transform build 25 s after fix.
+* Lane filename used GEMSDOE32's -zeros suffix, breaking this repo's tested
+  -(nan|allfinite) convention (1 test failed): renamed primary to -allfinite (bytes and
+  sha256 unchanged), manifests/run card/site regenerated. 82 -> 86 tests pass (4 new lane
+  tests); ruff clean.
+* Independent re-verification of the primary TIF without project code: all 12,279,160 cells
+  finite, strict whole-array [0,1], nodata=None, CRS 32611, shape/transform exact, 0 dots
+  on/within 2px of catalogue, min inter-dot 2.828px.
+* Assumption check: gate thresholds frozen pre-run were NOT adjusted after seeing A<B;
+  hybrid arm D was not promoted despite its positive control result (lane discipline).
+
+### Pass 3 — recheck vs original request
+| request | result |
+|---|---|
+| Why 0.2778 won; can we beat it (PhD level, no hallucinations) | knowledge/12: pixel-exact reconstruction + DTI arithmetic; honest answer: no promotable candidate this session |
+| Unique TIF, obvious submit-status, machine-validated | Lane TIF generated, measured unique, validator receipts shipped; first-screen badge is JSON-driven and correctly says DO NOT SUBMIT (gate failed); Slot 1 = submittable recommendation |
+| Fix "[0,1]" error | Mechanisms re-measured; primary = all-finite nodata=None; order-of-try documented |
+| 3-5 untried hypotheses ranked pre-implementation | knowledge/13 (H-A..H-E; H-D flagged data-blocked with named official source) |
+| Validate top candidate before any slot | E1+E2 preregistered buffered holdout; no slot spent |
+| Run card JSON | evidence/lane_run_card_2026-10-25.json (all protocol fields) |
+| README prompt + Core Values starting point | Session-6 section + operative prompt verbatim (elision labelled); Core Values block retained verbatim |
+| Limitations / access needed | knowledge/14 + IR register: owner receipts to upgrade OWNER-REPORTED scores; MCRE rupture vectors (H-D) need official fetch+hash; 1m DEM GPU training remains the big lever |
+
+No DrivenData access, upload, or score claim occurred. Negative result preserved as deliverable.
