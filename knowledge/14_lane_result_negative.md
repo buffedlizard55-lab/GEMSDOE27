@@ -16,7 +16,7 @@ Leaderboard numbers remain **OWNER-REPORTED**. Evidence: `evidence/lane_holdout_
 
 * **Frozen gate: FAIL.** Clean promote required Δ(A−B) > 0; exploratory required > −0.01 AND
   A−R > 0.05. Neither close. → Lane TIF is generated, measured unique, format-valid, and
-  badged **⛔ RESEARCH ONLY — DO NOT SUBMIT**. No weekly slot may be spent on it.
+  badged **⛔ RESEARCH ONLY — DO NOT SUBMIT** and filed under `docs/downloads/research/` (aligned at merge with PR #11's STOP policy). No weekly slot may be spent on it.
 * **Canary (E1): PASS.** All 15 transforms AUC 0.499–0.576 (no leakage; best = dilatation-rate
   gradient 0.576). Weak individually, as fault-edge physics predicts.
 * **Uniqueness: PASS by mechanism.** Surface Spearman vs registry densities 0.088–0.100

@@ -60,7 +60,8 @@ def main() -> int:
     cid = submission.scored_content_id(pred, foot, labels)
     date = datetime.now(timezone.utc).strftime("%Y%m%d")
     stem = f"gems27-lane-subsurface-buried-fault-{date}-{cid}"
-    out_dir = paths.DOCS / "downloads"
+    out_dir = paths.DOCS / "downloads" / "research"  # negative-artifact policy (main, PR #11)
+    out_dir.mkdir(parents=True, exist_ok=True)
     zeros_tif = out_dir / f"{stem}-allfinite.tif"  # PRIMARY (all-finite; repo naming convention)
     nan_tif = out_dir / f"{stem}-nan.tif"          # twin (competition-sample convention)
     submission.write_geotiff(pred, paths.TEMPLATE, zeros_tif, outside="zero")
@@ -77,7 +78,7 @@ def main() -> int:
         with rasterio.open(rp) as s:
             a = s.read(1)
         overlaps[rp.name] = euclid_overlap(dots, np.isfinite(a) & (a > 0))
-    for rp in sorted(out_dir.glob("gems27-*-nan.tif")):
+    for rp in sorted(out_dir.parent.glob("gems27-*-nan.tif")):
         if stem in rp.name:
             continue
         with rasterio.open(rp) as s:
@@ -141,7 +142,7 @@ def main() -> int:
     (out_dir / f"note-{stem}-allfinite.txt").write_text(note + "\n")
     lane_manifest = {"generated_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
                      "stem": stem, "run_card": "evidence/lane_run_card_2026-10-25.json", **card}
-    (out_dir / "lane_candidate_manifest.json").write_text(json.dumps(lane_manifest, indent=2) + "\n")
+    (out_dir.parent / "lane_candidate_manifest.json").write_text(json.dumps(lane_manifest, indent=2) + "\n")
     print(json.dumps({"dots": int(dots.sum()), "cid": cid, "max_overlap": max_overlap,
                       "max_surface_spearman": max_surf, "format_ok": format_ok,
                       "verdict": verdict, "ok_to_submit": card["ok_to_submit"],

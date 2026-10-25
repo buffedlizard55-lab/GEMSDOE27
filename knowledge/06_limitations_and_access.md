@@ -1,5 +1,15 @@
 # Limitations, access needed, and work for the next session
 
+## Session 6 outcome (2026-10-25) — H28-3 rejected; no currently approved submission
+
+H28-3 (label-free strain/conductivity intersection corridors) completed its pre-registered spatially blocked test on fresh seeds 160–169 and **failed** its frozen promotion gate. Pooled **HOLDOUT-DTI** was 0.1033523 for the candidate versus 0.1059458 baseline (Δ −0.0025935); mean paired seed Δ was −0.0025884 with deterministic 95% bootstrap CI [−0.0042399, −0.0009065], and only 2/10 seeds and 1/4 folds improved. Leakage canary, integrity, and uniform-control checks passed; the efficacy gates did not. Full result: `evidence/h28_3_strain_holdout.json`; protocol: `knowledge/13_preregistration_H28-3.md`. Do not tune or re-run H28-3.
+
+The format-valid, content-hashed H28-3 raster (`27d6875f3b22`) is peer-unique against the pinned 12-artifact registry, but is retained exclusively as a **NEGATIVE RESEARCH ARTIFACT — NOT APPROVED FOR SUBMISSION**. No GeoTIFF in this checkout is currently approved for a new DrivenData submission. Older weekly-slot and H28-1 files are historic audit artifacts, not current recommendations: their peer-family/validation position must be reassessed under the current parallel protocol before any human upload. No DrivenData access, upload, organiser receipt, or live score occurred in this session.
+
+**Next technical priority:** choose one of the three still-untried hypotheses only after a fresh preregistration and external-data provenance gate where relevant; use unused seeds and the same leakage/paired-gate/duplicate-screen protocol. H27-16 requires actual official bytes and SHA-256 verification before feature use.
+
+---
+
 ## What was resolved in Session 2 (previously listed as Next Steps 1–7 in Session 1)
 
 1. **Named, attributed vector fault graph (`src/gems27/vector_graph.py`, `scripts/fetch_vector_faults.py`, `.github/workflows/fetch-vector-faults.yml`):**

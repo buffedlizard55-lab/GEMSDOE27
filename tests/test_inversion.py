@@ -134,4 +134,6 @@ def test_manifest_and_site_agree_on_four_slots():
         assert (ROOT / "docs" / "downloads" / man[k]["zip"]).exists()
         assert len(man[k]["note"]) <= 200
     idx = (ROOT / "docs" / "index.html").read_text()
-    assert man["quaternary"]["nan"] in idx, "slot 4 is not on the first screen"
+    assert "Historic slot artifacts — audit only" in idx
+    assert man["quaternary"]["nan"] not in idx, "historic slot 4 must not be offered as a current download"
+    assert "NO TIFF IS APPROVED TO SUBMIT" in idx
