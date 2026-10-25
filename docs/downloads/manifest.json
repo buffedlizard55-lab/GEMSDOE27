@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-10-03T00:32:37Z",
+ "generated_utc": "2026-10-25T21:45:00Z",
  "status": "UNSCORED candidates; no leaderboard score is claimed",
  "primary": {
   "slug": "topo-gap-closure-t-v2-on-d1-5",
@@ -20,7 +20,8 @@
    "regenerated_equals_0_2477_file": true,
    "base15_px": 60069,
    "h19_5_px": 121131
-  }
+  },
+  "owner_reported_live_score_session6": 0.2449
  },
  "secondary": {
   "slug": "topo-gap-closure-t-v2-on-d2-8",
@@ -122,5 +123,67 @@
   "sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
   "url": "https://github.com/buffedlizard55-lab/GEMSDOE24/raw/07345ea0604953d7efb858d9cfbc21e20c7aca0b/docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif",
   "note": "owner-reported; not an organiser receipt"
+ },
+ "h29_1_recommended": {
+  "slug": "h29-1-piedmont-gdr-struct-d28-b2",
+  "hypothesis": "H29-1 (Session 6 Promoted Unique Submission)",
+  "content_id": "d505711d9251",
+  "note": "27gemsdoe H29-1 | piedmont+TMIup150+GDR1391+jackknife-tip ridge-Poisson d2.8 B2 | id d505711d9251",
+  "allfinite": "27gemsdoe-h29-1-piedmont-gdr-struct-d28-b2-20261025-d505711d9251-allfinite.tif",
+  "nan": "27gemsdoe-h29-1-piedmont-gdr-struct-d28-b2-20261025-d505711d9251-nan.tif",
+  "zip_allfinite": "27gemsdoe-h29-1-piedmont-gdr-struct-d28-b2-20261025-d505711d9251-allfinite.zip",
+  "zip": "27gemsdoe-h29-1-piedmont-gdr-struct-d28-b2-20261025-d505711d9251-nan.zip",
+  "sha256_allfinite": "0ade14e6132d6541d687e7e7d04d3c390c5a34c9bee166f62da3b819fc646669",
+  "sha256_nan": "f2688cb2b49ef238ee2dbc63de3dc271656edc1e0eaaecf8f06aac800f5be0fc",
+  "bytes_allfinite": 826298,
+  "bytes_nan": 1590770,
+  "emitted_px": 37654,
+  "collar_px_excluded": 2.0,
+  "min_dist_px": 2.8,
+  "blind_kernel_coverage_c": 0.058452,
+  "nn_spacing_median_px": 3.0,
+  "ok_to_download_and_submit": true,
+  "verdict": "promote",
+  "holdout_dti": {
+   "evidence_class": "HOLDOUT-DTI",
+   "evaluator_version": "gems27-pooled-hide-v2",
+   "dti": 0.150104,
+   "ci": [
+    0.134813,
+    0.1647
+   ],
+   "withheld_positive_pixels": 10892,
+   "delta_vs_legacy_boof": 0.058858,
+   "delta_vs_legacy_boof_ci95": [
+    0.040134,
+    0.077511
+   ],
+   "delta_vs_legacy_matched_geometry": 0.060899,
+   "delta_vs_legacy_matched_geometry_ci95": [
+    0.04037,
+    0.0814
+   ],
+   "delta_vs_random_37654": 0.107819,
+   "folds_improved_vs_legacy": "4/4"
+  },
+  "leakage_canary": {
+   "gate_passed": true,
+   "features_tested": 62,
+   "max_feature": "struct_piedmont_x_tip",
+   "max_symmetric_auc": 0.755584,
+   "threshold": 0.9
+  },
+  "registry_correlation_overlap": {
+   "gate_passed": true,
+   "rasters_scanned": 354,
+   "max_preplacement_surface_abs_spearman": 0.352936,
+   "max_preplacement_surface_peer": "460ad48bd4453a91_GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07-diag-mtheta.tif",
+   "max_final_dots_abs_spearman": 0.054102,
+   "max_final_dots_peer": "92d5062aeaf17a9a_coverage-v3-ml-20260925T054017Z-92d5062aea.tif",
+   "max_mutual_3px_dot_overlap": 0.47675,
+   "max_forward_geological_3px_dot_overlap": 0.566952,
+   "overlap_with_gemsdoe32_02778": 0.353429,
+   "overlap_with_gemsdoe70_02478": 0.301694
+  }
  }
 }

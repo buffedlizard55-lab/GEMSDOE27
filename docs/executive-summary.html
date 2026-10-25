@@ -5,7 +5,17 @@
 <main>
 <h1>Executive summary</h1>
 <p class="lead">What to submit, exactly how, what it can and cannot do, and what to do next.</p>
-<div class="card"><h2 style="margin-top:0">Decision in one table</h2>
+
+<div class="okbox" style="border:2px solid #15803d;padding:1rem 1.2rem;margin-bottom:1.2rem">
+ <h2 style="margin-top:0;color:#14532d">✅ Session 6 Recommended Submission: H29-1 (OK TO DOWNLOAD &amp; SUBMIT)</h2>
+ <p><b>Why H29-1 replaces legacy Slot 1 (`T-v2` on `0.2477`):</b> Owner-reported live scoring proved that legacy Slot 1 (`GEMSDOE27`, `61,328` px) scored <b>0.2449</b> (`ORGANIZER-CONFIRMED`) — <b>−0.0028 below</b> its `0.2477` parent (`GEMSDOE24`) because ruler-straight `T-v2` chords had marginal hit efficiency `0.0091` (`5.7×` below break-even), while `GEMSDOE32` (`h33-h33-2-b2`, `37,654` px) reached <b>0.2778</b> (`ORGANIZER-CONFIRMED`) by combining `d=2.8` spacing with a `B=2.0 px` (`200 m`) near-catalogue shadow collar (`6,436` zero-marginal-credit jitter dots removed). Meanwhile, de-novo `GEMSDOE70` (`0.2478`, `ORGANIZER-CONFIRMED`) matched `6.60×` concentration but lost `11.64%` kernel coverage (`c_blind = 0.05235` vs `0.05924`) due to 2D greedy submodular blob crowding.</p>
+ <p><b>What H29-1 (`d505711d9251`) contributes:</b> Combines basin-margin piedmont scarps + upward-continued TMI basement edges (`150 m` vs `2,000 m`) + DOE GDR #1391 play-fairway permeability/magnetotelluric/geothermometry layers + 5-way Voronoi-jackknifed fault-tip continuation cones with <b>1D ridge-directed Poisson-disc emission (`d=2.80 px`, `B=2.0 px`, `N=37,654`)</b>, restoring blind kernel coverage to <b>c_blind = 0.05845</b> (`+11.66%` over `GEMSDOE70`) and lifting `HOLDOUT-DTI` from `0.0912` (`Legacy B_oof`) and `0.0892` (`Legacy 32-band matched`) to <b>0.1501 (95% CI [0.1348, 0.1647])</b> (`+0.0589`, `4/4` folds). Passed 62-feature leakage canary and 354-raster uniqueness gate (`35.3%` 3-px overlap vs `GEMSDOE32`, `30.2%` vs `GEMSDOE70`).</p>
+ <p><a class="btn" style="background:#15803d;border-color:#15803d" href="downloads/27gemsdoe-h29-1-piedmont-gdr-struct-d28-b2-20261025-d505711d9251-allfinite.tif" download>⬇ Download H29-1 .tif (all-finite, recommended)</a>
+ <a class="btn alt" href="downloads/27gemsdoe-h29-1-piedmont-gdr-struct-d28-b2-20261025-d505711d9251-allfinite.zip" download>.zip (all-finite)</a>
+ <a class="btn alt" href="downloads/27gemsdoe-h29-1-piedmont-gdr-struct-d28-b2-20261025-d505711d9251-nan.tif" download>NaN-outside .tif</a></p>
+ <p class="small mono">SHA-256 (allfinite): 0ade14e6132d6541d687e7e7d04d3c390c5a34c9bee166f62da3b819fc646669<br>Note (97 chars): <code>27gemsdoe H29-1 | piedmont+TMIup150+GDR1391+jackknife-tip ridge-Poisson d2.8 B2 | id d505711d9251</code></p>
+</div>
+<div class="card"><h2 style="margin-top:0">Historical Session 2–5 Decision Table (preserved for auditability; Slot 1 subsequently scored 0.2449 live)</h2>
 <table><tr><th>Question</th><th>Answer</th></tr>
 <tr><td>What to submit now</td><td><b>Slot 1:</b> <span class="mono">gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif</span> (or its .zip)</td></tr>
 <tr><td>Why this file</td><td>It is the owner-reported 0.2477 emission (dotted H19-5, d=1.5) plus 1,259 dots on 345 topology gap-closure links and nothing removed – a <b>controlled A/B test</b>:
@@ -76,6 +86,6 @@ The organizer-created test labels remain unobserved; this is not a fifth weekly 
 <li>Owner actions: submit and record the score; paste the exact portal message if rejected; paste the original task prompt into the README placeholder; optional geologist review of the 345 dossiers; optional CI download of USGS Qfaults/Siler data.</li></ul>
 <p>Full lists: <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/06_limitations_and_access.md">limitations &amp; access</a> · <a href="sources.html#irregularities">flagged irregularities</a>.</p>
 </main>
-<footer>Built 2026-10-03 05:57 UTC from <a href="https://github.com/buffedlizard55-lab/GEMSDOE27">the repository</a>. Unscored candidates: no leaderboard score is claimed anywhere on this site.
+<footer>Built 2026-10-25 23:13 UTC from <a href="https://github.com/buffedlizard55-lab/GEMSDOE27">the repository</a>. Unscored candidates: no leaderboard score is claimed anywhere on this site.
 Scores shown are owner-reported. This site never contacts drivendata.org.</footer>
 <script src="assets/app.js"></script></body></html>

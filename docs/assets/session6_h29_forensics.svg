@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 420" width="980" height="420" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">
+  <rect width="980" height="420" fill="#f8fafc" rx="10" stroke="#cbd5e1"/>
+  <!-- Left Panel: Focus-Site Live Inversion -->
+  <text x="28" y="34" font-size="15" font-weight="700" fill="#0f172a">A. Focus-Site Live-Score Inversion (OWNER-REPORTED, |G| = 12,226 px)</text>
+  <text x="28" y="52" font-size="11.5" fill="#475569">Why GEMSDOE32 hit 0.2778 &amp; why GEMSDOE70 (0.2478) lost 11.6% kernel reach to 2D blob crowding</text>
+  <rect x="24" y="64" width="452" height="332" fill="#ffffff" rx="8" stroke="#e2e8f0"/>
+
+  <!-- Bars for Focus-Site Live Scores (scale: 0..0.32 -> width 0..270 px, x0=185) -->
+  <g font-size="11" fill="#1e293b">
+    <text x="36" y="95">19GEMSDOE H19-5 (121k)</text>
+    <rect x="190" y="83" width="162" height="16" fill="#94a3b8" rx="3"/>
+    <text x="357" y="95" font-weight="600">0.1922 (c=0.088)</text>
+
+    <text x="36" y="127">GEMSDOE27 T-v2 (61.3k)</text>
+    <rect x="190" y="115" width="207" height="16" fill="#f97316" rx="3"/>
+    <text x="402" y="127" font-weight="600">0.2449 (-0.0028)</text>
+
+    <text x="36" y="159">GEMSDOE24 d1.5 (60.1k)</text>
+    <rect x="190" y="147" width="209" height="16" fill="#64748b" rx="3"/>
+    <text x="404" y="159" font-weight="600">0.2477 (5.74x)</text>
+
+    <text x="36" y="191">GEMSDOE70 DeNovo (37.7k)</text>
+    <rect x="190" y="179" width="209" height="16" fill="#0ea5e9" rx="3"/>
+    <text x="404" y="191" font-weight="600" fill="#0369a1">0.2478 (6.60x, c=0.052)</text>
+
+    <text x="36" y="223">GEMSDOE25/30 d2.8 (44.1k)</text>
+    <rect x="190" y="211" width="219" height="16" fill="#64748b" rx="3"/>
+    <text x="414" y="223" font-weight="600">0.2600 (nan=zeros)</text>
+
+    <text x="36" y="255">GEMSDOE33 H33d (41.9k)</text>
+    <rect x="190" y="243" width="222" height="16" fill="#64748b" rx="3"/>
+    <text x="417" y="255" font-weight="600">0.2632</text>
+
+    <text x="36" y="287">GEMSDOE28/31 r1 (40.2k)</text>
+    <rect x="190" y="275" width="229" height="16" fill="#475569" rx="3"/>
+    <text x="423" y="287" font-weight="600">0.2708 (+0.0108)</text>
+
+    <text x="36" y="319">GEMSDOE36 PINN (38.9k)</text>
+    <rect x="190" y="307" width="232" height="16" fill="#6366f1" rx="3"/>
+    <text x="426" y="319" font-weight="600">0.2750</text>
+
+    <text x="36" y="351" font-weight="700">GEMSDOE32 B=2 (37.7k)</text>
+    <rect x="190" y="339" width="235" height="18" fill="#0f766e" rx="3"/>
+    <text x="429" y="352" font-weight="700" fill="#0f766e">0.2778</text>
+  </g>
+  <text x="36" y="382" font-size="10.5" fill="#334155">Key finding: d&lt;=200m shadow earned 0.0009-0.0057/px; 1D ridge d=2.8 gives c=0.059 (+13% vs 2D submod).</text>
+
+  <!-- Right Panel: Session 6 Buffered Whole-Component HOLDOUT-DTI -->
+  <text x="504" y="34" font-size="15" font-weight="700" fill="#0f172a">B. Session 6 Buffered Whole-Component HOLDOUT-DTI (95% CI)</text>
+  <text x="504" y="52" font-size="11.5" fill="#475569">gems27-pooled-hide-v2 · 10,892 withheld fault px · 1,000 20-km block draws · 0 leakage</text>
+  <rect x="500" y="64" width="456" height="332" fill="#ffffff" rx="8" stroke="#e2e8f0"/>
+
+  <!-- Scale: DTI 0.00..0.18 -> x = 690 + dti * 1350 -->
+  <g font-size="11" fill="#1e293b">
+    <text x="512" y="108">Random 37,654 dots</text>
+    <rect x="690" y="95" width="57" height="18" fill="#cbd5e1" rx="3"/>
+    <line x1="739" y1="104" x2="755" y2="104" stroke="#334155" stroke-width="2"/>
+    <text x="762" y="108">0.0423 [0.036, 0.048]</text>
+
+    <text x="512" y="154">Legacy 32-band (37.7k B=2)</text>
+    <rect x="690" y="141" width="120" height="18" fill="#94a3b8" rx="3"/>
+    <line x1="787" y1="150" x2="834" y2="150" stroke="#334155" stroke-width="2"/>
+    <text x="840" y="154">0.0892 [0.072, 0.107]</text>
+
+    <text x="512" y="200">Legacy B_oof (inherited)</text>
+    <rect x="690" y="187" width="123" height="18" fill="#64748b" rx="3"/>
+    <line x1="792" y1="196" x2="836" y2="196" stroke="#1e293b" stroke-width="2"/>
+    <text x="842" y="200">0.0912 [0.076, 0.108]</text>
+
+    <text x="512" y="246" fill="#0369a1" font-weight="600">Exp 1: H29-1a Pure Physics</text>
+    <rect x="690" y="233" width="149" height="18" fill="#38bdf8" rx="3"/>
+    <line x1="807" y1="242" x2="869" y2="242" stroke="#0369a1" stroke-width="2"/>
+    <text x="874" y="246" fill="#0369a1" font-weight="600">0.1104 (+23.7%)</text>
+
+    <text x="512" y="292" fill="#4338ca" font-weight="600">Exp 3: H29-1+H29-2 Dual</text>
+    <rect x="690" y="279" width="201" height="18" fill="#6366f1" rx="3"/>
+    <line x1="867" y1="288" x2="914" y2="288" stroke="#312e81" stroke-width="2"/>
+    <text x="896" y="274" font-size="10" fill="#4338ca" font-weight="600">0.1492 [0.131, 0.166]</text>
+
+    <text x="512" y="340" fill="#15803d" font-weight="700">Exp 2: H29-1 PROMOTED</text>
+    <rect x="690" y="326" width="203" height="20" fill="#16a34a" rx="3"/>
+    <line x1="872" y1="336" x2="912" y2="336" stroke="#052e16" stroke-width="2.5"/>
+    <text x="872" y="320" font-size="10.5" fill="#15803d" font-weight="700">0.1501 [0.135, 0.165]</text>
+  </g>
+  <text x="512" y="374" font-size="10.5" font-weight="600" fill="#15803d">Paired ΔDTI vs Legacy B_oof: +0.0589 (95% CI [+0.0401, +0.0775], 4/4 folds) · Uniqueness PASS (354 rasters)</text>
+  <text x="512" y="389" font-size="10" fill="#475569">Note: HOLDOUT-DTI measures buffered unseen fault recovery, NEVER claimed as a DrivenData live score.</text>
+</svg>

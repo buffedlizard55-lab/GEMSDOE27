@@ -1,0 +1,221 @@
+{
+  "schema": 1,
+  "generated_utc": "2026-10-03T21:47:18Z",
+  "pins_file": "/tmp/gdr/pins.json",
+  "pins_file_loaded": true,
+  "availability_only": true,
+  "drivendata_access": false,
+  "rows": {
+    "gdr_2m_probes": {
+      "url": "https://gdr.openei.org/files/1391/2m_temperature_probe_INGENIOUS_regional_data.zip",
+      "http_status": 200,
+      "content_type": "application/octet-stream",
+      "bytes": 1080530,
+      "sha256": "1301f70d230058e616ea5d34d1c7a32fabf7d49198172f376c59c89bd652eca3",
+      "status": "FETCHED",
+      "pinned_bytes": 1080530,
+      "pinned_sha256": "1301f70d230058e616ea5d34d1c7a32fabf7d49198172f376c59c89bd652eca3",
+      "pin_match": true
+    },
+    "gdr_paleo": {
+      "url": "https://gdr.openei.org/files/1391/paleo_geothermal_regional.zip",
+      "http_status": 200,
+      "content_type": "application/octet-stream",
+      "bytes": 84008,
+      "sha256": "faffcf697f32dbbf6cbb317cd1effb3e305538ce38eb239d72d0c6fa071e91ca",
+      "status": "FETCHED",
+      "pinned_bytes": 84008,
+      "pinned_sha256": "faffcf697f32dbbf6cbb317cd1effb3e305538ce38eb239d72d0c6fa071e91ca",
+      "pin_match": true
+    },
+    "gdr_volcanics": {
+      "url": "https://gdr.openei.org/files/1391/great_basin_q_volcanics.zip",
+      "http_status": 200,
+      "content_type": "application/octet-stream",
+      "bytes": 9898770,
+      "sha256": "c4a2d2dfd5c44f42e0aba37290948881631aff312b8b9ca7934b6dc1e451e5be",
+      "status": "FETCHED",
+      "pinned_bytes": 9898770,
+      "pinned_sha256": "c4a2d2dfd5c44f42e0aba37290948881631aff312b8b9ca7934b6dc1e451e5be",
+      "pin_match": true
+    }
+  },
+  "summary": {
+    "labels": 3,
+    "reachable": 3,
+    "pin_mismatches": [],
+    "unpinned": [],
+    "sciencebase_derived_written": 2,
+    "sciencebase_reachable": 7,
+    "sciencebase_checked": 7
+  },
+  "sciencebase_derived": {
+    "sb_slip_tendency_shapefile_full": {
+      "hypothesis": "H33-1 kinematic reactivation favourability gate",
+      "url": "https://www.sciencebase.gov/catalog/file/get/6296974dd34ec53d276bb33d?f=__disk__33%2Fb0%2F91%2F33b091fae2403dcf2f1dd2f698f7368ffdcf000d",
+      "http_status": 200,
+      "bytes": 35912323,
+      "sha256": "5d6213f7763002d369c40b281c31d22113f9c48c482e10ca469e0f6f6b985163",
+      "error": null,
+      "pin_match": true,
+      "payload_format": "zip",
+      "payload_used": "sb_slip_tendency_shapefile_full.zip",
+      "status": "DERIVED_WRITTEN",
+      "layers_found": [
+        "GB_Quaternary_faults_TD_TS.shp"
+      ],
+      "derived": {
+        "csv_path": "/tmp/gdr/out/commit/sb_slip_tendency_in_footprint.csv",
+        "json_path": "/tmp/gdr/out/commit/sb_slip_tendency_in_footprint.json",
+        "n_records": 84484,
+        "n_parts": 84484
+      },
+      "committed_files": [
+        "docs/data/sb_slip_tendency_in_footprint.csv",
+        "docs/data/sb_slip_tendency_in_footprint.json"
+      ]
+    },
+    "sb_heat_flow_zip": {
+      "hypothesis": "H33-3 heat-flow residual x 2 m probe conjunction",
+      "url": "https://www.sciencebase.gov/catalog/file/get/6297d2fad34ec53d276c5b28?f=__disk__03%2Fac%2F86%2F03ac865d4a5a3c5c52d8ca92bc170105c6fe508a",
+      "http_status": 200,
+      "bytes": 130154244,
+      "sha256": "e7fd62c6963ab390963b3f19adf4dd14bf616e7267f2ae38ad6af1005c106918",
+      "error": null,
+      "pin_match": true,
+      "payload_format": "zip",
+      "payload_used": "sb_heat_flow_zip.zip",
+      "archive_inventory": {
+        "n_members": 51,
+        "vector_members": [
+          "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/inputs/USGS_gbHeatFlowStudyArea.shp",
+          "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/inputs/USGS_gbHeatFlowWells.shp",
+          "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowWells_wEstimates.shp"
+        ],
+        "filegdb_roots": [],
+        "raster_members": [
+          "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowMap_equalWts.tif",
+          "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowMap_qcWts.tif",
+          "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowMap_tcWts.tif"
+        ],
+        "tabular_members": [
+          "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/documentation/documentation_doi_10_5066_P9BZPVUC.txt",
+          "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/documentation/readme.txt",
+          "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/inputs/readme.txt",
+          "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/readme.txt",
+          "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/readme.txt"
+        ]
+      },
+      "committed_files": [
+        "docs/data/sb_heat_flow_in_footprint_members.json",
+        "docs/data/sb_heat_flow_in_footprint.csv",
+        "docs/data/sb_heat_flow_in_footprint.json"
+      ],
+      "status": "DERIVED_WRITTEN",
+      "layers_found": [
+        "USGS_gbHeatFlowStudyArea.shp",
+        "USGS_gbHeatFlowWells.shp",
+        "USGS_gbHeatFlowWells_wEstimates.shp"
+      ],
+      "derived": {
+        "csv_path": "/tmp/gdr/out/commit/sb_heat_flow_in_footprint.csv",
+        "json_path": "/tmp/gdr/out/commit/sb_heat_flow_in_footprint.json",
+        "n_records": 4217,
+        "n_parts": 4217
+      }
+    }
+  },
+  "sciencebase_availability": {
+    "sb_slip_tendency_shapefile_full": {
+      "doi": "10.5066/P9YL58W6",
+      "page": "https://www.sciencebase.gov/catalog/item/6296974dd34ec53d276bb33d",
+      "filename": "Shapefile_Full Study.zip",
+      "hypothesis": "H33-1 kinematic reactivation favourability gate",
+      "listed_bytes": 35912323,
+      "download_url": "https://www.sciencebase.gov/catalog/file/get/6296974dd34ec53d276bb33d?f=__disk__33%2Fb0%2F91%2F33b091fae2403dcf2f1dd2f698f7368ffdcf000d",
+      "http_status": 200,
+      "bytes": 35912323,
+      "sha256": "5d6213f7763002d369c40b281c31d22113f9c48c482e10ca469e0f6f6b985163",
+      "status": "AVAILABILITY_FETCHED",
+      "error": null
+    },
+    "sb_mt_conductance_surface": {
+      "doi": "10.5066/P9TWT2LU",
+      "page": "https://www.sciencebase.gov/catalog/item/62979746d34ec53d276c113b",
+      "filename": "gb_conductance_surface_tp.tif",
+      "hypothesis": "H33-2 multi-depth MT conductance alignment",
+      "listed_bytes": 4132337,
+      "download_url": "https://www.sciencebase.gov/catalog/file/get/62979746d34ec53d276c113b?f=__disk__b5%2F9b%2F17%2Fb59b17d7b8d2b1e9bb9028da2c5934a9c8ac38b8",
+      "http_status": 200,
+      "bytes": 4132337,
+      "sha256": "8cc1a22404108a9fb81574e37b14a5078331181ee1c0527b6240c2dee888338e",
+      "status": "AVAILABILITY_FETCHED",
+      "error": null
+    },
+    "sb_mt_conductance_middle_crust": {
+      "doi": "10.5066/P9TWT2LU",
+      "page": "https://www.sciencebase.gov/catalog/item/62979746d34ec53d276c113b",
+      "filename": "gb_conductance_middle_crust_tp.tif",
+      "hypothesis": "H33-2 multi-depth MT conductance alignment",
+      "listed_bytes": 4132325,
+      "download_url": "https://www.sciencebase.gov/catalog/file/get/62979746d34ec53d276c113b?f=__disk__1c%2F80%2F77%2F1c807764c8f55b789a09b42dbfddac23b00f1549",
+      "http_status": 200,
+      "bytes": 4132325,
+      "sha256": "e8cfd731f58a64a50115de76fda1329b6f688440ff6f9e6fd3261634fa943a60",
+      "status": "AVAILABILITY_FETCHED",
+      "error": null
+    },
+    "sb_mt_conductance_lower_crust": {
+      "doi": "10.5066/P9TWT2LU",
+      "page": "https://www.sciencebase.gov/catalog/item/62979746d34ec53d276c113b",
+      "filename": "gb_conductance_lower_crust_tp.tif",
+      "hypothesis": "H33-2 multi-depth MT conductance alignment",
+      "listed_bytes": 4132325,
+      "download_url": "https://www.sciencebase.gov/catalog/file/get/62979746d34ec53d276c113b?f=__disk__d4%2F9d%2F3b%2Fd49d3b3cc2059b147a5d3b1eb0c6b907748c0a30",
+      "http_status": 200,
+      "bytes": 4132325,
+      "sha256": "4af622f1b53fbe9a9db98f77301e1dd99f83e6700110362d272d95b9ae7199b9",
+      "status": "AVAILABILITY_FETCHED",
+      "error": null
+    },
+    "sb_mt_conductance_upper_mantle": {
+      "doi": "10.5066/P9TWT2LU",
+      "page": "https://www.sciencebase.gov/catalog/item/62979746d34ec53d276c113b",
+      "filename": "gb_conductance_upper_mantle_tp.tif",
+      "hypothesis": "H33-2 multi-depth MT conductance alignment",
+      "listed_bytes": 4132325,
+      "download_url": "https://www.sciencebase.gov/catalog/file/get/62979746d34ec53d276c113b?f=__disk__22%2F5d%2F9d%2F225d9d5330cc74f6ed44ca54b707458ef21a799b",
+      "http_status": 200,
+      "bytes": 4132325,
+      "sha256": "6fcba6300bff85497c200e1689fd763d2f77d5ba675ee0f7672870d4cca6d70e",
+      "status": "AVAILABILITY_FETCHED",
+      "error": null
+    },
+    "sb_mt_conductance_mantle": {
+      "doi": "10.5066/P9TWT2LU",
+      "page": "https://www.sciencebase.gov/catalog/item/62979746d34ec53d276c113b",
+      "filename": "gb_conductance_mantle_tp.tif",
+      "hypothesis": "H33-2 multi-depth MT conductance alignment",
+      "listed_bytes": 4132325,
+      "download_url": "https://www.sciencebase.gov/catalog/file/get/62979746d34ec53d276c113b?f=__disk__ab%2F59%2F5a%2Fab595a5641b7856a44816c5d6b61bbf932919a5e",
+      "http_status": 200,
+      "bytes": 4132325,
+      "sha256": "3af6b918ddf8a6f43b4158737c6722a5ff9a1597005111be0a8157b8ef09c15c",
+      "status": "AVAILABILITY_FETCHED",
+      "error": null
+    },
+    "sb_heat_flow_zip": {
+      "doi": "10.5066/P9BZPVUC",
+      "page": "https://www.sciencebase.gov/catalog/item/6297d2fad34ec53d276c5b28",
+      "filename": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA.zip",
+      "hypothesis": "H33-3 heat-flow residual + 2 m probe conjunction",
+      "listed_bytes": 130154244,
+      "download_url": "https://www.sciencebase.gov/catalog/file/get/6297d2fad34ec53d276c5b28?f=__disk__03%2Fac%2F86%2F03ac865d4a5a3c5c52d8ca92bc170105c6fe508a",
+      "http_status": 200,
+      "bytes": 130154244,
+      "sha256": "e7fd62c6963ab390963b3f19adf4dd14bf616e7267f2ae38ad6af1005c106918",
+      "status": "AVAILABILITY_FETCHED",
+      "error": null
+    }
+  }
+}

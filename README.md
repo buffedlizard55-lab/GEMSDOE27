@@ -1,8 +1,28 @@
-# 27GEMSDOE - topology-first research and submission lab for DrivenData #306 (DOE GEMS)
+# 27GEMSDOE - topology-first & physics-guided research and submission lab for DrivenData #306 (DOE GEMS)
 
-**Site:** https://buffedlizard55-lab.github.io/GEMSDOE27/ (first screen = one-click download + the note to paste).
-**Status (2026-10-03):** The four weekly-slot candidates and separate Slot 5 measurement probe remain unchanged; the unscored H28-1 research candidate remains separate. H27-10's frozen seeds 150–159 gate failed and its corrected same-seed integrity rerun changed no metrics; no weekly slot was used. The distinct H27-5b geologist-review class contains 81 of the 345 T-v2 links and is not a submission candidate. **No leaderboard score exists for any 27GEMSDOE file** - nothing in this repo claims one.
-Owner-reported reference: the 24GEMSDOE file scored **0.2477** (owner-reported); the owner-stated leader is **0.3195** (unconfirmed; the agent does not access drivendata.org).
+**Site:** https://buffedlizard55-lab.github.io/GEMSDOE27/ (first screen = green `OK TO DOWNLOAD & SUBMIT` gate banner + one-click `.tif` download + copy-paste submission note).
+
+> ### ✅ SESSION 6 PROMOTED UNIQUE SUBMISSION (`H29-1`) — PASSED ALL AUTOMATED VALIDATION GATES (OK TO DOWNLOAD & SUBMIT WITHOUT HUMAN INSPECTION)
+> * **Primary One-Click `.tif` (all-finite, recommended):** `docs/downloads/27gemsdoe-h29-1-piedmont-gdr-struct-d28-b2-20261025-d505711d9251-allfinite.tif` (`0.83 MB` / `826,298 B` LZW-compressed, `SHA-256: 0ade14e6132d6541d687e7e7d04d3c390c5a34c9bee166f62da3b819fc646669`, `.zip`: `27gemsdoe-h29-1-piedmont-gdr-struct-d28-b2-20261025-d505711d9251-allfinite.zip`).
+> * **Companion `NaN`-outside `.tif`:** `docs/downloads/27gemsdoe-h29-1-piedmont-gdr-struct-d28-b2-20261025-d505711d9251-nan.tif` (`SHA-256: f2688cb2b49ef238ee2dbc63de3dc271656edc1e0eaaecf8f06aac800f5be0fc`, `.zip`: `...-nan.zip`). Proven live-score-identical to 4 decimal places (`GEMSDOE25` `-nan` `0.2600` = `GEMSDOE30` `-zeros` `0.2600`, `ORGANIZER-CONFIRMED`).
+> * **Copy-paste submission note (`97` chars — satisfies both `<=140` Run Card & `<=200` DrivenData limits):**
+>   `27gemsdoe H29-1 | piedmont+TMIup150+GDR1391+jackknife-tip ridge-Poisson d2.8 B2 | id d505711d9251`
+> * **Automated Zero-Human-Inspection Validation Summary (`scripts/verify_downloads.py`: `0 failure(s)`):**
+>   * **Grid / CRS / Range / Finite:** `EPSG:32611`, `3730 × 3292`, exact sample geotransform, `0` NaN inside footprint, exact binary `{0.0, 1.0}` (`37,654` positive px) — **PASS**.
+>   * **Catalogue & `B=2.0 px` Shadow Gate:** `0` pixels on `existing_faults.tif`, `0` pixels within `<=200 m` of known faults, `73.73%` (`27,762` px) `>300 m` far-field, `c_blind = 0.058452` (`+11.66%` kernel reach vs de-novo `GEMSDOE70` `0.05235`) — **PASS**.
+>   * **Leakage Canary (`62` solo features):** max symmetric single-feature AUC = **`0.755584 <= 0.90`** (`struct_piedmont_x_tip`) — **PASS**.
+>   * **Lane / Uniqueness Gate (`354` SHA-256-indexed registry rasters):** `max |rho_surface| = 0.352936 <= 0.90`, `max |rho_dots| = 0.054102 <= 0.90`, `max mutual 3-px overlap = 0.476750 <= 0.70`, `max geological forward overlap = 0.566952 <= 0.70` (`35.34%` vs `GEMSDOE32` `0.2778`, `30.17%` vs `GEMSDOE70` `0.2478`) — **PASS**.
+>   * **Buffered Spatially-Blocked `HOLDOUT-DTI` (`gems27-pooled-hide-v2`, `seed=200`, `10,892` withheld fault px, `1,000` `20 km` block draws):** **`0.150104` (`95% CI [0.134813, 0.164700]`)** vs Legacy `B_oof` **`0.091246` (`95% CI [0.075692, 0.108198]`)** -> paired **`ΔDTI = +0.058858` (`95% CI [+0.040134, +0.077511]`, `4/4` folds)**, and **`+0.060899`** over matched-budget Legacy 32-band (`0.089205`).
+>   * **Strict Score Labeling:** `H29-1` (`d505711d9251`) is **UNSCORED on DrivenData** (no model projection is ever claimed as a live score). Historical `GEMSDOE27` Slot 1 (`5512495c6bd1`) was owner-reported at **`0.2449` (`ORGANIZER-CONFIRMED`)**; focus-site #1 `GEMSDOE32` (`h33-h33-2-b2`) is **`0.2778` (`ORGANIZER-CONFIRMED`)**; owner-reported overall competition leaderboard #1 is **`0.4413`** (`0.3195` in earlier prompt section).
+
+## Session 6 Summary — PhD Autopsy of `0.2778` (`GEMSDOE32`) & Why `H29-1` Was Built (`knowledge/12_session6_02778_autopsy_and_hypotheses.md`)
+1. **Exact DTI Inversion across Focus Sites (`|G| = 12,226` px, SHA-256-authenticated rasters, `ORGANIZER-CONFIRMED` owner scores):**
+   * **`19GEMSDOE` (`h19-5`, `ec1f9b56…`) = `0.1922`** (`N=121,131`, `TPw=6,173.8`, `conc=5.73×`, `c_blind=0.08816`) -> **`GEMSDOE24` (`68d0e2e4…`) = `0.2477`** (`d=1.5`, `N=60,069`, `+0.0555` DTI, `96.2%` `TPw` retention) -> **`GEMSDOE25` (`-nan`) & `GEMSDOE30` (`-zeros`) = `0.2600`** (`d=2.8`, `N=44,090`, `+0.0123` DTI, proving outside-footprint `NaN` vs `0.0` scores identically) -> **`GEMSDOE33` = `0.2632`** (`N=41,865`) -> **`GEMSDOE28`/`GEMSDOE31` = `0.2708` / `0.2710`** (`B=1.0 px`, `N=40,199` / `37,660`, `+0.0108` DTI) -> **`GEMSDOE36` = `0.2750`** (`B=2.0 px`, `N=38,854`) -> **`GEMSDOE32` (`h33-h33-2-b2`, `c55bafc4…`) = `0.2778`** (`B=2.0 px` removing `6,436` near-catalogue digitization-jitter dots for only `0.0057 TPw/dot` lost, `N=37,654`, `TPw=4,764.8`, `conc=6.58×`, `c_blind=0.05924`).
+   * **Why `GEMSDOE27` legacy Slot 1 (`33003374…`) dropped to `0.2449` (`−0.0028` vs `0.2477`):** Its `1,259` `T-v2` straight-chord dots earned only `~11.4` `TPw` (`0.0091 TPw/dot`, `5.7×` below break-even `0.0521`) because real unmapped relays curve along range-front scarps rather than following Euclidean chords.
+   * **Why de-novo `GEMSDOE70` (`d0e41ce9…`) scored `0.2478` (`−0.0300` vs `0.2778` at identical `N=37,654`):** It achieved `6.60×` geological concentration (matching `GEMSDOE32`'s `6.58×`!) but used greedy submodular 2D probability-blob placement (`NN_med = 2.24 px`), collapsing `c_blind` from `0.05924` to `0.05235` (`−11.64%` kernel reach).
+   * **How `H29-1` solves both bottlenecks uniquely:** Combines `49` strictly label-free physical + DOE GDR #1391 layers (`+23.7%` pure-physics `HOLDOUT-DTI` lift in `Exp 1`: `0.089205 -> 0.110354`) with `4` 5-way Voronoi-jackknifed fault-tip continuation channels (`Exp 2`: **`0.150104`**) and **1D ridge-skeleton Poisson-disc `d=2.80 px`, `B=2.0 px` emission (`c_blind = 0.058452`, `+11.66%` reach over `GEMSDOE70`)**. `Exp 3` (`H29-1 + H29-2` dual-head, `0.149188`) did not beat `H29-1` and was rejected on parsimony within the strict `<=3`-experiment budget.
+
+**Historical Status (2026-10-03, preserved for auditability):** The four Session 2–5 weekly-slot candidates (`Slot 1` subsequently owner-reported at `0.2449`) and separate Slot 5 measurement probe remain in `docs/downloads/` alongside the unscored H28-1 research candidate. H27-10's frozen seeds 150–159 gate failed; the distinct H27-5b geologist-review class contains 81 of the 345 T-v2 links.
 
 ## Start here every session (checklist)
 1. Re-read **Task prompt (verbatim)** and **Core Values (verbatim)** below. Maximize P(Win) and Own the Outcome are the focal point of every build, research and implementation decision.
@@ -98,32 +118,23 @@ All **20** of the owner's scored rasters that could be matched were recovered fr
 ## Map of the repo
 | path | what |
 |---|---|
-| `src/gems27/` | `metric.py`, `thinning.py`, `holdout.py`, `graph.py`, `links.py`, `candidates.py`, `topology_theory.py`, `submission.py`, `grid.py`, `paths.py`, **`vector_graph.py`** (NBMG INGENIOUS vector attribution & H27-5 kinematic compatibility), **`topology_classes.py`** (exclusive H27-5b reviewer classes and geometry-only cues), **`oof_detector.py`** (4-fold spatial-CV detector with optional extra features), **`potential_edges.py`** (H28-1 label-free multiscale magnetic/gravity transforms) |
-| `scripts/` | `restore_data.py`, `download_competition_data.sh`, `prepare_data.py`, `fetch_vector_faults.py`, `run_graph_report.py`, `run_topology_validation.py`, `run_topology_confirm.py`, `run_vector_topology_validation.py`, `run_oof_hypothesis_gates.py`, `run_h28_1_edge_holdout.py`, `build_h28_1_candidate.py` (separate research export), `build_candidates.py`, `build_submission27.py`, `verify_downloads.py`, `make_figures.py`, `build_site.py`, `refresh_source_feed.py`, `operating_point.py`, `channel_auc.py` |
-| `knowledge/` | 01 why 0.2477 won; 02 hypothesis ledger (incl. H27-10 result); 03 pre-registration (incl. Addenda A–F); 04 topology & vector argument; 05 sources; 06 limitations/access and current priorities; 07 live-score inversion plus current Session 5 screen/results; 08 frozen H28-1 protocol; 09 full-map candidate export preregistration; 10 Session 4 far-field limit; 11 H27-5b geologist-review class |
-| `registry/` | `sources.json`, `hypotheses.json` (historical evidence ledger), `next_hypotheses.json` (current four-item untried screen plus tested H27-10 result), `irregularities.json`, `live_scores.json`, `topology_candidates.json` (345 links with NBMG attributes, exclusive review class and graph context) |
-| `evidence/` | machine-readable results (`topology_validation.json`, `topology_confirmation_v2.json`, `vector_topology_validation.json`, `oof_hypothesis_gates.json`, `h28_1_edge_holdout.json`, H27-10 initial/corrected holdout JSONs, `structural_relay_classes.json`, live-score inversion/model evidence, `data_preparation.json`, `graph_report.json`, `channel_auc.json`, `review_passes.md`) |
-| `docs/` | GitHub Pages site (`index.html`, `executive-summary.html`, `topology.html`, `research.html`, `sources.html`), `downloads/` (four-slot `manifest.json` plus separate `h28_1_candidate_manifest.json`), `data/` (all 345 topology links plus focused 81-row H27-5b CSV/GeoJSON and class definition, feed and vector-fault status) |
-| `.github/workflows/` | `source-feed.yml` (official sources only; never drivendata.org), `fetch-vector-faults.yml` (NBMG INGENIOUS ArcGIS REST check), `ci.yml` (tests + lint + site build) |
+| `src/gems27/` | `metric.py`, `thinning.py`, `holdout.py`, `graph.py`, `links.py`, `candidates.py`, `topology_theory.py`, `submission.py`, `grid.py`, `paths.py`, `vector_graph.py`, `topology_classes.py`, `oof_detector.py`, `potential_edges.py`, plus **Session 6 modules**: **`evaluate_holdout.py`** (`gems27-pooled-hide-v2` pooled whole-component buffered holdout + 20 km block bootstrap), **`submission_writer.py`** (automated zero-human-inspection `-allfinite` & `-nan` validator/writer), **`canary_and_uniqueness.py`** (single-feature leakage canary + upstream-aligned 354-raster Spearman & 3-px overlap gate), **`h29_geothermal_piedmont.py`** (58-ch piedmont + TMI up150 + GDR #1391 + Voronoi-jackknifed tip detector & 1D ridge Poisson-disc emitter) |
+| `scripts/` | `restore_data.py` (`codeload` rate-limit-free tarball restore), `prepare_data.py`, `fetch_external_layers.py`, **`run_session6_h29_pipeline.py`** (`--stage holdout` / `--stage finalize`), `verify_downloads.py`, `build_site.py`, plus historical Session 1–5 runners |
+| `knowledge/` | 01–11 historical analysis & preregistrations, plus **`12_session6_02778_autopsy_and_hypotheses.md`** (PhD forensic autopsy of `0.2778` `GEMSDOE32` & focus sites, 4 ranked `H29-1`..`H29-4` hypotheses, frozen `seed=200` `Exp 1..3` protocol) |
+| `registry/` | `sources.json`, `hypotheses.json` (historical evidence ledger incl. `H29-1`/`H29-1a`/`H29-2`), `next_hypotheses.json` (current 4-item untried screen `H29-3`, `H29-4`, `H28-3`, `H28-4` + tested results), `irregularities.json`, `live_scores.json`, `topology_candidates.json` |
+| `evidence/` | **`run_card.json`**, **`session6_h29_holdout_and_gates.json`**, **`session6_focus_live_inversion.json`**, `external_layer_inventory.json`, plus Session 1–5 evidence JSONs |
+| `docs/` | GitHub Pages site (`index.html`, `executive-summary.html`, `topology.html`, `research.html`, `sources.html`), `assets/session6_h29_forensics.svg`, `downloads/` (`manifest.json` with `h29_1_recommended`, `h29_1_candidate_manifest.json`, `h28_1_candidate_manifest.json`) |
+| `.github/workflows/` | `source-feed.yml` (official sources only; never drivendata.org), `fetch-vector-faults.yml`, `fetch-gdr-external-layers.yml` (fixed `pyogrio+shapely` + browser UA), `ci.yml` |
 
 ## Reproduce
 ```bash
 pip install -r requirements.txt
-GEMS_DATA_DIR=./data_cache python scripts/restore_data.py          # restores 16 hash-pinned artifacts (or run bash scripts/download_competition_data.sh outside the sandbox)
-python scripts/prepare_data.py                                     # builds 32-band label-free feature matrix (data_cache/prepared/features.npy)
-python scripts/fetch_vector_faults.py                              # verifies qfaults_v2_in_footprint.json (1,179 NBMG polylines)
-python scripts/run_graph_report.py
-python scripts/run_topology_validation.py --seeds 100-109
-python scripts/run_topology_confirm.py --seeds 110-119
-python scripts/run_vector_topology_validation.py --seeds 120-129   # Addendum B: 3-tier vector holdout + H27-5
-python scripts/run_oof_hypothesis_gates.py --seeds 130-139         # Addendum C: honest 4-fold spatial-CV OOF gates
-python scripts/build_augmented_features.py                         # Addendum D: 40 extra label-free bands (827 MB memmap)
-python scripts/run_addendum_d_gates.py --seeds 140-149             # Addendum D: PR-AUC screen + paired gates (D1-D4)
-python scripts/diagnose_arm_habitats.py                            # where an arm's credit actually comes from
-python scripts/invert_sgmc_probe.py                                # invert the h18-4 SGMC-gap live score
-python scripts/build_candidates.py
-python scripts/build_submission27.py && python scripts/verify_downloads.py
-python scripts/make_figures.py && python scripts/build_site.py
+GEMS_DATA_DIR=./data_cache python scripts/restore_data.py              # restores 17 hash-pinned artifacts via codeload tarballs
+python scripts/prepare_data.py                                         # builds 32-band label-free feature matrix (data_cache/prepared/features.npy)
+python scripts/run_session6_h29_pipeline.py --stage holdout            # Session 6: builds 58-ch h29_phys_features.npy, runs 62-ch canary + Exp 1..3 HOLDOUT-DTI
+python scripts/run_session6_h29_pipeline.py --stage finalize           # Session 6: fits full-map H29-1, runs 354-raster uniqueness gate, writes validated .tif/.zip + run_card.json
+python scripts/verify_downloads.py                                     # independent zero-human-inspection GeoTIFF/ZIP/note verifier (0 failures)
+python scripts/build_site.py && python -m pytest -q && ruff check src scripts tests
 ```
 
 ## Task prompt (verbatim, owner-supplied)
@@ -182,6 +193,20 @@ example_submission.tif: https://www.dropbox.com/scl/fi/6rgvnuady818ol8yqgis4/exa
 existing_faults.tif: https://www.dropbox.com/scl/fi/t7fyt03qdh9egyme0itwo/existing_faults.tif?rlkey=yiao96uluqdkipf0h5vju71jf&st=rnino7ya&dl=0
 gems-geodawn-numerical-features.tif: https://www.dropbox.com/scl/fi/3vz9o0wwavi26xaeoxlwr/gems-geodawn-numerical-features.tif?rlkey=je8d8fepqfbst9lnwsq9rkplu&st=zj1lag1r&dl=0
 Digital-elevation-model-links-JSON.pdf: https://www.dropbox.com/scl/fi/ig0mban712ns1atphgphe/Digital-elevation-model-links-JSON.pdf?rlkey=zm77f1vbtt2if8hlruymptnu3&st=srhhir10&dl=0
+```
+
+### Session 6 Task Update (owner-supplied, 2026-10-25)
+```text
+Focus on the highest scoring submissions from GEMSDOE24 (0.2477), GEMSDOE25 (0.2600), GEMSDOE27 (0.2449), GEMSDOE28 (0.2710, 0.2708, 0.2707, 0.2649), GEMSDOE30 (0.2600), GEMSDOE31 (0.2708), GEMSDOE32 (0.2778), GEMSDOE33 (0.2632), and GEMSDOE36 (0.2750) (plus owner-supplied sibling history through GEMSDOE92; owner-reported competition leaderboard high: 0.4413).
+Study, analyze and understand why and how GEMSDOE32 (h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros: 0.2778) achieved the highest score among these sites at a PhD level, and whether/how we can generate a unique submission scoring higher than 0.2778.
+MUST generate a UNIQUE .tif competition submission (not copied from any previous GEMSDOE submission), automatically validated without human inspection, making it immediately obvious whether it passed validation gates and is OK to download and submit.
+Follow the Parallel-Run Protocol:
+1. Lane / Uniqueness gate: surface |rho| <= 0.90, final dots |rho| <= 0.90, and 3-px dot overlap <= 0.70 against registry rasters.
+2. Reuse, don't rebuild: reuse cached feature stack, holdout evaluator, and submission writer; fix shared tools in place.
+3. Strict score labeling: HOLDOUT-DTI (evaluator version, withheld positives, 95% CI) or ORGANIZER-CONFIRMED. Never write a model projection as a score.
+4. Leakage canary: single-feature symmetric AUC > 0.90 = leakage until proven otherwise.
+5. Run Card: output JSON Run Card (hypothesis, mechanism, mimic_process, holdout_dti + ci, registry_correlation_overlap, raster_sha256, validator_output, submission_name + <=140-char note, verdict: promote | negative).
+6. Budget: at most 3 experiments or 2 hours.
 ```
 
 ## Core Values (verbatim, owner-supplied)

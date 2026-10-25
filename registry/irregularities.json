@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-03 | Session 5: H27-10 diagnostic disclosed; current GDR fetch workflow runs failed before jobs and are recorded without inferring source availability.",
+ "generated": "2026-10-25 | Session 6: GDR #1391 & ScienceBase layers SHA-256 verified; workflow fixed; 0.2778 focus-site inversion & H29-1 unique submission completed.",
  "items": [
   {
    "id": "prompt-verbatim-unavailable",
@@ -220,7 +220,7 @@
   {
    "id": "h27-10-first-run-spacing-diagnostic-self-distance",
    "severity": "low",
-   "issue": "The first H27-10 run (seeds 150-159) correctly generated the frozen equal-count candidate and measured mean paired ΔDTI +0.00084615, 4/4 fold means and 7/10 seed means improved, and annulus gross efficiency 0.03357 < m(0.2477)=0.05212. Its spacing integrity check incorrectly measured each added pixel against a mask that included itself, so it necessarily returned zero and marked the spacing data check false. This is a diagnostic false negative, not evidence of a spacing violation.",
+   "issue": "The first H27-10 run (seeds 150-159) correctly generated the frozen equal-count candidate and measured mean paired \u0394DTI +0.00084615, 4/4 fold means and 7/10 seed means improved, and annulus gross efficiency 0.03357 < m(0.2477)=0.05212. Its spacing integrity check incorrectly measured each added pixel against a mask that included itself, so it necessarily returned zero and marked the spacing data check false. This is a diagnostic false negative, not evidence of a spacing violation.",
    "action": "Preserved the first JSON as evidence/h27_10_annulus_holdout_initial.json. Corrected only the spacing-check implementation and added tests; the frozen masks, ranker, K, gate, and seeds are unchanged. The deterministic integrity rerun on the same used seeds passed all data checks; all 40 cell outcomes, aggregate metrics, and the frozen FAIL are unchanged in evidence/h27_10_annulus_holdout.json. This rerun is non-confirmatory and cannot change the negative gate result."
   },
   {
@@ -228,6 +228,42 @@
    "severity": "medium",
    "issue": "Six confirmed GitHub Actions runs for .github/workflows/fetch-gdr-external-layers.yml are recorded through branch head a58e74d: 37099986237 on feature commit 0ddaa3f, 37100053264 on PR #9 merge commit 733e2b2, 37100608786 on follow-up commit 50c0052, 37100751573 on branch-sync commit 443138d, 37100935082 on documentation commit b2f6c6b, and 37101134684 on documentation commit a58e74d. Each concluded failure; the Actions API reports zero jobs and gh run view --log-failed reports 'log not found'. No download script step ran and no fetch artifact/inventory was produced in this checkout. This is a point-in-time record; later pushes may create other workflow runs. It does not show that the official GDR files are unavailable or fail their pins.",
    "action": "Keep H27-16 UNTRIED and require a successful authorized runner job plus SHA-256 verification of the raw bytes before feature use. Have a repository maintainer investigate the Actions trigger, permissions, approval state, or runner configuration; the empty run records do not identify which, if any, caused the failure. The separate 2026-09-30 sibling-runner record is provenance for the pins, not evidence of a fetch in this checkout."
+  },
+  {
+   "id": "session6-github-rest-ratelimit-codeload-fix",
+   "severity": "medium",
+   "issue": "Under parallel agent runs, api.github.com REST quota returned HTTP 403 rate-limit errors, blocking per-blob scripts/restore_data.py fetches.",
+   "action": "Resolved in place in scripts/restore_data.py by streaming commit-pinned tarballs from codeload.github.com (zero REST quota) and verifying every file against data/manifest.json byte sizes and SHA-256 pins (17/17 verified)."
+  },
+  {
+   "id": "session6-gdr-workflow-geopandas-and-push-guard",
+   "severity": "medium",
+   "issue": ".github/workflows/fetch-gdr-external-layers.yml omitted geopandas (causing pyogrio.read_dataframe ImportError in run #24008635782) and hard-failed git push when default Actions GITHUB_TOKEN was read-only.",
+   "action": "Added geopandas to workflow pip install, refactored scripts/fetch_external_layers.py to use pyogrio.raw.read + shapely.from_wkb without requiring geopandas, soft-guarded git push, and verified all GDR #1391 & ScienceBase pins in evidence/external_layer_inventory.json."
+  },
+  {
+   "id": "session6-training-features-flt-min-sentinel",
+   "severity": "medium",
+   "issue": "training_features.tif stores -3.4028235e+38 (-FLT_MAX) outside the active footprint, which passes np.isfinite() and overflows Gaussian smoothing if unmasked.",
+   "action": "Explicitly masked via foot & np.isfinite(a) & (np.abs(a) < 1e20) in src/gems27/h29_geothermal_piedmont.py."
+  },
+  {
+   "id": "session6-gdr-csv-dist-known-fault-leakage-trap",
+   "severity": "high",
+   "issue": "data_cache/gdr_wellspring_in_footprint.csv and gdr_volcanic_vents_in_footprint.csv contain a precomputed dist_known_fault_px column measured against full labels.tif, which leaks withheld catalogue segments if ingested.",
+   "action": "Excluded by strict column allowlist in _build_gdr_hydrothermal_channels() and audited by univariate holdout leakage canary across all 62 features (max symmetric ROC-AUC = 0.7556 <= 0.90)."
+  },
+  {
+   "id": "session6-uniqueness-binary-dot-and-mutual-overlap-alignment",
+   "severity": "low",
+   "issue": "Evaluating 3-px dot overlap with arr > 0.5 and one-way forward overlap false-triggers on continuous/un-thinned whole-Nevada trace rasters (e.g., 12GEMSDOE_r7-nms3-dem10-scarp, 103,347 continuous pixels covering 31.7% of Nevada).",
+   "action": "Aligned src/gems27/canary_and_uniqueness.py with the upstream shared gems57 2026-10-20 fix (binary dot support |v-1|<1e-6 and mutual overlap min(forward, reverse) <= 0.70), while also reporting like-for-like (<=65k dot) forward overlap (0.5670 <= 0.70 across all 354 rasters)."
+  },
+  {
+   "id": "session6-prompt-leader-03195-vs-04413",
+   "severity": "low",
+   "issue": "The task statement quotes 0.3195 as current leader in Section 1 (carried from Oct 2) and 0.4413 in the updated Session 6 leaderboard summary (with GEMSDOE32 at 0.2778 as highest among focus sites).",
+   "action": "Recorded both owner-reported leader figures verbatim with date/section provenance in registry/live_scores.json without accessing drivendata.org."
   }
  ]
 }

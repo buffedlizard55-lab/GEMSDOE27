@@ -55,7 +55,7 @@ def main() -> int:
         base = np.nan_to_num(s.read(1)) > 0
     ok(int(foot.sum()) == 5167373 and tprof[:2] == (32611, (3730, 3292)), "template: EPSG:32611, 3730x3292, 5,167,373 px footprint")
     # both Session-4's Addendum-E probe and Session-5's H28-1 research slot are verified here
-    slots = tuple(s for s in ("primary", "secondary", "tertiary", "quaternary", "quinary_probe",
+    slots = tuple(s for s in ("h29_1_recommended", "primary", "secondary", "tertiary", "quaternary", "quinary_probe",
                               "h28_1_research") if s in man)
     for slot in slots:
         m = man[slot]
@@ -137,6 +137,26 @@ def main() -> int:
         ok(abs(m5["fraction_of_file_swapped"] - added.sum() / E.sum()) < 1e-9,
            f"slot5 manifest reports the one-sided swapped fraction {m5['fraction_of_file_swapped']:.4f} "
            f"(symmetric difference {m5['symmetric_difference_fraction']:.4f})")
+    if "h29_1_recommended" in man:
+        from scipy.spatial import cKDTree
+        mh = man["h29_1_recommended"]
+        with rasterio.open(DL / mh["allfinite"]) as sh:
+            H29a = sh.read(1)
+        ok(sha(DL / mh["allfinite"]) == mh["sha256_allfinite"], "h29_1_recommended/allfinite: sha256 matches manifest")
+        with zipfile.ZipFile(DL / mh["zip_allfinite"]) as zfa:
+            ok(zfa.namelist() == [mh["allfinite"]] and zfa.read(mh["allfinite"]) == (DL / mh["allfinite"]).read_bytes(),
+               "h29_1_recommended: zip_allfinite holds exact single allfinite GeoTIFF")
+        ok(len(mh["note"]) <= 140, f"h29_1_recommended: note length {len(mh['note'])} <= 140 chars")
+        b29 = H29a > 0.5
+        dcat_h29 = distance_transform_edt(~cat)
+        ok(int((b29 & (dcat_h29 <= 2.0)).sum()) == 0,
+           "h29_1_recommended: 0 dots within <= 200 m (2.0 px) digitization-jitter collar of catalogue")
+        yy, xx = np.nonzero(b29)
+        dd, _ = cKDTree(np.c_[yy, xx]).query(np.c_[yy, xx], k=2)
+        ok(float(dd[:, 1].min()) >= 2.80 - 1e-6,
+           f"h29_1_recommended: min pairwise dot spacing {float(dd[:, 1].min()):.4f} px >= 2.80 px")
+        ok(mh.get("ok_to_download_and_submit") is True,
+           "h29_1_recommended: automated gate verdict ok_to_download_and_submit=True")
     ok(len(list(DL.glob("*.tif"))) == len(set(p.name for p in DL.glob("*.tif"))), "all .tif file names are unique")
     print(f"\n{len(FAIL)} failure(s)")
     return 1 if FAIL else 0

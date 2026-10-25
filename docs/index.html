@@ -4,8 +4,40 @@
 <header class="top"><div class="in"><a class="brand" href="index.html">27GEMSDOE · DOE GEMS</a><nav><a href="index.html" class=on>Submit</a><a href="executive-summary.html">Executive summary</a><a href="topology.html">Topology candidates</a><a href="research.html">Research</a><a href="sources.html">Sources &amp; feed</a></nav></div></header>
 <main>
 <h1>Submit this file.</h1>
-<p class="lead">27GEMSDOE · DrivenData #306 DOE GEMS. The owner's 0.2477 file plus one controlled change: <b>1,259</b> topology gap-closure dots on <b>345</b> links.
-<span class="badge warn">UNSCORED – no score is claimed</span></p>
+
+<div class="okbox" style="border:2px solid #15803d;padding:1rem 1.2rem;margin-bottom:1rem">
+ <div style="font-size:1.12rem;font-weight:800;color:#14532d;margin-bottom:.35rem">✅ PASSED ALL AUTOMATED VALIDATION GATES — OK TO DOWNLOAD &amp; SUBMIT WITHOUT HUMAN INSPECTION</div>
+ <p style="margin:.2rem 0 .6rem 0"><b>Session 6 Promoted Unique Submission (<code>H29-1</code> · content id <code>d505711d9251</code>):</b>
+ 100% de-novo physics + GDR #1391 + Voronoi-jackknifed structural detector with 1D ridge-directed Poisson-disc emission (<code>N = 37,654</code>, <code>d = 2.80 px</code>, <code>B = 2.0 px</code> shadow collar).
+ Verified unique against all <b>354</b> SHA-256-indexed GEMSDOE registry rasters; zero catalogue overlap; zero NaNs inside footprint.
+ <span class="badge warn">UNSCORED ON DRIVENDATA – NO MODEL PROJECTION CLAIMED AS A LIVE SCORE</span></p>
+ <div class="row" style="margin:.55rem 0">
+  <a class="btn" style="background:#15803d;border-color:#15803d" href="downloads/27gemsdoe-h29-1-piedmont-gdr-struct-d28-b2-20261025-d505711d9251-allfinite.tif" download>⬇ Download Recommended Unique .tif (all-finite)</a>
+  <a class="btn alt" href="downloads/27gemsdoe-h29-1-piedmont-gdr-struct-d28-b2-20261025-d505711d9251-allfinite.zip" download>.zip (all-finite)</a>
+  <a class="btn alt" href="downloads/27gemsdoe-h29-1-piedmont-gdr-struct-d28-b2-20261025-d505711d9251-nan.tif" download>NaN-outside .tif</a>
+  <a class="btn alt" href="downloads/27gemsdoe-h29-1-piedmont-gdr-struct-d28-b2-20261025-d505711d9251-nan.zip" download>.zip (NaN-outside)</a>
+ </div>
+ <p class="small mono" style="margin:.25rem 0"><b>Primary (.tif):</b> 27gemsdoe-h29-1-piedmont-gdr-struct-d28-b2-20261025-d505711d9251-allfinite.tif · 0.83 MB · sha256 0ade14e6132d6541d687e7e7d04d3c390c5a34c9bee166f62da3b819fc646669<br>
+ <b>NaN-outside (.tif):</b> 27gemsdoe-h29-1-piedmont-gdr-struct-d28-b2-20261025-d505711d9251-nan.tif · 1.59 MB · sha256 f2688cb2b49ef238ee2dbc63de3dc271656edc1e0eaaecf8f06aac800f5be0fc (proven live-score-identical: GEMSDOE25 nan 0.2600 = GEMSDOE30 all-finite 0.2600)</p>
+ <h3 style="margin:.6rem 0 .25rem 0">Copy-paste submission note (optional DrivenData field · ≤140 Run Card &amp; ≤200 portal limit)</h3>
+ <textarea id="note-h29" class="note" readonly>27gemsdoe H29-1 | piedmont+TMIup150+GDR1391+jackknife-tip ridge-Poisson d2.8 B2 | id d505711d9251</textarea>
+ <div class="row"><button class="btn copy" data-copy="#note-h29">Copy note</button><span class="small"><b>97 / 140</b> Run Card chars (97 / 200 DrivenData chars)</span></div>
+ <div class="row" style="margin-top:.55rem;gap:.4rem;flex-wrap:wrap">
+  <span class="badge ok">GRID/CRS/RANGE PASS: EPSG:32611 · 3730×3292 · 0 NaN in footprint · exact {0,1}</span>
+  <span class="badge ok">CATALOGUE &amp; B=2 GATE PASS: 0 known-fault px · 0 px ≤200 m</span>
+  <span class="badge ok">CANARY PASS: max single-feature AUC 0.7556 ≤ 0.90 (62 ch)</span>
+  <span class="badge ok">UNIQUENESS PASS: max |ρ_surf| 0.3529 · max mutual 3-px 0.4768 ≤ 0.70</span>
+  <span class="badge ok">HOLDOUT-DTI: 0.1501 (95% CI [0.1348, 0.1647]) vs Legacy B_oof 0.0912 (+0.0589, 4/4 folds)</span>
+ </div>
+</div>
+<div class="card">
+ <h3 style="margin-top:0">Session 6 Forensic Inversion of 0.2778 (GEMSDOE32) &amp; H29-1 Holdout Validation</h3>
+ <p class="small">Every number below carries its strict provenance label: <b>ORGANIZER-CONFIRMED</b> (owner-supplied DrivenData receipt matched by SHA-256) or <b>HOLDOUT-DTI</b> (<code>gems27-pooled-hide-v2</code>, <code>10,892</code> withheld fault pixels, 95% block-bootstrap CI). Model projections are never written as scores.</p>
+ <figure style="margin:.6rem 0"><img class="fig" src="assets/session6_h29_forensics.svg" alt="Focus-site live-score inversion from 0.1922 to 0.2778 and Session 6 buffered holdout DTI ladder"><figcaption>Left: Exact metric inversion of focus-site live scores showing why GEMSDOE32 reached 0.2778 (ORGANIZER-CONFIRMED) via B=2 shadow pruning + d=2.8 1D ridge geometry (c_blind=0.0592), while GEMSDOE27 Slot 1 scored 0.2449 (−0.0028 from T-v2 straight chords) and GEMSDOE70 scored 0.2478 (−11.6% kernel coverage loss from 2D blob crowding). Right: Session 6 whole-component buffered HOLDOUT-DTI ladder showing H29-1 reaching 0.1501 [0.1348, 0.1647] (+0.0589 over Legacy B_oof, 4/4 folds).</figcaption></figure>
+</div>
+<h2>Historical Session 2–5 Weekly Slot Baseline (superseded by Session 6 H29-1 above after Slot 1 scored 0.2449 live)</h2>
+<p class="lead">27GEMSDOE · DrivenData #306 DOE GEMS. Historical Slot 1 baseline: the owner's 0.2477 file plus one controlled change: <b>1,259</b> topology gap-closure dots on <b>345</b> links (subsequently owner-reported at <b>0.2449</b> live; preserved for reproducibility).
+<span class="badge warn">H29-1 UNSCORED – no live score is claimed for H29-1</span></p>
 <div class="card hero">
  <div class="row"><a class="btn" href="downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif" download>⬇ Download submission (.tif)</a>
  <a class="btn alt" href="downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.zip" download>.zip (same file)</a>
@@ -58,6 +90,6 @@ Reaching the owner-stated leader (0.3195) is not possible with verified/modelled
 The agent never uploads anything; you press the button.</div>
 <p class="small">Reference (owner-reported 0.2477): <a href="https://github.com/buffedlizard55-lab/GEMSDOE24/raw/07345ea0604953d7efb858d9cfbc21e20c7aca0b/docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif">24GEMSDOE file</a> (sha256 68d0e2e4fcc594f9…).</p>
 </main>
-<footer>Built 2026-10-03 05:57 UTC from <a href="https://github.com/buffedlizard55-lab/GEMSDOE27">the repository</a>. Unscored candidates: no leaderboard score is claimed anywhere on this site.
+<footer>Built 2026-10-25 23:13 UTC from <a href="https://github.com/buffedlizard55-lab/GEMSDOE27">the repository</a>. Unscored candidates: no leaderboard score is claimed anywhere on this site.
 Scores shown are owner-reported. This site never contacts drivendata.org.</footer>
 <script src="assets/app.js"></script></body></html>

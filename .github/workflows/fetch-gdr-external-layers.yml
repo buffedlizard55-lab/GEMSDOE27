@@ -66,8 +66,8 @@ jobs:
       - name: Install geospatial readers
         run: |
           python -m pip install --upgrade pip
-          # pyogrio ships GDAL wheels, so FileGDB and shapefile both read without apt packages
-          python -m pip install pyogrio shapely pyproj pandas
+          # pyogrio ships GDAL wheels; include geopandas so pyogrio.read_dataframe() succeeds cleanly
+          python -m pip install geopandas pyogrio shapely pyproj pandas
 
       - name: Download, hash-verify, inventory and clip
         env:
@@ -107,7 +107,7 @@ jobs:
 Written by .github/workflows/fetch-gdr-external-layers.yml on the runner, because run logs and
 artifacts are hosted outside the agent sandbox's allowlist and cannot be read from a session.
 Every dataset row carries the pin it was checked against and whether it matched."
-            git push origin HEAD:${GITHUB_REF_NAME}
+            git push origin HEAD:${GITHUB_REF_NAME} || echo "::warning::GITHUB_TOKEN cannot push to ${GITHUB_REF_NAME}; inventory remains in run log and uploaded artifact."
           fi
 
       - uses: actions/upload-artifact@v4

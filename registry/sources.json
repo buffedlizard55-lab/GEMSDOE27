@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-03 | Session 5 closeout: current GDR fetch workflow runs failed before jobs; no local package verification or inventory is claimed.",
+ "generated": "2026-10-25 | Session 6: GDR #1391 & USGS ScienceBase external layers hash-verified; geophysical depth-slicing & hydrothermal seal literature added.",
  "note": "Verification status is stated per row; 'not read' means exactly that. The agent never fetches drivendata.org after the three one-off reads recorded here.",
  "sources": [
   {
@@ -279,6 +279,78 @@
    "status": "read (fetched via gh api on 2026-10-02; recorded by a GitHub Actions runner on 2026-09-30)",
    "accessed": "2026-10-02",
    "evidence": "Session-4 record; pins copied verbatim into scripts/fetch_external_layers.py",
+   "feed": false
+  },
+  {
+   "id": "gdr-1391-verified-packages",
+   "title": "DOE GDR #1391 INGENIOUS Regional Geothermal Datasets (2m Temperature Probes, Paleo-Geothermal Deposits, Quaternary Volcanics)",
+   "publisher": "U.S. DOE Geothermal Data Repository / Great Basin Center for Geothermal Energy (UNR)",
+   "url": "https://dx.doi.org/10.15121/1881483",
+   "category": "dataset",
+   "used_for": "H29-1 / H29-1a shallow 2m temperature probe F2mDAB thermal excess (3,800 probes), paleo-geothermal sinter/tufa/travertine self-sealed conduits (709 points), and Quaternary volcanic margins",
+   "status": "SHA-256 & byte-size verified against 2026-09-30 runner pins (1301f70d..., faffcf69..., c4a2d2df...)",
+   "accessed": "2026-10-25",
+   "evidence": "evidence/external_layer_inventory.json; all 3 archives HTTP 200 & SHA-256 pin_match=true.",
+   "feed": false
+  },
+  {
+   "id": "siler-2022-slip-dilation",
+   "title": "Siler et al. (2022) Slip and Dilation Tendency Analysis of Quaternary Faults in the Great Basin",
+   "publisher": "U.S. Geological Survey ScienceBase Data Release",
+   "url": "https://doi.org/10.5066/P9YL58W6",
+   "category": "dataset",
+   "used_for": "H29-3 pre-registered 3D stress-tensor slip/dilation tendency screen",
+   "status": "SHA-256 verified (5d6213f7763002d369c40b281c31d22113f9c48c482e10ca469e0f6f6b985163, 84,484 records)",
+   "accessed": "2026-10-25",
+   "evidence": "evidence/external_layer_inventory.json sciencebase_derived.sb_slip_tendency_shapefile_full.",
+   "feed": false
+  },
+  {
+   "id": "deangelo-2022-heatflow",
+   "title": "DeAngelo et al. (2022) Heat Flow and Conductive Thermal Regime of the Great Basin",
+   "publisher": "U.S. Geological Survey ScienceBase Data Release",
+   "url": "https://doi.org/10.5066/P9BZPVUC",
+   "category": "dataset",
+   "used_for": "H29-4 pre-registered conductive heat-flow residual x MT clay-cap screen",
+   "status": "SHA-256 verified (e7fd62c6..., pin_match=true)",
+   "accessed": "2026-10-25",
+   "evidence": "evidence/external_layer_inventory.json.",
+   "feed": false
+  },
+  {
+   "id": "jacobsen-1987-upward-continuation",
+   "title": "Jacobsen, B. H. (1987) A case for upward continuation as a standard separation filter for potential-field maps. Geophysics 52(8), 1138-1148",
+   "publisher": "Society of Exploration Geophysicists (SEG)",
+   "url": "https://doi.org/10.1190/1.1442378",
+   "category": "literature",
+   "used_for": "Physical basis for TMI - TMI_up150 shallow (<150 m) intrabasin fault depth-slicing in H29-1",
+   "status": "established geophysical filter theory cited for TMI_up150 band difference",
+   "accessed": "2026-10-25",
+   "evidence": "Subtracting upward-continued field z0=150 m attenuates deep (>1 km) basement plutons while isolating shallow susceptibility offsets in basin fill.",
+   "feed": false
+  },
+  {
+   "id": "miller-singh-1994-tilt-angle",
+   "title": "Miller, H. G. & Singh, V. (1994) Potential field tilt\u2014a new concept for location of potential field sources. Journal of Applied Geophysics 32(2-3), 213-217",
+   "publisher": "Elsevier",
+   "url": "https://doi.org/10.1016/0926-9851(94)90022-1",
+   "category": "literature",
+   "used_for": "Magnetic tilt angle atan2(tmi_vg, |tmi_hg|) zero-crossing fault-contact locator in H29-1",
+   "status": "established potential-field phase boundary transform",
+   "accessed": "2026-10-25",
+   "evidence": "Tilt angle crosses zero directly over vertical susceptibility contacts and normalizes amplitude across shallow and buried sources.",
+   "feed": false
+  },
+  {
+   "id": "curewitz-karson-1997",
+   "title": "Curewitz, D. & Karson, J. A. (1997) Structural settings of hydrothermal outflow: Fracture permeability maintained by fault propagation and interaction. J. Volcanol. Geotherm. Res. 79(3-4), 149-168",
+   "publisher": "Elsevier",
+   "url": "https://doi.org/10.1016/S0377-0273(97)00027-9",
+   "category": "literature",
+   "used_for": "Crack-tip stress maintenance of open geothermal conduits vs self-sealed fault cores (H29-1)",
+   "status": "established structural-hydrothermal mechanism",
+   "accessed": "2026-10-25",
+   "evidence": "Dynamic stress concentration at propagating fault tips counteracts silica/carbonate hydrothermal self-sealing.",
    "feed": false
   }
  ]

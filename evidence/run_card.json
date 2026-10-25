@@ -1,0 +1,84 @@
+{
+  "hypothesis": "H29-1: Shallow magnetic vertical-continuation residual (TMI - TMI_up150) + seamless piedmont break-in-slope curvature + verified GDR #1391 2m temperature-probe (F2mDAB) & paleo-sinter self-seal synthesis + Voronoi-jackknifed crack-tip transfer, emitted via priority-ordered curvilinear ridge-NMS Poisson-disk (d=2.80 px, B=2.0 px catalogue-flank exclusion, N=37,654 binary dots).",
+  "mechanism": "Combines <150 m shallow magnetic susceptibility steps (Jacobsen upward-continuation difference), down-slope alluvial-fan piedmont curvature across 100% of the footprint (solving the 24.6% 1 m LiDAR gap), survey-debiased GDR #1391 thermal upflow & sinter seals, and Voronoi-jackknifed off-tip accommodation envelopes; priority curvilinear ridge-Poisson dotting preserves optimal 1D kernel reach while stripping the 0-200 m cartographic digitization-jitter shadow.",
+  "mimic_process": "Pleistocene Lake Lahontan (~1332 m) contour-parallel wave-cut paleoshoreline benches, fluvial terrace risers, cold agricultural irrigation wells, and pre-Quaternary mountain-interior lithologic contacts.",
+  "holdout_dti": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems27-pooled-hide-v2",
+    "dti": 0.150104,
+    "ci": [
+      0.134813,
+      0.1647
+    ],
+    "withheld_positive_pixels": 10892,
+    "delta_vs_legacy_boof": 0.058858,
+    "delta_vs_legacy_boof_ci95": [
+      0.040134,
+      0.077511
+    ],
+    "delta_vs_legacy_matched_geometry": 0.060899,
+    "delta_vs_legacy_matched_geometry_ci95": [
+      0.04037,
+      0.0814
+    ],
+    "delta_vs_random_37654": 0.107819,
+    "folds_improved_vs_legacy": "4/4"
+  },
+  "leakage_canary": {
+    "gate_passed": true,
+    "features_tested": 62,
+    "max_feature": "struct_piedmont_x_tip",
+    "max_symmetric_auc": 0.755584,
+    "threshold": 0.9
+  },
+  "registry_correlation_overlap": {
+    "gate_passed": true,
+    "rasters_scanned": 354,
+    "max_preplacement_surface_abs_spearman": 0.352936,
+    "max_preplacement_surface_peer": "460ad48bd4453a91_GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07-diag-mtheta.tif",
+    "max_final_dots_abs_spearman": 0.054102,
+    "max_final_dots_peer": "92d5062aeaf17a9a_coverage-v3-ml-20260925T054017Z-92d5062aea.tif",
+    "max_mutual_3px_dot_overlap": 0.47675,
+    "max_forward_geological_3px_dot_overlap": 0.566952,
+    "overlap_with_gemsdoe32_02778": 0.353429,
+    "overlap_with_gemsdoe70_02478": 0.301694
+  },
+  "raster_sha256": "0ade14e6132d6541d687e7e7d04d3c390c5a34c9bee166f62da3b819fc646669",
+  "companion_nan_raster_sha256": "f2688cb2b49ef238ee2dbc63de3dc271656edc1e0eaaecf8f06aac800f5be0fc",
+  "scored_content_id": "d505711d9251",
+  "validator_output": {
+    "all_hard_checks_passed": true,
+    "no_nan_inside_footprint": true,
+    "whole_array_finite_zeros_variant": true,
+    "values_in_0_1": true,
+    "crs_epsg": 32611,
+    "shape": [
+      3730,
+      3292
+    ],
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "on_catalogue_positive_px": 0,
+    "emitted_dots": 37654,
+    "value_set_inside": [
+      0.0,
+      1.0
+    ],
+    "ok_to_download_and_submit": true
+  },
+  "submission_name": "27gemsdoe-h29-1-piedmont-gdr-struct-d28-b2-20261025-d505711d9251-allfinite.tif",
+  "companion_nan_submission_name": "27gemsdoe-h29-1-piedmont-gdr-struct-d28-b2-20261025-d505711d9251-nan.tif",
+  "note": "27gemsdoe H29-1 | piedmont+TMIup150+GDR1391+jackknife-tip ridge-Poisson d2.8 B2 | id d505711d9251",
+  "experiments_run": 3,
+  "experiment_budget_limit": 3,
+  "finalize_runtime_seconds": 619.7,
+  "holdout_runtime_seconds": 1384.7,
+  "peak_rss_mib": 2856.2,
+  "verdict": "promote"
+}

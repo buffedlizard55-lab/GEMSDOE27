@@ -171,10 +171,13 @@ def process_dataset(key: str, pin: dict, out_dir: Path) -> dict:
     # If the reader is unavailable the hash/size verification and the zip inventory above still stand:
     # that is the provenance part of this workflow, and it must not be lost to a dependency problem.
     try:
-        from pyogrio import list_layers, read_dataframe, read_info
+        import pandas as pd
+        import shapely
+        from pyogrio import list_layers, read_info
+        from pyogrio.raw import read as raw_read
         from pyproj import Transformer
     except Exception as e:                                        # noqa: BLE001
-        rec.update({"layers": [], "reader_error": f"pyogrio/pyproj unavailable: {e}",
+        rec.update({"layers": [], "reader_error": f"pyogrio/pyproj/shapely/pandas unavailable: {e}",
                     "note": "hash and zip inventory verified; vector reading needs the workflow's pip step"})
         return rec
 
@@ -189,7 +192,6 @@ def process_dataset(key: str, pin: dict, out_dir: Path) -> dict:
                         "(EPSG:32611 243350-572550 E, 4135550-4508550 N) and its 100 m grid row/col "
                         "is inside the 3730 x 3292 grid; polygon parts straddling the boundary are "
                         "therefore counted once, by centroid, and the CSV keeps native attributes only")
-    tr = Transformer.from_crs("EPSG:4326", "EPSG:32611", always_xy=True)
     x0, y0, x1, y1 = FOOTPRINT["bounds_utm11n"]
     for t in targets:
         try:
@@ -204,19 +206,25 @@ def process_dataset(key: str, pin: dict, out_dir: Path) -> dict:
                 entry.update({"features": info.get("features"), "crs": str(info.get("crs")),
                               "geometry_type": info.get("geometry_type"),
                               "columns": list(info.get("fields", []))})
-                gdf = read_dataframe(str(t), layer=name)
-                gdf = gdf.to_crs("EPSG:4326") if gdf.crs is not None else gdf
-                xs, ys = zip(*[(g.x, g.y) for g in gdf.geometry.centroid])
-                ux, uy = tr.transform(list(xs), list(ys))
-                gdf = gdf.assign(utm11n_x=ux, utm11n_y=uy)
-                gdf["grid_row"] = ((FOOTPRINT["transform"][5] - gdf.utm11n_y) / 100.0).astype("Int64")
-                gdf["grid_col"] = ((gdf.utm11n_x - FOOTPRINT["transform"][2]) / 100.0).astype("Int64")
-                inside = ((gdf.utm11n_x >= x0) & (gdf.utm11n_x < x1) & (gdf.utm11n_y >= y0)
-                          & (gdf.utm11n_y < y1) & gdf.grid_row.between(0, FOOTPRINT["height"] - 1)
-                          & gdf.grid_col.between(0, FOOTPRINT["width"] - 1))
+                meta, _fids, wkb, field_arrays = raw_read(str(t), layer=name)
+                geoms = shapely.from_wkb(wkb)
+                cents = shapely.centroid(geoms)
+                cx_raw = shapely.get_x(cents)
+                cy_raw = shapely.get_y(cents)
+                src_crs = meta.get("crs") or info.get("crs") or "EPSG:4326"
+                tr_src = Transformer.from_crs(src_crs, "EPSG:32611", always_xy=True)
+                ux, uy = tr_src.transform(cx_raw, cy_raw)
+                df = pd.DataFrame(dict(zip(meta["fields"], field_arrays)))
+                df["utm11n_x"] = ux
+                df["utm11n_y"] = uy
+                df["grid_row"] = ((FOOTPRINT["transform"][5] - df["utm11n_y"]) / 100.0).astype("Int64")
+                df["grid_col"] = ((df["utm11n_x"] - FOOTPRINT["transform"][2]) / 100.0).astype("Int64")
+                inside = ((df["utm11n_x"] >= x0) & (df["utm11n_x"] < x1) & (df["utm11n_y"] >= y0)
+                          & (df["utm11n_y"] < y1) & df["grid_row"].between(0, FOOTPRINT["height"] - 1)
+                          & df["grid_col"].between(0, FOOTPRINT["width"] - 1))
                 entry["features_in_footprint_bbox"] = int(inside.sum())
                 csv_path = out_dir / f"{key}_{name.replace(':', '_').replace('/', '_')}.csv"
-                gdf.loc[inside].drop(columns="geometry").to_csv(csv_path, index=False)
+                df.loc[inside].to_csv(csv_path, index=False)
                 entry["csv"] = csv_path.name
                 entry["csv_rows"] = int(inside.sum())
             except Exception as e:                                # noqa: BLE001

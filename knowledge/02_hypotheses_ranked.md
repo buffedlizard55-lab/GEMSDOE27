@@ -175,3 +175,35 @@ Ranking rule: expected DTI gain x probability the test can validate it / cost. B
 * **Status:** NOT IDENTIFIABLE - rejected. With overlapping geological bases the fit fails outright (in-sample R2 = -1.24). Restricted to a strict 7-cell catalogue-distance PARTITION (well identified, mass constraint exact) it still fails: in-sample R2 = -0.360, leave-one-submission-out score RMSE 0.0715 against a score spread of 0.0686 - signal ratio 0.96, i.e. no better than predicting the mean. 20 aggregate numbers cannot resolve a 5.2 M-pixel field. The fitted lambda put 66% of truth in the 100-200 m catalogue ring and 34% at 800-1500 m, which is suggestive and consistent with Hermant et al. (2025) 150-400 m LiDAR offsets, but it did not pass its own validation and MUST NOT be used to choose an emission.
 * **Expected gain:** none - failed its own leave-one-out validation
 * **Cost:** Tested and rejected (0 slots spent); evidence/live_truth_partition_radial.json
+
+## H29-1 (rank 17): Piedmont-scarp + upward-continued TMI (150 m vs 2,000 m) + DOE GDR #1391 + Voronoi-jackknifed crack-tip detector with 1D ridge Poisson-disc emission (d=2.80, B=2.0)
+
+* **Layers:** det_elevation, lidar_1m_arm_v1 (11 ch), tmi, rtp_mag, iso_grav_anom, cond_surface, rad_*, geod_*, earthq_density, DOE GDR #1391 (6 ch), visible-only Voronoi-jackknifed fault tips (4 ch)
+* **Physical signature:** Basin-margin piedmont break-in-slope scarps co-located with shallow basement magnetic edges, hydrothermal alteration/upflow plumes, and fracture-mechanics crack-tip propagation lobes beyond 200 m of mapped traces
+* **Why it catches a fault missing from USGS/INGENIOUS:** Unmapped Quaternary range-front splays and step-over relays sit in alluvial fans with subdued relief where standard 1:250k mapping missed them, yet preserve shallow TMI steps, K/Th alteration, and along-strike tip-stress alignment
+* **How it differs from the repo:** Replaces 2D greedy submodular blob placement (GEMSDOE70 c_blind=0.05235) and ruler-straight T-v2 chords (GEMSDOE27 0.2449) with a 53-channel de-novo HistGBDT + Ridge ensemble, 5-way Voronoi self-distance jackknifing, B=2.0 px shadow collar, and 1D ridge-skeleton Poisson-disc spacing d=2.80 px (c_blind=0.05845)
+* **Status:** TESTED & PROMOTED (Exp 2 — HOLDOUT-DTI 0.150104, 95% CI [0.134813, 0.164700]; +0.058858 over legacy B_oof in 4/4 folds; passed 62-ch canary and 354-raster uniqueness gate; id d505711d9251)
+* **Expected gain:** +0.0589 HOLDOUT-DTI vs legacy B_oof (measured)
+* **Cost:** 1 experiment (~15 min CPU)
+* **External data (free, official):** [DOE GDR #1391 INGENIOUS Great Basin Play Fairway (Faulds et al., UNR/NBMG)](https://gdr.openei.org/submissions/1391) - Verified free CC-BY-4.0 download; SHA-256 cached via scripts/fetch_external_layers.py
+
+## H29-1a (rank 18): Pure label-free physics + DOE GDR #1391 ablation (zero fault coordinates at inference)
+
+* **Layers:** 49 strictly label-free geophysical, topographic, 1 m lidar, and GDR #1391 hydrothermal channels
+* **Physical signature:** Purely physical fault-zone signatures (piedmont scarp + shallow TMI edge + 2 m temperature/sinter/geothermometry) without any visible-catalogue proximity or tip features
+* **Why it catches a fault missing from USGS/INGENIOUS:** Tests whether far-field unmapped Basin-and-Range faults can be recovered from physical and geothermal observables alone when 100% of catalogue coordinates are withheld at inference
+* **How it differs from the repo:** Drops all 4 structural visible-fault channels from H29-1 to isolate pure physical discovery power against the legacy 32-band detector at matched N=37,654, d=2.80, B=2.0
+* **Status:** TESTED (Exp 1 — HOLDOUT-DTI 0.110354, 95% CI [0.086985, 0.132963]; +0.021149 / +23.7% over matched-budget legacy 32-band GBDT 0.089205 in 3/4 folds)
+* **Expected gain:** +0.0211 HOLDOUT-DTI vs matched legacy 32-band (measured)
+* **Cost:** 1 experiment (~10 min CPU)
+* **External data (free, official):** [DOE GDR #1391 INGENIOUS Great Basin Play Fairway](https://gdr.openei.org/submissions/1391) - Verified free CC-BY-4.0 download
+
+## H29-2 (rank 19): Multi-azimuth synthetic illumination, Frangi vesselness, & 2*theta strike-concordance dual-habitat blend
+
+* **Layers:** 53 H29-1 channels + 5 multi-azimuth hillshade, multiscale Hessian vesselness (sigma=1.2, 3.0 px), and topographic-magnetic/gravity cos(2*DeltaTheta) strike concordance channels
+* **Physical signature:** Curvilinear scarp ridges striking parallel to underlying magnetic and gravity horizontal-gradient edges across arbitrary fault azimuths
+* **Why it catches a fault missing from USGS/INGENIOUS:** Targets oblique transfer/accommodation faults in the Walker Lane and Humboldt zone whose NW/ENE strikes are attenuated by single-sun hillshades
+* **How it differs from the repo:** Computes orientation-invariant 2*theta eigenvector concordance between DEM Hessian ridges and potential-field edges, blended with a label-free specialist head
+* **Status:** TESTED & REJECTED ON PARSIMONY (Exp 3 — HOLDOUT-DTI 0.149188, 95% CI [0.130902, 0.166041]; -0.000916 vs simpler H29-1 0.150104)
+* **Expected gain:** -0.0009 HOLDOUT-DTI vs H29-1 (+0.0579 vs legacy B_oof)
+* **Cost:** 1 experiment (~12 min CPU)
