@@ -149,8 +149,12 @@ share). Arms: **D** = 32+15 (control to beat), **DIP** = D+5 H30-1, **GAP** = D+
   > 0 **and** ≥24/40 cells positive **and** ≥3/4 fold-mean Δ > 0. This is the
   single-candidate confirmation required before any weekly slot may be considered; it
   must beat the current holdout best (Arm D), per the tasking.
-- **E3 build + uniqueness + validator (only the E2a-selected candidate is built,**
-  *whatever E2b says — a negative deliverable still ships its bytes badged ⛔*):
+- **E3 build + uniqueness + validator (exactly one candidate file is built:**
+  the E2a-selected candidate, *whatever E2b says — a negative deliverable still ships
+  its bytes badged ⛔*; **clarified before any E2a result was seen:** if no contender
+  beats D in E2a, the built file is the highest-pooled contender of {DIP, GAP, SOFT}
+  as a **negative research artifact** with verdict negative, so the session still
+  delivers exactly one new unique TIFF + run card):
   full-fit surface (all labels), B2, 38,000-dot (or 38,000-mass soft) emission;
   primary file all-finite (zeros outside, nodata=None) via the shared writer.
   **Promotion uniqueness registry (protocol-literal, decided here before results):**
