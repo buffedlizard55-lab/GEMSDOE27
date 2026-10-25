@@ -265,7 +265,7 @@ def build() -> None:
         )
         unique_tif_box = f"""
 <div class="card hero" style="border-left:4px solid #b00">
- <h2 style="margin-top:0">&#128269; Unique submission TIF &mdash; ready to download</h2>
+ <h2 style="margin-top:0">&#128269; Research-only GeoTIFF &mdash; not approved to submit</h2>
  <p>{badge}</p>
  <div class="row">
   <span class="badge ok">format: single-band float32 GeoTIFF, EPSG:32611, 3730&times;3292</span>
@@ -276,18 +276,16 @@ def build() -> None:
  <p><b>File:</b> <code>{unique_tif['filename']}</code> &nbsp;({unique_tif['bytes_tif']:,} bytes) &nbsp;
  <b>ZIP:</b> <code>{unique_tif['zip']['file']}</code> &nbsp;({unique_tif['zip']['bytes']:,} bytes) &nbsp;
  <b>SHA-256:</b> <code>{unique_tif['sha256_tif']}</code></p>
- <p><b>One-click download:</b>
- <a href="downloads/{unique_tif['filename']}" class="btn">Download .tif</a>
- <a href="downloads/{unique_tif['zip']['file']}" class="btn">Download .zip (single GeoTIFF)</a></p>
- <p><b>Short note to paste into the DrivenData submission form (&le;200 chars):</b></p>
+ <p><b>Research download only:</b>
+ <a href="downloads/{unique_tif['filename']}" class="btn alt">Download research .tif</a>
+ <a href="downloads/{unique_tif['zip']['file']}" class="btn alt">Download research .zip (single GeoTIFF)</a></p>
+ <p><b>Research label only (not a submission note):</b></p>
  <p style="background:#f5f5f5;padding:0.5rem;border-radius:4px;font-family:monospace;font-size:0.9rem;">
  {e(unique_tif['note'])}
  </p>
  <p><b>Hypothesis:</b> {e(unique_run_card['hypothesis'] if unique_run_card else unique_tif['hypothesis'])}</p>
  <p><b>Verdict:</b> {unique_run_card['verdict'] if unique_run_card else 'negative'}. {unique_run_card['verdict_reason'] if unique_run_card else 'Holdout DTI not measurable by design (far-field truth absent from catalogue-internal proxy). Format-valid and unique; not holdout-promoted.'}</p>
- <p class="small"><b>Submission steps:</b> 1) Download the .tif (do not open/re-save in GIS software). 2) Sign in at
- <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DrivenData #306</a>. 3) Upload the .tif (or .zip with exactly one GeoTIFF).
- 4) Paste the note above. 5) Submit and record the organiser receipt. This project never contacts drivendata.org (Terms of Use).</p>
+ <p class="small"><b>Status:</b> this research artifact is <b>not approved to submit</b>; do not upload it or assign it a weekly slot. A separate selector decision is required first. This project never contacts drivendata.org.</p>
  <p class="small"><b>Why not certified:</b> the catalogue-internal component-hidden holdout has 100% of its truth at d=0 from the published
  catalogue and 99.6% of credit within 200 m; this emission is entirely at d_cat &ge; 3 px (far field), so holdout DTI = 0 by design
  (knowledge/10). Support: GEMSDOE32 truth model (+0.0247, 12/12 draws) and convergence with GEMSDOE36 PINN (0.2750) on the B2 + ~38k optimum.
@@ -295,6 +293,89 @@ def build() -> None:
  Format receipt: <a href="downloads/{unique_checks_path.name}">checks JSON</a></p>
 </div>
 """
+    # ---- H29-2 current run: dynamic, fail-closed status and research-only download ----
+    h29_2_card_path = EV / "h29_2_run_card_2026-10-25.json"
+    h29_2_card = J(h29_2_card_path) if h29_2_card_path.exists() else None
+    h29_2_box = ""
+    if h29_2_card:
+        h = h29_2_card.get("holdout", {})
+        u = h29_2_card.get("uniqueness_vs_registry", {})
+        r = h29_2_card.get("raster") or {}
+        v = h29_2_card.get("validator") or {}
+        def fmt4(x):
+            return f"{float(x):.4f}" if isinstance(x, (int, float)) else "not measured"
+
+        n_hold = h.get("n_withheld_positives_total")
+        cand_dti, cand_ci = h.get("pooled_candidate_dti"), h.get("pooled_candidate_ci95")
+        ctrl_dti, delta, delta_ci = (h.get("pooled_control_dti"), h.get("paired_pooled_delta"),
+                                     h.get("paired_pooled_delta_ci95"))
+        if cand_dti is None:
+            holdout_line = f"HOLDOUT-DTI not completed ({e(h.get('status', 'not run'))}); no numeric score is claimed."
+        else:
+            ci_text = f"[{fmt4(cand_ci[0])}, {fmt4(cand_ci[1])}]" if cand_ci else "not available"
+            delta_ci_text = f"[{fmt4(delta_ci[0])}, {fmt4(delta_ci[1])}]" if delta_ci else "not available"
+            count_text = f"; {n_hold:,} withheld-positive occurrences" if isinstance(n_hold, int) else ""
+            holdout_line = (f"HOLDOUT-DTI: D+dip {fmt4(cand_dti)} (seed-bootstrap 95% CI {ci_text}) "
+                            f"vs D {fmt4(ctrl_dti)}; pooled Δ {fmt4(delta)} (95% CI {delta_ci_text})"
+                            f"{count_text}. Evaluator: {e(h.get('evaluator', 'gems27.metric.dti_binary v1'))}.")
+        max_surface = u.get("max_surface_spearman")
+        max_overlap = u.get("max_dot_overlap_within_3px")
+        max_surface_text = f"{fmt4(max_surface)} (limit 0.90)" if max_surface is not None else "not measured"
+        max_overlap_text = f"{float(max_overlap):.1%} (limit 70%)" if max_overlap is not None else "not measured"
+        max_auc = h.get("canary_max_auc")
+        canary_text = f"max direction-invariant AUC {fmt4(max_auc)} (stop >0.90)" if max_auc is not None else "not completed"
+        raster_path = r.get("path")
+        zip_path = r.get("zip_path")
+        if raster_path:
+            tif_href = raster_path.removeprefix("docs/")
+            zip_href = zip_path.removeprefix("docs/") if zip_path else ""
+            download_line = (f'<p><b>Research-only files — do not submit:</b> '
+                             f'<a class="btn alt" href="{e(tif_href)}">Download research GeoTIFF</a>'
+                             + (f' <a class="btn alt" href="{e(zip_href)}">Download research ZIP</a>' if zip_href else "")
+                             + "</p>")
+            sha_line = f"<p><b>GeoTIFF SHA-256:</b> <code>{e(r.get('sha256', 'not recorded'))}</code></p>"
+        else:
+            reason = ("Final-dot overlap with an earlier in-repository H28-1 candidate exceeded the "
+                      "70% duplicate threshold; the machine run card records the exact raster and overlap.")
+            download_line = f"<p><b>No GeoTIFF was written:</b> {e(reason)}</p>"
+            sha_line = ""
+        grid_info = v.get("crs_shape_transform") or {}
+        if v.get("status") == "not_run_no_tiff_written_duplicate_gate":
+            validator_line = (
+                "<p><b>Validator:</b> NOT RUN — no raster exists to validate. Footprint NaN count, [0,1] "
+                "range and CRS/shape/transform checks are not applicable, not passes.</p>"
+            )
+        else:
+            validator_line = (
+                f"<p>Validator: footprint NaNs {v.get('inside_footprint_nan_count', 'not measured')}; "
+                f"in-footprint range {fmt4(v.get('inside_footprint_min'))} to {fmt4(v.get('inside_footprint_max'))}; "
+                f"grid {e(grid_info.get('crs', 'not validated'))} {e(grid_info.get('shape', ''))} "
+                f"transform {e(grid_info.get('transform', ''))}; hard pass {e(v.get('shared_verify_geotiff_hard_pass', 'not run'))}.</p>"
+            )
+        verdict_text = "eligible for selector review only" if h29_2_card.get("verdict") == "promote" else "negative / not promoted"
+        h29_2_box = f"""
+<div class="card hero" id="h29-2" style="border-left:5px solid #cf222e">
+ <h2 style="margin-top:0">Current lane: H29-2 DIPDIRECT up-dip edge projection</h2>
+ <p><span class="badge bad" style="font-size:1.1rem">NOT OK TO SUBMIT — NO SELECTOR APPROVAL OR WEEKLY SLOT</span></p>
+ <p><b>Selector verdict:</b> {e(verdict_text)}. A <code>promote</code> verdict means selector review only; it does not authorize a submission or upload.</p>
+ <p>{holdout_line}</p>
+ <p><b>Canary:</b> {canary_text}. <b>Uniqueness:</b> max surface rank correlation {max_surface_text}; max final-dot overlap within 3 px {max_overlap_text}.</p>
+{validator_line}
+{download_line}
+{sha_line}
+ <p><b>Submission name:</b> <code>{e(h29_2_card.get('submission_name', 'GEMSDOE27-H29-2-DIPDIRECT-EDGE-UPDIP-38K'))}</code><br>
+ <b>Note target (&le;140 chars; not an authorization):</b> <code>{e(h29_2_card.get('note_max_140_chars', ''))}</code> ({h29_2_card.get('note_chars', 0)} chars).</p>
+ <p><b>Hypothesis:</b> {e(h29_2_card.get('hypothesis', ''))}</p>
+ <p><b>Mechanism:</b> {e(h29_2_card.get('mechanism', ''))}</p>
+ <p><b>Named non-fault mimic:</b> {e(h29_2_card.get('named_non_fault_mimic', ''))}</p>
+ <p class="small">Sources and evidence limits: <a href="{REPO_URL}/blob/main/knowledge/20_candidate_screen_20261025.md">ranked hypothesis screen</a> ·
+ <a href="{REPO_URL}/blob/main/knowledge/21_preregistration_H29-2_20261025.md">frozen preregistration</a> ·
+ <a href="{REPO_URL}/blob/main/evidence/h29_2_run_card_2026-10-25.json">machine run card</a> ·
+ <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0">NBMG Qfaults official layer</a>.
+ No organizer score or receipt is claimed; local mirror data were hash-pinned but not re-fetched from the official endpoint in this session.</p>
+</div>
+"""
+
     h28_manifest_path = DOCS / "downloads" / "h28_1_candidate_manifest.json"
     h28_manifest = J(h28_manifest_path) if h28_manifest_path.exists() else None
     h28_candidate = h28_manifest.get("candidate") if h28_manifest else None
@@ -617,6 +698,7 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
 <h1>Submission status: automated fail-closed gate &amp; unique GeoTIFF check</h1>
 <p class="lead">27GEMSDOE · DrivenData #306 DOE GEMS. Machine validation runs automatically without human intervention across technical GeoTIFF bounds, 24-raster uniqueness (12 peers + 12 in-house), and spatially blocked holdouts.
 <span class="badge bad">NO TIFF IS APPROVED TO SUBMIT</span> <span class="badge warn">WEEKLY SLOT HELD (H29-S #1 POOLED HOLDOUT 0.0422 &amp; 24-RASTER UNIQUE; SE CI PENDING)</span> <span class="badge bad">DO NOT SUBMIT H28-3</span></p>
+{h29_2_box}
 {h30_dipgap_box}
 {h29_hero_index}
 {unique_tif_box}
@@ -663,6 +745,7 @@ The agent never uploads anything; you press the button.</div>
     rows_pay = "".join(f"<tr><td class='num'>{k}</td><td class='num'>{v:+.4f}</td></tr>" for k, v in pay.items())
     pages["executive-summary.html"] = ("Executive summary", f"""
 <h1>Executive summary</h1>
+<p class="small">H29-2 result and no-download status: <a href="index.html#h29-2">submission status</a> · <a href="research.html#h29-2">research evidence</a>.</p>
 <p class="lead">Automated submit-readiness verdict, unique Session-7 GeoTIFF download &amp; copyable note, exact upload steps, and what to do next.</p>
 {h30_box}
 {h29_hero_exec}
@@ -810,6 +893,9 @@ Where a network sits near threshold, individual closures matter more than in a w
     pages["research.html"] = ("Research", f"""
 <h1>Research</h1>
 <p class="lead">Why 0.2778 and 0.2477 won, why Slot 1 scored 0.2449, Session 7 H29-1 results, and ranked untried hypotheses.</p>
+<h2>H29-2 test and submission status</h2>
+{h29_2_box}
+<p>The October 25 screen ranked H27-16 highest for theoretical upside, blocked pending official raw geothermal packages; H29-2 was the best locally eligible hypothesis and is now negative; H28-5 (quality-screened chemistry gradients) and H29-4 (interrupted cross-field lineament recovery) remain untried. Planning ranges are not scores. See the <a href="{REPO_URL}/blob/main/knowledge/20_candidate_screen_20261025.md">ranked screen</a> and <a href="{REPO_URL}/blob/main/knowledge/22_h29_2_result_and_h33_2_b2_audit_20261025.md">result/audit</a>.</p>
 {h29_research_section}
 <h2 id="h28-3">Session 6 H28-3 — dilatational-strain × conductivity corridors</h2>
 {h28_3_box}

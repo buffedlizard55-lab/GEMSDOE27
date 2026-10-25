@@ -79,58 +79,117 @@ def _rank01(vals_foot: np.ndarray) -> np.ndarray:
 
 
 def build_transforms(grids: dict[str, np.ndarray], foot: np.ndarray) -> np.ndarray:
-    """grids: full-grid arrays for SUBSURFACE_BANDS. Returns (n_footprint, 15) float32 ranks."""
-    n_foot = int(foot.sum())
-    out = np.empty((n_foot, len(TRANSFORM_NAMES)), dtype=np.float32)
+    """Return the 15 label-free transforms in footprint-row order, using bounded working memory.
 
-    def _put(col_idx: int, arr2d: np.ndarray) -> None:
-        vals = arr2d[foot]
-        vals = np.where(np.isfinite(vals), vals, np.nanmedian(vals[np.isfinite(vals)]))
-        out[:, col_idx] = _rank01(vals)
+    The formulas/order match the original batch implementation, but each derived surface is
+    ranked and released as soon as possible. This keeps the shared feature builder usable on the
+    full 3,730 x 3,292 grid without holding all input bands, all intermediate edges, and all raw
+    transform surfaces in memory simultaneously.
+    """
+    foot = np.asarray(foot, dtype=bool)
+    missing = [name for name in SUBSURFACE_BANDS if name not in grids]
+    if missing:
+        raise ValueError(f"missing prepared bands required by subsurface transforms: {missing}")
+    if foot.ndim != 2 or not foot.any():
+        raise ValueError("foot must be a non-empty 2-D boolean grid")
+    for name in SUBSURFACE_BANDS:
+        if np.asarray(grids[name]).shape != foot.shape:
+            raise ValueError(f"prepared band {name!r} does not match footprint shape")
 
+    columns = {name: i for i, name in enumerate(TRANSFORM_NAMES)}
+    output = np.empty((int(foot.sum()), len(TRANSFORM_NAMES)), dtype=np.float32)
+
+    def put(name: str, raw: np.ndarray) -> None:
+        vals = raw[foot]
+        finite = np.isfinite(vals)
+        if not finite.any():
+            raise ValueError(f"transform {name!r} has no finite footprint values")
+        if not finite.all():
+            vals = np.where(finite, vals, np.nanmedian(vals[finite]))
+        output[:, columns[name]] = _rank01(vals)
+
+    # RTP and gravity gradients are retained only until the analytic and cross-field terms use them.
     rtp = _fill(grids["rtp"], foot)
-    grav = _fill(grids["iso_grav_anom"], foot)
     gm_rtp2 = _grad_mag(rtp, 2.0)
-    _put(0, gm_rtp2)
-    _put(1, _grad_mag(rtp, 5.0))
+    put("sub_gm_rtp_s2", gm_rtp2)
+    gm_rtp5 = _grad_mag(rtp, 5.0)
+    del rtp
+    put("sub_gm_rtp_s5", gm_rtp5)
+    del gm_rtp5
 
     tmi_vg = _fill(grids["tmi_vg"], foot)
     tmi_hg = _fill(grids["tmi_hg"], foot)
     tilt = np.abs(np.arctan2(tmi_vg, np.hypot(tmi_hg, 1e-12))).astype(np.float32)
-    _put(2, np.pi / 2 - tilt)
-    del tilt, tmi_hg
+    del tmi_hg
+    put("sub_tiltabs_rtp", np.pi / 2 - tilt)
+    del tilt
     analytic = np.sqrt(gm_rtp2**2 + gaussian_filter(tmi_vg, 2.0) ** 2).astype(np.float32)
-    _put(3, analytic)
-    del analytic, tmi_vg
+    del tmi_vg
+    put("sub_analytic_rtp", analytic)
+    del analytic
 
+    grav = _fill(grids["iso_grav_anom"], foot)
     gm_grav2 = _grad_mag(grav, 2.0)
-    _put(4, gm_grav2)
-    _put(5, _grad_mag(grav, 5.0))
+    put("sub_gm_grav_s2", gm_grav2)
+    gm_grav5 = _grad_mag(grav, 5.0)
+    put("sub_gm_grav_s5", gm_grav5)
+    del gm_grav5
 
-    ry, rx = np.gradient(gaussian_filter(rtp, 3.0))
-    vy, vx = np.gradient(gaussian_filter(grav, 3.0))
-    del rtp, grav
+    # Cross-field orientation agreement x weaker edge strength (sigma=3 orientation, sigma=2 edges).
+    rtp_for_cross = _fill(grids["rtp"], foot)
+    grav_for_cross = _fill(grids["iso_grav_anom"], foot)
+    ry, rx = np.gradient(gaussian_filter(rtp_for_cross, 3.0))
+    del rtp_for_cross
+    vy, vx = np.gradient(gaussian_filter(grav_for_cross, 3.0))
+    del grav_for_cross, grav
     cos_d = np.abs((rx * vx + ry * vy) / (np.hypot(rx, ry) * np.hypot(vx, vy) + 1e-12))
-    del ry, rx, vy, vx
-    _put(6, (cos_d * np.minimum(gm_rtp2, gm_grav2)).astype(np.float32))
+    del rx, ry, vx, vy
+    cross = (cos_d * np.minimum(gm_rtp2, gm_grav2)).astype(np.float32)
     del cos_d, gm_rtp2, gm_grav2
+    put("sub_crossfield_coherence", cross)
+    del cross
 
-    gm_cond3 = _grad_mag(_fill(grids["cond_surf"], foot), 3.0)
-    _put(7, gm_cond3)
-    dtb = _fill(grids["depth_to_base_surf"], foot)
-    _put(8, _grad_mag(dtb, 3.0))
-    _put(9, _grad_mag(dtb, 8.0))
-    del dtb
+    # Conductivity and dilatational-strain gradients are held only for their geometric mean.
+    cond = _fill(grids["cond_surf"], foot)
+    gm_cond3 = _grad_mag(cond, 3.0)
+    del cond
+    put("sub_gm_cond_s3", gm_cond3)
 
-    gm_dil3 = _grad_mag(_fill(grids["geod_dilaterate"], foot), 3.0)
-    _put(10, gm_dil3)
-    _put(11, _grad_mag(_fill(grids["geod_2ndinv"], foot), 3.0))
-    _put(12, np.sqrt(np.maximum(gm_dil3, 0) * np.maximum(gm_cond3, 0)).astype(np.float32))
-    del gm_dil3, gm_cond3
+    depth = _fill(grids["depth_to_base_surf"], foot)
+    gm_depth3 = _grad_mag(depth, 3.0)
+    put("sub_gm_depth_s3", gm_depth3)
+    del gm_depth3
+    gm_depth8 = _grad_mag(depth, 8.0)
+    put("sub_gm_depth_s8", gm_depth8)
+    del depth, gm_depth8
 
-    _put(13, _structure_coherence(_fill(grids["ieq_n100a15"], foot), 5.0))
-    _put(14, _structure_coherence(_fill(grids["deq_n100a15"], foot), 5.0))
-    return out
+    dilate = _fill(grids["geod_dilaterate"], foot)
+    gm_dilate3 = _grad_mag(dilate, 3.0)
+    del dilate
+    put("sub_gm_dilate_s3", gm_dilate3)
+
+    second_inv = _fill(grids["geod_2ndinv"], foot)
+    gm_second_inv3 = _grad_mag(second_inv, 3.0)
+    del second_inv
+    put("sub_gm_2ndinv_s3", gm_second_inv3)
+    del gm_second_inv3
+
+    strain_cond = np.sqrt(np.maximum(gm_dilate3, 0) * np.maximum(gm_cond3, 0)).astype(np.float32)
+    del gm_dilate3, gm_cond3
+    put("sub_strain_x_cond", strain_cond)
+    del strain_cond
+
+    for band, name in (("ieq_n100a15", "sub_seismic_fabric_ieq"),
+                       ("deq_n100a15", "sub_seismic_fabric_deq")):
+        seismic = _fill(grids[band], foot)
+        coherence = _structure_coherence(seismic, 5.0)
+        del seismic
+        put(name, coherence)
+        del coherence
+
+    if not np.isfinite(output).all() or output.min() < 0.0 or output.max() > 1.0:
+        raise ValueError("subsurface transforms must be finite and ranked in [0,1]")
+    return output
 
 
 def priority_poisson_disk(prob: np.ndarray, candidates: np.ndarray, min_dist: float,
