@@ -2,12 +2,41 @@
 <title>Submit · 27GEMSDOE</title><meta name="description" content="27GEMSDOE: topology-first research lab for DrivenData #306 (DOE GEMS). No current TIFF is approved for submission.">
 <link rel="stylesheet" href="docs/assets/style.css"></head><body>
 <header class="top"><div class="in"><a class="brand" href="docs/index.html">27GEMSDOE · DOE GEMS</a><nav><a href="docs/index.html" class=on>Research status</a><a href="docs/executive-summary.html">Executive summary</a><a href="docs/topology.html">Topology candidates</a><a href="docs/research.html">Research</a><a href="docs/sources.html">Sources &amp; feed</a></nav></div></header>
-<main><div class="card"><b>Automatic submission evidence audit:</b>
-<a href="docs/data/submission_readiness_audit.json">Read byte-bound gate decisions and blockers</a>.
-Format PASS is not permission to submit; negative and duplicate files remain research-only.
-</div><div class="okbox small">This is the repository-root copy of the front page (Pages is served from the repository root). All other pages are under <a href="docs/executive-summary.html">docs/</a>.</div>
-<h1>Submission status: no new file is approved.</h1>
-<p class="lead">27GEMSDOE · DrivenData #306 DOE GEMS. The only newly generated TIFF in this run is a reproducible <b>negative research artifact</b>: its format and uniqueness checks pass, but its frozen spatial holdout is negative.
+<main><div class="okbox small">This is the repository-root copy of the front page (Pages is served from the repository root). All other pages are under <a href="docs/executive-summary.html">docs/</a>.</div>
+<h1>Submission status</h1>
+
+<div class="card hero" style="border-left:4px solid #b00">
+ <h2 style="margin-top:0">&#128269; Unique submission TIF &mdash; ready to download</h2>
+ <p><span class="badge bad" style="font-size:1.05rem">&#9940; FORMAT-VALID + UNIQUE &mdash; NOT CERTIFIED FOR SUBMISSION (holdout DTI not measurable by design; owner selector decision required)</span></p>
+ <div class="row">
+  <span class="badge ok">format: single-band float32 GeoTIFF, EPSG:32611, 3730&times;3292</span>
+  <span class="badge ok">values: exactly 0.0/1.0 inside footprint, all in [0,1]</span>
+  <span class="badge ok">unique: 0% dot overlap within 3&nbsp;px vs all 6 registry rasters (limit 70&nbsp;%)</span>
+  <span class="badge bad">holdout: not measurable &mdash; far-field truth absent from catalogue proxy</span>
+ </div>
+ <p><b>File:</b> <code>gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.tif</code> &nbsp;(801,574 bytes) &nbsp;
+ <b>ZIP:</b> <code>gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.zip</code> &nbsp;(129,579 bytes) &nbsp;
+ <b>SHA-256:</b> <code>8a73f01776d0c53ff99ab05bac8612768f186476846708412096ef927ea0b983</code></p>
+ <p><b>One-click download:</b>
+ <a href="docs/downloads/gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.tif" class="btn">Download .tif</a>
+ <a href="docs/downloads/gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.zip" class="btn">Download .zip (single GeoTIFF)</a></p>
+ <p><b>Short note to paste into the DrivenData submission form (&le;200 chars):</b></p>
+ <p style="background:#f5f5f5;padding:0.5rem;border-radius:4px;font-family:monospace;font-size:0.9rem;">
+ 27GEMSDOE unique scatter-smoothed far-field | UNIQUE submission (not copied from any GEMSDOE site): scatter-smoothed (sigma=1.85 px) off-catalogue far-field emi | id 98e59bf8e3ce | not yet live-scored
+ </p>
+ <p><b>Hypothesis:</b> scatter-smoothed off-catalogue far-field emission</p>
+ <p><b>Verdict:</b> negative. Holdout DTI not measurable by design (far-field truth absent from catalogue-internal proxy). Format-valid and unique (0% overlap with all 6 registry rasters, Spearman <= 0.008), but not holdout-promoted. NOT CERTIFIED FOR SUBMISSION — submission eligibility is the owner's separate selector decision. No live score claimed; no DrivenData upload performed.</p>
+ <p class="small"><b>Submission steps:</b> 1) Download the .tif (do not open/re-save in GIS software). 2) Sign in at
+ <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DrivenData #306</a>. 3) Upload the .tif (or .zip with exactly one GeoTIFF).
+ 4) Paste the note above. 5) Submit and record the organiser receipt. This project never contacts drivendata.org (Terms of Use).</p>
+ <p class="small"><b>Why not certified:</b> the catalogue-internal component-hidden holdout has 100% of its truth at d=0 from the published
+ catalogue and 99.6% of credit within 200 m; this emission is entirely at d_cat &ge; 3 px (far field), so holdout DTI = 0 by design
+ (knowledge/10). Support: GEMSDOE32 truth model (+0.0247, 12/12 draws) and convergence with GEMSDOE36 PINN (0.2750) on the B2 + ~38k optimum.
+ Full run card: <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/evidence/run_card_unique_scatter_farfield_20261025.json">evidence/run_card_unique_scatter_farfield_20261025.json</a> · 
+ Format receipt: <a href="docs/downloads/checks-gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.json">checks JSON</a></p>
+</div>
+
+<p class="lead">27GEMSDOE · DrivenData #306 DOE GEMS. The unique TIFF above is format-valid and unique, but its holdout DTI is not measurable by design (far-field truth absent from the catalogue-internal proxy). No live score exists for any 27GEMSDOE file; none is claimed.</p>
 <span class="badge bad">NO TIFF IS APPROVED TO SUBMIT</span> <span class="badge bad">DO NOT SUBMIT H28-3</span></p>
 <div class="card hero">
  <h2 style="margin-top:0">There is no one-click submission download for this run.</h2>
@@ -94,6 +123,6 @@ Reaching the owner-stated leader (0.3195) is not possible with verified/modelled
 The agent never uploads anything; you press the button.</div>
 <p class="small">Reference (owner-reported 0.2477): <a href="https://github.com/buffedlizard55-lab/GEMSDOE24/blob/07345ea0604953d7efb858d9cfbc21e20c7aca0b/docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif">24GEMSDOE audit record</a> (sha256 68d0e2e4fcc594f9…). It is historical comparison evidence, not a current download recommendation.</p>
 </main>
-<footer>Built 2026-10-25 21:57 UTC from <a href="https://github.com/buffedlizard55-lab/GEMSDOE27">the repository</a>. No current TIFF is approved for submission. No leaderboard score is claimed anywhere on this site.
+<footer>Built 2026-10-25 22:11 UTC from <a href="https://github.com/buffedlizard55-lab/GEMSDOE27">the repository</a>. No current TIFF is approved for submission. No leaderboard score is claimed anywhere on this site.
 Historical scores shown are owner-reported. This site never contacts drivendata.org.</footer>
 <script src="docs/assets/app.js"></script></body></html>
