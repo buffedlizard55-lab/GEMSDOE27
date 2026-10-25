@@ -311,3 +311,38 @@ While this branch was open, PR #5 (`arena/01a0fec2-gemsdoe27`, the H28-1 edge-co
 - **External-layer workflow irregularity:** GDR fetch runs `37099986237` (feature push, head `0ddaa3f`) and `37100053264` (main push, head `733e2b2`) concluded failure with zero jobs; `gh run view --log-failed` returned “log not found.” No fetch step or inventory artifact ran. Cause is unknown. This does not establish that GDR files are unavailable or fail their pins; the sibling 2026-09-30 pin record is provenance only. The issue is recorded in `registry/irregularities.json`, and H27-16 remains untried with packages absent from this checkout.
 - **Post-pull/follow-up local recheck:** with the branch based on PR head `bba5de0` and the source-status documentation corrections in the worktree, `./.venv/bin/python -m pytest -q` passed (**82 tests**), Ruff passed, Python compilation passed, `git diff --check` passed, and `scripts/verify_downloads.py` reported **0 failures** across the weekly files and the separate H28-1 research candidate. No submission artifact or manifest was changed.
 - **Source audit:** fetched and read all four OSTI page-service chunks (0–3) for Faulds & Hinz (2015); the full-paper status is supported. The GDR #1391 raw packages were not fetched or re-hashed in this checkout. No DrivenData access, upload, or score claim occurred. GitHub Pages deployment status was not checked in this closeout.
+
+
+---
+
+# Session 6 (2026-10-25) — H28-3 strain/conductivity negative result, duplicate screen, and public disclosure
+
+## Pass 1 — implement and verify
+
+- Re-read the repository README, limitations, current hypothesis screen, and predecessor evidence before selecting a method lane. Audited sibling artifacts and the owner-reported GEMSDOE32 H33-2-B2 `0.2778` claim in `knowledge/12_20261025_peer_submission_audit.md`. The reviewed sibling documentation supplies no organizer receipt/hash-to-score crosswalk for that claim; it remains **OWNER-REPORTED**, not organizer-confirmed.
+- Kept one method lane: H28-3, a deterministic six-feature, label-free 300 m strain/conductivity transform over `geod_2ndinv`, `geod_shearrate`, `geod_dilaterate`, `cond_surf`, and `depth_to_base_surf`. The transform, frozen paired spatial-holdout protocol, controls, stop rules, seed range 160–169, and promotion gate were written before the main result in `knowledge/13_preregistration_H28-3.md`.
+- Added unit coverage for shape, range, footprint masking, and invalid input handling (`tests/test_strain_conductivity.py`). The leakage canary passed: every source and derived feature's direction-invariant ROC-AUC was below the preregistered 0.90 stop (source maximum 0.570179; derived values approximately 0.5009–0.5417).
+- Ran the frozen paired OOF experiment once. It intentionally exited with gate-failure status after writing its evidence card. Candidate pooled **HOLDOUT-DTI** was **0.1033522683** versus baseline **0.1059457739**, for Δ **−0.0025935057**. Mean paired seed Δ was **−0.0025884280** with deterministic 95% bootstrap CI **[−0.0042398905, −0.0009065458]**; only **2/10** seeds and **1/4** folds improved. Integrity, range, no-known-catalogue-overlap, canary, and uniform-control checks passed. The frozen efficacy gate failed; H28-3 was not tuned, rerun, promoted, or given a weekly slot.
+- Retrieved the 12 pinned peer rasters using immutable GitHub codeload archives (not a retrying GitHub contents API), verified their template grids and hashes in ignored cache, and screened the format-valid failed-method artifact. The largest rank correlation was 0.06217 and the largest directed 3-pixel candidate-dot overlap was 0.48915, both below configured duplicate stops. This proves neither efficacy nor eligibility.
+- Built a content-hashed, single-band, all-finite float32 reproducibility artifact (`27d6875f3b22`; 59,243 positives; 0 catalogue overlap; SHA-256 `fa2a8525f5235a55ad3dc16e62b0912ec8391e6076bbd372b126ac8d8ad0b3f9`) only after the failed result and only as a **NEGATIVE RESEARCH ARTIFACT — NOT APPROVED FOR SUBMISSION**. Its manifest, validator receipt, NaN variant, ZIP, and note are under `docs/downloads/research/`; none is exposed as a current submission download.
+
+## Pass 2 — review for bugs, assumptions, and edge cases
+
+- Reviewed the frozen evidence keys, generated-page HTML, link resolution, CSS treatment of failed-status badges, artifact wording, and download affordances. Fixed public-site source and tests so the root and executive summary state **NO TIFF IS APPROVED TO SUBMIT** and **DO NOT SUBMIT H28-3**; no local TIFF/ZIP direct-download link remains on the current index, executive summary, or research page.
+- Reclassified historic Slot 1–5 and H28-1 files as audit artifacts rather than current recommendations. The generated site keeps their scientific/audit context but removes their former one-click submission affordances. The historical raw reference is an audit link, not a download action.
+- Updated `README.md`, `knowledge/06_limitations_and_access.md`, `knowledge/07_untried_hypotheses.md`, `knowledge/02_hypotheses_ranked.md`, `registry/next_hypotheses.json`, and `registry/hypotheses.json`. The live screen now has exactly three genuinely untried items: H27-16 (official bytes/provenance still required), H28-4 seismicity-fabric lineaments, and H28-5 quality-filtered hydrothermal chemistry gradients. H27-10 and H28-3 are tested frozen failures.
+- Checked that no organiser score, leaderboard upload, DrivenData access, PR, or merge is claimed. The site labels historical score statements owner-reported and the H33-2-B2 `0.2778` claim unverified.
+
+## Pass 3 — recheck against the owner request
+
+| Request / constraint | Evidence of completion | Limitation / next step |
+|---|---|---|
+| Holdout before submission; leakage canary; one method lane; stop after negative gate | `knowledge/13_preregistration_H28-3.md`, `evidence/h28_3_strain_holdout.json`; canary passed and frozen efficacy gate failed | H28-3 is closed: do not tune, rerun, or spend a slot on it. |
+| Unique, valid TIFF only with unambiguous eligibility | `docs/downloads/research/h28_3_negative_research_manifest.json`, `evidence/h28_3_negative_uniqueness.json` | The TIFF is deliberately ineligible; format/uniqueness cannot overcome negative HOLDOUT-DTI. |
+| Public Pages documentation, executive guidance, and auditability | Rebuilt `docs/index.html`, `docs/executive-summary.html`, `docs/research.html`, `docs/sources.html`, `docs/topology.html`, and root `index.html` | No approved file exists until a different hypothesis passes a fresh frozen gate and duplicate screen. |
+| Keep 3–5 untried hypotheses and name external provenance limits | `knowledge/07_untried_hypotheses.md`; `registry/next_hypotheses.json` contains three current entries | H27-16 cannot proceed until actual official package bytes and SHA-256 checks are obtained. |
+| Three independent verification passes | Final local verification below | The public organizer test labels and any real score remain unavailable without a human submission. |
+
+Final recheck on this branch: **85 tests passed** (`.venv/bin/python -m pytest -q`); focused site/inversion/topology tests passed (22); `ruff check src scripts tests` passed; Python compilation passed; `git diff --check` passed; `scripts/verify_downloads.py` reported **0 failures** across historical artifacts. A focused rendered-page search found no local TIFF/ZIP direct-download attributes on the index, executive-summary, research, or root index. No DrivenData request, upload, organizer receipt, PR, or merge occurred.
+
+---

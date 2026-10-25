@@ -42,23 +42,24 @@ def test_all_internal_links_and_assets_resolve():
             assert (base / target).exists(), f"{base.name}/{p}: broken internal reference {ref}"
 
 
-def test_repository_root_front_page_serves_the_one_click_download():
-    man = json.loads((DOCS / "downloads" / "manifest.json").read_text())
+def test_repository_root_front_page_shows_current_submission_decision():
     root_idx = (ROOT / "index.html").read_text()
-    P = man["primary"]
-    assert f'href="docs/downloads/{P["nan"]}"' in root_idx and "download" in root_idx
+    assert "NO TIFF IS APPROVED TO SUBMIT" in root_idx
+    assert "DO NOT SUBMIT H28-3" in root_idx
     assert (ROOT / ".nojekyll").exists()
 
 
-def test_front_page_has_download_and_exact_note():
-    man = json.loads((DOCS / "downloads" / "manifest.json").read_text())
+def test_front_page_does_not_offer_failed_h28_3_as_submission():
     idx = (DOCS / "index.html").read_text()
-    P = man["primary"]
-    assert f'href="downloads/{P["nan"]}"' in idx and "download" in idx
-    assert (DOCS / "downloads" / P["nan"]).is_file() and (DOCS / "downloads" / P["zip"]).is_file()
-    assert P["note"] in idx.replace("&#x27;", "'") or P["note"].replace("|", "|") in idx
-    assert len(P["note"]) <= 200
-    assert "UNSCORED" in idx
+    assert "NO TIFF IS APPROVED TO SUBMIT" in idx
+    assert "There is no one-click submission download for this run." in idx
+    assert "NOT APPROVED FOR SUBMISSION" in idx
+    assert "h28_3_negative_research_manifest.json" not in idx or "NOT APPROVED" in idx
+    assert 'download class="mono"' not in idx
+    assert ".tif\" download" not in idx
+    summary = (DOCS / "executive-summary.html").read_text()
+    assert "NO TIFF IS APPROVED TO SUBMIT" in summary
+    assert ".tif\" download" not in summary
 
 
 def test_research_page_lists_preregistered_h28_hypotheses_and_evidence_link():
@@ -77,12 +78,18 @@ def test_research_page_lists_preregistered_h28_hypotheses_and_evidence_link():
         candidate = json.loads(candidate_manifest.read_text())["candidate"]
         assert candidate["format_verified"] is True
         assert len(candidate["note"]) <= 200
-        assert candidate["nan"] in research and candidate["zip"] in research
-        assert candidate["allfinite"] in research
-        assert "not one of the four weekly slots" in research
-        summary = (DOCS / "executive-summary.html").read_text()
-        assert candidate["nan"] in summary
-        assert "not one of the four weekly slots" in summary
+        assert candidate["content_id"] in research
+        assert candidate["nan"] not in research
+        assert candidate["zip"] not in research
+        assert candidate["allfinite"] not in research
+        assert "audit only" in research
+    h28_3 = ROOT / "evidence" / "h28_3_strain_holdout.json"
+    if h28_3.exists():
+        result = json.loads(h28_3.read_text())
+        assert "H28-3" in research
+        assert "NO NEW SUBMISSION IS APPROVED" in research
+        assert result["gate"]["pass"] is False
+        assert "NOT APPROVED FOR SUBMISSION" in (DOCS / "executive-summary.html").read_text()
 
 
 def test_no_score_is_claimed_for_27gemsdoe_and_scripts_never_fetch_drivendata():
