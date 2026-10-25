@@ -252,6 +252,18 @@
    "severity": "medium",
    "issue": "Shared holdout harness buffered training but scored up to hidden segments (feature support could overlap hidden neighbourhoods). Protocol \u00a72 requires segments withheld WITH a buffer.",
    "action": "Fixed once in the template: gems27.holdout.buffered_scoring_mask() excludes the 600 m ring around hidden segments from scoring; catalogue-derived masks use visible faults only. Reported here per protocol \u00a72; siblings should adopt."
+  },
+  {
+   "id": "IR-2026-10-25-05-index-hand-edit-desync",
+   "severity": "high",
+   "issue": "Deployed docs/index.html presented gems27-unique-scatter-farfield as 'ready to download and submit' with download buttons, but scripts/build_site.py generates a STOP front page and README said no TIFF approved. The HTML had been hand-edited out of sync with its generator; executive-summary.html (generated) contradicted index.html.",
+   "action": "Session 7: regenerated all pages from JSON via build_site.py (hand hero removed); submission eligibility is now rendered only from run-card JSON gates. Do not hand-edit docs/*.html."
+  },
+  {
+   "id": "IR-2026-10-25-06-uniqueness-screen-tension",
+   "severity": "medium",
+   "issue": "H29-1 (38k dots) passes the pinned peer-registry duplicate screen (max 46.2% <=3px overlap vs 12 scored peers) but overlaps 85.4% with this repo's own unscored dense H28-1 research file (59,075 px; exact Jaccard 0.116). Minimal-swap deconfliction (H29-1b) is geometrically infeasible on the ridge pool (82.6% after refill). The extended screen may make any accurate emission uncertifiable.",
+   "action": "Frozen gate kept (verdict negative). Selector step must adjudicate whether unscored in-house files govern slot eligibility; record the decision in registry before any upload. See knowledge/17."
   }
  ]
 }
