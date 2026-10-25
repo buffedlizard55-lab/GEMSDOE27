@@ -331,7 +331,7 @@ While this branch was open, PR #5 (`arena/01a0fec2-gemsdoe27`, the H28-1 edge-co
 - Reviewed the frozen evidence keys, generated-page HTML, link resolution, CSS treatment of failed-status badges, artifact wording, and download affordances. Fixed public-site source and tests so the root and executive summary state **NO TIFF IS APPROVED TO SUBMIT** and **DO NOT SUBMIT H28-3**; no local TIFF/ZIP direct-download link remains on the current index, executive summary, or research page.
 - Reclassified historic Slot 1–5 and H28-1 files as audit artifacts rather than current recommendations. The generated site keeps their scientific/audit context but removes their former one-click submission affordances. The historical raw reference is an audit link, not a download action.
 - Updated `README.md`, `knowledge/06_limitations_and_access.md`, `knowledge/07_untried_hypotheses.md`, `knowledge/02_hypotheses_ranked.md`, `registry/next_hypotheses.json`, and `registry/hypotheses.json`. The live screen now has exactly three genuinely untried items: H27-16 (official bytes/provenance still required), H28-4 seismicity-fabric lineaments, and H28-5 quality-filtered hydrothermal chemistry gradients. H27-10 and H28-3 are tested frozen failures.
-- Checked that no organiser score, leaderboard upload, DrivenData access, PR, or merge is claimed. The site labels historical score statements owner-reported and the H33-2-B2 `0.2778` claim unverified.
+- Checked that no organiser score, leaderboard upload, or DrivenData access is claimed. The site labels historical score statements owner-reported and the H33-2-B2 `0.2778` claim unverified. GitHub PR/merge state is recorded separately below and is not represented as a competition outcome.
 
 ## Pass 3 — recheck against the owner request
 
@@ -343,6 +343,12 @@ While this branch was open, PR #5 (`arena/01a0fec2-gemsdoe27`, the H28-1 edge-co
 | Keep 3–5 untried hypotheses and name external provenance limits | `knowledge/07_untried_hypotheses.md`; `registry/next_hypotheses.json` contains three current entries | H27-16 cannot proceed until actual official package bytes and SHA-256 checks are obtained. |
 | Three independent verification passes | Final local verification below | The public organizer test labels and any real score remain unavailable without a human submission. |
 
-Final recheck on this branch: **85 tests passed** (`.venv/bin/python -m pytest -q`); focused site/inversion/topology tests passed (22); `ruff check src scripts tests` passed; Python compilation passed; `git diff --check` passed; `scripts/verify_downloads.py` reported **0 failures** across historical artifacts. A focused rendered-page search found no local TIFF/ZIP direct-download attributes on the index, executive-summary, research, or root index. No DrivenData request, upload, organizer receipt, PR, or merge occurred.
+Final recheck on this branch: **85 tests passed** (`.venv/bin/python -m pytest -q`); focused site/inversion/topology tests passed (22); `ruff check src scripts tests` passed; Python compilation passed; `git diff --check` passed; `scripts/verify_downloads.py` reported **0 failures** across historical artifacts. A focused rendered-page search found no local TIFF/ZIP direct-download attributes on the index, executive-summary, research, or root index. No DrivenData request, upload, or organizer receipt occurred.
+
+## Post-merge closeout (2026-10-25)
+
+- [PR #11](https://github.com/buffedlizard55-lab/GEMSDOE27/pull/11), **Record H28-3 negative result and withdraw submission promotion**, was merged to `main` at `2026-10-25T20:24:14Z` with merge commit `c3276755d1f26d2f72991de033d005413e1c99aa`.
+- GitHub reports two completed `CI (tests, lint, site build)` test jobs on the PR, both `SUCCESS`: runs `40230534378` and `40230527825` (completed at 20:23:59Z and 20:23:58Z respectively). This confirms repository CI only; it does not establish a DrivenData upload, organizer receipt, or score.
+
 
 ---

@@ -29,7 +29,7 @@ Historic Slot 1–5 and H28-1 artifacts remain retained for audit and reproducti
 * **Frozen result: FAIL; no weekly slot.** The candidate's pooled HOLDOUT-DTI was 0.1033523 vs 0.1059458 baseline (Δ **−0.0025935**), with mean paired seed Δ −0.0025884 and deterministic 95% bootstrap CI [−0.0042399, −0.0009065]. Only 2/10 seeds and 1/4 folds improved. Canary, integrity, and uniform-control checks passed; efficacy gates failed. No post-hoc tuning or rerun is allowed.
 * **Peer uniqueness does not promote a failed predictor.** The negative artifact passed the configured 12-peer duplicate screen (largest surface rank correlation 0.06217; largest directed 3-pixel overlap 0.48915), but it remains ineligible because predictive validation failed.
 * **Three genuinely untried hypotheses remain:** H27-16 official GDR layers (bytes/provenance still required), H28-4 seismicity-fabric lineaments, and H28-5 quality-filtered hydrothermal chemistry gradients. See `knowledge/07_untried_hypotheses.md` and `registry/next_hypotheses.json`.
-* **No external outcome was claimed.** No DrivenData access, upload, organiser score, PR, or merge occurred in this Session 6 work.
+* **No competition outcome was claimed.** No DrivenData access, upload, or organiser score occurred. [PR #11](https://github.com/buffedlizard55-lab/GEMSDOE27/pull/11) merged this documented negative-result/public-disclosure update to `main` at merge commit `c3276755d1f26d2f72991de033d005413e1c99aa` after the CI test job succeeded; this GitHub event is distinct from a competition result.
 
 ## Session 5 update — H27-10 rejected; H27-5b review class (`knowledge/06`, `knowledge/11`)
 
