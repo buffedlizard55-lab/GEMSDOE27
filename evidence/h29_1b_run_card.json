@@ -1,0 +1,293 @@
+{
+  "run_card": "H29-1b D-refill deconflicted (parallel-run protocol \u00a75)",
+  "generated_utc": "2026-10-25T20:54:45Z",
+  "hypothesis": "Same as H29-1 (Arm-D subsurface-augmented detector at B2/38k beats the frozen H19-5 ranking behind 0.2778), with minimal-swap deconfliction vs this repo's unscored H28-1 file (knowledge/16).",
+  "mechanism": "Full-fit HGB 32+15; ridge NMS; capped priority Poisson-disk >=2.8px (<=65% of budget within 3px of H28-1 dots); B2; 38,000 dots.",
+  "named_non_fault_mimic": "Lithologic contacts/survey seams; clay-cap conductivity; remanent magnetisation; fan edges/shorelines in lidar.",
+  "holdout": {
+    "label": "HOLDOUT-DTI (seeds 210-214 reused; exploratory-confirmatory)",
+    "evaluator": "gems27.metric v1 (alpha=0.2, beta=0.8, R=3px triangular)",
+    "pooled_dti_H29_1b": 0.10878607314240211,
+    "pooled_dti_B_control": 0.10019683788577569,
+    "pooled_dti_H29_1_undeconflicted": 0.10878607314240211,
+    "paired_1b_minus_B": {
+      "mean_delta": 0.008571174109359873,
+      "ci95": [
+        0.005128899147808386,
+        0.01248926340626096
+      ],
+      "cells_positive": 18,
+      "n_cells": 20
+    },
+    "n_withheld_positives_total": 59362,
+    "seeds": [
+      210,
+      211,
+      212,
+      213,
+      214
+    ],
+    "canary_max_auc": 0.5569533228595529,
+    "gate_holdout_pass": true,
+    "per_cell_1b": [
+      {
+        "dti": 0.11912291034003578,
+        "TPw": 411.3150917635679,
+        "FPw": 8325.0,
+        "FNw": 1720.684908236432,
+        "n_truth": 2132,
+        "n_emitted": 8492
+      },
+      {
+        "dti": 0.1491581528569656,
+        "TPw": 632.9665392912324,
+        "FPw": 10237.0,
+        "FNw": 1954.0334607087675,
+        "n_truth": 2587,
+        "n_emitted": 10499
+      },
+      {
+        "dti": 0.06864562075168189,
+        "TPw": 357.34639914873844,
+        "FPw": 10355.0,
+        "FNw": 3471.6536008512617,
+        "n_truth": 3829,
+        "n_emitted": 10506
+      },
+      {
+        "dti": 0.12084461529108823,
+        "TPw": 533.170565049934,
+        "FPw": 8299.0,
+        "FNw": 2773.829434950066,
+        "n_truth": 3307,
+        "n_emitted": 8503
+      },
+      {
+        "dti": 0.10854457057274812,
+        "TPw": 361.5744349476207,
+        "FPw": 8342.0,
+        "FNw": 1626.4255650523792,
+        "n_truth": 1988,
+        "n_emitted": 8492
+      },
+      {
+        "dti": 0.13607742852162588,
+        "TPw": 536.2890114030432,
+        "FPw": 10277.0,
+        "FNw": 1686.7109885969567,
+        "n_truth": 2223,
+        "n_emitted": 10499
+      },
+      {
+        "dti": 0.07031862634789472,
+        "TPw": 387.8615318385686,
+        "FPw": 10351.0,
+        "FNw": 3822.1384681614313,
+        "n_truth": 4210,
+        "n_emitted": 10506
+      },
+      {
+        "dti": 0.13623835146580704,
+        "TPw": 625.2033353035216,
+        "FPw": 8260.0,
+        "FNw": 2889.7966646964783,
+        "n_truth": 3515,
+        "n_emitted": 8503
+      },
+      {
+        "dti": 0.09861584474564816,
+        "TPw": 333.9919849114777,
+        "FPw": 8356.0,
+        "FNw": 1727.0080150885224,
+        "n_truth": 2061,
+        "n_emitted": 8492
+      },
+      {
+        "dti": 0.11140955927211767,
+        "TPw": 434.12118899334206,
+        "FPw": 10321.0,
+        "FNw": 1747.878811006658,
+        "n_truth": 2182,
+        "n_emitted": 10499
+      },
+      {
+        "dti": 0.06581901376408565,
+        "TPw": 341.6353729721722,
+        "FPw": 10375.0,
+        "FNw": 3467.3646270278277,
+        "n_truth": 3809,
+        "n_emitted": 10506
+      },
+      {
+        "dti": 0.14679743328631145,
+        "TPw": 700.3212674992137,
+        "FPw": 8241.0,
+        "FNw": 3027.6787325007863,
+        "n_truth": 3728,
+        "n_emitted": 8503
+      },
+      {
+        "dti": 0.09695869917172109,
+        "TPw": 323.77960620459976,
+        "FPw": 8357.0,
+        "FNw": 1680.2203937954002,
+        "n_truth": 2004,
+        "n_emitted": 8492
+      },
+      {
+        "dti": 0.13442547917533862,
+        "TPw": 584.3571602769127,
+        "FPw": 10259.0,
+        "FNw": 2138.6428397230875,
+        "n_truth": 2723,
+        "n_emitted": 10499
+      },
+      {
+        "dti": 0.0708052338156035,
+        "TPw": 382.2239850532851,
+        "FPw": 10353.0,
+        "FNw": 3681.776014946715,
+        "n_truth": 4064,
+        "n_emitted": 10506
+      },
+      {
+        "dti": 0.14331576978325833,
+        "TPw": 675.0177854814721,
+        "FPw": 8243.0,
+        "FNw": 2982.982214518528,
+        "n_truth": 3658,
+        "n_emitted": 8503
+      },
+      {
+        "dti": 0.1149046912671749,
+        "TPw": 371.8276194861229,
+        "FPw": 8332.0,
+        "FNw": 1497.1723805138772,
+        "n_truth": 1869,
+        "n_emitted": 8492
+      },
+      {
+        "dti": 0.14190287555412376,
+        "TPw": 595.6121216545525,
+        "FPw": 10251.0,
+        "FNw": 1939.3878783454475,
+        "n_truth": 2535,
+        "n_emitted": 10499
+      },
+      {
+        "dti": 0.06426856019251867,
+        "TPw": 330.17555770769314,
+        "FPw": 10373.0,
+        "FNw": 3415.8244422923067,
+        "n_truth": 3746,
+        "n_emitted": 10506
+      },
+      {
+        "dti": 0.11676434518926113,
+        "TPw": 503.88210198449815,
+        "FPw": 8305.0,
+        "FNw": 2688.117898015502,
+        "n_truth": 3192,
+        "n_emitted": 8503
+      }
+    ]
+  },
+  "uniqueness_vs_registry": {
+    "max_dot_overlap_within_3px_euclidean": 0.8255263157894737,
+    "per_raster": {
+      "g24_d15.tif": 0.4329736842105263,
+      "g25_d28.tif": 0.4183421052631579,
+      "g27_tv2_d15.tif": 0.4407105263157895,
+      "g28_h27_4_r1.tif": 0.407,
+      "g28_h32_1.tif": 0.41468421052631577,
+      "g28_h36_1.tif": 0.4026578947368421,
+      "g28_h38_1.tif": 0.4081578947368421,
+      "g30_d28.tif": 0.4183421052631579,
+      "g31_h27_4.tif": 0.407,
+      "g32_h33_2_b2.tif": 0.39273684210526316,
+      "g33_h33d.tif": 0.4140526315789474,
+      "g36_anderson.tif": 0.39663157894736845,
+      "gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-nan.tif": 0.4153157894736842,
+      "gems27-farfield-swap-augmented-detector-probe-20261002-a34b0799df59-nan.tif": 0.4799473684210526,
+      "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.tif": 0.65,
+      "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif": 0.4407105263157895,
+      "gems27-topo-gap-closure-t-v2-on-d2-8-20261002-3ebd51534bb1-nan.tif": 0.42636842105263156,
+      "gems27-topo-gap-closure-t-v2-plus-h27-4-r1-on-d1-5-20261002-d466b251f309-nan.tif": 0.4312105263157895,
+      "gems27-h29-1-drefill-b2-38k-20261025-c24b6371179c-nan.tif": 0.8255263157894737
+    },
+    "max_surface_spearman_armD": 0.44573325496777744,
+    "thresholds": {
+      "dot_overlap": 0.7,
+      "spearman": 0.9
+    },
+    "pass": false
+  },
+  "raster": {
+    "primary_allfinite": "gems27-h29-1b-drefill-deconf-b2-38k-20261025-14e416a1a380-allfinite.tif",
+    "sha256": "ad7d90f43c5d913f029b748d9b15ae9a4e9368e3d2e953aafac67ce91ced460a",
+    "bytes": 826586,
+    "dots": 38000,
+    "content_id": "14e416a1a380",
+    "zip": "gems27-h29-1b-drefill-deconf-b2-38k-20261025-14e416a1a380-allfinite.zip",
+    "nan_twin": "gems27-h29-1b-drefill-deconf-b2-38k-20261025-14e416a1a380-nan.tif",
+    "directory": "docs/downloads/research"
+  },
+  "validator": {
+    "zeros_hard_pass": true,
+    "zeros_checks": {
+      "grid_matches_template": {
+        "pass": true,
+        "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+        "hard": true
+      },
+      "single_band_float32": {
+        "pass": true,
+        "detail": "count=1 dtype=float32",
+        "hard": true
+      },
+      "inside_footprint_all_finite": {
+        "pass": true,
+        "detail": "0 non-finite inside 5167373 px",
+        "hard": true
+      },
+      "inside_footprint_in_0_1": {
+        "pass": true,
+        "detail": "min=0 max=1",
+        "hard": true
+      },
+      "no_infinities_anywhere": {
+        "pass": true,
+        "detail": "np.isinf(whole array) is empty",
+        "hard": true
+      },
+      "outside_footprint_is_zero_and_finite": {
+        "pass": true,
+        "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+        "hard": true
+      },
+      "strict_whole_array_range": {
+        "pass": true,
+        "detail": "whole-array min=0 max=1",
+        "hard": true
+      },
+      "profile_driver_gtiff": {
+        "pass": true,
+        "detail": "GTiff",
+        "hard": false
+      },
+      "compression_like_sample": {
+        "pass": true,
+        "detail": "Compression.lzw",
+        "hard": false
+      }
+    },
+    "nan_hard_pass": true
+  },
+  "submission_name": "GEMSDOE27-H29-1B-DREFILL-DECONF-B2-38K",
+  "note_max_140_chars": "27GEMSDOE H29-1b D-refill deconf B2 38k; HOLDOUT-DTI 0.1088 vs B 0.1002; UNSCORED | id 14e416a1a380",
+  "note_chars": 99,
+  "ok_to_submit": false,
+  "verdict": "negative",
+  "live_score": null,
+  "live_score_label": "UNSCORED \u2014 no ORGANIZER-CONFIRMED score exists for this file"
+}

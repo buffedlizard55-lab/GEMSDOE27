@@ -1,0 +1,959 @@
+{
+  "generated_utc": "2026-10-25T21:07:09Z",
+  "stem": "gems27-dconfirm-hybrid-armd-b2-38k-20261025-5ea0385b7e70",
+  "arm": "D",
+  "run_card": "Lane L-DCONFIRM (knowledge/15; parallel-run protocol \u00a75)",
+  "hypothesis": "Subsurface physics (potential-field/strain/conductivity/seismicity transforms), dip-offset doublets, radiometric alteration fronts and scarp-polarity pairs add detector information about faults missing from the surface-rupture catalogue when layered ON TOP of the full 32-band stack, emitted at the live optimum (B2, >=2.8 px, 38 k).",
+  "mechanism": "Full-fit HGB arm D (32 bands + 15 subsurface transforms); ridge NMS; priority Poisson-disk >=2.8 px; B2; 38,000 dots.",
+  "named_non_fault_mimic": "Basin-margin lithologic contacts; radiometric provenance/levelling seams; terrace risers and channel banks; clay-cap conductivity highs.",
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "evaluator": "gems27.metric v1 (alpha=0.2, beta=0.8, R=3px triangular)",
+    "selection_pooled": {
+      "B": 0.10019683788577569,
+      "D": 0.10878607314240211,
+      "E": 0.09902821422790394
+    },
+    "confirmation": {
+      "candidate": "D",
+      "pooled_holdout_dti": {
+        "D": 0.10658807688572539,
+        "B": 0.0991747508599681
+      },
+      "paired_candidate_minus_B": {
+        "mean_delta": 0.007599097043765454,
+        "ci95": [
+          0.004885070876335968,
+          0.010380051418353596
+        ],
+        "cells_positive": 32,
+        "n_cells": 40,
+        "folds_positive": 4,
+        "seeds_positive": 10,
+        "n_seeds": 10,
+        "fold_mean_delta": {
+          "NW": 0.00856825927203685,
+          "NE_LidarGapHeavy": 0.0011692879212353556,
+          "SW": 0.0020670674177492568,
+          "SE": 0.018591773564040355
+        }
+      },
+      "n_withheld_positives": 121404,
+      "gate_pass": true,
+      "per_cell": {
+        "D": [
+          {
+            "dti": 0.11577352780642963,
+            "TPw": 392.4360463900233,
+            "FPw": 8332.0,
+            "FNw": 1663.5639536099766,
+            "n_truth": 2056,
+            "n_emitted": 8492
+          },
+          {
+            "dti": 0.11593469787531781,
+            "TPw": 466.39117272270676,
+            "FPw": 10312.0,
+            "FNw": 1867.6088272772931,
+            "n_truth": 2334,
+            "n_emitted": 10499
+          },
+          {
+            "dti": 0.06236030357128856,
+            "TPw": 350.68548046297275,
+            "FPw": 10359.0,
+            "FNw": 4001.314519537027,
+            "n_truth": 4352,
+            "n_emitted": 10506
+          },
+          {
+            "dti": 0.11534476336940183,
+            "TPw": 521.6973836900054,
+            "FPw": 8293.0,
+            "FNw": 2928.302616309995,
+            "n_truth": 3450,
+            "n_emitted": 8503
+          },
+          {
+            "dti": 0.10037844762703675,
+            "TPw": 322.2601918017047,
+            "FPw": 8358.0,
+            "FNw": 1520.7398081982953,
+            "n_truth": 1843,
+            "n_emitted": 8492
+          },
+          {
+            "dti": 0.14655734120253733,
+            "TPw": 581.948377325301,
+            "FPw": 10260.0,
+            "FNw": 1671.051622674699,
+            "n_truth": 2253,
+            "n_emitted": 10499
+          },
+          {
+            "dti": 0.06513415406134143,
+            "TPw": 372.09969402534585,
+            "FPw": 10348.0,
+            "FNw": 4088.900305974654,
+            "n_truth": 4461,
+            "n_emitted": 10506
+          },
+          {
+            "dti": 0.11667211394745874,
+            "TPw": 506.00712444664595,
+            "FPw": 8311.0,
+            "FNw": 2710.992875553354,
+            "n_truth": 3217,
+            "n_emitted": 8503
+          },
+          {
+            "dti": 0.11123442547675777,
+            "TPw": 378.38355460815814,
+            "FPw": 8334.0,
+            "FNw": 1695.6164453918418,
+            "n_truth": 2074,
+            "n_emitted": 8492
+          },
+          {
+            "dti": 0.1743742870176219,
+            "TPw": 783.4804263894372,
+            "FPw": 10174.0,
+            "FNw": 2093.519573610563,
+            "n_truth": 2877,
+            "n_emitted": 10499
+          },
+          {
+            "dti": 0.056131448825331345,
+            "TPw": 291.29181655701495,
+            "FPw": 10384.0,
+            "FNw": 3526.708183442985,
+            "n_truth": 3818,
+            "n_emitted": 10506
+          },
+          {
+            "dti": 0.12394286940295651,
+            "TPw": 588.620057139241,
+            "FPw": 8281.0,
+            "FNw": 3130.379942860759,
+            "n_truth": 3719,
+            "n_emitted": 8503
+          },
+          {
+            "dti": 0.09281674715142961,
+            "TPw": 299.1133536020019,
+            "FPw": 8370.0,
+            "FNw": 1561.886646397998,
+            "n_truth": 1861,
+            "n_emitted": 8492
+          },
+          {
+            "dti": 0.11832413374044436,
+            "TPw": 482.41737026667477,
+            "FPw": 10299.0,
+            "FNw": 1918.5826297333251,
+            "n_truth": 2401,
+            "n_emitted": 10499
+          },
+          {
+            "dti": 0.08205441275063535,
+            "TPw": 442.02757400971296,
+            "FPw": 10329.0,
+            "FNw": 3598.972425990287,
+            "n_truth": 4041,
+            "n_emitted": 10506
+          },
+          {
+            "dti": 0.12912101275205717,
+            "TPw": 615.1625260724784,
+            "FPw": 8270.0,
+            "FNw": 3118.8374739275214,
+            "n_truth": 3734,
+            "n_emitted": 8503
+          },
+          {
+            "dti": 0.0997755878237165,
+            "TPw": 316.1723213995575,
+            "FPw": 8356.0,
+            "FNw": 1476.8276786004426,
+            "n_truth": 1793,
+            "n_emitted": 8492
+          },
+          {
+            "dti": 0.1427701598119184,
+            "TPw": 580.1655485032416,
+            "FPw": 10262.0,
+            "FNw": 1788.8344514967584,
+            "n_truth": 2369,
+            "n_emitted": 10499
+          },
+          {
+            "dti": 0.08277148775867868,
+            "TPw": 433.5495967793024,
+            "FPw": 10328.0,
+            "FNw": 3423.450403220698,
+            "n_truth": 3857,
+            "n_emitted": 10506
+          },
+          {
+            "dti": 0.11719647187186301,
+            "TPw": 468.6607389885835,
+            "FPw": 8322.0,
+            "FNw": 2332.3392610114165,
+            "n_truth": 2801,
+            "n_emitted": 8503
+          },
+          {
+            "dti": 0.09897690356089507,
+            "TPw": 334.61346394010724,
+            "FPw": 8357.0,
+            "FNw": 1718.3865360598927,
+            "n_truth": 2053,
+            "n_emitted": 8492
+          },
+          {
+            "dti": 0.16485894073863255,
+            "TPw": 693.5807107766148,
+            "FPw": 10214.0,
+            "FNw": 1838.4192892233852,
+            "n_truth": 2532,
+            "n_emitted": 10499
+          },
+          {
+            "dti": 0.06802805938471988,
+            "TPw": 363.68735739545866,
+            "FPw": 10355.0,
+            "FNw": 3639.3126426045415,
+            "n_truth": 4003,
+            "n_emitted": 10506
+          },
+          {
+            "dti": 0.10273302233974331,
+            "TPw": 479.045007940855,
+            "FPw": 8316.0,
+            "FNw": 3150.954992059145,
+            "n_truth": 3630,
+            "n_emitted": 8503
+          },
+          {
+            "dti": 0.10351443625558984,
+            "TPw": 344.2317032611819,
+            "FPw": 8351.0,
+            "FNw": 1638.7682967388182,
+            "n_truth": 1983,
+            "n_emitted": 8492
+          },
+          {
+            "dti": 0.1409289027771305,
+            "TPw": 589.1432220076887,
+            "FPw": 10253.0,
+            "FNw": 1925.8567779923114,
+            "n_truth": 2515,
+            "n_emitted": 10499
+          },
+          {
+            "dti": 0.060452809630691384,
+            "TPw": 334.63819861565815,
+            "FPw": 10367.0,
+            "FNw": 3909.361801384342,
+            "n_truth": 4244,
+            "n_emitted": 10506
+          },
+          {
+            "dti": 0.1552286824560157,
+            "TPw": 773.9372158237338,
+            "FPw": 8203.0,
+            "FNw": 3214.062784176266,
+            "n_truth": 3988,
+            "n_emitted": 8503
+          },
+          {
+            "dti": 0.12920678030874844,
+            "TPw": 475.86508551684403,
+            "FPw": 8299.0,
+            "FNw": 1934.134914483156,
+            "n_truth": 2410,
+            "n_emitted": 8492
+          },
+          {
+            "dti": 0.12608125446716423,
+            "TPw": 527.7962086081851,
+            "FPw": 10283.0,
+            "FNw": 2002.2037913918148,
+            "n_truth": 2530,
+            "n_emitted": 10499
+          },
+          {
+            "dti": 0.0725517542958475,
+            "TPw": 398.7554027765609,
+            "FPw": 10342.0,
+            "FNw": 3786.244597223439,
+            "n_truth": 4185,
+            "n_emitted": 10506
+          },
+          {
+            "dti": 0.11900241588661532,
+            "TPw": 554.857267215599,
+            "FPw": 8282.0,
+            "FNw": 3064.1427327844012,
+            "n_truth": 3619,
+            "n_emitted": 8503
+          },
+          {
+            "dti": 0.1407339632276912,
+            "TPw": 509.41225702605334,
+            "FPw": 8285.0,
+            "FNw": 1816.5877429739467,
+            "n_truth": 2326,
+            "n_emitted": 8492
+          },
+          {
+            "dti": 0.13530737907014434,
+            "TPw": 541.8756259688078,
+            "FPw": 10286.0,
+            "FNw": 1757.1243740311922,
+            "n_truth": 2299,
+            "n_emitted": 10499
+          },
+          {
+            "dti": 0.053055150289616784,
+            "TPw": 290.1603180791767,
+            "FPw": 10391.0,
+            "FNw": 3875.8396819208233,
+            "n_truth": 4166,
+            "n_emitted": 10506
+          },
+          {
+            "dti": 0.11273958694036523,
+            "TPw": 501.5917653859955,
+            "FPw": 8308.0,
+            "FNw": 2857.4082346140044,
+            "n_truth": 3359,
+            "n_emitted": 8503
+          },
+          {
+            "dti": 0.08541965212585813,
+            "TPw": 293.962551059374,
+            "FPw": 8369.0,
+            "FNw": 1842.037448940626,
+            "n_truth": 2136,
+            "n_emitted": 8492
+          },
+          {
+            "dti": 0.10805130975906824,
+            "TPw": 423.59561594489634,
+            "FPw": 10326.0,
+            "FNw": 1789.4043840551037,
+            "n_truth": 2213,
+            "n_emitted": 10499
+          },
+          {
+            "dti": 0.07194938222123444,
+            "TPw": 396.8855350799111,
+            "FPw": 10348.0,
+            "FNw": 3812.1144649200887,
+            "n_truth": 4209,
+            "n_emitted": 10506
+          },
+          {
+            "dti": 0.14151063653721557,
+            "TPw": 670.4330478481934,
+            "FPw": 8246.0,
+            "FNw": 3022.5669521518066,
+            "n_truth": 3693,
+            "n_emitted": 8503
+          }
+        ],
+        "B": [
+          {
+            "dti": 0.10196229295460515,
+            "TPw": 344.99960642544545,
+            "FPw": 8349.0,
+            "FNw": 1711.0003935745544,
+            "n_truth": 2056,
+            "n_emitted": 8492
+          },
+          {
+            "dti": 0.1143005803396709,
+            "TPw": 459.7103118324528,
+            "FPw": 10314.0,
+            "FNw": 1874.2896881675472,
+            "n_truth": 2334,
+            "n_emitted": 10499
+          },
+          {
+            "dti": 0.058608766727984,
+            "TPw": 329.46881664361086,
+            "FPw": 10370.0,
+            "FNw": 4022.531183356389,
+            "n_truth": 4352,
+            "n_emitted": 10506
+          },
+          {
+            "dti": 0.08967230145316686,
+            "TPw": 404.4115255918447,
+            "FPw": 8345.0,
+            "FNw": 3045.5884744081554,
+            "n_truth": 3450,
+            "n_emitted": 8503
+          },
+          {
+            "dti": 0.0950471909773889,
+            "TPw": 304.9290493715779,
+            "FPw": 8364.0,
+            "FNw": 1538.070950628422,
+            "n_truth": 1843,
+            "n_emitted": 8492
+          },
+          {
+            "dti": 0.1464945821909446,
+            "TPw": 581.5407364725475,
+            "FPw": 10255.0,
+            "FNw": 1671.4592635274525,
+            "n_truth": 2253,
+            "n_emitted": 10499
+          },
+          {
+            "dti": 0.06309649808893393,
+            "TPw": 360.3740595611236,
+            "FPw": 10353.0,
+            "FNw": 4100.625940438877,
+            "n_truth": 4461,
+            "n_emitted": 10506
+          },
+          {
+            "dti": 0.1069143907958509,
+            "TPw": 463.0253865059256,
+            "FPw": 8323.0,
+            "FNw": 2753.974613494074,
+            "n_truth": 3217,
+            "n_emitted": 8503
+          },
+          {
+            "dti": 0.1052796587340295,
+            "TPw": 357.8207294063636,
+            "FPw": 8340.0,
+            "FNw": 1716.1792705936364,
+            "n_truth": 2074,
+            "n_emitted": 8492
+          },
+          {
+            "dti": 0.179250173989916,
+            "TPw": 805.6451091849317,
+            "FPw": 10159.0,
+            "FNw": 2071.3548908150683,
+            "n_truth": 2877,
+            "n_emitted": 10499
+          },
+          {
+            "dti": 0.057281911103491304,
+            "TPw": 297.2849264772556,
+            "FPw": 10380.0,
+            "FNw": 3520.715073522744,
+            "n_truth": 3818,
+            "n_emitted": 10506
+          },
+          {
+            "dti": 0.10793326488738839,
+            "TPw": 511.57286858643636,
+            "FPw": 8311.0,
+            "FNw": 3207.4271314135635,
+            "n_truth": 3719,
+            "n_emitted": 8503
+          },
+          {
+            "dti": 0.07858409875049559,
+            "TPw": 252.80193270015266,
+            "FPw": 8388.0,
+            "FNw": 1608.1980672998473,
+            "n_truth": 1861,
+            "n_emitted": 8492
+          },
+          {
+            "dti": 0.1304621854194463,
+            "TPw": 532.7488266675223,
+            "FPw": 10281.0,
+            "FNw": 1868.2511733324777,
+            "n_truth": 2401,
+            "n_emitted": 10499
+          },
+          {
+            "dti": 0.08484398745596657,
+            "TPw": 457.15907248755116,
+            "FPw": 10320.0,
+            "FNw": 3583.8409275124486,
+            "n_truth": 4041,
+            "n_emitted": 10506
+          },
+          {
+            "dti": 0.1120798813704537,
+            "TPw": 532.7779465489054,
+            "FPw": 8299.0,
+            "FNw": 3201.2220534510943,
+            "n_truth": 3734,
+            "n_emitted": 8503
+          },
+          {
+            "dti": 0.09487831293967128,
+            "TPw": 300.46955147723855,
+            "FPw": 8362.0,
+            "FNw": 1492.5304485227614,
+            "n_truth": 1793,
+            "n_emitted": 8492
+          },
+          {
+            "dti": 0.13495549635205664,
+            "TPw": 547.9448168481873,
+            "FPw": 10277.0,
+            "FNw": 1821.0551831518128,
+            "n_truth": 2369,
+            "n_emitted": 10499
+          },
+          {
+            "dti": 0.08622200577935062,
+            "TPw": 451.7998589803895,
+            "FPw": 10320.0,
+            "FNw": 3405.2001410196103,
+            "n_truth": 3857,
+            "n_emitted": 10506
+          },
+          {
+            "dti": 0.08493001459985876,
+            "TPw": 338.263742080561,
+            "FPw": 8372.0,
+            "FNw": 2462.736257919439,
+            "n_truth": 2801,
+            "n_emitted": 8503
+          },
+          {
+            "dti": 0.08903269578180804,
+            "TPw": 300.6029234881435,
+            "FPw": 8369.0,
+            "FNw": 1752.3970765118565,
+            "n_truth": 2053,
+            "n_emitted": 8492
+          },
+          {
+            "dti": 0.16605160478925457,
+            "TPw": 698.5646430199608,
+            "FPw": 10208.0,
+            "FNw": 1833.4353569800392,
+            "n_truth": 2532,
+            "n_emitted": 10499
+          },
+          {
+            "dti": 0.06438807164821102,
+            "TPw": 344.0910271064489,
+            "FPw": 10364.0,
+            "FNw": 3658.908972893551,
+            "n_truth": 4003,
+            "n_emitted": 10506
+          },
+          {
+            "dti": 0.09049313221538444,
+            "TPw": 421.2869205931849,
+            "FPw": 8336.0,
+            "FNw": 3208.7130794068153,
+            "n_truth": 3630,
+            "n_emitted": 8503
+          },
+          {
+            "dti": 0.09617805828285537,
+            "TPw": 319.53299777513627,
+            "FPw": 8360.0,
+            "FNw": 1663.4670022248638,
+            "n_truth": 1983,
+            "n_emitted": 8492
+          },
+          {
+            "dti": 0.13686252783671773,
+            "TPw": 571.8907689033952,
+            "FPw": 10261.0,
+            "FNw": 1943.1092310966048,
+            "n_truth": 2515,
+            "n_emitted": 10499
+          },
+          {
+            "dti": 0.06181676701950134,
+            "TPw": 342.25790080515003,
+            "FPw": 10365.0,
+            "FNw": 3901.74209919485,
+            "n_truth": 4244,
+            "n_emitted": 10506
+          },
+          {
+            "dti": 0.1352748112366923,
+            "TPw": 672.8251249034527,
+            "FPw": 8244.0,
+            "FNw": 3315.174875096547,
+            "n_truth": 3988,
+            "n_emitted": 8503
+          },
+          {
+            "dti": 0.11714824934831526,
+            "TPw": 430.7722053668426,
+            "FPw": 8315.0,
+            "FNw": 1979.2277946331574,
+            "n_truth": 2410,
+            "n_emitted": 8492
+          },
+          {
+            "dti": 0.11193657655912097,
+            "TPw": 467.9153829960836,
+            "FPw": 10313.0,
+            "FNw": 2062.0846170039163,
+            "n_truth": 2530,
+            "n_emitted": 10499
+          },
+          {
+            "dti": 0.06079156826769327,
+            "TPw": 333.5948845106878,
+            "FPw": 10364.0,
+            "FNw": 3851.4051154893123,
+            "n_truth": 4185,
+            "n_emitted": 10506
+          },
+          {
+            "dti": 0.10103421158318815,
+            "TPw": 470.0526294548228,
+            "FPw": 8316.0,
+            "FNw": 3148.9473705451774,
+            "n_truth": 3619,
+            "n_emitted": 8503
+          },
+          {
+            "dti": 0.13657828506829195,
+            "TPw": 494.08800807510477,
+            "FPw": 8290.0,
+            "FNw": 1831.9119919248951,
+            "n_truth": 2326,
+            "n_emitted": 8492
+          },
+          {
+            "dti": 0.1379410237760007,
+            "TPw": 552.5517876825089,
+            "FPw": 10280.0,
+            "FNw": 1746.4482123174912,
+            "n_truth": 2299,
+            "n_emitted": 10499
+          },
+          {
+            "dti": 0.045509200636621054,
+            "TPw": 248.64998465924742,
+            "FPw": 10406.0,
+            "FNw": 3917.3500153407526,
+            "n_truth": 4166,
+            "n_emitted": 10506
+          },
+          {
+            "dti": 0.10197039527180561,
+            "TPw": 453.03478145961196,
+            "FPw": 8325.0,
+            "FNw": 2905.965218540388,
+            "n_truth": 3359,
+            "n_emitted": 8503
+          },
+          {
+            "dti": 0.07745903580632338,
+            "TPw": 266.3246869039507,
+            "FPw": 8381.0,
+            "FNw": 1869.6753130960492,
+            "n_truth": 2136,
+            "n_emitted": 8492
+          },
+          {
+            "dti": 0.10324077599449767,
+            "TPw": 404.52892993944386,
+            "FPw": 10335.0,
+            "FNw": 1808.471070060556,
+            "n_truth": 2213,
+            "n_emitted": 10499
+          },
+          {
+            "dti": 0.07125951188413969,
+            "TPw": 393.0250691357859,
+            "FPw": 10348.0,
+            "FNw": 3815.974930864214,
+            "n_truth": 4209,
+            "n_emitted": 10506
+          },
+          {
+            "dti": 0.11727143644949978,
+            "TPw": 554.1341376253038,
+            "FPw": 8300.0,
+            "FNw": 3138.865862374696,
+            "n_truth": 3693,
+            "n_emitted": 8503
+          }
+        ]
+      },
+      "meta": [
+        {
+          "seed": 215,
+          "fold": "NW"
+        },
+        {
+          "seed": 215,
+          "fold": "NE_LidarGapHeavy"
+        },
+        {
+          "seed": 215,
+          "fold": "SW"
+        },
+        {
+          "seed": 215,
+          "fold": "SE"
+        },
+        {
+          "seed": 216,
+          "fold": "NW"
+        },
+        {
+          "seed": 216,
+          "fold": "NE_LidarGapHeavy"
+        },
+        {
+          "seed": 216,
+          "fold": "SW"
+        },
+        {
+          "seed": 216,
+          "fold": "SE"
+        },
+        {
+          "seed": 217,
+          "fold": "NW"
+        },
+        {
+          "seed": 217,
+          "fold": "NE_LidarGapHeavy"
+        },
+        {
+          "seed": 217,
+          "fold": "SW"
+        },
+        {
+          "seed": 217,
+          "fold": "SE"
+        },
+        {
+          "seed": 218,
+          "fold": "NW"
+        },
+        {
+          "seed": 218,
+          "fold": "NE_LidarGapHeavy"
+        },
+        {
+          "seed": 218,
+          "fold": "SW"
+        },
+        {
+          "seed": 218,
+          "fold": "SE"
+        },
+        {
+          "seed": 219,
+          "fold": "NW"
+        },
+        {
+          "seed": 219,
+          "fold": "NE_LidarGapHeavy"
+        },
+        {
+          "seed": 219,
+          "fold": "SW"
+        },
+        {
+          "seed": 219,
+          "fold": "SE"
+        },
+        {
+          "seed": 220,
+          "fold": "NW"
+        },
+        {
+          "seed": 220,
+          "fold": "NE_LidarGapHeavy"
+        },
+        {
+          "seed": 220,
+          "fold": "SW"
+        },
+        {
+          "seed": 220,
+          "fold": "SE"
+        },
+        {
+          "seed": 221,
+          "fold": "NW"
+        },
+        {
+          "seed": 221,
+          "fold": "NE_LidarGapHeavy"
+        },
+        {
+          "seed": 221,
+          "fold": "SW"
+        },
+        {
+          "seed": 221,
+          "fold": "SE"
+        },
+        {
+          "seed": 222,
+          "fold": "NW"
+        },
+        {
+          "seed": 222,
+          "fold": "NE_LidarGapHeavy"
+        },
+        {
+          "seed": 222,
+          "fold": "SW"
+        },
+        {
+          "seed": 222,
+          "fold": "SE"
+        },
+        {
+          "seed": 223,
+          "fold": "NW"
+        },
+        {
+          "seed": 223,
+          "fold": "NE_LidarGapHeavy"
+        },
+        {
+          "seed": 223,
+          "fold": "SW"
+        },
+        {
+          "seed": 223,
+          "fold": "SE"
+        },
+        {
+          "seed": 224,
+          "fold": "NW"
+        },
+        {
+          "seed": 224,
+          "fold": "NE_LidarGapHeavy"
+        },
+        {
+          "seed": 224,
+          "fold": "SW"
+        },
+        {
+          "seed": 224,
+          "fold": "SE"
+        }
+      ]
+    },
+    "canary_max_auc_new_transforms": 0.609122390341628
+  },
+  "uniqueness_vs_registry": {
+    "max_dot_overlap_within_3px_euclidean": 0.8522105263157894,
+    "max_dot_overlap_peer_registry_12": 0.46628947368421053,
+    "max_dot_overlap_self_repo": 0.8522105263157894,
+    "worst_raster": "repo:gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.tif",
+    "per_raster": {
+      "peer:g24_d15.tif": 0.4559736842105263,
+      "peer:g25_d28.tif": 0.44107894736842107,
+      "peer:g27_tv2_d15.tif": 0.46628947368421053,
+      "peer:g28_h27_4_r1.tif": 0.4291052631578947,
+      "peer:g28_h32_1.tif": 0.4371842105263158,
+      "peer:g28_h36_1.tif": 0.42476315789473684,
+      "peer:g28_h38_1.tif": 0.43023684210526314,
+      "peer:g30_d28.tif": 0.44107894736842107,
+      "peer:g31_h27_4.tif": 0.4291052631578947,
+      "peer:g32_h33_2_b2.tif": 0.41336842105263155,
+      "peer:g33_h33d.tif": 0.43605263157894736,
+      "peer:g36_anderson.tif": 0.4169473684210526,
+      "repo:gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-nan.tif": 0.44013157894736843,
+      "repo:gems27-farfield-swap-augmented-detector-probe-20261002-a34b0799df59-nan.tif": 0.5048421052631579,
+      "repo:gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.tif": 0.8522105263157894,
+      "repo:gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif": 0.46628947368421053,
+      "repo:gems27-topo-gap-closure-t-v2-on-d2-8-20261002-3ebd51534bb1-nan.tif": 0.4517894736842105,
+      "repo:gems27-topo-gap-closure-t-v2-plus-h27-4-r1-on-d1-5-20261002-d466b251f309-nan.tif": 0.45631578947368423
+    },
+    "max_surface_spearman": 0.44573325496777744,
+    "thresholds": {
+      "dot_overlap": 0.7,
+      "spearman": 0.9
+    },
+    "pass": false,
+    "peer_registry_pass": true,
+    "selector_note": "Frozen gate (knowledge/15 \u00a74) FAILS only against this repo's own unsubmitted H28-1 research raster (audit-only, never scored); against the 12-raster peer parallel registry the file passes. Promotion would require a selector decision to retire the H28-1 artifact from the self-registry \u2014 not taken unilaterally here (no post-hoc gate edits)."
+  },
+  "raster": {
+    "primary_allfinite": "gems27-dconfirm-hybrid-armd-b2-38k-20261025-5ea0385b7e70-allfinite.tif",
+    "sha256": "40b88a6477b1914a525c587ef139f1016f3d52188442099e5fa5eeab716008c2",
+    "bytes": 826788,
+    "dots": 38000,
+    "content_id": "5ea0385b7e70",
+    "zip": "gems27-dconfirm-hybrid-armd-b2-38k-20261025-5ea0385b7e70-allfinite.zip",
+    "nan_twin": "gems27-dconfirm-hybrid-armd-b2-38k-20261025-5ea0385b7e70-nan.tif",
+    "nan_twin_sha256": "eed607e61b9e12b7540f2ed34939d620aaf87ef1c24f1a38b3c6d88ac548b9fa",
+    "directory": "docs/downloads/research"
+  },
+  "validator": {
+    "zeros_hard_pass": true,
+    "zeros_checks": {
+      "grid_matches_template": {
+        "pass": true,
+        "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+        "hard": true
+      },
+      "single_band_float32": {
+        "pass": true,
+        "detail": "count=1 dtype=float32",
+        "hard": true
+      },
+      "inside_footprint_all_finite": {
+        "pass": true,
+        "detail": "0 non-finite inside 5167373 px",
+        "hard": true
+      },
+      "inside_footprint_in_0_1": {
+        "pass": true,
+        "detail": "min=0 max=1",
+        "hard": true
+      },
+      "no_infinities_anywhere": {
+        "pass": true,
+        "detail": "np.isinf(whole array) is empty",
+        "hard": true
+      },
+      "outside_footprint_is_zero_and_finite": {
+        "pass": true,
+        "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+        "hard": true
+      },
+      "strict_whole_array_range": {
+        "pass": true,
+        "detail": "whole-array min=0 max=1",
+        "hard": true
+      },
+      "profile_driver_gtiff": {
+        "pass": true,
+        "detail": "GTiff",
+        "hard": false
+      },
+      "compression_like_sample": {
+        "pass": true,
+        "detail": "Compression.lzw",
+        "hard": false
+      }
+    },
+    "nan_hard_pass": true,
+    "dots_on_catalogue": 0,
+    "min_dot_distance_to_catalogue_px": 2.23606797749979
+  },
+  "submission_name": "GEMSDOE27-DCONFIRM-ARMD-B2-38K",
+  "note_max_140_chars": "27GEMSDOE L-DCONFIRM armD hybrid B2 38k; HOLDOUT-DTI 0.1066 vs 0.0992; UNSCORED | id 5ea0385b7e70",
+  "note_chars": 97,
+  "ok_to_submit": false,
+  "verdict": "negative",
+  "live_score": null,
+  "live_score_label": "UNSCORED \u2014 no ORGANIZER-CONFIRMED score exists for this file"
+}

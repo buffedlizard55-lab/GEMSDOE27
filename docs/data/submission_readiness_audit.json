@@ -1,0 +1,110 @@
+{
+  "purpose": "Fail-closed evidence/byte audit, not a new geological experiment",
+  "approved": [],
+  "results": {
+    "dconfirm_run_card_2026-10-25.json": {
+      "ok_to_publish_as_submission": false,
+      "reasons": [
+        "run card does not authorize submission",
+        "verdict is not promote",
+        "missing withheld positive count",
+        "efficacy gate not explicitly passed",
+        "paired improvement CI missing or does not exclude zero",
+        "canary missing or leakage threshold exceeded",
+        "uniqueness gate not passed",
+        "dot overlap missing or exceeds threshold"
+      ],
+      "actual_sha256": "40b88a6477b1914a525c587ef139f1016f3d52188442099e5fa5eeab716008c2",
+      "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
+    },
+    "h29_1_run_card.json": {
+      "ok_to_publish_as_submission": false,
+      "reasons": [
+        "run card does not authorize submission",
+        "verdict is not promote",
+        "uniqueness gate not passed",
+        "dot overlap missing or exceeds threshold"
+      ],
+      "actual_sha256": "40dc48a9f512c6b92415e5b2349e809be33107f9fec6661cc67c3a9871b8c84f",
+      "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
+    },
+    "h29_1b_run_card.json": {
+      "ok_to_publish_as_submission": false,
+      "reasons": [
+        "run card does not authorize submission",
+        "verdict is not promote",
+        "missing HOLDOUT-DTI label",
+        "efficacy gate not explicitly passed",
+        "paired improvement CI missing or does not exclude zero",
+        "uniqueness gate not passed",
+        "dot overlap missing or exceeds threshold"
+      ],
+      "actual_sha256": "ad7d90f43c5d913f029b748d9b15ae9a4e9368e3d2e953aafac67ce91ced460a",
+      "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
+    },
+    "h29_run_card_2026-10-25.json": {
+      "ok_to_publish_as_submission": false,
+      "reasons": [
+        "run card does not authorize submission",
+        "verdict is not promote",
+        "efficacy gate not explicitly passed",
+        "paired improvement CI missing or does not exclude zero"
+      ],
+      "actual_sha256": "8585c5e870f197f84fda5bac7f22047d646fb73d455eb8b1129486c79bb976cf",
+      "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
+    },
+    "lane_run_card_2026-10-25.json": {
+      "ok_to_publish_as_submission": false,
+      "reasons": [
+        "run card does not authorize submission",
+        "verdict is not promote",
+        "efficacy gate not explicitly passed",
+        "paired improvement CI missing or does not exclude zero"
+      ],
+      "actual_sha256": "d648a3cc02713612eb5c59637a4732418ae555aa4037ac9dbc815d2e7ab00528",
+      "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
+    },
+    "run_card_unique_scatter_farfield.json": {
+      "ok_to_publish_as_submission": false,
+      "reasons": [
+        "run card does not authorize submission",
+        "verdict is not promote",
+        "missing HOLDOUT-DTI label",
+        "missing evaluator version",
+        "missing withheld positive count",
+        "efficacy gate not explicitly passed",
+        "paired improvement CI missing or does not exclude zero",
+        "canary missing or leakage threshold exceeded",
+        "uniqueness gate not passed",
+        "dot overlap missing or exceeds threshold",
+        "surface correlation missing or exceeds threshold",
+        "all-finite validator not passed",
+        "missing or overlong submission note",
+        "raster missing or outside repository"
+      ],
+      "actual_sha256": null,
+      "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
+    },
+    "run_card_unique_scatter_farfield_20261025.json": {
+      "ok_to_publish_as_submission": false,
+      "reasons": [
+        "run card does not authorize submission",
+        "verdict is not promote",
+        "missing HOLDOUT-DTI label",
+        "missing evaluator version",
+        "missing withheld positive count",
+        "efficacy gate not explicitly passed",
+        "paired improvement CI missing or does not exclude zero",
+        "canary missing or leakage threshold exceeded",
+        "uniqueness gate not passed",
+        "dot overlap missing or exceeds threshold",
+        "surface correlation missing or exceeds threshold",
+        "all-finite validator not passed",
+        "missing or overlong submission note",
+        "raster missing or outside repository"
+      ],
+      "actual_sha256": null,
+      "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
+    }
+  }
+}

@@ -1,0 +1,91 @@
+building transforms...
+T15 (5167373, 15) T8 (5167373, 8) in 44s
+canary dip_edge_x_scarpann2_6: AUC 0.5718
+canary dip_scarp_x_edgeann2_6: AUC 0.5729
+canary dip_depthstep_x_scarpann2_6: AUC 0.6091
+canary rad_front_ThK_s2: AUC 0.5236
+canary rad_front_UK_s2: AUC 0.4982
+canary rad_front_K_s2: AUC 0.4923
+canary pol_lap_pair1_3: AUC 0.5725
+canary pol_face_pair1_3: AUC 0.5798
+OOF arm B...
+OOF arm D...
+OOF arm E...
+surface Spearman g24_d15.tif {'D': 0.44573325496777744, 'E': 0.45547540850836277}
+surface Spearman g25_d28.tif {'D': 0.44545440449934287, 'E': 0.45518823335706377}
+surface Spearman g27_tv2_d15.tif {'D': 0.4441331853800083, 'E': 0.4530270096322984}
+surface Spearman g28_h27_4_r1.tif {'D': 0.43425443692326104, 'E': 0.44448189529071713}
+surface Spearman g28_h32_1.tif {'D': 0.44011857779199304, 'E': 0.45015094544847195}
+surface Spearman g28_h36_1.tif {'D': 0.43331259611461853, 'E': 0.44362381363001546}
+surface Spearman g28_h38_1.tif {'D': 0.43539269979691664, 'E': 0.44557279365675}
+surface Spearman g30_d28.tif {'D': 0.44545440449934287, 'E': 0.45518823335706377}
+surface Spearman g31_h27_4.tif {'D': 0.43425443692326104, 'E': 0.44448189529071713}
+surface Spearman g32_h33_2_b2.tif {'D': 0.4201420504358862, 'E': 0.43107993861982785}
+surface Spearman g33_h33d.tif {'D': 0.43513092417211446, 'E': 0.4459951304233169}
+surface Spearman g36_anderson.tif {'D': 0.4164791487770574, 'E': 0.42750129495533024}
+E2a selection...
+  seed 210 fold NW: B=0.1105 D=0.1191 E=0.1223
+  seed 210 fold NE_LidarGapHeavy: B=0.1512 D=0.1492 E=0.1327
+  seed 210 fold SW: B=0.0654 D=0.0686 E=0.0646
+  seed 210 fold SE: B=0.0893 D=0.1208 E=0.0937
+  seed 211 fold NW: B=0.0987 D=0.1085 E=0.1080
+  seed 211 fold NE_LidarGapHeavy: B=0.1313 D=0.1361 E=0.1246
+  seed 211 fold SW: B=0.0677 D=0.0703 E=0.0699
+  seed 211 fold SE: B=0.1279 D=0.1362 E=0.1278
+  seed 212 fold NW: B=0.0952 D=0.0986 E=0.0972
+  seed 212 fold NE_LidarGapHeavy: B=0.1142 D=0.1114 E=0.1121
+  seed 212 fold SW: B=0.0614 D=0.0658 E=0.0540
+  seed 212 fold SE: B=0.1276 D=0.1468 E=0.1231
+  seed 213 fold NW: B=0.0825 D=0.0970 E=0.0954
+  seed 213 fold NE_LidarGapHeavy: B=0.1342 D=0.1344 E=0.1197
+  seed 213 fold SW: B=0.0606 D=0.0708 E=0.0690
+  seed 213 fold SE: B=0.1278 D=0.1433 E=0.1206
+  seed 214 fold NW: B=0.1080 D=0.1149 E=0.1106
+  seed 214 fold NE_LidarGapHeavy: B=0.1416 D=0.1419 E=0.1267
+  seed 214 fold SW: B=0.0574 D=0.0643 E=0.0557
+  seed 214 fold SE: B=0.0910 D=0.1168 E=0.1000
+selection pooled HOLDOUT-DTI: {'B': 0.10019683788577569, 'D': 0.10878607314240211, 'E': 0.09902821422790394}
+selected candidate: D
+E2b confirmation of D vs B...
+  seed 215 fold NW: D=0.1158 B=0.1020
+  seed 215 fold NE_LidarGapHeavy: D=0.1159 B=0.1143
+  seed 215 fold SW: D=0.0624 B=0.0586
+  seed 215 fold SE: D=0.1153 B=0.0897
+  seed 216 fold NW: D=0.1004 B=0.0950
+  seed 216 fold NE_LidarGapHeavy: D=0.1466 B=0.1465
+  seed 216 fold SW: D=0.0651 B=0.0631
+  seed 216 fold SE: D=0.1167 B=0.1069
+  seed 217 fold NW: D=0.1112 B=0.1053
+  seed 217 fold NE_LidarGapHeavy: D=0.1744 B=0.1793
+  seed 217 fold SW: D=0.0561 B=0.0573
+  seed 217 fold SE: D=0.1239 B=0.1079
+  seed 218 fold NW: D=0.0928 B=0.0786
+  seed 218 fold NE_LidarGapHeavy: D=0.1183 B=0.1305
+  seed 218 fold SW: D=0.0821 B=0.0848
+  seed 218 fold SE: D=0.1291 B=0.1121
+  seed 219 fold NW: D=0.0998 B=0.0949
+  seed 219 fold NE_LidarGapHeavy: D=0.1428 B=0.1350
+  seed 219 fold SW: D=0.0828 B=0.0862
+  seed 219 fold SE: D=0.1172 B=0.0849
+  seed 220 fold NW: D=0.0990 B=0.0890
+  seed 220 fold NE_LidarGapHeavy: D=0.1649 B=0.1661
+  seed 220 fold SW: D=0.0680 B=0.0644
+  seed 220 fold SE: D=0.1027 B=0.0905
+  seed 221 fold NW: D=0.1035 B=0.0962
+  seed 221 fold NE_LidarGapHeavy: D=0.1409 B=0.1369
+  seed 221 fold SW: D=0.0605 B=0.0618
+  seed 221 fold SE: D=0.1552 B=0.1353
+  seed 222 fold NW: D=0.1292 B=0.1171
+  seed 222 fold NE_LidarGapHeavy: D=0.1261 B=0.1119
+  seed 222 fold SW: D=0.0726 B=0.0608
+  seed 222 fold SE: D=0.1190 B=0.1010
+  seed 223 fold NW: D=0.1407 B=0.1366
+  seed 223 fold NE_LidarGapHeavy: D=0.1353 B=0.1379
+  seed 223 fold SW: D=0.0531 B=0.0455
+  seed 223 fold SE: D=0.1127 B=0.1020
+  seed 224 fold NW: D=0.0854 B=0.0775
+  seed 224 fold NE_LidarGapHeavy: D=0.1081 B=0.1032
+  seed 224 fold SW: D=0.0719 B=0.0713
+  seed 224 fold SE: D=0.1415 B=0.1173
+confirmation pooled: {'D': 0.10658807688572539, 'B': 0.0991747508599681} | gate: True {'mean_delta': 0.007599097043765454, 'ci95': [0.004885070876335968, 0.010380051418353596], 'cells_positive': 32, 'n_cells': 40, 'folds_positive': 4, 'seeds_positive': 10, 'n_seeds': 10, 'fold_mean_delta': {'NW': 0.00856825927203685, 'NE_LidarGapHeavy': 0.0011692879212353556, 'SW': 0.0020670674177492568, 'SE': 0.018591773564040355}}
+wrote /home/user/GEMSDOE27/evidence/dconfirm_holdout_2026-10-25.json
