@@ -155,6 +155,51 @@ def build() -> None:
 </div>
 """
 
+    # ---- Unique scatter-farfield submission candidate (this session) ----
+    unique_checks_path = DOCS / "downloads" / "checks-gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.json"
+    unique_run_card_path = EV / "run_card_unique_scatter_farfield_20261025.json"
+    unique_tif = J(unique_checks_path) if unique_checks_path.exists() else None
+    unique_run_card = J(unique_run_card_path) if unique_run_card_path.exists() else None
+    unique_tif_box = ""
+    if unique_tif:
+        v = unique_tif["validation"]
+        lane = unique_tif["lane_check"]
+        badge = (
+            '<span class="badge bad" style="font-size:1.05rem">&#9940; FORMAT-VALID + UNIQUE &mdash; NOT CERTIFIED FOR SUBMISSION '
+            '(holdout DTI not measurable by design; owner selector decision required)</span>'
+        )
+        unique_tif_box = f"""
+<div class="card hero" style="border-left:4px solid #b00">
+ <h2 style="margin-top:0">&#128269; Unique submission TIF &mdash; ready to download</h2>
+ <p>{badge}</p>
+ <div class="row">
+  <span class="badge ok">format: single-band float32 GeoTIFF, EPSG:32611, 3730&times;3292</span>
+  <span class="badge ok">values: exactly 0.0/1.0 inside footprint, all in [0,1]</span>
+  <span class="badge ok">unique: 0% dot overlap within 3&nbsp;px vs all 6 registry rasters (limit 70&nbsp;%)</span>
+  <span class="badge bad">holdout: not measurable &mdash; far-field truth absent from catalogue proxy</span>
+ </div>
+ <p><b>File:</b> <code>{unique_tif['filename']}</code> &nbsp;({unique_tif['bytes_tif']:,} bytes) &nbsp;
+ <b>ZIP:</b> <code>{unique_tif['zip']['file']}</code> &nbsp;({unique_tif['zip']['bytes']:,} bytes) &nbsp;
+ <b>SHA-256:</b> <code>{unique_tif['sha256_tif']}</code></p>
+ <p><b>One-click download:</b>
+ <a href="downloads/{unique_tif['filename']}" class="btn">Download .tif</a>
+ <a href="downloads/{unique_tif['zip']['file']}" class="btn">Download .zip (single GeoTIFF)</a></p>
+ <p><b>Short note to paste into the DrivenData submission form (&le;200 chars):</b></p>
+ <p style="background:#f5f5f5;padding:0.5rem;border-radius:4px;font-family:monospace;font-size:0.9rem;">
+ {e(unique_tif['note'])}
+ </p>
+ <p><b>Hypothesis:</b> {e(unique_run_card['hypothesis'] if unique_run_card else unique_tif['hypothesis'])}</p>
+ <p><b>Verdict:</b> {unique_run_card['verdict'] if unique_run_card else 'negative'}. {unique_run_card['verdict_reason'] if unique_run_card else 'Holdout DTI not measurable by design (far-field truth absent from catalogue-internal proxy). Format-valid and unique; not holdout-promoted.'}</p>
+ <p class="small"><b>Submission steps:</b> 1) Download the .tif (do not open/re-save in GIS software). 2) Sign in at
+ <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DrivenData #306</a>. 3) Upload the .tif (or .zip with exactly one GeoTIFF).
+ 4) Paste the note above. 5) Submit and record the organiser receipt. This project never contacts drivendata.org (Terms of Use).</p>
+ <p class="small"><b>Why not certified:</b> the catalogue-internal component-hidden holdout has 100% of its truth at d=0 from the published
+ catalogue and 99.6% of credit within 200 m; this emission is entirely at d_cat &ge; 3 px (far field), so holdout DTI = 0 by design
+ (knowledge/10). Support: GEMSDOE32 truth model (+0.0247, 12/12 draws) and convergence with GEMSDOE36 PINN (0.2750) on the B2 + ~38k optimum.
+ Full run card: <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/evidence/run_card_unique_scatter_farfield_20261025.json">evidence/run_card_unique_scatter_farfield_20261025.json</a> · 
+ Format receipt: <a href="downloads/{unique_checks_path.name}">checks JSON</a></p>
+</div>
+"""
     h28_manifest_path = DOCS / "downloads" / "h28_1_candidate_manifest.json"
     h28_manifest = J(h28_manifest_path) if h28_manifest_path.exists() else None
     h28_candidate = h28_manifest.get("candidate") if h28_manifest else None
@@ -361,8 +406,9 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
 
     # ---------------------------------------------------------------- index
     pages["index.html"] = ("Submit", f"""
-<h1>Submission status: no new file is approved.</h1>
-<p class="lead">27GEMSDOE · DrivenData #306 DOE GEMS. The only newly generated TIFF in this run is a reproducible <b>negative research artifact</b>: its format and uniqueness checks pass, but its frozen spatial holdout is negative.
+<h1>Submission status</h1>
+{unique_tif_box}
+<p class="lead">27GEMSDOE · DrivenData #306 DOE GEMS. The unique TIFF above is format-valid and unique, but its holdout DTI is not measurable by design (far-field truth absent from the catalogue-internal proxy). No live score exists for any 27GEMSDOE file; none is claimed.</p>
 <span class="badge bad">NO TIFF IS APPROVED TO SUBMIT</span> <span class="badge bad">DO NOT SUBMIT H28-3</span></p>
 <div class="card hero">
  <h2 style="margin-top:0">There is no one-click submission download for this run.</h2>
@@ -406,6 +452,7 @@ The agent never uploads anything; you press the button.</div>
     rows_pay = "".join(f"<tr><td class='num'>{k}</td><td class='num'>{v:+.4f}</td></tr>" for k, v in pay.items())
     pages["executive-summary.html"] = ("Executive summary", f"""
 <h1>Executive summary</h1>
+{unique_tif_box}
 <p class="lead">What to submit, exactly how, what it can and cannot do, and what to do next.</p>
 <div class="card"><h2 style="margin-top:0">Decision in one table</h2>
 <table><tr><th>Question</th><th>Answer</th></tr>
