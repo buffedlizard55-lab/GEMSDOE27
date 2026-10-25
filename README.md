@@ -16,7 +16,7 @@ The single built file (GAP arm, per the pre-result fallback rule) is a
 (sha256 `deb8b4f1…`, 38,000 dots) — format-valid (all-finite [0,1], the portal-error
 fix) and peer-unique (max 45.7 % dot overlap vs the 12 pinned registry rasters)
 but **DO NOT SUBMIT**. Full result: [knowledge/21](knowledge/21_h30_result_2026-10-25.md);
-run card: `evidence/h30_run_card.json`. The site's first screen and executive
+run card: `evidence/h30_dipgap_run_card.json`. The site's first screen and executive
 summary show this status, computed fail-closed from the run-card JSON by
 `scripts/audit_submission_readiness.py` (no human-inspection gate). Data-readiness
 was restored first: 16 hash-pinned inputs OK, prepared stack sha256 `83ed2704…`,

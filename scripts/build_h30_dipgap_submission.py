@@ -94,7 +94,7 @@ def read_dots(path: Path, threshold: float = 0.5) -> np.ndarray:
 
 
 def main() -> int:
-    hold = json.loads((paths.EVIDENCE / "h30_holdout.json").read_text())
+    hold = json.loads((paths.EVIDENCE / "h30_dipgap_holdout.json").read_text())
     sel = hold["selection"]
     contenders = ["DIP", "GAP", "SOFT"]
     selected = sel["selected_candidate"]
@@ -335,7 +335,7 @@ def main() -> int:
         "live_score": None,
         "live_score_label": "UNSCORED - no ORGANIZER-CONFIRMED score exists for this file",
     }
-    (paths.EVIDENCE / "h30_run_card.json").write_text(json.dumps(card, indent=2) + "\n")
+    (paths.EVIDENCE / "h30_dipgap_run_card.json").write_text(json.dumps(card, indent=2) + "\n")
     manifest_name = "h30_candidate_manifest.json" if ok_to_submit else \
         "h30_negative_research_manifest.json"
     (final_dir / manifest_name).write_text(

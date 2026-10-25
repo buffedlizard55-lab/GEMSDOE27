@@ -225,17 +225,17 @@
     {
       "id": "H30-1",
       "title": "Dip-advection correction (feature form of H29-2)",
-      "status": "TESTED - SELECTION GATE FAILED; negative (Lane L-H30 seeds 240-244); pooled HOLDOUT-DTI 0.09888 vs Arm-D 0.10234; evidence/h30_holdout.json"
+      "status": "TESTED - SELECTION GATE FAILED; negative (Lane L-H30 seeds 240-244); pooled HOLDOUT-DTI 0.09888 vs Arm-D 0.10234; evidence/h30_dipgap_holdout.json"
     },
     {
       "id": "H30-2",
       "title": "Along-strike gap flanking",
-      "status": "TESTED - SELECTION GATE FAILED; negative (Lane L-H30 seeds 240-244); pooled HOLDOUT-DTI 0.10180 vs Arm-D 0.10234; negative research TIFF 3107a3007b77 NOT APPROVED; evidence/h30_holdout.json + evidence/h30_run_card.json"
+      "status": "TESTED - SELECTION GATE FAILED; negative (Lane L-H30 seeds 240-244); pooled HOLDOUT-DTI 0.10180 vs Arm-D 0.10234; negative research TIFF 3107a3007b77 NOT APPROVED; evidence/h30_dipgap_holdout.json + evidence/h30_dipgap_run_card.json"
     },
     {
       "id": "H30-3",
       "title": "Soft rank-taper emission (H29-3)",
-      "status": "TESTED - SELECTION GATE FAILED; negative (Lane L-H30 seeds 240-244); pooled HOLDOUT-DTI 0.09943 vs binary Arm-D 0.10234; evidence/h30_holdout.json"
+      "status": "TESTED - SELECTION GATE FAILED; negative (Lane L-H30 seeds 240-244); pooled HOLDOUT-DTI 0.09943 vs binary Arm-D 0.10234; evidence/h30_dipgap_holdout.json"
     }
   ],
   "separate_review_class": {

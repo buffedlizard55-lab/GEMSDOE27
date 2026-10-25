@@ -53,7 +53,7 @@
       "actual_sha256": "8585c5e870f197f84fda5bac7f22047d646fb73d455eb8b1129486c79bb976cf",
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
-    "h30_run_card.json": {
+    "h30_dipgap_run_card.json": {
       "ok_to_publish_as_submission": false,
       "reasons": [
         "run card does not authorize submission",

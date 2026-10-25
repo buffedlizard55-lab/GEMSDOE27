@@ -193,7 +193,7 @@ def main() -> int:
     leak = {k: v for k, v in canary.items() if v["auc_direction_invariant"] > 0.90}
     print("CANARY leak flags (direction-invariant >0.90):", leak or "none", flush=True)
     if leak:
-        dest = paths.EVIDENCE / "h30_holdout.json"
+        dest = paths.EVIDENCE / "h30_dipgap_holdout.json"
         dest.write_text(json.dumps({
             "experiment": "H30 lane holdout (E1 canary STOP)",
             "preregistration": "knowledge/20_lane_h30_preregistration_2026-10-25.md",
@@ -324,7 +324,7 @@ def main() -> int:
         "gate_efficacy_pass": bool(gate_efficacy),
         "runtime_s": round(time.time() - t0, 1),
     }
-    dest = paths.EVIDENCE / "h30_holdout.json"
+    dest = paths.EVIDENCE / "h30_dipgap_holdout.json"
     dest.write_text(json.dumps(out, indent=2) + "\n")
     print(f"wrote {dest}")
     return 0

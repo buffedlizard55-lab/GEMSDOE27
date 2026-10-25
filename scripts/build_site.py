@@ -131,7 +131,7 @@ def build() -> None:
 
     # ---- Lane L-H30: dip-advection / gap-flanking / soft emission vs Arm-D (JSON-driven) ----
     h30_box = ""
-    h30_card_path = EV / "h30_run_card.json"
+    h30_card_path = EV / "h30_dipgap_run_card.json"
     if h30_card_path.exists():
         c30 = J(h30_card_path)
         h30, u30, r30 = c30["holdout"], c30["uniqueness_vs_registry"], c30["raster"]
@@ -171,7 +171,7 @@ def build() -> None:
  Extended overlaps vs this repo's own unsubmitted research files (up to
  {c30['extended_self_overlap_reported_not_gated']['max_dot_overlap_within_3px_euclidean']:.1%}) are reported in the run card.</li>
  <li>Full result: <a href="{REPO_URL}/blob/main/knowledge/21_h30_result_2026-10-25.md">knowledge/21</a> &middot;
- run card: <a href="{REPO_URL}/blob/main/evidence/h30_run_card.json">evidence/h30_run_card.json</a> &middot;
+ run card: <a href="{REPO_URL}/blob/main/evidence/h30_dipgap_run_card.json">evidence/h30_dipgap_run_card.json</a> &middot;
  automatic audit: <a href="data/submission_readiness_audit.json">submission readiness audit</a>.</li>
  </ul>
 </div>
