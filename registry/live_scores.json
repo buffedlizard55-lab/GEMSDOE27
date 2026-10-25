@@ -207,8 +207,33 @@
     "external_data_provenance": "https://mrdata.usgs.gov/geology/state/shp/NV.zip (sha256 3b333ac025e59aae7f0d827db45ba32c425cf867eb341561a788af1de186b76b) and .../CA.zip (sha256 78765ba4428df9f25a84f86e0b2529bd0508fc8a2cf65d2f41a830e82bccfd58), both verified downloaded by a GitHub runner in 16GEMSDOE evidence/ci/external_verification.json (2026-09-30)"
    },
    "irregularity": "Absent from this registry in Sessions 1-3, so the Session-3 corpus of 20 hash-authenticated rasters never included it. It is the only live score in the group's history that measures an emission placed entirely >300 m from the catalogue. See registry/irregularities.json id 'h18-4-score-unregistered'."
+  },
+  {
+   "repo": "buffedlizard55-lab/GEMSDOE27",
+   "label": "gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-allfinite.tif",
+   "sha256": "8585c5e870f197f84fda5bac7f22047d646fb73d455eb8b1129486c79bb976cf",
+   "family": "H29-1 / Lane L-S7-2026-10-25 (dual-partition stitched-OOF hydrothermal + piedmont flexure + destriped mag + Frangi vesselness + weighted 300 m CELF cover, B2 > 200 m)",
+   "emitted_px": 37654,
+   "owner_reported_public_score": null,
+   "status": "UNSCORED Session-7 candidate built 2026-10-25 (HOLDOUT-DTI 0.0422 buffered / 0.1039 unbuffered; technical & uniqueness validator PASS; weekly slot HELD under strict frozen gate vs D0)",
+   "corroboration": "evidence/h29_run_card_2026-10-25.json; scripts/verify_downloads.py 0 failures"
   }
  ],
+ "owner_reported_prompt_2026_10_25": {
+  "provenance": "OWNER-REPORTED in 2026-10-25 prompt; no DrivenData JSON/screenshot receipt stored in this repository.",
+  "focus_fleet_scores": {
+   "32GEMSDOE_h33_2_b2": 0.2778,
+   "25GEMSDOE_d2_8": 0.2586,
+   "70GEMSDOE_oof_submodular": 0.2478,
+   "24GEMSDOE_d1_5": 0.2477,
+   "27GEMSDOE_slot1_5512495c6bd1": 0.2449,
+   "76GEMSDOE_piedmont_oof": 0.2343,
+   "82GEMSDOE_tip_continuation": 0.1555,
+   "91GEMSDOE_tip_continuation": 0.0041,
+   "49GEMSDOE_unreconciled_prompt_claim": 0.4413
+  },
+  "slot1_ab_inversion_ref": "evidence/slot1_live_ab_inversion.json"
+ },
  "27GEMSDOE": [
   {
    "file": "(see docs/downloads/manifest.json)",

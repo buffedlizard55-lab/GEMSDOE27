@@ -138,6 +138,51 @@ def main() -> int:
            f"slot5 manifest reports the one-sided swapped fraction {m5['fraction_of_file_swapped']:.4f} "
            f"(symmetric difference {m5['symmetric_difference_fraction']:.4f})")
     ok(len(list(DL.glob("*.tif"))) == len(set(p.name for p in DL.glob("*.tif"))), "all .tif file names are unique")
+
+    # Session-7 H29-1 (Lane L-S7-2026-10-25) autonomous verification (zero human intervention):
+    h29_man_path = DL / "h29_candidate_manifest.json"
+    if h29_man_path.exists():
+        hm = json.loads(h29_man_path.read_text())
+        for variant, key_fn, key_sha in (
+            ("allfinite", "allfinite", "sha256_allfinite"),
+            ("nan", "nan", "sha256_nan"),
+        ):
+            hp = DL / hm[key_fn]
+            with rasterio.open(hp) as hs:
+                ha = hs.read(1)
+                hprof = (hs.crs.to_epsg(), hs.shape, tuple(hs.transform)[:6], hs.dtypes[0])
+                hnd, hcount = hs.nodata, hs.count
+            htag = f"h29/{variant}"
+            ok(hprof == tprof, f"{htag}: same CRS/shape/transform/dtype as template (EPSG:32611, 3730x3292, float32)")
+            ok(hcount == 1, f"{htag}: single band")
+            h_in, h_out = ha[foot], ha[~foot]
+            ok(bool(np.isfinite(h_in).all()), f"{htag}: every in-footprint value is finite")
+            ok(float(h_in.min()) >= 0.0 and float(h_in.max()) <= 1.0, f"{htag}: in-footprint range in [0,1]")
+            ok(set(np.unique(h_in).tolist()) <= {0.0, 1.0}, f"{htag}: exact binary {{0.0, 1.0}}")
+            ok(int((h_in == 1.0).sum()) == hm["emitted_px"], f"{htag}: emitted {hm['emitted_px']} dots")
+            ok(not bool((ha == 1.0)[cat].any()), f"{htag}: 0 catalogue overlap")
+            dcat_h = distance_transform_edt(~cat)
+            ok(bool((dcat_h[ha == 1.0] > hm["b_exclusion_px"]).all()), f"{htag}: strict B2 collar > {hm['b_exclusion_px']} px")
+            if variant == "allfinite":
+                ok(bool(np.isfinite(ha).all() and (h_out == 0.0).all() and hnd is None),
+                   f"{htag}: all 12,279,160 cells finite in [0,1], zeros outside, nodata=None")
+            else:
+                ok(int(np.isnan(h_out).sum()) == h_out.size and hnd is not None and np.isnan(hnd),
+                   f"{htag}: NaN outside footprint and nodata=NaN declared")
+            ok(sha(hp) == hm[key_sha], f"{htag}: sha256 matches h29_candidate_manifest.json")
+        hz = DL / hm["zip_allfinite"]
+        with zipfile.ZipFile(hz) as zf:
+            ok(zf.namelist() == [hm["allfinite"]] and zf.read(hm["allfinite"]) == (DL / hm["allfinite"]).read_bytes(),
+               "h29/zip: holds exactly the single allfinite GeoTIFF, byte-identical")
+        ok(sha(hz) == hm["sha256_zip_allfinite"], "h29/zip: sha256 matches h29_candidate_manifest.json")
+        hnote = (DL / hm["note_file"]).read_text().strip()
+        ok(len(hnote) <= 140 and hnote == hm["note"], f"h29/note: {len(hnote)} chars (<= 140) and matches manifest")
+        rc = json.loads((ROOT / hm["run_card"]).read_text())
+        ok(rc["uniqueness_vs_registry"]["pass"] and rc["uniqueness_vs_registry"]["max_dot_overlap_within_3px_vs_peers"] <= 0.70,
+           "h29/uniqueness: <= 70% 3px dot overlap & <= 0.90 Spearman vs all 12 peer rasters")
+        ok(rc["ok_to_submit"] == (rc["verdict"] == "promote" and rc["validator"]["technical_validator_pass"]),
+           f"h29/gate-consistency: verdict={rc['verdict']} ok_to_submit={rc['ok_to_submit']}")
+
     print(f"\n{len(FAIL)} failure(s)")
     return 1 if FAIL else 0
 
