@@ -1,5 +1,21 @@
 # 27GEMSDOE - topology-first research and submission lab for DrivenData #306 (DOE GEMS)
 
+## Current audit addendum (2026-10-25; read at every session start)
+**No newly certified unique TIFF was produced in this audit. DO NOT SUBMIT research files.**
+The current request requires a genuinely new TIFF, visible machine-based eligibility,
+whole-segment buffered holdout, feature canaries, pre-placement surface and final-dot
+registry checks, at most three experiments/two hours, and no automated slot use.
+These requirements are not fulfilled by renaming a prior raster or waiving duplicates.
+See [the three-pass audit and ranked prospective hypotheses](knowledge/19_readiness_audit_20261025.md).
+Run `.venv/bin/python scripts/audit_submission_readiness.py` to refresh the public
+[byte-bound submission evidence audit](docs/data/submission_readiness_audit.json).
+Badges now fail closed on contradictory/missing evidence, hash mismatch, failed
+efficacy or uniqueness, leakage canary, and invalid notes. The official reference
+supports CPU execution; earlier blanket “GPU needed” statements are too strong.
+The historical verbatim prompt below remains preserved; this paragraph summarizes
+the current request rather than purporting to reproduce it verbatim.
+
+
 **Site:** https://buffedlizard55-lab.github.io/GEMSDOE27/ — current front page states research status and submission eligibility.
 **Session 8 review (2026-10-25):** no new experiment or slot was used. Environment verification: 92 tests passed, 3 skipped; Ruff passed. The standalone download verifier could not run because `data_cache/sample_submission.tif` is absent, so no fresh byte/template validation is claimed. Current arm-D candidates still fail the extended self-registry uniqueness gate; **no TIFF is currently certified OK to submit**. Full review, ranked next hypotheses and precise blockers: `knowledge/18_session8_repo_review_2026-10-25.md`.
 **Status (2026-10-25, Session 7): NO TIFF IS CERTIFIED OK TO SUBMIT — machine gates decide, no human inspection.** The new H29-1 D-refill candidate (38,000 dots, B2, all-finite [0,1], validator PASS) **beat its frozen fresh-seed holdout gate** (pooled **HOLDOUT-DTI** 0.1088 vs 0.1002 control; paired +0.00857, 95% CI [+0.00513, +0.01249], 18/20 cells, seeds 210–214) and is **unique vs every scored rival** (≤3 px dot overlap ≤46.2% vs all 12 pinned peers; 40.9% vs the 0.2778 file), but it **fails the frozen extended duplicate screen** vs this repo's own unscored H28-1 research file (85.4% > 70%), and deconfliction H29-1b proved geometrically infeasible. Verdict: **negative — ⛔ NOT CERTIFIED UNIQUE, DO NOT SUBMIT AS THE UNIQUE LANE FILE** (`knowledge/17`, `evidence/h29_1_run_card.json`). Spending a slot on it is the owner's separate selector decision (IR-2026-10-25-06). H28-3 remains a failed-gate negative artifact. A parallel session (Lane L-DCONFIRM, `knowledge/15_lane_dconfirm_preregistration.md`, `knowledge/16_dconfirm_result.md`) independently confirmed the same arm-D gain on disjoint seeds 215–224 (paired Δ +0.00760 [+0.00489, +0.01038], 10/10 seeds) and rejected 8 new dip/rad/polarity transforms at selection; its file is a measured cross-session duplicate of H29-1 (87.5% within 3 px, `evidence/dconfirm_cross_session_overlap.json`) and is likewise **negative / not certified** — the selector must treat H29-1, H29-1b and L-DCONFIRM as one candidate family (IR-2026-10-25-09). No DrivenData upload, organiser receipt, or score occurred in either session. **How OK-to-submit will look when earned:** front page + executive summary show a green ✅ VALIDATED badge and one-click .tif/.zip + ≤140-char note, rendered from the run-card JSON only when holdout + uniqueness + format gates all PASS; otherwise the red ⛔ badge above. Submission steps (when green): download primary all-finite .tif → DrivenData #306 submission form → upload .tif (or single-TIFF .zip) → paste note → submit → record receipt in `registry/live_scores.json`.

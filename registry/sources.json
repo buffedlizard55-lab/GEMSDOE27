@@ -280,6 +280,18 @@
    "accessed": "2026-10-02",
    "evidence": "Session-4 record; pins copied verbatim into scripts/fetch_external_layers.py",
    "feed": false
+  },
+  {
+   "id": "official-reference-cpu-20261025",
+   "title": "GEMS official reference README: CPU and GPU environments",
+   "publisher": "DrivenData / reference-solution authors",
+   "url": "https://github.com/drivendataorg/gems-prize-reference-solution/blob/aebe92f7c8a990f0e3443451b7a825d9afd6336b/README.md",
+   "category": "reference implementation",
+   "used_for": "Correct blanket GPU prerequisite; official README offers CPU-only environments",
+   "status": "read",
+   "accessed": "2026-10-25",
+   "evidence": "evidence/official_reference_readme_20261025.md; sha256 cfa4d55559c9128313beb9417eae7e0a94c31677132afb1120f9e86222804239",
+   "feed": false
   }
  ]
 }
