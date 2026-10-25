@@ -1,0 +1,50 @@
+{
+  "hypothesis": "unique scatter-smoothed far-field greedy emission (+ T-v2 far-field dots)",
+  "layers": [
+    "OOF detector probabilities (32-band label-free feature stack)",
+    "scatter smoothing gaussian sigma=1.85 px",
+    "catalogue-distance far-field mask (d >= 3 px = 300 m)",
+    "T-v2 topology gap-closure links (z>=3, far field, non-redundant)"
+  ],
+  "signature": "blurred detector surface matching ~1.85 px truth scatter; off-catalogue-only emission",
+  "why_missing_fault": "emits where scattered hidden truth lives (around, not on, mapped traces); excludes catalogue pixels the holdout over-rewards; credit-per-pixel selection",
+  "differs_from_repo": "GEMSDOE27 emits on the catalogue base; GEMSDOE32 h33 emits far-from-catalogue dots from a plain thinned base without scatter smoothing, credit-bar gating, or topology links",
+  "seeds": [
+    160,
+    161,
+    162,
+    163
+  ],
+  "base_oof_mean_dti": 0.08949442875258752,
+  "variants": {
+    "scatter_farfield": {
+      "mean_dti_gain": -0.08949442875258752,
+      "min_seed_gain": -0.09298202267091726,
+      "max_seed_gain": -0.08587734612773042,
+      "fold_gains": {
+        "NW": -0.07465389237628152,
+        "NE_LidarGapHeavy": -0.1141309693205908,
+        "SW": -0.07162587044266397,
+        "SE": -0.09756698287081379
+      },
+      "folds_improved": 0,
+      "mean_dots": 15362.0,
+      "mean_base_dots": 16795.4375
+    },
+    "scatter_farfield_plus_tv2": {
+      "mean_dti_gain": -0.08949442875258752,
+      "min_seed_gain": -0.09298202267091726,
+      "max_seed_gain": -0.08587734612773042,
+      "fold_gains": {
+        "NW": -0.07465389237628152,
+        "NE_LidarGapHeavy": -0.1141309693205908,
+        "SW": -0.07162587044266397,
+        "SE": -0.09756698287081379
+      },
+      "folds_improved": 0,
+      "mean_dots": 15629.1875,
+      "mean_base_dots": 16795.4375
+    }
+  },
+  "seconds": 86.634512424469
+}

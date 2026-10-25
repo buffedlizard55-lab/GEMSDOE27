@@ -1,0 +1,122 @@
+{
+  "content_id": "98e59bf8e3ce",
+  "filename": "gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.tif",
+  "note": "27GEMSDOE unique scatter-smoothed far-field | UNIQUE submission (not copied from any GEMSDOE site): scatter-smoothed (sigma=1.85 px) off-catalogue far-field emi | id 98e59bf8e3ce | not yet live-scored",
+  "note_chars": 200,
+  "generated_utc": "2026-10-25T20:24:16Z",
+  "status": "UNIQUE UNSCORED measurement probe; no leaderboard score claimed",
+  "hypothesis": "scatter-smoothed off-catalogue far-field emission",
+  "emitted_px": 24482,
+  "sha256_tif": "8a73f01776d0c53ff99ab05bac8612768f186476846708412096ef927ea0b983",
+  "bytes_tif": 801574,
+  "zip": {
+    "file": "gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.zip",
+    "bytes": 129579,
+    "sha256": "0796384601f908f996d34cc3e75f64a07b9de4059dffbfa4d724efe55ccc00b5"
+  },
+  "validation": {
+    "file": "gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.tif",
+    "bytes": 801574,
+    "sha256": "8a73f01776d0c53ff99ab05bac8612768f186476846708412096ef927ea0b983",
+    "variant": "allfinite",
+    "checks": {
+      "grid_matches_template": {
+        "pass": true,
+        "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+        "hard": true
+      },
+      "single_band_float32": {
+        "pass": true,
+        "detail": "count=1 dtype=float32",
+        "hard": true
+      },
+      "inside_footprint_all_finite": {
+        "pass": true,
+        "detail": "0 non-finite inside 5167373 px",
+        "hard": true
+      },
+      "inside_footprint_in_0_1": {
+        "pass": true,
+        "detail": "min=0 max=1",
+        "hard": true
+      },
+      "no_infinities_anywhere": {
+        "pass": true,
+        "detail": "np.isinf(whole array) is empty",
+        "hard": true
+      },
+      "outside_footprint_is_zero_and_finite": {
+        "pass": true,
+        "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+        "hard": true
+      },
+      "strict_whole_array_range": {
+        "pass": true,
+        "detail": "whole-array min=0 max=1",
+        "hard": true
+      },
+      "profile_driver_gtiff": {
+        "pass": true,
+        "detail": "GTiff",
+        "hard": false
+      },
+      "compression_like_sample": {
+        "pass": true,
+        "detail": "Compression.lzw",
+        "hard": false
+      }
+    },
+    "hard_checks_passed": true,
+    "hard_failures": [],
+    "nonzero_inside_px": 24482,
+    "value_set_inside": [
+      0.0,
+      1.0
+    ]
+  },
+  "lane_check": {
+    "registry_rasters": 6,
+    "duplicates": [],
+    "passed": true,
+    "gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-nan.tif": {
+      "spearman_rho": -0.006208645096027411,
+      "my_dots_within_3px_frac": 0.0,
+      "duplicate": false
+    },
+    "gems27-farfield-swap-augmented-detector-probe-20261002-a34b0799df59-nan.tif": {
+      "spearman_rho": -0.007482541486445776,
+      "my_dots_within_3px_frac": 0.0,
+      "duplicate": false
+    },
+    "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.tif": {
+      "spearman_rho": -0.0074196520596037175,
+      "my_dots_within_3px_frac": 0.0,
+      "duplicate": false
+    },
+    "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif": {
+      "spearman_rho": -0.007561481063080558,
+      "my_dots_within_3px_frac": 0.0,
+      "duplicate": false
+    },
+    "gems27-topo-gap-closure-t-v2-on-d2-8-20261002-3ebd51534bb1-nan.tif": {
+      "spearman_rho": -0.006493869779764128,
+      "my_dots_within_3px_frac": 0.0,
+      "duplicate": false
+    },
+    "gems27-topo-gap-closure-t-v2-plus-h27-4-r1-on-d1-5-20261002-d466b251f309-nan.tif": {
+      "spearman_rho": -0.00722127110772548,
+      "my_dots_within_3px_frac": 0.0,
+      "duplicate": false
+    }
+  },
+  "format": {
+    "single_band_float32": true,
+    "grid_matches_template": true,
+    "inside_footprint_in_0_1": true,
+    "inside_footprint_all_finite": true,
+    "no_infinities_anywhere": true,
+    "values_exactly_0_or_1": true,
+    "no_dot_on_catalogue": true,
+    "no_dot_outside_footprint": true
+  }
+}

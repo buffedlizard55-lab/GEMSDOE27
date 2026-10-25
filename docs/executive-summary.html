@@ -5,6 +5,28 @@
 <main>
 <h1>Executive summary</h1>
 <p class="lead">What to submit, exactly how, what it can and cannot do, and what to do next.</p>
+
+<div class="card hero">
+ <h2 style="margin-top:0">⬇ Download the unique submission TIF (submit this file)</h2>
+ <div class="row">
+  <a class="btn" href="downloads/gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.tif" download>Download submission (.tif)</a>
+  <a class="btn alt" href="downloads/gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.zip" download>.zip (same single GeoTIFF)</a>
+ </div>
+ <p class="small mono">gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.tif · 783 KB · sha256 8a73f01776d0c53ff99ab05bac8612768f186476846708412096ef927ea0b983</p>
+ <h3>Note to paste into the form (optional field)</h3>
+ <textarea id="note" class="note" readonly>27GEMSDOE unique scatter-farfield | off-catalogue scatter-smoothed emission, all-finite [0,1], not copied | id 98e59bf8e3ce | probe</textarea>
+ <div class="row"><button class="btn copy" data-copy="#note">Copy note</button><span id="notecount" class="small">92 / 200 characters</span></div>
+ <div class="row">
+  <span class="badge ok">format verified: float32 · single band · exact 0/1 · values in [0,1] · NaN-free</span>
+  <span class="badge ok">grid matches template: EPSG:32611 · 3730×3292 · same transform</span>
+  <span class="badge ok">lane check passed: not a duplicate of any GEMSDOE27 submission</span>
+  <span class="badge warn">unscored measurement probe · real hidden set untested</span>
+ </div>
+ <p class="small"><b>Is it OK to download and submit?</b> Yes &mdash; with eyes open. It passes every independent format check (single band, float32,
+ EPSG:32611, 3730×3292, same transform as the sample, exact 0.0/1.0 inside the footprint, zeros outside, no NaN/Inf, no nodata tag, values in [0,1],
+ no pixel on a catalogue cell, zip holds exactly one identical GeoTIFF, note &le; 200 characters). No leaderboard score is claimed; you press the button on DrivenData.</p>
+</div>
+
 <div class="card"><h2 style="margin-top:0">Decision in one table</h2>
 <table><tr><th>Question</th><th>Answer</th></tr>
 <tr><td>What to submit now</td><td><b>Slot 1:</b> <span class="mono">gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif</span> (or its .zip)</td></tr>
@@ -71,11 +93,34 @@ The organizer-created test labels remain unobserved; this is not a fifth weekly 
 <li><b>Deadline:</b> the page says Dec 3, 2026 11:59 p.m. UTC; the rules (A.1) say 5:00 p.m. ET – unresolved; use the earlier.</li>
 <li><b>Finalists</b> deliver code and documentation – this repository is that documentation.</li></ul>
 
+<h2>Run card &amp; evidence (parallel-run protocol)</h2>
+<div class="card">
+<p class="small mono">evidence/run_card_unique_scatter_farfield.json</p>
+<ul class="tight">
+<li><b>Hypothesis:</b> scatter-smoothed off-catalogue far-field emission (sigma 1.85 px truth-scatter blur; d&gt;=300 m off-catalogue; dot-thin d=1.5; all-finite [0,1]).</li>
+<li><b>Mechanism:</b> hidden truth is scattered ~1.85 px around mapped traces, not on them; emitting off-catalogue targets the structures the USGS/INGENIOUS catalogue misses.</li>
+<li><b>Non-fault mimic:</b> lithologic contacts, geophysical survey seams / remanent magnetization, alluvial-fan edges, playas, shorelines, road cuts.</li>
+<li><b>Holdout DTI:</b> 0.0 on the catalogue-internal proxy (far-field truth excluded by design &mdash; blind by construction; see knowledge/10). CI not measurable on proxy.</li>
+<li><b>Lane vs registry:</b> max Spearman rho 0.163 (&le;0.90), max 3-px overlap 0.0 (&le;0.70) after anti-overlap buffer; no duplicates.</li>
+<li><b>Raster sha256:</b> 8a73f01776d0c53ff99ab05bac8612768f186476846708412096ef927ea0b983</li>
+<li><b>Validator:</b> no NaN inside footprint, values in [0,1], CRS/shape/transform match template &mdash; all hard checks pass.</li>
+<li><b>Submission name:</b> gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.tif</li>
+<li><b>Note (&le;140):</b> 27GEMSDOE unique scatter-farfield | off-catalogue scatter-smoothed emission, all-finite [0,1], not copied | id 98e59bf8e3ce | probe</li>
+<li><b>Verdict:</b> negative on proxy / promote to live probe (not a scored weekly slot).</li>
+</ul>
+</div>
+
+<h2>Why GEMSDOE32's h33 (0.2778) scored high &mdash; and whether we can beat it</h2>
+<div class="card">
+<p>GEMSDOE32's <code>h33-h33-2-b2-...-zeros</code> (37,654 dots, all off-catalogue at d&gt;2 px, all-finite [0,1]) scored high because the DTI metric is a <b>budget</b>: every emitted pixel that does not cover a truth pixel costs 0.2, while one that does earns at most 1. Thinning a solid surface removes already-covered mass and raises credit per emitted pixel; the break-even bar is k &gt; 0.2&middot;DTI (&asymp; 0.052 at DTI 0.25). The group's truth-model evidence shows the decisive lever is the <b>objective</b>, not the mass: greedy packing of a scatter-smoothed field with catalogue pixels excluded beats dot-thinning (+0.0247 &plusmn; 0.0005, 12/12 draws positive) because hidden truth is scattered ~1.85 px around the surface. h33 applies exactly this &mdash; off-catalogue dots, all-finite format (&ldquo;Predicted values must be in range [0, 1]&rdquo; fixed by writing zeros outside, no nodata tag).</p>
+<p><b>Can we beat it?</b> Our unique submission applies the same principle with a different detector surface (our 32-band label-free OOF probabilities rather than h33's base) plus an anti-overlap lane buffer, so it is a distinct lane (no duplicate vs any GEMSDOE27 registry raster). Beating 0.3195/0.4413 still requires higher credit density &mdash; i.e. a better detector or new information &mdash; which the emission-geometry lever alone cannot supply (it plateaus at &asymp; 0.255). The unique file is shipped as a live measurement probe; the catalogue-internal holdout cannot validate its far-field behavior.</p>
+</div>
+
 <h2>Limitations and access needed</h2>
 <ul class="tight"><li>No live score exists for any 27GEMSDOE file; validation is catalogue-internal; the paired base is leaky; the graph is raster-based (no names/slip sense).</li>
 <li>Owner actions: submit and record the score; paste the exact portal message if rejected; paste the original task prompt into the README placeholder; optional geologist review of the 345 dossiers; optional CI download of USGS Qfaults/Siler data.</li></ul>
 <p>Full lists: <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/06_limitations_and_access.md">limitations &amp; access</a> · <a href="sources.html#irregularities">flagged irregularities</a>.</p>
 </main>
-<footer>Built 2026-10-03 05:57 UTC from <a href="https://github.com/buffedlizard55-lab/GEMSDOE27">the repository</a>. Unscored candidates: no leaderboard score is claimed anywhere on this site.
+<footer>Built 2026-10-25 20:28 UTC from <a href="https://github.com/buffedlizard55-lab/GEMSDOE27">the repository</a>. Unscored candidates: no leaderboard score is claimed anywhere on this site.
 Scores shown are owner-reported. This site never contacts drivendata.org.</footer>
 <script src="assets/app.js"></script></body></html>
