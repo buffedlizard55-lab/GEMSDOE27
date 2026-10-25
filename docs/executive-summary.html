@@ -19,26 +19,6 @@
 <p>The unique H28-3 research TIFF is intentionally not offered as a submission download because it lost to the current baseline on its frozen holdout. Its all-finite GeoTIFF and ZIP passed format checks, but validity does not cure a negative model result.</p>
 <p>Read the <a href="research.html#h28-3">H28-3 result and run card</a>, <a href="downloads/research/h28_3_negative_research_manifest.json">format receipt</a>, and <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/evidence/h28_3_negative_uniqueness.json">peer-registry uniqueness report</a>. The receipt says <b>NOT APPROVED FOR SUBMISSION</b> on every file variant.</p></div>
 
-
-<div class="card hero" style="border-left:4px solid #1565c0">
- <h2 style="margin-top:0">Newest unique TIF &mdash; Lane L-DCONFIRM hybrid detector (arm D, B2, 38,000 dots)</h2>
- <p><span class="badge bad" style="font-size:1.05rem">&#9940; DO NOT SUBMIT YET &mdash; selector gate (holdout PASS, format PASS, peer-uniqueness PASS; self-registry duplicate vs audit-only H28-1)</span></p>
- <p class="small">Research bytes for audit (<b>not</b> a submission download until the selector gate below is recorded): <a href="downloads/research/gems27-dconfirm-hybrid-armd-b2-38k-20261025-5ea0385b7e70-allfinite.tif">all-finite GeoTIFF in downloads/research/</a> · <a href="downloads/research/gems27-dconfirm-hybrid-armd-b2-38k-20261025-5ea0385b7e70-allfinite.zip">single-TIFF ZIP</a> (sha256 40b88a6477b1914a&hellip;).</p>
- <p>First GEMSDOE27 detector to <b>confirm</b> a gain on untouched spatial-holdout seeds: pooled
- <b>HOLDOUT-DTI 0.1066 vs 0.0992</b>
- (paired &Delta; +0.0076, 95% CI [+0.0049, +0.0104],
- 4/4 folds, 10/10 seeds,
- 121,404 withheld positives; evaluator gems27.metric v1 (alpha=0.2, beta=0.8, R=3px triangular)).
- This is catalogue-internal evidence, <b>not</b> a leaderboard score; no live score is claimed.</p>
- <ul class="tight">
- <li><b>Unique vs every scored peer site (measured):</b> max 46.6% of dots within 3&nbsp;px of any of the 12 pinned GEMSDOE24/25/27/28/30/31/32/33/36 rasters (limit 70%); surface Spearman max 0.446 (limit 0.90). It is <b>not</b> an edit of the 0.2778 H19-5 dot field.</li>
- <li><b>Why the badge is not green:</b> 85.2% of its dots lie within 3&nbsp;px of this repo&rsquo;s own <i>unsubmitted, audit-only</i> H28-1 research raster &mdash; the same mechanism family &mdash; which fails this lane&rsquo;s frozen self-registry duplicate rule (knowledge/15 &sect;4). No post-hoc gate edit was made. The separate selector step can retire that audit artifact from the self-registry; the file bytes would not change.</li>
- <li><b>Format (machine-validated, no human inspection):</b> single-band float32, EPSG:32611, 3730&times;3292, values exactly 0/1, all-finite with nodata=None (fixes &ldquo;Predicted values must be in range [0, 1]&rdquo;), 0 dots on the catalogue, min distance &gt;200&nbsp;m (B2), spacing &ge;280&nbsp;m (<a href="downloads/research/checks-gems27-dconfirm-hybrid-armd-b2-38k-20261025-5ea0385b7e70-allfinite.json">re-read receipt</a>). Full run card: <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/evidence/dconfirm_run_card_2026-10-25.json">evidence/dconfirm_run_card_2026-10-25.json</a>; analysis: <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/16_dconfirm_result.md">knowledge/16</a>.</li>
- <li><b>Submission name &amp; note (use only if the badge turns green):</b> <code>GEMSDOE27-DCONFIRM-ARMD-B2-38K</code> &middot; <code>27GEMSDOE L-DCONFIRM armD hybrid B2 38k; HOLDOUT-DTI 0.1066 vs 0.0992; UNSCORED | id 5ea0385b7e70</code> (97 chars).</li>
- </ul>
-</div>
-
-
 <h2>Exact submission steps</h2>
 <ol class="steps">
 <li><b>Gate first:</b> use a file only when the front page explicitly says <b>APPROVED TO SUBMIT</b>. The current H28-3 research files are explicitly ineligible; do not upload them.</li>
@@ -55,6 +35,36 @@
 </div>
 
 <h2>Historical weekly-slot decision tree — archived and suspended</h2>
+
+<div class="card" style="border-left:4px solid #b00">
+ <h3 style="margin-top:0">H29-1 D-refill (2026-10-25): best-validated detector &mdash; NOT certified unique</h3>
+ <p><span class="badge bad" style="font-size:1.05rem">&#9940; NOT CERTIFIED UNIQUE &mdash; DO NOT SUBMIT AS THE UNIQUE LANE FILE (extended duplicate screen failed; see run card)</span></p>
+ <p>Full 32-band stack + 15 subsurface transforms at B2/38k, preregistered (<a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/15_preregistration_H29-1.md">knowledge/15</a>) and confirmed on <b>fresh seeds 210&ndash;214</b>: pooled HOLDOUT-DTI <b>0.1088</b> vs full-32 control <b>0.1002</b> (paired &Delta; +0.0086, 95% CI [+0.0051, +0.0125], 18/20 cells, 59,362 withheld positives, gems27.metric v1 (alpha=0.2, beta=0.8, R=3px triangular); leakage canary max AUC 0.557). Efficacy and format gates <b>PASS</b>.</p>
+ <ul class="tight">
+ <li><b>Unique vs every scored rival (measured):</b> max &le;3&nbsp;px dot overlap vs the 12 pinned peer rasters <b>46.2%</b> (limit 70&nbsp;%); vs the 0.2778 file specifically <b>40.9%</b> (exact shared pixels 1,649 of 38,000); surface Spearman max <b>0.446</b> (limit 0.90).</li>
+ <li><b>Why it is still NOT certified:</b> the frozen screen also covered this repo's own <i>unscored</i> H28-1 research file (59,075 px): overlap <b>85.4%</b> &gt; 70&nbsp;% (exact-pixel Jaccard 0.116 &mdash; same ridges, different dots). Frozen gates are not relaxed after the fact.</li>
+ <li><b>Deconflicted variant H29-1b:</b> minimal-swap vs H28-1 was geometrically infeasible on the ridge candidate pool &mdash; final max overlap still <b>82.6%</b> &rarr; also <b>negative</b>. No further tuning (experiment budget exhausted).</li>
+ <li><b>Format:</b> all-finite primary, nodata=None, every cell in [0,1], EPSG:32611 3730&times;3292 (re-read receipt beside the bytes in downloads/research/; sha256 40dc48a9f512c6b9&hellip;). Run cards: <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/evidence/h29_1_run_card.json">H29-1</a> &middot; <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/evidence/h29_1b_run_card.json">H29-1b</a>. <b>No live score exists; none is claimed.</b> Spending a weekly slot on a non-certified file is the owner's separate selector decision and must be recorded first.</li>
+ </ul>
+</div>
+
+
+<div class="card" style="border-left:4px solid #1565c0">
+ <h3 style="margin-top:0">Lane L-DCONFIRM (parallel session B): disjoint-seed confirmation of the same D detector</h3>
+ <p><span class="badge bad" style="font-size:1.05rem">&#9940; DO NOT SUBMIT &mdash; duplicate of the H29-1 lane family (selector treats both as one candidate)</span></p>
+ <p>An independent parallel session preregistered the same hybrid idea (full 32-band stack + 15 subsurface transforms,
+ B2/38k; plus 8 new dip-offset / radiometric-front / polarity transforms that <b>failed selection</b> and were dropped).
+ On <b>disjoint confirmation seeds 215&ndash;224</b> (40 cells, 121,404 withheld positives) arm D again beat
+ the full-32 control: pooled <b>HOLDOUT-DTI 0.1066 vs 0.0992</b>
+ (paired &Delta; +0.0076, 95% CI [+0.0049, +0.0104],
+ 4/4 folds, 10/10 seeds). Catalogue-internal evidence only; no live score.</p>
+ <ul class="tight">
+ <li><b>Cross-session duplicate (measured post-merge):</b> 87.5% of this file&rsquo;s dots lie within 3&nbsp;px of H29-1&rsquo;s dots (87.8% reverse) &mdash; the two parallel lanes converged. <b>Do not spend two slots on this family.</b> Evidence: <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/evidence/dconfirm_cross_session_overlap.json">cross-session overlap</a>.</li>
+ <li><b>Vs scored rivals:</b> max 46.6% within 3&nbsp;px of any of the 12 pinned peer rasters; surface Spearman max 0.446. Vs audit-only H28-1: 85.2% (same failure as H29-1).</li>
+ <li><b>Format:</b> all-finite, nodata=None, every cell in [0,1], EPSG:32611 3730&times;3292 (<a href="downloads/research/checks-gems27-dconfirm-hybrid-armd-b2-38k-20261025-5ea0385b7e70-allfinite.json">re-read receipt</a>); research bytes in <a href="downloads/research/gems27-dconfirm-hybrid-armd-b2-38k-20261025-5ea0385b7e70-allfinite.tif">downloads/research/</a> (sha256 40b88a6477b1914a&hellip;). Run card: <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/evidence/dconfirm_run_card_2026-10-25.json">evidence/dconfirm_run_card_2026-10-25.json</a>; analysis <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/16_dconfirm_result.md">knowledge/16 (L-DCONFIRM)</a>.</li>
+ </ul>
+</div>
+
 
 <div class="warnbox"><b>Session 6 H28-3 strain × conductivity result — FAILED; NO NEW SUBMISSION IS APPROVED.</b>
 <b>HOLDOUT-DTI (H28-3-holdout-v1):</b> baseline 0.105946; candidate 0.103352; paired Δ -0.002594; 95% bootstrap CI [-0.004240, -0.000907] across the 10 seed-level differences; withheld-positive occurrences 123,150. It improved only 2/10 seeds and 1/4 folds. Canary passed; the frozen gate failed.
@@ -80,6 +90,6 @@ The 59,243-dot all-finite research TIFF is format-valid and cleared the duplicat
 <li>Owner actions: submit and record the score; paste the exact portal message if rejected; paste the original task prompt into the README placeholder; optional geologist review of the 345 dossiers; optional CI download of USGS Qfaults/Siler data.</li></ul>
 <p>Full lists: <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/06_limitations_and_access.md">limitations &amp; access</a> · <a href="sources.html#irregularities">flagged irregularities</a>.</p>
 </main>
-<footer>Built 2026-10-25 21:09 UTC from <a href="https://github.com/buffedlizard55-lab/GEMSDOE27">the repository</a>. No current TIFF is approved for submission. No leaderboard score is claimed anywhere on this site.
+<footer>Built 2026-10-25 21:12 UTC from <a href="https://github.com/buffedlizard55-lab/GEMSDOE27">the repository</a>. No current TIFF is approved for submission. No leaderboard score is claimed anywhere on this site.
 Historical scores shown are owner-reported. This site never contacts drivendata.org.</footer>
 <script src="assets/app.js"></script></body></html>

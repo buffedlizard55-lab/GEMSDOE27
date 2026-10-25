@@ -87,7 +87,42 @@ def build() -> None:
 </div>
 """
 
-    # ---- Lane L-DCONFIRM (JSON-driven badge; knowledge/15-16) ----
+    # ---- H29-1/H29-1b D-refill (JSON-driven; machine gates decide the badge) ----
+    h29_box = ""
+    h29_card_path = EV / "h29_1_run_card.json"
+    h29b_card_path = EV / "h29_1b_run_card.json"
+    if h29_card_path.exists():
+        c29 = J(h29_card_path)
+        h29, u29, r29 = c29["holdout"], c29["uniqueness_vs_registry"], c29["raster"]
+        peers = {k: v for k, v in u29["per_raster"].items() if not k.startswith("gems27-")}
+        peer_max = max(peers.values()) if peers else 0.0
+        g32_ov = u29["per_raster"].get("g32_h33_2_b2.tif", 0.0)
+        ok29 = bool(c29.get("ok_to_submit"))
+        badge29 = ('<span class="badge ok" style="font-size:1.05rem">&#9989; VALIDATED &mdash; OK TO DOWNLOAD &amp; SUBMIT '
+                   '(all machine gates PASS; still UNSCORED)</span>') if ok29 else (
+                   '<span class="badge bad" style="font-size:1.05rem">&#9940; NOT CERTIFIED UNIQUE &mdash; DO NOT SUBMIT AS THE UNIQUE LANE FILE '
+                   '(extended duplicate screen failed; see run card)</span>')
+        h29b_line = ""
+        if h29b_card_path.exists():
+            c29b = J(h29b_card_path)
+            h29b_line = (f"<li><b>Deconflicted variant H29-1b:</b> minimal-swap vs H28-1 was geometrically infeasible on the ridge "
+                         f"candidate pool &mdash; final max overlap still <b>{c29b['uniqueness_vs_registry']['max_dot_overlap_within_3px_euclidean']:.1%}</b> "
+                         f"&rarr; also <b>negative</b>. No further tuning (experiment budget exhausted).</li>")
+        h29_box = f"""
+<div class="card" style="border-left:4px solid #b00">
+ <h3 style="margin-top:0">H29-1 D-refill (2026-10-25): best-validated detector &mdash; NOT certified unique</h3>
+ <p>{badge29}</p>
+ <p>Full 32-band stack + 15 subsurface transforms at B2/38k, preregistered (<a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/15_preregistration_H29-1.md">knowledge/15</a>) and confirmed on <b>fresh seeds 210&ndash;214</b>: pooled HOLDOUT-DTI <b>{h29['pooled_dti_D_lane']:.4f}</b> vs full-32 control <b>{h29['pooled_dti_B_control']:.4f}</b> (paired &Delta; {h29['paired_D_minus_B']['mean_delta']:+.4f}, 95% CI [{h29['paired_D_minus_B']['ci95'][0]:+.4f}, {h29['paired_D_minus_B']['ci95'][1]:+.4f}], {h29['paired_D_minus_B']['cells_positive']}/20 cells, {h29['n_withheld_positives_total']:,} withheld positives, {e(h29['evaluator'])}; leakage canary max AUC {h29['canary_max_auc']:.3f}). Efficacy and format gates <b>PASS</b>.</p>
+ <ul class="tight">
+ <li><b>Unique vs every scored rival (measured):</b> max &le;3&nbsp;px dot overlap vs the 12 pinned peer rasters <b>{peer_max:.1%}</b> (limit 70&nbsp;%); vs the 0.2778 file specifically <b>{g32_ov:.1%}</b> (exact shared pixels 1,649 of 38,000); surface Spearman max <b>{u29['max_surface_spearman_armD']:.3f}</b> (limit 0.90).</li>
+ <li><b>Why it is still NOT certified:</b> the frozen screen also covered this repo's own <i>unscored</i> H28-1 research file (59,075 px): overlap <b>{u29['max_dot_overlap_within_3px_euclidean']:.1%}</b> &gt; 70&nbsp;% (exact-pixel Jaccard 0.116 &mdash; same ridges, different dots). Frozen gates are not relaxed after the fact.</li>
+ {h29b_line}
+ <li><b>Format:</b> all-finite primary, nodata=None, every cell in [0,1], EPSG:32611 3730&times;3292 (re-read receipt beside the bytes in downloads/research/; sha256 {e(r29['sha256'][:16])}&hellip;). Run cards: <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/evidence/h29_1_run_card.json">H29-1</a> &middot; <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/evidence/h29_1b_run_card.json">H29-1b</a>. <b>No live score exists; none is claimed.</b> Spending a weekly slot on a non-certified file is the owner's separate selector decision and must be recorded first.</li>
+ </ul>
+</div>
+"""
+
+    # ---- Lane L-DCONFIRM, parallel session B (JSON-driven; same D family as H29-1) ----
     dc_path = DOCS / "downloads" / "dconfirm_candidate_manifest.json"
     dc = J(dc_path) if dc_path.exists() else None
     dconfirm_box = ""
@@ -97,37 +132,25 @@ def build() -> None:
         stats = conf["paired_candidate_minus_B"]
         rel_dir = r["directory"].replace("docs/", "", 1)
         tif_href = f"{rel_dir}/{r['primary_allfinite']}"
-        zip_href = f"{rel_dir}/{r['zip']}"
         checks_href = f"{rel_dir}/checks-{dc['stem']}-allfinite.json"
-        if dc.get("ok_to_submit"):
-            badge = ('<span class="badge ok" style="font-size:1.05rem">&#9989; VALIDATED &mdash; OK TO DOWNLOAD &amp; SUBMIT '
-                     '(holdout + uniqueness + format gates PASS; still UNSCORED)</span>')
-            dl = (f'<div class="row"><a class="btn" href="{e(tif_href)}" download>&#11015; Download submission (.tif)</a>'
-                  f'<a class="btn alt" href="{e(zip_href)}" download>.zip (same single GeoTIFF)</a></div>')
-        else:
-            badge = ('<span class="badge bad" style="font-size:1.05rem">&#9940; DO NOT SUBMIT YET &mdash; selector gate '
-                     '(holdout PASS, format PASS, peer-uniqueness PASS; self-registry duplicate vs audit-only H28-1)</span>')
-            # STOP policy (tests/test_site.py): while not approved, research bytes are
-            # linked for audit but never offered with a one-click download attribute.
-            dl = (f'<p class="small">Research bytes for audit (<b>not</b> a submission download until the selector gate '
-                  f'below is recorded): <a href="{e(tif_href)}">all-finite GeoTIFF in downloads/research/</a> · '
-                  f'<a href="{e(zip_href)}">single-TIFF ZIP</a> (sha256 {e(r["sha256"][:16])}&hellip;).</p>')
+        badge = ('<span class="badge ok" style="font-size:1.05rem">&#9989; VALIDATED &mdash; OK TO DOWNLOAD &amp; SUBMIT '
+                 '(all machine gates PASS; still UNSCORED)</span>') if dc.get("ok_to_submit") else (
+                 '<span class="badge bad" style="font-size:1.05rem">&#9940; DO NOT SUBMIT &mdash; duplicate of the H29-1 lane '
+                 'family (selector treats both as one candidate)</span>')
         dconfirm_box = f"""
-<div class="card hero" style="border-left:4px solid #1565c0">
- <h2 style="margin-top:0">Newest unique TIF &mdash; Lane L-DCONFIRM hybrid detector (arm {e(dc['arm'])}, B2, {r['dots']:,} dots)</h2>
+<div class="card" style="border-left:4px solid #1565c0">
+ <h3 style="margin-top:0">Lane L-DCONFIRM (parallel session B): disjoint-seed confirmation of the same D detector</h3>
  <p>{badge}</p>
- {dl}
- <p>First GEMSDOE27 detector to <b>confirm</b> a gain on untouched spatial-holdout seeds: pooled
- <b>HOLDOUT-DTI {conf['pooled_holdout_dti'][dc['arm']]:.4f} vs {conf['pooled_holdout_dti']['B']:.4f}</b>
+ <p>An independent parallel session preregistered the same hybrid idea (full 32-band stack + 15 subsurface transforms,
+ B2/38k; plus 8 new dip-offset / radiometric-front / polarity transforms that <b>failed selection</b> and were dropped).
+ On <b>disjoint confirmation seeds 215&ndash;224</b> (40 cells, {conf['n_withheld_positives']:,} withheld positives) arm D again beat
+ the full-32 control: pooled <b>HOLDOUT-DTI {conf['pooled_holdout_dti'][dc['arm']]:.4f} vs {conf['pooled_holdout_dti']['B']:.4f}</b>
  (paired &Delta; {stats['mean_delta']:+.4f}, 95% CI [{stats['ci95'][0]:+.4f}, {stats['ci95'][1]:+.4f}],
- {stats['folds_positive']}/4 folds, {stats['seeds_positive']}/{stats['n_seeds']} seeds,
- {conf['n_withheld_positives']:,} withheld positives; evaluator {e(dc['holdout']['evaluator'])}).
- This is catalogue-internal evidence, <b>not</b> a leaderboard score; no live score is claimed.</p>
+ {stats['folds_positive']}/4 folds, {stats['seeds_positive']}/{stats['n_seeds']} seeds). Catalogue-internal evidence only; no live score.</p>
  <ul class="tight">
- <li><b>Unique vs every scored peer site (measured):</b> max {u['max_dot_overlap_peer_registry_12']:.1%} of dots within 3&nbsp;px of any of the 12 pinned GEMSDOE24/25/27/28/30/31/32/33/36 rasters (limit 70%); surface Spearman max {u['max_surface_spearman']:.3f} (limit 0.90). It is <b>not</b> an edit of the 0.2778 H19-5 dot field.</li>
- <li><b>Why the badge is not green:</b> {u['max_dot_overlap_self_repo']:.1%} of its dots lie within 3&nbsp;px of this repo&rsquo;s own <i>unsubmitted, audit-only</i> H28-1 research raster &mdash; the same mechanism family &mdash; which fails this lane&rsquo;s frozen self-registry duplicate rule (knowledge/15 &sect;4). No post-hoc gate edit was made. The separate selector step can retire that audit artifact from the self-registry; the file bytes would not change.</li>
- <li><b>Format (machine-validated, no human inspection):</b> single-band float32, EPSG:32611, 3730&times;3292, values exactly 0/1, all-finite with nodata=None (fixes &ldquo;Predicted values must be in range [0, 1]&rdquo;), 0 dots on the catalogue, min distance &gt;200&nbsp;m (B2), spacing &ge;280&nbsp;m (<a href="{e(checks_href)}">re-read receipt</a>). Full run card: <a href="{REPO_URL}/blob/main/evidence/dconfirm_run_card_2026-10-25.json">evidence/dconfirm_run_card_2026-10-25.json</a>; analysis: <a href="{REPO_URL}/blob/main/knowledge/16_dconfirm_result.md">knowledge/16</a>.</li>
- <li><b>Submission name &amp; note (use only if the badge turns green):</b> <code>{e(dc['submission_name'])}</code> &middot; <code>{e(dc['note_max_140_chars'])}</code> ({dc['note_chars']} chars).</li>
+ <li><b>Cross-session duplicate (measured post-merge):</b> 87.5% of this file&rsquo;s dots lie within 3&nbsp;px of H29-1&rsquo;s dots (87.8% reverse) &mdash; the two parallel lanes converged. <b>Do not spend two slots on this family.</b> Evidence: <a href="{REPO_URL}/blob/main/evidence/dconfirm_cross_session_overlap.json">cross-session overlap</a>.</li>
+ <li><b>Vs scored rivals:</b> max {u['max_dot_overlap_peer_registry_12']:.1%} within 3&nbsp;px of any of the 12 pinned peer rasters; surface Spearman max {u['max_surface_spearman']:.3f}. Vs audit-only H28-1: {u['max_dot_overlap_self_repo']:.1%} (same failure as H29-1).</li>
+ <li><b>Format:</b> all-finite, nodata=None, every cell in [0,1], EPSG:32611 3730&times;3292 (<a href="{e(checks_href)}">re-read receipt</a>); research bytes in <a href="{e(tif_href)}">downloads/research/</a> (sha256 {e(r['sha256'][:16])}&hellip;). Run card: <a href="{REPO_URL}/blob/main/evidence/dconfirm_run_card_2026-10-25.json">evidence/dconfirm_run_card_2026-10-25.json</a>; analysis <a href="{REPO_URL}/blob/main/knowledge/16_dconfirm_result.md">knowledge/16 (L-DCONFIRM)</a>.</li>
  </ul>
 </div>
 """
@@ -347,6 +370,7 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
  <div class="row"><span class="badge ok">research TIFF format verified: float32 · single band · values [0,1]</span><span class="badge ok">unique versus 12 pinned peer rasters</span><span class="badge bad">predictive gate failed</span></div>
  <p class="small">The exact gate, 95% CI, validation receipt and duplicate report are on the <a href="research.html#h28-3"><b>Research page</b></a>. The executive summary explains the rule used to decide when a future TIFF is actually okay to submit.</p>
 </div>
+{h29_box}
 {dconfirm_box}
 {h28_3_box}
 {lane_box}
@@ -397,8 +421,6 @@ The agent never uploads anything; you press the button.</div>
 <p>The unique H28-3 research TIFF is intentionally not offered as a submission download because it lost to the current baseline on its frozen holdout. Its all-finite GeoTIFF and ZIP passed format checks, but validity does not cure a negative model result.</p>
 <p>Read the <a href="research.html#h28-3">H28-3 result and run card</a>, <a href="downloads/research/h28_3_negative_research_manifest.json">format receipt</a>, and <a href="{REPO_URL}/blob/main/evidence/h28_3_negative_uniqueness.json">peer-registry uniqueness report</a>. The receipt says <b>NOT APPROVED FOR SUBMISSION</b> on every file variant.</p></div>
 
-{dconfirm_box}
-
 <h2>Exact submission steps</h2>
 <ol class="steps">
 <li><b>Gate first:</b> use a file only when the front page explicitly says <b>APPROVED TO SUBMIT</b>. The current H28-3 research files are explicitly ineligible; do not upload them.</li>
@@ -415,6 +437,8 @@ The agent never uploads anything; you press the button.</div>
 </div>
 
 <h2>Historical weekly-slot decision tree — archived and suspended</h2>
+{h29_box}
+{dconfirm_box}
 {h28_3_box}
 <p class="warnbox"><b>Do not follow historic slot instructions or upload historical rasters.</b> They are retained in repository history to audit earlier work, but their rasters pre-date the pinned peer registry and are not current unique submissions. A future pre-registered candidate can replace this notice only after it passes its gate, format validation, and duplicate screen.</p>
 <p class="small">The historical model estimates and topology evidence remain available below for scientific context. They are not a submission recommendation and must not be read as organiser scores.</p>

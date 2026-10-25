@@ -56,3 +56,11 @@ detector class. Recommended next lanes, in order: (1) selector decision above, t
 live A/B slot for arm D — the only measurement that can price proxy→live transfer;
 (2) 1 m-DEM supervised scarp detector (the known route to a step-change in recall);
 (3) H28-5 chemistry corridors once official GDR bytes are hash-verified.
+
+## Post-merge addendum (recorded at merge, not part of frozen E1–E3)
+Session 7's H29-1 (merged to main first) independently built the same arm-D lane on
+seeds 210–214. Measured post-merge: this file vs H29-1 = 87.5 %/87.8 % of dots within
+3 px (exact shared 15,727/38,000) — a cross-session duplicate family
+(`evidence/dconfirm_cross_session_overlap.json`, IR-2026-10-25-09). Selection-seed
+pooled numbers match H29-1's by determinism (same seeds chosen independently); the
+disjoint 215–224 confirmation above remains this session's incremental evidence.

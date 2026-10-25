@@ -254,22 +254,34 @@
    "action": "Fixed once in the template: gems27.holdout.buffered_scoring_mask() excludes the 600 m ring around hidden segments from scoring; catalogue-derived masks use visible faults only. Reported here per protocol \u00a72; siblings should adopt."
   },
   {
-   "id": "IR-2026-10-25-05-lane-paragraph-missing-sessionB",
-   "severity": "medium",
-   "issue": "Second 2026-10-25 session prompt again contains no delimited single method paragraph for the parallel-run lane rule (same class as IR-2026-10-25-01).",
-   "action": "Session declared Lane L-DCONFIRM explicitly in knowledge/15 \u00a72 before implementation and stayed inside it; numeric uniqueness tests enforced on surface and final dots."
-  },
-  {
-   "id": "IR-2026-10-25-06-duplicate-registry-precedent-conflict",
+   "id": "IR-2026-10-25-05-index-hand-edit-desync",
    "severity": "high",
-   "issue": "Two frozen repo precedents define the duplicate-screen registry differently: Lane L-2026-10-25 used 5 peer top files + this repo's 6 shipped candidates, while the H28-3 session used the 12-peer parallel_submission_registry only. Lane L-DCONFIRM arm D passes the 12-peer screen (max 46.6% dots within 3px) but fails the union screen against this repo's own unsubmitted audit-only H28-1 research raster (85.2%).",
-   "action": "knowledge/15 \u00a74 froze the stricter union before results; verdict recorded as negative with full peer/self decomposition in evidence/dconfirm_run_card_2026-10-25.json. No post-hoc gate edit. A selector decision retiring the audit-only H28-1 artifact from the self-registry is the documented path to re-screen the identical bytes; not taken unilaterally."
+   "issue": "Deployed docs/index.html presented gems27-unique-scatter-farfield as 'ready to download and submit' with download buttons, but scripts/build_site.py generates a STOP front page and README said no TIFF approved. The HTML had been hand-edited out of sync with its generator; executive-summary.html (generated) contradicted index.html.",
+   "action": "Session 7: regenerated all pages from JSON via build_site.py (hand hero removed); submission eligibility is now rendered only from run-card JSON gates. Do not hand-edit docs/*.html."
   },
   {
-   "id": "IR-2026-10-25-07-frontpage-hero-stale-vs-newest-run",
+   "id": "IR-2026-10-25-06-uniqueness-screen-tension",
+   "severity": "medium",
+   "issue": "H29-1 (38k dots) passes the pinned peer-registry duplicate screen (max 46.2% <=3px overlap vs 12 scored peers) but overlaps 85.4% with this repo's own unscored dense H28-1 research file (59,075 px; exact Jaccard 0.116). Minimal-swap deconfliction (H29-1b) is geometrically infeasible on the ridge pool (82.6% after refill). The extended screen may make any accurate emission uncertifiable.",
+   "action": "Frozen gate kept (verdict negative). Selector step must adjudicate whether unscored in-house files govern slot eligibility; record the decision in registry before any upload. See knowledge/17."
+  },
+  {
+   "id": "IR-2026-10-25-07-lane-paragraph-missing-sessionB",
+   "severity": "medium",
+   "issue": "Parallel session B (Lane L-DCONFIRM) prompt again contained no delimited single method paragraph (same class as IR-2026-10-25-01).",
+   "action": "Lane declared explicitly in knowledge/15_lane_dconfirm_preregistration.md \u00a72 before implementation; numeric uniqueness tests enforced on surface and final dots."
+  },
+  {
+   "id": "IR-2026-10-25-08-knowledge-numbering-collision",
    "severity": "low",
-   "issue": "Front-page hero still describes the H28-3 run as 'the only newly generated TIFF in this run'; after L-DCONFIRM there is a newer research TIFF. Headline 'no new file is approved' remains accurate.",
-   "action": "L-DCONFIRM JSON-driven box added immediately below the hero on index and executive-summary (scripts/build_site.py). Hero wording left as the H28-3 record; consider rewording next session."
+   "issue": "Two parallel sessions both created knowledge/15_* and knowledge/16_* files (H29-1 preregistration/addendum vs L-DCONFIRM preregistration/result). Filenames differ; numbers collide.",
+   "action": "Filenames retained to avoid rewriting frozen evidence references; cite by full filename. Renumber only in a dedicated housekeeping change that updates every reference."
+  },
+  {
+   "id": "IR-2026-10-25-09-parallel-lanes-converged-cross-duplicate",
+   "severity": "high",
+   "issue": "Parallel sessions H29-1 (Session 7) and L-DCONFIRM independently built arm-D B2/38k files; measured post-merge directed dot overlap within 3px is 87.5%/87.8% (exact shared 15,727/38,000), exceeding the 70% duplicate threshold in both directions. Both also fail the extended self-registry screen vs H28-1 (85.4%/85.2%). Selection seeds 210-214 were independently chosen by both sessions, so pooled selection numbers are identical by determinism, not independent replication; L-DCONFIRM adds disjoint confirmation seeds 215-224.",
+   "action": "Both files remain verdict=negative, ok_to_submit=false. Selector must treat H29-1/H29-1b/L-DCONFIRM as ONE candidate family (evidence/dconfirm_cross_session_overlap.json). No slot may be spent twice on this family."
   }
  ]
 }
