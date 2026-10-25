@@ -1,0 +1,149 @@
+PASS template: EPSG:32611, 3730x3292, 5,167,373 px footprint
+PASS primary/nan: same CRS/shape/transform/dtype as the template (float32)
+PASS primary/nan: single band
+PASS primary/nan: every in-footprint value is finite
+PASS primary/nan: in-footprint range [0, 1] within [0,1]
+PASS primary/nan: values are exactly 0.0 / 1.0 (no float rounding above 1)
+PASS primary/nan: 61328 pixels equal 1.0 (manifest 61328)
+PASS primary/nan: no emitted pixel on a catalogue cell
+PASS primary/nan: no infinities anywhere
+PASS primary/nan: NaN outside the footprint (7,111,787 px) and nodata=NaN declared, like the sample
+PASS primary/nan: sha256 matches manifest
+PASS primary/allfinite: same CRS/shape/transform/dtype as the template (float32)
+PASS primary/allfinite: single band
+PASS primary/allfinite: every in-footprint value is finite
+PASS primary/allfinite: in-footprint range [0, 1] within [0,1]
+PASS primary/allfinite: values are exactly 0.0 / 1.0 (no float rounding above 1)
+PASS primary/allfinite: 61328 pixels equal 1.0 (manifest 61328)
+PASS primary/allfinite: no emitted pixel on a catalogue cell
+PASS primary/allfinite: no infinities anywhere
+PASS primary/allfinite: zeros outside, no NaN anywhere, no nodata tag (fallback)
+PASS primary/allfinite: (fallback hash recorded in checks json)
+PASS primary: zip holds exactly the one nan GeoTIFF, byte-identical
+PASS primary: note is 151 chars (<= 200) and matches the manifest
+PASS secondary/nan: same CRS/shape/transform/dtype as the template (float32)
+PASS secondary/nan: single band
+PASS secondary/nan: every in-footprint value is finite
+PASS secondary/nan: in-footprint range [0, 1] within [0,1]
+PASS secondary/nan: values are exactly 0.0 / 1.0 (no float rounding above 1)
+PASS secondary/nan: 45374 pixels equal 1.0 (manifest 45374)
+PASS secondary/nan: no emitted pixel on a catalogue cell
+PASS secondary/nan: no infinities anywhere
+PASS secondary/nan: NaN outside the footprint (7,111,787 px) and nodata=NaN declared, like the sample
+PASS secondary/nan: sha256 matches manifest
+PASS secondary/allfinite: same CRS/shape/transform/dtype as the template (float32)
+PASS secondary/allfinite: single band
+PASS secondary/allfinite: every in-footprint value is finite
+PASS secondary/allfinite: in-footprint range [0, 1] within [0,1]
+PASS secondary/allfinite: values are exactly 0.0 / 1.0 (no float rounding above 1)
+PASS secondary/allfinite: 45374 pixels equal 1.0 (manifest 45374)
+PASS secondary/allfinite: no emitted pixel on a catalogue cell
+PASS secondary/allfinite: no infinities anywhere
+PASS secondary/allfinite: zeros outside, no NaN anywhere, no nodata tag (fallback)
+PASS secondary/allfinite: (fallback hash recorded in checks json)
+PASS secondary: zip holds exactly the one nan GeoTIFF, byte-identical
+PASS secondary: note is 162 chars (<= 200) and matches the manifest
+PASS tertiary/nan: same CRS/shape/transform/dtype as the template (float32)
+PASS tertiary/nan: single band
+PASS tertiary/nan: every in-footprint value is finite
+PASS tertiary/nan: in-footprint range [0, 1] within [0,1]
+PASS tertiary/nan: values are exactly 0.0 / 1.0 (no float rounding above 1)
+PASS tertiary/nan: 55992 pixels equal 1.0 (manifest 55992)
+PASS tertiary/nan: no emitted pixel on a catalogue cell
+PASS tertiary/nan: no infinities anywhere
+PASS tertiary/nan: NaN outside the footprint (7,111,787 px) and nodata=NaN declared, like the sample
+PASS tertiary/nan: sha256 matches manifest
+PASS tertiary/allfinite: same CRS/shape/transform/dtype as the template (float32)
+PASS tertiary/allfinite: single band
+PASS tertiary/allfinite: every in-footprint value is finite
+PASS tertiary/allfinite: in-footprint range [0, 1] within [0,1]
+PASS tertiary/allfinite: values are exactly 0.0 / 1.0 (no float rounding above 1)
+PASS tertiary/allfinite: 55992 pixels equal 1.0 (manifest 55992)
+PASS tertiary/allfinite: no emitted pixel on a catalogue cell
+PASS tertiary/allfinite: no infinities anywhere
+PASS tertiary/allfinite: zeros outside, no NaN anywhere, no nodata tag (fallback)
+PASS tertiary/allfinite: (fallback hash recorded in checks json)
+PASS tertiary: zip holds exactly the one nan GeoTIFF, byte-identical
+PASS tertiary: note is 154 chars (<= 200) and matches the manifest
+PASS quaternary/nan: same CRS/shape/transform/dtype as the template (float32)
+PASS quaternary/nan: single band
+PASS quaternary/nan: every in-footprint value is finite
+PASS quaternary/nan: in-footprint range [0, 1] within [0,1]
+PASS quaternary/nan: values are exactly 0.0 / 1.0 (no float rounding above 1)
+PASS quaternary/nan: 41507 pixels equal 1.0 (manifest 41507)
+PASS quaternary/nan: no emitted pixel on a catalogue cell
+PASS quaternary/nan: no infinities anywhere
+PASS quaternary/nan: NaN outside the footprint (7,111,787 px) and nodata=NaN declared, like the sample
+PASS quaternary/nan: sha256 matches manifest
+PASS quaternary/allfinite: same CRS/shape/transform/dtype as the template (float32)
+PASS quaternary/allfinite: single band
+PASS quaternary/allfinite: every in-footprint value is finite
+PASS quaternary/allfinite: in-footprint range [0, 1] within [0,1]
+PASS quaternary/allfinite: values are exactly 0.0 / 1.0 (no float rounding above 1)
+PASS quaternary/allfinite: 41507 pixels equal 1.0 (manifest 41507)
+PASS quaternary/allfinite: no emitted pixel on a catalogue cell
+PASS quaternary/allfinite: no infinities anywhere
+PASS quaternary/allfinite: zeros outside, no NaN anywhere, no nodata tag (fallback)
+PASS quaternary/allfinite: (fallback hash recorded in checks json)
+PASS quaternary: zip holds exactly the one nan GeoTIFF, byte-identical
+PASS quaternary: note is 172 chars (<= 200) and matches the manifest
+PASS quinary_probe/nan: same CRS/shape/transform/dtype as the template (float32)
+PASS quinary_probe/nan: single band
+PASS quinary_probe/nan: every in-footprint value is finite
+PASS quinary_probe/nan: in-footprint range [0, 1] within [0,1]
+PASS quinary_probe/nan: values are exactly 0.0 / 1.0 (no float rounding above 1)
+PASS quinary_probe/nan: 60069 pixels equal 1.0 (manifest 60069)
+PASS quinary_probe/nan: no emitted pixel on a catalogue cell
+PASS quinary_probe/nan: no infinities anywhere
+PASS quinary_probe/nan: NaN outside the footprint (7,111,787 px) and nodata=NaN declared, like the sample
+PASS quinary_probe/nan: sha256 matches manifest
+PASS quinary_probe/allfinite: same CRS/shape/transform/dtype as the template (float32)
+PASS quinary_probe/allfinite: single band
+PASS quinary_probe/allfinite: every in-footprint value is finite
+PASS quinary_probe/allfinite: in-footprint range [0, 1] within [0,1]
+PASS quinary_probe/allfinite: values are exactly 0.0 / 1.0 (no float rounding above 1)
+PASS quinary_probe/allfinite: 60069 pixels equal 1.0 (manifest 60069)
+PASS quinary_probe/allfinite: no emitted pixel on a catalogue cell
+PASS quinary_probe/allfinite: no infinities anywhere
+PASS quinary_probe/allfinite: zeros outside, no NaN anywhere, no nodata tag (fallback)
+PASS quinary_probe/allfinite: (fallback hash recorded in checks json)
+PASS quinary_probe: zip holds exactly the one nan GeoTIFF, byte-identical
+PASS quinary_probe: note is 194 chars (<= 200) and matches the manifest
+PASS h28_1_research/nan: same CRS/shape/transform/dtype as the template (float32)
+PASS h28_1_research/nan: single band
+PASS h28_1_research/nan: every in-footprint value is finite
+PASS h28_1_research/nan: in-footprint range [0, 1] within [0,1]
+PASS h28_1_research/nan: values are exactly 0.0 / 1.0 (no float rounding above 1)
+PASS h28_1_research/nan: 59075 pixels equal 1.0 (manifest 59075)
+PASS h28_1_research/nan: no emitted pixel on a catalogue cell
+PASS h28_1_research/nan: no infinities anywhere
+PASS h28_1_research/nan: NaN outside the footprint (7,111,787 px) and nodata=NaN declared, like the sample
+PASS h28_1_research/nan: sha256 matches manifest
+PASS h28_1_research/allfinite: same CRS/shape/transform/dtype as the template (float32)
+PASS h28_1_research/allfinite: single band
+PASS h28_1_research/allfinite: every in-footprint value is finite
+PASS h28_1_research/allfinite: in-footprint range [0, 1] within [0,1]
+PASS h28_1_research/allfinite: values are exactly 0.0 / 1.0 (no float rounding above 1)
+PASS h28_1_research/allfinite: 59075 pixels equal 1.0 (manifest 59075)
+PASS h28_1_research/allfinite: no emitted pixel on a catalogue cell
+PASS h28_1_research/allfinite: no infinities anywhere
+PASS h28_1_research/allfinite: zeros outside, no NaN anywhere, no nodata tag (fallback)
+PASS h28_1_research/allfinite: (fallback hash recorded in checks json)
+PASS h28_1_research: zip holds exactly the one nan GeoTIFF, byte-identical
+PASS h28_1_research: note is 142 chars (<= 200) and matches the manifest
+PASS primary is a superset of the 0.2477 emission (nothing removed)
+PASS primary adds exactly 1259 px to the 0.2477 emission
+PASS slot4 contains the whole pruned d2.8 base (nothing else removed)
+PASS slot4 emits exactly 41507 px (manifest)
+PASS slot4 adds exactly 1308 T-v2 dots on top of the pruned base
+PASS slot4 prunes exactly 3891 catalogue-flank-shadow px
+PASS slot5 keeps the 0.2477 file's exact pixel count (60069 px)
+PASS slot5 near field (< 300 m from catalogue) is byte-identical to the 0.2477 file (11153 px)
+PASS slot5 swaps exactly 9783 far-field dots
+PASS slot5 changes no pixel closer than 300 m to the catalogue (single-variable far-field swap)
+PASS slot5 added dots are off-catalogue and inside the footprint
+PASS slot5 added dots respect the d1.5 emission geometry (>= 1.5 px from every kept dot)
+PASS slot5 manifest reports the one-sided swapped fraction 0.1629 (symmetric difference 0.3257)
+PASS all .tif file names are unique
+
+0 failure(s)

@@ -10,10 +10,14 @@ from __future__ import annotations
 import csv
 import html
 import json
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from gems27.readiness import publication_decision  # noqa: E402
+
 DOCS, EV, REG, KN = ROOT / "docs", ROOT / "evidence", ROOT / "registry", ROOT / "knowledge"
 REPO_URL = "https://github.com/buffedlizard55-lab/GEMSDOE27"
 DD_COMP = "https://www.drivendata.org/competitions/306/competition-doe-gems/"
@@ -36,7 +40,10 @@ def layout(fname: str, title: str, body: str, stamp: str) -> str:
 <title>{e(title)} · 27GEMSDOE</title><meta name="description" content="27GEMSDOE: topology-first research lab for DrivenData #306 (DOE GEMS). No current TIFF is approved for submission.">
 <link rel="stylesheet" href="assets/style.css"></head><body>
 <header class="top"><div class="in"><a class="brand" href="index.html">27GEMSDOE · DOE GEMS</a><nav>{nav}</nav></div></header>
-<main>{body}</main>
+<main><div class="card"><b>Automatic submission evidence audit:</b>
+<a href="data/submission_readiness_audit.json">Read byte-bound gate decisions and blockers</a>.
+Format PASS is not permission to submit; negative and duplicate files remain research-only.
+</div>{body}</main>
 <footer>Built {e(stamp)} from <a href="{REPO_URL}">the repository</a>. No current TIFF is approved for submission. No leaderboard score is claimed anywhere on this site.
 Historical scores shown are owner-reported. This site never contacts drivendata.org.</footer>
 <script src="assets/app.js"></script></body></html>"""
@@ -70,7 +77,7 @@ def build() -> None:
     lane_box = ""
     if lane:
         r, h, u = lane["raster"], lane["holdout"], lane["uniqueness_vs_registry"]
-        ok = bool(lane.get("ok_to_submit"))
+        ok = publication_decision(lane, ROOT)["ok_to_publish_as_submission"]
         badge = ('<span class="badge ok" style="font-size:1.05rem">&#9989; VALIDATED &mdash; OK TO DOWNLOAD &amp; SUBMIT '
                  '(format + uniqueness + holdout gates PASS; still UNSCORED)</span>') if ok else (
                  '<span class="badge bad" style="font-size:1.05rem">&#9940; RESEARCH ONLY &mdash; DO NOT SUBMIT '
@@ -97,7 +104,7 @@ def build() -> None:
         peers = {k: v for k, v in u29["per_raster"].items() if not k.startswith("gems27-")}
         peer_max = max(peers.values()) if peers else 0.0
         g32_ov = u29["per_raster"].get("g32_h33_2_b2.tif", 0.0)
-        ok29 = bool(c29.get("ok_to_submit"))
+        ok29 = publication_decision(c29, ROOT)["ok_to_publish_as_submission"]
         badge29 = ('<span class="badge ok" style="font-size:1.05rem">&#9989; VALIDATED &mdash; OK TO DOWNLOAD &amp; SUBMIT '
                    '(all machine gates PASS; still UNSCORED)</span>') if ok29 else (
                    '<span class="badge bad" style="font-size:1.05rem">&#9940; NOT CERTIFIED UNIQUE &mdash; DO NOT SUBMIT AS THE UNIQUE LANE FILE '
@@ -134,7 +141,7 @@ def build() -> None:
         tif_href = f"{rel_dir}/{r['primary_allfinite']}"
         checks_href = f"{rel_dir}/checks-{dc['stem']}-allfinite.json"
         badge = ('<span class="badge ok" style="font-size:1.05rem">&#9989; VALIDATED &mdash; OK TO DOWNLOAD &amp; SUBMIT '
-                 '(all machine gates PASS; still UNSCORED)</span>') if dc.get("ok_to_submit") else (
+                 '(all machine gates PASS; still UNSCORED)</span>') if publication_decision(dc, ROOT)["ok_to_publish_as_submission"] else (
                  '<span class="badge bad" style="font-size:1.05rem">&#9940; DO NOT SUBMIT &mdash; duplicate of the H29-1 lane '
                  'family (selector treats both as one candidate)</span>')
         dconfirm_box = f"""
