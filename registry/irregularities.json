@@ -284,13 +284,37 @@
    "action": "Both files remain verdict=negative, ok_to_submit=false. Selector must treat H29-1/H29-1b/L-DCONFIRM as ONE candidate family (evidence/dconfirm_cross_session_overlap.json). No slot may be spent twice on this family."
   },
   {
-   "id": "IR-2026-10-25-10-h30-registry-screen-scoped",
+   "id": "IR-2026-10-25-10-holdout-emit-ring-leak-fixed",
+   "severity": "high",
+   "issue": "In `scripts/run_lane_holdout.py`, `emit(prob, valid_scoring, known, hidden, ...)` built candidate masks on `valid_scoring | hidden`. Because `valid_scoring = foot & fold_mask & ~ring` (where `ring = (d_hidden <= 6) & ~hidden`), `valid_scoring | hidden` equalled `True` on `hidden` (`d_hidden == 0`) and `False` on `0 < d_hidden <= 6`, leaking the complement of the 6-px ring around withheld segments into candidate placement.",
+   "action": "Fixed in place in `scripts/run_lane_holdout.py` and enforced in `scripts/run_h29_holdout.py`: `emit()` receives ONLY `fold_domain = foot & sp.fold_mask` and `sp.known` (zero access to `sp.hidden` or `valid_scoring`)."
+  },
+  {
+   "id": "IR-2026-10-25-11-lane-registry-path-typo-fixed",
+   "severity": "medium",
+   "issue": "`scripts/run_lane_holdout.py` looked for peer rasters in `data_cache/registry` rather than `data_cache/parallel_registry`, causing `surface_spearman_vs_registry` to silently evaluate 0 files (`{}`) in Session 6.",
+   "action": "Fixed path in `scripts/run_lane_holdout.py` and added `assert len(peer_spearman) == 12` in `scripts/run_h29_holdout.py` (`evidence/h29_e1_canary_and_surface.json`)."
+  },
+  {
+   "id": "IR-2026-10-25-12-slot1-live-zero-hit-confirmation",
+   "severity": "medium",
+   "issue": "2026-10-25 prompt reports `27GEMSDOE: 0.2449` (OWNER-REPORTED; no DrivenData receipt stored in repo) alongside `24GEMSDOE: 0.2477`. Byte diff (`evidence/slot1_live_ab_inversion.json`) confirms `5512495c6bd1` (61,328 px) adds solely 1,259 `T-v2` straight-line catalogue-tip gap-closure dots to `989f59505db1` (60,069 px); pure zero-hit FP dilution predicts `0.24491`, matching `0.2449` to 4 decimal places (empirical marginal efficiency `-0.00018` credit/dot vs `0.05024` break-even).",
+   "action": "Recorded in `registry/live_scores.json` under `owner_reported_prompt_2026_10_25` (preserving `27GEMSDOE[*].score = null` until an organizer receipt exists) and permanently retired `T-v2` straight-line continuation."
+  },
+  {
+   "id": "IR-2026-10-25-13-h29s-clears-24-raster-uniqueness-including-self-registry",
+   "severity": "low",
+   "issue": "Unlike `H29-1 D-refill` (`c24b6371179c`) and `L-DCONFIRM` (`5ea0385b7e70`) which overlapped 85.4%/85.2% with dense `H28-1` and 87.5% with each other, `Lane L-S7-2026-10-25` (`H29-HPVC` + weighted 300 m CELF cover, content id `511898747886`) clears BOTH the 12-peer registry (max 64.21% <= 70%; 56.12% vs GEMSDOE32) AND all 12 in-house rasters (56.43% vs dense H28-1, 53.01% vs L-DCONFIRM, 52.56% vs H29-1 D-refill, 51.33% vs H29-1b).",
+   "action": "Recorded in `evidence/h29_run_card_2026-10-25.json`; weekly slot remains held solely on the strict SE Walker Lane CI95 sub-clause vs internal control D0 (`[-0.000986, +0.003695]`)."
+  },
+  {
+   "id": "IR-2026-10-25-14-h30-registry-screen-scoped",
    "severity": "medium",
    "issue": "Lane L-H30 (knowledge/20 section 5, committed d87283f before any result) scoped the PROMOTION uniqueness gate to the 12 pinned parallel-registry peer rasters named by the session protocol, and measures/reports overlaps vs this repo's own UNSUBMITTED research artifacts (H28-1/H29-1/L-DCONFIRM etc.) separately instead of gating on them. This prospectively supersedes the extended self-screen frozen by the H29-1/L-DCONFIRM lanes (see IR-2026-10-25-06), because the dense unscored H28-1 file makes the 70% rule geometrically near-impossible for any accurate 38k emission (H29-1b proof). The H30 candidate failed its efficacy gate, so the scoping did not change its negative verdict (extended max overlap 0.8467, reported in evidence/h30_run_card.json).",
    "action": "Selector should record a standing registry-scope rule before any future lane relies on it for a PASS. No file was promoted under the scoped rule this session."
   },
   {
-   "id": "IR-2026-10-25-11-h28-4-evidence-file-missing",
+   "id": "IR-2026-10-25-15-h28-4-evidence-file-missing",
    "severity": "low",
    "issue": "knowledge/19_untried_hypotheses_ranked.md states H28-4 was tested (2 seeds 230-231, mean paired gain -0.00067) with 'Full evidence: evidence/h28_4_quick.json', but neither that file nor the runner's default output evidence/h28_4_seismicity_holdout.json exists in this checkout (verified this session).",
    "action": "Treat the H28-4 numbers as unverifiable locally; do not cite them as evidence until the JSON is restored. H28-4 was not used in Lane L-H30."

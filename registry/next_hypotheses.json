@@ -1,80 +1,121 @@
 {
   "generated": "2026-10-25",
-  "status": "Updated 2026-10-25 (Lane L-H30): H30-1 dip advection, H30-2 gap flanking, H30-3 soft rank-taper all tested against the Arm-D control on selection seeds 240-244 and FAILED the frozen gate (no confirmation ran). The three previously untried entries below remain untried; H27-16/H28-5 stay blocked on official GDR bytes. See knowledge/20 + knowledge/21.",
-  "novelty_scope": "Screened against this checkout, its evidence ledger, and the owner-provided comparison list. The sibling score list does not include complete source methods; global novelty is unknown.",
+  "status": "Session 7 screen current as of 2026-10-25: H29-1 (Lane L-S7-2026-10-25) was tested on fresh seeds 210-219 (commit 30accf8) and achieved the new highest blind pooled HOLDOUT-DTI (0.042198 buffered / 0.103907 unbuffered), beating B0 (+0.005829, 10/10 seeds) and prior champion H28-1 (+0.004620, 10/10 seeds), while holding the weekly slot under the strict 6-clause composite gate (95% CI vs internal control D0 [-0.000986, +0.003695] spanned zero due to SE Walker Lane seismicity). Five genuinely untried hypotheses remain. Parallel Lane L-H30 (merged): H30-1/H30-2/H30-3 tested vs Arm-D control on seeds 240-244, all failed selection (knowledge/20+21); seeds 240-254 consumed/reserved by that lane.",
+  "novelty_scope": "Screened against this checkout, its evidence ledger, and the 12-peer parallel registry.",
   "target": "Fault-location pixels in the organizer-created test labels, which remain unobserved here. Catalogue-internal holdouts are only a proxy and cannot validate far-field behavior.",
   "baseline": {
-    "name": "Current in-repo OOF best",
-    "definition": "H28-1 multiscale potential-field edge features + T-v2 gap closures + H27-4 100 m flank-shadow prune (r1)",
-    "evidence": "evidence/h28_1_edge_holdout.json; seeds 140-149; +0.00294884 mean paired DTI over base_oof + T-v2 + H27-4 r1, 3/4 folds and 9/10 seeds",
-    "limitation": "Catalogue-internal component-hidden, four-quadrant holdout. It is not the organizer-created expert-label set and is especially weak for the far field."
+    "name": "Current blind buffered OOF holdout benchmark",
+    "definition": "H29-S (full-32 + 20 H29 hydrothermal/piedmont/destriped-mag + 10 Stage-2 Frangi/line-integral vesselness + probability-weighted 300 m CELF cover, B2 > 200 m, 37,654 px) alongside internal control D0 (full-32 + 15 subsurface + Poisson d=2.8)",
+    "evidence": "evidence/h29_e2_holdout_210_219.json; seeds 210-219; H29-S pooled buffered HOLDOUT-DTI 0.042198 (unbuffered 0.103907) vs D0 0.040902, H28_1_B2 0.037578, B0 0.036368",
+    "limitation": "Catalogue-internal component-hidden, four-quadrant buffered holdout. It is not the organizer-created expert-label set."
   },
-  "ranking_basis": "Expert priors on potential paired catalogue-holdout ΔDTI × testability / engineering cost. Planning priors are not leaderboard predictions. H27-10 and H28-3 are completed failed tests, not part of the untried ranking.",
+  "ranking_basis": "Expert priors on potential paired catalogue-holdout ΔDTI × testability / engineering cost. Planning priors are not leaderboard predictions. H27-10, H28-3, and H29-1 are completed tests in tested_hypotheses, not part of the untried ranking.",
   "hypotheses": [
     {
-      "id": "H27-16",
+      "id": "H29-6",
       "rank": 1,
-      "title": "Add three official GDR 1391 layers that are absent from the detector",
+      "title": "Unified H29-HPVC + Walker Lane Anisotropic Seismic-Fabric Structure-Tensor Coherence (targeting the SE quadrant deficit)",
       "layers": [
-        "Paleo-geothermal sinter/tufa/travertine and altered-bedrock regional vectors",
-        "INGENIOUS 2 m temperature-probe records",
-        "Great Basin Quaternary volcanics polygons"
+        "deq_n100a15 and ieq_n100a15 earthquake density rasters + geod_shearrate",
+        "H29-1 hydrothermal/piedmont/destriped-magnetic/Frangi-vesselness feature stack + weighted 300 m CELF cover"
       ],
-      "signature": "Independent surface and shallow-subsurface thermal/chemical/volcanic evidence for fault-focused fluid flow and young deformation; test each layer family separately before any combination.",
-      "why_missing_faults": "A permeable fault can localize hydrothermal alteration, thermal anomalies, or young volcanic alignments even where no Quaternary surface trace is catalogued.",
-      "confounders": "Sampling density, groundwater transport, non-fault heat sources, volcanic contacts unrelated to the target fault, and the fact that prior thermal-point-distance features were nearly null.",
-      "differs_from_repo": "The checkout currently holds 21 vent points and 27,092 well/spring rows, but not these regional paleo-geothermal features, 2 m probes, or volcanics polygons. The existing thermal-distance feature arm was measured near zero; this tests new records and polygon geometry instead.",
+      "signature": "Multi-scale structure-tensor anisotropy (lambda1 - lambda2)/(lambda1 + lambda2) of earthquake-density ridges (`ieq_n100a15`, `deq_n100a15`) aligned with dextral/transtensional `geod_shearrate` gradients in the Hawthorne/Tonopah Walker Lane belt, fused into the H29-S 2-stage vesselness + weighted CELF pipeline.",
+      "why_missing_faults": "Active transtensional strands in the SE Mina deflection / Walker Lane rupture distributed stepover zones with strong microseismic lineament fabric despite discontinuous Holocene alluvial scarps.",
+      "confounders": "Off-fault earthquake swarms, catalog-completeness gradients, and over-smoothed hypocenter kernels.",
+      "differs_from_repo": "H29-1 beat D0 in NW (+0.0022), NE_LidarGap (+0.0024), and SW (+0.0032), losing only SE (-0.0025) because H29-1 omitted D0's `ieq/deq` structure-tensor coherence. Combining H29-S with multi-scale seismic-fabric coherence has never been run.",
       "expected_holdout_delta_dti": [
-        0.0,
+        0.002,
         0.006
       ],
-      "cost": "medium-high; requires authorized data retrieval and checksum verification, then fold-safe vector reading/rasterization and separate feature arms",
-      "data_gate": "Official GDR #1391 listing and hash pins exist; the sibling 16GEMSDOE runner record reports ok:true for the three packages on 2026-09-30. Raw packages are absent from this checkout. This repo's reviewed workflow run set through branch head a58e74d includes runs 37099986237, 37100053264, 37100608786, 37100751573, 37100935082, and 37101134684, all of which concluded failure with zero jobs and no logs, so there was no local download, re-hash, clip, or artifact. Cause is unknown; do not infer that the sources are unavailable. Obtain bytes through an authorized runner or official source and verify SHA-256 before any feature use.",
-      "validation": "After raw-data inventory, preregister a separate spatial holdout with unused seeds; do not reuse 150-159 or treat catalogue-holdout success as a live score.",
-      "status": "UNTRIED; official source packages are not yet present in this checkout."
-    },
-    {
-      "id": "H28-4",
-      "rank": 2,
-      "title": "Anisotropic seismicity-fabric lineaments",
-      "layers": [
-        "deq_n100a15",
-        "ieq_n100a15",
-        "geod_shearrate"
-      ],
-      "signature": "Directional persistence of earthquake-density ridges and their alignment with local shear-rate gradients over scales wider than individual hypocenters.",
-      "why_missing_faults": "A linear earthquake fabric may expose a blind active strand without a clear young surface scarp.",
-      "confounders": "Aseismic faults, catalog-completeness gradients, earthquake swarms unrelated to a single fault, and over-smoothed density products.",
-      "differs_from_repo": "The source channels were included in the scalar model and channel audit, but no directional seismicity-fabric transform has been tested. It differs from the already refuted oriented LiDAR/geophysics line-integral arm in both signal and physical target.",
-      "expected_holdout_delta_dti": [
-        0.0,
-        0.002
-      ],
-      "cost": "low-medium; current feature raster only",
-      "data_gate": "Existing hash-pinned raster bands; no new external data.",
-      "validation": "No run registered yet; preregister a distinct unused seed range and compare against the current-best holdout baseline.",
+      "cost": "low-medium; 100% locally hash-pinned rasters",
+      "data_gate": "Existing hash-pinned raster bands; no new external download needed.",
+      "validation": "Preregister on fresh unused seeds 220-229 against both D0 and H29-S before running.",
       "status": "UNTRIED."
     },
     {
-      "id": "H28-5",
-      "rank": 3,
-      "title": "Quality-filtered hydrothermal chemistry gradients, not point-distance buffers",
+      "id": "H29-2",
+      "rank": 2,
+      "title": "Andersonian 60-degree Hanging-Wall Dip-Offset Geophysical-to-Scarp Doublet Pairing",
       "layers": [
-        "GDR/INGENIOUS wellspring CSV: temp_c, geothermquartz_c, geothermchalc_c, geothermcat_c, thermalclass, station name, and coordinates",
-        "Optional H27-16 2 m temperature probes after provenance verification"
+        "Destriped rtp and iso_grav_anom horizontal-gradient crests",
+        "depth_to_base_surf gradient",
+        "lidar_step_max, lidar_cos2strike, lidar_sin2strike"
       ],
-      "signature": "Quality-controlled, de-duplicated geothermometer/temperature contrasts along short spatial gradients and locally fault-aligned corridors, instead of isotropic distance-to-point surfaces.",
-      "why_missing_faults": "A chemically distinct upflow zone can reveal permeable fault pathways where the surface trace is absent; the target is the spatial contrast and alignment, not proximity to a spring by itself.",
-      "confounders": "Duplicate sampling, geothermometer validity, groundwater flow away from the fault, sparse biased stations, and non-fault heat sources.",
-      "differs_from_repo": "H27-12 tested simple well/spring distance features and found nearly zero benefit. This candidate instead uses screened measurement values and local contrasts; that distinct transform remains untried and must not be represented as already supported.",
+      "signature": "Directed cross-correlation between a subtle surface break at (y, x) and a parallel magnetic/gravity/basement gradient crest shifted 200-700 m perpendicular to strike into the down-dropped hanging wall.",
+      "why_missing_faults": "Eroded range-front and piedmont segments lose continuous surface scarp expression while the down-dip 60-deg basement step persists 300-600 m basinward.",
+      "confounders": "Tilted stratiform volcanic hogbacks dipping toward valleys.",
+      "differs_from_repo": "All prior repo features (H28-1, H28-3, H29-1) evaluate co-located (0 m) multi-field overlap, never directed cross-strike hanging-wall offset pairing.",
       "expected_holdout_delta_dti": [
-        0.0,
-        0.003
+        0.002,
+        0.008
       ],
-      "cost": "medium; point QA/deduplication and fold-safe spatial encoding",
-      "data_gate": "The in-footprint wellspring CSV is present as an owner-repository mirror; its official GDR package listing is verified, but this session did not independently fetch or re-hash the raw GDR binary.",
-      "validation": "No run registered yet; preregister quality filters and a fresh spatial holdout before feature construction.",
-      "status": "UNTRIED; separate from the refuted distance-only feature arm."
+      "cost": "medium; locally hash-pinned rasters",
+      "data_gate": "Existing hash-pinned raster bands; no external download needed.",
+      "validation": "Preregister on fresh unused seeds >= 230.",
+      "status": "UNTRIED."
+    },
+    {
+      "id": "H29-3",
+      "rank": 3,
+      "title": "Pleistocene Lake Lahontan Wave-Cut Paleo-Shoreline Contour-Parallelism Deconfounder",
+      "layers": [
+        "det_elev, lidar_step_max, lidar_lappos_max, lidar_cos2strike, lidar_sin2strike",
+        "Optional USGS 3DEP 1-m / 10-m absolute elevation (1,200-1,340 m Sehoo highstand belt)"
+      ],
+      "signature": "Measures sin^2(theta_scarp - theta_contour) to suppress non-tectonic horizontal wave-cut benches wrapping closed basin contours (~1,330-1,338 m) while retaining tectonic normal faults that cut obliquely across contours.",
+      "why_missing_faults": "Eliminates the primary non-fault scarp false-positive mimic in Winnemucca/Fallon/Carson Sink sub-basins, freeing 300 m CELF budget for genuine piedmont faults.",
+      "confounders": "Low-angle detachment toes locally sub-parallel to basin margin contours.",
+      "differs_from_repo": "No contour-parallelism shoreline filter has ever been tested in GEMSDOE27.",
+      "expected_holdout_delta_dti": [
+        0.002,
+        0.007
+      ],
+      "cost": "medium; partial local via det_elev, full mask via public-domain USGS 3DEP tiles (`dem_links.json`)",
+      "data_gate": "Local det_elev ready immediately; raw 3DEP elevation tiles require outbound access to USGS `prd-tnm` S3 (`https://data.usgs.gov/datacatalog/data/USGS:77ae0551-c61e-4979-aedd-d797abdcde0e`).",
+      "validation": "Preregister on fresh unused seeds >= 240.",
+      "status": "UNTRIED."
+    },
+    {
+      "id": "H27-16",
+      "rank": 4,
+      "title": "Add three official GDR 1391 layers absent from the detector (paleo-geothermal sinter/tufa, 2 m probes, Quaternary volcanics)",
+      "layers": [
+        "Paleo-geothermal sinter/tufa/travertine and altered-bedrock regional vectors (`faffcf69...`)",
+        "INGENIOUS 2 m temperature-probe records (`1301f70d...`, Kraal et al. 2022)",
+        "Great Basin Quaternary volcanics polygons (`c4a2d2df...`)"
+      ],
+      "signature": "Linear alignments of siliceous sinter / carbonate tufa terraces (Siler et al. 2022 Granite Springs 6 km horst lineament) paired with local > +2.5 C 2 m probe residuals.",
+      "why_missing_faults": "Fossil sinter/tufa aprons cement fault traces and mask young coseismic scarps while directly marking Quaternary hydrothermal upflow conduits.",
+      "confounders": "Lacustrine tufa mounds along Lake Lahontan shorelines (Kraal et al. 2022), groundwater outflow plumes, and volcanic contacts.",
+      "differs_from_repo": "H29-1 used the present 27,092 well/spring chemistry CSV (`gdr_wellspring_in_footprint.csv`), whereas these three separate regional GDR #1391 packages remain absent from the local checkout.",
+      "expected_holdout_delta_dti": [
+        0.001,
+        0.008
+      ],
+      "cost": "medium-high; requires authorized data retrieval and SHA-256 verification",
+      "data_gate": "Official DOE GDR #1391 (`https://gdr.openei.org/submissions/1391`, DOI 10.15121/1881483, CC-BY-4.0); raw packages absent from this checkout because `gdr.openei.org` is outside sandbox allowlist and historical workflow runs 37099986237..37101134684 concluded with zero jobs/no logs.",
+      "validation": "Obtain raw bytes via authorized runner, verify SHA-256 pins, then preregister on unused seeds >= 250.",
+      "status": "UNTRIED; official source packages are not yet present in this checkout."
+    },
+    {
+      "id": "H29-5",
+      "rank": 5,
+      "title": "Transverse Range-Front Canyon-Mouth Knickpoint & Alluvial-Fan Apex Collinearity",
+      "layers": [
+        "det_elev, det_local_relief, det_gradient, lidar_relief, lidar_cross_max"
+      ],
+      "signature": "Collinear 0.5-2 km alignments of steepened transverse stream-channel outlets and fan apexes along active footwall range fronts where Holocene debris-flow aggradation buries inter-canyon scarps.",
+      "why_missing_faults": "Rapidly aggrading bajadas erase continuous surface scarps within centuries while preserving aligned canyon-mouth knickpoints.",
+      "confounders": "Resistant stratiform bedrock hogbacks crossed by transverse streams.",
+      "differs_from_repo": "All existing DEM/LiDAR features measure local scarp height or curvature, never multi-canyon outlet collinearity.",
+      "expected_holdout_delta_dti": [
+        0.001,
+        0.005
+      ],
+      "cost": "medium; current DEM/LiDAR bands",
+      "data_gate": "Existing hash-pinned raster bands.",
+      "validation": "Preregister on fresh unused seeds >= 260.",
+      "status": "UNTRIED."
     }
   ],
   "tested_hypotheses": [
@@ -138,6 +179,48 @@
       "leakage_canary": "PASS: all five source and six derived features had direction-invariant ROC AUC <= 0.5702; threshold 0.90.",
       "integrity": "PASS: 40 cells, 0 known-catalogue prediction overlap, finite probabilities in [0,1].",
       "negative_research_artifact": "Unique, format-valid research TIFF content id 27d6875f3b22; NOT APPROVED FOR SUBMISSION because the predictive gate failed."
+    },
+    {
+      "id": "H29-1",
+      "title": "Hydrothermal Upflow Disequilibrium × Piedmont-Toe Concave Flexure × Destriped Shallow Geophysical Vesselness + Probability-Weighted 300 m CELF Submodular Cover (Lane L-S7-2026-10-25)",
+      "status": "TESTED — FROZEN GATE FAILED ON STRICT CI SUB-CLAUSE vs D0 (3/6 clauses; NEW POOLED HOLDOUT BEST 0.042198 buffered / 0.103907 unbuffered; beats B0 10/10 seeds +0.005829 & prior champion H28-1 10/10 seeds +0.004620; weekly slot held)",
+      "validation": "knowledge/15_geothermal_vent_discovery_and_h29_preregistration.md (commit 30accf8); evidence/h29_e1_canary_and_surface.json; evidence/h29_e2_holdout_210_219.json; evidence/h29_run_card_2026-10-25.json",
+      "seeds": [
+        210,
+        211,
+        212,
+        213,
+        214,
+        215,
+        216,
+        217,
+        218,
+        219
+      ],
+      "evaluator_version": "gems27.metric v1 + holdout-blind-buffered-v2 (buffer_px=6.0)",
+      "candidate_pooled_holdout_dti": 0.042198,
+      "candidate_unbuffered_diagnostic_dti": 0.103907,
+      "control_D0_pooled_holdout_dti": 0.040902,
+      "control_H28_1_B2_pooled_holdout_dti": 0.037578,
+      "control_B0_pooled_holdout_dti": 0.036368,
+      "delta_vs_B0": 0.005829,
+      "delta_vs_H28_1_B2": 0.00462,
+      "delta_vs_D0": 0.001295,
+      "bootstrap_95_ci_vs_B0": [
+        0.00442,
+        0.007417
+      ],
+      "bootstrap_95_ci_vs_H28_1_B2": [
+        0.003442,
+        0.005974
+      ],
+      "bootstrap_95_ci_vs_D0": [
+        -0.000986,
+        0.003695
+      ],
+      "leakage_canary": "PASS: all 20 H29 features had direction-invariant ROC AUC <= 0.5765 (threshold 0.90).",
+      "uniqueness": "PASS: max 3px dot overlap 0.6421 <= 0.70 (0.5612 vs GEMSDOE32) and max Spearman 0.0472 <= 0.90 across all 12 peer rasters.",
+      "candidate_artifact": "Unique all-finite [0,1] GeoTIFF content id 511898747886 (825,276 B); technical validator PASS; weekly submission slot HELD under strict frozen gate."
     },
     {
       "id": "H30-1",
