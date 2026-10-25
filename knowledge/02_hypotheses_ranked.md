@@ -185,3 +185,33 @@ Ranking rule: expected DTI gain x probability the test can validate it / cost. B
 * **Status:** TESTED — FROZEN GATE FAILED. HOLDOUT-DTI pooled candidate 0.103352 vs baseline 0.105946, Δ -0.002594; 95% seed-bootstrap CI [-0.004240, -0.000907], 2/10 seeds and 1/4 folds improved. No slot. Negative research TIFF 27d6875f3b22 is format-valid and unique against the pinned peer registry but NOT APPROVED FOR SUBMISSION.
 * **Expected gain:** negative: pooled ΔDTI -0.002594
 * **Cost:** one local pre-registered holdout experiment; 0 weekly slots
+
+## H30-1 (rank 99): Dip-advection correction of subsurface edges (feature form of H29-2)
+
+* **Layers:** rtp, iso_grav_anom, depth_to_base_surf from the pinned 32-band stack
+* **Physical signature:** Ranked RTP/gravity/basement-step edge strength sampled down-dip (along the depth-to-basement gradient) by clip(depth*cot(dip)/100 m, 0, 8 px), dip 50/70 deg (5 features, gems27.dip_gap_features)
+* **Why it catches a fault missing from USGS/INGENIOUS:** A dipping buried fault's deep edge is offset hundreds of metres from its surface trace; a per-pixel detector otherwise scores the deep-edge pixel, not the trace.
+* **How it differs from the repo:** Directed depth-scaled advection; differs from the undirected dip-offset doublets of L-DCONFIRM (which also hurt) and from any emission-side shift.
+* **Status:** TESTED - SELECTION GATE FAILED (Lane L-H30, seeds 240-244, knowledge/20+21). Pooled HOLDOUT-DTI DIP 0.09888 vs Arm-D control 0.10234 (mean paired -0.00359, 6/20 cells, 0/4 fold means up). Canary AUC <=0.561. No slot.
+* **Expected gain:** negative: pooled delta -0.00346 vs Arm D on selection seeds
+* **Cost:** one local pre-registered holdout experiment (Lane L-H30, shared selection); 0 weekly slots
+
+## H30-2 (rank 99): Along-strike gap flanking of potential-field edges
+
+* **Layers:** rtp, iso_grav_anom ranked edges (sigma=2)
+* **Physical signature:** max over 4 strikes of min(E(x-d*u), E(x+d*u)), lag d=6/12 px (4 features)
+* **Why it catches a fault missing from USGS/INGENIOUS:** Collinear edge segments bounding a low-amplitude interval mark one buried fault continuing under thicker cover where the surface catalogue stops.
+* **How it differs from the repo:** Min-of-flanks at fixed lags on potential-field edges; Addendum-D directional bands averaged lidar layers along strike (refuted) - different input and operator.
+* **Status:** TESTED - SELECTION GATE FAILED (Lane L-H30, seeds 240-244, knowledge/20+21). Pooled HOLDOUT-DTI GAP 0.10180 vs Arm-D control 0.10234 (mean paired -0.00071, 95% CI [-0.00291,+0.00164], 9/20 cells, 2/4 fold means up). Closest contender; built as the session's single NEGATIVE research TIFF 3107a3007b77 (format+peer-uniqueness PASS, efficacy FAIL, NOT APPROVED FOR SUBMISSION). No slot.
+* **Expected gain:** negative: pooled delta -0.00053 vs Arm D on selection seeds
+* **Cost:** one local pre-registered holdout experiment (Lane L-H30, shared selection); 0 weekly slots
+
+## H30-3 (rank 99): Soft rank-taper emission at matched effective mass (H29-3)
+
+* **Layers:** Arm-D detector probability surface only
+* **Physical signature:** 76,000-px Poisson support with values 1-k/N by descending probability, rescaled to effective mass 38,000, scored under exact soft DTI
+* **Why it catches a fault missing from USGS/INGENIOUS:** Fractional values could hedge second-tier candidates for uncatalogued faults at fractional false-positive cost.
+* **How it differs from the repo:** Every scored family file is binary; this is the family's first soft-emission gate.
+* **Status:** TESTED - SELECTION GATE FAILED (Lane L-H30, seeds 240-244, knowledge/20+21). Pooled HOLDOUT-DTI SOFT 0.09943 vs binary D 0.10234 (mean paired -0.00334, 4/20 cells). Consistent with bang-bang optimality of soft Tversky away from truth. No slot.
+* **Expected gain:** negative: pooled delta -0.00291 vs binary Arm D on selection seeds
+* **Cost:** one local pre-registered holdout experiment (Lane L-H30, shared selection); 0 weekly slots

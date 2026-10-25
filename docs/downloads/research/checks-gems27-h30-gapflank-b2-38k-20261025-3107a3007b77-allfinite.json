@@ -1,0 +1,60 @@
+{
+  "file": "gems27-h30-gapflank-b2-38k-20261025-3107a3007b77-allfinite.tif",
+  "bytes": 826824,
+  "sha256": "deb8b4f10eda333b8965813e3ab6c8cd3c134193f36a06ccb1cbbfdc19994eb3",
+  "variant": "allfinite",
+  "checks": {
+    "grid_matches_template": {
+      "pass": true,
+      "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+      "hard": true
+    },
+    "single_band_float32": {
+      "pass": true,
+      "detail": "count=1 dtype=float32",
+      "hard": true
+    },
+    "inside_footprint_all_finite": {
+      "pass": true,
+      "detail": "0 non-finite inside 5167373 px",
+      "hard": true
+    },
+    "inside_footprint_in_0_1": {
+      "pass": true,
+      "detail": "min=0 max=1",
+      "hard": true
+    },
+    "no_infinities_anywhere": {
+      "pass": true,
+      "detail": "np.isinf(whole array) is empty",
+      "hard": true
+    },
+    "outside_footprint_is_zero_and_finite": {
+      "pass": true,
+      "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+      "hard": true
+    },
+    "strict_whole_array_range": {
+      "pass": true,
+      "detail": "whole-array min=0 max=1",
+      "hard": true
+    },
+    "profile_driver_gtiff": {
+      "pass": true,
+      "detail": "GTiff",
+      "hard": false
+    },
+    "compression_like_sample": {
+      "pass": true,
+      "detail": "Compression.lzw",
+      "hard": false
+    }
+  },
+  "hard_checks_passed": true,
+  "hard_failures": [],
+  "nonzero_inside_px": 38000,
+  "value_set_inside": [
+    0.0,
+    1.0
+  ]
+}

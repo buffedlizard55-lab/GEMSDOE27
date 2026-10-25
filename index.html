@@ -48,6 +48,37 @@ Format PASS is not permission to submit; negative and duplicate files remain res
  <p class="small">The exact gate, 95% CI, validation receipt and duplicate report are on the <a href="docs/research.html#h28-3"><b>Research page</b></a>. The executive summary explains the rule used to decide when a future TIFF is actually okay to submit.</p>
 </div>
 
+<div class="card hero" style="border-left:4px solid #b00">
+ <h2 style="margin-top:0">Newest unique TIF (Lane L-H30, 2026-10-25): dip-advection / gap-flanking / soft emission &mdash; NEGATIVE</h2>
+ <p><span class="badge bad" style="font-size:1.05rem">&#9940; DO NOT SUBMIT &mdash; frozen holdout selection gate FAILED (negative research artifact)</span></p>
+ <p>One new unique GeoTIFF was generated this session (the GAP arm below). Whether it may be submitted is decided
+ <b>only</b> by the machine gates in its run card &mdash; no human-inspection step. It <b>failed</b> the frozen
+ efficacy gate, so the answer is <b>NOT OK TO SUBMIT</b>, even though its bytes are format-valid and unique.</p>
+ 
+ <p>Three preregistered contenders (<a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/20_lane_h30_preregistration_2026-10-25.md">knowledge/20</a>,
+ frozen before any run) were gated against the strongest in-repo control (Arm D = 32-band + 15 subsurface transforms)
+ on fresh seeds 240&ndash;244 (20 cells, 59,372 withheld positives, gems27.metric v1 (alpha=0.2, beta=0.8, R=3px triangular)).
+ Pooled <b>HOLDOUT-DTI</b>: D control <b>0.1023</b> &middot; GAP (gap-flanking) <b>0.1018</b>
+ &middot; SOFT (soft rank-taper) <b>0.0994</b> &middot; DIP (dip-advection) <b>0.0989</b>.
+ No contender beat the control (GAP paired &Delta; -0.0007, 95% CI
+ [-0.0029, +0.0016]); confirmation did not run and
+ no tuning followed. Leakage canary max AUC 0.561 (clean). Catalogue-internal evidence only; no live score.</p>
+ <ul class="tight">
+ <li><b>The generated file (research only):</b> <code>gems27-h30-gapflank-b2-38k-20261025-3107a3007b77-allfinite.tif</code>, 38,000 dots,
+ sha256 deb8b4f10eda333b&hellip;, in <a href="docs/downloads/research/gems27-h30-gapflank-b2-38k-20261025-3107a3007b77-allfinite.tif">downloads/research/</a> &mdash; not a submission download.</li>
+ <li><b>Format PASS:</b> single-band float32, all-finite, every cell in [0,1] (the portal-error fix), EPSG:32611
+ 3730&times;3292; 0 dots on catalogue; min catalogue distance 2.24&nbsp;px (B2).</li>
+ <li><b>Unique vs scored peers PASS:</b> max &le;3&nbsp;px dot overlap <b>45.7%</b>
+ vs the 12 pinned registry rasters (limit 70&nbsp;%); max surface Spearman 0.433 (limit 0.90).
+ Extended overlaps vs this repo's own unsubmitted research files (up to
+ 84.7%) are reported in the run card.</li>
+ <li>Full result: <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/21_h30_result_2026-10-25.md">knowledge/21</a> &middot;
+ run card: <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/evidence/h30_run_card.json">evidence/h30_run_card.json</a> &middot;
+ automatic audit: <a href="docs/data/submission_readiness_audit.json">submission readiness audit</a>.</li>
+ </ul>
+</div>
+
+
 <div class="card" style="border-left:4px solid #b00">
  <h3 style="margin-top:0">H29-1 D-refill (2026-10-25): best-validated detector &mdash; NOT certified unique</h3>
  <p><span class="badge bad" style="font-size:1.05rem">&#9940; NOT CERTIFIED UNIQUE &mdash; DO NOT SUBMIT AS THE UNIQUE LANE FILE (extended duplicate screen failed; see run card)</span></p>
@@ -126,6 +157,6 @@ Reaching the owner-stated leader (0.3195) is not possible with verified/modelled
 The agent never uploads anything; you press the button.</div>
 <p class="small">Reference (owner-reported 0.2477): <a href="https://github.com/buffedlizard55-lab/GEMSDOE24/blob/07345ea0604953d7efb858d9cfbc21e20c7aca0b/docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif">24GEMSDOE audit record</a> (sha256 68d0e2e4fcc594f9…). It is historical comparison evidence, not a current download recommendation.</p>
 </main>
-<footer>Built 2026-10-25 22:13 UTC from <a href="https://github.com/buffedlizard55-lab/GEMSDOE27">the repository</a>. No current TIFF is approved for submission. No leaderboard score is claimed anywhere on this site.
+<footer>Built 2026-10-25 23:21 UTC from <a href="https://github.com/buffedlizard55-lab/GEMSDOE27">the repository</a>. No current TIFF is approved for submission. No leaderboard score is claimed anywhere on this site.
 Historical scores shown are owner-reported. This site never contacts drivendata.org.</footer>
 <script src="docs/assets/app.js"></script></body></html>

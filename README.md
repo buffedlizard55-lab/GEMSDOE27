@@ -1,19 +1,26 @@
 # 27GEMSDOE - topology-first research and submission lab for DrivenData #306 (DOE GEMS)
 
-## Current audit addendum (2026-10-25; read at every session start)
-**No newly certified unique TIFF was produced in this audit. DO NOT SUBMIT research files.**
-The current request requires a genuinely new TIFF, visible machine-based eligibility,
-whole-segment buffered holdout, feature canaries, pre-placement surface and final-dot
-registry checks, at most three experiments/two hours, and no automated slot use.
-These requirements are not fulfilled by renaming a prior raster or waiving duplicates.
-See [the three-pass audit and ranked prospective hypotheses](knowledge/19_readiness_audit_20261025.md).
-Run `.venv/bin/python scripts/audit_submission_readiness.py` to refresh the public
-[byte-bound submission evidence audit](docs/data/submission_readiness_audit.json).
-Badges now fail closed on contradictory/missing evidence, hash mismatch, failed
-efficacy or uniqueness, leakage canary, and invalid notes. The official reference
-supports CPU execution; earlier blanket “GPU needed” statements are too strong.
-The historical verbatim prompt below remains preserved; this paragraph summarizes
-the current request rather than purporting to reproduce it verbatim.
+## Current status — Session 9, Lane L-H30 (2026-10-25; read at every session start)
+**One new unique TIFF WAS generated this session, and it is ⛔ NOT OK TO SUBMIT.**
+Lane L-H30 preregistered three contenders against the strongest in-repo control
+(Arm D) — H30-1 dip-advection, H30-2 along-strike gap flanking, H30-3 soft
+rank-taper emission — in [knowledge/20](knowledge/20_lane_h30_preregistration_2026-10-25.md)
+(committed before any run), and gated them on fresh seeds 240–244. **All three
+failed the frozen selection gate**: pooled **HOLDOUT-DTI** (`gems27.metric` v1)
+D 0.10234 · GAP 0.10180 · SOFT 0.09943 · DIP 0.09888 (20 cells, 59,372 withheld
+positives; canary max AUC 0.561, clean). No confirmation ran; no tuning followed.
+The single built file (GAP arm, per the pre-result fallback rule) is a
+**NEGATIVE research artifact**: `docs/downloads/research/gems27-h30-gapflank-b2-38k-20261025-3107a3007b77-allfinite.tif`
+(sha256 `deb8b4f1…`, 38,000 dots) — format-valid (all-finite [0,1], the portal-error
+fix) and peer-unique (max 45.7 % dot overlap vs the 12 pinned registry rasters)
+but **DO NOT SUBMIT**. Full result: [knowledge/21](knowledge/21_h30_result_2026-10-25.md);
+run card: `evidence/h30_run_card.json`. The site's first screen and executive
+summary show this status, computed fail-closed from the run-card JSON by
+`scripts/audit_submission_readiness.py` (no human-inspection gate). Data-readiness
+was restored first: 16 hash-pinned inputs OK, prepared stack sha256 `83ed2704…`,
+107 tests passed, `verify_downloads.py` 0 failures. **Still no TIFF in this repo
+is certified OK to submit**, and no live/organizer score exists for any file here.
+The historical verbatim prompts below remain preserved.
 
 
 **Site:** https://buffedlizard55-lab.github.io/GEMSDOE27/ — current front page states research status and submission eligibility.
@@ -23,7 +30,7 @@ Owner-reported reference: the 24GEMSDOE file scored **0.2477** (owner-reported);
 
 ## Start here every session (checklist)
 1. Re-read **Task prompt (verbatim)** and **Core Values (verbatim)** below. Maximize P(Win) and Own the Outcome are the focal point of every build, research and implementation decision.
-2. Do the previous session's next steps first: read `knowledge/18_session8_repo_review_2026-10-25.md`, then `knowledge/06_limitations_and_access.md` -> newest dated outcome and carry-forward priorities. Session 8's first blocker is missing `data_cache/sample_submission.tif`; do not claim fresh download validation until inputs are restored.
+2. Do the previous session's next steps first: read `knowledge/21_h30_result_2026-10-25.md` (Lane L-H30: DIP/GAP/SOFT all failed selection vs Arm D on seeds 240–244; those seeds are consumed — never reuse 240–254 for confirmation), then `knowledge/06_limitations_and_access.md` -> "Session 9 (Lane L-H30) outcome and carry-forward priorities". Data restore is proven working (Session 9), but `data_cache/` is git-ignored: re-run `scripts/restore_data.py` and `scripts/prepare_data.py` before claiming any fresh validation.
 3. Verify inputs: `python scripts/restore_data.py` (16 hash-pinned artifacts; SHA-256 in `data/manifest.json`), `python scripts/prepare_data.py`, then `python -m pytest -q` and `python scripts/verify_downloads.py`.
 4. Verify line by line against official sources and give links for manual review (`registry/sources.json`, `docs/sources.html`). Flag irregularities (`registry/irregularities.json`). No hallucinations: unknown stays unknown.
 5. Never automate drivendata.org (Terms of Use); never claim an upload, score, PR or merge without evidence.

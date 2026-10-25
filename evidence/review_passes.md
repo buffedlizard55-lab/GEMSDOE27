@@ -404,3 +404,44 @@ See `knowledge/18_session8_repo_review_2026-10-25.md` for the full candidate scr
 * Pass 1: reviewed the full prior task, current H29-1 and L-DCONFIRM cards, the parallel uniqueness registry, site-generation logic, download receipts, and input availability. No candidate passed all gates; no experimental run or submission-slot use was justified.
 * Pass 2: installed project dependencies into the ignored `.venv/`; `pytest -q` reported **92 passed, 3 skipped**, Ruff passed. The strict standalone raster verifier stopped because `data_cache/sample_submission.tif` is missing. This must not be represented as successful TIFF validation.
 * Pass 3: README now points to the fresh review and makes the missing-data prerequisite the first next-session action. The existing site STOP badge remains appropriate. No false positive submit-ready badge, organizer-confirmed score, upload, or source download was introduced.
+
+# Session 9 (Lane L-H30, 2026-10-25) — three passes
+
+* **Pass 1 (implement + verify):** restored all 16 hash-pinned inputs + assembled
+  training raster (all SHA-256 OK), rebuilt the 32-band stack (`83ed2704…`),
+  fetched the 12 pinned peers, re-verified the 0.2778 chain pixel-exactly
+  (d2.8 → r1 → B2, both equalities True) and the focus-site table from bytes.
+  Preregistered Lane L-H30 (`knowledge/20`, commit `d87283f`) *before* code,
+  implemented `gems27.dip_gap_features` + runner with unit tests (commit
+  `6ceeb24`), ran E1 canary (max AUC 0.561, clean), E2a selection on fresh
+  seeds 240–244 (D 0.10234 > GAP 0.10180 > SOFT 0.09943 > DIP 0.09888 pooled
+  HOLDOUT-DTI → frozen gate FAIL, no confirmation), E3 built the single GAP
+  TIFF (`3107a3007b77`, sha256 `deb8b4f1…`): all-finite [0,1], B2 (min 2.236 px),
+  spacing ≥2.828 px, peer-uniqueness PASS (max 45.7 %), verdict **negative**.
+* **Pass 2 (bugs / assumptions / edge cases):** verified `dti_exact` ==
+  `dti_binary` on binary inputs before trusting SOFT scores; the shared
+  `check_parallel_uniqueness.py` independently reproduced every per-peer
+  overlap in the run card exactly; independent re-read confirmed grid/CRS,
+  {0,1}, 38,000 dots, single-TIFF ZIP byte-identical, card hash bound to
+  bytes. Found and fixed: the negative run card initially carried a null
+  paired block — replaced with the descriptive selection-cell paired Δ and
+  95 % CI computed from recorded evidence (bytes byte-identical after
+  rebuild, sha unchanged); site box was double-inserted on the index and
+  missing from the executive summary — repaired and grep-verified on both
+  pages. Flagged the missing H28-4 evidence file (IR-2026-10-25-11) and the
+  prospective registry-scope decision (IR-2026-10-25-10).
+* **Pass 3 (recheck vs original request):** a *unique* TIFF was generated (not
+  a copy of any prior submission: content-hashed, ≤45.7 % dot overlap vs every
+  scored peer, surface checked before placement and on final dots); whether
+  it is OK to download-and-submit is obvious and machine-decided — **⛔ DO NOT
+  SUBMIT** on the first screen + executive summary, computed fail-closed from
+  the run-card JSON (readiness audit lists the blocking reasons), no human
+  inspector anywhere. The 0.2778 mechanism was answered from raster bytes.
+  3–5 hypotheses were ranked before implementing; the top lanes were
+  validated on the spatially blocked holdout before any slot decision; no
+  slot was spent; hypotheses needing new external data name the free official
+  source (GDR #1391) and are marked not-yet-viable. Every number is labelled
+  HOLDOUT-DTI (evaluator/withheld-n/CI) or OWNER-REPORTED; nothing is
+  projected as a score. Remaining work and limitations: `knowledge/06`
+  Session-9 carry-forward (selector registry decision, segmentation-class
+  detector, GDR bytes, missing H28-4 evidence).

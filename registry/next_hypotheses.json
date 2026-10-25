@@ -1,6 +1,6 @@
 {
   "generated": "2026-10-25",
-  "status": "Session 6 screen current as of 2026-10-25: H28-3 was tested on fresh seeds 160-169 and failed its frozen gate; it is excluded from the untried list. Three genuinely untried hypotheses remain. No weekly slot was used. H27-16 raw packages remain absent; the local fetch-workflow runs failed with zero jobs/no logs, so no new package verification is claimed.",
+  "status": "Updated 2026-10-25 (Lane L-H30): H30-1 dip advection, H30-2 gap flanking, H30-3 soft rank-taper all tested against the Arm-D control on selection seeds 240-244 and FAILED the frozen gate (no confirmation ran). The three previously untried entries below remain untried; H27-16/H28-5 stay blocked on official GDR bytes. See knowledge/20 + knowledge/21.",
   "novelty_scope": "Screened against this checkout, its evidence ledger, and the owner-provided comparison list. The sibling score list does not include complete source methods; global novelty is unknown.",
   "target": "Fault-location pixels in the organizer-created test labels, which remain unobserved here. Catalogue-internal holdouts are only a proxy and cannot validate far-field behavior.",
   "baseline": {
@@ -9,7 +9,7 @@
     "evidence": "evidence/h28_1_edge_holdout.json; seeds 140-149; +0.00294884 mean paired DTI over base_oof + T-v2 + H27-4 r1, 3/4 folds and 9/10 seeds",
     "limitation": "Catalogue-internal component-hidden, four-quadrant holdout. It is not the organizer-created expert-label set and is especially weak for the far field."
   },
-  "ranking_basis": "Expert priors on potential paired catalogue-holdout \u0394DTI \u00d7 testability / engineering cost. Planning priors are not leaderboard predictions. H27-10 and H28-3 are completed failed tests, not part of the untried ranking.",
+  "ranking_basis": "Expert priors on potential paired catalogue-holdout ΔDTI × testability / engineering cost. Planning priors are not leaderboard predictions. H27-10 and H28-3 are completed failed tests, not part of the untried ranking.",
   "hypotheses": [
     {
       "id": "H27-16",
@@ -81,7 +81,7 @@
     {
       "id": "H27-10",
       "title": "Model-ranked 100-300 m offset-scarp annulus substitution",
-      "status": "TESTED \u2014 FROZEN GATE FAILED; not untried and not eligible to justify a weekly slot",
+      "status": "TESTED — FROZEN GATE FAILED; not untried and not eligible to justify a weekly slot",
       "validation": "knowledge/03_preregistration_topology_gate.md#addendum-f-h27-10; evidence/h27_10_annulus_holdout.json; initial diagnostic output preserved at evidence/h27_10_annulus_holdout_initial.json",
       "seeds": [
         150,
@@ -107,8 +107,8 @@
     },
     {
       "id": "H28-3",
-      "title": "Dilatational-strain \u00d7 conductivity intersection corridors",
-      "status": "TESTED \u2014 FROZEN GATE FAILED; negative result, not slot-eligible",
+      "title": "Dilatational-strain × conductivity intersection corridors",
+      "status": "TESTED — FROZEN GATE FAILED; negative result, not slot-eligible",
       "validation": "knowledge/13_preregistration_H28-3.md; evidence/h28_3_strain_holdout.json; evidence/h28_3_negative_uniqueness.json",
       "seeds": [
         160,
@@ -138,6 +138,21 @@
       "leakage_canary": "PASS: all five source and six derived features had direction-invariant ROC AUC <= 0.5702; threshold 0.90.",
       "integrity": "PASS: 40 cells, 0 known-catalogue prediction overlap, finite probabilities in [0,1].",
       "negative_research_artifact": "Unique, format-valid research TIFF content id 27d6875f3b22; NOT APPROVED FOR SUBMISSION because the predictive gate failed."
+    },
+    {
+      "id": "H30-1",
+      "title": "Dip-advection correction (feature form of H29-2)",
+      "status": "TESTED - SELECTION GATE FAILED; negative (Lane L-H30 seeds 240-244); pooled HOLDOUT-DTI 0.09888 vs Arm-D 0.10234; evidence/h30_holdout.json"
+    },
+    {
+      "id": "H30-2",
+      "title": "Along-strike gap flanking",
+      "status": "TESTED - SELECTION GATE FAILED; negative (Lane L-H30 seeds 240-244); pooled HOLDOUT-DTI 0.10180 vs Arm-D 0.10234; negative research TIFF 3107a3007b77 NOT APPROVED; evidence/h30_holdout.json + evidence/h30_run_card.json"
+    },
+    {
+      "id": "H30-3",
+      "title": "Soft rank-taper emission (H29-3)",
+      "status": "TESTED - SELECTION GATE FAILED; negative (Lane L-H30 seeds 240-244); pooled HOLDOUT-DTI 0.09943 vs binary Arm-D 0.10234; evidence/h30_holdout.json"
     }
   ],
   "separate_review_class": {
@@ -175,7 +190,7 @@
       "docs/assets/fig_map_h27_5b_priority.png"
     ],
     "refuted_signals": [
-      "graph-\u0394P ranking as a holdout-improvement signal (Addendum D-3)",
+      "graph-ΔP ranking as a holdout-improvement signal (Addendum D-3)",
       "overlapping en-echelon step-over as a holdout-improvement signal (Addendum D-4)"
     ]
   }

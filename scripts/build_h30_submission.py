@@ -243,13 +243,30 @@ def main() -> int:
         }
         note_pooled_c, note_pooled_d = conf["pooled_candidate"], conf["pooled_control_D"]
     else:
+        # No confirmation ran (selection gate failed). The paired block is the
+        # descriptive candidate-minus-control summary of the RECORDED selection
+        # cells only (same deterministic bootstrap as the frozen confirmation
+        # would have used) - arithmetic on existing evidence, not a new run.
+        sel_cells = sel["per_cell"]
+        deltas = np.array([a["dti"] - b["dti"]
+                            for a, b in zip(sel_cells[arm], sel_cells["D"])])
+        rng_bs = np.random.default_rng(11)
+        boot = [rng_bs.choice(deltas, size=len(deltas), replace=True).mean()
+                for _ in range(2000)]
+        paired_sel = {
+            "mean_delta": float(deltas.mean()),
+            "ci95": [float(np.percentile(boot, 2.5)), float(np.percentile(boot, 97.5))],
+            "cells_positive": int((deltas > 0).sum()),
+            "n_cells": int(len(deltas)),
+            "basis": "selection seeds 240-244 only; NO confirmation ran (selection "
+                     "gate failed: pooled candidate did not exceed pooled D control)",
+        }
         holdout_block = {
             "label": "HOLDOUT-DTI",
             "evaluator": hold["evaluator"],
             "pooled_dti_candidate": sel["pooled_holdout_dti"][arm],
             "pooled_dti_control_D": sel["pooled_holdout_dti"]["D"],
-            "paired_A_minus_B": {"mean_delta": None, "ci95": [],
-                                  "note": "no confirmation ran: selection gate failed"},
+            "paired_A_minus_B": paired_sel,
             "n_withheld_positives_total": sel["n_withheld_positives_total"],
             "seeds_selection": sel["seeds"],
             "canary_max_auc": canary_max,
