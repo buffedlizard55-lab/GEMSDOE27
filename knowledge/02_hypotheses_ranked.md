@@ -175,3 +175,13 @@ Ranking rule: expected DTI gain x probability the test can validate it / cost. B
 * **Status:** NOT IDENTIFIABLE - rejected. With overlapping geological bases the fit fails outright (in-sample R2 = -1.24). Restricted to a strict 7-cell catalogue-distance PARTITION (well identified, mass constraint exact) it still fails: in-sample R2 = -0.360, leave-one-submission-out score RMSE 0.0715 against a score spread of 0.0686 - signal ratio 0.96, i.e. no better than predicting the mean. 20 aggregate numbers cannot resolve a 5.2 M-pixel field. The fitted lambda put 66% of truth in the 100-200 m catalogue ring and 34% at 800-1500 m, which is suggestive and consistent with Hermant et al. (2025) 150-400 m LiDAR offsets, but it did not pass its own validation and MUST NOT be used to choose an emission.
 * **Expected gain:** none - failed its own leave-one-out validation
 * **Cost:** Tested and rejected (0 slots spent); evidence/live_truth_partition_radial.json
+
+## H28-3 (rank 99): Dilatational-strain × conductivity intersection corridors
+
+* **Layers:** geod_2ndinv, geod_shearrate, geod_dilaterate, cond_surf, depth_to_base_surf; 300-m label-free gradients and co-location.
+* **Physical signature:** Positive-dilatation strain core, strain/shear/conductivity gradients, unsigned gradient alignment, and shallow-basement-conditioned corridor.
+* **Why it catches a fault missing from USGS/INGENIOUS:** A blind or alluvium-covered fault could localize deformation and fluid-altered conductivity without a catalogue-quality surface scarp.
+* **How it differs from the repo:** Explicit spatial conjunction and gradient alignment, not a scalar-channel threshold, emission re-spacing, catalogue-flank prune, or peer-raster copy.
+* **Status:** TESTED — FROZEN GATE FAILED. HOLDOUT-DTI pooled candidate 0.103352 vs baseline 0.105946, Δ -0.002594; 95% seed-bootstrap CI [-0.004240, -0.000907], 2/10 seeds and 1/4 folds improved. No slot. Negative research TIFF 27d6875f3b22 is format-valid and unique against the pinned peer registry but NOT APPROVED FOR SUBMISSION.
+* **Expected gain:** negative: pooled ΔDTI -0.002594
+* **Cost:** one local pre-registered holdout experiment; 0 weekly slots

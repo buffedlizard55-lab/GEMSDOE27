@@ -1,6 +1,6 @@
 {
-  "generated": "2026-10-03",
-  "status": "Session 5 screen current as of 2026-10-03: four genuinely untried hypotheses remain. H27-10 was tested on seeds 150-159 and failed its frozen gate; it is excluded from the untried list. No weekly slot has been used. H27-16 raw packages remain absent; the local fetch-workflow runs failed with zero jobs/no logs, so no new package verification is claimed.",
+  "generated": "2026-10-25",
+  "status": "Session 6 screen current as of 2026-10-25: H28-3 was tested on fresh seeds 160-169 and failed its frozen gate; it is excluded from the untried list. Three genuinely untried hypotheses remain. No weekly slot was used. H27-16 raw packages remain absent; the local fetch-workflow runs failed with zero jobs/no logs, so no new package verification is claimed.",
   "novelty_scope": "Screened against this checkout, its evidence ledger, and the owner-provided comparison list. The sibling score list does not include complete source methods; global novelty is unknown.",
   "target": "Fault-location pixels in the organizer-created test labels, which remain unobserved here. Catalogue-internal holdouts are only a proxy and cannot validate far-field behavior.",
   "baseline": {
@@ -9,7 +9,7 @@
     "evidence": "evidence/h28_1_edge_holdout.json; seeds 140-149; +0.00294884 mean paired DTI over base_oof + T-v2 + H27-4 r1, 3/4 folds and 9/10 seeds",
     "limitation": "Catalogue-internal component-hidden, four-quadrant holdout. It is not the organizer-created expert-label set and is especially weak for the far field."
   },
-  "ranking_basis": "Expert priors on potential paired catalogue-holdout \u0394DTI \u00d7 testability / engineering cost. These ranges are planning priors only, not measurements or leaderboard predictions. H27-10 is a completed, rejected test, not part of this untried ranking.",
+  "ranking_basis": "Expert priors on potential paired catalogue-holdout \u0394DTI \u00d7 testability / engineering cost. Planning priors are not leaderboard predictions. H27-10 and H28-3 are completed failed tests, not part of the untried ranking.",
   "hypotheses": [
     {
       "id": "H27-16",
@@ -34,32 +34,8 @@
       "status": "UNTRIED; official source packages are not yet present in this checkout."
     },
     {
-      "id": "H28-3",
-      "rank": 2,
-      "title": "Dilatational-strain and conductivity intersection corridors",
-      "layers": [
-        "geod_2ndinv",
-        "geod_shearrate",
-        "geod_dilaterate",
-        "cond_surf",
-        "depth_to_base_surf"
-      ],
-      "signature": "Narrow, spatially coincident strain-gradient and conductivity corridors, rather than a high-value threshold on either raster alone.",
-      "why_missing_faults": "A buried active or fluid-bearing strand may have weak surface relief but express local strain concentration and conductive alteration at depth.",
-      "confounders": "Broad basin conductivity, clay caps, regional strain smoothness, source-depth mismatch, and the fact that a strain anomaly is not a fault trace.",
-      "differs_from_repo": "The current detector uses these layers as scalar channels; no in-repo rule tests their spatial conjunction as a candidate corridor. It is distinct from refuted scalar thermal/radiometric arms and from endpoint graph links.",
-      "expected_holdout_delta_dti": [
-        0.0,
-        0.003
-      ],
-      "cost": "low-medium; existing raster layers only, but a fold-safe joint-feature definition needs preregistration",
-      "data_gate": "All listed bands are in the locally restored hash-pinned training-feature mirror.",
-      "validation": "No run registered yet; use a fresh seed range and preregister the exact transform, controls, and gate against the current-best holdout baseline.",
-      "status": "UNTRIED."
-    },
-    {
       "id": "H28-4",
-      "rank": 3,
+      "rank": 2,
       "title": "Anisotropic seismicity-fabric lineaments",
       "layers": [
         "deq_n100a15",
@@ -81,7 +57,7 @@
     },
     {
       "id": "H28-5",
-      "rank": 4,
+      "rank": 3,
       "title": "Quality-filtered hydrothermal chemistry gradients, not point-distance buffers",
       "layers": [
         "GDR/INGENIOUS wellspring CSV: temp_c, geothermquartz_c, geothermchalc_c, geothermcat_c, thermalclass, station name, and coordinates",
@@ -128,6 +104,40 @@
       "live_break_even_efficiency": 0.052122130336889505,
       "removed_farfield_efficiency": 0.033406434892356694,
       "integrity_note": "The first-run self-distance spacing check produced a false negative. It was corrected and rerun on the same used seeds solely as an integrity check; data checks then passed, numerical results and the frozen FAIL outcome were unchanged. Not fresh confirmation."
+    },
+    {
+      "id": "H28-3",
+      "title": "Dilatational-strain \u00d7 conductivity intersection corridors",
+      "status": "TESTED \u2014 FROZEN GATE FAILED; negative result, not slot-eligible",
+      "validation": "knowledge/13_preregistration_H28-3.md; evidence/h28_3_strain_holdout.json; evidence/h28_3_negative_uniqueness.json",
+      "seeds": [
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169
+      ],
+      "evaluator_version": "H28-3-holdout-v1",
+      "baseline": "H28-1 edges + T-v2 + H27-4 r1",
+      "candidate_pooled_holdout_dti": 0.10335226828635775,
+      "baseline_pooled_holdout_dti": 0.10594577394895514,
+      "candidate_minus_baseline_pooled_holdout_dti": -0.0025935056625973896,
+      "mean_seed_level_paired_delta_dti": -0.0025884279689379814,
+      "bootstrap_95_ci_seed_resampling": [
+        -0.004239890457162197,
+        -0.0009065457815041949
+      ],
+      "positive_seeds": "2/10",
+      "positive_folds": "1/4",
+      "withheld_positive_occurrences": 123150,
+      "leakage_canary": "PASS: all five source and six derived features had direction-invariant ROC AUC <= 0.5702; threshold 0.90.",
+      "integrity": "PASS: 40 cells, 0 known-catalogue prediction overlap, finite probabilities in [0,1].",
+      "negative_research_artifact": "Unique, format-valid research TIFF content id 27d6875f3b22; NOT APPROVED FOR SUBMISSION because the predictive gate failed."
     }
   ],
   "separate_review_class": {

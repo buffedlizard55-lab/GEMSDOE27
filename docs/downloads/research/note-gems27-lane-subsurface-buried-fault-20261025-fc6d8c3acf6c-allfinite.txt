@@ -1,0 +1,1 @@
+27GEMSDOE Lane-A subsurface-only buried-fault detector, B2, 38k dots; HOLDOUT-DTI 0.0752 vs full 0.1001; UNSCORED | id fc6d8c3acf6c

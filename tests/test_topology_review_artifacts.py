@@ -66,14 +66,18 @@ def test_focused_h27_5b_csv_and_geojson_are_81_sorted_source_linked_rows():
         assert "delta_second_moment_km2" in props
 
 
-def test_h27_10_is_tested_failed_not_currently_untried_or_slot_authorized():
+def test_failed_hypotheses_are_not_currently_untried_or_slot_authorized():
     screen = json.loads((ROOT / "registry" / "next_hypotheses.json").read_text())
     current_ids = {h["id"] for h in screen["hypotheses"]}
     assert 3 <= len(current_ids) <= 5
     assert "H27-10" not in current_ids
+    assert "H28-3" not in current_ids
     tested = next(h for h in screen["tested_hypotheses"] if h["id"] == "H27-10")
     assert "FROZEN GATE FAILED" in tested["status"]
     assert "not eligible to justify a weekly slot" in tested["status"]
+    h28_3 = next(h for h in screen["tested_hypotheses"] if h["id"] == "H28-3")
+    assert "FROZEN GATE FAILED" in h28_3["status"]
+    assert h28_3["candidate_minus_baseline_pooled_holdout_dti"] < 0
 
     initial = json.loads((ROOT / "evidence" / "h27_10_annulus_holdout_initial.json").read_text())
     corrected = json.loads((ROOT / "evidence" / "h27_10_annulus_holdout.json").read_text())
@@ -96,8 +100,10 @@ def test_topology_and_research_pages_disclose_review_only_and_refuted_signals():
     assert "assets/fig_map_h27_5b_priority.png" in topology
     assert (ROOT / "docs" / "assets" / "fig_map_h27_5b_priority.png").is_file()
     assert "review class</th>" in topology
-    assert "Current Session 5 untried screen (4 hypotheses)" in research
+    assert "Current Session 6 untried screen (3 hypotheses)" in research
     assert "H27-10 annulus result — REJECTED; no weekly slot." in research
+    assert "H28-3 strain × conductivity result — FAILED" in research
+    assert "NOT APPROVED FOR SUBMISSION" in research
     assert "h27_10_annulus_holdout_initial.json" in research
     assert "not a score or proof of transfer" in topology
     assert "graph-ΔP ranking" in topology and "refuted as holdout-improvement signals" in topology

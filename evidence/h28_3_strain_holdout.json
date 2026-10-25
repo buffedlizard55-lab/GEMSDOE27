@@ -1,0 +1,1345 @@
+{
+  "preregistration": "knowledge/13_preregistration_H28-3.md",
+  "evaluator_version": "H28-3-holdout-v1",
+  "candidate": "H28-3 dilatational-strain x conductivity corridors",
+  "seeds": [
+    160,
+    161,
+    162,
+    163,
+    164,
+    165,
+    166,
+    167,
+    168,
+    169
+  ],
+  "holdout_definition": "20% whole 8-connected catalogue components hidden within each fixed quadrant; 600-m train/test collar; catalogue-derived topology from visible faults only; 300-m triangular DTI alpha=0.2 beta=0.8.",
+  "leakage_canary": {
+    "threshold": 0.9,
+    "features": {
+      "geod_2ndinv": {
+        "finite": 5164312,
+        "roc_auc": 0.5701787515350865,
+        "direction_invariant_roc_auc": 0.5701787515350865,
+        "pr_auc": 0.016714816830746264,
+        "kind": "source_scalar"
+      },
+      "geod_shearrate": {
+        "finite": 5164312,
+        "roc_auc": 0.5689810121873415,
+        "direction_invariant_roc_auc": 0.5689810121873415,
+        "pr_auc": 0.016329381962267298,
+        "kind": "source_scalar"
+      },
+      "geod_dilaterate": {
+        "finite": 5164312,
+        "roc_auc": 0.525488980063061,
+        "direction_invariant_roc_auc": 0.525488980063061,
+        "pr_auc": 0.013448795401784314,
+        "kind": "source_scalar"
+      },
+      "depth_to_base_surf": {
+        "finite": 5164312,
+        "roc_auc": 0.5118815248133238,
+        "direction_invariant_roc_auc": 0.5118815248133238,
+        "pr_auc": 0.01142019065900245,
+        "kind": "source_scalar"
+      },
+      "cond_surf": {
+        "finite": 5164312,
+        "roc_auc": 0.48328712745707275,
+        "direction_invariant_roc_auc": 0.5167128725429273,
+        "pr_auc": 0.01385329055923739,
+        "kind": "source_scalar"
+      },
+      "strain_dilation_core": {
+        "finite": 5167373,
+        "roc_auc": 0.5417111318915908,
+        "direction_invariant_roc_auc": 0.5417111318915908,
+        "pr_auc": 0.015166928441440014,
+        "kind": "derived_label_free"
+      },
+      "strain_gradient_300m": {
+        "finite": 5167373,
+        "roc_auc": 0.4795208194557061,
+        "direction_invariant_roc_auc": 0.5204791805442939,
+        "pr_auc": 0.012822384727078398,
+        "kind": "derived_label_free"
+      },
+      "shear_gradient_300m": {
+        "finite": 5167373,
+        "roc_auc": 0.4954339440431649,
+        "direction_invariant_roc_auc": 0.5045660559568352,
+        "pr_auc": 0.011833251413416238,
+        "kind": "derived_label_free"
+      },
+      "conductivity_gradient_300m": {
+        "finite": 5167373,
+        "roc_auc": 0.4955490689886105,
+        "direction_invariant_roc_auc": 0.5044509310113895,
+        "pr_auc": 0.012013743222384025,
+        "kind": "derived_label_free"
+      },
+      "strain_conductivity_corridor": {
+        "finite": 5167373,
+        "roc_auc": 0.4991351093743206,
+        "direction_invariant_roc_auc": 0.5008648906256794,
+        "pr_auc": 0.011947115953171617,
+        "kind": "derived_label_free"
+      },
+      "shallow_basement_corridor": {
+        "finite": 5167373,
+        "roc_auc": 0.5029389273960154,
+        "direction_invariant_roc_auc": 0.5029389273960154,
+        "pr_auc": 0.011854569204188148,
+        "kind": "derived_label_free"
+      }
+    },
+    "leaking_features": [],
+    "pass": true,
+    "interpretation": "Safety screen only; these full-catalogue AUCs are not holdout performance or a score."
+  },
+  "baseline": "H28-1 edges + T-v2 + H27-4 r1",
+  "candidate_variant": "baseline + six H28-3 strain-conductivity features",
+  "control": "same-count uniform active-region replacement; deterministic seed + 91000",
+  "HOLDOUT_DTI": {
+    "baseline": {
+      "pooled_dti": 0.10594577394895514,
+      "mean_cell_dti": 0.106303876070961,
+      "mean_dots_per_seed": 65596.4,
+      "pooled_tp_w": 24576.264259222993,
+      "pooled_fp_w": 642674.8248013601,
+      "withheld_positives_total": 123150
+    },
+    "candidate": {
+      "pooled_dti": 0.10335226828635775,
+      "mean_cell_dti": 0.10374219919986612,
+      "mean_dots_per_seed": 65477.2,
+      "pooled_tp_w": 23945.74200217951,
+      "pooled_fp_w": 641906.9170058839,
+      "withheld_positives_total": 123150
+    },
+    "uniform_control": {
+      "pooled_dti": 0.057470779018834586,
+      "mean_cell_dti": 0.05654574993454988,
+      "mean_dots_per_seed": 65477.2,
+      "pooled_tp_w": 13277.008861209508,
+      "pooled_fp_w": 649232.5170469532,
+      "withheld_positives_total": 123150
+    },
+    "candidate_minus_baseline_pooled": -0.0025935056625973896,
+    "candidate_minus_uniform_control_pooled": 0.04588148926752317,
+    "seed_level_paired_mean": -0.0025884279689379814,
+    "seed_level_paired_deltas": {
+      "160": -0.007070075942440815,
+      "161": -0.0021436491692061743,
+      "162": -0.0036738167360715335,
+      "163": -0.003379728049087552,
+      "164": -9.861184122963995e-05,
+      "165": -0.005697485525240062,
+      "166": -0.0025508926345765154,
+      "167": 0.002132698496232391,
+      "168": -0.004159200959353682,
+      "169": 0.0007564826715937695
+    },
+    "fold_pooled_deltas": {
+      "NW": -0.00039774398169893643,
+      "NE_LidarGapHeavy": -0.008514876548274986,
+      "SW": -0.0032127383892041894,
+      "SE": 0.0020003667224881977
+    },
+    "bootstrap_95_ci_seed_resampling": [
+      -0.004239890457162197,
+      -0.0009065457815041949
+    ],
+    "ci_note": "10,000 deterministic bootstrap resamples of ten seed-level pooled paired differences; not a claim that cells are independent."
+  },
+  "integrity": {
+    "n_cells": 40,
+    "expected_cells": 40,
+    "footprint_cells": 5167373,
+    "withheld_positive_occurrences": 123150,
+    "prepared_features": {
+      "schema": 2,
+      "n_features": 32,
+      "lidar_names": [
+        "lidar_ex_max",
+        "lidar_ex_mean",
+        "lidar_step_max",
+        "lidar_lapneg_max",
+        "lidar_lappos_max",
+        "lidar_downface_max",
+        "lidar_upface_max",
+        "lidar_cross_max",
+        "lidar_relief",
+        "lidar_coh100"
+      ],
+      "sha256": "83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc"
+    },
+    "h28_1_edge_features": {
+      "schema": 1,
+      "feature_names": [
+        "potential_mag_edge_300m",
+        "potential_mag_edge_1000m",
+        "potential_grav_edge_300m",
+        "potential_grav_edge_1000m",
+        "potential_edge_concordance_1000m",
+        "potential_edge_orientation_agreement_1000m"
+      ],
+      "shape": [
+        5167373,
+        6
+      ],
+      "grid_shape": [
+        3730,
+        3292
+      ],
+      "crs": "EPSG:32611",
+      "source_bands": {
+        "magnetic": {
+          "band": 2,
+          "description": "rtp"
+        },
+        "gravity": {
+          "band": 13,
+          "description": "iso_grav_anom"
+        }
+      },
+      "valid_cells": 5164312,
+      "parameters": {
+        "pixel_size_m": 100.0,
+        "sigmas_px": [
+          3.0,
+          10.0
+        ],
+        "gradient_percentiles": [
+          5,
+          95
+        ],
+        "orientation_threshold_percentile": 10,
+        "outside_mask": 0.0
+      },
+      "inputs": {
+        "template": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+        "training_features": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+        "prepared_features": "83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc",
+        "transform_code": "96dbe727891f06cd42e0f111df3696d8995cf2e62bd522c8781677365e024cf1"
+      },
+      "sha256": "04c5fb77f07dacf35e508ba8668848b4c593840b840a89175ef87644a68b12a2"
+    },
+    "h28_3_features": {
+      "schema": 1,
+      "feature_names": [
+        "strain_dilation_core",
+        "strain_gradient_300m",
+        "shear_gradient_300m",
+        "conductivity_gradient_300m",
+        "strain_conductivity_corridor",
+        "shallow_basement_corridor"
+      ],
+      "shape": [
+        5167373,
+        6
+      ],
+      "grid_shape": [
+        3730,
+        3292
+      ],
+      "crs": "EPSG:32611",
+      "source_bands": {
+        "geod_2ndinv": 4,
+        "geod_shearrate": 7,
+        "geod_dilaterate": 8,
+        "depth_to_base_surf": 15,
+        "cond_surf": 17
+      },
+      "source_description_check": {
+        "geod_2ndinv": 4,
+        "geod_shearrate": 7,
+        "geod_dilaterate": 8,
+        "depth_to_base_surf": 15,
+        "cond_surf": 17
+      },
+      "valid_cells": 5164312,
+      "parameters": {
+        "pixel_size_m": 100.0,
+        "sigma_px": 3.0,
+        "scalar_percentiles": [
+          5.0,
+          95.0
+        ],
+        "orientation_magnitude_percentile": 10.0,
+        "outside_mask": 0.0
+      },
+      "inputs": {
+        "template": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+        "training_features": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+        "transform_code": "b9eedc8a99667d872e4129b2726d06afcaeac02e253a7918272704d12deedd76"
+      },
+      "sha256": "e252e09718ce182318d8aa52f0ec2f3816a6d728f5d1eb7c0220012d86f9f9ab"
+    },
+    "probabilities_finite_in_0_1": true,
+    "known_catalogue_overlap": 0,
+    "submission_written": false
+  },
+  "code_sha256": {
+    "runner": "2cffac25357707ede0e08c5f310c204020ea3a8a7957372474e3971b4f9e65e1",
+    "transform": "b9eedc8a99667d872e4129b2726d06afcaeac02e253a7918272704d12deedd76",
+    "oof_detector": "6c041479cf92d28d7a084f5d69407963bde45b7463e0fea624673efa3506b235"
+  },
+  "gate": {
+    "leakage_canary_passed": true,
+    "candidate_pooled_dti_exceeds_baseline": false,
+    "mean_paired_gain_at_least_0_001": false,
+    "bootstrap_95_ci_lower_above_zero": false,
+    "at_least_3_of_4_folds_improve": false,
+    "at_least_8_of_10_seeds_improve": false,
+    "beats_same_count_uniform_control_by_0_001": true,
+    "integrity_passed": true,
+    "pass": false
+  },
+  "cell_results": [
+    {
+      "seed": 160,
+      "fold": "NW",
+      "link_dots": 347,
+      "baseline": {
+        "tp": 375.25916688628985,
+        "fp": 14191.24074326512,
+        "dti": 0.08138523245800626,
+        "dots": 14410,
+        "n_truth": 2122
+      },
+      "candidate": {
+        "tp": 401.99169482969046,
+        "fp": 14219.198163993777,
+        "dti": 0.0869765875127608,
+        "dots": 14448,
+        "n_truth": 2122
+      },
+      "uniform_control": {
+        "tp": 221.54145770849848,
+        "fp": 14352.785213113126,
+        "dti": 0.04803102932020924,
+        "dots": 14448,
+        "n_truth": 2122
+      }
+    },
+    {
+      "seed": 160,
+      "fold": "NE_LidarGapHeavy",
+      "link_dots": 665,
+      "baseline": {
+        "tp": 971.8723373451908,
+        "fp": 17605.46176500196,
+        "dti": 0.16277450518541947,
+        "dots": 18138,
+        "n_truth": 2819
+      },
+      "candidate": {
+        "tp": 895.5798064440623,
+        "fp": 17657.839871909262,
+        "dti": 0.1501168671878248,
+        "dots": 18149,
+        "n_truth": 2819
+      },
+      "uniform_control": {
+        "tp": 290.8272157133109,
+        "fp": 18028.264335841814,
+        "dti": 0.04913436662322396,
+        "dots": 18149,
+        "n_truth": 2819
+      }
+    },
+    {
+      "seed": 160,
+      "fold": "SW",
+      "link_dots": 680,
+      "baseline": {
+        "tp": 651.7362329853097,
+        "fp": 18175.58043203128,
+        "dti": 0.09332030165826671,
+        "dots": 18503,
+        "n_truth": 4023
+      },
+      "candidate": {
+        "tp": 586.9501712545339,
+        "fp": 18045.75889498629,
+        "dti": 0.08451477161787256,
+        "dots": 18349,
+        "n_truth": 4023
+      },
+      "uniform_control": {
+        "tp": 430.1161065334916,
+        "fp": 18160.983180319625,
+        "dti": 0.06200658467254245,
+        "dots": 18349,
+        "n_truth": 4023
+      }
+    },
+    {
+      "seed": 160,
+      "fold": "SE",
+      "link_dots": 573,
+      "baseline": {
+        "tp": 685.7012752279347,
+        "fp": 14319.485674948792,
+        "dti": 0.1210238183718073,
+        "dots": 14675,
+        "n_truth": 3331
+      },
+      "candidate": {
+        "tp": 631.4594626689532,
+        "fp": 14337.489642691136,
+        "dti": 0.11159307930507747,
+        "dots": 14662,
+        "n_truth": 3331
+      },
+      "uniform_control": {
+        "tp": 335.93670166631676,
+        "fp": 14534.564484857488,
+        "dti": 0.05957486167922129,
+        "dots": 14662,
+        "n_truth": 3331
+      }
+    },
+    {
+      "seed": 161,
+      "fold": "NW",
+      "link_dots": 398,
+      "baseline": {
+        "tp": 461.2160734575301,
+        "fp": 14249.664769244668,
+        "dti": 0.09988704766788203,
+        "dots": 14510,
+        "n_truth": 2094
+      },
+      "candidate": {
+        "tp": 445.9902251624352,
+        "fp": 14262.37005083975,
+        "dti": 0.09660008330757454,
+        "dots": 14509,
+        "n_truth": 2094
+      },
+      "uniform_control": {
+        "tp": 230.64780744671688,
+        "fp": 14413.573883210593,
+        "dti": 0.05009678241615609,
+        "dots": 14509,
+        "n_truth": 2094
+      }
+    },
+    {
+      "seed": 161,
+      "fold": "NE_LidarGapHeavy",
+      "link_dots": 597,
+      "baseline": {
+        "tp": 658.5037049954093,
+        "fp": 17668.069584453937,
+        "dti": 0.11935221132291246,
+        "dots": 18025,
+        "n_truth": 2315
+      },
+      "candidate": {
+        "tp": 610.9729118141556,
+        "fp": 17716.36681453161,
+        "dti": 0.11073429295170607,
+        "dots": 18038,
+        "n_truth": 2315
+      },
+      "uniform_control": {
+        "tp": 240.32711557346295,
+        "fp": 17938.129183592348,
+        "dti": 0.04379384775673223,
+        "dots": 18038,
+        "n_truth": 2315
+      }
+    },
+    {
+      "seed": 161,
+      "fold": "SW",
+      "link_dots": 634,
+      "baseline": {
+        "tp": 647.1697506124724,
+        "fp": 18150.080642462737,
+        "dti": 0.09222817898585979,
+        "dots": 18504,
+        "n_truth": 4072
+      },
+      "candidate": {
+        "tp": 626.4438055769488,
+        "fp": 18030.192419412295,
+        "dti": 0.08963375688541428,
+        "dots": 18369,
+        "n_truth": 4072
+      },
+      "uniform_control": {
+        "tp": 437.6545144298749,
+        "fp": 18184.032749764072,
+        "dti": 0.06268382055551934,
+        "dots": 18369,
+        "n_truth": 4072
+      }
+    },
+    {
+      "seed": 161,
+      "fold": "SE",
+      "link_dots": 580,
+      "baseline": {
+        "tp": 621.9333686642522,
+        "fp": 14341.005506815176,
+        "dti": 0.11046405439694483,
+        "dots": 14666,
+        "n_truth": 3297
+      },
+      "candidate": {
+        "tp": 653.9650002184005,
+        "fp": 14324.069681147863,
+        "dti": 0.1160910663508189,
+        "dots": 14661,
+        "n_truth": 3297
+      },
+      "uniform_control": {
+        "tp": 351.3367210051026,
+        "fp": 14520.300028432815,
+        "dti": 0.06260535803370297,
+        "dots": 14661,
+        "n_truth": 3297
+      }
+    },
+    {
+      "seed": 162,
+      "fold": "NW",
+      "link_dots": 374,
+      "baseline": {
+        "tp": 420.6798564643534,
+        "fp": 14199.80544879882,
+        "dti": 0.09614886728480304,
+        "dots": 14446,
+        "n_truth": 1814
+      },
+      "candidate": {
+        "tp": 400.04669148548277,
+        "fp": 14202.855749677477,
+        "dti": 0.09150658239889385,
+        "dots": 14439,
+        "n_truth": 1814
+      },
+      "uniform_control": {
+        "tp": 187.20352869137974,
+        "fp": 14358.954595085172,
+        "dti": 0.042932338996966066,
+        "dots": 14439,
+        "n_truth": 1814
+      }
+    },
+    {
+      "seed": 162,
+      "fold": "NE_LidarGapHeavy",
+      "link_dots": 436,
+      "baseline": {
+        "tp": 662.0726922421736,
+        "fp": 17548.147959809045,
+        "dti": 0.11953264555599309,
+        "dots": 17925,
+        "n_truth": 2371
+      },
+      "candidate": {
+        "tp": 595.0665301972037,
+        "fp": 17585.803668560264,
+        "dti": 0.10754912745138696,
+        "dots": 17914,
+        "n_truth": 2371
+      },
+      "uniform_control": {
+        "tp": 268.5995973779165,
+        "fp": 17805.902928032025,
+        "dti": 0.04873261838617404,
+        "dots": 17914,
+        "n_truth": 2371
+      }
+    },
+    {
+      "seed": 162,
+      "fold": "SW",
+      "link_dots": 572,
+      "baseline": {
+        "tp": 525.2184748386899,
+        "fp": 18113.224872295745,
+        "dti": 0.07388609580123962,
+        "dots": 18398,
+        "n_truth": 4226
+      },
+      "candidate": {
+        "tp": 495.84319017545505,
+        "fp": 17987.398953444343,
+        "dti": 0.07005959777199647,
+        "dots": 18261,
+        "n_truth": 4226
+      },
+      "uniform_control": {
+        "tp": 441.86177989613134,
+        "fp": 18068.54276921328,
+        "dti": 0.06238447116584439,
+        "dots": 18261,
+        "n_truth": 4226
+      }
+    },
+    {
+      "seed": 162,
+      "fold": "SE",
+      "link_dots": 476,
+      "baseline": {
+        "tp": 724.952165370463,
+        "fp": 14265.309720267127,
+        "dti": 0.11897622492707621,
+        "dots": 14639,
+        "n_truth": 3869
+      },
+      "candidate": {
+        "tp": 753.211191184376,
+        "fp": 14242.161836662493,
+        "dti": 0.12359324774825206,
+        "dots": 14635,
+        "n_truth": 3869
+      },
+      "uniform_control": {
+        "tp": 432.6691193181118,
+        "fp": 14467.534636941316,
+        "dti": 0.07121843183281792,
+        "dots": 14635,
+        "n_truth": 3869
+      }
+    },
+    {
+      "seed": 163,
+      "fold": "NW",
+      "link_dots": 326,
+      "baseline": {
+        "tp": 456.2991445897764,
+        "fp": 14159.53806663731,
+        "dti": 0.09654330734034976,
+        "dots": 14421,
+        "n_truth": 2254
+      },
+      "candidate": {
+        "tp": 448.6124356252732,
+        "fp": 14198.880484353029,
+        "dti": 0.09478998665430444,
+        "dots": 14442,
+        "n_truth": 2254
+      },
+      "uniform_control": {
+        "tp": 251.31625095252127,
+        "fp": 14337.159352278082,
+        "dti": 0.05323487273591489,
+        "dots": 14442,
+        "n_truth": 2254
+      }
+    },
+    {
+      "seed": 163,
+      "fold": "NE_LidarGapHeavy",
+      "link_dots": 489,
+      "baseline": {
+        "tp": 748.1571227500697,
+        "fp": 17540.468244417072,
+        "dti": 0.1303926404911096,
+        "dots": 17978,
+        "n_truth": 2600
+      },
+      "candidate": {
+        "tp": 728.8205531086006,
+        "fp": 17582.10245480087,
+        "dti": 0.12692391548943374,
+        "dots": 18010,
+        "n_truth": 2600
+      },
+      "uniform_control": {
+        "tp": 303.49356500983777,
+        "fp": 17878.510216236486,
+        "dti": 0.0530917229119642,
+        "dots": 18010,
+        "n_truth": 2600
+      }
+    },
+    {
+      "seed": 163,
+      "fold": "SW",
+      "link_dots": 679,
+      "baseline": {
+        "tp": 575.4136368912174,
+        "fp": 18173.61831552549,
+        "dti": 0.08329421623470465,
+        "dots": 18482,
+        "n_truth": 3948
+      },
+      "candidate": {
+        "tp": 562.9488084794649,
+        "fp": 18013.84196611854,
+        "dti": 0.08189825649719262,
+        "dots": 18327,
+        "n_truth": 3948
+      },
+      "uniform_control": {
+        "tp": 446.5918962601148,
+        "fp": 18136.976604210584,
+        "dti": 0.064957746989334,
+        "dots": 18327,
+        "n_truth": 3948
+      }
+    },
+    {
+      "seed": 163,
+      "fold": "SE",
+      "link_dots": 505,
+      "baseline": {
+        "tp": 717.7821520575553,
+        "fp": 14285.411684799514,
+        "dti": 0.12689199037866308,
+        "dots": 14663,
+        "n_truth": 3320
+      },
+      "candidate": {
+        "tp": 676.1129771175424,
+        "fp": 14287.116966394598,
+        "dti": 0.11969469824411591,
+        "dots": 14639,
+        "n_truth": 3320
+      },
+      "uniform_control": {
+        "tp": 316.71565264112274,
+        "fp": 14511.066151358522,
+        "dti": 0.05633949609471161,
+        "dots": 14639,
+        "n_truth": 3320
+      }
+    },
+    {
+      "seed": 164,
+      "fold": "NW",
+      "link_dots": 347,
+      "baseline": {
+        "tp": 333.3651992543685,
+        "fp": 14195.417746751134,
+        "dti": 0.07481002800816144,
+        "dots": 14390,
+        "n_truth": 1938
+      },
+      "candidate": {
+        "tp": 321.57547695313076,
+        "fp": 14198.043607586176,
+        "dti": 0.07219400523268316,
+        "dots": 14373,
+        "n_truth": 1938
+      },
+      "uniform_control": {
+        "tp": 182.5834090384,
+        "fp": 14292.067928197659,
+        "dti": 0.041073080749778244,
+        "dots": 14373,
+        "n_truth": 1938
+      }
+    },
+    {
+      "seed": 164,
+      "fold": "NE_LidarGapHeavy",
+      "link_dots": 537,
+      "baseline": {
+        "tp": 785.9551912006455,
+        "fp": 17565.898843106235,
+        "dti": 0.13226289922532494,
+        "dots": 18011,
+        "n_truth": 2840
+      },
+      "candidate": {
+        "tp": 763.866368688079,
+        "fp": 17608.71421810625,
+        "dti": 0.12845611675807636,
+        "dots": 18031,
+        "n_truth": 2840
+      },
+      "uniform_control": {
+        "tp": 269.13184662874903,
+        "fp": 17915.235533330568,
+        "dti": 0.04554706539540819,
+        "dots": 18031,
+        "n_truth": 2840
+      }
+    },
+    {
+      "seed": 164,
+      "fold": "SW",
+      "link_dots": 761,
+      "baseline": {
+        "tp": 606.8842098844516,
+        "fp": 18264.44163280903,
+        "dti": 0.08352998683471237,
+        "dots": 18580,
+        "n_truth": 4364
+      },
+      "candidate": {
+        "tp": 559.1206919260201,
+        "fp": 18140.459891468894,
+        "dti": 0.0773214926847384,
+        "dots": 18443,
+        "n_truth": 4364
+      },
+      "uniform_control": {
+        "tp": 490.27662479936475,
+        "fp": 18239.34645826306,
+        "dti": 0.0677446708140389,
+        "dots": 18443,
+        "n_truth": 4364
+      }
+    },
+    {
+      "seed": 164,
+      "fold": "SE",
+      "link_dots": 535,
+      "baseline": {
+        "tp": 921.9180494319017,
+        "fp": 14244.08867464135,
+        "dti": 0.14375317409345598,
+        "dots": 14701,
+        "n_truth": 4225
+      },
+      "candidate": {
+        "tp": 999.4007292382842,
+        "fp": 14245.564143598414,
+        "dti": 0.1554521420658415,
+        "dots": 14739,
+        "n_truth": 4225
+      },
+      "uniform_control": {
+        "tp": 463.1931430024688,
+        "fp": 14548.347189697266,
+        "dti": 0.07257455111318735,
+        "dots": 14739,
+        "n_truth": 4225
+      }
+    },
+    {
+      "seed": 165,
+      "fold": "NW",
+      "link_dots": 312,
+      "baseline": {
+        "tp": 473.324614098955,
+        "fp": 14130.923795058578,
+        "dti": 0.097519319505275,
+        "dots": 14396,
+        "n_truth": 2416
+      },
+      "candidate": {
+        "tp": 472.34610906695116,
+        "fp": 14171.175934192153,
+        "dti": 0.09716048147907055,
+        "dots": 14430,
+        "n_truth": 2416
+      },
+      "uniform_control": {
+        "tp": 243.30561380662851,
+        "fp": 14320.725927945428,
+        "dti": 0.0502115934144959,
+        "dots": 14430,
+        "n_truth": 2416
+      }
+    },
+    {
+      "seed": 165,
+      "fold": "NE_LidarGapHeavy",
+      "link_dots": 555,
+      "baseline": {
+        "tp": 703.531258515608,
+        "fp": 17620.65026105036,
+        "dti": 0.12043393698308183,
+        "dots": 17986,
+        "n_truth": 2721
+      },
+      "candidate": {
+        "tp": 628.6463752660716,
+        "fp": 17685.99026038782,
+        "dti": 0.10764995350633574,
+        "dots": 18031,
+        "n_truth": 2721
+      },
+      "uniform_control": {
+        "tp": 283.86541657765974,
+        "fp": 17910.366714438263,
+        "dti": 0.04881063870970293,
+        "dots": 18031,
+        "n_truth": 2721
+      }
+    },
+    {
+      "seed": 165,
+      "fold": "SW",
+      "link_dots": 746,
+      "baseline": {
+        "tp": 609.90800604726,
+        "fp": 18209.83466197471,
+        "dti": 0.08697132131801737,
+        "dots": 18538,
+        "n_truth": 4061
+      },
+      "candidate": {
+        "tp": 548.5051644644072,
+        "fp": 18099.079079500967,
+        "dti": 0.07860135564801893,
+        "dots": 18403,
+        "n_truth": 4061
+      },
+      "uniform_control": {
+        "tp": 443.34162726018945,
+        "fp": 18216.274244952914,
+        "dti": 0.06350941244554327,
+        "dots": 18403,
+        "n_truth": 4061
+      }
+    },
+    {
+      "seed": 165,
+      "fold": "SE",
+      "link_dots": 597,
+      "baseline": {
+        "tp": 772.8257767338273,
+        "fp": 14325.33195006875,
+        "dti": 0.13226904981271634,
+        "dots": 14725,
+        "n_truth": 3529
+      },
+      "candidate": {
+        "tp": 772.845822431083,
+        "fp": 14318.912302496195,
+        "dti": 0.13230146235672052,
+        "dots": 14714,
+        "n_truth": 3529
+      },
+      "uniform_control": {
+        "tp": 406.8046856316424,
+        "fp": 14551.223212640049,
+        "dti": 0.06996015258842565,
+        "dots": 14714,
+        "n_truth": 3529
+      }
+    },
+    {
+      "seed": 166,
+      "fold": "NW",
+      "link_dots": 356,
+      "baseline": {
+        "tp": 456.40266188567057,
+        "fp": 14177.249510277365,
+        "dti": 0.09957448050243196,
+        "dots": 14443,
+        "n_truth": 2071
+      },
+      "candidate": {
+        "tp": 435.2318204446253,
+        "fp": 14182.838629717055,
+        "dti": 0.09502019072516885,
+        "dots": 14441,
+        "n_truth": 2071
+      },
+      "uniform_control": {
+        "tp": 191.19466498520558,
+        "fp": 14360.7258312515,
+        "dti": 0.04186270157415543,
+        "dots": 14441,
+        "n_truth": 2071
+      }
+    },
+    {
+      "seed": 166,
+      "fold": "NE_LidarGapHeavy",
+      "link_dots": 531,
+      "baseline": {
+        "tp": 523.0980343696515,
+        "fp": 17628.454584840416,
+        "dti": 0.09657116289628981,
+        "dots": 17917,
+        "n_truth": 2233
+      },
+      "candidate": {
+        "tp": 466.8433937615706,
+        "fp": 17698.80503133533,
+        "dti": 0.08614094227464077,
+        "dots": 17953,
+        "n_truth": 2233
+      },
+      "uniform_control": {
+        "tp": 234.72211156671804,
+        "fp": 17853.38268550099,
+        "dti": 0.04343471524726418,
+        "dots": 17953,
+        "n_truth": 2233
+      }
+    },
+    {
+      "seed": 166,
+      "fold": "SW",
+      "link_dots": 711,
+      "baseline": {
+        "tp": 493.3660444726013,
+        "fp": 18240.803668560264,
+        "dti": 0.07374641873236913,
+        "dots": 18513,
+        "n_truth": 3679
+      },
+      "candidate": {
+        "tp": 499.4108146471505,
+        "fp": 18086.71265854391,
+        "dti": 0.07498182736630728,
+        "dots": 18362,
+        "n_truth": 3679
+      },
+      "uniform_control": {
+        "tp": 445.92408409517077,
+        "fp": 18171.608720385106,
+        "dti": 0.06688821234521929,
+        "dots": 18362,
+        "n_truth": 3679
+      }
+    },
+    {
+      "seed": 166,
+      "fold": "SE",
+      "link_dots": 482,
+      "baseline": {
+        "tp": 822.7816345007192,
+        "fp": 14217.00842915259,
+        "dti": 0.1288503890885469,
+        "dots": 14623,
+        "n_truth": 4222
+      },
+      "candidate": {
+        "tp": 832.8315247147283,
+        "fp": 14229.244176360533,
+        "dti": 0.1303332631342821,
+        "dots": 14633,
+        "n_truth": 4222
+      },
+      "uniform_control": {
+        "tp": 408.03732391314844,
+        "fp": 14476.17875643622,
+        "dti": 0.06421291528340889,
+        "dots": 14633,
+        "n_truth": 4222
+      }
+    },
+    {
+      "seed": 167,
+      "fold": "NW",
+      "link_dots": 394,
+      "baseline": {
+        "tp": 437.77930932397425,
+        "fp": 14209.936943877237,
+        "dti": 0.091863463678768,
+        "dots": 14456,
+        "n_truth": 2295
+      },
+      "candidate": {
+        "tp": 457.34944206901594,
+        "fp": 14233.235730117845,
+        "dti": 0.09579770222648816,
+        "dots": 14491,
+        "n_truth": 2295
+      },
+      "uniform_control": {
+        "tp": 270.46997923198336,
+        "fp": 14376.072310004072,
+        "dti": 0.056758126282657424,
+        "dots": 14491,
+        "n_truth": 2295
+      }
+    },
+    {
+      "seed": 167,
+      "fold": "NE_LidarGapHeavy",
+      "link_dots": 521,
+      "baseline": {
+        "tp": 538.7847399347356,
+        "fp": 17630.79887268978,
+        "dti": 0.10116281721904076,
+        "dots": 17936,
+        "n_truth": 2115
+      },
+      "candidate": {
+        "tp": 520.243727071077,
+        "fp": 17657.454998904483,
+        "dti": 0.09765177773296159,
+        "dots": 17955,
+        "n_truth": 2115
+      },
+      "uniform_control": {
+        "tp": 248.31812448558802,
+        "fp": 17847.53056910562,
+        "dti": 0.04675394248289264,
+        "dots": 17955,
+        "n_truth": 2115
+      }
+    },
+    {
+      "seed": 167,
+      "fold": "SW",
+      "link_dots": 656,
+      "baseline": {
+        "tp": 449.5340602701605,
+        "fp": 18203.20400866861,
+        "dti": 0.06812621300542569,
+        "dots": 18454,
+        "n_truth": 3585
+      },
+      "candidate": {
+        "tp": 474.36124180328113,
+        "fp": 18055.00874652273,
+        "dti": 0.07215855399183813,
+        "dots": 18311,
+        "n_truth": 3585
+      },
+      "uniform_control": {
+        "tp": 447.17307681569883,
+        "fp": 18125.322672298505,
+        "dti": 0.06793363229237037,
+        "dots": 18311,
+        "n_truth": 3585
+      }
+    },
+    {
+      "seed": 167,
+      "fold": "SE",
+      "link_dots": 567,
+      "baseline": {
+        "tp": 770.9175113855513,
+        "fp": 14330.085341639286,
+        "dti": 0.12795310180283492,
+        "dots": 14726,
+        "n_truth": 3756
+      },
+      "candidate": {
+        "tp": 791.6668385198145,
+        "fp": 14288.722156990363,
+        "dti": 0.1314869467413433,
+        "dots": 14684,
+        "n_truth": 3756
+      },
+      "uniform_control": {
+        "tp": 414.1796529247375,
+        "fp": 14521.823510671402,
+        "dti": 0.06912209766070512,
+        "dots": 14684,
+        "n_truth": 3756
+      }
+    },
+    {
+      "seed": 168,
+      "fold": "NW",
+      "link_dots": 404,
+      "baseline": {
+        "tp": 440.80884326942623,
+        "fp": 14202.069170389865,
+        "dti": 0.09919691781657801,
+        "dots": 14450,
+        "n_truth": 1894
+      },
+      "candidate": {
+        "tp": 421.60262320809886,
+        "fp": 14220.178121695939,
+        "dti": 0.0948795534619972,
+        "dots": 14451,
+        "n_truth": 1894
+      },
+      "uniform_control": {
+        "tp": 223.0197557084679,
+        "fp": 14354.479222822036,
+        "dti": 0.05033510867054641,
+        "dots": 14451,
+        "n_truth": 1894
+      }
+    },
+    {
+      "seed": 168,
+      "fold": "NE_LidarGapHeavy",
+      "link_dots": 613,
+      "baseline": {
+        "tp": 888.5984859668301,
+        "fp": 17602.39352283358,
+        "dti": 0.14994410003011743,
+        "dots": 18082,
+        "n_truth": 2785
+      },
+      "candidate": {
+        "tp": 803.806158698317,
+        "fp": 17624.596089123286,
+        "dti": 0.13592316418516384,
+        "dots": 18059,
+        "n_truth": 2785
+      },
+      "uniform_control": {
+        "tp": 313.81876947062466,
+        "fp": 17923.6508889918,
+        "dti": 0.05341147027189344,
+        "dots": 18059,
+        "n_truth": 2785
+      }
+    },
+    {
+      "seed": 168,
+      "fold": "SW",
+      "link_dots": 679,
+      "baseline": {
+        "tp": 502.7302711270362,
+        "fp": 18189.935895072886,
+        "dti": 0.07207258123871953,
+        "dots": 18448,
+        "n_truth": 4046
+      },
+      "candidate": {
+        "tp": 465.25855263552467,
+        "fp": 18052.16027710015,
+        "dti": 0.06703739621017174,
+        "dots": 18299,
+        "n_truth": 4046
+      },
+      "uniform_control": {
+        "tp": 430.68394488255944,
+        "fp": 18115.129287085118,
+        "dti": 0.06200493247685078,
+        "dots": 18299,
+        "n_truth": 4046
+      }
+    },
+    {
+      "seed": 168,
+      "fold": "SE",
+      "link_dots": 477,
+      "baseline": {
+        "tp": 652.8812909464557,
+        "fp": 14260.539946969215,
+        "dti": 0.11160584779178007,
+        "dots": 14607,
+        "n_truth": 3584
+      },
+      "candidate": {
+        "tp": 693.3806698503524,
+        "fp": 14240.602247768835,
+        "dti": 0.11844569089603472,
+        "dots": 14595,
+        "n_truth": 3584
+      },
+      "uniform_control": {
+        "tp": 394.74060459346526,
+        "fp": 14445.080759646176,
+        "dti": 0.0676485847062609,
+        "dots": 14595,
+        "n_truth": 3584
+      }
+    },
+    {
+      "seed": 169,
+      "fold": "NW",
+      "link_dots": 406,
+      "baseline": {
+        "tp": 483.57957547659487,
+        "fp": 14208.599639402142,
+        "dti": 0.10567652703339853,
+        "dots": 14479,
+        "n_truth": 2047
+      },
+      "candidate": {
+        "tp": 518.9500574705096,
+        "fp": 14225.428069926307,
+        "dti": 0.11314789390272968,
+        "dots": 14515,
+        "n_truth": 2047
+      },
+      "uniform_control": {
+        "tp": 224.47988494366754,
+        "fp": 14416.10508365708,
+        "dti": 0.04916640370997777,
+        "dots": 14515,
+        "n_truth": 2047
+      }
+    },
+    {
+      "seed": 169,
+      "fold": "NE_LidarGapHeavy",
+      "link_dots": 564,
+      "baseline": {
+        "tp": 820.2076409055198,
+        "fp": 17590.595771753146,
+        "dti": 0.13720066830730357,
+        "dots": 18057,
+        "n_truth": 2870
+      },
+      "candidate": {
+        "tp": 799.2655598987272,
+        "fp": 17643.36846738847,
+        "dti": 0.1335553479610955,
+        "dots": 18089,
+        "n_truth": 2870
+      },
+      "uniform_control": {
+        "tp": 307.5800897270113,
+        "fp": 17956.872031311505,
+        "dti": 0.051703774618239946,
+        "dots": 18089,
+        "n_truth": 2870
+      }
+    },
+    {
+      "seed": 169,
+      "fold": "SW",
+      "link_dots": 614,
+      "baseline": {
+        "tp": 517.1146367732368,
+        "fp": 18138.298762351675,
+        "dti": 0.07486730081807175,
+        "dots": 18417,
+        "n_truth": 3970
+      },
+      "candidate": {
+        "tp": 512.3438146709774,
+        "fp": 17993.813480977435,
+        "dti": 0.0744985562443706,
+        "dots": 18270,
+        "n_truth": 3970
+      },
+      "uniform_control": {
+        "tp": 388.6688087468103,
+        "fp": 18100.585351884045,
+        "dti": 0.05654309618193092,
+        "dots": 18270,
+        "n_truth": 3970
+      }
+    },
+    {
+      "seed": 169,
+      "fold": "SE",
+      "link_dots": 502,
+      "baseline": {
+        "tp": 666.0000580691237,
+        "fp": 14302.149736648184,
+        "dti": 0.11609199903498102,
+        "dots": 14646,
+        "n_truth": 3429
+      },
+      "candidate": {
+        "tp": 672.8735693391397,
+        "fp": 14313.361066550715,
+        "dti": 0.11721623383394049,
+        "dots": 14648,
+        "n_truth": 3429
+      },
+      "uniform_control": {
+        "tp": 364.656588149638,
+        "fp": 14497.101843949524,
+        "dti": 0.06380076817600706,
+        "dots": 14648,
+        "n_truth": 3429
+      }
+    }
+  ],
+  "seconds": 318.375776052475
+}
