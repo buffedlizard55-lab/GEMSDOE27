@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-03 | Session 5: H27-10 diagnostic disclosed; current GDR fetch workflow runs failed before jobs and are recorded without inferring source availability.",
+ "generated": "2026-10-25 | Merged parallel sessions (Lane L-S7 IR-10..13 + Session 9 H30 IR-14/15, renumbered to avoid collision).",
  "items": [
   {
    "id": "prompt-verbatim-unavailable",
@@ -220,7 +220,7 @@
   {
    "id": "h27-10-first-run-spacing-diagnostic-self-distance",
    "severity": "low",
-   "issue": "The first H27-10 run (seeds 150-159) correctly generated the frozen equal-count candidate and measured mean paired \u0394DTI +0.00084615, 4/4 fold means and 7/10 seed means improved, and annulus gross efficiency 0.03357 < m(0.2477)=0.05212. Its spacing integrity check incorrectly measured each added pixel against a mask that included itself, so it necessarily returned zero and marked the spacing data check false. This is a diagnostic false negative, not evidence of a spacing violation.",
+   "issue": "The first H27-10 run (seeds 150-159) correctly generated the frozen equal-count candidate and measured mean paired ΔDTI +0.00084615, 4/4 fold means and 7/10 seed means improved, and annulus gross efficiency 0.03357 < m(0.2477)=0.05212. Its spacing integrity check incorrectly measured each added pixel against a mask that included itself, so it necessarily returned zero and marked the spacing data check false. This is a diagnostic false negative, not evidence of a spacing violation.",
    "action": "Preserved the first JSON as evidence/h27_10_annulus_holdout_initial.json. Corrected only the spacing-check implementation and added tests; the frozen masks, ranker, K, gate, and seeds are unchanged. The deterministic integrity rerun on the same used seeds passed all data checks; all 40 cell outcomes, aggregate metrics, and the frozen FAIL are unchanged in evidence/h27_10_annulus_holdout.json. This rerun is non-confirmatory and cannot change the negative gate result."
   },
   {
@@ -232,8 +232,8 @@
   {
    "id": "IR-2026-10-25-01-lane-paragraph-missing",
    "severity": "high",
-   "issue": "PARALLEL-RUN PROTOCOL \u00a71 says 'Your lane is the single method paragraph below', but the prompt as received contains no delimited single method paragraph; parallel sessions may therefore collide or diverge silently.",
-   "action": "This session DECLARED Lane L-2026-10-25 explicitly in knowledge/13 \u00a71 before implementing, stayed inside it, and enforced the numeric uniqueness tests (surface Spearman <0.90; <70% final dots within 3px Euclidean of any single registry raster). Owner: confirm the intended lane text for future parallel runs."
+   "issue": "PARALLEL-RUN PROTOCOL §1 says 'Your lane is the single method paragraph below', but the prompt as received contains no delimited single method paragraph; parallel sessions may therefore collide or diverge silently.",
+   "action": "This session DECLARED Lane L-2026-10-25 explicitly in knowledge/13 §1 before implementing, stayed inside it, and enforced the numeric uniqueness tests (surface Spearman <0.90; <70% final dots within 3px Euclidean of any single registry raster). Owner: confirm the intended lane text for future parallel runs."
   },
   {
    "id": "IR-2026-10-25-02-leader-score-conflict",
@@ -244,14 +244,14 @@
   {
    "id": "IR-2026-10-25-03-portal-error-mechanism-verified",
    "severity": "medium",
-   "issue": "Updates item portal-0-1-error-cause-unknown: GEMSDOE32's two mechanisms were re-measured this session \u2014 training_features.tif nodata -3.4028234663852886e+38 occupies 3,061 cells INSIDE the footprint; NaN-outside files risk strict whole-array validators. This repo's front-page primary button historically pointed at the NaN variant.",
+   "issue": "Updates item portal-0-1-error-cause-unknown: GEMSDOE32's two mechanisms were re-measured this session — training_features.tif nodata -3.4028234663852886e+38 occupies 3,061 cells INSIDE the footprint; NaN-outside files risk strict whole-array validators. This repo's front-page primary button historically pointed at the NaN variant.",
    "action": "Lane primary download is all-finite zeros-outside (nodata=None), NaN twin secondary; site order-of-try updated for the lane file. Legacy slot files unchanged (history); their allfinite fallbacks remain the safe choice."
   },
   {
    "id": "IR-2026-10-25-04-holdout-buffer-template-fix",
    "severity": "medium",
-   "issue": "Shared holdout harness buffered training but scored up to hidden segments (feature support could overlap hidden neighbourhoods). Protocol \u00a72 requires segments withheld WITH a buffer.",
-   "action": "Fixed once in the template: gems27.holdout.buffered_scoring_mask() excludes the 600 m ring around hidden segments from scoring; catalogue-derived masks use visible faults only. Reported here per protocol \u00a72; siblings should adopt."
+   "issue": "Shared holdout harness buffered training but scored up to hidden segments (feature support could overlap hidden neighbourhoods). Protocol §2 requires segments withheld WITH a buffer.",
+   "action": "Fixed once in the template: gems27.holdout.buffered_scoring_mask() excludes the 600 m ring around hidden segments from scoring; catalogue-derived masks use visible faults only. Reported here per protocol §2; siblings should adopt."
   },
   {
    "id": "IR-2026-10-25-05-index-hand-edit-desync",
@@ -269,7 +269,7 @@
    "id": "IR-2026-10-25-07-lane-paragraph-missing-sessionB",
    "severity": "medium",
    "issue": "Parallel session B (Lane L-DCONFIRM) prompt again contained no delimited single method paragraph (same class as IR-2026-10-25-01).",
-   "action": "Lane declared explicitly in knowledge/15_lane_dconfirm_preregistration.md \u00a72 before implementation; numeric uniqueness tests enforced on surface and final dots."
+   "action": "Lane declared explicitly in knowledge/15_lane_dconfirm_preregistration.md §2 before implementation; numeric uniqueness tests enforced on surface and final dots."
   },
   {
    "id": "IR-2026-10-25-08-knowledge-numbering-collision",
@@ -282,6 +282,60 @@
    "severity": "high",
    "issue": "Parallel sessions H29-1 (Session 7) and L-DCONFIRM independently built arm-D B2/38k files; measured post-merge directed dot overlap within 3px is 87.5%/87.8% (exact shared 15,727/38,000), exceeding the 70% duplicate threshold in both directions. Both also fail the extended self-registry screen vs H28-1 (85.4%/85.2%). Selection seeds 210-214 were independently chosen by both sessions, so pooled selection numbers are identical by determinism, not independent replication; L-DCONFIRM adds disjoint confirmation seeds 215-224.",
    "action": "Both files remain verdict=negative, ok_to_submit=false. Selector must treat H29-1/H29-1b/L-DCONFIRM as ONE candidate family (evidence/dconfirm_cross_session_overlap.json). No slot may be spent twice on this family."
+  },
+  {
+   "id": "IR-2026-10-25-10-holdout-emit-ring-leak-fixed",
+   "severity": "high",
+   "issue": "In `scripts/run_lane_holdout.py`, `emit(prob, valid_scoring, known, hidden, ...)` built candidate masks on `valid_scoring | hidden`. Because `valid_scoring = foot & fold_mask & ~ring` (where `ring = (d_hidden <= 6) & ~hidden`), `valid_scoring | hidden` equalled `True` on `hidden` (`d_hidden == 0`) and `False` on `0 < d_hidden <= 6`, leaking the complement of the 6-px ring around withheld segments into candidate placement.",
+   "action": "Fixed in place in `scripts/run_lane_holdout.py` and enforced in `scripts/run_h29_holdout.py`: `emit()` receives ONLY `fold_domain = foot & sp.fold_mask` and `sp.known` (zero access to `sp.hidden` or `valid_scoring`)."
+  },
+  {
+   "id": "IR-2026-10-25-11-lane-registry-path-typo-fixed",
+   "severity": "medium",
+   "issue": "`scripts/run_lane_holdout.py` looked for peer rasters in `data_cache/registry` rather than `data_cache/parallel_registry`, causing `surface_spearman_vs_registry` to silently evaluate 0 files (`{}`) in Session 6.",
+   "action": "Fixed path in `scripts/run_lane_holdout.py` and added `assert len(peer_spearman) == 12` in `scripts/run_h29_holdout.py` (`evidence/h29_e1_canary_and_surface.json`)."
+  },
+  {
+   "id": "IR-2026-10-25-12-slot1-live-zero-hit-confirmation",
+   "severity": "medium",
+   "issue": "2026-10-25 prompt reports `27GEMSDOE: 0.2449` (OWNER-REPORTED; no DrivenData receipt stored in repo) alongside `24GEMSDOE: 0.2477`. Byte diff (`evidence/slot1_live_ab_inversion.json`) confirms `5512495c6bd1` (61,328 px) adds solely 1,259 `T-v2` straight-line catalogue-tip gap-closure dots to `989f59505db1` (60,069 px); pure zero-hit FP dilution predicts `0.24491`, matching `0.2449` to 4 decimal places (empirical marginal efficiency `-0.00018` credit/dot vs `0.05024` break-even).",
+   "action": "Recorded in `registry/live_scores.json` under `owner_reported_prompt_2026_10_25` (preserving `27GEMSDOE[*].score = null` until an organizer receipt exists) and permanently retired `T-v2` straight-line continuation."
+  },
+  {
+   "id": "IR-2026-10-25-13-h29s-clears-24-raster-uniqueness-including-self-registry",
+   "severity": "low",
+   "issue": "Unlike `H29-1 D-refill` (`c24b6371179c`) and `L-DCONFIRM` (`5ea0385b7e70`) which overlapped 85.4%/85.2% with dense `H28-1` and 87.5% with each other, `Lane L-S7-2026-10-25` (`H29-HPVC` + weighted 300 m CELF cover, content id `511898747886`) clears BOTH the 12-peer registry (max 64.21% <= 70%; 56.12% vs GEMSDOE32) AND all 12 in-house rasters (56.43% vs dense H28-1, 53.01% vs L-DCONFIRM, 52.56% vs H29-1 D-refill, 51.33% vs H29-1b).",
+   "action": "Recorded in `evidence/h29_run_card_2026-10-25.json`; weekly slot remains held solely on the strict SE Walker Lane CI95 sub-clause vs internal control D0 (`[-0.000986, +0.003695]`)."
+  },
+  {
+   "id": "IR-2026-10-25-14-h30-deconfliction-cost-measured",
+   "severity": "high",
+   "issue": "H30's frozen promote gate failed: buying strict self-registry uniqueness (65% cap vs 12 repo rasters) cost -0.00662 HOLDOUT-DTI vs Arm D and made L-B significantly negative (-0.00445 [-0.00800,-0.00112]). This quantifies IR-2026-10-25-06's suspicion: for the arm-D family, strict uniqueness and catalogue-internal efficacy are in direct conflict.",
+   "action": "Negative retained per protocol (no cap relaxation, no seed shopping, no post-hoc tuning). The H30 bytes are retained as a unique-but-not-certified research artifact (first file to clear both uniqueness screens). The screen choice is explicitly framed as the selector's strategy decision in knowledge/22 and on the site."
+  },
+  {
+   "id": "IR-2026-10-25-15-selector-screen-decision-recorded",
+   "severity": "medium",
+   "issue": "The current owner prompt (2026-10-25) demands a unique TIF and names the focus sites whose highest-scoring submissions form exactly the 12-peer parallel registry; the prompt's duplicate rule references 'registry raster'. Recorded decision: the 12-peer registry is the OPERATIVE screen; the stricter self-registry screen is reported alongside (H30 clears both). Under the operative screen the previously holdout-passed H29-1 family is eligible.",
+   "action": "The H29-1 badge was NOT flipped: that remains a separate, explicit owner action (retire the unscored H28-1/H29-1/H29-1b/L-DCONFIRM family from the self-registry or confirm the 12-peer screen governs). No bytes were touched; no new experiment is needed for that flip (knowledge/16 E3). Cross-session duplicate caveat IR-2026-10-25-09 stands."
+  },
+  {
+   "id": "IR-2026-10-25-17-h30dipgap-registry-screen-scoped",
+   "severity": "medium",
+   "issue": "Lane L-H30 (knowledge/20 section 5, committed d87283f before any result) scoped the PROMOTION uniqueness gate to the 12 pinned parallel-registry peer rasters named by the session protocol, and measures/reports overlaps vs this repo's own UNSUBMITTED research artifacts (H28-1/H29-1/L-DCONFIRM etc.) separately instead of gating on them. This prospectively supersedes the extended self-screen frozen by the H29-1/L-DCONFIRM lanes (see IR-2026-10-25-06), because the dense unscored H28-1 file makes the 70% rule geometrically near-impossible for any accurate 38k emission (H29-1b proof). The H30 candidate failed its efficacy gate, so the scoping did not change its negative verdict (extended max overlap 0.8467, reported in evidence/h30_dipgap_run_card.json).",
+   "action": "Selector should record a standing registry-scope rule before any future lane relies on it for a PASS. No file was promoted under the scoped rule this session."
+  },
+  {
+   "id": "IR-2026-10-25-18-h28-4-evidence-file-missing",
+   "severity": "low",
+   "issue": "knowledge/19_untried_hypotheses_ranked.md states H28-4 was tested (2 seeds 230-231, mean paired gain -0.00067) with 'Full evidence: evidence/h28_4_quick.json', but neither that file nor the runner's default output evidence/h28_4_seismicity_holdout.json exists in this checkout (verified this session).",
+   "action": "Treat the H28-4 numbers as unverifiable locally; do not cite them as evidence until the JSON is restored. H28-4 was not used in Lane L-H30."
+  },
+  {
+   "id": "IR-2026-10-25-16-parallel-h30-lanes-numbering-seed-filename-collision",
+   "severity": "high",
+   "issue": "Two parallel Session-9 lanes both used the H30 label, the same evidence/script filenames, and fresh holdout seeds 240-244 PR #24 (merged, commit b7dc19f): chemistry-verified deconflicted emission, evidence/h30_holdout.json + evidence/h30_run_card.json, knowledge/20_preregistration_H30.md (seeds 240-244). PR #25 lane L-H30-DIPGAP: dip-advection/gap-flanking/soft emission, originally identical filenames and the same seeds 240-244 (knowledge/20_lane_h30_preregistration_2026-10-25.md); its files were renamed to evidence/h30_dipgap_*.json and scripts/*_h30_dipgap_*.py before merging (commit 5383045) so neither lane overwrote the other. Both lanes gated different arms against closely related controls on the same seed block, so the two selection results are NOT independent replications; neither used the other's outcomes before running (parallel sessions). knowledge/20 and knowledge/21 numeric prefixes now each cover two different files. Recommend: the selector assigns hypothesis numbers, knowledge-file numbers, seed blocks and unique evidence filename prefixes before parallel sessions start.",
+   "action": "flagged for manual review; L-H30-DIPGAP files renamed (h30_dipgap_*) before merge so neither lane overwrote the other; selector must pre-assign hypothesis/knowledge numbers, seed blocks and filename prefixes to parallel lanes"
   }
  ]
 }

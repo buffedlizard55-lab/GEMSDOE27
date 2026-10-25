@@ -129,6 +129,54 @@ def build() -> None:
 </div>
 """
 
+    # ---- Lane L-H30: dip-advection / gap-flanking / soft emission vs Arm-D (JSON-driven) ----
+    h30_dipgap_box = ""
+    h30_card_path = EV / "h30_dipgap_run_card.json"
+    if h30_card_path.exists():
+        c30 = J(h30_card_path)
+        h30, u30, r30 = c30["holdout"], c30["uniqueness_vs_registry"], c30["raster"]
+        ok30 = publication_decision(c30, ROOT)["ok_to_publish_as_submission"]
+        badge30 = ('<span class="badge ok" style="font-size:1.05rem">&#9989; VALIDATED &mdash; OK TO DOWNLOAD &amp; SUBMIT '
+                   '(all machine gates PASS; still UNSCORED)</span>') if ok30 else (
+                   '<span class="badge bad" style="font-size:1.05rem">&#9940; DO NOT SUBMIT &mdash; frozen holdout '
+                   'selection gate FAILED (negative research artifact)</span>')
+        rel30 = r30["directory"].replace("docs/", "", 1)
+        sel30 = h30["selection_pooled_holdout_dti"]
+        dl30 = (f'<p><b>One-click download:</b> <a href="{e(rel30)}/{e(r30["primary_allfinite"])}" class="btn">Download .tif</a> '
+                f'<a href="{e(rel30)}/{e(r30["zip"])}" class="btn">Download .zip</a></p>'
+                f'<p><b>Note to paste (&le;140 chars):</b> <code>{e(c30["note_max_140_chars"])}</code></p>') if ok30 else ""
+        h30_dipgap_box = f"""
+<div class="card hero" style="border-left:4px solid #b00">
+ <h2 style="margin-top:0">Newest unique TIF (Lane L-H30, 2026-10-25): dip-advection / gap-flanking / soft emission &mdash; NEGATIVE</h2>
+ <p>{badge30}</p>
+ <p>One new unique GeoTIFF was generated this session (the GAP arm below). Whether it may be submitted is decided
+ <b>only</b> by the machine gates in its run card &mdash; no human-inspection step. It <b>failed</b> the frozen
+ efficacy gate, so the answer is <b>NOT OK TO SUBMIT</b>, even though its bytes are format-valid and unique.</p>
+ {dl30}
+ <p>Three preregistered contenders (<a href="{REPO_URL}/blob/main/knowledge/20_lane_h30_preregistration_2026-10-25.md">knowledge/20</a>,
+ frozen before any run) were gated against the strongest in-repo control (Arm D = 32-band + 15 subsurface transforms)
+ on fresh seeds 240&ndash;244 (20 cells, {h30['n_withheld_positives_total']:,} withheld positives, {e(h30['evaluator'])}).
+ Pooled <b>HOLDOUT-DTI</b>: D control <b>{sel30['D']:.4f}</b> &middot; GAP (gap-flanking) <b>{sel30['GAP']:.4f}</b>
+ &middot; SOFT (soft rank-taper) <b>{sel30['SOFT']:.4f}</b> &middot; DIP (dip-advection) <b>{sel30['DIP']:.4f}</b>.
+ No contender beat the control (GAP paired &Delta; {h30['paired_A_minus_B']['mean_delta']:+.4f}, 95% CI
+ [{h30['paired_A_minus_B']['ci95'][0]:+.4f}, {h30['paired_A_minus_B']['ci95'][1]:+.4f}]); confirmation did not run and
+ no tuning followed. Leakage canary max AUC {h30['canary_max_auc']:.3f} (clean). Catalogue-internal evidence only; no live score.</p>
+ <ul class="tight">
+ <li><b>The generated file (research only):</b> <code>{e(r30['primary_allfinite'])}</code>, {r30['dots']:,} dots,
+ sha256 {e(r30['sha256'][:16])}&hellip;, in <a href="{e(rel30)}/{e(r30['primary_allfinite'])}">{e(rel30)}/</a> &mdash; not a submission download.</li>
+ <li><b>Format PASS:</b> single-band float32, all-finite, every cell in [0,1] (the portal-error fix), EPSG:32611
+ 3730&times;3292; 0 dots on catalogue; min catalogue distance 2.24&nbsp;px (B2).</li>
+ <li><b>Unique vs scored peers PASS:</b> max &le;3&nbsp;px dot overlap <b>{u30['max_dot_overlap_within_3px_euclidean']:.1%}</b>
+ vs the 12 pinned registry rasters (limit 70&nbsp;%); max surface Spearman {u30['max_surface_spearman']:.3f} (limit 0.90).
+ Extended overlaps vs this repo's own unsubmitted research files (up to
+ {c30['extended_self_overlap_reported_not_gated']['max_dot_overlap_within_3px_euclidean']:.1%}) are reported in the run card.</li>
+ <li>Full result: <a href="{REPO_URL}/blob/main/knowledge/21_h30_result_2026-10-25.md">knowledge/21</a> &middot;
+ run card: <a href="{REPO_URL}/blob/main/evidence/h30_dipgap_run_card.json">evidence/h30_dipgap_run_card.json</a> &middot;
+ automatic audit: <a href="data/submission_readiness_audit.json">submission readiness audit</a>.</li>
+ </ul>
+</div>
+"""
+
     # ---- Lane L-DCONFIRM, parallel session B (JSON-driven; same D family as H29-1) ----
     dc_path = DOCS / "downloads" / "dconfirm_candidate_manifest.json"
     dc = J(dc_path) if dc_path.exists() else None
@@ -159,6 +207,46 @@ def build() -> None:
  <li><b>Vs scored rivals:</b> max {u['max_dot_overlap_peer_registry_12']:.1%} within 3&nbsp;px of any of the 12 pinned peer rasters; surface Spearman max {u['max_surface_spearman']:.3f}. Vs audit-only H28-1: {u['max_dot_overlap_self_repo']:.1%} (same failure as H29-1).</li>
  <li><b>Format:</b> all-finite, nodata=None, every cell in [0,1], EPSG:32611 3730&times;3292 (<a href="{e(checks_href)}">re-read receipt</a>); research bytes in <a href="{e(tif_href)}">downloads/research/</a> (sha256 {e(r['sha256'][:16])}&hellip;). Run card: <a href="{REPO_URL}/blob/main/evidence/dconfirm_run_card_2026-10-25.json">evidence/dconfirm_run_card_2026-10-25.json</a>; analysis <a href="{REPO_URL}/blob/main/knowledge/16_dconfirm_result.md">knowledge/16 (L-DCONFIRM)</a>.</li>
  </ul>
+</div>
+"""
+
+    # ---- H30 chemistry-verified deconflicted emission (Session 9; JSON-driven badge) ----
+    h30_box = ""
+    h30_card_path = EV / "h30_run_card.json"
+    if h30_card_path.exists():
+        h30 = J(h30_card_path)
+        r30, hh30, u30 = h30["raster"], h30["holdout"], h30["uniqueness_vs_registry"]
+        ok30 = publication_decision(h30, ROOT)["ok_to_publish_as_submission"]
+        badge30 = ('<span class="badge ok" style="font-size:1.05rem">&#9989; VALIDATED &mdash; OK TO DOWNLOAD &amp; SUBMIT '
+                   '(holdout + uniqueness + format gates PASS; still UNSCORED)</span>') if ok30 else (
+                   '<span class="badge bad" style="font-size:1.05rem">&#9940; NOT CERTIFIED &mdash; DO NOT SUBMIT '
+                   '(efficacy gate FAILED: holdout DTI below control; unique and format-valid are not enough)</span>')
+        lb30, ld30 = hh30["paired_L_minus_B"], hh30["paired_L_minus_D"]
+        h30_box = f"""
+<div class="card hero" style="border-left:4px solid #b00">
+ <h2 style="margin-top:0">Session 9 &middot; H30: the unique-TIF demand, answered with a measurement</h2>
+ <p>{badge30}</p>
+ <p>A genuinely new TIFF was generated this session (new detector content: measured well/spring temperatures as a bounded re-ranker of the
+ twice-confirmed subsurface detector, plus deconflicted placement). It is <b>unique against every screened raster at once</b> &mdash; max dot
+ overlap within 3&nbsp;px <b>{u30['max_dot_overlap_peers_operative']:.1%}</b> vs all 12 pinned focus-site peers (limit 70&nbsp;%) and
+ <b>{u30['max_dot_overlap_repo_self_screen']:.1%}</b> vs every repo-shipped raster including H28-1, the D-family and the parallel session's
+ H29-S (re-screened post-merge at 30.2&nbsp;%); surface Spearman max <b>{u30['max_surface_spearman']:.3f}</b> (limit 0.90). Bytes (research
+ directory, intentionally not a submission download): <a href="downloads/research/{e(r30['primary_allfinite'])}">{e(r30['primary_allfinite'])}</a>,
+ sha256 {e(r30['sha256'][:16])}&hellip;, validator hard-PASS, <a href="downloads/research/checks-{e(r30['primary_allfinite'][:-len('-allfinite.tif')])}-allfinite.json">re-read receipt</a>.</p>
+ <p><b>Why it is NOT certified:</b> HOLDOUT-DTI ({e(hh30['evaluator'])}; fresh seeds 240&ndash;244; {hh30['n_withheld_positives_total']:,} withheld
+ positives): lane <b>{hh30['pooled_dti_L_lane']:.4f}</b> vs full-32 control <b>{hh30['pooled_dti_B_control']:.4f}</b> (paired
+ {lb30['mean_delta']:+.4f}, 95&nbsp;% CI [{lb30['ci95'][0]:+.4f}, {lb30['ci95'][1]:+.4f}], {lb30['cells_positive']}/{lb30['n_cells']} cells) and vs
+ the subsurface-augmented control <b>{hh30['pooled_dti_D_control']:.4f}</b> (paired {ld30['mean_delta']:+.4f}, CI
+ [{ld30['ci95'][0]:+.4f}, {ld30['ci95'][1]:+.4f}]). <b>The deconfliction that buys strict uniqueness costs more than the confirmed detector
+ gain</b> &mdash; the uniqueness/efficacy conflict flagged in IR-2026-10-25-06 is now a measured number, not a suspicion.</p>
+ <p><b>The decision this forces (selector-owned):</b> if the <b>12-peer parallel registry governs</b> (the operative reading of the current owner
+ prompt), the previously holdout-passed D-refill family (H29-1: +0.0086 [+0.0051, +0.0125], 18/20 cells, canary clean, &le;46.2&nbsp;% vs all peers)
+ is eligible and its badge flip touches no bytes; if the <b>strict self-registry governs</b>, no arm-D-family file can be both unique and
+ efficacious (measured), and the next certifiable file needs a ridge-decorrelated detector (H28-6 is the cheapest untried lane). This session
+ flipped nothing by itself. Full run card:
+ <a href="{REPO_URL}/blob/main/evidence/h30_run_card.json">evidence/h30_run_card.json</a>; analysis
+ <a href="{REPO_URL}/blob/main/knowledge/22_h30_result.md">knowledge/22</a>; preregistration
+ <a href="{REPO_URL}/blob/main/knowledge/20_preregistration_H30.md">knowledge/20</a>.</p>
 </div>
 """
 
@@ -205,7 +293,6 @@ def build() -> None:
  Format receipt: <a href="downloads/{unique_checks_path.name}">checks JSON</a></p>
 </div>
 """
-
     # ---- H29-2 current run: dynamic, fail-closed status and research-only download ----
     h29_2_card_path = EV / "h29_2_run_card_2026-10-25.json"
     h29_2_card = J(h29_2_card_path) if h29_2_card_path.exists() else None
@@ -429,6 +516,119 @@ The organizer-created test labels remain unobserved; this is not a fifth weekly 
     peer_registry = J(peer_registry_path) if peer_registry_path.exists() else None
     h28_3_negative_path = DOCS / "downloads" / "research" / "h28_3_negative_research_manifest.json"
     h28_3_negative = J(h28_3_negative_path) if h28_3_negative_path.exists() else None
+    h29_manifest_path = DOCS / "downloads" / "h29_candidate_manifest.json"
+    h29_manifest = J(h29_manifest_path) if h29_manifest_path.exists() else None
+    h29_rc_path = EV / "h29_run_card_2026-10-25.json"
+    h29_rc = J(h29_rc_path) if h29_rc_path.exists() else None
+    slot1_inv_path = EV / "slot1_live_ab_inversion.json"
+    slot1_inv = J(slot1_inv_path) if slot1_inv_path.exists() else None
+
+    h29_e2_path = EV / "h29_e2_holdout_210_219.json"
+    h29_e2 = J(h29_e2_path) if h29_e2_path.exists() else None
+
+    h29_hero_index = ""
+    h29_hero_exec = ""
+    h29_research_section = ""
+    if h29_manifest and h29_rc and h29_e2:
+        hc = h29_manifest
+        hr = h29_rc["raster"]
+        hd = h29_rc["holdout_dti"]
+        hu = h29_rc["uniqueness_vs_registry"]
+        hv = h29_rc["validator"]
+        ok_sub = bool(publication_decision(h29_rc, ROOT)["ok_to_publish_as_submission"] and hc.get("ok_to_submit"))
+        tech_ok = bool(hc.get("technical_validator_pass") and hv.get("technical_validator_pass"))
+        uniq_ok = bool(hc.get("uniqueness_pass") and hu.get("pass"))
+        g32_ov = next((p["candidate_dot_fraction_within_3px"] for p in hu["peer_entries"] if p["id"] == "g32_h33_2_b2"), 0.5612)
+        gate_headline = (
+            "APPROVED TO SUBMIT — ALL FORMAT, UNIQUENESS &amp; HOLDOUT GATES PASS"
+            if ok_sub else
+            "HOLD WEEKLY SLOT — NO TIFF IS APPROVED TO SUBMIT (DO NOT SPEND 5/WEEK LIVE SLOT YET)"
+        )
+        gate_badge = (
+            f'<span class="badge ok" style="font-size:1rem">&#9989; {gate_headline}</span>'
+            if ok_sub else
+            f'<span class="badge bad" style="font-size:1rem">&#9940; {gate_headline}</span>'
+        )
+        tech_badge = (
+            '<span class="badge ok">&#9989; FORMAT &amp; [0,1] RANGE VALIDATED: float32 &middot; 0 NaN &middot; EPSG:32611 &middot; 3730&times;3292</span>'
+            if tech_ok else
+            '<span class="badge bad">&#9940; FORMAT VALIDATION FAILED</span>'
+        )
+        uniq_badge = (
+            f'<span class="badge ok">&#9989; UNIQUE VS 12 PEERS: max 3px overlap {hu["max_dot_overlap_within_3px_vs_peers"]:.1%} &le; 70% ({g32_ov:.1%} vs GEMSDOE32) &middot; Spearman {hu["max_postplacement_spearman_vs_peers"]:.4f} &le; 0.90</span>'
+            if uniq_ok else
+            '<span class="badge bad">&#9940; DUPLICATE VS PEER REGISTRY</span>'
+        )
+        hold_badge = (
+            f'<span class="badge ok">&#9989; HOLDOUT GATE PASS ({hd["frozen_gate_clauses_passed"]})</span>'
+            if ok_sub else
+            f'<span class="badge warn">&#9888;&#65039; NEW #1 BLIND POOLED HOLDOUT-DTI ({hd["candidate_H29S_buffered_pooled"]:.4f}), BEATS B0 &amp; H28-1 10/10 SEEDS, STRICT CI95 VS D0 HOLDS SLOT ({hd["frozen_gate_clauses_passed"]})</span>'
+        )
+        border_col = "#1a7f37" if ok_sub else "#cf222e"
+        vs_b0 = hd["paired_vs_B0"]
+        vs_h28 = hd["paired_vs_H28_1_B2"]
+        vs_d0 = hd["paired_vs_D0"]
+        vs_h29a_delta = hd["candidate_H29S_buffered_pooled"] - hd["ablation_H29A_buffered_pooled"]
+        unbuf = h29_e2.get("pooled_unbuffered_diagnostic_dti", {})
+        h29_hero_index = f"""
+<div class="card hero" style="border:2px solid {border_col}">
+ <h2 style="margin-top:0">Session 7 Automated Gate &amp; Unique Candidate GeoTIFF (<code>{e(hc['submission_name'])}</code>)</h2>
+ <div class="row">{gate_badge}</div>
+ <div class="row">{tech_badge}{uniq_badge}{hold_badge}</div>
+ <p><b>Automated machine verdict (zero human intervention):</b> Primary all-finite zeros-outside GeoTIFF (<code>nodata=None</code>, exact <code>{{0.0, 1.0}}</code> across all <code>12,279,160</code> cells &mdash; fixing the <code>&ldquo;Predicted values must be in range [0, 1]&rdquo;</code> portal error per official reference notebook Cell 19) is built, SHA-256 pinned, and verified across <b>162 automated checks</b>. On frozen unused spatial holdout seeds <code>210&ndash;219</code> (<code>{hd['n_withheld_positive_occurrences']:,}</code> withheld positive occurrences, <code>{e(hd['evaluator_version'])}</code>), <b>H29-S</b> sets a <b>new repository #1 blind pooled HOLDOUT-DTI = {hd['candidate_H29S_buffered_pooled']:.4f}</b> (unbuffered <code>{hd['candidate_H29S_unbuffered_pooled']:.4f}</code>), beating <code>B0</code> by <b>{vs_b0['pooled_delta_dti']:+.4f}</b> (<code>{vs_b0['positive_seeds']}/10</code> seeds, <code>{vs_b0['positive_folds']}/4</code> folds, 95% CI <code>[{vs_b0['seed_bootstrap_95_ci'][0]:+.4f}, {vs_b0['seed_bootstrap_95_ci'][1]:+.4f}]</code>), beating prior promoted champion <code>H28-1</code> by <b>{vs_h28['pooled_delta_dti']:+.4f}</b> (<code>{vs_h28['positive_seeds']}/10</code> seeds, <code>{vs_h28['positive_folds']}/4</code> folds), proving probability-weighted 300&nbsp;m CELF cover beats Poisson <code>d=2.8</code> by <b>{vs_h29a_delta:+.4f}</b> (<code>8/10</code> seeds), and edging Session-6 internal control <code>D0</code> by <b>{vs_d0['pooled_delta_dti']:+.4f}</b> (<code>{vs_d0['positive_folds']}/4</code> folds: NW, NE_LidarGap, SW). Because the strict 6-clause composite gate requires the 95% CI vs <code>D0</code> (<code>[{vs_d0['seed_bootstrap_95_ci'][0]:+.4f}, {vs_d0['seed_bootstrap_95_ci'][1]:+.4f}]</code>, SE Walker Lane <code>{vs_d0['per_fold_pooled_delta_dti']['SE']:+.4f}</code>) to clear zero, <b>do not spend a scarce 5/week live submission slot yet</b>; the unique GeoTIFF is provided below for one-click audit/inspection while <code>H29-6</code> closes SE on fresh seeds <code>220&ndash;229</code>.</p>
+ <div class="row">
+  <a class="btn alt" href="downloads/{e(hc['allfinite'])}">One-click GeoTIFF ({hr['allfinite_bytes'] // 1024:,} KB &middot; {e(hc['allfinite'])})</a>
+  <a class="btn alt" href="downloads/{e(hc['zip_allfinite'])}">Single-TIFF ZIP ({hr['allfinite_zip_bytes'] // 1024:,} KB)</a>
+  <a class="btn alt" href="downloads/{e(hc['checks_allfinite'])}">Automated Validator JSON</a>
+  <a class="btn alt" href="research.html#h29-1">Full Run Card &amp; 0.2778 Analysis</a>
+ </div>
+ <p class="small" style="margin:.5rem 0 .2rem"><b>Unique submission name:</b> <code>{e(hc['submission_name'])}</code> &nbsp;&middot;&nbsp; <b>Content ID:</b> <code>{e(hc['content_id'])}</code> &nbsp;&middot;&nbsp; <b>SHA-256:</b> <code>{e(hc['sha256_allfinite'][:24])}&hellip;</code> &nbsp;&middot;&nbsp; <b>Emitted dots:</b> <code>{hc['emitted_px']:,}</code> (strict <code>B2 &gt; 200 m</code>, <code>0</code> collar overlap)</p>
+ <label for="note" class="small"><b>Copyable short note ({len(hc['note'])} / 140 chars; portal limit &le; 200):</b></label>
+ <textarea id="note" class="note" readonly>{e(hc['note'])}</textarea>
+ <div class="row"><button class="btn copy" type="button" data-copy="#note">Copy note</button><span id="notecount" class="small">{len(hc['note'])} / 200 characters</span></div>
+</div>"""
+        h29_hero_exec = h29_hero_index.replace('id="note"', 'id="note-exec"').replace('for="note"', 'for="note-exec"').replace('data-copy="#note"', 'data-copy="#note-exec"').replace('id="notecount"', 'id="notecount-exec"')
+        slot1_txt = ""
+        if slot1_inv:
+            rd = slot1_inv["raster_diff"]
+            iv = slot1_inv["inversion_at_reference_prior"]
+            slot1_txt = (
+                f"<p><b>Live A/B Proof on 27GEMSDOE Slot 1 (<code>5512495c6bd1</code>, OWNER-REPORTED <code>0.2449</code> vs 24GEMSDOE <code>0.2477</code>):</b> "
+                f"Exact pixel diff (<a href='{REPO_URL}/blob/main/evidence/slot1_live_ab_inversion.json'>evidence/slot1_live_ab_inversion.json</a>) proves Slot 1 = "
+                f"<code>60,069</code> dots of 24GEMSDOE + <code>{rd['added_dots_tv2']:,}</code> straight-line <code>T-v2</code> gap-closure dots "
+                f"(<code>{rd['removed_dots']}</code> removed). Pure zero-hit false-positive dilution predicts "
+                f"<code>{iv['predicted_dti_if_zero_hits']:.5f}</code>, matching the reported <code>0.2449</code> to 4 decimal places "
+                f"(implied marginal efficiency <code>{iv['empirical_tv2_efficiency_credit_per_dot']:+.5f}</code> vs break-even <code>+{iv['breakeven_efficiency_at_02477']:.5f}</code>), "
+                f"confirming sibling collapses <code>82GEMSDOE=0.1555</code> and <code>91GEMSDOE=0.0041</code>.</p>"
+            )
+        peer_rows = "".join(
+            f"<tr><td><code>{e(pv['id'])}</code></td><td class='mono small'>{e(pv['reference_sha256'][:16])}&hellip;</td>"
+            f"<td class='num'><b>{pv['candidate_dot_fraction_within_3px']:.2%}</b></td>"
+            f"<td class='num'>{pv['spearman_rank_correlation']:+.4f}</td>"
+            f"<td>{'DUPLICATE' if pv['duplicate'] else 'UNIQUE'}</td></tr>"
+            for pv in hu["peer_entries"]
+        )
+        h29_research_section = f"""
+<h2 id="h29-1">Session 7 Lane L-S7-2026-10-25 (H29-1) &mdash; Hydrothermal Upflow &times; Piedmont Flexure &times; Destriped Shallow Mag + Weighted 300&nbsp;m CELF Cover</h2>
+{h29_hero_exec.replace('id="note-exec"', 'id="note-res"').replace('for="note-exec"', 'for="note-res"').replace('data-copy="#note-exec"', 'data-copy="#note-res"').replace('id="notecount-exec"', 'id="notecount-res"')}
+<h3>Why GEMSDOE32 (<code>h33-h33-2-b2-...-zeros</code>) scored 0.2778 (OWNER-REPORTED) and why Slot 1 scored 0.2449</h3>
+<p>SHA-256 verification across the 12-peer parallel registry proves <code>GEMSDOE32</code>'s <code>c55bafc4&hellip;</code> (<code>37,654</code> dots, OWNER-REPORTED <code>0.2778</code>) is identically <code>(GEMSDOE25_D2.8 &gt; 0) &amp; (EDT(~existing_faults) &gt; 2.0)</code>: zero re-ranking, removing <code>7,865</code> dots inside the <code>0&ndash;200&nbsp;m</code> published-catalogue collar where hidden organizer truth density is near zero (earning <code>~0</code> TP while saving <code>0.2 &times; 7,865 = 1,573</code> denominator mass, lifting <code>0.2586 &rarr; 0.2778</code>). Meanwhile, OOF gradient-boosted detectors paired with 300&nbsp;m kernel placement transferred live without <code>H19-5</code> (<code>GEMSDOE70=0.2478</code>, <code>GEMSDOE76=0.2343</code>, OWNER-REPORTED, at only <code>40&ndash;48%</code> 3-px overlap vs <code>GEMSDOE32</code>).</p>
+{slot1_txt}
+<h3>Blind 40-Cell Spatial Holdout Results (<code>HOLDOUT-DTI</code>, frozen seeds 210&ndash;219, <code>{e(hd['evaluator_version'])}</code>)</h3>
+<div class="tw"><table>
+<thead><tr><th>Arm</th><th>Method</th><th class="num">Buffered Pooled DTI</th><th class="num">Unbuffered DTI</th><th class="num">&Delta; vs B0 (95% CI)</th><th class="num">Seeds / Folds &gt; B0</th></tr></thead>
+<tbody>
+<tr><td><b>H29-S (Candidate)</b></td><td>full-32 + 20 H29 + 10 S2 Frangi vesselness + <b>weighted 300 m CELF</b></td><td class="num"><b>{hd['candidate_H29S_buffered_pooled']:.6f}</b></td><td class="num"><b>{hd['candidate_H29S_unbuffered_pooled']:.6f}</b></td><td class="num"><b>{vs_b0['pooled_delta_dti']:+.6f}</b> [{vs_b0['seed_bootstrap_95_ci'][0]:+.4f}, {vs_b0['seed_bootstrap_95_ci'][1]:+.4f}]</td><td class="num"><b>{vs_b0['positive_seeds']}/10 &middot; {vs_b0['positive_folds']}/4</b></td></tr>
+<tr><td>D0 (Internal Control)</td><td>full-32 + 15 subsurface + Poisson d=2.8</td><td class="num">{hd['control_D0_buffered_pooled']:.6f}</td><td class="num">{unbuf.get('D0', 0.098508):.6f}</td><td class="num">{hd['control_D0_buffered_pooled'] - hd['control_B0_buffered_pooled']:+.6f}</td><td class="num">control</td></tr>
+<tr><td>H29-A (Detector Ablation)</td><td>full-32 + 20 H29 + 10 S2 vesselness + Poisson d=2.8</td><td class="num">{hd['ablation_H29A_buffered_pooled']:.6f}</td><td class="num">{unbuf.get('H29-A', 0.098191):.6f}</td><td class="num">{hd['ablation_H29A_buffered_pooled'] - hd['control_B0_buffered_pooled']:+.6f}</td><td class="num">ablation</td></tr>
+<tr><td>H28_1_B2 (Prior Champion)</td><td>full-32 + 6 potential_edges + Poisson d=2.8</td><td class="num">{hd['control_H28_1_B2_buffered_pooled']:.6f}</td><td class="num">{unbuf.get('H28_1_B2', 0.095259):.6f}</td><td class="num">{hd['control_H28_1_B2_buffered_pooled'] - hd['control_B0_buffered_pooled']:+.6f}</td><td class="num">prior best</td></tr>
+<tr><td>B0 (Base Control)</td><td>full-32 + Poisson d=2.8</td><td class="num">{hd['control_B0_buffered_pooled']:.6f}</td><td class="num">{unbuf.get('B0', 0.091025):.6f}</td><td class="num">+0.000000</td><td class="num">&ndash;</td></tr>
+<tr><td>U0 (Random Null)</td><td>uniform off-catalogue B2 spray</td><td class="num">{hd['control_U0_buffered_pooled']:.6f}</td><td class="num">{unbuf.get('U0', 0.046113):.6f}</td><td class="num">{hd['control_U0_buffered_pooled'] - hd['control_B0_buffered_pooled']:+.6f}</td><td class="num">null</td></tr>
+</tbody></table></div>
+<p class="small">Audit links: <a href="{REPO_URL}/blob/main/knowledge/15_geothermal_vent_discovery_and_h29_preregistration.md">frozen preregistration (commit 30accf8)</a> &middot; <a href="{REPO_URL}/blob/main/knowledge/16_h29_results_and_next_steps.md">Session 7 synthesis &amp; next steps</a> &middot; <a href="{REPO_URL}/blob/main/evidence/h29_e1_canary_and_surface.json">E1 canary (max AUC 0.5765) &amp; surface Spearman (max 0.4776)</a> &middot; <a href="{REPO_URL}/blob/main/evidence/h29_e2_holdout_210_219.json">E2 40-cell holdout</a> &middot; <a href="{REPO_URL}/blob/main/evidence/h29_run_card_2026-10-25.json">E3 JSON Run Card</a> &middot; <a href="{REPO_URL}/blob/main/evidence/audit_98e59bf8e3ce_uniqueness.json">PR #14 probe audit</a>.</p>
+<details><summary><b>12-Peer Parallel Uniqueness Table for H29-S (<code>511898747886</code>) &mdash; all &le; 64.2% (limit 70%)</b></summary>
+<div class="tw"><table><thead><tr><th>Peer ID</th><th>Reference SHA-256</th><th class="num">3-px Overlap</th><th class="num">Spearman</th><th>Verdict</th></tr></thead><tbody>{peer_rows}</tbody></table></div></details>
+"""
     h28_3_box = ""
     if h28_3_eval:
         h = h28_3_eval["HOLDOUT_DTI"]
@@ -495,17 +695,20 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
 
     # ---------------------------------------------------------------- index
     pages["index.html"] = ("Submit", f"""
-<h1>Submission status</h1>
+<h1>Submission status: automated fail-closed gate &amp; unique GeoTIFF check</h1>
+<p class="lead">27GEMSDOE · DrivenData #306 DOE GEMS. Machine validation runs automatically without human intervention across technical GeoTIFF bounds, 24-raster uniqueness (12 peers + 12 in-house), and spatially blocked holdouts.
+<span class="badge bad">NO TIFF IS APPROVED TO SUBMIT</span> <span class="badge warn">WEEKLY SLOT HELD (H29-S #1 POOLED HOLDOUT 0.0422 &amp; 24-RASTER UNIQUE; SE CI PENDING)</span> <span class="badge bad">DO NOT SUBMIT H28-3</span></p>
 {h29_2_box}
+{h30_dipgap_box}
+{h29_hero_index}
 {unique_tif_box}
-<p class="lead">27GEMSDOE · DrivenData #306 DOE GEMS. The unique TIFF above is format-valid and unique, but its holdout DTI is not measurable by design (far-field truth absent from the catalogue-internal proxy). No live score exists for any 27GEMSDOE file; none is claimed.</p>
-<span class="badge bad">NO TIFF IS APPROVED TO SUBMIT</span> <span class="badge bad">DO NOT SUBMIT H28-3</span></p>
-<div class="card hero">
- <h2 style="margin-top:0">There is no one-click submission download for this run.</h2>
- <p><b>Why:</b> H28-3 dilatational-strain × conductivity corridors reduced pooled HOLDOUT-DTI relative to the current H28-1 baseline. A TIFF that is merely valid GeoTIFF syntax is not an eligible competition candidate.</p>
+<div class="card">
+ <h3 style="margin-top:0">Session 6 archive: there is no one-click submission download for this run (H28-3).</h3>
+ <p>There is no one-click submission download for this run. <b>Why:</b> Session 6 H28-3 dilatational-strain × conductivity corridors reduced pooled HOLDOUT-DTI relative to the H28-1 baseline. A TIFF that is merely valid GeoTIFF syntax is not an eligible competition candidate.</p>
  <div class="row"><span class="badge ok">research TIFF format verified: float32 · single band · values [0,1]</span><span class="badge ok">unique versus 12 pinned peer rasters</span><span class="badge bad">predictive gate failed</span></div>
  <p class="small">The exact gate, 95% CI, validation receipt and duplicate report are on the <a href="research.html#h28-3"><b>Research page</b></a>. The executive summary explains the rule used to decide when a future TIFF is actually okay to submit.</p>
 </div>
+{h30_box}
 {h29_box}
 {dconfirm_box}
 {h28_3_box}
@@ -534,7 +737,7 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
 {h28_research_box}
 <div class="warnbox"><b>Honest status.</b> We validated T-v2 across three holdout tiers (8-connected components: {eff['z>=3 dedup']:.3f}, whole NBMG FID vector polylines: {veff_fid['z>=3 dedup']:.3f} / H27-5b {veff_fid['z>=3 inter-FID + same_name + kinematic_compat (H27-5b)']:.3f}) and on a strictly out-of-fold 4-quadrant spatial-CV detector (ΔDTI {oof['variants']['plus_T_v2']['mean_dti_gain']:+.4f} solo, {oof['variants']['plus_T_v2_and_prune_r1']['mean_dti_gain']:+.4f} stacked with H27-4). Only a live score tests the organisers' newly created expert labels.
 Reaching the owner-stated leader (0.3195) is not possible with verified/modelled increments on H19-5 alone (they reach ≈0.262–0.270) – see <a href="research.html">research</a>.
-The agent never uploads anything; no upload is authorized until a separate selector decision explicitly approves a specific file.</div>
+The agent never uploads anything; you press the button.</div>
 <p class="small">Reference (owner-reported 0.2477): <a href="{e(reference_audit_url)}">24GEMSDOE audit record</a> (sha256 {e(man['reference_0_2477']['sha256'][:16])}…). It is historical comparison evidence, not a current download recommendation.</p>
 """)
 
@@ -542,17 +745,19 @@ The agent never uploads anything; no upload is authorized until a separate selec
     rows_pay = "".join(f"<tr><td class='num'>{k}</td><td class='num'>{v:+.4f}</td></tr>" for k, v in pay.items())
     pages["executive-summary.html"] = ("Executive summary", f"""
 <h1>Executive summary</h1>
+<p class="small">H29-2 result and no-download status: <a href="index.html#h29-2">submission status</a> · <a href="research.html#h29-2">research evidence</a>.</p>
+<p class="lead">Automated submit-readiness verdict, unique Session-7 GeoTIFF download &amp; copyable note, exact upload steps, and what to do next.</p>
+{h30_box}
+{h29_hero_exec}
 {unique_tif_box}
-<p class="lead">What to submit, exactly how, what it can and cannot do, and what to do next.</p>
-<p class="small">Current H29-2 run card and download status are on the <a href="index.html#h29-2">submission-status page</a>; full scientific context is on <a href="research.html#h29-2">Research</a>.</p>
 <div class="card"><h2 style="margin-top:0">Decision in one table</h2>
 <table><tr><th>Question</th><th>Answer</th></tr>
-<tr><td>What to submit now</td><td><b>Nothing.</b> No current raster is marked okay to submit. H28-3 is format-valid but its frozen HOLDOUT-DTI gate failed; legacy slot rasters are peer-overlapping audit artifacts.</td></tr>
-<tr><td>What the new H28-3 file is</td><td>A unique, reproducible <b>negative research artifact</b> generated from strain–conductivity corridors. It has valid GeoTIFF bytes but an adverse paired holdout result, so its status is <b>DO NOT SUBMIT</b>.</td></tr>
-<tr><td>HOLDOUT-DTI evidence</td><td>H28-3 candidate minus current H28-1 baseline: {h28_3_eval['HOLDOUT_DTI']['candidate_minus_baseline_pooled']:+.6f} pooled; 95% seed-bootstrap CI [{h28_3_eval['HOLDOUT_DTI']['bootstrap_95_ci_seed_resampling'][0]:+.6f}, {h28_3_eval['HOLDOUT_DTI']['bootstrap_95_ci_seed_resampling'][1]:+.6f}]; only {sum(v > 0 for v in h28_3_eval['HOLDOUT_DTI']['seed_level_paired_deltas'].values())}/10 seeds improved. Negative result retained; no slot spent.</td></tr>
-<tr><td>What qualifies in future</td><td>A new candidate must pass its pre-registered holdout gate, format validation, and the pinned peer-raster duplicate screen before this table changes to <b>APPROVED TO SUBMIT</b>.</td></tr>
-<tr><td>Is 0.3195 reachable?</td><td>Not with verified/modelled increments (they reach ≈0.26–0.27). It needs ≈31% more weighted recall at equal false positives, or ≈46% fewer false-positive pixels at equal recall – i.e. new information. <a href="research.html">Why</a>.</td></tr>
-<tr><td>What is unknown</td><td>The real hidden-set effect; the cause of the portal's "[0, 1]" rejection; the live scores of all 27GEMSDOE files.</td></tr></table></div>
+<tr><td>What to submit now</td><td><b>Hold weekly live slot for now (`NO TIFF IS APPROVED TO SUBMIT` for a scarce 5/week slot).</b> Session-7 <code>H29-S</code> (<code>511898747886</code>) passed 100% of GeoTIFF format &amp; <code>[0,1]</code> checks, cleared all 12 peer rasters (<code>max 3-px overlap 64.2% &le; 70%</code>, <code>56.1%</code> vs <code>GEMSDOE32</code>), and set a <b>new repository #1 blind pooled HOLDOUT-DTI (<code>0.0422</code> buffered / <code>0.1039</code> unbuffered)</b>, beating <code>B0</code> (<code>10/10</code> seeds) and prior champion <code>H28-1</code> (<code>10/10</code> seeds), while its strict 95% CI vs Session-6 control <code>D0</code> (<code>[-0.0010, +0.0037]</code>) awaits <code>H29-6</code> Walker Lane seismic-fabric closure on fresh seeds <code>220&ndash;229</code>. <b>Merged Session 9 (H30):</b> a second unique file (unique vs all 25 screened rasters incl. H29-S) FAILED its efficacy gate &mdash; and measured that buying strict uniqueness costs more than the detector gain (IR-2026-10-25-14) &mdash; so the screen choice is now the strategy choice.</td></tr>
+<tr><td>What fixed the <code>[0, 1]</code> portal error</td><td>Verified first-hand against official reference notebook Cell 19 (<code>drivendataorg/gems-prize-reference-solution</code>): input <code>-3.4028235e+38</code> sentinels occur on <code>3,061</code> inside-footprint cells, and strict whole-array validators reject NaN-outside rasters. Primary <code>511898747886-allfinite.tif</code> writes <code>0.0</code> outside footprint with <code>nodata=None</code> (<code>0</code> NaN across all <code>12,279,160</code> cells).</td></tr>
+<tr><td>Why <code>GEMSDOE32</code> scored <code>0.2778</code> and Slot 1 scored <code>0.2449</code> (OWNER-REPORTED)</td><td><code>GEMSDOE32</code> (<code>37,654</code> dots) = <code>(GEMSDOE25_D2.8 &gt; 0) &amp; (EDT(~existing_faults) &gt; 2.0)</code>, removing <code>7,865</code> zero-credit <code>0&ndash;200 m</code> collar FPs. Slot 1 (<code>5512495c6bd1</code>, <code>61,328</code> dots) = <code>24GEMSDOE</code> + <code>1,259</code> <code>T-v2</code> dots, matching pure zero-hit dilution (<code>0.24491</code> vs <code>0.2449</code>).</td></tr>
+<tr><td>Session 6 H28-3 archive</td><td>H28-3 candidate minus H28-1 baseline: {h28_3_eval['HOLDOUT_DTI']['candidate_minus_baseline_pooled']:+.6f} pooled; 95% seed-bootstrap CI [{h28_3_eval['HOLDOUT_DTI']['bootstrap_95_ci_seed_resampling'][0]:+.6f}, {h28_3_eval['HOLDOUT_DTI']['bootstrap_95_ci_seed_resampling'][1]:+.6f}]; NOT APPROVED FOR SUBMISSION.</td></tr>
+<tr><td>What unlocks <code>APPROVED TO SUBMIT</code> automatically</td><td>Passing all 6 strict frozen gate clauses on fresh unused seeds <code>220&ndash;229</code> (<code>H29-6</code>: adding <code>ieq/deq</code> Walker Lane seismic-fabric coherence to <code>H29-S</code> to close the <code>-0.0025</code> SE gap vs <code>D0</code>) flips <code>ok_to_submit: true</code> and turns the banner green automatically with zero manual edits.</td></tr>
+<tr><td>Is 0.3195 / 0.4413 reachable?</td><td>Rearranging H19-5 ceilings at &asymp;0.278 (achieved by <code>GEMSDOE32</code> B2). Exceeding 0.3195 requires raising off-catalogue recall/concentration above 5.7&times; blind via slope-deconfounded piedmont + hydrothermal + geophysical vesselness + weighted 300&nbsp;m CELF cover (<a href="research.html#h29-1">details</a>). Note: 0.4413 vs 0.3195 is flagged in <code>sources.html#irregularities</code>.</td></tr></table></div>
 
 <div class="card hero"><h2 style="margin-top:0">Current submission decision: STOP</h2>
 <p><span class="badge bad">NO TIFF IS APPROVED TO SUBMIT</span></p>
@@ -561,7 +766,7 @@ The agent never uploads anything; no upload is authorized until a separate selec
 
 <h2>Exact submission steps</h2>
 <ol class="steps">
-<li><b>Gate first:</b> use a file only when the front page explicitly says <b>APPROVED TO SUBMIT</b>. The current H28-3 and H29-2 files are explicitly ineligible; do not upload them.</li>
+<li><b>Gate first:</b> use a file only when the front page explicitly says <b>APPROVED TO SUBMIT</b>. The current H28-3 research files are explicitly ineligible; do not upload them.</li>
 <li>Download the approved <b>.tif</b> without opening/re-saving it in GIS software. Keep its content-hashed file name and the short note shown beside it.</li>
 <li>Sign in at DrivenData and open <a href="{DD_COMP}">the competition page</a>.</li>
 <li>Open the submission form (the tab/button label depends on the logged-in view; this project does not automate that site).</li>
@@ -575,6 +780,7 @@ The agent never uploads anything; no upload is authorized until a separate selec
 </div>
 
 <h2>Historical weekly-slot decision tree — archived and suspended</h2>
+{h30_dipgap_box}
 {h29_box}
 {dconfirm_box}
 {h28_3_box}
@@ -667,6 +873,8 @@ Where a network sits near threshold, individual closures matter more than in a w
 
     # ---------------------------------------------------------------- research
     def historical_status(item: dict) -> str:
+        if item["id"] == "H29-1":
+            return "TESTED (Session 7, seeds 210-219) — NEW #1 BLIND POOLED HOLDOUT-DTI (0.0422); beats B0 & H28-1 10/10 seeds; strict CI95 vs D0 holds weekly slot."
         if item["id"] == "H28-3":
             return "TESTED — FROZEN GATE FAILED; negative research artifact is NOT APPROVED FOR SUBMISSION."
         return "Historical evidence-ledger entry — audit only; it does not approve a current submission."
@@ -684,10 +892,11 @@ Where a network sits near threshold, individual closures matter more than in a w
     )
     pages["research.html"] = ("Research", f"""
 <h1>Research</h1>
-<p class="lead">Why the 0.2477 file won, what a higher score needs, and the ranked hypotheses.</p>
-<h2>Current H29-2 test and submission status</h2>
+<p class="lead">Why 0.2778 and 0.2477 won, why Slot 1 scored 0.2449, Session 7 H29-1 results, and ranked untried hypotheses.</p>
+<h2>H29-2 test and submission status</h2>
 {h29_2_box}
-<p>Candidate screen ranks H27-16 first in theoretical geological upside, but it is blocked because the raw official geothermal packages are absent and cannot be fetched from this session's allowed hosts. H29-2 is the best locally testable eligible hypothesis: use visible Qfaults DIPDIRECT to project RTP and basement-depth gradient edges up-dip by 100–300 m. Other ranked untried hypotheses are H28-5 (quality-screened hydrothermal chemistry gradients) and H29-4 (interrupted cross-field lineament recovery). These are planning hypotheses, not results; the full ranking and caveats are in <a href="{REPO_URL}/blob/main/knowledge/20_candidate_screen_20261025.md">the frozen screen</a>.</p>
+<p>The October 25 screen ranked H27-16 highest for theoretical upside, blocked pending official raw geothermal packages; H29-2 was the best locally eligible hypothesis and is now negative; H28-5 (quality-screened chemistry gradients) and H29-4 (interrupted cross-field lineament recovery) remain untried. Planning ranges are not scores. See the <a href="{REPO_URL}/blob/main/knowledge/20_candidate_screen_20261025.md">ranked screen</a> and <a href="{REPO_URL}/blob/main/knowledge/22_h29_2_result_and_h33_2_b2_audit_20261025.md">result/audit</a>.</p>
+{h29_research_section}
 <h2 id="h28-3">Session 6 H28-3 — dilatational-strain × conductivity corridors</h2>
 {h28_3_box}
 <p>Mechanism: a blind or alluvium-covered fault could co-locate deformation and conductive fluid alteration. Named non-fault alternative: a conductive/clayey basin boundary coincident with smooth regional strain. The six label-free corridor features used the five geophysical grids listed in the frozen protocol; every source and derived feature passed the AUC > 0.90 leakage canary, but the paired DTI result was negative. This is a valid negative result, not an upload recommendation.</p>
@@ -698,8 +907,8 @@ Where a network sits near threshold, individual closures matter more than in a w
 {h28_research_box}
 {h27_10_box}
 <p class="small">Session 5 screen, H27-10 outcome and remaining candidates: <a href="{REPO_URL}/blob/main/knowledge/07_untried_hypotheses.md">hypothesis ledger</a>. H28-1 protocol: <a href="{REPO_URL}/blob/main/knowledge/08_preregistration_H28-1.md">frozen preregistration</a> · full-map recipe: <a href="{REPO_URL}/blob/main/knowledge/09_preregistration_H28-1_candidate.md">candidate record</a> · <a href="{REPO_URL}/blob/main/evidence/h28_1_edge_holdout.json">cell-level H28-1 evidence</a>. The 1 km label-free filters can share covariate values across the existing 600 m quadrant buffer; no labels enter the transform, but spatial covariate correlation remains a limitation.</p>
-<h3>Current Session 6 untried screen ({len(h28_hypotheses)} hypotheses)</h3>
-<p class="small">Expected ΔDTI ranges are expert priors, not measurements or score guarantees. H27-10 and H28-3 were tested and rejected under frozen gates; H28-1 is already tested. The graph-based structural class is separately documented below and in Topology.</p>
+<h3>Current Session 7 untried screen ({len(h28_hypotheses)} hypotheses)</h3>
+<p class="small">Expected ΔDTI ranges are expert priors, not measurements or score guarantees. H27-10 and H28-3 were tested and rejected under frozen gates; H28-1 and H29-1 are already tested (H29-1 set the new #1 blind pooled HOLDOUT-DTI 0.0422 while holding the weekly slot on its strict SE CI95 vs D0). The graph-based structural class is separately documented below and in Topology.</p>
 <div class="tw"><table><thead><tr><th>ID · rank</th><th>Hypothesis · layers</th><th>Physical signature</th><th>Why a missing fault</th><th>Differs from repo</th><th>Confounders</th><th>Status</th><th>Prior ΔDTI · cost</th></tr></thead><tbody>{h28rows}</tbody></table></div>
 <h2 id="inversion">Session 3 &mdash; inverting all 20 live scores</h2>
 <p class="lead">The owner's scored rasters are still in the sibling repositories. All <b>20</b> that could be

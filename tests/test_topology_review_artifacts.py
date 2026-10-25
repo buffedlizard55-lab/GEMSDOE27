@@ -100,7 +100,8 @@ def test_topology_and_research_pages_disclose_review_only_and_refuted_signals():
     assert "assets/fig_map_h27_5b_priority.png" in topology
     assert (ROOT / "docs" / "assets" / "fig_map_h27_5b_priority.png").is_file()
     assert "review class</th>" in topology
-    assert "Current Session 6 untried screen (3 hypotheses)" in research
+    screen = json.loads((ROOT / "registry" / "next_hypotheses.json").read_text())
+    assert f"Current Session 7 untried screen ({len(screen['hypotheses'])} hypotheses)" in research
     assert "H27-10 annulus result — REJECTED; no weekly slot." in research
     assert "H28-3 strain × conductivity result — FAILED" in research
     assert "NOT APPROVED FOR SUBMISSION" in research

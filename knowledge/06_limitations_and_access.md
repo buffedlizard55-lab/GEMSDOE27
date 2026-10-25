@@ -1,5 +1,17 @@
 # Limitations, access needed, and work for the next session
 
+## Session 7 outcome (2026-10-25) — `Lane L-S7-2026-10-25` (`H29-1`) sets new #1 blind pooled `HOLDOUT-DTI` (`0.0422`); strict `SE` CI sub-clause holds weekly slot
+
+1. **Completed 3-experiment budget (`E1` canary/surface, `E2` 40-cell blind holdout on unused seeds `210–219`, `E3` dual-partition stitched-OOF GeoTIFF + Run Card):**
+   - Frozen preregistration committed before execution at `30accf8` (`knowledge/15_geothermal_vent_discovery_and_h29_preregistration.md`); full synthesis in `knowledge/16_h29_results_and_next_steps.md`.
+   - **Shipped unique GeoTIFF (`27GEMSDOE-H29S-20261025-511898747886`):** `docs/downloads/gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-allfinite.tif` (`825,276 B`, SHA-256 `8585c5e870f197f84fda5bac7f22047d646fb73d455eb8b1129486c79bb976cf`, `37,654` binary `{0.0, 1.0}` dots, `all-finite` zeros-outside `nodata=None` per official reference notebook Cell 19). Verified across **162/162 automated checks** (`scripts/verify_downloads.py`, `0` failures) and all **12 peer rasters** (`max 3-px overlap = 64.21% <= 70%`, `56.12%` vs `GEMSDOE32`; `max Spearman = 0.0472 <= 0.90`).
+   - **Blind spatial holdout (`HOLDOUT-DTI`, seeds `210–219`, `118,673` withheld positive occurrences):** `H29-S` reached **`0.042198` buffered (`0.103907` unbuffered)**, beating `B0` (`+0.005829`, `95% CI [+0.00442, +0.00742]`, `10/10` seeds, `4/4` folds), beating prior promoted champion `H28-1` (`+0.004620`, `95% CI [+0.00344, +0.00597]`, `10/10` seeds, `3/4` folds), proving `weighted_celf_cover` fixes `H27-6` (`+0.002500` buffered / `+0.005716` unbuffered over Poisson `d=2.8` on the identical `H29` surface, `8/10` seeds), and edging Session-6 internal control `D0` (`+0.001295` buffered / `+0.005399` unbuffered, `3/4` folds `NW, NE_LidarGap, SW`).
+   - **Why the weekly live slot is HELD (`ok_to_submit: false`):** `SE` (Hawthorne/Tonopah Walker Lane) lagged `D0` by `-0.002526` because `H29-1` omitted `D0`'s `ieq_n100a15`/`deq_n100a15` earthquake structure-tensor coherence, leaving the strict 95% CI vs `D0` at `[-0.000986, +0.003695]` (`3/6` strict composite clauses). Per `AGENTS.md`, thresholds are never relaxed post-hoc.
+2. **Next Session Top Technical Priority (`H29-6` on fresh unused seeds `220–229`):**
+   - Preregister and run `H29-6` (appending multi-scale `ieq_n100a15` + `deq_n100a15` structure-tensor anisotropy + dextral `geod_shearrate` alignment to `H29-S` + `weighted_celf_cover`) on fresh unused seeds `220–229` against both `D0` and `H29-S`. Once all 6 strict clauses pass, `ok_to_submit` flips to `true` and turns the landing/executive-summary banner green automatically without manual HTML edits.
+
+---
+
 ## Session 6 outcome (2026-10-25) — H28-3 rejected; no currently approved submission
 
 H28-3 (label-free strain/conductivity intersection corridors) completed its pre-registered spatially blocked test on fresh seeds 160–169 and **failed** its frozen promotion gate. Pooled **HOLDOUT-DTI** was 0.1033523 for the candidate versus 0.1059458 baseline (Δ −0.0025935); mean paired seed Δ was −0.0025884 with deterministic 95% bootstrap CI [−0.0042399, −0.0009065], and only 2/10 seeds and 1/4 folds improved. Leakage canary, integrity, and uniform-control checks passed; the efficacy gates did not. Full result: `evidence/h28_3_strain_holdout.json`; protocol: `knowledge/13_preregistration_H28-3.md`. Do not tune or re-run H28-3.
@@ -122,3 +134,53 @@ This H28 run used seeds 140–149. At the time, H27-10 was reserved for seeds **
 3. **Do not spend a weekly slot on a candidate until it beats the current holdout best under its frozen gate.** Even a catalogue-internal pass does not prove transfer to organizer labels. Request a human score only through the owner; the agent must never access or upload to DrivenData.
 4. **Use the H27-5b files for geologist review if an expert is available.** Record any manual map interpretation with provenance; do not promote a link from graph importance, a setting hint, or the Tier-2 enrichment alone.
 5. **Keep the existing limitations visible:** no hidden-label or live-score evidence; NBMG FIDs are records in one compilation; compatibility can pass with missing kinematic fields; geometry cues are not field verification; the portal validator's historical error cause remains unknown; raster-dependent CI requires the restored local cache.
+
+---
+
+# Session 9 (Lane L-H30) outcome and carry-forward priorities (2026-10-25)
+
+* **Data readiness restored and proven** (previous Session 8 blocker closed):
+  `restore_data.py` fetched and SHA-256-verified all 16 pinned inputs plus the
+  assembled `training_features.tif`; `prepare_data.py` rebuilt the 32-band stack
+  (sha256 `83ed2704…`); 12 parallel-registry peers fetched at pinned commits;
+  `pytest -q` 107 passed; `verify_downloads.py` 0 failures. `data_cache/` is
+  git-ignored, so a fresh checkout must redo this before any raster claim.
+* **Lane L-H30 ran its full frozen protocol** (`knowledge/20` @ `d87283f`,
+  implementation @ `6ceeb24`): E1 canary PASS (max direction-invariant AUC
+  0.561 over 9 new features); E2a selection on fresh seeds **240–244** — DIP
+  (H30-1) 0.09888, GAP (H30-2) 0.10180, SOFT (H30-3) 0.09943 vs Arm-D
+  control 0.10234 pooled **HOLDOUT-DTI**; **frozen gate FAILED**, no
+  confirmation (seeds 245–254 untouched and now reserved-consumed by this
+  lane's protocol — do not reuse 240–254), no post-hoc tuning.
+* **One new unique TIFF exists and is negative**: GAP full-fit B2/38k,
+  content id `3107a3007b77`, sha256 `deb8b4f1…`, all-finite [0,1] (portal-error
+  fix verified by independent re-read), peer-uniqueness PASS (max 45.7 %),
+  efficacy FAIL → `docs/downloads/research/`, badge **⛔ DO NOT SUBMIT**.
+  H30-1/2/3 must not be re-proposed in this form (recorded in
+  `registry/hypotheses.json` + `registry/next_hypotheses.json`).
+* **Registry-scope note (IR-2026-10-25-17)**: H30's promotion uniqueness gate
+  was scoped *before results* to the 12 pinned parallel peers, with extended
+  self-overlaps (max 84.7 %) reported in the run card. The candidate failed
+  efficacy, so nothing was promoted by that scoping; the selector should
+  still settle a standing scope rule (IR-2026-10-25-06).
+
+## Carry-forward priorities (next session, in order)
+1. **Selector decision on the Arm-D family (owner action, unchanged):** H29-1 /
+   L-DCONFIRM remain the only detectors with a replicated holdout gain. Either
+   record a standing registry-scope decision (IR-2026-10-25-06) or accept that
+   no D-descendant can be certified; do not let any session silently re-badge.
+2. **Detector-class change, not more feature appends:** per-pixel HGB + extra
+   hand transforms is now repeatedly refuted as a route past Arm D
+   (L-DCONFIRM arm E; H30 DIP/GAP; soft emission). The credible untried lever
+   is spatially contextual supervised segmentation (official reference
+   solution runs on CPU per its README snapshot; GPU only speeds it). Any
+   attempt needs its own preregistration, fresh seeds, and the same buffered
+   whole-segment holdout + canary + registry gates.
+3. **Official GDR #1391 bytes** for H27-16/H28-5 remain unobtained in-sandbox
+   (allowlist excludes gdr.openei.org). Obtain via an authorized runner,
+   verify SHA-256 against the recorded pins, *then* preregister.
+4. Restore the missing H28-4 evidence JSON or retract its numbers
+   (IR-2026-10-25-18).
+5. If the owner ever submits any file, record the exact portal receipt in
+   `registry/live_scores.json` — until then every score here stays
+   OWNER-REPORTED and every 27GEMSDOE file UNSCORED.
