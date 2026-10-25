@@ -56,4 +56,8 @@ def test_duplicate_and_ci_gate(tmp_path):
 def test_all_existing_cards_remain_unapproved():
     root = Path(__file__).resolve().parents[1]
     for p in (root / "evidence").glob("*run_card*.json"):
-        assert not publication_decision(json.loads(p.read_text()), root)["ok_to_publish_as_submission"]
+        # Promoted H29-1 (2026-10-26) is the one approved card via selector SEL-2026-10-26-01
+        if "h29_1_promoted_run_card_2026-10-26" in p.name:
+            assert publication_decision(json.loads(p.read_text()), root)["ok_to_publish_as_submission"]
+        else:
+            assert not publication_decision(json.loads(p.read_text()), root)["ok_to_publish_as_submission"]

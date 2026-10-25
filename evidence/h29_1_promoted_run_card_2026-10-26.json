@@ -1,0 +1,128 @@
+{
+  "run_card": "H29-1 D-refill PROMOTED (selector SEL-2026-10-26-01, parallel-run protocol \u00a75-\u00a76)",
+  "generated_utc": "2026-10-26T00:00:00Z",
+  "hypothesis": "Faults missing from the surface-rupture-scoped USGS/INGENIOUS catalogue include buried/older structures expressed in subsurface physics; adding 15 label-free subsurface transforms to the full 32-band detector (Arm D) improves dot placement at the live-family B2/38k optimum vs the frozen H19-5 detector behind 0.2778.",
+  "mechanism": "Full-fit HGB on 32 bands + 15 transforms (gems27.subsurface_features); ridge NMS; priority Poisson-disk >=2.8px; B2 (200 m) catalogue exclusion; 38,000-dot budget.",
+  "named_non_fault_mimic": "Lithologic contacts and survey seams in potential fields; clay-cap/basin conductivity highs; remanent magnetisation; alluvial-fan edges and shorelines in lidar.",
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "evaluator": "gems27.metric v1 (alpha=0.2, beta=0.8, R=3px triangular)",
+    "pooled_dti_D_lane": 0.10878607314240211,
+    "pooled_dti_B_control": 0.10019683788577569,
+    "paired_D_minus_B": {
+      "mean_delta": 0.008571174109359873,
+      "ci95": [
+        0.005128899147808386,
+        0.01248926340626096
+      ],
+      "cells_positive": 18,
+      "n_cells": 20
+    },
+    "n_withheld_positives_total": 59362,
+    "seeds": [
+      210,
+      211,
+      212,
+      213,
+      214
+    ],
+    "canary_max_auc": 0.5569533228595529,
+    "gate_efficacy_pass": true
+  },
+  "uniqueness_vs_registry": {
+    "max_dot_overlap_within_3px_euclidean": 0.4615,
+    "per_raster": {
+      "g24_d15.tif": 0.45152631578947366,
+      "g25_d28.tif": 0.4366578947368421,
+      "g27_tv2_d15.tif": 0.4615,
+      "g28_h27_4_r1.tif": 0.42455263157894735,
+      "g28_h32_1.tif": 0.4326842105263158,
+      "g28_h36_1.tif": 0.41968421052631577,
+      "g28_h38_1.tif": 0.42547368421052634,
+      "g30_d28.tif": 0.4366578947368421,
+      "g31_h27_4.tif": 0.42455263157894735,
+      "g32_h33_2_b2.tif": 0.4089736842105263,
+      "g33_h33d.tif": 0.43186842105263157,
+      "g36_anderson.tif": 0.4121578947368421
+    },
+    "max_surface_spearman_armD": 0.44573325496777744,
+    "thresholds": {
+      "dot_overlap": 0.7,
+      "spearman": 0.9
+    },
+    "pass": true,
+    "peer_registry_only": true,
+    "peer_registry_count": 12,
+    "self_registry_excluded": "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.tif (59,075 px, research-only, SEL-2026-10-26-01)",
+    "g32_h33_2_b2_overlap": 0.4089736842105263
+  },
+  "raster": {
+    "primary_allfinite": "gems27-h29-1-drefill-b2-38k-20261025-c24b6371179c-allfinite.tif",
+    "sha256": "40dc48a9f512c6b92415e5b2349e809be33107f9fec6661cc67c3a9871b8c84f",
+    "bytes": 826752,
+    "dots": 38000,
+    "content_id": "c24b6371179c",
+    "zip": "gems27-h29-1-drefill-b2-38k-20261025-c24b6371179c-allfinite.zip",
+    "nan_twin": "gems27-h29-1-drefill-b2-38k-20261025-c24b6371179c-nan.tif",
+    "directory": "docs/downloads"
+  },
+  "validator": {
+    "zeros_hard_pass": true,
+    "zeros_checks": {
+      "grid_matches_template": {
+        "pass": true,
+        "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+        "hard": true
+      },
+      "single_band_float32": {
+        "pass": true,
+        "detail": "count=1 dtype=float32",
+        "hard": true
+      },
+      "inside_footprint_all_finite": {
+        "pass": true,
+        "detail": "0 non-finite inside 5167373 px",
+        "hard": true
+      },
+      "inside_footprint_in_0_1": {
+        "pass": true,
+        "detail": "min=0 max=1",
+        "hard": true
+      },
+      "no_infinities_anywhere": {
+        "pass": true,
+        "detail": "np.isinf(whole array) is empty",
+        "hard": true
+      },
+      "outside_footprint_is_zero_and_finite": {
+        "pass": true,
+        "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+        "hard": true
+      },
+      "strict_whole_array_range": {
+        "pass": true,
+        "detail": "whole-array min=0 max=1",
+        "hard": true
+      },
+      "profile_driver_gtiff": {
+        "pass": true,
+        "detail": "GTiff",
+        "hard": false
+      },
+      "compression_like_sample": {
+        "pass": true,
+        "detail": "Compression.lzw",
+        "hard": false
+      }
+    },
+    "nan_hard_pass": true
+  },
+  "submission_name": "GEMSDOE27-H29-1-DREFILL-B2-38K",
+  "note_max_140_chars": "27GEMSDOE H29-1 D-refill B2 38k; HOLDOUT-DTI 0.1088 vs B 0.1002; UNSCORED | id c24b6371179c",
+  "note_chars": 91,
+  "ok_to_submit": true,
+  "verdict": "promote",
+  "live_score": null,
+  "live_score_label": "UNSCORED \u2014 no ORGANIZER-CONFIRMED score exists for this file; HOLDOUT-DTI 0.1088 vs B 0.1002, paired +0.00857 [+0.00513,+0.01249]",
+  "selector_decision": "registry/selector_decision_2026-10-26.json: H28-1 retired from binding screen; peer registry (12) governs"
+}

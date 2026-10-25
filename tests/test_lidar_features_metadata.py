@@ -1,9 +1,14 @@
 from __future__ import annotations
 
 import json
+import sys
+import pathlib
 from pathlib import Path
 
-from scripts.prepare_data import LIDAR_BANDS, LIDAR_EXPECTED_DESCRIPTIONS
+ROOT_TMP = pathlib.Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT_TMP / "scripts"))
+sys.path.insert(0, str(ROOT_TMP / "src"))
+from prepare_data import LIDAR_BANDS, LIDAR_EXPECTED_DESCRIPTIONS
 
 ROOT = Path(__file__).resolve().parents[1]
 

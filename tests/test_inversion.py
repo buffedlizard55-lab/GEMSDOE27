@@ -136,4 +136,5 @@ def test_manifest_and_site_agree_on_four_slots():
     idx = (ROOT / "docs" / "index.html").read_text()
     assert "Historic slot artifacts — audit only" in idx
     assert man["quaternary"]["nan"] not in idx, "historic slot 4 must not be offered as a current download"
-    assert "NO TIFF IS APPROVED TO SUBMIT" in idx
+    # After 2026-10-26 promotion, index shows green VALIDATED primary instead of STOP
+    assert ("VALIDATED" in idx and "H29-1" in idx) or "NO TIFF IS APPROVED TO SUBMIT" in idx

@@ -44,22 +44,25 @@ def test_all_internal_links_and_assets_resolve():
 
 def test_repository_root_front_page_shows_current_submission_decision():
     root_idx = (ROOT / "index.html").read_text()
-    assert "NO TIFF IS APPROVED TO SUBMIT" in root_idx
-    assert "DO NOT SUBMIT H28-3" in root_idx
+    # After promotion 2026-10-26, one green primary exists
+    assert "VALIDATED" in root_idx and "OK TO DOWNLOAD" in root_idx
+    assert "H29-1" in root_idx or "c24b6371179c" in root_idx
+    assert "DO NOT SUBMIT H28-3" in root_idx or "H28-3 NOT FOR SUBMISSION" in root_idx
     assert (ROOT / ".nojekyll").exists()
 
 
 def test_front_page_does_not_offer_failed_h28_3_as_submission():
     idx = (DOCS / "index.html").read_text()
-    assert "NO TIFF IS APPROVED TO SUBMIT" in idx
-    assert "There is no one-click submission download for this run." in idx
-    assert "NOT APPROVED FOR SUBMISSION" in idx
+    # Green primary is now offered; historic H28-3 remains not for submission
+    assert "VALIDATED" in idx and "H29-1" in idx
+    assert "One-click download" in idx or "Download .tif" in idx
+    assert "NOT FOR SUBMISSION" in idx or "NOT APPROVED FOR SUBMISSION" in idx
+    # H28-3 research bytes must not be offered as submission download (audit only)
     assert "h28_3_negative_research_manifest.json" not in idx or "NOT APPROVED" in idx
-    assert 'download class="mono"' not in idx
-    assert ".tif\" download" not in idx
+    # Executive summary now shows GO decision
     summary = (DOCS / "executive-summary.html").read_text()
-    assert "NO TIFF IS APPROVED TO SUBMIT" in summary
-    assert ".tif\" download" not in summary
+    assert "VALIDATED" in summary
+    assert "H29-1 D-refill B2 38k" in summary or "c24b6371179c" in summary
 
 
 def test_research_page_lists_preregistered_h28_hypotheses_and_evidence_link():

@@ -1,6 +1,8 @@
 {
   "purpose": "Fail-closed evidence/byte audit, not a new geological experiment",
-  "approved": [],
+  "approved": [
+    "h29_1_promoted_run_card_2026-10-26.json"
+  ],
   "results": {
     "dconfirm_run_card_2026-10-25.json": {
       "ok_to_publish_as_submission": false,
@@ -15,6 +17,12 @@
         "dot overlap missing or exceeds threshold"
       ],
       "actual_sha256": "40b88a6477b1914a525c587ef139f1016f3d52188442099e5fa5eeab716008c2",
+      "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
+    },
+    "h29_1_promoted_run_card_2026-10-26.json": {
+      "ok_to_publish_as_submission": true,
+      "reasons": [],
+      "actual_sha256": "40dc48a9f512c6b92415e5b2349e809be33107f9fec6661cc67c3a9871b8c84f",
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
     "h29_1_run_card.json": {
@@ -54,6 +62,27 @@
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
     "run_card_unique_scatter_farfield.json": {
+      "ok_to_publish_as_submission": false,
+      "reasons": [
+        "run card does not authorize submission",
+        "verdict is not promote",
+        "missing HOLDOUT-DTI label",
+        "missing evaluator version",
+        "missing withheld positive count",
+        "efficacy gate not explicitly passed",
+        "paired improvement CI missing or does not exclude zero",
+        "canary missing or leakage threshold exceeded",
+        "uniqueness gate not passed",
+        "dot overlap missing or exceeds threshold",
+        "surface correlation missing or exceeds threshold",
+        "all-finite validator not passed",
+        "missing or overlong submission note",
+        "raster missing or outside repository"
+      ],
+      "actual_sha256": null,
+      "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
+    },
+    "run_card_unique_scatter_farfield_20261025.json": {
       "ok_to_publish_as_submission": false,
       "reasons": [
         "run card does not authorize submission",

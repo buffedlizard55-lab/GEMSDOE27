@@ -1,0 +1,1 @@
+27GEMSDOE dip-corrected geothermal B3 38k | Dip-corrected geothermal: B3 300m exclusion, potential-field edge + shear alignment, 38k Poisson-disk, all-finite [0 | id 2b0a2af4846d | not yet live-scored

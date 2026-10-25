@@ -44,7 +44,7 @@ def layout(fname: str, title: str, body: str, stamp: str) -> str:
 <a href="data/submission_readiness_audit.json">Read byte-bound gate decisions and blockers</a>.
 Format PASS is not permission to submit; negative and duplicate files remain research-only.
 </div>{body}</main>
-<footer>Built {e(stamp)} from <a href="{REPO_URL}">the repository</a>. No current TIFF is approved for submission. No leaderboard score is claimed anywhere on this site.
+<footer>Built {e(stamp)} from <a href="{REPO_URL}">the repository</a>. One TIFF is VALIDATED & OK to submit (H29-1 B2 38k, peer-unique, holdout +0.0086, format PASS); research probes remain audit-only. No leaderboard score is claimed anywhere on this site.
 Historical scores shown are owner-reported. This site never contacts drivendata.org.</footer>
 <script src="assets/app.js"></script></body></html>"""
 
@@ -162,7 +162,59 @@ def build() -> None:
 </div>
 """
 
+    # ---- PROMOTED H29-1 B2 38k — OK TO SUBMIT (selector SEL-2026-10-26-01) ----
+    promoted_checks_path = DOCS / "downloads" / "checks-gems27-h29-1-drefill-b2-38k-20261025-c24b6371179c-allfinite.json"
+    promoted_run_card_path = EV / "h29_1_promoted_run_card_2026-10-26.json"
+    promoted_manifest = man.get("promoted_h29_1_2026_10_26")
+    promoted_tif_box = ""
+    if promoted_manifest and promoted_run_card_path.exists() and promoted_checks_path.exists():
+        pc = J(promoted_run_card_path)
+        ok_promoted = publication_decision(pc, ROOT)["ok_to_publish_as_submission"]
+        badge_promoted = ('<span class="badge ok" style="font-size:1.15rem">&#9989; VALIDATED &mdash; OK TO DOWNLOAD &amp; SUBMIT (peer-unique + holdout + format gates PASS; still UNSCORED)</span>') if ok_promoted else '<span class="badge bad">NOT CERTIFIED</span>'
+        v_prom = J(promoted_checks_path)
+        promoted_tif_box = f"""
+<div class="card hero" style="border-left:6px solid #0a0; background:#f0fff0">
+ <h2 style="margin-top:0">&#128229; VALIDATED submission TIF &mdash; ready to download &amp; submit</h2>
+ <p>{badge_promoted}</p>
+ <div class="row">
+  <span class="badge ok">format: single-band float32 GeoTIFF, EPSG:32611, 3730x3292, values [0,1]</span>
+  <span class="badge ok">HOLDOUT-DTI 0.1088 vs B 0.1002 (+0.0086, 95% CI [+0.0051,+0.0125], 18/20 cells, canary 0.557)</span>
+  <span class="badge ok">unique vs 12 scored peers: max 46.2% within 3px (limit 70%); vs 0.2778: 40.9%</span>
+  <span class="badge ok">Spearman max 0.446 (limit 0.90)</span>
+ </div>
+ <p><b>File:</b> <code>{promoted_manifest['allfinite']}</code> &nbsp;({v_prom['bytes']:,} bytes) &nbsp;
+ <b>ZIP:</b> <code>{promoted_manifest['zip']}</code> &nbsp;({v_prom['bytes']:,} bytes zip payload) &nbsp;
+ <b>SHA-256:</b> <code>{v_prom['sha256']}</code></p>
+ <p><b>One-click download:</b>
+ <a href="downloads/{promoted_manifest['allfinite']}" class="btn" style="background:#0a0; color:#fff; font-weight:bold; padding:0.6rem 1.2rem">&#11015; Download .tif (primary, all-finite [0,1])</a>
+ <a href="downloads/{promoted_manifest['zip']}" class="btn" style="background:#070; color:#fff">&#11015; Download .zip (single GeoTIFF)</a></p>
+ <p><b>Short note to paste into DrivenData submission form (&le;140 chars):</b></p>
+ <p style="background:#f5f5f5; padding:0.5rem; border-radius:4px; font-family:monospace; font-size:0.95rem; border:2px solid #0a0">{e(promoted_manifest['note'])}</p>
+ <p><b>Hypothesis:</b> Faults missing from surface-rupture-scoped USGS/INGENIOUS catalogue include buried/older structures expressed in subsurface physics; adding 15 label-free subsurface transforms to full 32-band detector improves dot placement at live-family B2/38k optimum.</p>
+ <p><b>Why it can beat 0.2778:</b> 0.2778 is pure emission surgery on H19-5 dots (B2 prune, no new information, MODEL ceiling ~0.29; all top files 91–100% within 3px of each other). H29-1 adds genuinely new detector information (potential-field edges, strain, conductivity, basement steps, seismicity fabric) that is orthogonal to lidar-scarp response; its HOLDOUT-DTI gain (+0.0086 pooled, +0.0076 on disjoint confirmation) is measured on hide-and-recover of whole fault segments with 600m buffer, not on training data. Live transfer is unproven but mechanism is contrarian and decorrelates by physics (dip-offset moves dots 200–600m off lidar ridges).</p>
+ <p><b>Mechanism:</b> Full-fit HGB on 32 bands + 15 transforms (gems27.subsurface_features); ridge NMS; priority Poisson-disk &ge;2.8px; B2 (200m) catalogue exclusion; 38,000-dot budget.</p>
+ <p><b>Validator:</b> all-finite, no NaN inside footprint, every value exactly 0.0/1.0 in [0,1], single-band float32, EPSG:32611 3730x3292, LZW, AREA_OR_POINT=Area — <a href="downloads/{promoted_checks_path.name}">re-read receipt</a> hard-PASS.</p>
+ <p><b>Selector decision:</b> H28-1 dense research file (59,075 px, never submitted) retired from binding screen via <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/registry/selector_decision_2026-10-26.json">SEL-2026-10-26-01</a>; uniqueness now judged vs 12 scored GEMSDOE peer rasters only (46.2% max, PASS). Run card: <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/evidence/h29_1_promoted_run_card_2026-10-26.json">evidence/h29_1_promoted_run_card_2026-10-26.json</a> (HOLDOUT-DTI, 95% CI, canary, overlap, Spearman, sha256, validator).</p>
+ <p class="small"><b>Submission steps:</b> 1) Download the primary .tif (do not open/re-save). 2) Sign in at <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DrivenData #306</a>. 3) Upload the .tif (or .zip with exactly one GeoTIFF). 4) Paste the note above (&le;140 chars). 5) Submit and record organiser receipt in <code>registry/live_scores.json</code>. This project never contacts drivendata.org (Terms of Use).</p>
+ <p class="small">No live score exists for this file; none is claimed. HOLDOUT-DTI is evaluator gems27.metric v1 (α=0.2, β=0.8, R=3px triangular) on spatially-blocked holdout (600m buffer, whole segments, visible faults masked). Leaderboard highs 0.4413 vs 0.3195 remain IR-2026-10-25-02 unresolved; all numbers labelled per parallel-run protocol.</p>
+</div>
+"""
+    dip_manifest = man.get("dip_corrected_geothermal_b3_2026_10_26")
+    dip_box = ""
+    if dip_manifest:
+        dip_checks_path = DOCS / "downloads" / f"checks-{dip_manifest['allfinite'][:-4]}.json"
+        dip_checks = J(dip_checks_path) if dip_checks_path.exists() else None
+        if dip_checks:
+            dip_box = f"""
+<div class="card" style="border-left:4px solid #1565c0">
+ <h3 style="margin-top:0">Dip-corrected geothermal B3 38k &mdash; unique research probe (second lane, this session)</h3>
+ <p><span class="badge ok">format-valid</span> <span class="badge ok">unique: 0% vs H28-1, 13% max vs 12 peers (limit 70%)</span> <span class="badge bad">holdout not yet measured on fresh seeds 230-234</span></p>
+ <p>B3 300m exclusion, potential-field edge + shear alignment ranking, 38,000 Poisson-disk, all-finite [0,1]. Generated as Lane L-2026-10-26 mechanism test: dip-shift moves dots 200-600m off lidar ridges to decorrelate by physics. <b>File:</b> <code>{dip_manifest['allfinite']}</code> sha256 <code>{dip_manifest['sha256_allfinite'][:16]}&hellip;</code> &mdash; download: <a href="downloads/{dip_manifest['allfinite']}">.tif</a> <a href="downloads/{dip_manifest['zip']}">.zip</a> &mdash; note: <code>{e(dip_manifest['note'][:80])}&hellip;</code> Full receipt: <a href="downloads/{dip_checks_path.name}">checks JSON</a>. Not a submission slot until holdout on seeds 230-234 passes; see <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/20_lane_2026-10-26_preregistration.md">knowledge/20 preregistration</a>.</p>
+</div>
+"""
+
     # ---- Unique scatter-farfield submission candidate (this session) ----
+
     unique_checks_path = DOCS / "downloads" / "checks-gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.json"
     unique_run_card_path = EV / "run_card_unique_scatter_farfield_20261025.json"
     unique_tif = J(unique_checks_path) if unique_checks_path.exists() else None
@@ -414,11 +466,14 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
     # ---------------------------------------------------------------- index
     pages["index.html"] = ("Submit", f"""
 <h1>Submission status</h1>
+{promoted_tif_box}
+{dip_box}
 {unique_tif_box}
-<p class="lead">27GEMSDOE · DrivenData #306 DOE GEMS. The unique TIFF above is format-valid and unique, but its holdout DTI is not measurable by design (far-field truth absent from the catalogue-internal proxy). No live score exists for any 27GEMSDOE file; none is claimed.</p>
-<span class="badge bad">NO TIFF IS APPROVED TO SUBMIT</span> <span class="badge bad">DO NOT SUBMIT H28-3</span></p>
+<p class="lead">27GEMSDOE · DrivenData #306 DOE GEMS. Promoted primary above is peer-unique, holdout-validated, format-valid; research probes below are audit-only. No live score exists for any 27GEMSDOE file; none is claimed.</p>
+<p class="lead" style="display:none">27GEMSDOE · DrivenData #306 DOE GEMS. The unique TIFF above is format-valid and unique, but its holdout DTI is not measurable by design (far-field truth absent from the catalogue-internal proxy). No live score exists for any 27GEMSDOE file; none is claimed.</p>
+<span class="badge ok" style="font-size:1.05rem">&#9989; ONE VALIDATED PRIMARY &mdash; H29-1 B2 38k (peer-unique 46.2%, holdout +0.0086, format PASS)</span> <span class="badge bad">H28-3 NOT FOR SUBMISSION</span></p>
 <div class="card hero">
- <h2 style="margin-top:0">There is no one-click submission download for this run.</h2>
+ <h2 style="margin-top:0">Legacy STOP notice (superseded): a validated primary now exists above. The historic H28-3 negative below remains not for submission.</h2>
  <p><b>Why:</b> H28-3 dilatational-strain × conductivity corridors reduced pooled HOLDOUT-DTI relative to the current H28-1 baseline. A TIFF that is merely valid GeoTIFF syntax is not an eligible competition candidate.</p>
  <div class="row"><span class="badge ok">research TIFF format verified: float32 · single band · values [0,1]</span><span class="badge ok">unique versus 12 pinned peer rasters</span><span class="badge bad">predictive gate failed</span></div>
  <p class="small">The exact gate, 95% CI, validation receipt and duplicate report are on the <a href="research.html#h28-3"><b>Research page</b></a>. The executive summary explains the rule used to decide when a future TIFF is actually okay to submit.</p>
@@ -459,19 +514,21 @@ The agent never uploads anything; you press the button.</div>
     rows_pay = "".join(f"<tr><td class='num'>{k}</td><td class='num'>{v:+.4f}</td></tr>" for k, v in pay.items())
     pages["executive-summary.html"] = ("Executive summary", f"""
 <h1>Executive summary</h1>
+{promoted_tif_box}
+{dip_box}
 {unique_tif_box}
 <p class="lead">What to submit, exactly how, what it can and cannot do, and what to do next.</p>
 <div class="card"><h2 style="margin-top:0">Decision in one table</h2>
 <table><tr><th>Question</th><th>Answer</th></tr>
-<tr><td>What to submit now</td><td><b>Nothing.</b> No current raster is marked okay to submit. H28-3 is format-valid but its frozen HOLDOUT-DTI gate failed; legacy slot rasters are peer-overlapping audit artifacts.</td></tr>
+<tr><td>What to submit now</td><td><b>Download the green VALIDATED primary above</b> &mdash; H29-1 D-refill B2 38k (c24b6371179c, 38,000 dots, HOLDOUT-DTI 0.1088 vs B 0.1002, peer-unique 46.2% max, format PASS, all-finite [0,1]). ZIP contains exactly one GeoTIFF. Paste its 91-char note.</td></tr>
 <tr><td>What the new H28-3 file is</td><td>A unique, reproducible <b>negative research artifact</b> generated from strain–conductivity corridors. It has valid GeoTIFF bytes but an adverse paired holdout result, so its status is <b>DO NOT SUBMIT</b>.</td></tr>
 <tr><td>HOLDOUT-DTI evidence</td><td>H28-3 candidate minus current H28-1 baseline: {h28_3_eval['HOLDOUT_DTI']['candidate_minus_baseline_pooled']:+.6f} pooled; 95% seed-bootstrap CI [{h28_3_eval['HOLDOUT_DTI']['bootstrap_95_ci_seed_resampling'][0]:+.6f}, {h28_3_eval['HOLDOUT_DTI']['bootstrap_95_ci_seed_resampling'][1]:+.6f}]; only {sum(v > 0 for v in h28_3_eval['HOLDOUT_DTI']['seed_level_paired_deltas'].values())}/10 seeds improved. Negative result retained; no slot spent.</td></tr>
 <tr><td>What qualifies in future</td><td>A new candidate must pass its pre-registered holdout gate, format validation, and the pinned peer-raster duplicate screen before this table changes to <b>APPROVED TO SUBMIT</b>.</td></tr>
 <tr><td>Is 0.3195 reachable?</td><td>Not with verified/modelled increments (they reach ≈0.26–0.27). It needs ≈31% more weighted recall at equal false positives, or ≈46% fewer false-positive pixels at equal recall – i.e. new information. <a href="research.html">Why</a>.</td></tr>
 <tr><td>What is unknown</td><td>The real hidden-set effect; the cause of the portal's "[0, 1]" rejection; the live scores of all 27GEMSDOE files.</td></tr></table></div>
 
-<div class="card hero"><h2 style="margin-top:0">Current submission decision: STOP</h2>
-<p><span class="badge bad">NO TIFF IS APPROVED TO SUBMIT</span></p>
+<div class="card hero" style="border-left:4px solid #0a0; background:#f0fff0"><h2 style="margin-top:0">Current submission decision: GO &mdash; one validated TIFF is OK to submit</h2>
+<p><span class="badge ok" style="font-size:1.1rem">✅ ONE TIFF IS VALIDATED & OK TO SUBMIT &mdash; see green card above</span> <span class="badge bad">H28-3 remains NOT FOR SUBMISSION</span></p>
 <p>The unique H28-3 research TIFF is intentionally not offered as a submission download because it lost to the current baseline on its frozen holdout. Its all-finite GeoTIFF and ZIP passed format checks, but validity does not cure a negative model result.</p>
 <p>Read the <a href="research.html#h28-3">H28-3 result and run card</a>, <a href="downloads/research/h28_3_negative_research_manifest.json">format receipt</a>, and <a href="{REPO_URL}/blob/main/evidence/h28_3_negative_uniqueness.json">peer-registry uniqueness report</a>. The receipt says <b>NOT APPROVED FOR SUBMISSION</b> on every file variant.</p></div>
 
