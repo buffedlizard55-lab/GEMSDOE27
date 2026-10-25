@@ -18,7 +18,7 @@ DOCS, EV, REG, KN = ROOT / "docs", ROOT / "evidence", ROOT / "registry", ROOT / 
 REPO_URL = "https://github.com/buffedlizard55-lab/GEMSDOE27"
 DD_COMP = "https://www.drivendata.org/competitions/306/competition-doe-gems/"
 DD_LB = DD_COMP + "leaderboard/"
-NAV = [("index.html", "Submit"), ("executive-summary.html", "Executive summary"), ("topology.html", "Topology candidates"),
+NAV = [("index.html", "Research status"), ("executive-summary.html", "Executive summary"), ("topology.html", "Topology candidates"),
        ("research.html", "Research"), ("sources.html", "Sources & feed")]
 
 
@@ -33,12 +33,12 @@ def e(x) -> str:
 def layout(fname: str, title: str, body: str, stamp: str) -> str:
     nav = "".join(f'<a href="{h}"{" class=on" if h == fname else ""}>{e(t)}</a>' for h, t in NAV)
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{e(title)} · 27GEMSDOE</title><meta name="description" content="27GEMSDOE: topology-first research and submission lab for DrivenData #306 (DOE GEMS). Unscored candidate; no score claimed.">
+<title>{e(title)} · 27GEMSDOE</title><meta name="description" content="27GEMSDOE: topology-first research lab for DrivenData #306 (DOE GEMS). No current TIFF is approved for submission.">
 <link rel="stylesheet" href="assets/style.css"></head><body>
 <header class="top"><div class="in"><a class="brand" href="index.html">27GEMSDOE · DOE GEMS</a><nav>{nav}</nav></div></header>
 <main>{body}</main>
-<footer>Built {e(stamp)} from <a href="{REPO_URL}">the repository</a>. Unscored candidates: no leaderboard score is claimed anywhere on this site.
-Scores shown are owner-reported. This site never contacts drivendata.org.</footer>
+<footer>Built {e(stamp)} from <a href="{REPO_URL}">the repository</a>. No current TIFF is approved for submission. No leaderboard score is claimed anywhere on this site.
+Historical scores shown are owner-reported. This site never contacts drivendata.org.</footer>
 <script src="assets/app.js"></script></body></html>"""
 
 
@@ -56,6 +56,8 @@ def build() -> None:
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     man = J(DOCS / "downloads" / "manifest.json")
     P, S, T = man["primary"], man["secondary"], man["tertiary"]
+    # Keep historical peer artifacts auditable without presenting a raw GeoTIFF as a download.
+    reference_audit_url = man["reference_0_2477"]["url"].replace("/raw/", "/blob/")
     Q = man.get("quaternary")
     Q5 = man["quinary_probe"]
     sgi = J(EV / "sgmc_gap_inversion.json") if (EV / "sgmc_gap_inversion.json").exists() else None
@@ -161,7 +163,6 @@ def build() -> None:
     eff = con["efficiency_pooled"]
     veff_fid = vval["tiers"]["FID_trace"]["efficiency_pooled"]
     pay = op["payoff_of_shipped_addition"]["by_efficiency"]
-    size_mb = P["bytes_nan"] / 1e6
     _sgi = sgi["inversion"]["blind_lattice_this_repo"]
     sgi_c = _sgi["c_blind_credit_per_truth_px"]
     sgi_conc = sgi["reading"]["concentration_central"]
@@ -191,16 +192,34 @@ def build() -> None:
     h28_research_box = ""
     if h28_candidate:
         h28_research_box = f"""
-<div class="warnbox"><b>H28-1 research candidate — not one of the four weekly slots.</b>
-{e(h28_gate_summary)} Full-map candidate content id <code>{e(h28_candidate['content_id'])}</code>,
-{h28_candidate['emitted_px']:,} binary cells; no known-label overlap.
-<a href="downloads/{e(h28_candidate['nan'])}" download>research .tif</a> ·
-<a href="downloads/{e(h28_candidate['zip'])}" download>single-TIFF .zip</a> ·
-<a href="downloads/{e(h28_candidate['allfinite'])}" download>all-finite fallback</a>.
-Note ({len(h28_candidate['note'])} chars): <code>{e(h28_candidate['note'])}</code>.
+<div class="warnbox"><b>H28-1 historical research artifact — audit only; not approved for a new submission.</b>
+{e(h28_gate_summary)} The archived full-map item has content id <code>{e(h28_candidate['content_id'])}</code> and
+{h28_candidate['emitted_px']:,} binary cells with no known-label overlap. Its historical manifest remains in the repository for audit, but no direct download is offered on this site because the current parallel protocol requires a fresh uniqueness review before any submission recommendation.
 The organizer-created test labels remain unobserved; this is not a fifth weekly slot or a score.</div>"""
     elif h28_eval:
         h28_research_box = f'<div class="warnbox"><b>H28-1 holdout:</b> {e(h28_gate_summary)} The separate full-map research candidate has not been built.</div>'
+    h28_3_evidence_path = EV / "h28_3_strain_holdout.json"
+    h28_3_eval = J(h28_3_evidence_path) if h28_3_evidence_path.exists() else None
+    peer_registry_path = REG / "parallel_submission_registry.json"
+    peer_registry = J(peer_registry_path) if peer_registry_path.exists() else None
+    h28_3_negative_path = DOCS / "downloads" / "research" / "h28_3_negative_research_manifest.json"
+    h28_3_negative = J(h28_3_negative_path) if h28_3_negative_path.exists() else None
+    h28_3_box = ""
+    if h28_3_eval:
+        h = h28_3_eval["HOLDOUT_DTI"]
+        gate_label = "PASS" if h28_3_eval["gate"]["pass"] else "FAILED"
+        peer_count = len(peer_registry["entries"]) if peer_registry else 0
+        negative_link = (
+            '<a href="downloads/research/h28_3_negative_research_manifest.json">negative-artifact receipt</a>'
+            if h28_3_negative else "negative artifact not retained"
+        )
+        h28_3_box = f"""
+<div class="warnbox"><b>Session 6 H28-3 strain × conductivity result — {gate_label}; NO NEW SUBMISSION IS APPROVED.</b>
+<b>HOLDOUT-DTI ({e(h28_3_eval['evaluator_version'])}):</b> baseline {h['baseline']['pooled_dti']:.6f}; candidate {h['candidate']['pooled_dti']:.6f}; paired Δ {h['candidate_minus_baseline_pooled']:+.6f}; 95% bootstrap CI [{h['bootstrap_95_ci_seed_resampling'][0]:+.6f}, {h['bootstrap_95_ci_seed_resampling'][1]:+.6f}] across the 10 seed-level differences; withheld-positive occurrences {h['candidate']['withheld_positives_total']:,}. It improved only {sum(v > 0 for v in h['seed_level_paired_deltas'].values())}/10 seeds and {sum(v > 0 for v in h['fold_pooled_deltas'].values())}/4 folds. Canary passed; the frozen gate failed.
+The 59,243-dot all-finite research TIFF is format-valid and cleared the duplicate screen against {peer_count} pinned peer rasters, but is explicitly <b>NOT APPROVED FOR SUBMISSION</b>; format validity and novelty do not override a negative holdout. See {negative_link} ·
+<a href="{REPO_URL}/blob/main/evidence/h28_3_strain_holdout.json">cell-level evidence</a> ·
+<a href="{REPO_URL}/blob/main/evidence/h28_3_negative_uniqueness.json">duplicate check</a> ·
+<a href="{REPO_URL}/blob/main/knowledge/13_preregistration_H28-3.md">frozen protocol</a>.</div>"""
     h27_10_box = ""
     if h27_10_eval:
         h27_10_box = f"""
@@ -251,21 +270,17 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
 
     # ---------------------------------------------------------------- index
     pages["index.html"] = ("Submit", f"""
-<h1>Submit this file.</h1>
-<p class="lead">27GEMSDOE · DrivenData #306 DOE GEMS. The owner's 0.2477 file plus one controlled change: <b>{P['added_px']:,}</b> topology gap-closure dots on <b>{P['links']}</b> links.
-<span class="badge warn">UNSCORED – no score is claimed</span></p>
+<h1>Submission status: no new file is approved.</h1>
+<p class="lead">27GEMSDOE · DrivenData #306 DOE GEMS. The only newly generated TIFF in this run is a reproducible <b>negative research artifact</b>: its format and uniqueness checks pass, but its frozen spatial holdout is negative.
+<span class="badge bad">NO TIFF IS APPROVED TO SUBMIT</span> <span class="badge bad">DO NOT SUBMIT H28-3</span></p>
 <div class="card hero">
- <div class="row"><a class="btn" href="downloads/{e(P['nan'])}" download>⬇ Download submission (.tif)</a>
- <a class="btn alt" href="downloads/{e(P['zip'])}" download>.zip (same file)</a>
- <a class="btn alt" href="downloads/{e(P['allfinite'])}" download>fallback: all-finite .tif</a></div>
- <p class="small mono">{e(P['nan'])} · {size_mb:.2f} MB · sha256 {e(P['sha256_nan'])}</p>
- <h3>Note to paste into the form (optional field)</h3>
- <textarea id="note" class="note" readonly>{e(P['note'])}</textarea>
- <div class="row"><button class="btn copy" data-copy="#note">Copy note</button><span id="notecount" class="small">{len(P['note'])} / 200 characters</span></div>
- <div class="row"><span class="badge ok">format verified: float32 · single band · exact 0/1 · NaN outside</span><span class="badge ok">gates passed on blocked holdout (class level)</span><span class="badge warn">real hidden set: untested</span></div>
+ <h2 style="margin-top:0">There is no one-click submission download for this run.</h2>
+ <p><b>Why:</b> H28-3 dilatational-strain × conductivity corridors reduced pooled HOLDOUT-DTI relative to the current H28-1 baseline. A TIFF that is merely valid GeoTIFF syntax is not an eligible competition candidate.</p>
+ <div class="row"><span class="badge ok">research TIFF format verified: float32 · single band · values [0,1]</span><span class="badge ok">unique versus 12 pinned peer rasters</span><span class="badge bad">predictive gate failed</span></div>
+ <p class="small">The exact gate, 95% CI, validation receipt and duplicate report are on the <a href="research.html#h28-3"><b>Research page</b></a>. The executive summary explains the rule used to decide when a future TIFF is actually okay to submit.</p>
 </div>
-<p>Steps: download → open <a href="{DD_COMP}">the competition</a> (sign in) → Submit → upload the .tif (or the .zip) → paste the note → submit.
-Exact steps, the "[0, 1]" troubleshooting and the 4-slot plan are in the <a href="executive-summary.html"><b>executive summary</b></a>.</p>
+{h28_3_box}
+<p><b>Legacy files below are retained only for audit and must not be submitted as a new unique candidate:</b> peer repositories now contain overlapping copies and no organizer receipt verifies their score/file pairing. The next action is a new pre-registered, data-ready hypothesis—not a renamed legacy raster.</p>
 <div class="grid">
  <div class="stat"><b>{P['emitted_px']:,}</b><span>emitted pixels = 60,069 (the 0.2477 emission, nothing removed) + {P['added_px']:,}</span></div>
  <div class="stat"><b>{cs['selected_links']}</b><span>aligned gap links (median {cs['median_gap_km']:.1f} km), each with NBMG/USGS vector fault attribution &amp; written argument</span></div>
@@ -282,20 +297,15 @@ Exact steps, the "[0, 1]" troubleshooting and the 4-slot plan are in the <a href
  </ol>
 </div>
 <div class="card">
- <h3 style="margin-top:0">All 5 weekly slot files (pre-built &amp; verified; slot 5 is a measurement probe, not a recommendation)</h3>
- <table>
-  <tr><th>Slot</th><th>Candidate (.tif / .zip / fallback)</th><th>Pixels</th><th>Model<br>geo / hyb</th><th>What it tests</th></tr>
-  <tr><td><b>1 (Primary A/B)</b></td><td><a href="downloads/{e(P['nan'])}" download class="mono">{e(P['nan'])}</a> &middot; <a href="downloads/{e(P['zip'])}" download>.zip</a> &middot; <a href="downloads/{e(P['allfinite'])}" download>allfinite</a></td><td class="num">{P['emitted_px']:,}</td><td class="num">{mscore('slot1_primary_A_B','model_score_geometric')} / {mscore('slot1_primary_A_B','model_score_hybrid')}</td><td>0.2477 base + {P['added_px']:,} T-v2 dots, <b>nothing removed</b>. Changes exactly one thing, so slot 1 against the scored 0.2477 parent is a clean A/B. OOF &Delta;DTI {oof['variants']['plus_T_v2']['mean_dti_gain']:+.4f} (4/4 folds).</td></tr>
-  <tr><td><b>2 (budget optimum)</b></td><td><a href="downloads/{e(S['nan'])}" download class="mono">{e(S['nan'])}</a> &middot; <a href="downloads/{e(S['zip'])}" download>.zip</a> &middot; <a href="downloads/{e(S['allfinite'])}" download>allfinite</a></td><td class="num">{S['emitted_px']:,}</td><td class="num">{mscore('slot2_secondary_d2_8','model_score_geometric')} / {mscore('slot2_secondary_d2_8','model_score_hybrid')}</td><td>d2.8-thinned H19-5 + {S['added_px']:,} T-v2 dots. d=2.25&ndash;2.8 is the <b>live-anchored budget optimum</b> ({geo_ceiling:.4f} for that base alone, vs 0.2477 live).</td></tr>
-  <tr><td><b>3 (T-v2 + H27-4 prune)</b></td><td><a href="downloads/{e(T['nan'])}" download class="mono">{e(T['nan'])}</a> &middot; <a href="downloads/{e(T['zip'])}" download>.zip</a> &middot; <a href="downloads/{e(T['allfinite'])}" download>allfinite</a></td><td class="num">{T['emitted_px']:,}</td><td class="num">{mscore('slot3_tertiary_prune_d1_5','model_score_geometric')} / {mscore('slot3_tertiary_prune_d1_5','model_score_hybrid')}</td><td>0.2477 base &minus; {T['pruned_flank_shadow_px']:,} 100&nbsp;m catalogue-flank-shadow dots + {T['added_px']:,} T-v2 dots. OOF &Delta;DTI {oof['variants']['plus_T_v2_and_prune_r1']['mean_dti_gain']:+.4f} (4/4 folds). <b>Slot 1 vs slot 3 settles whether the prune pays.</b></td></tr>
-  <tr><td><b>4 (NEW &mdash; all increments)</b></td><td><a href="downloads/{e(Q['nan'])}" download class="mono">{e(Q['nan'])}</a> &middot; <a href="downloads/{e(Q['zip'])}" download>.zip</a> &middot; <a href="downloads/{e(Q['allfinite'])}" download>allfinite</a></td><td class="num">{Q['emitted_px']:,}</td><td class="num">{mscore('slot4_quaternary_all_increments','model_score_geometric')} / {mscore('slot4_quaternary_all_increments','model_score_hybrid')}</td><td>d2.8 optimum base &minus; {Q['pruned_flank_shadow_px']:,} flank-shadow dots + {Q['added_px']:,} T-v2 dots. First candidate to stack <b>every</b> increment this programme validated, at the live-anchored budget; highest hybrid estimate of the four.</td></tr>"\n  <tr style=\"background:#fff8e6\"><td><b>5 (MEASUREMENT PROBE &mdash; NOT RECOMMENDED)</b></td><td><a href=\"downloads/{e(Q5['nan'])}\" download class=\"mono\">{e(Q5['nan'])}</a> &middot; <a href=\"downloads/{e(Q5['zip'])}\" download>.zip</a> &middot; <a href=\"downloads/{e(Q5['allfinite'])}\" download>allfinite</a></td><td class=\"num\">{Q5['emitted_px']:,}</td><td class=\"num\">n/a</td><td>The owner's 0.2477 file with <b>{Q5['far_field_px_dropped']:,} of its far-field dots swapped</b> ({Q5['fraction_of_file_swapped']:.1%} of the file) for the 72-band augmented detector's best far-field picks. Near field, pixel count, d1.5 geometry, nodata and grid are byte-identical, so a live comparison against 0.2477 differs in <b>one</b> variable: <i>which</i> far-field pixels are emitted. Registered reading (knowledge/03 Addendum E): &ge; 0.2507 &rarr; the detector carries real far-field information and should be adopted; 0.2447&ndash;0.2507 &rarr; no measurable information; &le; 0.2447 &rarr; refuted. <b>Declared downside:</b> if it carries none, this randomises {Q5['fraction_of_file_swapped']:.1%} of the best file's dots and should cost ~0.003&ndash;0.008. No model score is quoted: the proxy cannot see this habitat (card above).</td></tr>"
- </table>
+ <h3 style="margin-top:0">Historic slot artifacts — audit only</h3>
+ <p>Five older rasters (four slot variants and one measurement probe) remain in the repository as evidence of prior work. They pre-date the pinned parallel registry, and peer-family overlap means they are not presented as fresh unique candidates. Direct TIFF and ZIP links have deliberately been removed from the public decision page.</p>
+ <p class="small">Audit IDs: Slot 1 <code>{e(P['content_id'])}</code>; Slot 2 <code>{e(S['content_id'])}</code>; Slot 3 <code>{e(T['content_id'])}</code>; Slot 4 <code>{e(Q['content_id'])}</code>; probe <code>{e(Q5['content_id'])}</code>. Historical manifests are versioned with the repository.</p>
 </div>
 {h28_research_box}
 <div class="warnbox"><b>Honest status.</b> We validated T-v2 across three holdout tiers (8-connected components: {eff['z>=3 dedup']:.3f}, whole NBMG FID vector polylines: {veff_fid['z>=3 dedup']:.3f} / H27-5b {veff_fid['z>=3 inter-FID + same_name + kinematic_compat (H27-5b)']:.3f}) and on a strictly out-of-fold 4-quadrant spatial-CV detector (ΔDTI {oof['variants']['plus_T_v2']['mean_dti_gain']:+.4f} solo, {oof['variants']['plus_T_v2_and_prune_r1']['mean_dti_gain']:+.4f} stacked with H27-4). Only a live score tests the organisers' newly created expert labels.
 Reaching the owner-stated leader (0.3195) is not possible with verified/modelled increments on H19-5 alone (they reach ≈0.262–0.270) – see <a href="research.html">research</a>.
 The agent never uploads anything; you press the button.</div>
-<p class="small">Reference (owner-reported 0.2477): <a href="{e(man['reference_0_2477']['url'])}">24GEMSDOE file</a> (sha256 {e(man['reference_0_2477']['sha256'][:16])}…).</p>
+<p class="small">Reference (owner-reported 0.2477): <a href="{e(reference_audit_url)}">24GEMSDOE audit record</a> (sha256 {e(man['reference_0_2477']['sha256'][:16])}…). It is historical comparison evidence, not a current download recommendation.</p>
 """)
 
     # ---------------------------------------------------------------- executive summary
@@ -305,51 +315,37 @@ The agent never uploads anything; you press the button.</div>
 <p class="lead">What to submit, exactly how, what it can and cannot do, and what to do next.</p>
 <div class="card"><h2 style="margin-top:0">Decision in one table</h2>
 <table><tr><th>Question</th><th>Answer</th></tr>
-<tr><td>What to submit now</td><td><b>Slot 1:</b> <span class="mono">{e(P['nan'])}</span> (or its .zip)</td></tr>
-<tr><td>Why this file</td><td>It is the owner-reported 0.2477 emission (dotted H19-5, d=1.5) plus {P['added_px']:,} dots on {P['links']} topology gap-closure links and nothing removed – a <b>controlled A/B test</b>:
-score(A) − 0.2477 isolates the effect of the new class.</td></tr>
-<tr><td>What it can do</td><td>Modelled effect at the 0.2477 operating point: {pay['0.0']:+.4f} (hit rate 0) · break-even at efficiency 0.052 · {pay['0.14']:+.4f} at half the holdout efficiency · {pay['0.28']:+.4f} at the holdout efficiency. The downside is small because only ~1.3k dots are added to a 60k base.</td></tr>
-<tr><td>Evidence</td><td>Pre-registered gate passed on seeds 100–109 and confirmed on fresh seeds 110–119 (efficiency {eff['z>=3 dedup']:.3f}; controls {con['control_pooled']:.3f}; random same-size subsets {con['random_same_size']['mean']:.3f}, 95th pct {con['random_same_size']['p95']:.3f}).</td></tr>
+<tr><td>What to submit now</td><td><b>Nothing.</b> No current raster is marked okay to submit. H28-3 is format-valid but its frozen HOLDOUT-DTI gate failed; legacy slot rasters are peer-overlapping audit artifacts.</td></tr>
+<tr><td>What the new H28-3 file is</td><td>A unique, reproducible <b>negative research artifact</b> generated from strain–conductivity corridors. It has valid GeoTIFF bytes but an adverse paired holdout result, so its status is <b>DO NOT SUBMIT</b>.</td></tr>
+<tr><td>HOLDOUT-DTI evidence</td><td>H28-3 candidate minus current H28-1 baseline: {h28_3_eval['HOLDOUT_DTI']['candidate_minus_baseline_pooled']:+.6f} pooled; 95% seed-bootstrap CI [{h28_3_eval['HOLDOUT_DTI']['bootstrap_95_ci_seed_resampling'][0]:+.6f}, {h28_3_eval['HOLDOUT_DTI']['bootstrap_95_ci_seed_resampling'][1]:+.6f}]; only {sum(v > 0 for v in h28_3_eval['HOLDOUT_DTI']['seed_level_paired_deltas'].values())}/10 seeds improved. Negative result retained; no slot spent.</td></tr>
+<tr><td>What qualifies in future</td><td>A new candidate must pass its pre-registered holdout gate, format validation, and the pinned peer-raster duplicate screen before this table changes to <b>APPROVED TO SUBMIT</b>.</td></tr>
 <tr><td>Is 0.3195 reachable?</td><td>Not with verified/modelled increments (they reach ≈0.26–0.27). It needs ≈31% more weighted recall at equal false positives, or ≈46% fewer false-positive pixels at equal recall – i.e. new information. <a href="research.html">Why</a>.</td></tr>
 <tr><td>What is unknown</td><td>The real hidden-set effect; the cause of the portal's "[0, 1]" rejection; the live scores of all 27GEMSDOE files.</td></tr></table></div>
 
-<div class="card hero"><h2 style="margin-top:0">One-click: current Slot 1 TIFF</h2>
-<p><a class="btn" href="downloads/{e(P['nan'])}" download>⬇ Download current submission (.tif)</a>
-<a class="btn alt" href="downloads/{e(P['zip'])}" download>.zip</a>
-<a class="btn alt" href="downloads/{e(P['allfinite'])}" download>all-finite fallback</a></p>
-<p class="small mono">{e(P['nan'])} · SHA-256 {e(P['sha256_nan'])}</p>
-<p>Optional note ({len(P['note'])}/200 characters): <code>{e(P['note'])}</code></p></div>
+<div class="card hero"><h2 style="margin-top:0">Current submission decision: STOP</h2>
+<p><span class="badge bad">NO TIFF IS APPROVED TO SUBMIT</span></p>
+<p>The unique H28-3 research TIFF is intentionally not offered as a submission download because it lost to the current baseline on its frozen holdout. Its all-finite GeoTIFF and ZIP passed format checks, but validity does not cure a negative model result.</p>
+<p>Read the <a href="research.html#h28-3">H28-3 result and run card</a>, <a href="downloads/research/h28_3_negative_research_manifest.json">format receipt</a>, and <a href="{REPO_URL}/blob/main/evidence/h28_3_negative_uniqueness.json">peer-registry uniqueness report</a>. The receipt says <b>NOT APPROVED FOR SUBMISSION</b> on every file variant.</p></div>
 
 <h2>Exact submission steps</h2>
 <ol class="steps">
-<li>Download the <b>.tif</b> from the <a href="index.html">front page</a> (do not open and re-save it in a GIS; that rewrites the file). Keep the file name.</li>
+<li><b>Gate first:</b> use a file only when the front page explicitly says <b>APPROVED TO SUBMIT</b>. The current H28-3 research files are explicitly ineligible; do not upload them.</li>
+<li>Download the approved <b>.tif</b> without opening/re-saving it in GIS software. Keep its content-hashed file name and the short note shown beside it.</li>
 <li>Sign in at DrivenData and open <a href="{DD_COMP}">the competition page</a>.</li>
-<li>Open the competition's submission form (the tab/button label depends on your logged-in view; the agent cannot see it and does not automate that site).</li>
-<li>Upload the <b>.tif</b> – or the <b>.zip</b>, which holds exactly the same single GeoTIFF (the form takes a .tif or a .zip with one GeoTIFF).</li>
-<li>Paste the note (<b>{len(P['note'])}</b> characters, copy button on the front page) into the optional Note field:<br><code>{e(P['note'])}</code></li>
-<li>Submit and wait for scoring. Copy the public score.</li>
-<li>Record it: add the number to the "27GEMSDOE" entry of <code>registry/live_scores.json</code> and push – the <i>build-site</i> workflow refreshes these pages. (Scores are owner-reported; the site never fetches them.)</li></ol>
+<li>Open the submission form (the tab/button label depends on the logged-in view; this project does not automate that site).</li>
+<li>Upload the approved single-band <b>.tif</b> – or its approved <b>.zip</b>, which must contain exactly one GeoTIFF – and paste its <=200-character note.</li>
+<li>Submit, retain the portal response / score, and record that exact outcome in <code>registry/live_scores.json</code>. Scores stay OWNER-REPORTED unless a receipt is stored.</li></ol>
 
-<h2>If the form says "Predicted values must be in range [0, 1]"</h2>
+<h2>Submission-format rule for a future approved candidate</h2>
 <div class="card">
-<p>The cause of that message in the earlier attempt is <b>not established</b> – the validator is not public. What is verified for these files (<code>scripts/verify_downloads.py</code>, independent of the project code):</p>
-<ul class="tight"><li>single band, float32, EPSG:32611, 3730 × 3292, same transform as the sample;</li>
-<li>every in-footprint pixel is exactly 0.0 or 1.0 (no float rounding above 1, no negatives, no NaN, no Inf inside the footprint);</li>
-<li>NaN only outside the footprint (7,111,787 px) with <code>nodata=NaN</code> declared, exactly like the sample submission;</li>
-<li>no emitted pixel on a catalogue cell; zip holds exactly one identical .tif; note ≤ 200 characters.</li></ul>
-<p><b>Order to try:</b> (1) the .tif; (2) the <a href="downloads/{e(P['zip'])}">.zip</a>; (3) the <a href="downloads/{e(P['allfinite'])}">all-finite fallback</a> (zeros outside the footprint, no NaN anywhere – it satisfies even a validator that compares NaN directly; the owner's sibling forensics found both outside-footprint conventions have scored on the live board).
-If all three are rejected, paste the exact message and the file name – that is the information needed to find the real rule.</p></div>
+<p>The earlier portal message, “Predicted values must be in range [0, 1],” has no established cause because the organizer validator is not public. It is not a reason to upload an unapproved file.</p>
+<p>Before any future candidate is labelled approved, the independent validator must record: a single-band float32 GeoTIFF on the exact competition grid/CRS/transform; every in-footprint prediction finite and within [0,1]; an explicitly verified outside-footprint/nodata convention; no known-catalogue overlap where the protocol forbids it; a ZIP containing exactly one TIFF if offered; and a note within the portal limit. The validation receipt and peer-uniqueness result must be linked beside the approved download.</p>
+</div>
 
-<h2>The five weekly slots (decision rules fixed in advance)</h2>
-<table><tr><th>Slot</th><th>File</th><th>Run when</th><th>Reading the result (Δ = score − 0.2477, owner-reported)</th></tr>
-<tr><td>1</td><td><b>A/B primary</b> (above)</td><td>now</td><td>Δ &gt; +0.0005: topology helps → slot 2 = file B. −0.0015 &lt; Δ ≤ +0.0005: no detectable effect → slot 2 = the owner's plain d2.8 file. Δ &lt; −0.0015: refuted on the real set → do not stack; slot 2 = plain d2.8. (A drop beyond −0.0026 would contradict the arithmetic – investigate scoring or masking.)</td></tr>
-<tr><td>2</td><td>B = <span class="mono">{e(S['nan'])}</span> (d2.8 base + same links; <a href="downloads/{e(S['nan'])}" download>.tif</a> · <a href="downloads/{e(S['zip'])}" download>.zip</a>)<br><span class="small">Note ({len(S['note'])} chars): <code>{e(S['note'])}</code></span></td><td>after slot 1</td><td>d2.8 is a sibling <i>model</i> (+≈0.010 over d1.5), never scored; B stacks it with the topology dots.</td></tr>
-<tr><td>3</td><td>C = <span class="mono">{e(T['nan'])}</span> (0.2477 base minus {T['pruned_flank_shadow_px']:,} 100 m flank-shadow dots + {T['added_px']:,} T-v2 dots; <a href="downloads/{e(T['nan'])}" download>.tif</a> · <a href="downloads/{e(T['zip'])}" download>.zip</a>)<br><span class="small">Note ({len(T['note'])} chars): <code>{e(T['note'])}</code></span></td><td>after slot 1/2</td><td>Validated on the honest 4-fold spatial-CV OOF detector (seeds 130–139): 100 m flank-shadow dots have hit efficiency 0.0034 (15× below break-even 0.0521); stacking H27-4 r≤1px + T-v2 gains <b>+0.0141 DTI in 4/4 folds</b> (modelled live DTI ≈ 0.262–0.270).</td></tr>
-<tr><td>4</td><td><b>D = NEW</b> <span class="mono">{e(Q['nan'])}</span> (d2.8 optimum base minus {Q['pruned_flank_shadow_px']:,} flank-shadow dots + {Q['added_px']:,} T-v2 dots; <a href="downloads/{e(Q['nan'])}" download>.tif</a> · <a href="downloads/{e(Q['zip'])}" download>.zip</a>)<br><span class="small">Note ({len(Q['note'])} chars): <code>{e(Q['note'])}</code></span></td><td>after slot 1 or 3</td><td>First candidate stacking <b>all three</b> validated increments at the live-anchored budget. Model {mscore('slot4_quaternary_all_increments','model_score_geometric')} (geometric) / <b>{mscore('slot4_quaternary_all_increments','model_score_hybrid')}</b> (hybrid) &mdash; the highest hybrid estimate of the four. Run slot 1 or 3 first: they measure whether the prune pays, which is the only term the two models disagree about.</td></tr>
-<tr style="background:#fff8e6"><td>5</td><td><b>E = MEASUREMENT PROBE</b> <span class="mono">{e(Q5['nan'])}</span> (the 0.2477 file with {Q5['far_field_px_dropped']:,} far-field dots swapped for the 72-band augmented detector's best picks; <a href="downloads/{e(Q5['nan'])}" download>.tif</a> · <a href="downloads/{e(Q5['zip'])}" download>.zip</a>)<br><span class="small">Note ({len(Q5['note'])} chars): <code>{e(Q5['note'])}</code></span></td><td>only if a slot is free after 1/3/4 &mdash; it is an experiment, not a candidate</td><td>Δ = score − 0.2477. <b>Δ ≥ +0.003:</b> the augmented detector carries real far-field information → rebuild the whole emission from it (this is the only route left that could reach 0.3195). <b>|Δ| &lt; 0.003:</b> no measurable far-field information → close the detector-improvement route and stop spending slots on feature work. <b>Δ ≤ −0.003:</b> refuted. Registered in knowledge/03 Addendum E before the file was built; declared downside ≈ −0.003…−0.008 if the detector carries no information. <b>Slot 1 remains the recommendation.</b></td></tr></table>
-{h28_research_box}
-<p class="small">The geometric/hybrid pair is explained in <a href="research.html#inversion">the inversion</a>: they differ only in what the targeted H27-4 prune is charged, and slot&nbsp;1&nbsp;vs&nbsp;slot&nbsp;3 is the live A/B that settles it.</p>
-<p class="small">Limit: 3 submissions per week; one submission is chosen for both rounds (problem page and Official Rules, read in part). Choose the final one deliberately.</p>
+<h2>Historical weekly-slot decision tree — archived and suspended</h2>
+{h28_3_box}
+<p class="warnbox"><b>Do not follow historic slot instructions or upload historical rasters.</b> They are retained in repository history to audit earlier work, but their rasters pre-date the pinned peer registry and are not current unique submissions. A future pre-registered candidate can replace this notice only after it passes its gate, format validation, and duplicate screen.</p>
+<p class="small">The historical model estimates and topology evidence remain available below for scientific context. They are not a submission recommendation and must not be read as organiser scores.</p>
 
 <h2>Modelled payoff of the shipped addition</h2>
 <div class="row"><table style="max-width:22rem"><tr><th class="num">hit efficiency</th><th class="num">ΔDTI at 0.2477</th></tr>{rows_pay}</table>
@@ -436,8 +432,13 @@ Where a network sits near threshold, individual closures matter more than in a w
 """)
 
     # ---------------------------------------------------------------- research
-    hrows = "".join(f"<tr><td><b>{e(h['id'])}</b><br><span class='small'>rank {h['rank']}</span></td><td><b>{e(h['title'])}</b><br><span class='small'>{e(h['layers'])}</span></td>"
-                    f"<td>{e(h['signature'])}</td><td>{e(h['why'])}</td><td>{e(h['differs'])}</td><td>{e(h['status'])}</td><td>{e(h['gain'])}<br><span class='small'>cost: {e(h['cost'])}</span></td></tr>" for h in hyp)
+    def historical_status(item: dict) -> str:
+        if item["id"] == "H28-3":
+            return "TESTED — FROZEN GATE FAILED; negative research artifact is NOT APPROVED FOR SUBMISSION."
+        return "Historical evidence-ledger entry — audit only; it does not approve a current submission."
+
+    hrows = "".join(f"<tr><td><b>{e(h['id'])}</b><br><span class='small'>historical rank {h['rank']}</span></td><td><b>{e(h['title'])}</b><br><span class='small'>{e(h['layers'])}</span></td>"
+                    f"<td>{e(h['signature'])}</td><td>{e(h['why'])}</td><td>{e(h['differs'])}</td><td>{e(historical_status(h))}</td><td>See the versioned historical ledger for the original result, planning cost, and limitations.</td></tr>" for h in hyp)
     h28rows = "".join(
         f"<tr><td><b>{e(h['id'])}</b><br><span class='small'>rank {h['rank']}</span></td>"
         f"<td><b>{e(h['title'])}</b><br><span class='small'>{'<br>'.join(e(x) for x in h['layers'])}</span></td>"
@@ -450,14 +451,18 @@ Where a network sits near threshold, individual closures matter more than in a w
     pages["research.html"] = ("Research", f"""
 <h1>Research</h1>
 <p class="lead">Why the 0.2477 file won, what a higher score needs, and the ranked hypotheses.</p>
+<h2 id="h28-3">Session 6 H28-3 — dilatational-strain × conductivity corridors</h2>
+{h28_3_box}
+<p>Mechanism: a blind or alluvium-covered fault could co-locate deformation and conductive fluid alteration. Named non-fault alternative: a conductive/clayey basin boundary coincident with smooth regional strain. The six label-free corridor features used the five geophysical grids listed in the frozen protocol; every source and derived feature passed the AUC > 0.90 leakage canary, but the paired DTI result was negative. This is a valid negative result, not an upload recommendation.</p>
+<p>Peer review: <a href="{REPO_URL}/blob/main/knowledge/12_20261025_peer_submission_audit.md">high-score / 0.2778 audit</a> · <a href="{REPO_URL}/blob/main/registry/parallel_submission_registry.json">pinned parallel registry</a> · <a href="{REPO_URL}/blob/main/evidence/h28_3_negative_uniqueness.json">raster correlation and overlap report</a>. The claimed GEMSDOE32 0.2778 is labelled OWNER-REPORTED because its own peer audit calls the named file unscored; no organizer receipt was found in the reviewed paths.</p>
 <h2 id="h28-1">H28-1 — multiscale potential-field edge coherence</h2>
 <p>The H28-1 transform uses label-free, multiscale edge strength and orientation agreement in the existing RTP magnetic and isostatic gravity grids. It tests a feature representation of geophysical boundaries that differs from the earlier pixelwise/tabular detector; it does not itself prove that any edge is a fault. The T-v2 additions remain a separate, geology-reviewable graph hypothesis.</p>
 <p><b>{e(h28_gate_summary) if h28_gate_summary else 'No frozen H28-1 holdout evidence is available.'}</b></p>
 {h28_research_box}
 {h27_10_box}
 <p class="small">Session 5 screen, H27-10 outcome and remaining candidates: <a href="{REPO_URL}/blob/main/knowledge/07_untried_hypotheses.md">hypothesis ledger</a>. H28-1 protocol: <a href="{REPO_URL}/blob/main/knowledge/08_preregistration_H28-1.md">frozen preregistration</a> · full-map recipe: <a href="{REPO_URL}/blob/main/knowledge/09_preregistration_H28-1_candidate.md">candidate record</a> · <a href="{REPO_URL}/blob/main/evidence/h28_1_edge_holdout.json">cell-level H28-1 evidence</a>. The 1 km label-free filters can share covariate values across the existing 600 m quadrant buffer; no labels enter the transform, but spatial covariate correlation remains a limitation.</p>
-<h3>Current Session 5 untried screen ({len(h28_hypotheses)} hypotheses)</h3>
-<p class="small">Expected ΔDTI ranges are expert priors, not measurements or score guarantees. H27-10 was tested and rejected under its frozen gate; H28-1 is already tested. The graph-based structural class is separately documented below and in Topology.</p>
+<h3>Current Session 6 untried screen ({len(h28_hypotheses)} hypotheses)</h3>
+<p class="small">Expected ΔDTI ranges are expert priors, not measurements or score guarantees. H27-10 and H28-3 were tested and rejected under frozen gates; H28-1 is already tested. The graph-based structural class is separately documented below and in Topology.</p>
 <div class="tw"><table><thead><tr><th>ID · rank</th><th>Hypothesis · layers</th><th>Physical signature</th><th>Why a missing fault</th><th>Differs from repo</th><th>Confounders</th><th>Status</th><th>Prior ΔDTI · cost</th></tr></thead><tbody>{h28rows}</tbody></table></div>
 <h2 id="inversion">Session 3 &mdash; inverting all 20 live scores</h2>
 <p class="lead">The owner's scored rasters are still in the sibling repositories. All <b>20</b> that could be
@@ -560,7 +565,7 @@ The same surface gained +43.7% when dotted (H25-ctx 0.1280 → H28 0.1839) and H
 Stacking only verified/modelled increments gives ≈0.26–0.27 – so 0.3195 needs <i>new information or a materially better detector</i> (e.g. a supervised scarp detector on the 1 m DEM with geologist-labelled scarps – an access need).</p>
 <p>Full write-up: <a href="{REPO_URL}/blob/main/knowledge/01_why_0.2477_won_and_the_ceiling.md">knowledge/01</a>.</p>
 <h2>Hypotheses, ranked (expected DTI gain × probability of validation ÷ cost)</h2>
-<div class="tw"><table><tr><th>ID</th><th>Hypothesis · layers</th><th>Physical signature</th><th>Why it catches a fault missing from USGS/INGENIOUS</th><th>How it differs from the repo</th><th>Status</th><th>Gain · cost</th></tr>{hrows}</table></div>
+<div class="tw"><table><tr><th>ID</th><th>Hypothesis · layers</th><th>Physical signature</th><th>Why it catches a fault missing from USGS/INGENIOUS</th><th>How it differs from the repo</th><th>Status</th><th>Audit record</th></tr>{hrows}</table></div>
 <h2>Contrarian, grounded notes</h2>
 <ul class="tight"><li>Point-wise AUC of any single channel is weak (best: lidar <code>lappos_max</code> 0.58); magnetic/gravity <i>values</i> sit near 0.5 – faults are edges, not values (<code>evidence/channel_auc.json</code>).</li>
 <li>The training band <code>tc</code> is rank-identical to the radiometric total-count grid (Spearman 1.0000), not a magnetic tilt/curvature as its metadata says – a documentation irregularity.</li>
