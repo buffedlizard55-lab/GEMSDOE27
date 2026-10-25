@@ -13,6 +13,19 @@
  <p class="small">The exact gate, 95% CI, validation receipt and duplicate report are on the <a href="docs/research.html#h28-3"><b>Research page</b></a>. The executive summary explains the rule used to decide when a future TIFF is actually okay to submit.</p>
 </div>
 
+<div class="card" style="border-left:4px solid #b00">
+ <h3 style="margin-top:0">H29-1 D-refill (2026-10-25): best-validated detector &mdash; NOT certified unique</h3>
+ <p><span class="badge bad" style="font-size:1.05rem">&#9940; NOT CERTIFIED UNIQUE &mdash; DO NOT SUBMIT AS THE UNIQUE LANE FILE (extended duplicate screen failed; see run card)</span></p>
+ <p>Full 32-band stack + 15 subsurface transforms at B2/38k, preregistered (<a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/15_preregistration_H29-1.md">knowledge/15</a>) and confirmed on <b>fresh seeds 210&ndash;214</b>: pooled HOLDOUT-DTI <b>0.1088</b> vs full-32 control <b>0.1002</b> (paired &Delta; +0.0086, 95% CI [+0.0051, +0.0125], 18/20 cells, 59,362 withheld positives, gems27.metric v1 (alpha=0.2, beta=0.8, R=3px triangular); leakage canary max AUC 0.557). Efficacy and format gates <b>PASS</b>.</p>
+ <ul class="tight">
+ <li><b>Unique vs every scored rival (measured):</b> max &le;3&nbsp;px dot overlap vs the 12 pinned peer rasters <b>46.2%</b> (limit 70&nbsp;%); vs the 0.2778 file specifically <b>40.9%</b> (exact shared pixels 1,649 of 38,000); surface Spearman max <b>0.446</b> (limit 0.90).</li>
+ <li><b>Why it is still NOT certified:</b> the frozen screen also covered this repo's own <i>unscored</i> H28-1 research file (59,075 px): overlap <b>85.4%</b> &gt; 70&nbsp;% (exact-pixel Jaccard 0.116 &mdash; same ridges, different dots). Frozen gates are not relaxed after the fact.</li>
+ <li><b>Deconflicted variant H29-1b:</b> minimal-swap vs H28-1 was geometrically infeasible on the ridge candidate pool &mdash; final max overlap still <b>82.6%</b> &rarr; also <b>negative</b>. No further tuning (experiment budget exhausted).</li>
+ <li><b>Format:</b> all-finite primary, nodata=None, every cell in [0,1], EPSG:32611 3730&times;3292 (re-read receipt beside the bytes in downloads/research/; sha256 40dc48a9f512c6b9&hellip;). Run cards: <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/evidence/h29_1_run_card.json">H29-1</a> &middot; <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/evidence/h29_1b_run_card.json">H29-1b</a>. <b>No live score exists; none is claimed.</b> Spending a weekly slot on a non-certified file is the owner's separate selector decision and must be recorded first.</li>
+ </ul>
+</div>
+
+
 <div class="warnbox"><b>Session 6 H28-3 strain × conductivity result — FAILED; NO NEW SUBMISSION IS APPROVED.</b>
 <b>HOLDOUT-DTI (H28-3-holdout-v1):</b> baseline 0.105946; candidate 0.103352; paired Δ -0.002594; 95% bootstrap CI [-0.004240, -0.000907] across the 10 seed-level differences; withheld-positive occurrences 123,150. It improved only 2/10 seeds and 1/4 folds. Canary passed; the frozen gate failed.
 The 59,243-dot all-finite research TIFF is format-valid and cleared the duplicate screen against 12 pinned peer rasters, but is explicitly <b>NOT APPROVED FOR SUBMISSION</b>; format validity and novelty do not override a negative holdout. See <a href="docs/downloads/research/h28_3_negative_research_manifest.json">negative-artifact receipt</a> ·
@@ -61,6 +74,6 @@ Reaching the owner-stated leader (0.3195) is not possible with verified/modelled
 The agent never uploads anything; you press the button.</div>
 <p class="small">Reference (owner-reported 0.2477): <a href="https://github.com/buffedlizard55-lab/GEMSDOE24/blob/07345ea0604953d7efb858d9cfbc21e20c7aca0b/docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif">24GEMSDOE audit record</a> (sha256 68d0e2e4fcc594f9…). It is historical comparison evidence, not a current download recommendation.</p>
 </main>
-<footer>Built 2026-10-25 20:42 UTC from <a href="https://github.com/buffedlizard55-lab/GEMSDOE27">the repository</a>. No current TIFF is approved for submission. No leaderboard score is claimed anywhere on this site.
+<footer>Built 2026-10-25 21:01 UTC from <a href="https://github.com/buffedlizard55-lab/GEMSDOE27">the repository</a>. No current TIFF is approved for submission. No leaderboard score is claimed anywhere on this site.
 Historical scores shown are owner-reported. This site never contacts drivendata.org.</footer>
 <script src="docs/assets/app.js"></script></body></html>
