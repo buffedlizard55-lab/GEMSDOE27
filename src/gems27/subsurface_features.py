@@ -80,41 +80,57 @@ def _rank01(vals_foot: np.ndarray) -> np.ndarray:
 
 def build_transforms(grids: dict[str, np.ndarray], foot: np.ndarray) -> np.ndarray:
     """grids: full-grid arrays for SUBSURFACE_BANDS. Returns (n_footprint, 15) float32 ranks."""
-    g = {k: _fill(grids[k], foot) for k in SUBSURFACE_BANDS}
-    rtp, grav = g["rtp"], g["iso_grav_anom"]
-    gm_rtp2, gm_rtp5 = _grad_mag(rtp, 2.0), _grad_mag(rtp, 5.0)
-    gm_grav2, gm_grav5 = _grad_mag(grav, 2.0), _grad_mag(grav, 5.0)
-    tilt = np.abs(np.arctan2(g["tmi_vg"], np.hypot(g["tmi_hg"], 1e-12))).astype(np.float32)
-    analytic = np.sqrt(gm_rtp2**2 + gaussian_filter(g["tmi_vg"], 2.0) ** 2).astype(np.float32)
-    # cross-field coherence at sigma=3: orientation agreement x weaker edge strength
+    n_foot = int(foot.sum())
+    out = np.empty((n_foot, len(TRANSFORM_NAMES)), dtype=np.float32)
+
+    def _put(col_idx: int, arr2d: np.ndarray) -> None:
+        vals = arr2d[foot]
+        vals = np.where(np.isfinite(vals), vals, np.nanmedian(vals[np.isfinite(vals)]))
+        out[:, col_idx] = _rank01(vals)
+
+    rtp = _fill(grids["rtp"], foot)
+    grav = _fill(grids["iso_grav_anom"], foot)
+    gm_rtp2 = _grad_mag(rtp, 2.0)
+    _put(0, gm_rtp2)
+    _put(1, _grad_mag(rtp, 5.0))
+
+    tmi_vg = _fill(grids["tmi_vg"], foot)
+    tmi_hg = _fill(grids["tmi_hg"], foot)
+    tilt = np.abs(np.arctan2(tmi_vg, np.hypot(tmi_hg, 1e-12))).astype(np.float32)
+    _put(2, np.pi / 2 - tilt)
+    del tilt, tmi_hg
+    analytic = np.sqrt(gm_rtp2**2 + gaussian_filter(tmi_vg, 2.0) ** 2).astype(np.float32)
+    _put(3, analytic)
+    del analytic, tmi_vg
+
+    gm_grav2 = _grad_mag(grav, 2.0)
+    _put(4, gm_grav2)
+    _put(5, _grad_mag(grav, 5.0))
+
     ry, rx = np.gradient(gaussian_filter(rtp, 3.0))
     vy, vx = np.gradient(gaussian_filter(grav, 3.0))
+    del rtp, grav
     cos_d = np.abs((rx * vx + ry * vy) / (np.hypot(rx, ry) * np.hypot(vx, vy) + 1e-12))
-    gm_cond3 = _grad_mag(g["cond_surf"], 3.0)
-    gm_dil3 = _grad_mag(g["geod_dilaterate"], 3.0)
-    raw = {
-        "sub_gm_rtp_s2": gm_rtp2, "sub_gm_rtp_s5": gm_rtp5,
-        "sub_tiltabs_rtp": np.pi / 2 - tilt,  # high near tilt zero-crossing (over edges)
-        "sub_analytic_rtp": analytic,
-        "sub_gm_grav_s2": gm_grav2, "sub_gm_grav_s5": gm_grav5,
-        "sub_crossfield_coherence": (cos_d * np.minimum(gm_rtp2, gm_grav2)).astype(np.float32),
-        "sub_gm_cond_s3": gm_cond3,
-        "sub_gm_depth_s3": _grad_mag(g["depth_to_base_surf"], 3.0),
-        "sub_gm_depth_s8": _grad_mag(g["depth_to_base_surf"], 8.0),
-        "sub_gm_dilate_s3": gm_dil3,
-        "sub_gm_2ndinv_s3": _grad_mag(g["geod_2ndinv"], 3.0),
-        "sub_strain_x_cond": np.sqrt(
-            np.maximum(gm_dil3, 0) * np.maximum(gm_cond3, 0)).astype(np.float32),
-        "sub_seismic_fabric_ieq": _structure_coherence(g["ieq_n100a15"], 5.0),
-        "sub_seismic_fabric_deq": _structure_coherence(g["deq_n100a15"], 5.0),
-    }
-    assert list(raw) == TRANSFORM_NAMES, "transform order drift"
-    cols = []
-    for name in TRANSFORM_NAMES:
-        vals = raw[name][foot]
-        vals = np.where(np.isfinite(vals), vals, np.nanmedian(vals[np.isfinite(vals)]))
-        cols.append(_rank01(vals))
-    return np.stack(cols, axis=1).astype(np.float32)
+    del ry, rx, vy, vx
+    _put(6, (cos_d * np.minimum(gm_rtp2, gm_grav2)).astype(np.float32))
+    del cos_d, gm_rtp2, gm_grav2
+
+    gm_cond3 = _grad_mag(_fill(grids["cond_surf"], foot), 3.0)
+    _put(7, gm_cond3)
+    dtb = _fill(grids["depth_to_base_surf"], foot)
+    _put(8, _grad_mag(dtb, 3.0))
+    _put(9, _grad_mag(dtb, 8.0))
+    del dtb
+
+    gm_dil3 = _grad_mag(_fill(grids["geod_dilaterate"], foot), 3.0)
+    _put(10, gm_dil3)
+    _put(11, _grad_mag(_fill(grids["geod_2ndinv"], foot), 3.0))
+    _put(12, np.sqrt(np.maximum(gm_dil3, 0) * np.maximum(gm_cond3, 0)).astype(np.float32))
+    del gm_dil3, gm_cond3
+
+    _put(13, _structure_coherence(_fill(grids["ieq_n100a15"], foot), 5.0))
+    _put(14, _structure_coherence(_fill(grids["deq_n100a15"], foot), 5.0))
+    return out
 
 
 def priority_poisson_disk(prob: np.ndarray, candidates: np.ndarray, min_dist: float,

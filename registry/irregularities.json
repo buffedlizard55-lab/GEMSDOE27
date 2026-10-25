@@ -252,6 +252,36 @@
    "severity": "medium",
    "issue": "Shared holdout harness buffered training but scored up to hidden segments (feature support could overlap hidden neighbourhoods). Protocol \u00a72 requires segments withheld WITH a buffer.",
    "action": "Fixed once in the template: gems27.holdout.buffered_scoring_mask() excludes the 600 m ring around hidden segments from scoring; catalogue-derived masks use visible faults only. Reported here per protocol \u00a72; siblings should adopt."
+  },
+  {
+   "id": "IR-2026-10-25-05-pr14-site-desync-and-dead-link",
+   "severity": "high",
+   "issue": "PR #14 (merge commit ea7373b) hand-edited docs/*.html and index.html without updating scripts/build_site.py, breaking CI (`git diff --exit-code docs/ index.html` and `test_inversion.py::test_site_matches_evidence`), linked to non-existent `submissions/gems27-unique-scatter-farfield-allfinite.tif` (404), wrote a 201-char note exceeding the 140-char Protocol \u00a75 limit, and displayed `98e59bf8e3ce` as READY TO SUBMIT despite HOLDOUT-DTI = 0.0 (\u0394 = -0.0895 vs baseline) and checking only 6 local rasters rather than all 12 peer rasters.",
+   "action": "Audited `98e59bf8e3ce` against all 12 peer rasters (`evidence/audit_98e59bf8e3ce_uniqueness.json`), reclassified it strictly as a negative research probe, restored 100% programmatic `scripts/build_site.py` rendering with zero hand-edited HTML, verified all relative links in `tests/test_site.py`, and wired the landing/executive-summary banner directly to machine-verified gate fields."
+  },
+  {
+   "id": "IR-2026-10-25-06-holdout-emit-ring-leak-fixed",
+   "severity": "high",
+   "issue": "In `scripts/run_lane_holdout.py`, `emit(prob, valid_scoring, known, hidden, ...)` built candidate masks on `valid_scoring | hidden`. Because `valid_scoring = foot & fold_mask & ~ring` (where `ring = (d_hidden <= 6) & ~hidden`), `valid_scoring | hidden` equalled `True` on `hidden` (`d_hidden == 0`) and `False` on `0 < d_hidden <= 6`, leaking the complement of the 6-px ring around withheld segments into candidate placement.",
+   "action": "Fixed in place in `scripts/run_lane_holdout.py` and enforced in `scripts/run_h29_holdout.py`: `emit()` receives ONLY `fold_domain = foot & sp.fold_mask` and `sp.known` (zero access to `sp.hidden` or `valid_scoring`)."
+  },
+  {
+   "id": "IR-2026-10-25-07-lane-registry-path-typo-fixed",
+   "severity": "medium",
+   "issue": "`scripts/run_lane_holdout.py` looked for peer rasters in `data_cache/registry` rather than `data_cache/parallel_registry`, causing `surface_spearman_vs_registry` to silently evaluate 0 files (`{}`) in Session 6.",
+   "action": "Fixed path in `scripts/run_lane_holdout.py` and added `assert len(peer_spearman) == 12` in `scripts/run_h29_holdout.py` (`evidence/h29_e1_canary_and_surface.json`)."
+  },
+  {
+   "id": "IR-2026-10-25-08-slot1-live-zero-hit-confirmation",
+   "severity": "medium",
+   "issue": "2026-10-25 prompt reports `27GEMSDOE: 0.2449` (OWNER-REPORTED; no DrivenData receipt stored in repo) alongside `24GEMSDOE: 0.2477`. Byte diff (`evidence/slot1_live_ab_inversion.json`) confirms `5512495c6bd1` (61,328 px) adds solely 1,259 `T-v2` straight-line catalogue-tip gap-closure dots to `989f59505db1` (60,069 px); pure zero-hit FP dilution predicts `0.24491`, matching `0.2449` to 4 decimal places (empirical marginal efficiency `-0.00018` credit/dot vs `0.05024` break-even).",
+   "action": "Recorded in `registry/live_scores.json` under `owner_reported_prompt_2026_10_25` (preserving `27GEMSDOE[*].score = null` until an organizer receipt exists) and permanently retired `T-v2` straight-line continuation."
+  },
+  {
+   "id": "IR-2026-10-25-09-reference-notebook-zeros-outside-verified",
+   "severity": "low",
+   "issue": "First-hand read of Prof. John Lipor's official reference notebook (`drivendataorg/gems-prize-reference-solution/unet-mc-cv-reference-solution.ipynb`, Cells 5 & 19) confirms `X_orig[X_orig < -1e38] = np.nan` for input sentinels and `y_out = np.zeros(...)` with `nodata=None` for the output GeoTIFF.",
+   "action": "All new submissions (`H29-S`, content id `511898747886`) emit `allfinite` zeros-outside (`nodata=None`, finite `{0.0, 1.0}` across all 12,279,160 cells) as the primary downloadable `.tif` and `.zip`."
   }
  ]
 }
