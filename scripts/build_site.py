@@ -122,6 +122,39 @@ def build() -> None:
 </div>
 """
 
+    # ---- Lane L-DCONFIRM, parallel session B (JSON-driven; same D family as H29-1) ----
+    dc_path = DOCS / "downloads" / "dconfirm_candidate_manifest.json"
+    dc = J(dc_path) if dc_path.exists() else None
+    dconfirm_box = ""
+    if dc:
+        r, u = dc["raster"], dc["uniqueness_vs_registry"]
+        conf = dc["holdout"]["confirmation"]
+        stats = conf["paired_candidate_minus_B"]
+        rel_dir = r["directory"].replace("docs/", "", 1)
+        tif_href = f"{rel_dir}/{r['primary_allfinite']}"
+        checks_href = f"{rel_dir}/checks-{dc['stem']}-allfinite.json"
+        badge = ('<span class="badge ok" style="font-size:1.05rem">&#9989; VALIDATED &mdash; OK TO DOWNLOAD &amp; SUBMIT '
+                 '(all machine gates PASS; still UNSCORED)</span>') if dc.get("ok_to_submit") else (
+                 '<span class="badge bad" style="font-size:1.05rem">&#9940; DO NOT SUBMIT &mdash; duplicate of the H29-1 lane '
+                 'family (selector treats both as one candidate)</span>')
+        dconfirm_box = f"""
+<div class="card" style="border-left:4px solid #1565c0">
+ <h3 style="margin-top:0">Lane L-DCONFIRM (parallel session B): disjoint-seed confirmation of the same D detector</h3>
+ <p>{badge}</p>
+ <p>An independent parallel session preregistered the same hybrid idea (full 32-band stack + 15 subsurface transforms,
+ B2/38k; plus 8 new dip-offset / radiometric-front / polarity transforms that <b>failed selection</b> and were dropped).
+ On <b>disjoint confirmation seeds 215&ndash;224</b> (40 cells, {conf['n_withheld_positives']:,} withheld positives) arm D again beat
+ the full-32 control: pooled <b>HOLDOUT-DTI {conf['pooled_holdout_dti'][dc['arm']]:.4f} vs {conf['pooled_holdout_dti']['B']:.4f}</b>
+ (paired &Delta; {stats['mean_delta']:+.4f}, 95% CI [{stats['ci95'][0]:+.4f}, {stats['ci95'][1]:+.4f}],
+ {stats['folds_positive']}/4 folds, {stats['seeds_positive']}/{stats['n_seeds']} seeds). Catalogue-internal evidence only; no live score.</p>
+ <ul class="tight">
+ <li><b>Cross-session duplicate (measured post-merge):</b> 87.5% of this file&rsquo;s dots lie within 3&nbsp;px of H29-1&rsquo;s dots (87.8% reverse) &mdash; the two parallel lanes converged. <b>Do not spend two slots on this family.</b> Evidence: <a href="{REPO_URL}/blob/main/evidence/dconfirm_cross_session_overlap.json">cross-session overlap</a>.</li>
+ <li><b>Vs scored rivals:</b> max {u['max_dot_overlap_peer_registry_12']:.1%} within 3&nbsp;px of any of the 12 pinned peer rasters; surface Spearman max {u['max_surface_spearman']:.3f}. Vs audit-only H28-1: {u['max_dot_overlap_self_repo']:.1%} (same failure as H29-1).</li>
+ <li><b>Format:</b> all-finite, nodata=None, every cell in [0,1], EPSG:32611 3730&times;3292 (<a href="{e(checks_href)}">re-read receipt</a>); research bytes in <a href="{e(tif_href)}">downloads/research/</a> (sha256 {e(r['sha256'][:16])}&hellip;). Run card: <a href="{REPO_URL}/blob/main/evidence/dconfirm_run_card_2026-10-25.json">evidence/dconfirm_run_card_2026-10-25.json</a>; analysis <a href="{REPO_URL}/blob/main/knowledge/16_dconfirm_result.md">knowledge/16 (L-DCONFIRM)</a>.</li>
+ </ul>
+</div>
+"""
+
     h28_manifest_path = DOCS / "downloads" / "h28_1_candidate_manifest.json"
     h28_manifest = J(h28_manifest_path) if h28_manifest_path.exists() else None
     h28_candidate = h28_manifest.get("candidate") if h28_manifest else None
@@ -338,6 +371,7 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
  <p class="small">The exact gate, 95% CI, validation receipt and duplicate report are on the <a href="research.html#h28-3"><b>Research page</b></a>. The executive summary explains the rule used to decide when a future TIFF is actually okay to submit.</p>
 </div>
 {h29_box}
+{dconfirm_box}
 {h28_3_box}
 {lane_box}
 <p><b>Legacy files below are retained only for audit and must not be submitted as a new unique candidate:</b> peer repositories now contain overlapping copies and no organizer receipt verifies their score/file pairing. The next action is a new pre-registered, data-ready hypothesis—not a renamed legacy raster.</p>
@@ -404,6 +438,7 @@ The agent never uploads anything; you press the button.</div>
 
 <h2>Historical weekly-slot decision tree — archived and suspended</h2>
 {h29_box}
+{dconfirm_box}
 {h28_3_box}
 <p class="warnbox"><b>Do not follow historic slot instructions or upload historical rasters.</b> They are retained in repository history to audit earlier work, but their rasters pre-date the pinned peer registry and are not current unique submissions. A future pre-registered candidate can replace this notice only after it passes its gate, format validation, and duplicate screen.</p>
 <p class="small">The historical model estimates and topology evidence remain available below for scientific context. They are not a submission recommendation and must not be read as organiser scores.</p>

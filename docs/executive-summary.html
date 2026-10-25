@@ -49,6 +49,23 @@
 </div>
 
 
+<div class="card" style="border-left:4px solid #1565c0">
+ <h3 style="margin-top:0">Lane L-DCONFIRM (parallel session B): disjoint-seed confirmation of the same D detector</h3>
+ <p><span class="badge bad" style="font-size:1.05rem">&#9940; DO NOT SUBMIT &mdash; duplicate of the H29-1 lane family (selector treats both as one candidate)</span></p>
+ <p>An independent parallel session preregistered the same hybrid idea (full 32-band stack + 15 subsurface transforms,
+ B2/38k; plus 8 new dip-offset / radiometric-front / polarity transforms that <b>failed selection</b> and were dropped).
+ On <b>disjoint confirmation seeds 215&ndash;224</b> (40 cells, 121,404 withheld positives) arm D again beat
+ the full-32 control: pooled <b>HOLDOUT-DTI 0.1066 vs 0.0992</b>
+ (paired &Delta; +0.0076, 95% CI [+0.0049, +0.0104],
+ 4/4 folds, 10/10 seeds). Catalogue-internal evidence only; no live score.</p>
+ <ul class="tight">
+ <li><b>Cross-session duplicate (measured post-merge):</b> 87.5% of this file&rsquo;s dots lie within 3&nbsp;px of H29-1&rsquo;s dots (87.8% reverse) &mdash; the two parallel lanes converged. <b>Do not spend two slots on this family.</b> Evidence: <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/evidence/dconfirm_cross_session_overlap.json">cross-session overlap</a>.</li>
+ <li><b>Vs scored rivals:</b> max 46.6% within 3&nbsp;px of any of the 12 pinned peer rasters; surface Spearman max 0.446. Vs audit-only H28-1: 85.2% (same failure as H29-1).</li>
+ <li><b>Format:</b> all-finite, nodata=None, every cell in [0,1], EPSG:32611 3730&times;3292 (<a href="downloads/research/checks-gems27-dconfirm-hybrid-armd-b2-38k-20261025-5ea0385b7e70-allfinite.json">re-read receipt</a>); research bytes in <a href="downloads/research/gems27-dconfirm-hybrid-armd-b2-38k-20261025-5ea0385b7e70-allfinite.tif">downloads/research/</a> (sha256 40b88a6477b1914a&hellip;). Run card: <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/evidence/dconfirm_run_card_2026-10-25.json">evidence/dconfirm_run_card_2026-10-25.json</a>; analysis <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/16_dconfirm_result.md">knowledge/16 (L-DCONFIRM)</a>.</li>
+ </ul>
+</div>
+
+
 <div class="warnbox"><b>Session 6 H28-3 strain × conductivity result — FAILED; NO NEW SUBMISSION IS APPROVED.</b>
 <b>HOLDOUT-DTI (H28-3-holdout-v1):</b> baseline 0.105946; candidate 0.103352; paired Δ -0.002594; 95% bootstrap CI [-0.004240, -0.000907] across the 10 seed-level differences; withheld-positive occurrences 123,150. It improved only 2/10 seeds and 1/4 folds. Canary passed; the frozen gate failed.
 The 59,243-dot all-finite research TIFF is format-valid and cleared the duplicate screen against 12 pinned peer rasters, but is explicitly <b>NOT APPROVED FOR SUBMISSION</b>; format validity and novelty do not override a negative holdout. See <a href="downloads/research/h28_3_negative_research_manifest.json">negative-artifact receipt</a> ·
@@ -73,6 +90,6 @@ The 59,243-dot all-finite research TIFF is format-valid and cleared the duplicat
 <li>Owner actions: submit and record the score; paste the exact portal message if rejected; paste the original task prompt into the README placeholder; optional geologist review of the 345 dossiers; optional CI download of USGS Qfaults/Siler data.</li></ul>
 <p>Full lists: <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/06_limitations_and_access.md">limitations &amp; access</a> · <a href="sources.html#irregularities">flagged irregularities</a>.</p>
 </main>
-<footer>Built 2026-10-25 21:03 UTC from <a href="https://github.com/buffedlizard55-lab/GEMSDOE27">the repository</a>. No current TIFF is approved for submission. No leaderboard score is claimed anywhere on this site.
+<footer>Built 2026-10-25 21:12 UTC from <a href="https://github.com/buffedlizard55-lab/GEMSDOE27">the repository</a>. No current TIFF is approved for submission. No leaderboard score is claimed anywhere on this site.
 Historical scores shown are owner-reported. This site never contacts drivendata.org.</footer>
 <script src="assets/app.js"></script></body></html>

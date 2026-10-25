@@ -1,0 +1,20 @@
+{
+  "measured": "2026-10-25 post-merge crosscheck (not part of frozen E1-E3 gates)",
+  "ours": "docs/downloads/research/gems27-dconfirm-hybrid-armd-b2-38k-20261025-5ea0385b7e70-allfinite.tif",
+  "vs_h29_1": {
+    "file": "gems27-h29-1-drefill-b2-38k-20261025-c24b6371179c-allfinite.tif",
+    "ours_within_3px_of_them": 0.8752,
+    "them_within_3px_of_ours": 0.8775,
+    "exact_shared_px": 15727,
+    "dots_each": 38000
+  },
+  "vs_h29_1b": {
+    "file": "gems27-h29-1b-drefill-deconf-b2-38k-20261025-14e416a1a380-allfinite.tif",
+    "ours_within_3px_of_them": 0.7992,
+    "them_within_3px_of_ours": 0.7746,
+    "exact_shared_px": 13969,
+    "dots_each": 38000
+  },
+  "threshold": 0.7,
+  "conclusion": "DUPLICATE family under parallel-run protocol \u00a71; selector treats as one candidate."
+}

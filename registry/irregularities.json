@@ -264,6 +264,24 @@
    "severity": "medium",
    "issue": "H29-1 (38k dots) passes the pinned peer-registry duplicate screen (max 46.2% <=3px overlap vs 12 scored peers) but overlaps 85.4% with this repo's own unscored dense H28-1 research file (59,075 px; exact Jaccard 0.116). Minimal-swap deconfliction (H29-1b) is geometrically infeasible on the ridge pool (82.6% after refill). The extended screen may make any accurate emission uncertifiable.",
    "action": "Frozen gate kept (verdict negative). Selector step must adjudicate whether unscored in-house files govern slot eligibility; record the decision in registry before any upload. See knowledge/17."
+  },
+  {
+   "id": "IR-2026-10-25-07-lane-paragraph-missing-sessionB",
+   "severity": "medium",
+   "issue": "Parallel session B (Lane L-DCONFIRM) prompt again contained no delimited single method paragraph (same class as IR-2026-10-25-01).",
+   "action": "Lane declared explicitly in knowledge/15_lane_dconfirm_preregistration.md \u00a72 before implementation; numeric uniqueness tests enforced on surface and final dots."
+  },
+  {
+   "id": "IR-2026-10-25-08-knowledge-numbering-collision",
+   "severity": "low",
+   "issue": "Two parallel sessions both created knowledge/15_* and knowledge/16_* files (H29-1 preregistration/addendum vs L-DCONFIRM preregistration/result). Filenames differ; numbers collide.",
+   "action": "Filenames retained to avoid rewriting frozen evidence references; cite by full filename. Renumber only in a dedicated housekeeping change that updates every reference."
+  },
+  {
+   "id": "IR-2026-10-25-09-parallel-lanes-converged-cross-duplicate",
+   "severity": "high",
+   "issue": "Parallel sessions H29-1 (Session 7) and L-DCONFIRM independently built arm-D B2/38k files; measured post-merge directed dot overlap within 3px is 87.5%/87.8% (exact shared 15,727/38,000), exceeding the 70% duplicate threshold in both directions. Both also fail the extended self-registry screen vs H28-1 (85.4%/85.2%). Selection seeds 210-214 were independently chosen by both sessions, so pooled selection numbers are identical by determinism, not independent replication; L-DCONFIRM adds disjoint confirmation seeds 215-224.",
+   "action": "Both files remain verdict=negative, ok_to_submit=false. Selector must treat H29-1/H29-1b/L-DCONFIRM as ONE candidate family (evidence/dconfirm_cross_session_overlap.json). No slot may be spent twice on this family."
   }
  ]
 }

@@ -366,3 +366,33 @@ do not carry standalone detection at 100 m. The lane transforms as an ADD-ON gai
 Merge alignment: lane artifact filed under docs/downloads/research/; front page keeps PR #11's
 STOP policy (no TIFF approved); lane box added as second parallel negative. Passes 1-3 detail
 for this lane: knowledge/14 + evidence/lane_run_card_2026-10-25.json. 86+ tests green post-merge.
+
+## Lane L-DCONFIRM session (2026-10-25B) — three passes
+
+- **Pass 1 (implement + verify):** restored 17 hash-pinned artifacts (all OK), prepared the
+  32-band stack, fetched the 12 peer registry rasters at pinned commits, re-verified the
+  0.2778 chain pixel-exactly (d2.8 -> r1 -> B2, both equalities True), preregistered Lane
+  L-DCONFIRM (knowledge/15) before code, implemented 8 new transforms with tests, ran
+  E1 canary (max AUC 0.609 PASS), E2a selection (E rejected; D candidate), E2b confirmation
+  (GATE PASS, +0.00760 [+0.00489,+0.01038]), E3 build (38,000 dots, validator PASS,
+  deterministic rebuild reproduced sha256 40b88a64... twice).
+- **Pass 2 (bugs / assumptions / edge cases):** found E3 chose the output directory from
+  gate_pass alone before uniqueness was known (negative file briefly in downloads/ root);
+  restructured to compute uniqueness from dots first, moved to research/, added peer/self
+  decomposition + selector note to the run card. New test_dconfirm caught a stale
+  raster.directory from a parallel-edit race; fixed and re-ran sequentially. Site build
+  initially lost the index insertion to the same race class; repaired sequentially and
+  verified hrefs on index/executive/root copies. Independent re-read verified: finite
+  everywhere, values {0,1}, 0 dots on catalogue, min d(cat) 2.24 px, spacing >=2.83 px,
+  ZIP holds exactly the TIF bytes. Transfer caveat recorded (D median d(cat) 8.9 px vs
+  0.2778's 19.6 px; proxy cannot price far-field).
+- **Pass 3 (recheck vs original request):** unique TIF generated and easy to download;
+  badge is machine-computed from frozen gates (no human inspector step); 0.2778 mechanism
+  answered from raster bytes (knowledge/15 §1, 16); 5 hypotheses ranked with layers,
+  signatures, catalogue-missing rationale, repo difference and cost (knowledge/15 §3);
+  top candidate validated on spatially blocked holdout BEFORE any slot decision; no slot
+  spent or claimed; external-data blockers named with official sources (GDR #1391 not
+  reachable from sandbox allowlist); all leaderboard numbers OWNER-REPORTED, all detector
+  numbers HOLDOUT-DTI with evaluator/n/CI; run card complete (evidence/
+  dconfirm_run_card_2026-10-25.json). Remaining known gap: frozen self-registry duplicate
+  vs audit-only H28-1 keeps ok_to_submit=false pending a selector decision (IR-2026-10-25-06).
