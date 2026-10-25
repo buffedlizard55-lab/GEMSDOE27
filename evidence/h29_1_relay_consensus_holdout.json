@@ -1,0 +1,1604 @@
+{
+  "schema": "GEMSDOE27-H29-1-v1",
+  "preregistration": "knowledge/12_preregistration_H29-1.md",
+  "evaluator": {
+    "module": "src/gems27/holdout.py make_split(feature_buffer_px=3) + src/gems27/metric.py dti_binary",
+    "holdout_sha256": "337d0b591e053b89f0e78bcfba5f076b4686ddff216cd2cf5e75e5abc1bf4e99",
+    "metric_sha256": "4b0a600d7fa92e1338b3f8ffeed3df76031ab94725f8143df1fc194c40bfb101",
+    "buffer_px": 3,
+    "seeds": [
+      160,
+      161,
+      162,
+      163,
+      164,
+      165,
+      166,
+      167,
+      168,
+      169
+    ],
+    "folds": [
+      "NW",
+      "NE_LidarGapHeavy",
+      "SW",
+      "SE"
+    ],
+    "withheld_positive_cell_instances_across_40_cells": 123150,
+    "mean_withheld_positive_px_per_seed": 12315.0,
+    "alpha": 0.2,
+    "beta": 0.8,
+    "kernel_radius_px": 3.0,
+    "kernel_metres": 300,
+    "feature_generation_visible_labels_only": true
+  },
+  "inputs": {
+    "prepared_features_sha256": "83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc",
+    "edge_feature_cache_sha256": "04c5fb77f07dacf35e508ba8668848b4c593840b840a89175ef87644a68b12a2",
+    "edge_feature_metadata": {
+      "schema": 1,
+      "feature_names": [
+        "potential_mag_edge_300m",
+        "potential_mag_edge_1000m",
+        "potential_grav_edge_300m",
+        "potential_grav_edge_1000m",
+        "potential_edge_concordance_1000m",
+        "potential_edge_orientation_agreement_1000m"
+      ],
+      "shape": [
+        5167373,
+        6
+      ],
+      "grid_shape": [
+        3730,
+        3292
+      ],
+      "crs": "EPSG:32611",
+      "source_bands": {
+        "magnetic": {
+          "band": 2,
+          "description": "rtp"
+        },
+        "gravity": {
+          "band": 13,
+          "description": "iso_grav_anom"
+        }
+      },
+      "valid_cells": 5164312,
+      "parameters": {
+        "pixel_size_m": 100.0,
+        "sigmas_px": [
+          3.0,
+          10.0
+        ],
+        "gradient_percentiles": [
+          5,
+          95
+        ],
+        "orientation_threshold_percentile": 10,
+        "outside_mask": 0.0
+      },
+      "inputs": {
+        "template": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+        "training_features": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+        "prepared_features": "83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc",
+        "transform_code": "96dbe727891f06cd42e0f111df3696d8995cf2e62bd522c8781677365e024cf1"
+      },
+      "sha256": "04c5fb77f07dacf35e508ba8668848b4c593840b840a89175ef87644a68b12a2"
+    }
+  },
+  "leakage_canary": {
+    "feature": "binary H29-1 convergent topology dots alone, after subtracting same-run baseline dots within 300 m",
+    "pooled_auc_binary_tie_aware": 0.5000566609892952,
+    "confusion_instances": {
+      "tp": 18,
+      "fn": 123132,
+      "fp": 1677,
+      "tn": 51062173
+    },
+    "canary_passed": true
+  },
+  "pooled_dti": {
+    "baseline": 0.10510787680124295,
+    "candidate": 0.09526553599467952,
+    "same_size_random_control": 0.09600007873157204,
+    "paired_delta": -0.009842340806563432,
+    "ci95_seed_cluster_bootstrap": {
+      "method": "10,000 seed-cluster bootstrap resamples; each draw resamples 10 seeds with replacement and pools TPw/FPw/FNw over four folds",
+      "seed": 20261025,
+      "baseline_ci95": [
+        0.10200685588933923,
+        0.1080708194727125
+      ],
+      "candidate_ci95": [
+        0.09201671338013966,
+        0.09856217772738206
+      ],
+      "paired_delta_ci95": [
+        -0.010713859247936016,
+        -0.008880332163147552
+      ]
+    },
+    "seed_level_paired_deltas": {
+      "160": -0.009445100458178646,
+      "161": -0.00993329287073065,
+      "162": -0.007459188134523995,
+      "163": -0.007359905956791105,
+      "164": -0.009054725188823304,
+      "165": -0.010882151168801077,
+      "166": -0.010696065792255599,
+      "167": -0.010392205302234322,
+      "168": -0.012168248826804576,
+      "169": -0.011054531592489439
+    },
+    "fold_level_pooled_deltas": {
+      "NW": -0.016290473528637536,
+      "NE_LidarGapHeavy": -0.009298111869130501,
+      "SW": -0.007369708438957276,
+      "SE": -0.00826757613424664
+    }
+  },
+  "candidate_surface": {
+    "preplacement_feature": "H29-1 convergent-tip corridor subset of visible-label-only z>=3 topology links",
+    "buffered_feature_sources": "split.feature_known only",
+    "candidate_links_mean_per_cell": 10.4,
+    "eligible_links_mean_per_cell": 94.375,
+    "candidate_dots_mean_per_cell": 65.225
+  },
+  "gates": {
+    "mean_pooled_paired_delta_ge_0_001": false,
+    "paired_delta_ci_lower_gt_0": false,
+    "at_least_3_of_4_pooled_fold_gains_positive": false,
+    "at_least_8_of_10_seed_gains_positive": false,
+    "feature_only_pooled_auc_le_0_90": true,
+    "known_catalogue_overlap_zero": true,
+    "exact_registered_seed_list": true
+  },
+  "gate_passed": false,
+  "tiff_written": false,
+  "cell_results": [
+    {
+      "seed": 160,
+      "fold": "NW",
+      "fold_id": 0,
+      "n_withheld_positive_px": 2122,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 58681,
+      "eligible_links": 61,
+      "convergent_links": 11,
+      "all_topology_dots": 356,
+      "convergent_topology_dots": 66,
+      "candidate_feature_tp": 1,
+      "candidate_feature_fp": 4,
+      "baseline": {
+        "tpw": 364.32219912011874,
+        "fpw": 14209.101212608664,
+        "fnw": 1757.6778008798813,
+        "n_truth": 2122,
+        "dots": 14426
+      },
+      "candidate": {
+        "tpw": 298.6942440757988,
+        "fpw": 14044.09098612742,
+        "fnw": 1823.305755924201,
+        "n_truth": 2122,
+        "dots": 14224
+      },
+      "same_size_random": {
+        "tpw": 305.33649003763503,
+        "fpw": 14069.110293591628,
+        "fnw": 1816.663509962365,
+        "n_truth": 2122,
+        "dots": 14252
+      }
+    },
+    {
+      "seed": 160,
+      "fold": "NE_LidarGapHeavy",
+      "fold_id": 1,
+      "n_withheld_positive_px": 2819,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 57995,
+      "eligible_links": 118,
+      "convergent_links": 16,
+      "all_topology_dots": 668,
+      "convergent_topology_dots": 116,
+      "candidate_feature_tp": 0,
+      "candidate_feature_fp": 77,
+      "baseline": {
+        "tpw": 972.9554084774371,
+        "fpw": 17624.776522305292,
+        "fnw": 1846.0445915225628,
+        "n_truth": 2819,
+        "dots": 18165
+      },
+      "candidate": {
+        "tpw": 904.8447770261538,
+        "fpw": 17335.985564610688,
+        "fnw": 1914.1552229738463,
+        "n_truth": 2819,
+        "dots": 17840
+      },
+      "same_size_random": {
+        "tpw": 906.5019486457859,
+        "fpw": 17311.105059768146,
+        "fnw": 1912.498051354214,
+        "n_truth": 2819,
+        "dots": 17816
+      }
+    },
+    {
+      "seed": 160,
+      "fold": "SW",
+      "fold_id": 2,
+      "n_withheld_positive_px": 4023,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 56440,
+      "eligible_links": 112,
+      "convergent_links": 19,
+      "all_topology_dots": 643,
+      "convergent_topology_dots": 111,
+      "candidate_feature_tp": 1,
+      "candidate_feature_fp": 100,
+      "baseline": {
+        "tpw": 630.9595662082202,
+        "fpw": 18180.723616459363,
+        "fnw": 3392.04043379178,
+        "n_truth": 4023,
+        "dots": 18504
+      },
+      "candidate": {
+        "tpw": 558.5578701236448,
+        "fpw": 17816.328296297128,
+        "fnw": 3464.4421298763555,
+        "n_truth": 4023,
+        "dots": 18108
+      },
+      "same_size_random": {
+        "tpw": 556.7768215401424,
+        "fpw": 17803.580749401423,
+        "fnw": 3466.2231784598575,
+        "n_truth": 4023,
+        "dots": 18093
+      }
+    },
+    {
+      "seed": 160,
+      "fold": "SE",
+      "fold_id": 3,
+      "n_withheld_positive_px": 3331,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 57405,
+      "eligible_links": 101,
+      "convergent_links": 4,
+      "all_topology_dots": 556,
+      "convergent_topology_dots": 23,
+      "candidate_feature_tp": 0,
+      "candidate_feature_fp": 14,
+      "baseline": {
+        "tpw": 671.4888965210569,
+        "fpw": 14328.331218634543,
+        "fnw": 2659.5111034789434,
+        "n_truth": 3331,
+        "dots": 14680
+      },
+      "candidate": {
+        "tpw": 628.8350613029086,
+        "fpw": 13986.154849888806,
+        "fnw": 2702.164938697091,
+        "n_truth": 3331,
+        "dots": 14312
+      },
+      "same_size_random": {
+        "tpw": 628.8350613029086,
+        "fpw": 13982.154849888806,
+        "fnw": 2702.164938697091,
+        "n_truth": 3331,
+        "dots": 14308
+      }
+    },
+    {
+      "seed": 161,
+      "fold": "NW",
+      "fold_id": 0,
+      "n_withheld_positive_px": 2094,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 58690,
+      "eligible_links": 62,
+      "convergent_links": 5,
+      "all_topology_dots": 381,
+      "convergent_topology_dots": 38,
+      "candidate_feature_tp": 0,
+      "candidate_feature_fp": 5,
+      "baseline": {
+        "tpw": 453.59198946162536,
+        "fpw": 14251.360969856785,
+        "fnw": 1640.4080105383746,
+        "n_truth": 2094,
+        "dots": 14513
+      },
+      "candidate": {
+        "tpw": 366.2865099285352,
+        "fpw": 14038.55070469797,
+        "fnw": 1727.7134900714648,
+        "n_truth": 2094,
+        "dots": 14253
+      },
+      "same_size_random": {
+        "tpw": 375.1975941214589,
+        "fpw": 14050.179487870428,
+        "fnw": 1718.802405878541,
+        "n_truth": 2094,
+        "dots": 14269
+      }
+    },
+    {
+      "seed": 161,
+      "fold": "NE_LidarGapHeavy",
+      "fold_id": 1,
+      "n_withheld_positive_px": 2315,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 58484,
+      "eligible_links": 111,
+      "convergent_links": 6,
+      "all_topology_dots": 563,
+      "convergent_topology_dots": 37,
+      "candidate_feature_tp": 0,
+      "candidate_feature_fp": 22,
+      "baseline": {
+        "tpw": 651.3729379517797,
+        "fpw": 17639.876513211264,
+        "fnw": 1663.6270620482203,
+        "n_truth": 2315,
+        "dots": 17996
+      },
+      "candidate": {
+        "tpw": 583.5511836300012,
+        "fpw": 17347.37557474502,
+        "fnw": 1731.448816369999,
+        "n_truth": 2315,
+        "dots": 17670
+      },
+      "same_size_random": {
+        "tpw": 575.7701350464986,
+        "fpw": 17356.113626593695,
+        "fnw": 1739.2298649535014,
+        "n_truth": 2315,
+        "dots": 17674
+      }
+    },
+    {
+      "seed": 161,
+      "fold": "SW",
+      "fold_id": 2,
+      "n_withheld_positive_px": 4072,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 56363,
+      "eligible_links": 106,
+      "convergent_links": 11,
+      "all_topology_dots": 582,
+      "convergent_topology_dots": 79,
+      "candidate_feature_tp": 0,
+      "candidate_feature_fp": 68,
+      "baseline": {
+        "tpw": 633.7923751393794,
+        "fpw": 18124.49996926573,
+        "fnw": 3438.207624860621,
+        "n_truth": 4072,
+        "dots": 18473
+      },
+      "candidate": {
+        "tpw": 584.8980901373183,
+        "fpw": 17754.783001720403,
+        "fnw": 3487.1019098626816,
+        "n_truth": 4072,
+        "dots": 18081
+      },
+      "same_size_random": {
+        "tpw": 594.9337827283209,
+        "fpw": 17718.31378810282,
+        "fnw": 3477.0662172716793,
+        "n_truth": 4072,
+        "dots": 18049
+      }
+    },
+    {
+      "seed": 161,
+      "fold": "SE",
+      "fold_id": 3,
+      "n_withheld_positive_px": 3297,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 57380,
+      "eligible_links": 97,
+      "convergent_links": 6,
+      "all_topology_dots": 558,
+      "convergent_topology_dots": 25,
+      "candidate_feature_tp": 0,
+      "candidate_feature_fp": 7,
+      "baseline": {
+        "tpw": 624.5144559253263,
+        "fpw": 14344.384027786546,
+        "fnw": 2672.4855440746737,
+        "n_truth": 3297,
+        "dots": 14675
+      },
+      "candidate": {
+        "tpw": 574.895581863972,
+        "fpw": 14008.864513290304,
+        "fnw": 2722.104418136028,
+        "n_truth": 3297,
+        "dots": 14315
+      },
+      "same_size_random": {
+        "tpw": 577.7360123090991,
+        "fpw": 14017.74794047026,
+        "fnw": 2719.2639876909006,
+        "n_truth": 3297,
+        "dots": 14326
+      }
+    },
+    {
+      "seed": 162,
+      "fold": "NW",
+      "fold_id": 0,
+      "n_withheld_positive_px": 1814,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 58993,
+      "eligible_links": 62,
+      "convergent_links": 10,
+      "all_topology_dots": 388,
+      "convergent_topology_dots": 67,
+      "candidate_feature_tp": 1,
+      "candidate_feature_fp": 20,
+      "baseline": {
+        "tpw": 424.21064284676885,
+        "fpw": 14218.924943956277,
+        "fnw": 1389.789357153231,
+        "n_truth": 1814,
+        "dots": 14474
+      },
+      "candidate": {
+        "tpw": 374.1159824582106,
+        "fpw": 14054.893219107618,
+        "fnw": 1439.8840175417895,
+        "n_truth": 1814,
+        "dots": 14280
+      },
+      "same_size_random": {
+        "tpw": 377.5658886115863,
+        "fpw": 14083.952600969242,
+        "fnw": 1436.4341113884138,
+        "n_truth": 1814,
+        "dots": 14310
+      }
+    },
+    {
+      "seed": 162,
+      "fold": "NE_LidarGapHeavy",
+      "fold_id": 1,
+      "n_withheld_positive_px": 2371,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 58468,
+      "eligible_links": 81,
+      "convergent_links": 4,
+      "all_topology_dots": 442,
+      "convergent_topology_dots": 24,
+      "candidate_feature_tp": 2,
+      "candidate_feature_fp": 18,
+      "baseline": {
+        "tpw": 658.6056695277955,
+        "fpw": 17560.85762321054,
+        "fnw": 1712.3943304722045,
+        "n_truth": 2371,
+        "dots": 17939
+      },
+      "candidate": {
+        "tpw": 623.4188570240253,
+        "fpw": 17336.223726797467,
+        "fnw": 1747.5811429759747,
+        "n_truth": 2371,
+        "dots": 17696
+      },
+      "same_size_random": {
+        "tpw": 616.5569282114831,
+        "fpw": 17326.459063340757,
+        "fnw": 1754.443071788517,
+        "n_truth": 2371,
+        "dots": 17681
+      }
+    },
+    {
+      "seed": 162,
+      "fold": "SW",
+      "fold_id": 2,
+      "n_withheld_positive_px": 4226,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 56205,
+      "eligible_links": 109,
+      "convergent_links": 19,
+      "all_topology_dots": 619,
+      "convergent_topology_dots": 127,
+      "candidate_feature_tp": 1,
+      "candidate_feature_fp": 102,
+      "baseline": {
+        "tpw": 536.6155718400606,
+        "fpw": 18166.351671597025,
+        "fnw": 3689.3844281599395,
+        "n_truth": 4226,
+        "dots": 18462
+      },
+      "candidate": {
+        "tpw": 495.779209230626,
+        "fpw": 17810.31994674837,
+        "fnw": 3730.220790769374,
+        "n_truth": 4226,
+        "dots": 18085
+      },
+      "same_size_random": {
+        "tpw": 489.7457075428299,
+        "fpw": 17776.060189500247,
+        "fnw": 3736.25429245717,
+        "n_truth": 4226,
+        "dots": 18046
+      }
+    },
+    {
+      "seed": 162,
+      "fold": "SE",
+      "fold_id": 3,
+      "n_withheld_positive_px": 3869,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 56810,
+      "eligible_links": 89,
+      "convergent_links": 4,
+      "all_topology_dots": 482,
+      "convergent_topology_dots": 16,
+      "candidate_feature_tp": 0,
+      "candidate_feature_fp": 13,
+      "baseline": {
+        "tpw": 728.3350681482465,
+        "fpw": 14287.51155512262,
+        "fnw": 3140.6649318517534,
+        "n_truth": 3869,
+        "dots": 14665
+      },
+      "candidate": {
+        "tpw": 658.5013105060873,
+        "fpw": 13986.449568293723,
+        "fnw": 3210.498689493913,
+        "n_truth": 3869,
+        "dots": 14332
+      },
+      "same_size_random": {
+        "tpw": 660.1085953111295,
+        "fpw": 13985.528257619555,
+        "fnw": 3208.8914046888704,
+        "n_truth": 3869,
+        "dots": 14332
+      }
+    },
+    {
+      "seed": 163,
+      "fold": "NW",
+      "fold_id": 0,
+      "n_withheld_positive_px": 2254,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 58564,
+      "eligible_links": 66,
+      "convergent_links": 17,
+      "all_topology_dots": 374,
+      "convergent_topology_dots": 91,
+      "candidate_feature_tp": 1,
+      "candidate_feature_fp": 5,
+      "baseline": {
+        "tpw": 470.9665426906515,
+        "fpw": 14175.11477209197,
+        "fnw": 1783.0334573093485,
+        "n_truth": 2254,
+        "dots": 14446
+      },
+      "candidate": {
+        "tpw": 398.1575197240433,
+        "fpw": 14015.002167014272,
+        "fnw": 1855.8424802759566,
+        "n_truth": 2254,
+        "dots": 14249
+      },
+      "same_size_random": {
+        "tpw": 402.97426089854844,
+        "fpw": 14049.688141145149,
+        "fnw": 1851.0257391014516,
+        "n_truth": 2254,
+        "dots": 14286
+      }
+    },
+    {
+      "seed": 163,
+      "fold": "NE_LidarGapHeavy",
+      "fold_id": 1,
+      "n_withheld_positive_px": 2600,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 58255,
+      "eligible_links": 89,
+      "convergent_links": 8,
+      "all_topology_dots": 463,
+      "convergent_topology_dots": 48,
+      "candidate_feature_tp": 0,
+      "candidate_feature_fp": 47,
+      "baseline": {
+        "tpw": 750.0948185510301,
+        "fpw": 17539.056221757903,
+        "fnw": 1849.9051814489699,
+        "n_truth": 2600,
+        "dots": 17978
+      },
+      "candidate": {
+        "tpw": 699.7885108898025,
+        "fpw": 17321.44163280903,
+        "fnw": 1900.2114891101974,
+        "n_truth": 2600,
+        "dots": 17735
+      },
+      "same_size_random": {
+        "tpw": 693.6770513103817,
+        "fpw": 17295.59389822008,
+        "fnw": 1906.3229486896184,
+        "n_truth": 2600,
+        "dots": 17705
+      }
+    },
+    {
+      "seed": 163,
+      "fold": "SW",
+      "fold_id": 2,
+      "n_withheld_positive_px": 3948,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 56505,
+      "eligible_links": 121,
+      "convergent_links": 13,
+      "all_topology_dots": 691,
+      "convergent_topology_dots": 85,
+      "candidate_feature_tp": 0,
+      "candidate_feature_fp": 67,
+      "baseline": {
+        "tpw": 581.0052680036744,
+        "fpw": 18196.166949903116,
+        "fnw": 3366.9947319963258,
+        "n_truth": 3948,
+        "dots": 18513
+      },
+      "candidate": {
+        "tpw": 542.3751220561479,
+        "fpw": 17777.61863289563,
+        "fnw": 3405.624877943852,
+        "n_truth": 3948,
+        "dots": 18073
+      },
+      "same_size_random": {
+        "tpw": 542.1204780486478,
+        "fpw": 17752.67582385405,
+        "fnw": 3405.879521951352,
+        "n_truth": 3948,
+        "dots": 18048
+      }
+    },
+    {
+      "seed": 163,
+      "fold": "SE",
+      "fold_id": 3,
+      "n_withheld_positive_px": 3320,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 57385,
+      "eligible_links": 94,
+      "convergent_links": 4,
+      "all_topology_dots": 528,
+      "convergent_topology_dots": 23,
+      "candidate_feature_tp": 0,
+      "candidate_feature_fp": 14,
+      "baseline": {
+        "tpw": 713.6899999423434,
+        "fpw": 14320.961778646135,
+        "fnw": 2606.3100000576565,
+        "n_truth": 3320,
+        "dots": 14702
+      },
+      "candidate": {
+        "tpw": 678.6292553056501,
+        "fpw": 13978.925671991065,
+        "fnw": 2641.37074469435,
+        "n_truth": 3320,
+        "dots": 14343
+      },
+      "same_size_random": {
+        "tpw": 678.6292553056501,
+        "fpw": 13983.925671991065,
+        "fnw": 2641.37074469435,
+        "n_truth": 3320,
+        "dots": 14348
+      }
+    },
+    {
+      "seed": 164,
+      "fold": "NW",
+      "fold_id": 0,
+      "n_withheld_positive_px": 1938,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 58882,
+      "eligible_links": 61,
+      "convergent_links": 6,
+      "all_topology_dots": 344,
+      "convergent_topology_dots": 40,
+      "candidate_feature_tp": 1,
+      "candidate_feature_fp": 13,
+      "baseline": {
+        "tpw": 331.8344128719531,
+        "fpw": 14204.635238698633,
+        "fnw": 1606.1655871280468,
+        "n_truth": 1938,
+        "dots": 14404
+      },
+      "candidate": {
+        "tpw": 240.7565516742574,
+        "fpw": 14059.565630355766,
+        "fnw": 1697.2434483257425,
+        "n_truth": 1938,
+        "dots": 14211
+      },
+      "same_size_random": {
+        "tpw": 246.74559375880574,
+        "fpw": 14061.782390869057,
+        "fnw": 1691.2544062411944,
+        "n_truth": 1938,
+        "dots": 14215
+      }
+    },
+    {
+      "seed": 164,
+      "fold": "NE_LidarGapHeavy",
+      "fold_id": 1,
+      "n_withheld_positive_px": 2840,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 58001,
+      "eligible_links": 99,
+      "convergent_links": 10,
+      "all_topology_dots": 533,
+      "convergent_topology_dots": 68,
+      "candidate_feature_tp": 2,
+      "candidate_feature_fp": 55,
+      "baseline": {
+        "tpw": 780.3999841133996,
+        "fpw": 17582.094105252112,
+        "fnw": 2059.6000158866004,
+        "n_truth": 2840,
+        "dots": 18026
+      },
+      "candidate": {
+        "tpw": 744.9147994330901,
+        "fpw": 17327.122493699288,
+        "fnw": 2095.08520056691,
+        "n_truth": 2840,
+        "dots": 17752
+      },
+      "same_size_random": {
+        "tpw": 739.9147994330901,
+        "fpw": 17306.495901430037,
+        "fnw": 2100.08520056691,
+        "n_truth": 2840,
+        "dots": 17727
+      }
+    },
+    {
+      "seed": 164,
+      "fold": "SW",
+      "fold_id": 2,
+      "n_withheld_positive_px": 4364,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 56145,
+      "eligible_links": 128,
+      "convergent_links": 28,
+      "all_topology_dots": 743,
+      "convergent_topology_dots": 189,
+      "candidate_feature_tp": 0,
+      "candidate_feature_fp": 163,
+      "baseline": {
+        "tpw": 584.7428989894391,
+        "fpw": 18264.718506618156,
+        "fnw": 3779.2571010105607,
+        "n_truth": 4364,
+        "dots": 18576
+      },
+      "candidate": {
+        "tpw": 540.4245914072499,
+        "fpw": 17871.467830353,
+        "fnw": 3823.57540859275,
+        "n_truth": 4364,
+        "dots": 18162
+      },
+      "same_size_random": {
+        "tpw": 561.8019668803429,
+        "fpw": 17809.941425776997,
+        "fnw": 3802.1980331196573,
+        "n_truth": 4364,
+        "dots": 18109
+      }
+    },
+    {
+      "seed": 164,
+      "fold": "SE",
+      "fold_id": 3,
+      "n_withheld_positive_px": 4225,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 56412,
+      "eligible_links": 86,
+      "convergent_links": 8,
+      "all_topology_dots": 511,
+      "convergent_topology_dots": 35,
+      "candidate_feature_tp": 0,
+      "candidate_feature_fp": 22,
+      "baseline": {
+        "tpw": 904.6430525552637,
+        "fpw": 14252.419817071477,
+        "fnw": 3320.3569474447363,
+        "n_truth": 4225,
+        "dots": 14709
+      },
+      "candidate": {
+        "tpw": 831.0854372880198,
+        "fpw": 13954.464590645446,
+        "fnw": 3393.91456271198,
+        "n_truth": 4225,
+        "dots": 14381
+      },
+      "same_size_random": {
+        "tpw": 830.9710553711839,
+        "fpw": 13964.578972562282,
+        "fnw": 3394.028944628816,
+        "n_truth": 4225,
+        "dots": 14391
+      }
+    },
+    {
+      "seed": 165,
+      "fold": "NW",
+      "fold_id": 0,
+      "n_withheld_positive_px": 2416,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 58379,
+      "eligible_links": 58,
+      "convergent_links": 11,
+      "all_topology_dots": 346,
+      "convergent_topology_dots": 82,
+      "candidate_feature_tp": 1,
+      "candidate_feature_fp": 20,
+      "baseline": {
+        "tpw": 467.7544813539134,
+        "fpw": 14174.520539411657,
+        "fnw": 1948.2455186460866,
+        "n_truth": 2416,
+        "dots": 14444
+      },
+      "candidate": {
+        "tpw": 401.5148596981382,
+        "fpw": 14031.274244952914,
+        "fnw": 2014.4851403018617,
+        "n_truth": 2416,
+        "dots": 14265
+      },
+      "same_size_random": {
+        "tpw": 402.60701181335025,
+        "fpw": 14058.507390593,
+        "fnw": 2013.3929881866497,
+        "n_truth": 2416,
+        "dots": 14291
+      }
+    },
+    {
+      "seed": 165,
+      "fold": "NE_LidarGapHeavy",
+      "fold_id": 1,
+      "n_withheld_positive_px": 2721,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 58129,
+      "eligible_links": 103,
+      "convergent_links": 6,
+      "all_topology_dots": 546,
+      "convergent_topology_dots": 38,
+      "candidate_feature_tp": 1,
+      "candidate_feature_fp": 28,
+      "baseline": {
+        "tpw": 702.8318215953539,
+        "fpw": 17613.650261050356,
+        "fnw": 2018.1681784046461,
+        "n_truth": 2721,
+        "dots": 17982
+      },
+      "candidate": {
+        "tpw": 624.5251965639864,
+        "fpw": 17341.159866435497,
+        "fnw": 2096.4748034360136,
+        "n_truth": 2721,
+        "dots": 17671
+      },
+      "same_size_random": {
+        "tpw": 635.5608891549889,
+        "fpw": 17335.726345408915,
+        "fnw": 2085.439110845011,
+        "n_truth": 2721,
+        "dots": 17669
+      }
+    },
+    {
+      "seed": 165,
+      "fold": "SW",
+      "fold_id": 2,
+      "n_withheld_positive_px": 4061,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 56365,
+      "eligible_links": 127,
+      "convergent_links": 26,
+      "all_topology_dots": 703,
+      "convergent_topology_dots": 163,
+      "candidate_feature_tp": 1,
+      "candidate_feature_fp": 112,
+      "baseline": {
+        "tpw": 583.1386434139984,
+        "fpw": 18198.149419278045,
+        "fnw": 3477.8613565860014,
+        "n_truth": 4061,
+        "dots": 18514
+      },
+      "candidate": {
+        "tpw": 516.982824324678,
+        "fpw": 17812.272882177844,
+        "fnw": 3544.017175675322,
+        "n_truth": 4061,
+        "dots": 18098
+      },
+      "same_size_random": {
+        "tpw": 533.4232354310192,
+        "fpw": 17796.846665295092,
+        "fnw": 3527.5767645689807,
+        "n_truth": 4061,
+        "dots": 18090
+      }
+    },
+    {
+      "seed": 165,
+      "fold": "SE",
+      "fold_id": 3,
+      "n_withheld_positive_px": 3529,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 57122,
+      "eligible_links": 99,
+      "convergent_links": 4,
+      "all_topology_dots": 572,
+      "convergent_topology_dots": 20,
+      "candidate_feature_tp": 0,
+      "candidate_feature_fp": 19,
+      "baseline": {
+        "tpw": 748.913957707276,
+        "fpw": 14341.354179870374,
+        "fnw": 2780.086042292724,
+        "n_truth": 3529,
+        "dots": 14733
+      },
+      "candidate": {
+        "tpw": 675.7683684986177,
+        "fpw": 13980.3195326843,
+        "fnw": 2853.2316315013823,
+        "n_truth": 3529,
+        "dots": 14340
+      },
+      "same_size_random": {
+        "tpw": 677.1232001993665,
+        "fpw": 13986.37672364272,
+        "fnw": 2851.8767998006333,
+        "n_truth": 3529,
+        "dots": 14347
+      }
+    },
+    {
+      "seed": 166,
+      "fold": "NW",
+      "fold_id": 0,
+      "n_withheld_positive_px": 2071,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 58717,
+      "eligible_links": 67,
+      "convergent_links": 6,
+      "all_topology_dots": 366,
+      "convergent_topology_dots": 35,
+      "candidate_feature_tp": 0,
+      "candidate_feature_fp": 0,
+      "baseline": {
+        "tpw": 458.0161053362635,
+        "fpw": 14202.414924507068,
+        "fnw": 1612.9838946637365,
+        "n_truth": 2071,
+        "dots": 14475
+      },
+      "candidate": {
+        "tpw": 378.57068108264895,
+        "fpw": 14019.049134890867,
+        "fnw": 1692.429318917351,
+        "n_truth": 2071,
+        "dots": 14247
+      },
+      "same_size_random": {
+        "tpw": 386.8231341869425,
+        "fpw": 14039.265895404158,
+        "fnw": 1684.1768658130575,
+        "n_truth": 2071,
+        "dots": 14272
+      }
+    },
+    {
+      "seed": 166,
+      "fold": "NE_LidarGapHeavy",
+      "fold_id": 1,
+      "n_withheld_positive_px": 2233,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 58571,
+      "eligible_links": 88,
+      "convergent_links": 4,
+      "all_topology_dots": 486,
+      "convergent_topology_dots": 19,
+      "candidate_feature_tp": 0,
+      "candidate_feature_fp": 18,
+      "baseline": {
+        "tpw": 523.7031282714872,
+        "fpw": 17614.69211228691,
+        "fnw": 1709.2968717285128,
+        "n_truth": 2233,
+        "dots": 17904
+      },
+      "candidate": {
+        "tpw": 485.1771377595536,
+        "fpw": 17368.82287933054,
+        "fnw": 1747.8228622404463,
+        "n_truth": 2233,
+        "dots": 17638
+      },
+      "same_size_random": {
+        "tpw": 488.0390665720959,
+        "fpw": 17361.7419991015,
+        "fnw": 1744.9609334279041,
+        "n_truth": 2233,
+        "dots": 17632
+      }
+    },
+    {
+      "seed": 166,
+      "fold": "SW",
+      "fold_id": 2,
+      "n_withheld_positive_px": 3679,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 56847,
+      "eligible_links": 134,
+      "convergent_links": 20,
+      "all_topology_dots": 754,
+      "convergent_topology_dots": 125,
+      "candidate_feature_tp": 0,
+      "candidate_feature_fp": 119,
+      "baseline": {
+        "tpw": 520.5896950656515,
+        "fpw": 18293.908969494132,
+        "fnw": 3158.4103049343485,
+        "n_truth": 3679,
+        "dots": 18582
+      },
+      "candidate": {
+        "tpw": 432.20730304586584,
+        "fpw": 17849.310765672053,
+        "fnw": 3246.792696954134,
+        "n_truth": 3679,
+        "dots": 18097
+      },
+      "same_size_random": {
+        "tpw": 452.5467950247498,
+        "fpw": 17822.137001893596,
+        "fnw": 3226.45320497525,
+        "n_truth": 3679,
+        "dots": 18079
+      }
+    },
+    {
+      "seed": 166,
+      "fold": "SE",
+      "fold_id": 3,
+      "n_withheld_positive_px": 4222,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 56427,
+      "eligible_links": 92,
+      "convergent_links": 6,
+      "all_topology_dots": 513,
+      "convergent_topology_dots": 25,
+      "candidate_feature_tp": 0,
+      "candidate_feature_fp": 19,
+      "baseline": {
+        "tpw": 815.1386571046744,
+        "fpw": 14251.758898385713,
+        "fnw": 3406.861342895326,
+        "n_truth": 4222,
+        "dots": 14661
+      },
+      "candidate": {
+        "tpw": 748.676847724266,
+        "fpw": 13962.664869338016,
+        "fnw": 3473.323152275734,
+        "n_truth": 4222,
+        "dots": 14343
+      },
+      "same_size_random": {
+        "tpw": 747.6003493016393,
+        "fpw": 13961.055393629767,
+        "fnw": 3474.399650698361,
+        "n_truth": 4222,
+        "dots": 14340
+      }
+    },
+    {
+      "seed": 167,
+      "fold": "NW",
+      "fold_id": 0,
+      "n_withheld_positive_px": 2295,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 58505,
+      "eligible_links": 64,
+      "convergent_links": 8,
+      "all_topology_dots": 371,
+      "convergent_topology_dots": 47,
+      "candidate_feature_tp": 0,
+      "candidate_feature_fp": 0,
+      "baseline": {
+        "tpw": 404.74946140780173,
+        "fpw": 14219.23312515057,
+        "fnw": 1890.2505385921982,
+        "n_truth": 2295,
+        "dots": 14456
+      },
+      "candidate": {
+        "tpw": 336.4348041978169,
+        "fpw": 14032.375164080371,
+        "fnw": 1958.565195802183,
+        "n_truth": 2295,
+        "dots": 14233
+      },
+      "same_size_random": {
+        "tpw": 336.4348041978169,
+        "fpw": 14071.375164080371,
+        "fnw": 1958.565195802183,
+        "n_truth": 2295,
+        "dots": 14272
+      }
+    },
+    {
+      "seed": 167,
+      "fold": "NE_LidarGapHeavy",
+      "fold_id": 1,
+      "n_withheld_positive_px": 2115,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 58717,
+      "eligible_links": 99,
+      "convergent_links": 6,
+      "all_topology_dots": 522,
+      "convergent_topology_dots": 48,
+      "candidate_feature_tp": 0,
+      "candidate_feature_fp": 41,
+      "baseline": {
+        "tpw": 541.0393839422356,
+        "fpw": 17645.52492121807,
+        "fnw": 1573.9606160577644,
+        "n_truth": 2115,
+        "dots": 17954
+      },
+      "candidate": {
+        "tpw": 475.47770083929936,
+        "fpw": 17388.750762714328,
+        "fnw": 1639.5222991607006,
+        "n_truth": 2115,
+        "dots": 17662
+      },
+      "same_size_random": {
+        "tpw": 480.31813128442633,
+        "fpw": 17366.614882430076,
+        "fnw": 1634.6818687155737,
+        "n_truth": 2115,
+        "dots": 17643
+      }
+    },
+    {
+      "seed": 167,
+      "fold": "SW",
+      "fold_id": 2,
+      "n_withheld_positive_px": 3585,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 56902,
+      "eligible_links": 120,
+      "convergent_links": 24,
+      "all_topology_dots": 703,
+      "convergent_topology_dots": 178,
+      "candidate_feature_tp": 2,
+      "candidate_feature_fp": 153,
+      "baseline": {
+        "tpw": 438.09730293544294,
+        "fpw": 18254.485264284143,
+        "fnw": 3146.9026970645573,
+        "n_truth": 3585,
+        "dots": 18504
+      },
+      "candidate": {
+        "tpw": 386.4248916872944,
+        "fpw": 17878.627303213943,
+        "fnw": 3198.5751083127057,
+        "n_truth": 3585,
+        "dots": 18102
+      },
+      "same_size_random": {
+        "tpw": 378.8197977854587,
+        "fpw": 17829.86044885403,
+        "fnw": 3206.180202214541,
+        "n_truth": 3585,
+        "dots": 18049
+      }
+    },
+    {
+      "seed": 167,
+      "fold": "SE",
+      "fold_id": 3,
+      "n_withheld_positive_px": 3756,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 56879,
+      "eligible_links": 101,
+      "convergent_links": 10,
+      "all_topology_dots": 565,
+      "convergent_topology_dots": 49,
+      "candidate_feature_tp": 0,
+      "candidate_feature_fp": 29,
+      "baseline": {
+        "tpw": 777.3481100747181,
+        "fpw": 14354.933076228242,
+        "fnw": 2978.651889925282,
+        "n_truth": 3756,
+        "dots": 14759
+      },
+      "candidate": {
+        "tpw": 702.4524656970074,
+        "fpw": 14003.243765695883,
+        "fnw": 3053.5475343029925,
+        "n_truth": 3756,
+        "dots": 14374
+      },
+      "same_size_random": {
+        "tpw": 720.1854043050578,
+        "fpw": 14012.186574737465,
+        "fnw": 3035.814595694942,
+        "n_truth": 3756,
+        "dots": 14391
+      }
+    },
+    {
+      "seed": 168,
+      "fold": "NW",
+      "fold_id": 0,
+      "n_withheld_positive_px": 1894,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 58915,
+      "eligible_links": 67,
+      "convergent_links": 11,
+      "all_topology_dots": 379,
+      "convergent_topology_dots": 60,
+      "candidate_feature_tp": 0,
+      "candidate_feature_fp": 1,
+      "baseline": {
+        "tpw": 435.2919371398774,
+        "fpw": 14190.402503723199,
+        "fnw": 1458.7080628601225,
+        "n_truth": 1894,
+        "dots": 14440
+      },
+      "candidate": {
+        "tpw": 354.00712444664595,
+        "fpw": 14027.602465045627,
+        "fnw": 1539.992875553354,
+        "n_truth": 1894,
+        "dots": 14231
+      },
+      "same_size_random": {
+        "tpw": 369.18088822510623,
+        "fpw": 14062.819225558918,
+        "fnw": 1524.8191117748938,
+        "n_truth": 1894,
+        "dots": 14275
+      }
+    },
+    {
+      "seed": 168,
+      "fold": "NE_LidarGapHeavy",
+      "fold_id": 1,
+      "n_withheld_positive_px": 2785,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 58064,
+      "eligible_links": 111,
+      "convergent_links": 8,
+      "all_topology_dots": 607,
+      "convergent_topology_dots": 64,
+      "candidate_feature_tp": 2,
+      "candidate_feature_fp": 35,
+      "baseline": {
+        "tpw": 884.4841040499942,
+        "fpw": 17610.905001751787,
+        "fnw": 1900.5158959500059,
+        "n_truth": 2785,
+        "dots": 18091
+      },
+      "candidate": {
+        "tpw": 777.8125209299832,
+        "fpw": 17316.044849778384,
+        "fnw": 2007.1874790700167,
+        "n_truth": 2785,
+        "dots": 17745
+      },
+      "same_size_random": {
+        "tpw": 790.5877248386557,
+        "fpw": 17308.123539104214,
+        "fnw": 1994.4122751613443,
+        "n_truth": 2785,
+        "dots": 17742
+      }
+    },
+    {
+      "seed": 168,
+      "fold": "SW",
+      "fold_id": 2,
+      "n_withheld_positive_px": 4046,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 56388,
+      "eligible_links": 120,
+      "convergent_links": 14,
+      "all_topology_dots": 673,
+      "convergent_topology_dots": 87,
+      "candidate_feature_tp": 1,
+      "candidate_feature_fp": 62,
+      "baseline": {
+        "tpw": 490.93283741673997,
+        "fpw": 18197.41314426851,
+        "fnw": 3555.06716258326,
+        "n_truth": 4046,
+        "dots": 18459
+      },
+      "candidate": {
+        "tpw": 417.7271315128296,
+        "fpw": 17783.162468003356,
+        "fnw": 3628.2728684871704,
+        "n_truth": 4046,
+        "dots": 18007
+      },
+      "same_size_random": {
+        "tpw": 422.83859109225045,
+        "fpw": 17780.181775467565,
+        "fnw": 3623.1614089077493,
+        "n_truth": 4046,
+        "dots": 18005
+      }
+    },
+    {
+      "seed": 168,
+      "fold": "SE",
+      "fold_id": 3,
+      "n_withheld_positive_px": 3584,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 57118,
+      "eligible_links": 88,
+      "convergent_links": 4,
+      "all_topology_dots": 497,
+      "convergent_topology_dots": 23,
+      "candidate_feature_tp": 0,
+      "candidate_feature_fp": 14,
+      "baseline": {
+        "tpw": 643.2026209594083,
+        "fpw": 14288.118111892874,
+        "fnw": 2940.7973790405917,
+        "n_truth": 3584,
+        "dots": 14635
+      },
+      "candidate": {
+        "tpw": 594.5761287835054,
+        "fpw": 13998.960319177138,
+        "fnw": 2989.4238712164947,
+        "n_truth": 3584,
+        "dots": 14321
+      },
+      "same_size_random": {
+        "tpw": 597.4923262170505,
+        "fpw": 14005.453222065345,
+        "fnw": 2986.5076737829495,
+        "n_truth": 3584,
+        "dots": 14329
+      }
+    },
+    {
+      "seed": 169,
+      "fold": "NW",
+      "fold_id": 0,
+      "n_withheld_positive_px": 2047,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 58739,
+      "eligible_links": 67,
+      "convergent_links": 7,
+      "all_topology_dots": 396,
+      "convergent_topology_dots": 40,
+      "candidate_feature_tp": 0,
+      "candidate_feature_fp": 3,
+      "baseline": {
+        "tpw": 490.24112890264,
+        "fpw": 14226.188348177184,
+        "fnw": 1556.75887109736,
+        "n_truth": 2047,
+        "dots": 14504
+      },
+      "candidate": {
+        "tpw": 363.82888556726266,
+        "fpw": 14026.542765813861,
+        "fnw": 1683.1711144327373,
+        "n_truth": 2047,
+        "dots": 14238
+      },
+      "same_size_random": {
+        "tpw": 381.3694843668525,
+        "fpw": 14029.700144465529,
+        "fnw": 1665.6305156331475,
+        "n_truth": 2047,
+        "dots": 14250
+      }
+    },
+    {
+      "seed": 169,
+      "fold": "NE_LidarGapHeavy",
+      "fold_id": 1,
+      "n_withheld_positive_px": 2870,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 57971,
+      "eligible_links": 108,
+      "convergent_links": 10,
+      "all_topology_dots": 572,
+      "convergent_topology_dots": 59,
+      "candidate_feature_tp": 0,
+      "candidate_feature_fp": 51,
+      "baseline": {
+        "tpw": 828.284867362936,
+        "fpw": 17605.267551660432,
+        "fnw": 2041.715132637064,
+        "n_truth": 2870,
+        "dots": 18079
+      },
+      "candidate": {
+        "tpw": 765.9174010009463,
+        "fpw": 17327.264946693158,
+        "fnw": 2104.0825989990535,
+        "n_truth": 2870,
+        "dots": 17769
+      },
+      "same_size_random": {
+        "tpw": 762.6412586260309,
+        "fpw": 17313.379328609994,
+        "fnw": 2107.358741373969,
+        "n_truth": 2870,
+        "dots": 17753
+      }
+    },
+    {
+      "seed": 169,
+      "fold": "SW",
+      "fold_id": 2,
+      "n_withheld_positive_px": 3970,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 56460,
+      "eligible_links": 113,
+      "convergent_links": 18,
+      "all_topology_dots": 649,
+      "convergent_topology_dots": 117,
+      "candidate_feature_tp": 0,
+      "candidate_feature_fp": 101,
+      "baseline": {
+        "tpw": 509.0115267425732,
+        "fpw": 18187.858351245333,
+        "fnw": 3460.988473257427,
+        "n_truth": 3970,
+        "dots": 18466
+      },
+      "candidate": {
+        "tpw": 456.9544358775035,
+        "fpw": 17808.26995984043,
+        "fnw": 3513.0455641224967,
+        "n_truth": 3970,
+        "dots": 18060
+      },
+      "same_size_random": {
+        "tpw": 467.4593420860906,
+        "fpw": 17776.234267249427,
+        "fnw": 3502.5406579139094,
+        "n_truth": 3970,
+        "dots": 18034
+      }
+    },
+    {
+      "seed": 169,
+      "fold": "SE",
+      "fold_id": 3,
+      "n_withheld_positive_px": 3429,
+      "feature_buffer_px": 3,
+      "visible_fault_pixels_for_features": 57235,
+      "eligible_links": 96,
+      "convergent_links": 4,
+      "all_topology_dots": 513,
+      "convergent_topology_dots": 22,
+      "candidate_feature_tp": 0,
+      "candidate_feature_fp": 16,
+      "baseline": {
+        "tpw": 659.6696470732054,
+        "fpw": 14330.96616045255,
+        "fnw": 2769.3303529267946,
+        "n_truth": 3429,
+        "dots": 14676
+      },
+      "candidate": {
+        "tpw": 615.3848377793931,
+        "fpw": 13993.39488560865,
+        "fnw": 2813.615162220607,
+        "n_truth": 3429,
+        "dots": 14315
+      },
+      "same_size_random": {
+        "tpw": 614.4635271052264,
+        "fpw": 13988.570840290316,
+        "fnw": 2814.5364728947734,
+        "n_truth": 3429,
+        "dots": 14309
+      }
+    }
+  ],
+  "elapsed_seconds": 158.1161618232727,
+  "uniqueness_preplacement": {
+    "registry_repositories_requested": [
+      "GEMSDOE24",
+      "GEMSDOE25",
+      "GEMSDOE27",
+      "GEMSDOE28",
+      "GEMSDOE30",
+      "GEMSDOE31",
+      "GEMSDOE32",
+      "GEMSDOE33",
+      "GEMSDOE36"
+    ],
+    "source": "owner GitHub main-branch codeload mirrors; secondary, not organizer-authenticated",
+    "candidate_surface_positive_pixels": 229,
+    "candidate_convergent_links": 37,
+    "duplicate_trigger": {
+      "registry_raster": "GEMSDOE27 docs/downloads/gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-allfinite.tif",
+      "registry_raster_sha256": "f881810d6713a4bd8d6f9fd15bca99cc928ea052473bbd6a82c738d54dd4067b",
+      "candidate_dots_within_3px": 229,
+      "candidate_dot_count": 229,
+      "fraction": 1.0,
+      "protocol_threshold": 0.7,
+      "decision": "DUPLICATE \u2014 stop before final raster placement or TIFF writing"
+    },
+    "rank_correlation": "NOT COMPUTED: the >70% dot-overlap duplicate stop condition was already met",
+    "final_raster_comparison": "NOT RUN; final dots/TIFF were not written after the pre-placement duplicate stop",
+    "all_nine_site_registries_downloaded": "Their current main-branch download TIFF corpora were mirrored locally; comparison stopped at first protocol-triggering duplicate and did not continue through remaining files."
+  },
+  "verdict": "negative; holdout gate failed and pre-placement uniqueness gate triggered duplicate stop",
+  "run_card": {
+    "hypothesis": "H29-1 convergent-tip relay support: keep a visible-label-derived fault-gap link only when another independent eligible link converges within the preregistered corridor tolerances.",
+    "mechanism": "Independent visible fault tips may indicate a missing relay strand; in this catalogue-internal test the supported subset performed worse than the full current-best topology baseline.",
+    "named_non_fault_mimic": "Drainage/canyon alignment or map-digitisation snapping can mimic a corridor without an uncatalogued fault.",
+    "holdout_dti_and_ci": "HOLDOUT-DTI (GEMSDOE27 evaluator: holdout.make_split(feature_buffer_px=3) + metric.dti_binary; metric SHA-256 4b0a600d7fa92e1338b3f8ffeed3df76031ab94725f8143df1fc194c40bfb101; 123,150 withheld-positive cell instances across 40 fold/seed cells): baseline 0.105108, 95% CI [0.102007, 0.108071]; candidate 0.095266, 95% CI [0.092017, 0.098562]; paired \u0394DTI \u22120.009842, 95% CI [\u22120.010714, \u22120.008880]. Seed-cluster bootstrap with 10,000 resamples; seeds 160\u2013169.",
+    "leakage_canary": "HOLDOUT-CANARY AUC 0.500057 (binary tie-aware; below 0.90 leakage alarm).",
+    "correlation_overlap_vs_registry": "LANE-CHECK: pre-placement surface has 229 positive dots; 229/229 (100%) are within 3 px of the GEMSDOE27 all-increments registry raster (SHA-256 f881810d6713a4bd8d6f9fd15bca99cc928ea052473bbd6a82c738d54dd4067b). Duplicate threshold >70% triggered. Rank correlation and final-raster check not run after stop.",
+    "raster_sha256": "NONE \u2014 no GeoTIFF generated; duplicate stop occurred before placement.",
+    "validator_output": "NOT RUN \u2014 no TIF exists. Format, range, CRS, shape and transform are therefore not certified for this experiment.",
+    "submission_name": "NONE \u2014 not generated / not slot eligible.",
+    "submission_note": "NOT GENERATED: holdout gate failed; pre-placement duplicate guard matched 100% of dots within 3 px.",
+    "verdict": "negative"
+  }
+}

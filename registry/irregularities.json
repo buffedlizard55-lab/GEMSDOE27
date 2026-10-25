@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-03 | Session 5: H27-10 diagnostic disclosed; current GDR fetch workflow runs failed before jobs and are recorded without inferring source availability.",
+ "generated": "2026-10-25 | Session 6: H33-2-B2 score/receipt inconsistency reviewed against pinned owner-repository commit d781d41e; user-reported leaderboard value noted.",
  "items": [
   {
    "id": "prompt-verbatim-unavailable",
@@ -228,6 +228,24 @@
    "severity": "medium",
    "issue": "Six confirmed GitHub Actions runs for .github/workflows/fetch-gdr-external-layers.yml are recorded through branch head a58e74d: 37099986237 on feature commit 0ddaa3f, 37100053264 on PR #9 merge commit 733e2b2, 37100608786 on follow-up commit 50c0052, 37100751573 on branch-sync commit 443138d, 37100935082 on documentation commit b2f6c6b, and 37101134684 on documentation commit a58e74d. Each concluded failure; the Actions API reports zero jobs and gh run view --log-failed reports 'log not found'. No download script step ran and no fetch artifact/inventory was produced in this checkout. This is a point-in-time record; later pushes may create other workflow runs. It does not show that the official GDR files are unavailable or fail their pins.",
    "action": "Keep H27-16 UNTRIED and require a successful authorized runner job plus SHA-256 verification of the raw bytes before feature use. Have a repository maintainer investigate the Actions trigger, permissions, approval state, or runner configuration; the empty run records do not identify which, if any, caused the failure. The separate 2026-09-30 sibling-runner record is provenance for the pins, not evidence of a fetch in this checkout."
+  },
+  {
+   "id": "h33-2-b2-score-unconfirmed",
+   "severity": "high",
+   "issue": "User attributes 0.2778 to GEMSDOE32 H33-2-B2. Five owner-generated files were directly retrieved and SHA-256 recorded at pinned GEMSDOE32 commit d781d41e809366b2d5430fbca8bf0ebccd25202f. The audit labels its 0.274673 value as a projection and UNSCORED; the primary file manifest has receipt:null, and the validation instrument row has owner_reported_live_dti:null. These repository artifacts do not substantiate the user's 0.2778 score-to-file association.",
+   "action": "Treat 0.2778 as user-reported, not organizer-confirmed. Do not claim the projection explains the score. Resolve only with an authorized owner-held submission-page receipt or official score record; this agent does not access DrivenData."
+  },
+  {
+   "id": "leaderboard-latest-claim-4413-unverified",
+   "severity": "medium",
+   "issue": "User reports current leaderboard high 0.4413; this repo has an older owner-reported 0.3195 value, while checked sibling leaderboard snapshots are from Oct 4 and show different values. No up-to-date official page was accessed in this session.",
+   "action": "Keep 0.4413 labelled user-reported; do not replace registry values or describe it as verified without an owner-provided receipt/snapshot."
+  },
+  {
+   "id": "h29-1-preplacement-duplicate-stop",
+   "severity": "high",
+   "issue": "H29-1 convergent-tip support failed its frozen buffered holdout (pooled candidate DTI 0.09527 vs same-run baseline 0.10511; paired Δ -0.00984, 95% CI [-0.01071,-0.00888]). Before final placement, its 229-dot surface was 100% within 3 px of the GEMSDOE27 all-increments registry raster (SHA-256 f881810d6713a4bd8d6f9fd15bca99cc928ea052473bbd6a82c738d54dd4067b), exceeding the >70% duplicate stop threshold. No final raster or TIFF was written; rank-correlation and final-map checks were not run after the stop.",
+   "action": "Negative result. Keep out of submission slots; do not construct a full-map artifact or rerun/tune the consumed seeds 160-169. A future new experiment must use a distinct, preregistered topology hypothesis and fresh seeds."
   }
  ]
 }

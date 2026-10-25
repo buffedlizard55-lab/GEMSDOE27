@@ -1,6 +1,6 @@
 {
-  "generated": "2026-10-03",
-  "status": "Session 5 screen current as of 2026-10-03: four genuinely untried hypotheses remain. H27-10 was tested on seeds 150-159 and failed its frozen gate; it is excluded from the untried list. No weekly slot has been used. H27-16 raw packages remain absent; the local fetch-workflow runs failed with zero jobs/no logs, so no new package verification is claimed.",
+  "generated": "2026-10-25",
+  "status": "Session 6 update: H29-1 was preregistered and tested on seeds 160-169; its frozen holdout gate failed and the pre-placement duplicate guard stopped it. No slot selected. The four hypotheses in the legacy list below remain untried cross-method ideas, but they are not the active topology-gap-closure lane. From the Session 6 preregistered three-idea topology screen, only H29-2 and H29-3 remain untested; do not implement either without a fresh 3-5 hypothesis screen, preregistration, and unused seeds.",
   "novelty_scope": "Screened against this checkout, its evidence ledger, and the owner-provided comparison list. The sibling score list does not include complete source methods; global novelty is unknown.",
   "target": "Fault-location pixels in the organizer-created test labels, which remain unobserved here. Catalogue-internal holdouts are only a proxy and cannot validate far-field behavior.",
   "baseline": {
@@ -9,7 +9,7 @@
     "evidence": "evidence/h28_1_edge_holdout.json; seeds 140-149; +0.00294884 mean paired DTI over base_oof + T-v2 + H27-4 r1, 3/4 folds and 9/10 seeds",
     "limitation": "Catalogue-internal component-hidden, four-quadrant holdout. It is not the organizer-created expert-label set and is especially weak for the far field."
   },
-  "ranking_basis": "Expert priors on potential paired catalogue-holdout \u0394DTI \u00d7 testability / engineering cost. These ranges are planning priors only, not measurements or leaderboard predictions. H27-10 is a completed, rejected test, not part of this untried ranking.",
+  "ranking_basis": "Expert priors on potential paired catalogue-holdout ΔDTI × testability / engineering cost. These ranges are planning priors only, not measurements or leaderboard predictions. H27-10 is a completed, rejected test, not part of this untried ranking.",
   "hypotheses": [
     {
       "id": "H27-16",
@@ -105,7 +105,7 @@
     {
       "id": "H27-10",
       "title": "Model-ranked 100-300 m offset-scarp annulus substitution",
-      "status": "TESTED \u2014 FROZEN GATE FAILED; not untried and not eligible to justify a weekly slot",
+      "status": "TESTED — FROZEN GATE FAILED; not untried and not eligible to justify a weekly slot",
       "validation": "knowledge/03_preregistration_topology_gate.md#addendum-f-h27-10; evidence/h27_10_annulus_holdout.json; initial diagnostic output preserved at evidence/h27_10_annulus_holdout_initial.json",
       "seeds": [
         150,
@@ -128,6 +128,35 @@
       "live_break_even_efficiency": 0.052122130336889505,
       "removed_farfield_efficiency": 0.033406434892356694,
       "integrity_note": "The first-run self-distance spacing check produced a false negative. It was corrected and rerun on the same used seeds solely as an integrity check; data checks then passed, numerical results and the frozen FAIL outcome were unchanged. Not fresh confirmation."
+    },
+    {
+      "id": "H29-1",
+      "title": "Convergent-tip relay support",
+      "status": "TESTED — frozen holdout gate failed and pre-placement duplicate guard triggered stop; not eligible for TIFF, slot, or tuning.",
+      "validation": "knowledge/12_preregistration_H29-1.md; evidence/h29_1_relay_consensus_holdout.json; Session 6 review knowledge/14_session6_outcome.md",
+      "seeds": [
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169
+      ],
+      "baseline_pooled_holdout_dti": 0.10510787680124295,
+      "candidate_pooled_holdout_dti": 0.09526553599467952,
+      "mean_paired_delta_dti": -0.009842340806563432,
+      "paired_delta_ci95": [
+        -0.010713859247936016,
+        -0.008880332163147552
+      ],
+      "feature_only_auc": 0.5000566609892952,
+      "withheld_positive_cell_instances": 123150,
+      "duplicate_dots": "229/229 (100%) within 3 px of GEMSDOE27 all-increments registry raster; stop before final raster placement.",
+      "artifact": "No TIFF, raster hash, validator result, or submission name."
     }
   ],
   "separate_review_class": {
@@ -165,8 +194,68 @@
       "docs/assets/fig_map_h27_5b_priority.png"
     ],
     "refuted_signals": [
-      "graph-\u0394P ranking as a holdout-improvement signal (Addendum D-3)",
+      "graph-ΔP ranking as a holdout-improvement signal (Addendum D-3)",
       "overlapping en-echelon step-over as a holdout-improvement signal (Addendum D-4)"
+    ]
+  },
+  "session6_topology_screen": {
+    "source": "knowledge/12_preregistration_H29-1.md",
+    "lane": "topology-gap-closure",
+    "status": "H29-1 is rejected and consumed; H29-2 and H29-3 are untested planning hypotheses only. No current winner or slot promotion.",
+    "hypotheses": [
+      {
+        "id": "H29-1",
+        "title": "Convergent-tip relay support",
+        "status": "TESTED — FROZEN GATE FAILED; DUPLICATE STOP; DO NOT RERUN",
+        "validation": "evidence/h29_1_relay_consensus_holdout.json",
+        "seeds": [
+          160,
+          161,
+          162,
+          163,
+          164,
+          165,
+          166,
+          167,
+          168,
+          169
+        ],
+        "baseline_pooled_holdout_dti": 0.10510787680124295,
+        "candidate_pooled_holdout_dti": 0.09526553599467952,
+        "paired_delta_dti": -0.009842340806563432,
+        "paired_delta_ci95": [
+          -0.010713859247936016,
+          -0.008880332163147552
+        ],
+        "feature_only_auc": 0.5000566609892952,
+        "uniqueness": "229/229 pre-placement dots within 3 px of a registry raster; >70% duplicate stop; no TIFF."
+      },
+      {
+        "id": "H29-2",
+        "title": "Dimensionless gap-to-system scale",
+        "status": "UNTESTED; planning only; no implementation authorization",
+        "expected_holdout_delta_dti_prior": [
+          0.0,
+          0.002
+        ],
+        "layers": "Visible-fault component graph per fold; gap length divided by geometric mean of adjoining component lengths.",
+        "why": "A segmentation break may be short relative to adjoining strands independent of absolute fault scale.",
+        "difference": "T-v2 has a fixed merged_km <= 8 indicator, not a frozen dimensionless gap/system-size feature.",
+        "cost": "Low-medium; threshold-selection risk; no new external data."
+      },
+      {
+        "id": "H29-3",
+        "title": "Connectivity-definition robustness",
+        "status": "UNTESTED; planning only; no implementation authorization",
+        "expected_holdout_delta_dti_prior": [
+          -0.001,
+          0.002
+        ],
+        "layers": "Visible-fault graph derived under both 4- and 8-connected raster conventions.",
+        "why": "Reject links that exist only due to diagonal pixel contacts; prioritize gaps robust to raster topology.",
+        "difference": "Current graph and holdout use 8-connectivity only; no 4/8 concordance feature exists.",
+        "cost": "Medium-high; requires independent 4-connected graph builder; no new external data."
+      }
     ]
   }
 }

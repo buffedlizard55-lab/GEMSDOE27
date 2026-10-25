@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-03 (Session 5 update and post-merge closeout: H27-10 failed its frozen gate; H27-5b review class added; GDR fetch workflow failure disclosed without inferring source availability)",
+ "generated": "2026-10-25 | Session 6: H29-1 convergent-tip relay support preregistered, tested on buffered holdout, rejected and duplicate-stopped.",
  "ranking_rule": "expected DTI gain x probability the test can actually validate it / cost. Session 4 ranks the two routes that add information or settle the question (H27-17, H27-16) above the shipped increments, because Session 3 proved that rearranging pixels cannot exceed ~0.2550 and Session 4 proved that the catalogue-internal proxy cannot see the far-field habitat where 81.4% of the live emission's dots sit.",
  "hypotheses": [
   {
@@ -12,7 +12,7 @@
    "differs": "Every other candidate in this repo changes the emission's budget, geometry or near field as well; this is the programme's first single-variable far-field A/B against a file with a known live score.",
    "status": "BUILT AND VERIFIED, UNSCORED, MEASUREMENT PROBE - NOT THE RECOMMENDED SUBMISSION. Slot 5 gems27-farfield-swap-augmented-detector-probe-20261002-a34b0799df59-nan.tif (sha256 f8e6c76cf584..., 1,632,158 B, 60,069 px): near field 11,153 px byte-identical, exactly 9,783 far-field dots swapped (16.29% of the file; symmetric difference 32.57%), no pixel changed closer than 300 m to the catalogue, added dots >=1.5 px from every kept dot and off-catalogue, note 194 chars. Mean detector probability: dropped 0.0288, added 0.4380, kept far-field 0.1510; added dots' median catalogue distance 640 m and 31.7% are >=1 km out, so they are not hugging the 300 m boundary. scripts/verify_downloads.py: 0 failures over 5 slots. Registered interpretation (knowledge/03 Addendum E): >=0.2507 adopt the detector; 0.2447-0.2507 no measurable far-field information; <=0.2447 refuted. Declared downside: if it carries no information this randomises 16.3% of the best file's dots and should cost ~0.003-0.008.",
    "gain": "information: it is the only experiment that can license or close all future detector work",
-   "cost": "one weekly slot; Slot 1 remains the recommendation",
+   "cost": "one weekly slot; the prior Slot 1 recommendation is historical and was not reselected in Session 6",
    "external": []
   },
   {
@@ -30,17 +30,17 @@
     {
      "name": "GDR 1391 paleo-geothermal regional features (sinter/tufa/travertine, altered bedrock)",
      "url": "https://gdr.openei.org/files/1391/paleo_geothermal_regional.zip",
-     "obtainable": "The sibling 16GEMSDOE/evidence/ci/external_verification.json reportedly records an ok:true check of this package\u2019s size/hash pin on 2026-09-30. Raw bytes are not in this checkout and were not re-downloaded/re-hashed here. The reviewed fetch-workflow run set through branch head a58e74d includes runs 37099986237, 37100053264, 37100608786, 37100751573, 37100935082, and 37101134684, all of which failed before any job and produced no artifact; this does not establish source unavailability. Verify the raw bytes against the pin before use."
+     "obtainable": "The sibling 16GEMSDOE/evidence/ci/external_verification.json reportedly records an ok:true check of this package’s size/hash pin on 2026-09-30. Raw bytes are not in this checkout and were not re-downloaded/re-hashed here. The reviewed fetch-workflow run set through branch head a58e74d includes runs 37099986237, 37100053264, 37100608786, 37100751573, 37100935082, and 37101134684, all of which failed before any job and produced no artifact; this does not establish source unavailability. Verify the raw bytes against the pin before use."
     },
     {
      "name": "GDR 1391 INGENIOUS 2 m temperature-probe regional data",
      "url": "https://gdr.openei.org/files/1391/2m_temperature_probe_INGENIOUS_regional_data.zip",
-     "obtainable": "The sibling 16GEMSDOE/evidence/ci/external_verification.json reportedly records an ok:true check of this package\u2019s size/hash pin on 2026-09-30. Raw bytes are not in this checkout and were not re-downloaded/re-hashed here. The reviewed fetch-workflow run set through branch head a58e74d includes runs 37099986237, 37100053264, 37100608786, 37100751573, 37100935082, and 37101134684, all of which failed before any job and produced no artifact; this does not establish source unavailability. Verify the raw bytes against the pin before use."
+     "obtainable": "The sibling 16GEMSDOE/evidence/ci/external_verification.json reportedly records an ok:true check of this package’s size/hash pin on 2026-09-30. Raw bytes are not in this checkout and were not re-downloaded/re-hashed here. The reviewed fetch-workflow run set through branch head a58e74d includes runs 37099986237, 37100053264, 37100608786, 37100751573, 37100935082, and 37101134684, all of which failed before any job and produced no artifact; this does not establish source unavailability. Verify the raw bytes against the pin before use."
     },
     {
      "name": "GDR 1391 Great Basin Quaternary volcanics (polygons)",
      "url": "https://gdr.openei.org/files/1391/great_basin_q_volcanics.zip",
-     "obtainable": "The sibling 16GEMSDOE/evidence/ci/external_verification.json reportedly records an ok:true check of this package\u2019s size/hash pin on 2026-09-30. Raw bytes are not in this checkout and were not re-downloaded/re-hashed here. The reviewed fetch-workflow run set through branch head a58e74d includes runs 37099986237, 37100053264, 37100608786, 37100751573, 37100935082, and 37101134684, all of which failed before any job and produced no artifact; this does not establish source unavailability. Verify the raw bytes against the pin before use."
+     "obtainable": "The sibling 16GEMSDOE/evidence/ci/external_verification.json reportedly records an ok:true check of this package’s size/hash pin on 2026-09-30. Raw bytes are not in this checkout and were not re-downloaded/re-hashed here. The reviewed fetch-workflow run set through branch head a58e74d includes runs 37099986237, 37100053264, 37100608786, 37100751573, 37100935082, and 37101134684, all of which failed before any job and produced no artifact; this does not establish source unavailability. Verify the raw bytes against the pin before use."
     }
    ]
   },
@@ -120,7 +120,7 @@
    "signature": "Reallocate the exact number of H27-4 r1-pruned OOF dots into the 1 < distance <= 3 px (100-300 m) annulus around known catalogue traces. Rank eligible OOF ridge cells by the frozen H28-1 OOF detector probability; preserve the total dot count, T-v2 links, and >=1.5 px spacing.",
    "why": "A LiDAR-supported ridge offset from a mapped Quaternary trace may be an unlabelled parallel strand or splay. The official Hermant et al. (2025) PDF says one local USGS/TLS separation can be up to 400 m; it does not establish a typical 150-400 m distribution or validate the selected 100-300 m band. Prior habitat tomography failed validation and is not evidence for the location. The experiment tests this narrow band directly on catalogue-internal hidden components, whose transfer limit is explicit.",
    "differs": "H27-4 removes d<=1 px emissions; this version tests whether the pruned dot budget is better reallocated to model-ranked 1<d<=3 px OOF ridges than to the current best's lower-probability >3 px dots. It does not use SLIPSENSE/DIPDIRECT to claim a mechanically predicted side: no local stress model or preregistered sidedness rule is available.",
-   "status": "TESTED \u2014 FROZEN GATE FAILED on seeds 150-159; do not treat as untried or use to justify a weekly slot. Mean paired \u0394DTI +0.00084615 (required \u2265+0.001); 4/4 folds but 7/10 seeds (required \u22658/10); annulus addition efficiency 0.03357 < m(0.2477)=0.05212. First-run self-distance spacing diagnostic false-negative is recorded; corrected rerun on the same used seeds passed data checks with numerical result and gate unchanged (integrity check only, not fresh confirmation). See evidence/h27_10_annulus_holdout.json, evidence/h27_10_annulus_holdout_initial.json, and registry/irregularities.json.",
+   "status": "TESTED — FROZEN GATE FAILED on seeds 150-159; do not treat as untried or use to justify a weekly slot. Mean paired ΔDTI +0.00084615 (required ≥+0.001); 4/4 folds but 7/10 seeds (required ≥8/10); annulus addition efficiency 0.03357 < m(0.2477)=0.05212. First-run self-distance spacing diagnostic false-negative is recorded; corrected rerun on the same used seeds passed data checks with numerical result and gate unchanged (integrity check only, not fresh confirmation). See evidence/h27_10_annulus_holdout.json, evidence/h27_10_annulus_holdout_initial.json, and registry/irregularities.json.",
    "gain": "Observed catalogue-holdout result: +0.00084615 paired mean DTI; frozen gate failed. No live score or weekly slot.",
    "cost": "low-medium; cached, hash-pinned feature inputs and existing OOF/link code; one holdout run",
    "external": [
@@ -242,7 +242,7 @@
    "signature": "Drop isolated emitted dots that have no other emitted dot within 600 m (6 px), on the hypothesis that isolated specks are false-positive noise whereas multi-dot chains are true fault scarps.",
    "why": "Tests whether isolated dots in a d=1.5 thinned ridge emission have efficiency below the break-even threshold m(D).",
    "differs": "Graph filter on the emission itself rather than on the catalogue.",
-   "status": "REFUTED on the honest 4-fold spatial-CV out-of-fold detector B_oof (Addendum C, seeds 130-139, evidence/oof_hypothesis_gates.json): isolated dots removed by the 600 m filter had hit efficiency 0.0329 (> m_oof = 0.0175), so dropping them reduced DTI in 4/4 folds (mean -0.0010, min -0.0013, max -0.0006). Because catalogued fault segments have a median length of 1.27 km, a single d=1.5 thinned scarp fragment often consists of 1-2 dots; dropping isolated dots discards real short faults. Rejected \u2014 no submission slot spent.",
+   "status": "REFUTED on the honest 4-fold spatial-CV out-of-fold detector B_oof (Addendum C, seeds 130-139, evidence/oof_hypothesis_gates.json): isolated dots removed by the 600 m filter had hit efficiency 0.0329 (> m_oof = 0.0175), so dropping them reduced DTI in 4/4 folds (mean -0.0010, min -0.0013, max -0.0006). Because catalogued fault segments have a median length of 1.27 km, a single d=1.5 thinned scarp fragment often consists of 1-2 dots; dropping isolated dots discards real short faults. Rejected — no submission slot spent.",
    "gain": "-0.0010 on OOF holdout (negative in 4/4 folds). Do not ship.",
    "cost": "Tested and rejected on holdout (0 slots spent).",
    "external": null
@@ -285,6 +285,20 @@
    "gain": "none - failed its own leave-one-out validation",
    "cost": "Tested and rejected (0 slots spent); evidence/live_truth_partition_radial.json",
    "external": null
+  },
+  {
+   "id": "H29-1",
+   "rank": 17,
+   "title": "Convergent-tip relay support",
+   "layers": "Competition fault-label raster as a per-split skeleton/component/end-point graph; only buffered visible catalogue pixels generate graph/link features.",
+   "signature": "A z>=3 1-4 km gap link is eligible only if an independent link between a different unordered pair of visible fault components has midpoint distance <=500 m and axial-strike difference <=15 degrees.",
+   "why": "Several independent mapped fault tips converging into the same short corridor could indicate an uncompiled relay strand rather than an isolated nearest-neighbour connection.",
+   "differs": "T-v2 evaluates each link independently with its fixed evidence score; this preregistered rule requires pairwise corridor convergence and does not use FID names or kinematic labels.",
+   "status": "TESTED — NEGATIVE; holdout gate failed (seeds 160-169, 40 cells; 3 px feature buffer). Pre-placement uniqueness gate then found 100% of its 229 candidate dots within 3 px of a GEMSDOE27 all-increments registry raster; duplicate recorded and execution stopped before TIFF writing. Do not promote or repeat.",
+   "gain": "HOLDOUT-DTI pooled baseline 0.105108; H29-1 0.095266; paired delta -0.009842; seed-cluster 95% CI for delta [-0.010714,-0.008880]. Catalogue-internal; not a competition score.",
+   "cost": "Tested (one experiment, 157 seconds); no external data; 0 weekly slots spent.",
+   "external": null,
+   "evidence": "knowledge/12_preregistration_H29-1.md; evidence/h29_1_relay_consensus_holdout.json; knowledge/13_h33_score_review_2026-10-25.md"
   }
  ]
 }

@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-03 | Session 5 closeout: current GDR fetch workflow runs failed before jobs; no local package verification or inventory is claimed.",
+ "generated": "2026-10-25 | Session 6: pinned and SHA-256 verified five owner-repository GEMSDOE32 H33-2-B2 artifacts at commit d781d41e; no DrivenData contact.",
  "note": "Verification status is stated per row; 'not read' means exactly that. The agent never fetches drivendata.org after the three one-off reads recorded here.",
  "sources": [
   {
@@ -279,6 +279,18 @@
    "status": "read (fetched via gh api on 2026-10-02; recorded by a GitHub Actions runner on 2026-09-30)",
    "accessed": "2026-10-02",
    "evidence": "Session-4 record; pins copied verbatim into scripts/fetch_external_layers.py",
+   "feed": false
+  },
+  {
+   "id": "gemsdoe32-h33-2-b2-owner-artifacts",
+   "title": "GEMSDOE32 H33-2-B2 owner-generated submission manifest, raster audit, and holdout records",
+   "publisher": "buffedlizard55-lab/GEMSDOE32 (owner sibling repository; not organizer)",
+   "url": "https://github.com/buffedlizard55-lab/GEMSDOE32/blob/d781d41e809366b2d5430fbca8bf0ebccd25202f/docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-audit.json",
+   "category": "sibling provenance / learning reference",
+   "used_for": "Audit of the requested H33-2-B2 artifact construction, raster SHA-256/grid/range properties, and claimed calibrated model outputs. Used only for learning; no candidate TIFF copied.",
+   "status": "Directly retrieved from GitHub REST Contents API at immutable owner-repository commit d781d41e809366b2d5430fbca8bf0ebccd25202f on 2026-10-25; raw-byte SHA-256 and Git blob IDs recorded in evidence/gemsdoe32_h33_source_check.json. Owner-generated evidence only; no organizer score/receipt verified.",
+   "accessed": "2026-10-25",
+   "evidence": "At the pinned commit, docs/downloads/submissions_manifest.json lists H33-2-B2 as available/primary and receipt:null; the audit records 37,654 emitted pixels and projected_dti_if_live_credit_matches=0.274673; evidence/h33_validation.json lm_validity_report.rows has owner_reported_live_dti=null for H33-2-B2. These are owner/model statements, not organizer confirmation. See knowledge/13_h33_score_review_2026-10-25.md and evidence/gemsdoe32_h33_source_check.json.",
    "feed": false
   }
  ]

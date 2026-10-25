@@ -10,7 +10,7 @@ Ranking rule: expected DTI gain x probability the test can validate it / cost. B
 * **How it differs from the repo:** Every other candidate in this repo changes the emission's budget, geometry or near field as well; this is the programme's first single-variable far-field A/B against a file with a known live score.
 * **Status:** BUILT AND VERIFIED, UNSCORED, MEASUREMENT PROBE - NOT THE RECOMMENDED SUBMISSION. Slot 5 gems27-farfield-swap-augmented-detector-probe-20261002-a34b0799df59-nan.tif (sha256 f8e6c76cf584..., 1,632,158 B, 60,069 px): near field 11,153 px byte-identical, exactly 9,783 far-field dots swapped (16.29% of the file; symmetric difference 32.57%), no pixel changed closer than 300 m to the catalogue, added dots >=1.5 px from every kept dot and off-catalogue, note 194 chars. Mean detector probability: dropped 0.0288, added 0.4380, kept far-field 0.1510; added dots' median catalogue distance 640 m and 31.7% are >=1 km out, so they are not hugging the 300 m boundary. scripts/verify_downloads.py: 0 failures over 5 slots. Registered interpretation (knowledge/03 Addendum E): >=0.2507 adopt the detector; 0.2447-0.2507 no measurable far-field information; <=0.2447 refuted. Declared downside: if it carries no information this randomises 16.3% of the best file's dots and should cost ~0.003-0.008.
 * **Expected gain:** information: it is the only experiment that can license or close all future detector work
-* **Cost:** one weekly slot; Slot 1 remains the recommendation
+* **Cost:** one weekly slot; the prior Slot 1 recommendation is historical and was not reselected in Session 6
 
 ## H27-16 (rank 2): Three official GDR 1391 layers absent from this checkout; verified fetch pending
 
@@ -175,3 +175,13 @@ Ranking rule: expected DTI gain x probability the test can validate it / cost. B
 * **Status:** NOT IDENTIFIABLE - rejected. With overlapping geological bases the fit fails outright (in-sample R2 = -1.24). Restricted to a strict 7-cell catalogue-distance PARTITION (well identified, mass constraint exact) it still fails: in-sample R2 = -0.360, leave-one-submission-out score RMSE 0.0715 against a score spread of 0.0686 - signal ratio 0.96, i.e. no better than predicting the mean. 20 aggregate numbers cannot resolve a 5.2 M-pixel field. The fitted lambda put 66% of truth in the 100-200 m catalogue ring and 34% at 800-1500 m, which is suggestive and consistent with Hermant et al. (2025) 150-400 m LiDAR offsets, but it did not pass its own validation and MUST NOT be used to choose an emission.
 * **Expected gain:** none - failed its own leave-one-out validation
 * **Cost:** Tested and rejected (0 slots spent); evidence/live_truth_partition_radial.json
+
+## H29-1 (rank 17): Convergent-tip relay support
+
+* **Layers:** Competition fault-label raster as a per-split skeleton/component/end-point graph; only buffered visible catalogue pixels generate graph/link features.
+* **Physical signature:** A z>=3 1-4 km gap link is eligible only if an independent link between a different unordered pair of visible fault components has midpoint distance <=500 m and axial-strike difference <=15 degrees.
+* **Why it catches a fault missing from USGS/INGENIOUS:** Several independent mapped fault tips converging into the same short corridor could indicate an uncompiled relay strand rather than an isolated nearest-neighbour connection.
+* **How it differs from the repo:** T-v2 evaluates each link independently with its fixed evidence score; this preregistered rule requires pairwise corridor convergence and does not use FID names or kinematic labels.
+* **Status:** TESTED — NEGATIVE; holdout gate failed (seeds 160-169, 40 cells; 3 px feature buffer). Pre-placement uniqueness gate then found 100% of its 229 candidate dots within 3 px of a GEMSDOE27 all-increments registry raster; duplicate recorded and execution stopped before TIFF writing. Do not promote or repeat.
+* **Expected gain:** HOLDOUT-DTI pooled baseline 0.105108; H29-1 0.095266; paired delta -0.009842; seed-cluster 95% CI for delta [-0.010714,-0.008880]. Catalogue-internal; not a competition score.
+* **Cost:** Tested (one experiment, 157 seconds); no external data; 0 weekly slots spent.

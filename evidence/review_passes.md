@@ -311,3 +311,31 @@ While this branch was open, PR #5 (`arena/01a0fec2-gemsdoe27`, the H28-1 edge-co
 - **External-layer workflow irregularity:** GDR fetch runs `37099986237` (feature push, head `0ddaa3f`) and `37100053264` (main push, head `733e2b2`) concluded failure with zero jobs; `gh run view --log-failed` returned “log not found.” No fetch step or inventory artifact ran. Cause is unknown. This does not establish that GDR files are unavailable or fail their pins; the sibling 2026-09-30 pin record is provenance only. The issue is recorded in `registry/irregularities.json`, and H27-16 remains untried with packages absent from this checkout.
 - **Post-pull/follow-up local recheck:** with the branch based on PR head `bba5de0` and the source-status documentation corrections in the worktree, `./.venv/bin/python -m pytest -q` passed (**82 tests**), Ruff passed, Python compilation passed, `git diff --check` passed, and `scripts/verify_downloads.py` reported **0 failures** across the weekly files and the separate H28-1 research candidate. No submission artifact or manifest was changed.
 - **Source audit:** fetched and read all four OSTI page-service chunks (0–3) for Faulds & Hinz (2015); the full-paper status is supported. The GDR #1391 raw packages were not fetched or re-hashed in this checkout. No DrivenData access, upload, or score claim occurred. GitHub Pages deployment status was not checked in this closeout.
+
+---
+
+# Session 6 (2026-10-25) — H29-1 negative holdout, duplicate stop, H33 provenance review
+
+## Pass 1 — implement and verify
+- Read the README and AGENTS constraints; kept work in the topology-gap-closure lane. Screened three geological hypotheses and preregistered H29-1 before implementation in `knowledge/12_preregistration_H29-1.md`.
+- Corrected the shared holdout API to keep pixel-exact visible-fault scoring masks separate from the buffered visible-only feature mask. Added tests for whole-component holdout, 3-pixel feature buffering, legacy zero-buffer behavior, and convergent-link features.
+- Ran frozen seeds 160–169 over 40 cells. HOLDOUT-DTI baseline 0.1051078768, candidate 0.0952655360, paired Δ −0.0098423408; 95% seed-cluster CI [−0.0107138592, −0.0088803322]. Feature-only leakage AUC 0.5000566610. Full evidence and JSON run card: `evidence/h29_1_relay_consensus_holdout.json`.
+- The pre-placement lane comparison found 229/229 candidate dots within 3 px of one GEMSDOE27 registry raster, crossing the >70% duplicate guard. Stopped before placement; generated no H29-1 TIF, ZIP, hash, validator report, submission name, or slot selection.
+- Retrieved five owner-repository GEMSDOE32 files through GitHub REST Contents API at immutable commit `d781d41e809366b2d5430fbca8bf0ebccd25202f`; computed and recorded Git blob IDs and raw-byte SHA-256 in `evidence/gemsdoe32_h33_source_check.json`. This verifies the source snapshot, not organizer score truth.
+- Updated README, knowledge/06, knowledge/07, source/irregularity/hypothesis registries, the rendered Pages site, and the historical-candidate messaging so the Session 6 negative result and no-selection state are prominent. Existing candidate files were not modified.
+
+## Pass 2 — review for bugs, assumptions, integration
+- The targeted unit tests caught and corrected fixture/expectation issues and validation ordering before the holdout run; the final holdout/relay tests passed. Ruff then found two unused items in the H29 runner; removed them.
+- H33 review distinguishes the user-reported 0.2778 from the pinned owner audit's 0.274673 calibrated projection; manifest receipt is null, validation instrument live-score field null, and neither is organizer confirmation. Current 0.4413 remains unverified. The full provenance review links immutable owner-source files.
+- The first broader test invocation via the `pytest` console entrypoint failed collection because that entrypoint omitted the repository root from Python import paths. The repo-compatible `.venv/bin/python -m pytest -q` invocation passed after updating one stale site-heading assertion and adding Session 6 page assertions.
+- Rebuilt the site from source; `89` tests pass, `ruff check src scripts tests` passes, `scripts/verify_downloads.py` passes with 0 failures for existing historical files, and `git diff --check` passes. The validator checks inherited artifacts only; no H29-1 output exists to validate.
+
+## Pass 3 — recheck against the user request
+| requirement / constraint | outcome | residual limitation |
+|---|---|---|
+| Named sites/results and H33-2-B2 evidence boundary | H33 owner files pinned and hashed; 0.2778 and 0.4413 remain unconfirmed claims, not scores asserted by this agent | an authorized owner must provide a verifiable submission receipt/score; no DrivenData access or upload |
+| Propose 3–5 geology hypotheses; preregister top and use spatial holdout before a slot | Session 6 screen preregistered H29-1; frozen holdout failed | no TIF or score-eligible candidate; H29-2/3 are untested only |
+| Parallel-run protocol and no leakage | shared split API preserves exact scoring masks and feature-buffered visible labels; canary AUC below alarm; 123,150 withheld-positive cell instances reported | holdout is catalogue-internal and does not establish organizer-label performance |
+| Unique candidate, registry guard, run card | pre-placement 100% 3-pixel overlap triggered the >70% stop; full JSON run card records no raster/hash/validator/name and a negative verdict | no TIFF can be produced under the duplicate stop; remaining registry corpus was not compared after stopping |
+| README and research-site update | current status and evidence rendered; historical download artifacts are explicitly not Session 6 slot selections | deployment is not checked or claimed |
+| PR/merge/upload/score | none performed or claimed | the branch remains an Arena work branch; any GitHub promotion is a separate verified action |

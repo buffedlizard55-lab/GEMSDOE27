@@ -96,9 +96,24 @@ def test_topology_and_research_pages_disclose_review_only_and_refuted_signals():
     assert "assets/fig_map_h27_5b_priority.png" in topology
     assert (ROOT / "docs" / "assets" / "fig_map_h27_5b_priority.png").is_file()
     assert "review class</th>" in topology
-    assert "Current Session 5 untried screen (4 hypotheses)" in research
+    assert "Archived Session 5 untried screen (4 hypotheses)" in research
     assert "H27-10 annulus result — REJECTED; no weekly slot." in research
     assert "h27_10_annulus_holdout_initial.json" in research
     assert "not a score or proof of transfer" in topology
     assert "graph-ΔP ranking" in topology and "refuted as holdout-improvement signals" in topology
     assert "overlapping en-echelon step-over test" in topology
+
+
+def test_session6_outcome_is_prominent_and_score_provenance_is_bounded():
+    index = (ROOT / "docs" / "index.html").read_text()
+    research = (ROOT / "docs" / "research.html").read_text()
+    summary = (ROOT / "docs" / "executive-summary.html").read_text()
+    assert "Session 6 status — no new submission generated or selected." in index
+    assert "HOLDOUT-DTI 0.095266 vs baseline 0.105108" in index
+    assert "229/229 dots within 3 px" in index
+    assert "USER-REPORTED" in index and "not organizer-confirmed" in index
+    assert "paired Δ -0.009842" in research
+    assert "0.274673" in research and "null / UNSCORED" in research
+    assert "no GeoTIFF, raster hash, validator output, or submission name exists" in research
+    assert "slot not selected this session" in summary
+    assert "full outcome" in index

@@ -112,3 +112,15 @@ This H28 run used seeds 140–149. At the time, H27-10 was reserved for seeds **
 3. **Do not spend a weekly slot on a candidate until it beats the current holdout best under its frozen gate.** Even a catalogue-internal pass does not prove transfer to organizer labels. Request a human score only through the owner; the agent must never access or upload to DrivenData.
 4. **Use the H27-5b files for geologist review if an expert is available.** Record any manual map interpretation with provenance; do not promote a link from graph importance, a setting hint, or the Tier-2 enrichment alone.
 5. **Keep the existing limitations visible:** no hidden-label or live-score evidence; NBMG FIDs are records in one compilation; compatibility can pass with missing kinematic fields; geometry cues are not field verification; the portal validator's historical error cause remains unknown; raster-dependent CI requires the restored local cache.
+
+---
+
+## Session 6 outcome and current carry-forward (2026-10-25)
+
+This section supersedes the Session 5 next-step list wherever it conflicts. Full three-pass review: `knowledge/14_session6_outcome.md`.
+
+1. **H29-1 convergent-tip relay support is negative and consumed.** Frozen seeds 160–169: baseline HOLDOUT-DTI 0.1051078768; candidate 0.0952655360; paired Δ −0.0098423408, seed-cluster 95% CI [−0.0107138592, −0.0088803322]. Feature-alone canary AUC 0.5000566610. Then the pre-placement uniqueness guard found 229/229 dots within 3 pixels of a registry raster; execution stopped. Do not rerun/tune H29-1 or write its full-map raster. Full preregistration/evidence/run card: `knowledge/12_preregistration_H29-1.md`, `evidence/h29_1_relay_consensus_holdout.json`.
+2. **No new GeoTIFF is submission-ready from Session 6.** No H29-1 TIFF, validator output or submission name exists. Existing candidate downloads remain historical; no weekly slot was selected. Slot choice is an independent owner/selector action.
+3. **H33 provenance was pinned and verified only at the owner-repository level.** Five GEMSDOE32 files were retrieved from GitHub API commit `d781d41e809366b2d5430fbca8bf0ebccd25202f`; file SHA-256/blob identities are in `evidence/gemsdoe32_h33_source_check.json`. Owner audit projection 0.274673 and null receipt do not confirm the user-reported 0.2778; current 0.4413 remains unverified. Only an authorized owner can supply organizer receipt/score evidence, and the agent does not access DrivenData.
+4. **Next method step:** the Session 6 pre-run topology screen listed H29-1/2/3. H29-2 and H29-3 are untested planning ideas only. Before implementing any new feature, form a fresh 3–5-hypothesis screen in the chosen method lane, preregister one, and use unused seeds. Do not infer positive value from their prior ranges.
+5. **Registry scan limitation:** the codeload corpus was current-main and comparison stopped at the first duplicate, as required. A future distinct candidate must be checked against available version-pinned rasters; missing/inaccessible registry files must be disclosed. No final-map correlation was measured for the stopped H29-1 candidate.

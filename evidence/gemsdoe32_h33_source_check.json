@@ -1,0 +1,44 @@
+{
+  "schema": "GEMSDOE27-GEMSDOE32-source-check-v1",
+  "retrieved_utc": "2026-10-25",
+  "repository": "https://github.com/buffedlizard55-lab/GEMSDOE32",
+  "commit": "d781d41e809366b2d5430fbca8bf0ebccd25202f",
+  "method": "GitHub REST contents API; each file fetched with immutable commit ref; sha256 computed over decoded raw file bytes",
+  "files": [
+    {
+      "path": "docs/downloads/submissions_manifest.json",
+      "git_blob_sha": "7b4cac39a568bc2cc2ce8fa8357ae4be1070718a",
+      "size_bytes": 15647,
+      "sha256": "2c9ea10b7e3a5e1c7578b79841d6432a0999c2318d31381cb2b977f6aa28e4ef",
+      "downloaded_content_sha256": "2c9ea10b7e3a5e1c7578b79841d6432a0999c2318d31381cb2b977f6aa28e4ef"
+    },
+    {
+      "path": "docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-audit.json",
+      "git_blob_sha": "5d4157e5a084345faa5d5a6ccb1fc4f12cb9a486",
+      "size_bytes": 3903,
+      "sha256": "e4db14f2e369b1db37870d8d1a31035f730512309a88810d99ff705782e28212",
+      "downloaded_content_sha256": "e4db14f2e369b1db37870d8d1a31035f730512309a88810d99ff705782e28212"
+    },
+    {
+      "path": "evidence/h33_validation.json",
+      "git_blob_sha": "29a11d5a65154a310364474957de3fd14a7a8ed7",
+      "size_bytes": 14443,
+      "sha256": "74d416a733cddbb3bc841680bb5d01270fd7958b18cba710786484c0e397348a",
+      "downloaded_content_sha256": "74d416a733cddbb3bc841680bb5d01270fd7958b18cba710786484c0e397348a"
+    },
+    {
+      "path": "docs/research/h33-hypotheses.md",
+      "git_blob_sha": "80cfc3428b7f85837a33a390240ad3d66bed247b",
+      "size_bytes": 11746,
+      "sha256": "b0a214f6bc0f1ff02211360529d96fb0e2719ee2b9eaf9f7355ed714ef25bf92",
+      "downloaded_content_sha256": "b0a214f6bc0f1ff02211360529d96fb0e2719ee2b9eaf9f7355ed714ef25bf92"
+    },
+    {
+      "path": "README.md",
+      "git_blob_sha": "1a5b884d4c4103e760337a1db958e09c55cef878",
+      "size_bytes": 73254,
+      "sha256": "28bbaf6aa18adf00c416dca5e0fb36f4d788cc1747e6460553e899200150fb67",
+      "downloaded_content_sha256": "28bbaf6aa18adf00c416dca5e0fb36f4d788cc1747e6460553e899200150fb67"
+    }
+  ]
+}

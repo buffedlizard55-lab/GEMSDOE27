@@ -1,4 +1,8 @@
-# Session 5 current hypothesis screen (2026-10-03)
+# Current carry-forward after Session 6 (2026-10-25)
+
+**H29-1 is consumed and rejected.** Its frozen seeds 160–169 must not be reused or tuned; the full negative result and duplicate-stop record are in `evidence/h29_1_relay_consensus_holdout.json`. The Session 6 pre-run screen in `knowledge/12_preregistration_H29-1.md` listed three topology-lane ideas. Only H29-2 (dimensionless gap-to-system scale) and H29-3 (4-/8-connectivity robustness) remain untested from that screen; both are planning hypotheses with broad priors, not current recommendations or implementation authorization. The candidate-ranking panel below is retained as the Session 5, cross-method untried screen and is historical relative to the topology-only Session 6 method lane. Before any future feature code, screen 3–5 genuinely distinct hypotheses in the chosen lane, preregister one, and use new seeds. No H29-1 rerun, TIFF, weekly slot, or submission selection is permitted by this result.
+
+# Archived Session 5 hypothesis screen (2026-10-03)
 
 **Status:** Four genuinely untried geological hypotheses remain. H27-10 has been tested and its frozen gate failed; it is not untried, has no weekly-slot justification, and is recorded below as a completed result. H27-5b is a separate geologist-review prioritization class, not a new holdout-improvement claim. No weekly slot has been used. Expected ΔDTI ranges below are subjective planning priors for catalogue-internal holdouts, not measurements or leaderboard predictions. Novelty is only relative to this checkout and available method descriptions; sibling-code novelty is unknown.
 

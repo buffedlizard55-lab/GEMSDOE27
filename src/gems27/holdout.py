@@ -51,13 +51,54 @@ class Split:
     seed: int
     fold_mask: np.ndarray   # full-grid bool, the quadrant
     hidden: np.ndarray      # full-grid bool, hidden truth (inside quadrant)
-    known: np.ndarray       # full-grid bool, all catalogue pixels that are NOT hidden (everywhere)
+    known: np.ndarray       # all visible catalogue pixels; exact scoring mask
+    feature_known: np.ndarray  # visible labels permitted for catalogue-derived features
+    feature_buffer_px: int
 
 
-def make_split(labels: np.ndarray, fold: np.ndarray, fold_id: int, seed: int) -> Split:
-    fm = fold == fold_id
+def make_split(
+    labels: np.ndarray,
+    fold: np.ndarray,
+    fold_id: int,
+    seed: int,
+    *,
+    feature_buffer_px: int = 0,
+) -> Split:
+    """Hide whole 8-connected components and optionally buffer feature construction.
+
+    `known` remains the pixel-exact visible-label mask used to exclude known positives from scoring.
+    `feature_known` is stricter: visible fault pixels within `feature_buffer_px` of hidden truth are
+    removed before constructing a graph, distance field, or other catalogue-derived predictor.
+    Keeping these masks separate prevents a buffer from changing the scoring truth/mask.
+
+    The zero-buffer default preserves historical preregistrations. New buffered experiments must
+    pass their frozen buffer explicitly and record it in their evidence.
+    """
+    if feature_buffer_px < 0:
+        raise ValueError("feature_buffer_px must be non-negative")
+    labels = np.asarray(labels, dtype=bool)
+    fm = np.asarray(fold == fold_id, dtype=bool)
+    if labels.shape != fm.shape:
+        raise ValueError("labels and fold grid must have equal shapes")
     hidden = hide_components(labels & fm, HIDE_FRACTION, seed=4242 + fold_id + 1000 * seed)
-    return Split(fold_id, FOLD_NAMES[fold_id], seed, fm, hidden, labels & ~hidden)
+    known = labels & ~hidden
+    if feature_buffer_px:
+        from scipy.ndimage import distance_transform_edt
+
+        d_hidden = distance_transform_edt(~hidden)
+        feature_known = known & (d_hidden > feature_buffer_px)
+    else:
+        feature_known = known.copy()
+    return Split(
+        fold_id,
+        FOLD_NAMES[fold_id],
+        seed,
+        fm,
+        hidden,
+        known,
+        feature_known,
+        int(feature_buffer_px),
+    )
 
 
 def crop(mask_or_arr: np.ndarray, fold_mask: np.ndarray) -> tuple[slice, slice]:
