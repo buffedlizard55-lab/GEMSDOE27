@@ -8,8 +8,30 @@ Format PASS is not permission to submit; negative and duplicate files remain res
 </div>
 <h1>Submission status</h1>
 
+<div class="card hero" id="h29-2" style="border-left:5px solid #cf222e">
+ <h2 style="margin-top:0">Current lane: H29-2 DIPDIRECT up-dip edge projection</h2>
+ <p><span class="badge bad" style="font-size:1.1rem">NOT OK TO SUBMIT — NO SELECTOR APPROVAL OR WEEKLY SLOT</span></p>
+ <p><b>Selector verdict:</b> negative / not promoted. A <code>promote</code> verdict means selector review only; it does not authorize a submission or upload.</p>
+ <p>HOLDOUT-DTI: D+dip 0.1061 (seed-bootstrap 95% CI [0.0991, 0.1144]) vs D 0.1221; pooled Δ -0.0160 (95% CI [-0.0233, -0.0084]); 118,467 withheld-positive occurrences. Evaluator: gems27.metric.dti_binary v1; alpha=0.2, beta=0.8, 300m triangular kernel; whole-FID seeds 300–309.</p>
+ <p><b>Canary:</b> max direction-invariant AUC 0.5591 (stop >0.90). <b>Uniqueness:</b> max surface rank correlation 0.7101 (limit 0.90); max final-dot overlap within 3 px 79.5% (limit 70%).</p>
+<p><b>Validator:</b> NOT RUN — no raster exists to validate. Footprint NaN count, [0,1] range and CRS/shape/transform checks are not applicable, not passes.</p>
+<p><b>No GeoTIFF was written:</b> Final-dot overlap with an earlier in-repository H28-1 candidate exceeded the 70% duplicate threshold; the machine run card records the exact raster and overlap.</p>
+
+ <p><b>Submission name:</b> <code>GEMSDOE27-H29-2-DIPDIRECT-EDGE-UPDIP-38K</code><br>
+ <b>Note target (&le;140 chars; not an authorization):</b> <code>H29-2 DIPDIRECT up-dip edge projection; HOLDOUT-DTI gate; unscored research artifact; not approved to submit.</code> (109 chars).</p>
+ <p><b>Hypothesis:</b> Among the D-detector&#x27;s line candidates, RTP or basement-depth gradient edges sampled 100–300 m down-dip from a target pixel will better identify the corresponding surface-fault location when the locally visible NBMG DIPDIRECT field points down-dip; project that evidence up-dip by 1–3 pixels without assuming an unverified dip magnitude.</p>
+ <p><b>Mechanism:</b> Fit the shared HistGradientBoosting detector on the 32-band prepared cache plus 15 frozen subsurface transforms; the paired arm adds three visible-FID-only, DIPDIRECT-conditioned up-dip projections of sigma-2 RTP and basement-depth gradient ranks (offsets 1, 2, 3 px), their minimum/concordance, ridge NMS, B2 exclusion and priority Poisson placement at 38,000 dots.</p>
+ <p><b>Named non-fault mimic:</b> Basin-margin lithologic contacts or cover-induced edge termination combined with inaccurate or ambiguous mapped dip direction.</p>
+ <p class="small">Sources and evidence limits: <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/20_candidate_screen_20261025.md">ranked hypothesis screen</a> ·
+ <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/21_preregistration_H29-2_20261025.md">frozen preregistration</a> ·
+ <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/evidence/h29_2_run_card_2026-10-25.json">machine run card</a> ·
+ <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0">NBMG Qfaults official layer</a>.
+ No organizer score or receipt is claimed; local mirror data were hash-pinned but not re-fetched from the official endpoint in this session.</p>
+</div>
+
+
 <div class="card hero" style="border-left:4px solid #b00">
- <h2 style="margin-top:0">&#128269; Unique submission TIF &mdash; ready to download</h2>
+ <h2 style="margin-top:0">&#128269; Research-only GeoTIFF &mdash; not approved to submit</h2>
  <p><span class="badge bad" style="font-size:1.05rem">&#9940; FORMAT-VALID + UNIQUE &mdash; NOT CERTIFIED FOR SUBMISSION (holdout DTI not measurable by design; owner selector decision required)</span></p>
  <div class="row">
   <span class="badge ok">format: single-band float32 GeoTIFF, EPSG:32611, 3730&times;3292</span>
@@ -20,18 +42,16 @@ Format PASS is not permission to submit; negative and duplicate files remain res
  <p><b>File:</b> <code>gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.tif</code> &nbsp;(801,574 bytes) &nbsp;
  <b>ZIP:</b> <code>gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.zip</code> &nbsp;(129,579 bytes) &nbsp;
  <b>SHA-256:</b> <code>8a73f01776d0c53ff99ab05bac8612768f186476846708412096ef927ea0b983</code></p>
- <p><b>One-click download:</b>
- <a href="downloads/gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.tif" class="btn">Download .tif</a>
- <a href="downloads/gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.zip" class="btn">Download .zip (single GeoTIFF)</a></p>
- <p><b>Short note to paste into the DrivenData submission form (&le;200 chars):</b></p>
+ <p><b>Research download only:</b>
+ <a href="downloads/gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.tif" class="btn alt">Download research .tif</a>
+ <a href="downloads/gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.zip" class="btn alt">Download research .zip (single GeoTIFF)</a></p>
+ <p><b>Research label only (not a submission note):</b></p>
  <p style="background:#f5f5f5;padding:0.5rem;border-radius:4px;font-family:monospace;font-size:0.9rem;">
  27GEMSDOE unique scatter-smoothed far-field | UNIQUE submission (not copied from any GEMSDOE site): scatter-smoothed (sigma=1.85 px) off-catalogue far-field emi | id 98e59bf8e3ce | not yet live-scored
  </p>
  <p><b>Hypothesis:</b> scatter-smoothed off-catalogue far-field emission</p>
  <p><b>Verdict:</b> negative. Holdout DTI not measurable by design (far-field truth absent from catalogue-internal proxy). Format-valid and unique (0% overlap with all 6 registry rasters, Spearman <= 0.008), but not holdout-promoted. NOT CERTIFIED FOR SUBMISSION — submission eligibility is the owner's separate selector decision. No live score claimed; no DrivenData upload performed.</p>
- <p class="small"><b>Submission steps:</b> 1) Download the .tif (do not open/re-save in GIS software). 2) Sign in at
- <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DrivenData #306</a>. 3) Upload the .tif (or .zip with exactly one GeoTIFF).
- 4) Paste the note above. 5) Submit and record the organiser receipt. This project never contacts drivendata.org (Terms of Use).</p>
+ <p class="small"><b>Status:</b> this research artifact is <b>not approved to submit</b>; do not upload it or assign it a weekly slot. A separate selector decision is required first. This project never contacts drivendata.org.</p>
  <p class="small"><b>Why not certified:</b> the catalogue-internal component-hidden holdout has 100% of its truth at d=0 from the published
  catalogue and 99.6% of credit within 200 m; this emission is entirely at d_cat &ge; 3 px (far field), so holdout DTI = 0 by design
  (knowledge/10). Support: GEMSDOE32 truth model (+0.0247, 12/12 draws) and convergence with GEMSDOE36 PINN (0.2750) on the B2 + ~38k optimum.
@@ -123,9 +143,9 @@ Frozen seeds 140–149: mean paired ΔDTI +0.00295; 3/4 folds and 9/10 seeds imp
 The organizer-created test labels remain unobserved; this is not a fifth weekly slot or a score.</div>
 <div class="warnbox"><b>Honest status.</b> We validated T-v2 across three holdout tiers (8-connected components: 0.280, whole NBMG FID vector polylines: 0.100 / H27-5b 0.178) and on a strictly out-of-fold 4-quadrant spatial-CV detector (ΔDTI +0.0115 solo, +0.0141 stacked with H27-4). Only a live score tests the organisers' newly created expert labels.
 Reaching the owner-stated leader (0.3195) is not possible with verified/modelled increments on H19-5 alone (they reach ≈0.262–0.270) – see <a href="research.html">research</a>.
-The agent never uploads anything; you press the button.</div>
+The agent never uploads anything; no upload is authorized until a separate selector decision explicitly approves a specific file.</div>
 <p class="small">Reference (owner-reported 0.2477): <a href="https://github.com/buffedlizard55-lab/GEMSDOE24/blob/07345ea0604953d7efb858d9cfbc21e20c7aca0b/docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif">24GEMSDOE audit record</a> (sha256 68d0e2e4fcc594f9…). It is historical comparison evidence, not a current download recommendation.</p>
 </main>
-<footer>Built 2026-10-25 22:13 UTC from <a href="https://github.com/buffedlizard55-lab/GEMSDOE27">the repository</a>. No current TIFF is approved for submission. No leaderboard score is claimed anywhere on this site.
+<footer>Built 2026-10-25 23:36 UTC from <a href="https://github.com/buffedlizard55-lab/GEMSDOE27">the repository</a>. No current TIFF is approved for submission. No leaderboard score is claimed anywhere on this site.
 Historical scores shown are owner-reported. This site never contacts drivendata.org.</footer>
 <script src="assets/app.js"></script></body></html>

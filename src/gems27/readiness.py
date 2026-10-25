@@ -46,7 +46,7 @@ def publication_decision(card: dict, root: Path) -> dict:
             "all-finite validator not passed")
     note = card.get("note_max_140_chars")
     require(isinstance(note, str) and 0 < len(note) <= 140, "missing or overlong submission note")
-    raster = card.get("raster", {})
+    raster = card.get("raster") or {}
     name = raster.get("primary_allfinite", "")
     directory = raster.get("directory", "docs/downloads/research")
     path = (root / directory / name).resolve()

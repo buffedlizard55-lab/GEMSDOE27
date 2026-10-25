@@ -1,0 +1,134 @@
+{
+  "created_utc": "2026-10-25T22:57:34.228875+00:00",
+  "purpose": "Byte-authenticated raster-content audit; scores are not authenticated by this analysis.",
+  "source_registry_sha256": "a433a83f433cf33e9230056165fd92e7fc1097e4f8a0b3d4bfd95129137e0601",
+  "grid": [
+    "EPSG:32611",
+    [
+      3730,
+      3292
+    ],
+    [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ]
+  ],
+  "g32": {
+    "registry_id": "g32_h33_2_b2",
+    "repo": "buffedlizard55-lab/GEMSDOE32",
+    "path": "docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+    "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+    "dots": 37654,
+    "score_receipt": "not present; owner-reported association is unverified"
+  },
+  "sampling": {
+    "method": "300,000 footprint cells; fixed seed 0x270",
+    "sampled_spearman": true
+  },
+  "comparisons": [
+    {
+      "registry_id": "g24_d15",
+      "dots": 60069,
+      "exact_intersection_with_g32": 25517,
+      "peer_only_exact": 34552,
+      "g32_only_exact": 12137,
+      "g32_dots_within_3px_of_peer_fraction": 1.0,
+      "spearman_binary_dot_masks_sampled_footprint": 0.5431268874707992
+    },
+    {
+      "registry_id": "g25_d28",
+      "dots": 44090,
+      "exact_intersection_with_g32": 37654,
+      "peer_only_exact": 6436,
+      "g32_only_exact": 0,
+      "g32_dots_within_3px_of_peer_fraction": 1.0,
+      "spearman_binary_dot_masks_sampled_footprint": 0.9276407736493814
+    },
+    {
+      "registry_id": "g27_tv2_d15",
+      "dots": 61328,
+      "exact_intersection_with_g32": 25517,
+      "peer_only_exact": 35811,
+      "g32_only_exact": 12137,
+      "g32_dots_within_3px_of_peer_fraction": 1.0,
+      "spearman_binary_dot_masks_sampled_footprint": 0.537134085176827
+    },
+    {
+      "registry_id": "g28_h27_4_r1",
+      "dots": 40199,
+      "exact_intersection_with_g32": 37654,
+      "peer_only_exact": 2545,
+      "g32_only_exact": 0,
+      "g32_dots_within_3px_of_peer_fraction": 1.0,
+      "spearman_binary_dot_masks_sampled_footprint": 0.9688909503668652
+    },
+    {
+      "registry_id": "g28_h32_1",
+      "dots": 42294,
+      "exact_intersection_with_g32": 36874,
+      "peer_only_exact": 5420,
+      "g32_only_exact": 780,
+      "g32_dots_within_3px_of_peer_fraction": 1.0,
+      "spearman_binary_dot_masks_sampled_footprint": 0.9271020707039275
+    },
+    {
+      "registry_id": "g28_h36_1",
+      "dots": 37660,
+      "exact_intersection_with_g32": 26248,
+      "peer_only_exact": 11412,
+      "g32_only_exact": 11406,
+      "g32_dots_within_3px_of_peer_fraction": 0.9987517926382323,
+      "spearman_binary_dot_masks_sampled_footprint": 0.6959238532077747
+    },
+    {
+      "registry_id": "g28_h38_1",
+      "dots": 37860,
+      "exact_intersection_with_g32": 26250,
+      "peer_only_exact": 11610,
+      "g32_only_exact": 11404,
+      "g32_dots_within_3px_of_peer_fraction": 0.9987517926382323,
+      "spearman_binary_dot_masks_sampled_footprint": 0.6943678209393186
+    },
+    {
+      "registry_id": "g30_d28",
+      "dots": 44090,
+      "exact_intersection_with_g32": 37654,
+      "peer_only_exact": 6436,
+      "g32_only_exact": 0,
+      "g32_dots_within_3px_of_peer_fraction": 1.0,
+      "spearman_binary_dot_masks_sampled_footprint": 0.9276407736493814
+    },
+    {
+      "registry_id": "g31_h27_4",
+      "dots": 40199,
+      "exact_intersection_with_g32": 37654,
+      "peer_only_exact": 2545,
+      "g32_only_exact": 0,
+      "g32_dots_within_3px_of_peer_fraction": 1.0,
+      "spearman_binary_dot_masks_sampled_footprint": 0.9688909503668652
+    },
+    {
+      "registry_id": "g33_h33d",
+      "dots": 41865,
+      "exact_intersection_with_g32": 31614,
+      "peer_only_exact": 10251,
+      "g32_only_exact": 6040,
+      "g32_dots_within_3px_of_peer_fraction": 0.9998406543793488,
+      "spearman_binary_dot_masks_sampled_footprint": 0.8009991770996123
+    },
+    {
+      "registry_id": "g36_anderson",
+      "dots": 38854,
+      "exact_intersection_with_g32": 37654,
+      "peer_only_exact": 1200,
+      "g32_only_exact": 0,
+      "g32_dots_within_3px_of_peer_fraction": 1.0,
+      "spearman_binary_dot_masks_sampled_footprint": 0.9850604160743271
+    }
+  ],
+  "interpretation": "Directed fraction is candidate (G32) dots within Euclidean 3 px of each peer. Exact subset relationships refute treating these raster placements as independent; they do not authenticate any score."
+}

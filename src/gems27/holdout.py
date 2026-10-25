@@ -49,9 +49,67 @@ class Split:
     fold_id: int
     name: str
     seed: int
-    fold_mask: np.ndarray   # full-grid bool, the quadrant
-    hidden: np.ndarray      # full-grid bool, hidden truth (inside quadrant)
-    known: np.ndarray       # full-grid bool, all catalogue pixels that are NOT hidden (everywhere)
+    fold_mask: np.ndarray   # full-grid bool, the evaluation domain
+    hidden: np.ndarray      # full-grid bool, withheld positive pixels
+    known: np.ndarray       # full-grid bool, visible catalogue pixels
+    hidden_group_ids: tuple[int, ...] = ()  # vector-segment groups; empty for legacy component splits
+
+
+def make_segment_split(
+    labels: np.ndarray,
+    footprint: np.ndarray,
+    group_map: np.ndarray,
+    seed: int,
+    frac: float = 0.20,
+) -> Split:
+    """Withhold complete vector-fault groups, stratified by group-centroid quadrant.
+
+    ``group_map`` is a positive integer ID per catalogue pixel (for example, the nearest
+    NBMG Qfaults feature/FID index from ``VectorAttribution.pix_fid_idx``); zero is reserved
+    for pixels without a mapped segment. A selected group is hidden on the *entire* grid,
+    including any portions outside the quadrant containing its centroid. The returned
+    ``fold_mask`` is the footprint, so callers must use ``buffered_scoring_mask`` and
+    ``buffered_training_mask`` to enforce the registered exclusion zone.
+
+    This is deliberately separate from ``make_split``: historical component-level results
+    remain reproducible, while new whole-segment gates can use the protocol-compliant split.
+    """
+    labels = np.asarray(labels, bool)
+    footprint = np.asarray(footprint, bool)
+    groups = np.asarray(group_map)
+    if labels.ndim != 2 or labels.shape != footprint.shape or labels.shape != groups.shape:
+        raise ValueError("labels, footprint and group_map must have the same 2-D shape")
+    if not np.isfinite(frac) or not 0.0 < frac < 1.0:
+        raise ValueError("frac must be finite and strictly between 0 and 1")
+    positive = labels & footprint
+    if not positive.any():
+        raise ValueError("cannot split a catalogue with no positive footprint pixels")
+    if np.any(groups[positive] <= 0):
+        raise ValueError("every positive catalogue pixel must have a positive segment group ID")
+
+    ids, inverse = np.unique(groups[positive].astype(np.int64), return_inverse=True)
+    rows, cols = np.nonzero(positive)
+    counts = np.bincount(inverse, minlength=len(ids)).astype(np.float64)
+    row_centres = np.rint(np.bincount(inverse, weights=rows, minlength=len(ids)) / counts).astype(int)
+    col_centres = np.rint(np.bincount(inverse, weights=cols, minlength=len(ids)) / counts).astype(int)
+    folds = make_quadrant_folds(footprint)
+    centre_fold = folds[row_centres, col_centres]
+    rng_folds = []
+    for fold_id in range(4):
+        fold_ids = ids[centre_fold == fold_id]
+        if len(fold_ids) == 0:
+            continue
+        n_hide = max(1, int(round(frac * len(fold_ids))))
+        rng = np.random.default_rng(4242 + fold_id + 1000 * int(seed))
+        rng_folds.extend(rng.choice(fold_ids, size=min(n_hide, len(fold_ids)), replace=False).tolist())
+    hidden_ids = tuple(sorted(set(int(group_id) for group_id in rng_folds)))
+    if not hidden_ids:
+        raise ValueError("segment split selected no groups")
+    hidden = positive & np.isin(groups, np.asarray(hidden_ids, dtype=np.int64))
+    known = positive & ~hidden
+    if not hidden.any() or np.any(hidden & known):
+        raise RuntimeError("invalid whole-segment split")
+    return Split(-1, "whole-FID", int(seed), footprint.copy(), hidden, known, hidden_ids)
 
 
 def make_split(labels: np.ndarray, fold: np.ndarray, fold_id: int, seed: int) -> Split:
@@ -60,22 +118,40 @@ def make_split(labels: np.ndarray, fold: np.ndarray, fold_id: int, seed: int) ->
     return Split(fold_id, FOLD_NAMES[fold_id], seed, fm, hidden, labels & ~hidden)
 
 
-def buffered_scoring_mask(split: "Split", footprint: np.ndarray, buffer_px: float = 6.0) -> np.ndarray:
-    """Pixels eligible for scoring under the parallel-run protocol (2026-10-25 template fix).
+def buffered_training_mask(split: "Split", footprint: np.ndarray, buffer_px: float = 6.0) -> np.ndarray:
+    """Training cells outside the hidden-segment core and its spatial buffer."""
+    from scipy.ndimage import distance_transform_edt
 
-    The pre-existing harness excluded a buffer from *training* (oof_detector.BUFFER_PX) but scored
-    right up to hidden segments, so a detector could earn credit from features whose support
-    overlaps a hidden segment's own neighbourhood. The protocol requires whole segments withheld
-    *with a buffer*: pixels within `buffer_px` of a hidden segment but not on it are excluded from
-    scoring (neither truth nor valid prediction area), and every catalogue-derived quantity must be
-    computed from `split.known` (visible faults) only. Visible faults stay masked pixel-exactly via
-    the metric's `known=` argument. Returns the boolean `valid` mask to pass to the metric.
+    if not np.isfinite(buffer_px) or buffer_px < 0:
+        raise ValueError("buffer_px must be finite and non-negative")
+    hidden = np.asarray(split.hidden, bool)
+    foot = np.asarray(footprint, bool)
+    if hidden.shape != foot.shape:
+        raise ValueError("hidden mask and footprint must have the same shape")
+    d_hidden = distance_transform_edt(~hidden)
+    return foot & (d_hidden > buffer_px)
+
+
+def buffered_scoring_mask(split: "Split", footprint: np.ndarray, buffer_px: float = 6.0) -> np.ndarray:
+    """Pixels eligible for scoring under the parallel-run protocol.
+
+    Pixels within ``buffer_px`` of a hidden segment but not on it are excluded from scoring
+    (neither truth nor valid prediction area). Hidden positive cells remain scoreable. Visible
+    catalogue cells stay masked pixel-exactly by passing ``split.known`` as ``known=`` to the
+    metric. For a whole-FID split, ``split.fold_mask`` is the entire footprint; for historical
+    component holdouts it is the evaluation quadrant.
     """
     from scipy.ndimage import distance_transform_edt
 
-    d_hidden = distance_transform_edt(~split.hidden)
-    ring = (d_hidden <= buffer_px) & ~split.hidden
-    return np.asarray(footprint, bool) & split.fold_mask & ~ring
+    if not np.isfinite(buffer_px) or buffer_px < 0:
+        raise ValueError("buffer_px must be finite and non-negative")
+    hidden = np.asarray(split.hidden, bool)
+    foot = np.asarray(footprint, bool)
+    if hidden.shape != foot.shape or split.fold_mask.shape != foot.shape:
+        raise ValueError("split masks and footprint must have the same shape")
+    d_hidden = distance_transform_edt(~hidden)
+    ring = (d_hidden <= buffer_px) & ~hidden
+    return foot & split.fold_mask & ~ring
 
 
 def crop(mask_or_arr: np.ndarray, fold_mask: np.ndarray) -> tuple[slice, slice]:

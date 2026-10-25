@@ -157,6 +157,83 @@ def fit_predict_full_probabilities(foot: np.ndarray, labels: np.ndarray, *, extr
     return prob
 
 
+def fit_predict_visible_probabilities(
+    foot: np.ndarray,
+    visible_labels: np.ndarray,
+    training_mask: np.ndarray,
+    *,
+    extra: np.ndarray | None = None,
+    neg_ratio: int = 10,
+    seed: int = 2026,
+    chunk: int = 400_000,
+    base_features: np.ndarray | None = None,
+) -> np.ndarray:
+    """Fit once on visible positives outside a caller-supplied spatial buffer and predict the grid.
+
+    Unlike the historical component-holdout OOF path, this explicit hide-and-recover tool accepts
+    the visible-label mask and buffered training domain from ``gems27.holdout``. It is intended for
+    whole-segment holdouts: callers must remove complete hidden groups from ``visible_labels``,
+    exclude the hidden-segment buffer from ``training_mask``, and pass only catalogue-derived
+    features built from visible groups. The model instrument and feature cache remain shared.
+
+    ``base_features`` and ``extra`` are row-major footprint matrices; when ``base_features`` is
+    omitted, the cached prepared stack is memory-mapped from ``paths.PREPARED_FEATURES``. The
+    returned probability image has zeros outside the footprint and finite values in [0,1] inside.
+    """
+    foot = np.asarray(foot, bool)
+    visible = np.asarray(visible_labels, bool)
+    train = np.asarray(training_mask, bool) & foot
+    if foot.ndim != 2 or visible.shape != foot.shape or train.shape != foot.shape:
+        raise ValueError("foot, visible_labels and training_mask must be same-shape 2-D grids")
+    if neg_ratio < 1 or chunk < 1:
+        raise ValueError("neg_ratio and chunk must be positive integers")
+
+    X_foot = (np.load(paths.PREPARED_FEATURES, mmap_mode="r")
+              if base_features is None else np.asarray(base_features))
+    n_foot = int(foot.sum())
+    if X_foot.ndim != 2 or X_foot.shape[0] != n_foot:
+        raise ValueError(f"base features must have {n_foot} rows in row-major footprint order")
+    if extra is not None and (extra.ndim != 2 or extra.shape[0] != n_foot):
+        raise ValueError("extra must be a 2-D row-major footprint feature matrix")
+
+    y_foot = visible[foot]
+    train_foot = train[foot]
+    pos = np.flatnonzero(train_foot & y_foot)
+    neg = np.flatnonzero(train_foot & ~y_foot)
+    if len(pos) == 0 or len(neg) == 0:
+        raise ValueError("buffered training domain must contain visible positives and negatives")
+    rng = np.random.default_rng(seed)
+    neg_sub = rng.choice(neg, size=min(len(neg), len(pos) * neg_ratio), replace=False)
+    train_idx = np.sort(np.r_[pos, neg_sub])
+
+    def assemble(idx: np.ndarray) -> np.ndarray:
+        base = np.asarray(X_foot[idx], dtype=np.float32)
+        if extra is None:
+            return base
+        return np.concatenate([base, np.asarray(extra[idx], dtype=np.float32)], axis=1)
+
+    clf = HistGradientBoostingClassifier(
+        max_iter=100,
+        max_leaf_nodes=31,
+        learning_rate=0.08,
+        l2_regularization=5.0,
+        random_state=seed,
+    )
+    clf.fit(assemble(train_idx), y_foot[train_idx].astype(int))
+
+    all_idx = np.arange(n_foot)
+    out = np.empty(n_foot, dtype=np.float32)
+    for start in range(0, n_foot, chunk):
+        stop = min(start + chunk, n_foot)
+        out[start:stop] = clf.predict_proba(assemble(all_idx[start:stop]))[:, 1].astype(np.float32)
+    prob = np.zeros(foot.shape, dtype=np.float32)
+    rows, cols = np.nonzero(foot)
+    prob[rows, cols] = out
+    if not np.isfinite(out).all() or np.any((out < 0.0) | (out > 1.0)):
+        raise ValueError("visible-fault model produced non-finite probabilities or values outside [0,1]")
+    return prob
+
+
 def oof_pr_auc(oof_prob: np.ndarray, labels: np.ndarray, foot: np.ndarray) -> float:
     """Out-of-fold PR-AUC (average precision) against catalogue pixels, over footprint pixels."""
     from sklearn.metrics import average_precision_score

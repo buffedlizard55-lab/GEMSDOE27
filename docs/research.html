@@ -8,6 +8,30 @@ Format PASS is not permission to submit; negative and duplicate files remain res
 </div>
 <h1>Research</h1>
 <p class="lead">Why the 0.2477 file won, what a higher score needs, and the ranked hypotheses.</p>
+<h2>Current H29-2 test and submission status</h2>
+
+<div class="card hero" id="h29-2" style="border-left:5px solid #cf222e">
+ <h2 style="margin-top:0">Current lane: H29-2 DIPDIRECT up-dip edge projection</h2>
+ <p><span class="badge bad" style="font-size:1.1rem">NOT OK TO SUBMIT — NO SELECTOR APPROVAL OR WEEKLY SLOT</span></p>
+ <p><b>Selector verdict:</b> negative / not promoted. A <code>promote</code> verdict means selector review only; it does not authorize a submission or upload.</p>
+ <p>HOLDOUT-DTI: D+dip 0.1061 (seed-bootstrap 95% CI [0.0991, 0.1144]) vs D 0.1221; pooled Δ -0.0160 (95% CI [-0.0233, -0.0084]); 118,467 withheld-positive occurrences. Evaluator: gems27.metric.dti_binary v1; alpha=0.2, beta=0.8, 300m triangular kernel; whole-FID seeds 300–309.</p>
+ <p><b>Canary:</b> max direction-invariant AUC 0.5591 (stop >0.90). <b>Uniqueness:</b> max surface rank correlation 0.7101 (limit 0.90); max final-dot overlap within 3 px 79.5% (limit 70%).</p>
+<p><b>Validator:</b> NOT RUN — no raster exists to validate. Footprint NaN count, [0,1] range and CRS/shape/transform checks are not applicable, not passes.</p>
+<p><b>No GeoTIFF was written:</b> Final-dot overlap with an earlier in-repository H28-1 candidate exceeded the 70% duplicate threshold; the machine run card records the exact raster and overlap.</p>
+
+ <p><b>Submission name:</b> <code>GEMSDOE27-H29-2-DIPDIRECT-EDGE-UPDIP-38K</code><br>
+ <b>Note target (&le;140 chars; not an authorization):</b> <code>H29-2 DIPDIRECT up-dip edge projection; HOLDOUT-DTI gate; unscored research artifact; not approved to submit.</code> (109 chars).</p>
+ <p><b>Hypothesis:</b> Among the D-detector&#x27;s line candidates, RTP or basement-depth gradient edges sampled 100–300 m down-dip from a target pixel will better identify the corresponding surface-fault location when the locally visible NBMG DIPDIRECT field points down-dip; project that evidence up-dip by 1–3 pixels without assuming an unverified dip magnitude.</p>
+ <p><b>Mechanism:</b> Fit the shared HistGradientBoosting detector on the 32-band prepared cache plus 15 frozen subsurface transforms; the paired arm adds three visible-FID-only, DIPDIRECT-conditioned up-dip projections of sigma-2 RTP and basement-depth gradient ranks (offsets 1, 2, 3 px), their minimum/concordance, ridge NMS, B2 exclusion and priority Poisson placement at 38,000 dots.</p>
+ <p><b>Named non-fault mimic:</b> Basin-margin lithologic contacts or cover-induced edge termination combined with inaccurate or ambiguous mapped dip direction.</p>
+ <p class="small">Sources and evidence limits: <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/20_candidate_screen_20261025.md">ranked hypothesis screen</a> ·
+ <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/21_preregistration_H29-2_20261025.md">frozen preregistration</a> ·
+ <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/evidence/h29_2_run_card_2026-10-25.json">machine run card</a> ·
+ <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0">NBMG Qfaults official layer</a>.
+ No organizer score or receipt is claimed; local mirror data were hash-pinned but not re-fetched from the official endpoint in this session.</p>
+</div>
+
+<p>Candidate screen ranks H27-16 first in theoretical geological upside, but it is blocked because the raw official geothermal packages are absent and cannot be fetched from this session's allowed hosts. H29-2 is the best locally testable eligible hypothesis: use visible Qfaults DIPDIRECT to project RTP and basement-depth gradient edges up-dip by 100–300 m. Other ranked untried hypotheses are H28-5 (quality-screened hydrothermal chemistry gradients) and H29-4 (interrupted cross-field lineament recovery). These are planning hypotheses, not results; the full ranking and caveats are in <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/20_candidate_screen_20261025.md">the frozen screen</a>.</p>
 <h2 id="h28-3">Session 6 H28-3 — dilatational-strain × conductivity corridors</h2>
 
 <div class="warnbox"><b>Session 6 H28-3 strain × conductivity result — FAILED; NO NEW SUBMISSION IS APPROVED.</b>
@@ -152,6 +176,6 @@ Stacking only verified/modelled increments gives ≈0.26–0.27 – so 0.3195 ne
 <li>The final round rescoring against expert-expanded labels rewards well-localised, defensible predictions; every link here carries a written argument for that reviewer.</li></ul>
 <p class="small">Derived documents: <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/02_hypotheses_ranked.md">hypotheses</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/03_preregistration_topology_gate.md">pre-registration</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/04_topology_graph_argument.md">graph argument</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/05_sources_and_verification.md">sources</a>.</p>
 </main>
-<footer>Built 2026-10-25 22:13 UTC from <a href="https://github.com/buffedlizard55-lab/GEMSDOE27">the repository</a>. No current TIFF is approved for submission. No leaderboard score is claimed anywhere on this site.
+<footer>Built 2026-10-25 23:36 UTC from <a href="https://github.com/buffedlizard55-lab/GEMSDOE27">the repository</a>. No current TIFF is approved for submission. No leaderboard score is claimed anywhere on this site.
 Historical scores shown are owner-reported. This site never contacts drivendata.org.</footer>
 <script src="assets/app.js"></script></body></html>
