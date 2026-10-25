@@ -162,6 +162,46 @@ def build() -> None:
 </div>
 """
 
+    # ---- H30 chemistry-verified deconflicted emission (Session 9; JSON-driven badge) ----
+    h30_box = ""
+    h30_card_path = EV / "h30_run_card.json"
+    if h30_card_path.exists():
+        h30 = J(h30_card_path)
+        r30, hh30, u30 = h30["raster"], h30["holdout"], h30["uniqueness_vs_registry"]
+        ok30 = publication_decision(h30, ROOT)["ok_to_publish_as_submission"]
+        badge30 = ('<span class="badge ok" style="font-size:1.05rem">&#9989; VALIDATED &mdash; OK TO DOWNLOAD &amp; SUBMIT '
+                   '(holdout + uniqueness + format gates PASS; still UNSCORED)</span>') if ok30 else (
+                   '<span class="badge bad" style="font-size:1.05rem">&#9940; NOT CERTIFIED &mdash; DO NOT SUBMIT '
+                   '(efficacy gate FAILED: holdout DTI below control; unique and format-valid are not enough)</span>')
+        lb30, ld30 = hh30["paired_L_minus_B"], hh30["paired_L_minus_D"]
+        h30_box = f"""
+<div class="card hero" style="border-left:4px solid #b00">
+ <h2 style="margin-top:0">Session 9 &middot; H30: the unique-TIF demand, answered with a measurement</h2>
+ <p>{badge30}</p>
+ <p>A genuinely new TIFF was generated this session (new detector content: measured well/spring temperatures as a bounded re-ranker of the
+ twice-confirmed subsurface detector, plus deconflicted placement). It is <b>the first file in this repo's history that is unique against
+ every screened raster at once</b> &mdash; max dot overlap within 3&nbsp;px <b>{u30['max_dot_overlap_peers_operative']:.1%}</b> vs all 12 pinned
+ focus-site peers (limit 70&nbsp;%) and <b>{u30['max_dot_overlap_repo_self_screen']:.1%}</b> vs all 12 repo-shipped rasters including H28-1 and the
+ whole D-family; surface Spearman max <b>{u30['max_surface_spearman_L']:.3f}</b> (limit 0.90). Bytes (research directory, intentionally not a
+ submission download): <a href="downloads/research/{e(r30['primary_allfinite'])}">{e(r30['primary_allfinite'])}</a>, sha256 {e(r30['sha256'][:16])}&hellip;,
+ validator hard-PASS, <a href="downloads/research/checks-{e(r30['primary_allfinite'][:-len('-allfinite.tif')])}-allfinite.json">re-read receipt</a>.</p>
+ <p><b>Why it is NOT certified:</b> HOLDOUT-DTI ({e(hh30['evaluator'])}; fresh seeds 240&ndash;244; {hh30['n_withheld_positives_total']:,} withheld
+ positives): lane <b>{hh30['pooled_dti_L_lane']:.4f}</b> vs full-32 control <b>{hh30['pooled_dti_B_control']:.4f}</b> (paired
+ {lb30['mean_delta']:+.4f}, 95&nbsp;% CI [{lb30['ci95'][0]:+.4f}, {lb30['ci95'][1]:+.4f}], {lb30['cells_positive']}/{lb30['n_cells']} cells) and vs
+ the subsurface-augmented control <b>{hh30['pooled_dti_D_control']:.4f}</b> (paired {ld30['mean_delta']:+.4f}, CI
+ [{ld30['ci95'][0]:+.4f}, {ld30['ci95'][1]:+.4f}]). <b>The deconfliction that buys strict uniqueness costs more than the confirmed detector
+ gain</b> &mdash; the uniqueness/efficacy conflict flagged in IR-2026-10-25-06 is now a measured number, not a suspicion.</p>
+ <p><b>The decision this forces (selector-owned):</b> if the <b>12-peer parallel registry governs</b> (the operative reading of the current owner
+ prompt), the previously holdout-passed D-refill family (H29-1: +0.0086 [+0.0051, +0.0125], 18/20 cells, canary clean, &le;46.2&nbsp;% vs all peers)
+ is eligible and its badge flip touches no bytes; if the <b>strict self-registry governs</b>, no arm-D-family file can be both unique and
+ efficacious (measured), and the next certifiable file needs a ridge-decorrelated detector (H28-6 is the cheapest untried lane). This session
+ flipped nothing by itself. Full run card:
+ <a href="{REPO_URL}/blob/main/evidence/h30_run_card.json">evidence/h30_run_card.json</a>; analysis
+ <a href="{REPO_URL}/blob/main/knowledge/22_h30_result.md">knowledge/22</a>; preregistration
+ <a href="{REPO_URL}/blob/main/knowledge/20_preregistration_H30.md">knowledge/20</a>.</p>
+</div>
+"""
+
     # ---- Unique scatter-farfield submission candidate (this session) ----
     unique_checks_path = DOCS / "downloads" / "checks-gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.json"
     unique_run_card_path = EV / "run_card_unique_scatter_farfield_20261025.json"
@@ -414,8 +454,9 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
     # ---------------------------------------------------------------- index
     pages["index.html"] = ("Submit", f"""
 <h1>Submission status</h1>
+{h30_box}
 {unique_tif_box}
-<p class="lead">27GEMSDOE · DrivenData #306 DOE GEMS. The unique TIFF above is format-valid and unique, but its holdout DTI is not measurable by design (far-field truth absent from the catalogue-internal proxy). No live score exists for any 27GEMSDOE file; none is claimed.</p>
+<p class="lead">27GEMSDOE · DrivenData #306 DOE GEMS. Session 9 generated a new unique TIFF (H30) that clears every uniqueness screen ever used here — and measured, honestly, that it does not beat the control on holdout, so it is NOT certified for submission. No live score exists for any 27GEMSDOE file; none is claimed.</p>
 <span class="badge bad">NO TIFF IS APPROVED TO SUBMIT</span> <span class="badge bad">DO NOT SUBMIT H28-3</span></p>
 <div class="card hero">
  <h2 style="margin-top:0">There is no one-click submission download for this run.</h2>
@@ -459,11 +500,13 @@ The agent never uploads anything; you press the button.</div>
     rows_pay = "".join(f"<tr><td class='num'>{k}</td><td class='num'>{v:+.4f}</td></tr>" for k, v in pay.items())
     pages["executive-summary.html"] = ("Executive summary", f"""
 <h1>Executive summary</h1>
+{h30_box}
 {unique_tif_box}
 <p class="lead">What to submit, exactly how, what it can and cannot do, and what to do next.</p>
 <div class="card"><h2 style="margin-top:0">Decision in one table</h2>
 <table><tr><th>Question</th><th>Answer</th></tr>
-<tr><td>What to submit now</td><td><b>Nothing.</b> No current raster is marked okay to submit. H28-3 is format-valid but its frozen HOLDOUT-DTI gate failed; legacy slot rasters are peer-overlapping audit artifacts.</td></tr>
+<tr><td>What to submit now</td><td><b>Nothing.</b> No current raster is marked okay to submit. The Session-9 H30 file is unique against every screened raster and format-valid, but its frozen HOLDOUT-DTI gate failed (lane 0.0961 vs control 0.1003); H28-3 and the legacy slot rasters remain ineligible for the same class of reason.</td></tr>
+<tr><td>What the new H30 file is</td><td>A unique, reproducible <b>negative research artifact</b> (chemistry-verified, deconflicted emission; first file to clear both the 12-peer registry screen and the strict repo self-registry screen). Valid GeoTIFF bytes, adverse paired holdout result &mdash; <b>DO NOT SUBMIT</b>. The measurement also quantifies that strict uniqueness costs more than the confirmed detector gain, so the selector's screen choice is now the strategy choice.</td></tr>
 <tr><td>What the new H28-3 file is</td><td>A unique, reproducible <b>negative research artifact</b> generated from strain–conductivity corridors. It has valid GeoTIFF bytes but an adverse paired holdout result, so its status is <b>DO NOT SUBMIT</b>.</td></tr>
 <tr><td>HOLDOUT-DTI evidence</td><td>H28-3 candidate minus current H28-1 baseline: {h28_3_eval['HOLDOUT_DTI']['candidate_minus_baseline_pooled']:+.6f} pooled; 95% seed-bootstrap CI [{h28_3_eval['HOLDOUT_DTI']['bootstrap_95_ci_seed_resampling'][0]:+.6f}, {h28_3_eval['HOLDOUT_DTI']['bootstrap_95_ci_seed_resampling'][1]:+.6f}]; only {sum(v > 0 for v in h28_3_eval['HOLDOUT_DTI']['seed_level_paired_deltas'].values())}/10 seeds improved. Negative result retained; no slot spent.</td></tr>
 <tr><td>What qualifies in future</td><td>A new candidate must pass its pre-registered holdout gate, format validation, and the pinned peer-raster duplicate screen before this table changes to <b>APPROVED TO SUBMIT</b>.</td></tr>

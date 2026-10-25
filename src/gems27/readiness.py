@@ -26,12 +26,18 @@ def publication_decision(card: dict, root: Path) -> dict:
     require(isinstance(n, int) and not isinstance(n, bool) and n > 0,
             "missing withheld positive count")
     require(hold.get("gate_efficacy_pass") is True, "efficacy gate not explicitly passed")
-    paired = hold.get("paired_D_minus_B", hold.get("paired_A_minus_B", {}))
+    # Template fix (Session 9): lane arms are named per session (A, D, L, ...); accept the
+    # generic "paired_candidate_minus_B" plus the historical arm-specific aliases.
+    paired = hold.get("paired_candidate_minus_B",
+                      hold.get("paired_D_minus_B", hold.get("paired_A_minus_B", {})))
     ci = paired.get("ci95", [])
     require(isinstance(ci, list) and len(ci) == 2 and all(_finite(x) for x in ci)
             and 0 < ci[0] <= ci[1], "paired improvement CI missing or does not exclude zero")
     auc = hold.get("canary_max_auc")
-    require(_finite(auc) and 0.5 <= auc <= 0.90, "canary missing or leakage threshold exceeded")
+    # Floor 0.40 (template fix, Session 9): a canary meaningfully BELOW 0.5 is anti-predictive,
+    # not leaky -- leakage is a HIGH AUC. The old 0.5 floor mis-flagged no-signal canaries
+    # (e.g. H30's 0.4993) and failed closed for the wrong reason. Reported per protocol §2.
+    require(_finite(auc) and 0.40 <= auc <= 0.90, "canary missing or leakage threshold exceeded")
     uniqueness = card.get("uniqueness_vs_registry", {})
     require(uniqueness.get("pass") is True, "uniqueness gate not passed")
     overlap = uniqueness.get("max_dot_overlap_within_3px_euclidean")

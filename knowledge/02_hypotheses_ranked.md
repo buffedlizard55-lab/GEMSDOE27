@@ -185,3 +185,13 @@ Ranking rule: expected DTI gain x probability the test can validate it / cost. B
 * **Status:** TESTED — FROZEN GATE FAILED. HOLDOUT-DTI pooled candidate 0.103352 vs baseline 0.105946, Δ -0.002594; 95% seed-bootstrap CI [-0.004240, -0.000907], 2/10 seeds and 1/4 folds improved. No slot. Negative research TIFF 27d6875f3b22 is format-valid and unique against the pinned peer registry but NOT APPROVED FOR SUBMISSION.
 * **Expected gain:** negative: pooled ΔDTI -0.002594
 * **Cost:** one local pre-registered holdout experiment; 0 weekly slots
+
+## H30 (rank 98): Hydrothermal-chemistry re-ranking + deconflicted placement of the Arm-D detector
+
+* **Layers:** INGENIOUS/GDR wellspring station temperatures (temp_c, geothermquartz_c; dist_known_fault_px never read) x 32-band stack + 15 subsurface transforms (Arm D).
+* **Physical signature:** Local thermal-anomaly field (station temp vs 15 px local median), rank-normalised, bounded +/-40% multiplicative re-ranking; deconflicted priority Poisson-disk with <=65% of the 38k budget within 3 px of repo-shipped rasters.
+* **Why it catches a fault missing from USGS/INGENIOUS:** Buried/basement faults with active upflow host warm wells without young scarps; measured temperatures carry information the lidar-scarp regime cannot see; deconfliction buys uniqueness vs every shipped raster.
+* **How it differs from the repo:** H27-12 used distance-to-spring features (refuted); no prior use of measured values or post-detector re-ranking; deconfliction generalised from H29-1b's single-raster cap to all 12 repo rasters.
+* **Status:** TESTED - FROZEN GATE FAILED (negative, deliverable). HOLDOUT-DTI pooled L 0.09608 vs B 0.10031 (paired -0.00445 [-0.00800,-0.00112], 7/20 cells) and L-D -0.00662 [-0.00845,-0.00463]; canary 0.499 clean; D-B replicated +0.00217 [-0.00126,+0.00531] 15/20 cells on third fresh seed set. Uniqueness: unique vs ALL 12 peers (max 0.320) AND all 12 repo rasters (max 0.648) - first file to clear both screens; format hard-PASS. Bytes retained as NEGATIVE RESEARCH ARTIFACT (ad5a68bb0535); ok_to_submit=false. Evidence: evidence/h30_holdout.json, evidence/h30_run_card.json, knowledge/22.
+* **Expected gain:** Prior +0.002..+0.008 vs B (MODEL); realised -0.0044 (the deconfliction cost, MEASURED).
+* **Cost:** Low-medium (TESTED this session; consumed seeds 240-244)

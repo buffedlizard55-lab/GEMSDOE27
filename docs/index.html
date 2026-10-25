@@ -9,6 +9,33 @@ Format PASS is not permission to submit; negative and duplicate files remain res
 <h1>Submission status</h1>
 
 <div class="card hero" style="border-left:4px solid #b00">
+ <h2 style="margin-top:0">Session 9 &middot; H30: the unique-TIF demand, answered with a measurement</h2>
+ <p><span class="badge bad" style="font-size:1.05rem">&#9940; NOT CERTIFIED &mdash; DO NOT SUBMIT (efficacy gate FAILED: holdout DTI below control; unique and format-valid are not enough)</span></p>
+ <p>A genuinely new TIFF was generated this session (new detector content: measured well/spring temperatures as a bounded re-ranker of the
+ twice-confirmed subsurface detector, plus deconflicted placement). It is <b>the first file in this repo's history that is unique against
+ every screened raster at once</b> &mdash; max dot overlap within 3&nbsp;px <b>32.0%</b> vs all 12 pinned
+ focus-site peers (limit 70&nbsp;%) and <b>64.8%</b> vs all 12 repo-shipped rasters including H28-1 and the
+ whole D-family; surface Spearman max <b>0.465</b> (limit 0.90). Bytes (research directory, intentionally not a
+ submission download): <a href="downloads/research/gems27-h30-chem-deconf-b2-38k-20261025-ad5a68bb0535-allfinite.tif">gems27-h30-chem-deconf-b2-38k-20261025-ad5a68bb0535-allfinite.tif</a>, sha256 047f383d9f764fb3&hellip;,
+ validator hard-PASS, <a href="downloads/research/checks-gems27-h30-chem-deconf-b2-38k-20261025-ad5a68bb0535-allfinite.json">re-read receipt</a>.</p>
+ <p><b>Why it is NOT certified:</b> HOLDOUT-DTI (gems27.metric v1 (alpha=0.2, beta=0.8, R=3px triangular); fresh seeds 240&ndash;244; 59,372 withheld
+ positives): lane <b>0.0961</b> vs full-32 control <b>0.1003</b> (paired
+ -0.0044, 95&nbsp;% CI [-0.0080, -0.0011], 7/20 cells) and vs
+ the subsurface-augmented control <b>0.1023</b> (paired -0.0066, CI
+ [-0.0084, -0.0046]). <b>The deconfliction that buys strict uniqueness costs more than the confirmed detector
+ gain</b> &mdash; the uniqueness/efficacy conflict flagged in IR-2026-10-25-06 is now a measured number, not a suspicion.</p>
+ <p><b>The decision this forces (selector-owned):</b> if the <b>12-peer parallel registry governs</b> (the operative reading of the current owner
+ prompt), the previously holdout-passed D-refill family (H29-1: +0.0086 [+0.0051, +0.0125], 18/20 cells, canary clean, &le;46.2&nbsp;% vs all peers)
+ is eligible and its badge flip touches no bytes; if the <b>strict self-registry governs</b>, no arm-D-family file can be both unique and
+ efficacious (measured), and the next certifiable file needs a ridge-decorrelated detector (H28-6 is the cheapest untried lane). This session
+ flipped nothing by itself. Full run card:
+ <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/evidence/h30_run_card.json">evidence/h30_run_card.json</a>; analysis
+ <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/22_h30_result.md">knowledge/22</a>; preregistration
+ <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/20_preregistration_H30.md">knowledge/20</a>.</p>
+</div>
+
+
+<div class="card hero" style="border-left:4px solid #b00">
  <h2 style="margin-top:0">&#128269; Unique submission TIF &mdash; ready to download</h2>
  <p><span class="badge bad" style="font-size:1.05rem">&#9940; FORMAT-VALID + UNIQUE &mdash; NOT CERTIFIED FOR SUBMISSION (holdout DTI not measurable by design; owner selector decision required)</span></p>
  <div class="row">
@@ -39,7 +66,7 @@ Format PASS is not permission to submit; negative and duplicate files remain res
  Format receipt: <a href="downloads/checks-gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.json">checks JSON</a></p>
 </div>
 
-<p class="lead">27GEMSDOE · DrivenData #306 DOE GEMS. The unique TIFF above is format-valid and unique, but its holdout DTI is not measurable by design (far-field truth absent from the catalogue-internal proxy). No live score exists for any 27GEMSDOE file; none is claimed.</p>
+<p class="lead">27GEMSDOE · DrivenData #306 DOE GEMS. Session 9 generated a new unique TIFF (H30) that clears every uniqueness screen ever used here — and measured, honestly, that it does not beat the control on holdout, so it is NOT certified for submission. No live score exists for any 27GEMSDOE file; none is claimed.</p>
 <span class="badge bad">NO TIFF IS APPROVED TO SUBMIT</span> <span class="badge bad">DO NOT SUBMIT H28-3</span></p>
 <div class="card hero">
  <h2 style="margin-top:0">There is no one-click submission download for this run.</h2>
@@ -126,6 +153,6 @@ Reaching the owner-stated leader (0.3195) is not possible with verified/modelled
 The agent never uploads anything; you press the button.</div>
 <p class="small">Reference (owner-reported 0.2477): <a href="https://github.com/buffedlizard55-lab/GEMSDOE24/blob/07345ea0604953d7efb858d9cfbc21e20c7aca0b/docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif">24GEMSDOE audit record</a> (sha256 68d0e2e4fcc594f9…). It is historical comparison evidence, not a current download recommendation.</p>
 </main>
-<footer>Built 2026-10-25 22:13 UTC from <a href="https://github.com/buffedlizard55-lab/GEMSDOE27">the repository</a>. No current TIFF is approved for submission. No leaderboard score is claimed anywhere on this site.
+<footer>Built 2026-10-25 23:17 UTC from <a href="https://github.com/buffedlizard55-lab/GEMSDOE27">the repository</a>. No current TIFF is approved for submission. No leaderboard score is claimed anywhere on this site.
 Historical scores shown are owner-reported. This site never contacts drivendata.org.</footer>
 <script src="assets/app.js"></script></body></html>

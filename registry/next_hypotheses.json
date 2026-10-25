@@ -1,6 +1,6 @@
 {
   "generated": "2026-10-25",
-  "status": "Session 6 screen current as of 2026-10-25: H28-3 was tested on fresh seeds 160-169 and failed its frozen gate; it is excluded from the untried list. Three genuinely untried hypotheses remain. No weekly slot was used. H27-16 raw packages remain absent; the local fetch-workflow runs failed with zero jobs/no logs, so no new package verification is claimed.",
+  "status": "Session 9 screen: H30 (chemistry re-rank + deconfliction) tested on fresh seeds 240-244 and FAILED its frozen gate (L-B -0.00445; the 65% deconfliction cap costs more than the Arm-D gain - the uniqueness/efficacy conflict is now measured). Seeds 240-244 are consumed. H28-4 remains negative (2-seed probe). H27-16 raw packages remain absent. The next certifiable file needs either the selector screen decision (12-peer registry => H29-1 family eligible) or a ridge-decorrelated detector (H28-6 standalone gravity invariants is the cheapest untried lane).",
   "novelty_scope": "Screened against this checkout, its evidence ledger, and the owner-provided comparison list. The sibling score list does not include complete source methods; global novelty is unknown.",
   "target": "Fault-location pixels in the organizer-created test labels, which remain unobserved here. Catalogue-internal holdouts are only a proxy and cannot validate far-field behavior.",
   "baseline": {
