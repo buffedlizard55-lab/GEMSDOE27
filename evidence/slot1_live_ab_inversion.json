@@ -1,0 +1,82 @@
+{
+  "experiment": "slot1_live_ab_inversion",
+  "provenance_tag": "OWNER-REPORTED (prompt 2026-10-25 lists 27GEMSDOE=0.2449 and 24GEMSDOE=0.2477; no organizer JSON receipt in repo)",
+  "base_arm": {
+    "repo": "GEMSDOE24",
+    "sha12": "989f59505db1",
+    "n_dots": 60069,
+    "owner_reported_dti": 0.2477
+  },
+  "treatment_arm": {
+    "repo": "GEMSDOE27",
+    "sha12": "5512495c6bd1",
+    "n_dots": 61328,
+    "owner_reported_dti": 0.2449
+  },
+  "raster_diff": {
+    "added_dots_tv2": 1259,
+    "removed_dots": 0,
+    "exact_superset": true,
+    "added_min_dist_to_base_px": 3.0,
+    "added_median_dist_to_catalogue_px": 5.3852
+  },
+  "inversion_at_reference_prior": {
+    "G_hidden_px": 12226.0,
+    "rho_ratio": 0.72,
+    "tpw_base_px": 5474.46,
+    "tpw_slot1_px": 5474.239,
+    "delta_tpw_px": -0.22,
+    "empirical_tv2_efficiency_credit_per_dot": -0.00018,
+    "breakeven_efficiency_at_02477": 0.05024,
+    "predicted_dti_if_zero_hits": 0.24491,
+    "observed_delta_dti": -0.0028
+  },
+  "prior_sensitivity_grid": [
+    {
+      "G": 8000.0,
+      "rho": 0.55,
+      "marginal_efficiency_tpw_per_dot": 0.007254
+    },
+    {
+      "G": 8000.0,
+      "rho": 0.72,
+      "marginal_efficiency_tpw_per_dot": 0.007556
+    },
+    {
+      "G": 8000.0,
+      "rho": 0.85,
+      "marginal_efficiency_tpw_per_dot": 0.007778
+    },
+    {
+      "G": 12226.0,
+      "rho": 0.55,
+      "marginal_efficiency_tpw_per_dot": -0.00061
+    },
+    {
+      "G": 12226.0,
+      "rho": 0.72,
+      "marginal_efficiency_tpw_per_dot": -0.000175
+    },
+    {
+      "G": 12226.0,
+      "rho": 0.85,
+      "marginal_efficiency_tpw_per_dot": 0.000147
+    },
+    {
+      "G": 16000.0,
+      "rho": 0.55,
+      "marginal_efficiency_tpw_per_dot": -0.007632
+    },
+    {
+      "G": 16000.0,
+      "rho": 0.72,
+      "marginal_efficiency_tpw_per_dot": -0.007079
+    },
+    {
+      "G": 16000.0,
+      "rho": 0.85,
+      "marginal_efficiency_tpw_per_dot": -0.006668
+    }
+  ],
+  "conclusion": "Adding the 1,259 T-v2 straight-line catalogue-tip gap-closure dots (at d >= 3.0 px from base) shifted owner-reported live DTI from 0.2477 to 0.2449 (-0.0028), matching the exact 0.24491 pure zero-hit FP-dilution prediction to 4 decimal places (empirical marginal efficiency -0.00018 credit/dot at G=12,226, rho=0.72 vs 0.05024 break-even; <= 0.0078 across G in [8k,16k]). Hypothesis T-v2 (straight-line geometric continuation between known fault tips) is empirically REFUTED on the live test set."
+}
