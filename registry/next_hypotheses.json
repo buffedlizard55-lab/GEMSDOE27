@@ -1,6 +1,6 @@
 {
   "generated": "2026-10-25",
-  "status": "Session 7 screen current as of 2026-10-25: H29-1 (Lane L-S7-2026-10-25) was tested on fresh seeds 210-219 (commit 30accf8) and achieved the new highest blind pooled HOLDOUT-DTI (0.042198 buffered / 0.103907 unbuffered), beating B0 (+0.005829, 10/10 seeds) and prior champion H28-1 (+0.004620, 10/10 seeds), while holding the weekly slot under the strict 6-clause composite gate (95% CI vs internal control D0 [-0.000986, +0.003695] spanned zero due to SE Walker Lane seismicity). Five genuinely untried hypotheses remain. || MERGED Session 9 (H30): chemistry re-rank + deconfliction tested on fresh seeds 240-244 and FAILED its frozen gate (L-B -0.00445; the 65% deconfliction cap costs more than the Arm-D gain - the uniqueness/efficacy conflict is now measured, IR-2026-10-25-14). Seeds 240-244 consumed. See knowledge/22.",
+  "status": "Session 7 screen current as of 2026-10-25: H29-1 (Lane L-S7-2026-10-25) was tested on fresh seeds 210-219 (commit 30accf8) and achieved the new highest blind pooled HOLDOUT-DTI (0.042198 buffered / 0.103907 unbuffered), beating B0 (+0.005829, 10/10 seeds) and prior champion H28-1 (+0.004620, 10/10 seeds), while holding the weekly slot under the strict 6-clause composite gate (95% CI vs internal control D0 [-0.000986, +0.003695] spanned zero due to SE Walker Lane seismicity). Five genuinely untried hypotheses remain. || MERGED Session 9 (H30): chemistry re-rank + deconfliction tested on fresh seeds 240-244 and FAILED its frozen gate (L-B -0.00445; the 65% deconfliction cap costs more than the Arm-D gain - the uniqueness/efficacy conflict is now measured, IR-2026-10-25-14). Seeds 240-244 consumed. See knowledge/22. Parallel Lane L-H30-DIPGAP (merged): H30-1/H30-2/H30-3 failed selection vs Arm-D on seeds 240-244 (evidence/h30_dipgap_holdout.json); distinct from the H30-chem lane of PR #24 (evidence/h30_holdout.json) - parallel hypothesis-numbering collision, both retained.",
   "novelty_scope": "Screened against this checkout, its evidence ledger, and the 12-peer parallel registry.",
   "target": "Fault-location pixels in the organizer-created test labels, which remain unobserved here. Catalogue-internal holdouts are only a proxy and cannot validate far-field behavior.",
   "baseline": {
@@ -9,7 +9,7 @@
     "evidence": "evidence/h29_e2_holdout_210_219.json; seeds 210-219; H29-S pooled buffered HOLDOUT-DTI 0.042198 (unbuffered 0.103907) vs D0 0.040902, H28_1_B2 0.037578, B0 0.036368",
     "limitation": "Catalogue-internal component-hidden, four-quadrant buffered holdout. It is not the organizer-created expert-label set."
   },
-  "ranking_basis": "Expert priors on potential paired catalogue-holdout \u0394DTI \u00d7 testability / engineering cost. Planning priors are not leaderboard predictions. H27-10, H28-3, and H29-1 are completed tests in tested_hypotheses, not part of the untried ranking.",
+  "ranking_basis": "Expert priors on potential paired catalogue-holdout ΔDTI × testability / engineering cost. Planning priors are not leaderboard predictions. H27-10, H28-3, and H29-1 are completed tests in tested_hypotheses, not part of the untried ranking.",
   "hypotheses": [
     {
       "id": "H29-6",
@@ -122,7 +122,7 @@
     {
       "id": "H27-10",
       "title": "Model-ranked 100-300 m offset-scarp annulus substitution",
-      "status": "TESTED \u2014 FROZEN GATE FAILED; not untried and not eligible to justify a weekly slot",
+      "status": "TESTED — FROZEN GATE FAILED; not untried and not eligible to justify a weekly slot",
       "validation": "knowledge/03_preregistration_topology_gate.md#addendum-f-h27-10; evidence/h27_10_annulus_holdout.json; initial diagnostic output preserved at evidence/h27_10_annulus_holdout_initial.json",
       "seeds": [
         150,
@@ -148,8 +148,8 @@
     },
     {
       "id": "H28-3",
-      "title": "Dilatational-strain \u00d7 conductivity intersection corridors",
-      "status": "TESTED \u2014 FROZEN GATE FAILED; negative result, not slot-eligible",
+      "title": "Dilatational-strain × conductivity intersection corridors",
+      "status": "TESTED — FROZEN GATE FAILED; negative result, not slot-eligible",
       "validation": "knowledge/13_preregistration_H28-3.md; evidence/h28_3_strain_holdout.json; evidence/h28_3_negative_uniqueness.json",
       "seeds": [
         160,
@@ -182,8 +182,8 @@
     },
     {
       "id": "H29-1",
-      "title": "Hydrothermal Upflow Disequilibrium \u00d7 Piedmont-Toe Concave Flexure \u00d7 Destriped Shallow Geophysical Vesselness + Probability-Weighted 300 m CELF Submodular Cover (Lane L-S7-2026-10-25)",
-      "status": "TESTED \u2014 FROZEN GATE FAILED ON STRICT CI SUB-CLAUSE vs D0 (3/6 clauses; NEW POOLED HOLDOUT BEST 0.042198 buffered / 0.103907 unbuffered; beats B0 10/10 seeds +0.005829 & prior champion H28-1 10/10 seeds +0.004620; weekly slot held)",
+      "title": "Hydrothermal Upflow Disequilibrium × Piedmont-Toe Concave Flexure × Destriped Shallow Geophysical Vesselness + Probability-Weighted 300 m CELF Submodular Cover (Lane L-S7-2026-10-25)",
+      "status": "TESTED — FROZEN GATE FAILED ON STRICT CI SUB-CLAUSE vs D0 (3/6 clauses; NEW POOLED HOLDOUT BEST 0.042198 buffered / 0.103907 unbuffered; beats B0 10/10 seeds +0.005829 & prior champion H28-1 10/10 seeds +0.004620; weekly slot held)",
       "validation": "knowledge/15_geothermal_vent_discovery_and_h29_preregistration.md (commit 30accf8); evidence/h29_e1_canary_and_surface.json; evidence/h29_e2_holdout_210_219.json; evidence/h29_run_card_2026-10-25.json",
       "seeds": [
         210,
@@ -221,6 +221,21 @@
       "leakage_canary": "PASS: all 20 H29 features had direction-invariant ROC AUC <= 0.5765 (threshold 0.90).",
       "uniqueness": "PASS: max 3px dot overlap 0.6421 <= 0.70 (0.5612 vs GEMSDOE32) and max Spearman 0.0472 <= 0.90 across all 12 peer rasters.",
       "candidate_artifact": "Unique all-finite [0,1] GeoTIFF content id 511898747886 (825,276 B); technical validator PASS; weekly submission slot HELD under strict frozen gate."
+    },
+    {
+      "id": "H30-1",
+      "title": "Dip-advection correction (feature form of H29-2)",
+      "status": "TESTED - SELECTION GATE FAILED; negative (Lane L-H30 seeds 240-244); pooled HOLDOUT-DTI 0.09888 vs Arm-D 0.10234; evidence/h30_dipgap_holdout.json"
+    },
+    {
+      "id": "H30-2",
+      "title": "Along-strike gap flanking",
+      "status": "TESTED - SELECTION GATE FAILED; negative (Lane L-H30 seeds 240-244); pooled HOLDOUT-DTI 0.10180 vs Arm-D 0.10234; negative research TIFF 3107a3007b77 NOT APPROVED; evidence/h30_dipgap_holdout.json + evidence/h30_dipgap_run_card.json"
+    },
+    {
+      "id": "H30-3",
+      "title": "Soft rank-taper emission (H29-3)",
+      "status": "TESTED - SELECTION GATE FAILED; negative (Lane L-H30 seeds 240-244); pooled HOLDOUT-DTI 0.09943 vs binary Arm-D 0.10234; evidence/h30_dipgap_holdout.json"
     }
   ],
   "separate_review_class": {
@@ -258,7 +273,7 @@
       "docs/assets/fig_map_h27_5b_priority.png"
     ],
     "refuted_signals": [
-      "graph-\u0394P ranking as a holdout-improvement signal (Addendum D-3)",
+      "graph-ΔP ranking as a holdout-improvement signal (Addendum D-3)",
       "overlapping en-echelon step-over as a holdout-improvement signal (Addendum D-4)"
     ]
   }

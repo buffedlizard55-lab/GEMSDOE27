@@ -452,3 +452,44 @@ See `knowledge/18_session8_repo_review_2026-10-25.md` for the full candidate scr
 **Pass 3 — request fit:** the prompt's highest-urgency demands were each met with evidence: a genuinely NEW unique TIF was generated (new detector content, new content id, not a rename or re-thin of any prior submission); uniqueness is measured against every screened raster; and the OK-to-submit state is machine-decided and unmistakable on the site/README/run card (⛔ NOT CERTIFIED — the efficacy gate failed; negative results are deliverables). The 3–5 hypothesis screen with layers/signature/why/differs/cost was written before implementation and the top candidate was validated on the spatially blocked holdout before any slot consideration; no weekly slot was spent or picked (selector step). Every number is labelled HOLDOUT-DTI / MEASURED / OWNER-REPORTED / MODEL; no live score, projection-as-score, DrivenData access, or upload is claimed.
 
 **Merge review (PR #24 ← origin/main PR #22, parallel Lane L-S7):** conflicts resolved by union (registries, build_site boxes, README addenda, review passes). This session's irregularities renumbered IR-2026-10-25-14/-15 (parallel session consumed -10..-13). Post-merge re-screen: H30 vs the parallel H29-S raster = 0.3021 directed 3-px overlap (1,812 exact shared px, Jaccard 0.0245) — PASS; merged-state screen is 12 peers + 13 repo rasters, no maximum changed. "First file to clear both screens" amended honestly: H29-S cleared the 24-raster screen first; H30 clears all 25 with larger peer margins. Instrument disclosure recorded: H30's E2 used the pre-fix `emit()` domain (`valid | hidden`), all arms shared it, paired deltas stand, no re-run (would be a 4th experiment). Seeds 240–244 consumed by this session; the parallel session used 210–219 (already consumed by H29-1/L-DCONFIRM in 210–224 — flagged to the selector as a cross-session seed-range overlap in their evidence, not re-litigated here).
+
+# Session 9 (Lane L-H30, 2026-10-25) — three passes
+
+* **Pass 1 (implement + verify):** restored all 16 hash-pinned inputs + assembled
+  training raster (all SHA-256 OK), rebuilt the 32-band stack (`83ed2704…`),
+  fetched the 12 pinned peers, re-verified the 0.2778 chain pixel-exactly
+  (d2.8 → r1 → B2, both equalities True) and the focus-site table from bytes.
+  Preregistered Lane L-H30 (`knowledge/20`, commit `d87283f`) *before* code,
+  implemented `gems27.dip_gap_features` + runner with unit tests (commit
+  `6ceeb24`), ran E1 canary (max AUC 0.561, clean), E2a selection on fresh
+  seeds 240–244 (D 0.10234 > GAP 0.10180 > SOFT 0.09943 > DIP 0.09888 pooled
+  HOLDOUT-DTI → frozen gate FAIL, no confirmation), E3 built the single GAP
+  TIFF (`3107a3007b77`, sha256 `deb8b4f1…`): all-finite [0,1], B2 (min 2.236 px),
+  spacing ≥2.828 px, peer-uniqueness PASS (max 45.7 %), verdict **negative**.
+* **Pass 2 (bugs / assumptions / edge cases):** verified `dti_exact` ==
+  `dti_binary` on binary inputs before trusting SOFT scores; the shared
+  `check_parallel_uniqueness.py` independently reproduced every per-peer
+  overlap in the run card exactly; independent re-read confirmed grid/CRS,
+  {0,1}, 38,000 dots, single-TIFF ZIP byte-identical, card hash bound to
+  bytes. Found and fixed: the negative run card initially carried a null
+  paired block — replaced with the descriptive selection-cell paired Δ and
+  95 % CI computed from recorded evidence (bytes byte-identical after
+  rebuild, sha unchanged); site box was double-inserted on the index and
+  missing from the executive summary — repaired and grep-verified on both
+  pages. Flagged the missing H28-4 evidence file (IR-2026-10-25-11) and the
+  prospective registry-scope decision (IR-2026-10-25-10).
+* **Pass 3 (recheck vs original request):** a *unique* TIFF was generated (not
+  a copy of any prior submission: content-hashed, ≤45.7 % dot overlap vs every
+  scored peer, surface checked before placement and on final dots); whether
+  it is OK to download-and-submit is obvious and machine-decided — **⛔ DO NOT
+  SUBMIT** on the first screen + executive summary, computed fail-closed from
+  the run-card JSON (readiness audit lists the blocking reasons), no human
+  inspector anywhere. The 0.2778 mechanism was answered from raster bytes.
+  3–5 hypotheses were ranked before implementing; the top lanes were
+  validated on the spatially blocked holdout before any slot decision; no
+  slot was spent; hypotheses needing new external data name the free official
+  source (GDR #1391) and are marked not-yet-viable. Every number is labelled
+  HOLDOUT-DTI (evaluator/withheld-n/CI) or OWNER-REPORTED; nothing is
+  projected as a score. Remaining work and limitations: `knowledge/06`
+  Session-9 carry-forward (selector registry decision, segmentation-class
+  detector, GDR bytes, missing H28-4 evidence).

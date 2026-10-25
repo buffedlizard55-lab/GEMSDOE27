@@ -129,6 +129,54 @@ def build() -> None:
 </div>
 """
 
+    # ---- Lane L-H30: dip-advection / gap-flanking / soft emission vs Arm-D (JSON-driven) ----
+    h30_dipgap_box = ""
+    h30_card_path = EV / "h30_dipgap_run_card.json"
+    if h30_card_path.exists():
+        c30 = J(h30_card_path)
+        h30, u30, r30 = c30["holdout"], c30["uniqueness_vs_registry"], c30["raster"]
+        ok30 = publication_decision(c30, ROOT)["ok_to_publish_as_submission"]
+        badge30 = ('<span class="badge ok" style="font-size:1.05rem">&#9989; VALIDATED &mdash; OK TO DOWNLOAD &amp; SUBMIT '
+                   '(all machine gates PASS; still UNSCORED)</span>') if ok30 else (
+                   '<span class="badge bad" style="font-size:1.05rem">&#9940; DO NOT SUBMIT &mdash; frozen holdout '
+                   'selection gate FAILED (negative research artifact)</span>')
+        rel30 = r30["directory"].replace("docs/", "", 1)
+        sel30 = h30["selection_pooled_holdout_dti"]
+        dl30 = (f'<p><b>One-click download:</b> <a href="{e(rel30)}/{e(r30["primary_allfinite"])}" class="btn">Download .tif</a> '
+                f'<a href="{e(rel30)}/{e(r30["zip"])}" class="btn">Download .zip</a></p>'
+                f'<p><b>Note to paste (&le;140 chars):</b> <code>{e(c30["note_max_140_chars"])}</code></p>') if ok30 else ""
+        h30_dipgap_box = f"""
+<div class="card hero" style="border-left:4px solid #b00">
+ <h2 style="margin-top:0">Newest unique TIF (Lane L-H30, 2026-10-25): dip-advection / gap-flanking / soft emission &mdash; NEGATIVE</h2>
+ <p>{badge30}</p>
+ <p>One new unique GeoTIFF was generated this session (the GAP arm below). Whether it may be submitted is decided
+ <b>only</b> by the machine gates in its run card &mdash; no human-inspection step. It <b>failed</b> the frozen
+ efficacy gate, so the answer is <b>NOT OK TO SUBMIT</b>, even though its bytes are format-valid and unique.</p>
+ {dl30}
+ <p>Three preregistered contenders (<a href="{REPO_URL}/blob/main/knowledge/20_lane_h30_preregistration_2026-10-25.md">knowledge/20</a>,
+ frozen before any run) were gated against the strongest in-repo control (Arm D = 32-band + 15 subsurface transforms)
+ on fresh seeds 240&ndash;244 (20 cells, {h30['n_withheld_positives_total']:,} withheld positives, {e(h30['evaluator'])}).
+ Pooled <b>HOLDOUT-DTI</b>: D control <b>{sel30['D']:.4f}</b> &middot; GAP (gap-flanking) <b>{sel30['GAP']:.4f}</b>
+ &middot; SOFT (soft rank-taper) <b>{sel30['SOFT']:.4f}</b> &middot; DIP (dip-advection) <b>{sel30['DIP']:.4f}</b>.
+ No contender beat the control (GAP paired &Delta; {h30['paired_A_minus_B']['mean_delta']:+.4f}, 95% CI
+ [{h30['paired_A_minus_B']['ci95'][0]:+.4f}, {h30['paired_A_minus_B']['ci95'][1]:+.4f}]); confirmation did not run and
+ no tuning followed. Leakage canary max AUC {h30['canary_max_auc']:.3f} (clean). Catalogue-internal evidence only; no live score.</p>
+ <ul class="tight">
+ <li><b>The generated file (research only):</b> <code>{e(r30['primary_allfinite'])}</code>, {r30['dots']:,} dots,
+ sha256 {e(r30['sha256'][:16])}&hellip;, in <a href="{e(rel30)}/{e(r30['primary_allfinite'])}">{e(rel30)}/</a> &mdash; not a submission download.</li>
+ <li><b>Format PASS:</b> single-band float32, all-finite, every cell in [0,1] (the portal-error fix), EPSG:32611
+ 3730&times;3292; 0 dots on catalogue; min catalogue distance 2.24&nbsp;px (B2).</li>
+ <li><b>Unique vs scored peers PASS:</b> max &le;3&nbsp;px dot overlap <b>{u30['max_dot_overlap_within_3px_euclidean']:.1%}</b>
+ vs the 12 pinned registry rasters (limit 70&nbsp;%); max surface Spearman {u30['max_surface_spearman']:.3f} (limit 0.90).
+ Extended overlaps vs this repo's own unsubmitted research files (up to
+ {c30['extended_self_overlap_reported_not_gated']['max_dot_overlap_within_3px_euclidean']:.1%}) are reported in the run card.</li>
+ <li>Full result: <a href="{REPO_URL}/blob/main/knowledge/21_h30_result_2026-10-25.md">knowledge/21</a> &middot;
+ run card: <a href="{REPO_URL}/blob/main/evidence/h30_dipgap_run_card.json">evidence/h30_dipgap_run_card.json</a> &middot;
+ automatic audit: <a href="data/submission_readiness_audit.json">submission readiness audit</a>.</li>
+ </ul>
+</div>
+"""
+
     # ---- Lane L-DCONFIRM, parallel session B (JSON-driven; same D family as H29-1) ----
     dc_path = DOCS / "downloads" / "dconfirm_candidate_manifest.json"
     dc = J(dc_path) if dc_path.exists() else None
@@ -569,7 +617,7 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
 <h1>Submission status: automated fail-closed gate &amp; unique GeoTIFF check</h1>
 <p class="lead">27GEMSDOE · DrivenData #306 DOE GEMS. Machine validation runs automatically without human intervention across technical GeoTIFF bounds, 24-raster uniqueness (12 peers + 12 in-house), and spatially blocked holdouts.
 <span class="badge bad">NO TIFF IS APPROVED TO SUBMIT</span> <span class="badge warn">WEEKLY SLOT HELD (H29-S #1 POOLED HOLDOUT 0.0422 &amp; 24-RASTER UNIQUE; SE CI PENDING)</span> <span class="badge bad">DO NOT SUBMIT H28-3</span></p>
-{h30_box}
+{h30_dipgap_box}
 {h29_hero_index}
 {unique_tif_box}
 <div class="card">
@@ -578,6 +626,7 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
  <div class="row"><span class="badge ok">research TIFF format verified: float32 · single band · values [0,1]</span><span class="badge ok">unique versus 12 pinned peer rasters</span><span class="badge bad">predictive gate failed</span></div>
  <p class="small">The exact gate, 95% CI, validation receipt and duplicate report are on the <a href="research.html#h28-3"><b>Research page</b></a>. The executive summary explains the rule used to decide when a future TIFF is actually okay to submit.</p>
 </div>
+{h30_box}
 {h29_box}
 {dconfirm_box}
 {h28_3_box}
@@ -648,6 +697,7 @@ The agent never uploads anything; you press the button.</div>
 </div>
 
 <h2>Historical weekly-slot decision tree — archived and suspended</h2>
+{h30_dipgap_box}
 {h29_box}
 {dconfirm_box}
 {h28_3_box}

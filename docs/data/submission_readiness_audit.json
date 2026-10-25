@@ -53,6 +53,17 @@
       "actual_sha256": "8585c5e870f197f84fda5bac7f22047d646fb73d455eb8b1129486c79bb976cf",
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
+    "h30_dipgap_run_card.json": {
+      "ok_to_publish_as_submission": false,
+      "reasons": [
+        "run card does not authorize submission",
+        "verdict is not promote",
+        "efficacy gate not explicitly passed",
+        "paired improvement CI missing or does not exclude zero"
+      ],
+      "actual_sha256": "deb8b4f10eda333b8965813e3ab6c8cd3c134193f36a06ccb1cbbfdc19994eb3",
+      "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
+    },
     "h30_run_card.json": {
       "ok_to_publish_as_submission": false,
       "reasons": [

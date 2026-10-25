@@ -1,0 +1,50 @@
+building transforms...
+transforms 15:(5167373, 15) 9:(5167373, 9) in 61s
+canary dipadv_rtp_dip50: AUC 0.5357
+canary dipadv_rtp_dip70: AUC 0.5376
+canary dipadv_grav_dip50: AUC 0.5611
+canary dipadv_grav_dip70: AUC 0.5570
+canary dipadv_depth_dip50: AUC 0.5233
+canary gapflank_rtp_lag6: AUC 0.5388
+canary gapflank_rtp_lag12: AUC 0.5335
+canary gapflank_grav_lag6: AUC 0.5468
+canary gapflank_grav_lag12: AUC 0.5418
+CANARY leak flags (direction-invariant >0.90): none
+OOF D done 175s
+OOF DIP done 295s
+OOF GAP done 422s
+surface Spearman g24_d15.tif {'D': {'vs_raster_value': 0.11267683742380977, 'vs_density_sigma3': 0.4407799194398377}, 'DIP': {'vs_raster_value': 0.1109402997332991, 'vs_density_sigma3': 0.43177387053909505}, 'GAP': {'vs_raster_value': 0.11022795320436257, 'vs_density_sigma3': 0.433143439437209}}
+surface Spearman g25_d28.tif {'D': {'vs_raster_value': 0.09606990549030055, 'vs_density_sigma3': 0.44042482996276194}, 'DIP': {'vs_raster_value': 0.0940736154494803, 'vs_density_sigma3': 0.43146066052096993}, 'GAP': {'vs_raster_value': 0.09279343365230121, 'vs_density_sigma3': 0.43291255529286554}}
+surface Spearman g27_tv2_d15.tif {'D': {'vs_raster_value': 0.11162930339711252, 'vs_density_sigma3': 0.439187573314684}, 'DIP': {'vs_raster_value': 0.10992780182419748, 'vs_density_sigma3': 0.42987526556441824}, 'GAP': {'vs_raster_value': 0.10926772516688323, 'vs_density_sigma3': 0.4318603534323465}}
+surface Spearman g28_h27_4_r1.tif {'D': {'vs_raster_value': 0.08965350055458257, 'vs_density_sigma3': 0.4302451563631026}, 'DIP': {'vs_raster_value': 0.08778862028015985, 'vs_density_sigma3': 0.42176802313547374}, 'GAP': {'vs_raster_value': 0.08634661631292818, 'vs_density_sigma3': 0.42301461243994076}}
+surface Spearman g28_h32_1.tif {'D': {'vs_raster_value': 0.09211092805539998, 'vs_density_sigma3': 0.43567289954053623}, 'DIP': {'vs_raster_value': 0.09013016731012892, 'vs_density_sigma3': 0.4269080403853604}, 'GAP': {'vs_raster_value': 0.08892613474372854, 'vs_density_sigma3': 0.42846560527521327}}
+surface Spearman g28_h36_1.tif {'D': {'vs_raster_value': 0.08670083052815389, 'vs_density_sigma3': 0.42935206650811353}, 'DIP': {'vs_raster_value': 0.08520655910668747, 'vs_density_sigma3': 0.42100651340834044}, 'GAP': {'vs_raster_value': 0.08361374693336017, 'vs_density_sigma3': 0.4220424117496259}}
+surface Spearman g28_h38_1.tif {'D': {'vs_raster_value': 0.08676320188523202, 'vs_density_sigma3': 0.43093271972557545}, 'DIP': {'vs_raster_value': 0.0852811078783428, 'vs_density_sigma3': 0.422680620115486}, 'GAP': {'vs_raster_value': 0.08369942549649007, 'vs_density_sigma3': 0.4236637616369132}}
+surface Spearman g30_d28.tif {'D': {'vs_raster_value': 0.09606990549030055, 'vs_density_sigma3': 0.44042482996276194}, 'DIP': {'vs_raster_value': 0.0940736154494803, 'vs_density_sigma3': 0.43146066052096993}, 'GAP': {'vs_raster_value': 0.09279343365230121, 'vs_density_sigma3': 0.43291255529286554}}
+surface Spearman g31_h27_4.tif {'D': {'vs_raster_value': 0.08965350055458257, 'vs_density_sigma3': 0.4302451563631026}, 'DIP': {'vs_raster_value': 0.08778862028015985, 'vs_density_sigma3': 0.42176802313547374}, 'GAP': {'vs_raster_value': 0.08634661631292818, 'vs_density_sigma3': 0.42301461243994076}}
+surface Spearman g32_h33_2_b2.tif {'D': {'vs_raster_value': 0.0864234291097426, 'vs_density_sigma3': 0.41595686603275084}, 'DIP': {'vs_raster_value': 0.08464028782226274, 'vs_density_sigma3': 0.40770475273098883}, 'GAP': {'vs_raster_value': 0.08316488540201968, 'vs_density_sigma3': 0.40874245662512754}}
+surface Spearman g33_h33d.tif {'D': {'vs_raster_value': 0.09282713122836977, 'vs_density_sigma3': 0.4306257608616247}, 'DIP': {'vs_raster_value': 0.0907003348477067, 'vs_density_sigma3': 0.42266160188082347}, 'GAP': {'vs_raster_value': 0.08961295432925376, 'vs_density_sigma3': 0.42473874512626286}}
+surface Spearman g36_anderson.tif {'D': {'vs_raster_value': 0.0847783367950953, 'vs_density_sigma3': 0.4120047685088959}, 'DIP': {'vs_raster_value': 0.083196418226312, 'vs_density_sigma3': 0.4041215140669659}, 'GAP': {'vs_raster_value': 0.0815333615905758, 'vs_density_sigma3': 0.40485580162102514}}
+seed 240 fold 0 D=0.1076 DIP=0.1081 GAP=0.1051 SOFT=0.1009
+seed 240 fold 1 D=0.1252 DIP=0.1167 GAP=0.1179 SOFT=0.1237
+seed 240 fold 2 D=0.0757 DIP=0.0793 GAP=0.0781 SOFT=0.0767
+seed 240 fold 3 D=0.1105 DIP=0.1078 GAP=0.1036 SOFT=0.1048
+seed 241 fold 0 D=0.1373 DIP=0.1299 GAP=0.1332 SOFT=0.1274
+seed 241 fold 1 D=0.1322 DIP=0.1278 GAP=0.1398 SOFT=0.1286
+seed 241 fold 2 D=0.0652 DIP=0.0604 GAP=0.0626 SOFT=0.0687
+seed 241 fold 3 D=0.1315 DIP=0.1357 GAP=0.1401 SOFT=0.1288
+seed 242 fold 0 D=0.1022 DIP=0.0997 GAP=0.1051 SOFT=0.1009
+seed 242 fold 1 D=0.1483 DIP=0.1485 GAP=0.1428 SOFT=0.1441
+seed 242 fold 2 D=0.0588 DIP=0.0519 GAP=0.0607 SOFT=0.0603
+seed 242 fold 3 D=0.1109 DIP=0.1118 GAP=0.1211 SOFT=0.1066
+seed 243 fold 0 D=0.0816 DIP=0.0765 GAP=0.0794 SOFT=0.0758
+seed 243 fold 1 D=0.1172 DIP=0.1021 GAP=0.1066 SOFT=0.1134
+seed 243 fold 2 D=0.0595 DIP=0.0602 GAP=0.0597 SOFT=0.0657
+seed 243 fold 3 D=0.1102 DIP=0.1075 GAP=0.1068 SOFT=0.1045
+seed 244 fold 0 D=0.1079 DIP=0.1023 GAP=0.1025 SOFT=0.0988
+seed 244 fold 1 D=0.1197 DIP=0.1117 GAP=0.1219 SOFT=0.1137
+seed 244 fold 2 D=0.0688 DIP=0.0633 GAP=0.0671 SOFT=0.0660
+seed 244 fold 3 D=0.1250 DIP=0.1221 GAP=0.1267 SOFT=0.1190
+SELECTION pooled HOLDOUT-DTI: {'D': 0.10233654533926163, 'DIP': 0.09887799235546904, 'GAP': 0.10180499284068865, 'SOFT': 0.099431373465421}
+SELECTED: None
+wrote /home/user/GEMSDOE27/evidence/h30_holdout.json
