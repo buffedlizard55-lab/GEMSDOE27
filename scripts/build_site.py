@@ -64,6 +64,29 @@ def build() -> None:
     hab = J(EV / "arm_habitat_decomposition.json") if (EV / "arm_habitat_decomposition.json").exists() else None
     addD = J(EV / "addendum_d_gates.json") if (EV / "addendum_d_gates.json").exists() else None
     gval = J(REG / "topology_candidates.json")["summary"].get("graph_value", {})
+    # ---- Lane L-2026-10-25 parallel negative (JSON-driven; research/ per STOP policy) ----
+    lane_path = DOCS / "downloads" / "lane_candidate_manifest.json"
+    lane = J(lane_path) if lane_path.exists() else None
+    lane_box = ""
+    if lane:
+        r, h, u = lane["raster"], lane["holdout"], lane["uniqueness_vs_registry"]
+        ok = bool(lane.get("ok_to_submit"))
+        badge = ('<span class="badge ok" style="font-size:1.05rem">&#9989; VALIDATED &mdash; OK TO DOWNLOAD &amp; SUBMIT '
+                 '(format + uniqueness + holdout gates PASS; still UNSCORED)</span>') if ok else (
+                 '<span class="badge bad" style="font-size:1.05rem">&#9940; RESEARCH ONLY &mdash; DO NOT SUBMIT '
+                 '(holdout gate failed; see run card)</span>')
+        lane_box = f"""
+<div class="card" style="border-left:4px solid #b00">
+ <h3 style="margin-top:0">Parallel lane L-2026-10-25: subsurface-only buried-fault detector &mdash; also NEGATIVE</h3>
+ <p>{badge}</p>
+ <p>A second parallel run tested a lidar-free detector (potential-field edges, strain, conductivity, seismicity fabric) at B2/38k. Pooled HOLDOUT-DTI {h['pooled_dti_lane_A']:.4f} vs full-32 control {h['pooled_dti_full_B']:.4f} (&Delta; {h['paired_A_minus_B']['mean_delta']:+.4f}, 95% CI [{h['paired_A_minus_B']['ci95'][0]:+.4f}, {h['paired_A_minus_B']['ci95'][1]:+.4f}], {h['n_withheld_positives_total']:,} withheld positives, {e(h['evaluator'])}). The same 15 transforms ON TOP of the full stack gained +0.0045 [+0.0003, +0.0090] &mdash; recorded as the next preregistered lane, not shipped.</p>
+ <ul class="tight">
+ <li><b>Unique (measured):</b> max dot overlap within 3&nbsp;px vs any registry raster <b>{u['max_dot_overlap_within_3px_euclidean']:.1%}</b> (limit 70&nbsp;%); surface Spearman max <b>{u['max_surface_spearman']:.3f}</b> (limit 0.90). Why the family best 0.2778 won, reconstructed pixel-exactly: <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/12_why_02778_won.md">knowledge/12</a>.</li>
+ <li><b>Format:</b> all-finite, nodata=None, every cell in [0,1] (<a href="downloads/research/checks-{e(lane['stem'])}-allfinite.json">re-read receipt</a>); research bytes in <a href="downloads/research/{e(r['primary_allfinite'])}">downloads/research/</a> (sha256 {e(r['sha256'][:16])}&hellip;), intentionally not a submission download. Full run card: <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/evidence/lane_run_card_2026-10-25.json">evidence/lane_run_card_2026-10-25.json</a>. No live score exists; none is claimed.</li>
+ </ul>
+</div>
+"""
+
     h28_manifest_path = DOCS / "downloads" / "h28_1_candidate_manifest.json"
     h28_manifest = J(h28_manifest_path) if h28_manifest_path.exists() else None
     h28_candidate = h28_manifest.get("candidate") if h28_manifest else None
@@ -280,6 +303,7 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
  <p class="small">The exact gate, 95% CI, validation receipt and duplicate report are on the <a href="research.html#h28-3"><b>Research page</b></a>. The executive summary explains the rule used to decide when a future TIFF is actually okay to submit.</p>
 </div>
 {h28_3_box}
+{lane_box}
 <p><b>Legacy files below are retained only for audit and must not be submitted as a new unique candidate:</b> peer repositories now contain overlapping copies and no organizer receipt verifies their score/file pairing. The next action is a new pre-registered, data-ready hypothesis—not a renamed legacy raster.</p>
 <div class="grid">
  <div class="stat"><b>{P['emitted_px']:,}</b><span>emitted pixels = 60,069 (the 0.2477 emission, nothing removed) + {P['added_px']:,}</span></div>

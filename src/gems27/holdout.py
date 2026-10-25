@@ -60,6 +60,24 @@ def make_split(labels: np.ndarray, fold: np.ndarray, fold_id: int, seed: int) ->
     return Split(fold_id, FOLD_NAMES[fold_id], seed, fm, hidden, labels & ~hidden)
 
 
+def buffered_scoring_mask(split: "Split", footprint: np.ndarray, buffer_px: float = 6.0) -> np.ndarray:
+    """Pixels eligible for scoring under the parallel-run protocol (2026-10-25 template fix).
+
+    The pre-existing harness excluded a buffer from *training* (oof_detector.BUFFER_PX) but scored
+    right up to hidden segments, so a detector could earn credit from features whose support
+    overlaps a hidden segment's own neighbourhood. The protocol requires whole segments withheld
+    *with a buffer*: pixels within `buffer_px` of a hidden segment but not on it are excluded from
+    scoring (neither truth nor valid prediction area), and every catalogue-derived quantity must be
+    computed from `split.known` (visible faults) only. Visible faults stay masked pixel-exactly via
+    the metric's `known=` argument. Returns the boolean `valid` mask to pass to the metric.
+    """
+    from scipy.ndimage import distance_transform_edt
+
+    d_hidden = distance_transform_edt(~split.hidden)
+    ring = (d_hidden <= buffer_px) & ~split.hidden
+    return np.asarray(footprint, bool) & split.fold_mask & ~ring
+
+
 def crop(mask_or_arr: np.ndarray, fold_mask: np.ndarray) -> tuple[slice, slice]:
     r = np.nonzero(fold_mask.any(axis=1))[0][[0, -1]]
     c = np.nonzero(fold_mask.any(axis=0))[0][[0, -1]]

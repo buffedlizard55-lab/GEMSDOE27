@@ -352,3 +352,17 @@ Final recheck on this branch: **85 tests passed** (`.venv/bin/python -m pytest -
 
 
 ---
+
+## Session 6 / Lane L-2026-10-25 (parallel to the H28-3 run above; merged after PR #11)
+
+Independent parallel lane with its own frozen gate (knowledge/13): subsurface-only detector
+(lidar excluded), B2/38k. Result NEGATIVE: pooled HOLDOUT-DTI 0.0752 vs full-32 0.1001
+(delta -0.0262 [-0.0368,-0.0163], seeds 200-204, 60,423 withheld positives); canary clean;
+uniqueness PASS (surface Spearman <=0.100, dot overlap <=51.0%). Cross-validation note: the
+H28-3 strain-conductivity negative above independently agrees — strain/conductivity transforms
+do not carry standalone detection at 100 m. The lane transforms as an ADD-ON gained +0.0045
+[+0.0003,+0.0090] (control arm D) — next preregistered lane candidate, not shipped.
+0.2778 forensics (pixel-exact B2 reconstruction): knowledge/12_why_02778_won.md.
+Merge alignment: lane artifact filed under docs/downloads/research/; front page keeps PR #11's
+STOP policy (no TIFF approved); lane box added as second parallel negative. Passes 1-3 detail
+for this lane: knowledge/14 + evidence/lane_run_card_2026-10-25.json. 86+ tests green post-merge.

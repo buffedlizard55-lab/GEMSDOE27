@@ -220,7 +220,7 @@
   {
    "id": "h27-10-first-run-spacing-diagnostic-self-distance",
    "severity": "low",
-   "issue": "The first H27-10 run (seeds 150-159) correctly generated the frozen equal-count candidate and measured mean paired ΔDTI +0.00084615, 4/4 fold means and 7/10 seed means improved, and annulus gross efficiency 0.03357 < m(0.2477)=0.05212. Its spacing integrity check incorrectly measured each added pixel against a mask that included itself, so it necessarily returned zero and marked the spacing data check false. This is a diagnostic false negative, not evidence of a spacing violation.",
+   "issue": "The first H27-10 run (seeds 150-159) correctly generated the frozen equal-count candidate and measured mean paired \u0394DTI +0.00084615, 4/4 fold means and 7/10 seed means improved, and annulus gross efficiency 0.03357 < m(0.2477)=0.05212. Its spacing integrity check incorrectly measured each added pixel against a mask that included itself, so it necessarily returned zero and marked the spacing data check false. This is a diagnostic false negative, not evidence of a spacing violation.",
    "action": "Preserved the first JSON as evidence/h27_10_annulus_holdout_initial.json. Corrected only the spacing-check implementation and added tests; the frozen masks, ranker, K, gate, and seeds are unchanged. The deterministic integrity rerun on the same used seeds passed all data checks; all 40 cell outcomes, aggregate metrics, and the frozen FAIL are unchanged in evidence/h27_10_annulus_holdout.json. This rerun is non-confirmatory and cannot change the negative gate result."
   },
   {
@@ -228,6 +228,30 @@
    "severity": "medium",
    "issue": "Six confirmed GitHub Actions runs for .github/workflows/fetch-gdr-external-layers.yml are recorded through branch head a58e74d: 37099986237 on feature commit 0ddaa3f, 37100053264 on PR #9 merge commit 733e2b2, 37100608786 on follow-up commit 50c0052, 37100751573 on branch-sync commit 443138d, 37100935082 on documentation commit b2f6c6b, and 37101134684 on documentation commit a58e74d. Each concluded failure; the Actions API reports zero jobs and gh run view --log-failed reports 'log not found'. No download script step ran and no fetch artifact/inventory was produced in this checkout. This is a point-in-time record; later pushes may create other workflow runs. It does not show that the official GDR files are unavailable or fail their pins.",
    "action": "Keep H27-16 UNTRIED and require a successful authorized runner job plus SHA-256 verification of the raw bytes before feature use. Have a repository maintainer investigate the Actions trigger, permissions, approval state, or runner configuration; the empty run records do not identify which, if any, caused the failure. The separate 2026-09-30 sibling-runner record is provenance for the pins, not evidence of a fetch in this checkout."
+  },
+  {
+   "id": "IR-2026-10-25-01-lane-paragraph-missing",
+   "severity": "high",
+   "issue": "PARALLEL-RUN PROTOCOL \u00a71 says 'Your lane is the single method paragraph below', but the prompt as received contains no delimited single method paragraph; parallel sessions may therefore collide or diverge silently.",
+   "action": "This session DECLARED Lane L-2026-10-25 explicitly in knowledge/13 \u00a71 before implementing, stayed inside it, and enforced the numeric uniqueness tests (surface Spearman <0.90; <70% final dots within 3px Euclidean of any single registry raster). Owner: confirm the intended lane text for future parallel runs."
+  },
+  {
+   "id": "IR-2026-10-25-02-leader-score-conflict",
+   "severity": "medium",
+   "issue": "Leader score is stated as 0.4413 and as 0.3195 in different parts of the 2026-10-25 prompt; GEMSDOE32's site read 0.3262 (#1 nchuzhoy) on 2026-10-04. All are OWNER-REPORTED; no ORGANIZER-CONFIRMED receipt was shown for any score including 0.2778.",
+   "action": "All numbers labelled OWNER-REPORTED / HOLDOUT-DTI / MODEL in knowledge/12-13 and the run card. Owner: paste a submission-page receipt to upgrade any figure to ORGANIZER-CONFIRMED."
+  },
+  {
+   "id": "IR-2026-10-25-03-portal-error-mechanism-verified",
+   "severity": "medium",
+   "issue": "Updates item portal-0-1-error-cause-unknown: GEMSDOE32's two mechanisms were re-measured this session \u2014 training_features.tif nodata -3.4028234663852886e+38 occupies 3,061 cells INSIDE the footprint; NaN-outside files risk strict whole-array validators. This repo's front-page primary button historically pointed at the NaN variant.",
+   "action": "Lane primary download is all-finite zeros-outside (nodata=None), NaN twin secondary; site order-of-try updated for the lane file. Legacy slot files unchanged (history); their allfinite fallbacks remain the safe choice."
+  },
+  {
+   "id": "IR-2026-10-25-04-holdout-buffer-template-fix",
+   "severity": "medium",
+   "issue": "Shared holdout harness buffered training but scored up to hidden segments (feature support could overlap hidden neighbourhoods). Protocol \u00a72 requires segments withheld WITH a buffer.",
+   "action": "Fixed once in the template: gems27.holdout.buffered_scoring_mask() excludes the 600 m ring around hidden segments from scoring; catalogue-derived masks use visible faults only. Reported here per protocol \u00a72; siblings should adopt."
   }
  ]
 }

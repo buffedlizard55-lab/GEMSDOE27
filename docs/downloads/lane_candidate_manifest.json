@@ -1,0 +1,132 @@
+{
+  "generated_utc": "2026-10-25T20:23:04Z",
+  "stem": "gems27-lane-subsurface-buried-fault-20261025-fc6d8c3acf6c",
+  "run_card": "Lane L-2026-10-25 (single-lane parallel run)",
+  "hypothesis": "Faults missing from the surface-rupture-scoped USGS/INGENIOUS catalogue are preferentially buried/older structures visible in subsurface physics (potential-field edges, basement steps, strain, conductivity, seismicity fabric) but not in lidar scarps; a subsurface-only detector at B2/38k therefore places credit where the H19-5 family cannot.",
+  "mechanism": "OOF/full HGB on 16 subsurface bands + 15 label-free transforms (gems27.subsurface_features); ridge NMS; priority Poisson-disk >=2.8px; B2 (200 m) catalogue exclusion; 38,000-dot budget (live-family optimum).",
+  "named_non_fault_mimic": "Lithologic contacts and survey seams in potential fields; clay-cap/basin conductivity highs; remanent magnetisation.",
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "evaluator": "gems27.metric v1 (alpha=0.2, beta=0.8, R=3px triangular)",
+    "pooled_dti_lane_A": 0.0752283127772491,
+    "pooled_dti_full_B": 0.10011567622995199,
+    "pooled_dti_hybrid_D_control": 0.10465296756905067,
+    "paired_A_minus_B": {
+      "mean_delta": -0.026216871962789053,
+      "ci95": [
+        -0.036817050748421856,
+        -0.016342778274567843
+      ],
+      "cells_positive": 4,
+      "n_cells": 20
+    },
+    "paired_A_minus_Random": {
+      "mean_delta": 0.00957092497228047,
+      "ci95": [
+        -0.0015422457836385404,
+        0.021740030522782235
+      ],
+      "cells_positive": 10,
+      "n_cells": 20
+    },
+    "n_withheld_positives_total": 60423,
+    "seeds": [
+      200,
+      201,
+      202,
+      203,
+      204
+    ],
+    "canary_max_auc": 0.5772227576417308
+  },
+  "uniqueness_vs_registry": {
+    "max_dot_overlap_within_3px_euclidean": 0.5103421052631579,
+    "per_raster": {
+      "g28_h27-4-solo_02708.tif": 0.2226578947368421,
+      "g30_d28_02600.tif": 0.23589473684210527,
+      "g32_h33-2-b2_02778.tif": 0.20978947368421053,
+      "g33_h33d_02632.tif": 0.2303421052631579,
+      "g36_pinn_02750.tif": 0.21676315789473685,
+      "gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-nan.tif": 0.23589473684210527,
+      "gems27-farfield-swap-augmented-detector-probe-20261002-a34b0799df59-nan.tif": 0.29139473684210526,
+      "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.tif": 0.5103421052631579,
+      "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif": 0.26002631578947366,
+      "gems27-topo-gap-closure-t-v2-on-d2-8-20261002-3ebd51534bb1-nan.tif": 0.24878947368421053,
+      "gems27-topo-gap-closure-t-v2-plus-h27-4-r1-on-d1-5-20261002-d466b251f309-nan.tif": 0.24860526315789475
+    },
+    "max_surface_spearman": 0.10013305907391513,
+    "thresholds": {
+      "dot_overlap": 0.7,
+      "spearman": 0.9
+    },
+    "pass": true
+  },
+  "raster": {
+    "primary_allfinite": "gems27-lane-subsurface-buried-fault-20261025-fc6d8c3acf6c-allfinite.tif",
+    "sha256": "d648a3cc02713612eb5c59637a4732418ae555aa4037ac9dbc815d2e7ab00528",
+    "bytes": 827016,
+    "dots": 38000,
+    "content_id": "fc6d8c3acf6c",
+    "zip": "gems27-lane-subsurface-buried-fault-20261025-fc6d8c3acf6c-allfinite.zip",
+    "nan_twin": "gems27-lane-subsurface-buried-fault-20261025-fc6d8c3acf6c-nan.tif",
+    "nan_twin_sha256": "9f91bd4e51edc9a732a6f68a017206ca16ab1eca0c9dc23892b19d29d619d92c"
+  },
+  "validator": {
+    "zeros_hard_pass": true,
+    "zeros_checks": {
+      "grid_matches_template": {
+        "pass": true,
+        "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+        "hard": true
+      },
+      "single_band_float32": {
+        "pass": true,
+        "detail": "count=1 dtype=float32",
+        "hard": true
+      },
+      "inside_footprint_all_finite": {
+        "pass": true,
+        "detail": "0 non-finite inside 5167373 px",
+        "hard": true
+      },
+      "inside_footprint_in_0_1": {
+        "pass": true,
+        "detail": "min=0 max=1",
+        "hard": true
+      },
+      "no_infinities_anywhere": {
+        "pass": true,
+        "detail": "np.isinf(whole array) is empty",
+        "hard": true
+      },
+      "outside_footprint_is_zero_and_finite": {
+        "pass": true,
+        "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+        "hard": true
+      },
+      "strict_whole_array_range": {
+        "pass": true,
+        "detail": "whole-array min=0 max=1",
+        "hard": true
+      },
+      "profile_driver_gtiff": {
+        "pass": true,
+        "detail": "GTiff",
+        "hard": false
+      },
+      "compression_like_sample": {
+        "pass": true,
+        "detail": "Compression.lzw",
+        "hard": false
+      }
+    },
+    "nan_hard_pass": true
+  },
+  "submission_name": "GEMSDOE27-LANE-A-SUBSURFACE-B2-38K",
+  "note_max_140_chars": "27GEMSDOE Lane-A subsurface-only buried-fault detector, B2, 38k dots; HOLDOUT-DTI 0.0752 vs full 0.1001; UNSCORED | id fc6d8c3acf6c",
+  "note_chars": 131,
+  "ok_to_submit": false,
+  "verdict": "negative",
+  "live_score": null,
+  "live_score_label": "UNSCORED \u2014 no ORGANIZER-CONFIRMED score exists for this file"
+}

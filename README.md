@@ -31,6 +31,34 @@ Historic Slot 1–5 and H28-1 artifacts remain retained for audit and reproducti
 * **Three genuinely untried hypotheses remain:** H27-16 official GDR layers (bytes/provenance still required), H28-4 seismicity-fabric lineaments, and H28-5 quality-filtered hydrothermal chemistry gradients. See `knowledge/07_untried_hypotheses.md` and `registry/next_hypotheses.json`.
 * **No competition outcome was claimed.** No DrivenData access, upload, or organiser score occurred. [PR #11](https://github.com/buffedlizard55-lab/GEMSDOE27/pull/11) merged this documented negative-result/public-disclosure update to `main` at merge commit `c3276755d1f26d2f72991de033d005413e1c99aa` after the CI test job succeeded; this GitHub event is distinct from a competition result.
 
+## Session 6 (2026-10-25) — why 0.2778 won (pixel-exact), Lane L-2026-10-25 NEGATIVE, [0,1] fix shipped
+
+* **Why 0.2778 won (`knowledge/12_why_02778_won.md`, MEASURED):** the GEMSDOE32 file
+  `h33-h33-2-b2` (sha256 `c55bafc4…`, hash-authenticated here) is *pixel-exactly* the 0.2708
+  file minus its 2,545 dots within (1,2] px of the catalogue: 0.1922 solid → 0.2477 dotted
+  d1.5 → 0.2600 d2.8 → 0.2708 r≤1 prune → 0.2778 B2 prune (all OWNER-REPORTED; no
+  ORGANIZER-CONFIRMED receipt exists in this repo). Each step deletes near-zero-credit FP
+  mass; GEMSDOE36's independent PINN (0.2750) converges on the same B2 + ~38 k optimum.
+  All five top files are the same dot field (91–100 % within 3 px), so beating 0.2778 needs
+  new detector information, not more thinning.
+* **Lane L-2026-10-25 (`knowledge/13`, declared because the prompt's "single method
+  paragraph" was not delimited — IR-2026-10-25-01):** subsurface-only buried-fault detector
+  (potential-field edges/strain/conductivity/seismicity fabric; lidar excluded by
+  construction), B2, 38 k dots. **Frozen gate FAILED** (`knowledge/14`): pooled HOLDOUT-DTI
+  0.0752 vs full-32 control 0.1001 (Δ −0.0262, 95 % CI [−0.0368, −0.0163], 60,423 withheld
+  positives, seeds 200–204); canary clean (max AUC 0.576); uniqueness PASS (surface
+  Spearman ≤ 0.100; final-dot overlap ≤ 51.0 % vs any registry raster). The unique TIF
+  `docs/downloads/gems27-lane-subsurface-buried-fault-20261025-fc6d8c3acf6c-allfinite.tif`
+  (sha256 `d648a3cc…`) is generated and format-valid but badged **⛔ RESEARCH ONLY — DO NOT
+  SUBMIT** on the site's first screen. **Nothing is approved to submit** (aligned at merge with PR #11's STOP policy: legacy slots demoted to audit-only after the peer-overlap audit; H28-3 and this lane both negative).
+  Positive control: the 15 lane transforms ON TOP of the full stack gained +0.0045
+  HOLDOUT-DTI [+0.0003, +0.0090] — the recommended *next preregistered lane*, not shipped.
+* **[0,1] portal error:** both mechanisms re-measured (sentinel −3.4e38 in 3,061 in-footprint
+  cells; NaN-outside strictness). New primary downloads are all-finite (nodata=None, every
+  cell in [0,1], independent re-read receipt in `docs/downloads/checks-*.json`).
+* Template fixes (protocol §2, reported IR-2026-10-25-04): buffered scoring mask in
+  `gems27.holdout`; detector column selection in `gems27.oof_detector`. 86 tests pass.
+
 ## Session 5 update — H27-10 rejected; H27-5b review class (`knowledge/06`, `knowledge/11`)
 
 * **H27-10 frozen gate: FAIL; no weekly slot.** On seeds 150–159, baseline mean DTI was 0.10937685 and the annulus substitution mean was 0.11022300: paired ΔDTI **+0.00084615**, below +0.001. Fold means improved 4/4, seed means 7/10 (gate required 8/10), and added-annulus efficiency was **0.03357**, below m(0.2477)=**0.05212**. The first run's self-distance spacing diagnostic falsely marked the integrity check; the initial JSON is preserved. A corrected same-seed integrity rerun passed all data checks while leaving all metrics and the failed gate unchanged. It is not fresh confirmation. See `evidence/h27_10_annulus_holdout.json`, `evidence/h27_10_annulus_holdout_initial.json`, and Addendum F.
@@ -180,6 +208,29 @@ example_submission.tif: https://www.dropbox.com/scl/fi/6rgvnuady818ol8yqgis4/exa
 existing_faults.tif: https://www.dropbox.com/scl/fi/t7fyt03qdh9egyme0itwo/existing_faults.tif?rlkey=yiao96uluqdkipf0h5vju71jf&st=rnino7ya&dl=0
 gems-geodawn-numerical-features.tif: https://www.dropbox.com/scl/fi/3vz9o0wwavi26xaeoxlwr/gems-geodawn-numerical-features.tif?rlkey=je8d8fepqfbst9lnwsq9rkplu&st=zj1lag1r&dl=0
 Digital-elevation-model-links-JSON.pdf: https://www.dropbox.com/scl/fi/ig0mban712ns1atphgphe/Digital-elevation-model-links-JSON.pdf?rlkey=zm77f1vbtt2if8hlruymptnu3&st=srhhir10&dl=0
+```
+
+## Session 6 prompt (operative text verbatim, 2026-10-25; score list elided)
+
+The 2026-10-25 tasking: focus on the highest-scoring submissions from GEMSDOE24/25/27/28/30/
+31/32/33/36; study why `h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros` scored 0.2778
+(owner-reported; leaderboard highs stated as both 0.4413 and 0.3195 — IR-2026-10-25-02);
+generate a UNIQUE TIF whose submit-readiness is obvious and machine-validated; fix the
+"Predicted values must be in range [0, 1]" rejection; one-click download + unique name +
+short note on the first screen and an executive-summary subpage; 3–5 untried hypotheses
+ranked before implementing; validate on the spatially blocked holdout before any weekly
+slot; 3 passes; PR + merge. The full per-site score list in the prompt is elided here —
+its values for the focus sites are recorded in `knowledge/12` (OWNER-REPORTED).
+
+```text
+PARALLEL-RUN PROTOCOL — read first. This session is one of several running from this same prompt.
+1. LANE. Your lane is the single method paragraph below. Stay inside it. If your raster's rank-correlation with any registry raster exceeds [0.90], or more than [70%] of your dots fall within 3 px of one registry raster's dots, you have drifted into another lane: log it as a duplicate and stop. Check this on the surface before placement AND on the final dots.
+2. REUSE, DON'T REBUILD. Use the template's cached feature stack, evaluate_holdout.py and submission_writer.py. Holdout = hide-and-recover: withhold whole fault segments with a buffer, derive every catalogue-based feature only from the visible faults, mask visible faults pixel-exactly, score pooled DTI (alpha 0.2, beta 0.8, 300 m triangular kernel). If a shared tool is wrong, fix it once in the template and report it; never keep a private fork.
+3. LABEL EVERY NUMBER as HOLDOUT-DTI (evaluator version, number of withheld positives, 95% CI) or ORGANIZER-CONFIRMED (copied from a submission-page receipt). A projection is never written as a score.
+4. LEAKAGE CANARY. Test each feature alone on the holdout before trusting any result. AUC above [0.90] means leakage until proven otherwise.
+5. RUN CARD. End with one JSON card: hypothesis; mechanism; the named non-fault process that could mimic it; holdout DTI + CI; correlation/overlap vs registry; raster sha256; validator output (no NaN inside the footprint, values in [0,1], CRS/shape/transform match); submission name + note of at most 140 characters; verdict promote / negative. Negative results are deliverables.
+6. BUDGET. Stop after [3] experiments or [2] hours. Do not pick submissions: promotion to a real slot is a separate selector step, within the weekly cap shown on the submission page.
+THE FOLLOWING IS THE HIGHEST URGENCY AND MUST BE FOLLOWED! MUST GENERATE A UNIQUE TIF SUBMISSION FOR THE COMPETITION. DO NOT COPY A PREVIOUS SUBMISSION UNLESS IT'S FOR LEARNING AND EDUCATION. BUT WE MUST GENERATE A UNIQUE TIF SUBMISSION. IT MUST BE OBVIOUS WHETHER IT IS OK TO DOWNLOAD AND SUBMIT THE GENERATED TIF SUBMISSION.
 ```
 
 ## Core Values (verbatim, owner-supplied)

@@ -52,8 +52,13 @@ def fit_predict_oof_probabilities(
     seed: int = 2026,
     extra: np.ndarray | None = None,
     chunk: int = 400_000,
+    columns: np.ndarray | None = None,
 ) -> np.ndarray:
     """Predict strictly out-of-fold fault probabilities across all 4 spatial quadrants.
+
+    `columns` (2026-10-25, Lane L-2026-10-25): optional index array selecting a subset of the
+    prepared 32 bands. The hypothesis under test is feature-regime *exclusion*, so the instrument
+    must be able to run without the lidar bands; hyper-parameters are unchanged.
 
     `extra_features` (Session-5 H28-1 arm) and `extra` (Session-4 Addendum-D arm) are aliases: both
     append further label-free bands, in row-major footprint order, to the prepared matrix. `extra` may
@@ -77,6 +82,8 @@ def fit_predict_oof_probabilities(
 
     def assemble(idx: np.ndarray) -> np.ndarray:
         base = np.asarray(X_foot[idx], dtype=np.float32)
+        if columns is not None:
+            base = base[:, columns]
         if extra is None:
             return base
         return np.concatenate([base, np.asarray(extra[idx], dtype=np.float32)], axis=1)
@@ -112,7 +119,8 @@ def fit_predict_oof_probabilities(
 
 
 def fit_predict_full_probabilities(foot: np.ndarray, labels: np.ndarray, *, extra: np.ndarray | None = None,
-                                   neg_ratio: int = 10, seed: int = 2026, chunk: int = 400_000) -> np.ndarray:
+                                   neg_ratio: int = 10, seed: int = 2026, chunk: int = 400_000,
+                                   columns: np.ndarray | None = None) -> np.ndarray:
     """Fit on ALL published labels and predict everywhere - the emission-time detector.
 
     At submission time there is no held-out truth (every label is public), so out-of-fold fitting would
@@ -126,6 +134,8 @@ def fit_predict_full_probabilities(foot: np.ndarray, labels: np.ndarray, *, extr
 
     def assemble(idx: np.ndarray) -> np.ndarray:
         base = np.asarray(X_foot[idx], dtype=np.float32)
+        if columns is not None:
+            base = base[:, columns]
         if extra is None:
             return base
         return np.concatenate([base, np.asarray(extra[idx], dtype=np.float32)], axis=1)
