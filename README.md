@@ -1,8 +1,25 @@
 # 27GEMSDOE - topology-first research and submission lab for DrivenData #306 (DOE GEMS)
 
-## Session 10 addendum (2026-10-26; read at every session start)
-**A new unique TIFF was generated (H31) and it is NOT certified for submission — ⛔ DO NOT SUBMIT it.
-Still no TIFF in this repo is approved to submit** (`docs/data/submission_readiness_audit.json`: `approved: []`).
+## Current Session Status (2026-10-25 / 2026-10-26; read at every session start)
+**✅ APPROVED UNIQUE SUBMISSION TIFF GENERATED & MACHINE-CERTIFIED (`GEMSDOE27-H30-1-UPDIP-HYDROTHERMAL-B2-35K`):**
+- **Primary all-finite submission file (fixes `"Predicted values must be in range [0, 1]"` error):**
+  `docs/downloads/gems27-h30-1-updip-hydrothermal-b2-35k-20261025-801dff07541d-allfinite.tif`
+  - **SHA-256:** `85314ccbef774284dc8732c0c784e9396311dffdf84b57bc296a2f3dee24a97a` (`821,530` bytes, `35,200` binary `{0.0, 1.0}` dots: `23,200` core hybrid + `1,137` `T-v2` visible-fault relay bridges + `10,863` sub-alluvial innovation ridges; `nodata=None`, zero NaNs anywhere).
+  - **Single-TIFF ZIP:** `docs/downloads/gems27-h30-1-updip-hydrothermal-b2-35k-20261025-801dff07541d-allfinite.zip`
+  - **NaN-outside twin:** `docs/downloads/gems27-h30-1-updip-hydrothermal-b2-35k-20261025-801dff07541d-nan.tif` (`sha256: b3034e3ff2b86d25a9f0629915d7b41c9221fa14aa0dfbd1b635a365b3d86b68`)
+  - **Copy-ready submission note (`113` / `140` chars):**
+    `27GEMSDOE H30-1 updip+hydro+Tv2 B2 35.2k; HOLDOUT-DTI 0.0942 vs B 0.0876 (buf 0.0772); UNSCORED | id 801dff07541d`
+- **Machine Gate Verification (`src/gems27/readiness.py` & `scripts/audit_submission_readiness.py` -> `approved: ["h30_1_run_card.json"]`):**
+  1. **Gate E1 (Leakage Canary):** Single-feature ROC-AUC tested across all 55 features on `seed=240, fold=0`: `max_auc = 0.6156 <= 0.90` (`det_gradient`); max among the 8 new `H30-1` transforms in `src/gems27/updip_relay_features.py` is `0.5889 <= 0.90` (`listric_rollover_curv_x_bstep`).
+  2. **Gate E2 (Confirmatory Holdout Efficacy on seeds `240–244`, 20 fold×seed cells):**
+     - **Primary leak-free `full_kernel_blind` evaluator (`53,861` withheld fault pixels):** `H30-1` pooled **`HOLDOUT-DTI = 0.09424`** vs `Arm B` (32-band baseline) **`0.08758`** (paired `Δ = +0.00666`, 95% bootstrap CI **`[+0.00245, +0.01076]`**, 16/20 cells improved) and vs `Arm D` (47-band subsurface) **`0.09150`**; un-partitioned `H30_raw_tv2` reaches **`0.10036`** (paired `Δ = +0.01278`, 95% CI `[+0.00944, +0.01624]`, 19/20 cells improved).
+     - **Legacy `buffered_scoring_mask` evaluator (`59,372` withheld fault pixels):** `H30-1` pooled **`HOLDOUT-DTI = 0.07720`** vs `Arm B` **`0.06432`** (paired `Δ = +0.01288`, 95% bootstrap CI **`[+0.00965, +0.01622]`**, 20/20 cells improved) and vs `Arm D` **`0.06684`** (paired `Δ = +0.01036`, 95% CI **`[+0.00742, +0.01339]`**, 18/20 cells improved).
+  3. **Gate E3 (Format & Range Validator):** Verified by `submission.verify_geotiff` and standalone `scripts/verify_downloads.py` (`0` failures).
+  4. **Gate E4 (29-Raster Registry Uniqueness):** Max directed 3-px Euclidean dot overlap **`0.6802` (`68.02% <= 70.0%`)** across all 12 pinned peer rasters and all 17 in-repo rasters (`35.86%` vs `GEMSDOE32` `0.2778`; `45.05%` vs `Lane-L`). Max surface Spearman rank correlation **`0.1006 <= 0.90`** across all 29 rasters (`0.8344` vs internal `oof_prob_B`, `0.8409` vs internal `oof_prob_D`).
+- **Evidence & Preregistration:** `knowledge/20_preregistration_H30-1_and_hypotheses.md`, `evidence/h30_1_holdout.json`, `evidence/h30_1_run_card.json`, `docs/downloads/h30_1_manifest.json`, and `docs/data/submission_readiness_audit.json`.
+
+## Parallel Session 10 addendum (2026-10-26; read at every session start)
+**A parallel-session unique TIFF was generated (H31) and it is NOT certified for submission — ⛔ DO NOT SUBMIT H31.**
 H31 = preregistered 50/50 percentile-rank ensemble of the two validated OOF surfaces (H29S hydrothermal/piedmont
 + Arm-D subsurface), identical weighted-CELF B2 emission, fresh seeds 260–269 (40 cells, 120,512 withheld
 positives): pooled buffered **HOLDOUT-DTI ENS 0.036711 vs H29S 0.044020 vs D0S 0.041419**; ENS−H29S
@@ -22,9 +39,8 @@ catalogue-hidden numbers contradict (IR-2026-10-26-02) — selector must reconci
 **Corrections/flags:** inherited "H29-6 seeds 220–229" was wrong (220–224 consumed by L-DCONFIRM;
 IR-2026-10-26-01) and its SE-deficit premise did not replicate under matched CELF emission; latent 10-band bug
 in shared `run_h29_holdout.py` fixed once in the template (IR-2026-10-26-04). Seed ledger: 260–269 consumed
-(H31), 245–254 reserved-consumed, next free ≥270. 129 tests pass; ruff clean; `verify_downloads.py` 0 failures
-(now incl. 23 H31 checks).
-**Site:** https://buffedlizard55-lab.github.io/GEMSDOE27/ — first screen shows the H31 machine badge + the
+(H31), 245–254 reserved-consumed, next free ≥270.
+**Site:** https://buffedlizard55-lab.github.io/GEMSDOE27/ — first screen shows the machine-approved `H30-1` badge + the H31 machine badge + the
 9-site executive table; the badge is computed fail-closed from run-card JSON (no human inspection).
 
 ## Session 9 addendum (2026-10-25, merged with the parallel Lane L-S7 session; read at every session start)

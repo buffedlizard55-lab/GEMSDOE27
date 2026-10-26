@@ -107,7 +107,6 @@ def main() -> int:
     foot = grid.load_footprint(paths.TEMPLATE)
     labels = grid.load_labels(paths.LABELS)
     fold = holdout.make_quadrant_folds(foot)
-    d_cat = distance_transform_edt(~labels)  # distance to catalogue (px, 100 m/cell)
 
     print("Computing OOF probabilities (4-fold, reused across seeds)...", flush=True)
     oof_prob = oof_detector.fit_predict_oof_probabilities(foot, labels, fold)
@@ -123,6 +122,7 @@ def main() -> int:
             sp = holdout.make_split(labels, fold, f, seed)
             fm = sp.fold_mask
             hid, kn = sp.hidden, sp.known
+            d_known = distance_transform_edt(~kn)  # distance to visible catalogue only (IR-2026-10-25-10 fix)
             g = hid & fm & ~kn
             active = fm & ~kn
             k_pt = metric.kernel_from_distance(distance_transform_edt(~g)) if g.any() else np.zeros_like(g, float)
@@ -135,10 +135,10 @@ def main() -> int:
 
             # unique: scatter-smoothed far field
             sf = scatter_farfield_emission(oof_prob, ridge_all, fm, kn,
-                                           d_cat, fm, budget_frac)
+                                           d_known, fm, budget_frac)
 
             # unique + T-v2 far-field topology dots
-            sf_tv2 = sf | tv2_farfield_dots(labels, foot, fm, kn, d_cat, sf)
+            sf_tv2 = sf | tv2_farfield_dots(labels, foot, fm, kn, d_known, sf)
 
             v_sets = {"base_oof": base_c, "scatter_farfield": sf,
                       "scatter_farfield_plus_tv2": sf_tv2}

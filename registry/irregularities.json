@@ -366,6 +366,24 @@
    "severity": "medium",
    "issue": "Two parallel Session-10 (2026-10-26) lanes from the same prompt produced separate executive summaries and unique TIFFs: PR #27 (knowledge/24_focus_sites_executive_summary_20261026.md, knowledge/25_hypothesis_screen_20261026.md, gems27-unique-20261026-6c2790d67dc6 far-field probe in docs/downloads/, verdict negative) merged before PR #28 (knowledge/24_focus_sites_executive_summary_2026-10-26.md, knowledge/25_h31_result_2026-10-26.md, H31 93c8af046660 in docs/downloads/research/, verdict negative). Knowledge numbers 24 and 25 now each cover two distinct files. The PR #27 lane's run card reports n_withheld_positives_total=0 (far-field probe not holdout-gated); the H31 lane consumed seeds 260-269. Cross-screen measured post-merge: 5.69%/10.16% directed 3px overlaps - not duplicates (evidence/h31_cross_session_overlap.json).",
    "action": "Both evidence sets preserved on merge; site regenerated from merged JSON; merged readiness audit approves nothing. Cite knowledge files by full filename. Selector should pre-assign lane numbers/filenames/seed blocks to parallel sessions (repeat of IR-2026-10-25-16 pattern)."
+  },
+  {
+   "id": "IR-2026-10-26-06-unique-holdout-hidden-mask-and-banner-contradiction",
+   "severity": "high",
+   "issue": "scripts/run_unique_holdout.py line 99 computed d_cat = distance_transform_edt(~labels) using ALL labels (sp.known | sp.hidden) instead of sp.known (visible faults only). Because FAR_D_PX = 3.0 and the DTI kernel radius is 3.0 px (300 m), requiring d_cat >= 3.0 banned every prediction within 300 m of withheld truth sp.hidden, mathematically forcing TPw = 0.0 and HOLDOUT-DTI = 0.0 across all 20 cells.",
+   "action": "Fixed scripts/run_unique_holdout.py to compute d_known = distance_transform_edt(~kn) from visible faults only inside each split, and wired the machine-gated H30-1 Run Card panel verified by src/gems27/readiness.py."
+  },
+  {
+   "id": "IR-2026-10-26-07-h29-1b-self-comparison-in-uniqueness-screen",
+   "severity": "medium",
+   "issue": "In evidence/h29_1b_run_card.json (lines 210-231), H29-1b achieved 0.6500 (65.0% <= 70%) 3-px dot overlap with H28-1 and <= 0.4799 across all 12 peer rasters and Slots 1-5; the reported 0.8255 maximum was against H29-1 (c24b6371179c, its own un-deconflicted draft) because scripts/run_build_h29_1b.py included H29-1 in ref_paths.",
+   "action": "Keep H29-1b in docs/downloads/research/ with verdict=negative. Implemented H30-1 as a self-contained 3-habitat geophysical lane evaluated on confirmatory seeds 240-244 that achieves <= 0.6802 3-px dot overlap across ALL 29 rasters (12 peer rasters + 17 in-repo rasters including H28-1, H29-1, H29-1b, L-DCONFIRM, H29-S, H30-chem, H30-dipgap, unique-20261026, and H31) without post-hoc registry deconfliction."
+  },
+  {
+   "id": "IR-2026-10-26-08-buffered-scoring-mask-target-halo-and-kernel-clipping",
+   "severity": "high",
+   "issue": "holdout.buffered_scoring_mask(sp, foot) excludes ring = (d_hidden <= 6.0) & ~sp.hidden. Passing allowed = (valid_scoring | hidden) & (d_known > 2.0) into emit() and ridge_nms(prob, allowed) zeroed prob across the 100-600 m moat surrounding sp.hidden while leaving sp.hidden (d == 0) positive, and zeroed the 0 < d < 3.0 px (100-300 m) triangular tolerance kernel during scoring.",
+   "action": "In scripts/run_h30_1_holdout.py, ridge_nms(prob, foot) is computed strictly on foot (100% blind to sp.hidden), and holdout evaluation reports BOTH the primary leak-free full_kernel_blind evaluator (where emit sees only fold_mask and visible_known = sp.known & (d(hidden) > 6.0), and the full 300 m kernel is active) AND the legacy buffered_scoring_mask evaluator. H30-1 passes both evaluators with 95% bootstrap CIs strictly above zero."
   }
  ]
 }

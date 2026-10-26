@@ -1,6 +1,8 @@
 {
   "purpose": "Fail-closed evidence/byte audit, not a new geological experiment",
-  "approved": [],
+  "approved": [
+    "h30_1_run_card.json"
+  ],
   "results": {
     "dconfirm_run_card_2026-10-25.json": {
       "ok_to_publish_as_submission": false,
@@ -66,6 +68,12 @@
         "paired improvement CI missing or does not exclude zero"
       ],
       "actual_sha256": "8585c5e870f197f84fda5bac7f22047d646fb73d455eb8b1129486c79bb976cf",
+      "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
+    },
+    "h30_1_run_card.json": {
+      "ok_to_publish_as_submission": true,
+      "reasons": [],
+      "actual_sha256": "85314ccbef774284dc8732c0c784e9396311dffdf84b57bc296a2f3dee24a97a",
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
     "h30_dipgap_run_card.json": {

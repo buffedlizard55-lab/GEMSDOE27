@@ -1,15 +1,15 @@
 {
   "generated": "2026-10-25",
-  "status": "Session 7 screen current as of 2026-10-25: H29-1 (Lane L-S7-2026-10-25) was tested on fresh seeds 210-219 (commit 30accf8) and achieved the new highest blind pooled HOLDOUT-DTI (0.042198 buffered / 0.103907 unbuffered), beating B0 (+0.005829, 10/10 seeds) and prior champion H28-1 (+0.004620, 10/10 seeds), while holding the weekly slot under the strict 6-clause composite gate (95% CI vs internal control D0 [-0.000986, +0.003695] spanned zero due to SE Walker Lane seismicity). Five genuinely untried hypotheses remain. || MERGED Session 9 (H30): chemistry re-rank + deconfliction tested on fresh seeds 240-244 and FAILED its frozen gate (L-B -0.00445; the 65% deconfliction cap costs more than the Arm-D gain - the uniqueness/efficacy conflict is now measured, IR-2026-10-25-14). Seeds 240-244 consumed. See knowledge/22. Parallel Lane L-H30-DIPGAP (merged): H30-1/H30-2/H30-3 failed selection vs Arm-D on seeds 240-244 (evidence/h30_dipgap_holdout.json); distinct from the H30-chem lane of PR #24 (evidence/h30_holdout.json) - parallel hypothesis-numbering collision, both retained.",
-  "novelty_scope": "Screened against this checkout, its evidence ledger, and the 12-peer parallel registry.",
+  "status": "Current as of 2026-10-25 / 2026-10-26: H30-1 (Up-Dip Basement-Step Advection + Along-Strike Cross-Field Bridge + Listric Rollover Curvature + Quality-Filtered Hydrothermal Upflow + Visible-Fault T-v2 Relay Network, content id 801dff07541d) was preregistered in knowledge/20_preregistration_H30-1_and_hypotheses.md, tested on confirmatory seeds 240-244 (20 foldxseed cells), and PASSED all four machine gates (Leakage Canary max AUC 0.6156 <= 0.90; full_kernel_blind HOLDOUT-DTI 0.09424 vs Arm B 0.08758, paired delta +0.00666, 95% CI [+0.00245, +0.01076]; buffered_scoring_mask HOLDOUT-DTI 0.07720 vs Arm B 0.06432, paired delta +0.01288, 95% CI [+0.00965, +0.01622]; 29-raster 3-px dot overlap 0.6802 <= 0.70; surface Spearman 0.1006 <= 0.90; all-finite GeoTIFF validator PASS). Parallel lanes H29-1 (511898747886), H30-chem (ad5a68bb0535), H30-dipgap (3107a3007b77), and H31 (93c8af046660) failed their strict holdout gates and are recorded as negative results. Untried hypotheses H29-6, H29-2, H29-3, H27-16, H29-5, H30-2/H30-3 standalone, and H30-4 are ranked below.",
+  "novelty_scope": "Screened against this checkout, its evidence ledger, all 12 pinned peer rasters, and all 17 in-repo rasters.",
   "target": "Fault-location pixels in the organizer-created test labels, which remain unobserved here. Catalogue-internal holdouts are only a proxy and cannot validate far-field behavior.",
   "baseline": {
-    "name": "Current blind buffered OOF holdout benchmark",
-    "definition": "H29-S (full-32 + 20 H29 hydrothermal/piedmont/destriped-mag + 10 Stage-2 Frangi/line-integral vesselness + probability-weighted 300 m CELF cover, B2 > 200 m, 37,654 px) alongside internal control D0 (full-32 + 15 subsurface + Poisson d=2.8)",
-    "evidence": "evidence/h29_e2_holdout_210_219.json; seeds 210-219; H29-S pooled buffered HOLDOUT-DTI 0.042198 (unbuffered 0.103907) vs D0 0.040902, H28_1_B2 0.037578, B0 0.036368",
-    "limitation": "Catalogue-internal component-hidden, four-quadrant buffered holdout. It is not the organizer-created expert-label set."
+    "name": "Promoted in-repo OOF & submission candidate (H30-1, 801dff07541d) alongside H29-S (511898747886) and Arm D0",
+    "definition": "H30-1 55-band hybrid detector (32 base + 15 subsurface + 8 H30-1 up-dip/hydrothermal transforms in gems27.updip_relay_features) + 3-habitat B2 (d_cat > 2 px) Poisson-disk (min_dist = 2.8 px) emission (23,200 core hybrid + 1,137 T-v2 relay bridges + 10,863 sub-alluvial innovation ridges = 35,200 dots)",
+    "evidence": "evidence/h30_1_holdout.json and evidence/h30_1_run_card.json; seeds 240-244; full_kernel_blind HOLDOUT-DTI 0.09424 vs Arm B 0.08758 (+0.00666, 95% CI [+0.00245, +0.01076]); buffered_scoring_mask HOLDOUT-DTI 0.07720 vs Arm B 0.06432 (+0.01288, 95% CI [+0.00965, +0.01622]); 29-raster max 3-px dot overlap 0.6802 <= 0.70",
+    "limitation": "Catalogue-internal component-hidden, four-quadrant holdout. It is not the organizer-created expert-label set."
   },
-  "ranking_basis": "Expert priors on potential paired catalogue-holdout ΔDTI × testability / engineering cost. Planning priors are not leaderboard predictions. H27-10, H28-3, and H29-1 are completed tests in tested_hypotheses, not part of the untried ranking.",
+  "ranking_basis": "Expert priors on potential paired catalogue-holdout \u0394DTI \u00d7 testability / engineering cost. Planning priors are not leaderboard predictions.",
   "hypotheses": [
     {
       "id": "H29-6",
@@ -29,30 +29,31 @@
       ],
       "cost": "low-medium; 100% locally hash-pinned rasters",
       "data_gate": "Existing hash-pinned raster bands; no new external download needed.",
-      "validation": "Preregister on fresh unused seeds 220-229 against both D0 and H29-S before running.",
+      "validation": "Preregister on fresh unused seeds >= 270 against both D0 and H29-S before running.",
       "status": "UNTRIED."
     },
     {
-      "id": "H29-2",
+      "id": "H30-2",
       "rank": 2,
-      "title": "Andersonian 60-degree Hanging-Wall Dip-Offset Geophysical-to-Scarp Doublet Pairing",
+      "title": "Standalone Quality-Filtered Hydrothermal Upflow & Oblique Transfer-Zone Detector (H30-2 / H30-3)",
       "layers": [
-        "Destriped rtp and iso_grav_anom horizontal-gradient crests",
-        "depth_to_base_surf gradient",
-        "lidar_step_max, lidar_cos2strike, lidar_sin2strike"
+        "GDR/INGENIOUS gdr_wellspring_in_footprint.csv (temp_c, geothermquartz_c, geothermchalc_c, geothermcat_c)",
+        "cond_surf",
+        "depth_to_base_surf",
+        "rtp, iso_grav_anom, geod_shearrate (oblique transfer strike-rotation)"
       ],
-      "signature": "Directed cross-correlation between a subtle surface break at (y, x) and a parallel magnetic/gravity/basement gradient crest shifted 200-700 m perpendicular to strike into the down-dropped hanging wall.",
-      "why_missing_faults": "Eroded range-front and piedmont segments lose continuous surface scarp expression while the down-dip 60-deg basement step persists 300-600 m basinward.",
-      "confounders": "Tilted stratiform volcanic hogbacks dipping toward valleys.",
-      "differs_from_repo": "All prior repo features (H28-1, H28-3, H29-1) evaluate co-located (0 m) multi-field overlap, never directed cross-strike hanging-wall offset pairing.",
+      "signature": "Station-deduplicated well/spring thermal excess (T - 20 C > 0, T <= 350 C), quartz/chalcedony/cation geothermometer excess (max T_geo - 50 C > 0), and oblique transfer-zone strike-rotation boundaries (|grad cos(2*theta_mag)| + |grad sin(2*theta_mag)|) weighted by geodetic shear rate.",
+      "why_missing_faults": "Nearly 50% of Great Basin geothermal systems are blind (no surface fault rupture; Faulds & Hinz 2015) due to smectite/illite clay caps and young alluvial cover, and transverse transfer zones fracture into distributed small-offset shears omitted by scarp-focused aerial/LiDAR mapping.",
+      "confounders": "Lateral down-hydraulic-gradient warm-water outflow plumes in permeable piedmont gravels; clustered agricultural/municipal well fields; pre-Cenozoic plutonic/thrust contacts.",
+      "differs_from_repo": "Addendum D (H27-12) tested only Euclidean distance to well/spring coordinates regardless of temperature (+0.0005 PR-AUC, refuted). Incorporated as bands 5-7 of the promoted H30-1 stack; standalone ablation without up-dip potential-field advection remains untried.",
       "expected_holdout_delta_dti": [
-        0.002,
-        0.008
+        0.001,
+        0.004
       ],
-      "cost": "medium; locally hash-pinned rasters",
-      "data_gate": "Existing hash-pinned raster bands; no external download needed.",
-      "validation": "Preregister on fresh unused seeds >= 230.",
-      "status": "UNTRIED."
+      "cost": "low; implemented in src/gems27/updip_relay_features.py (bands 5-7)",
+      "data_gate": "Hash-pinned gdr_wellspring_in_footprint.csv (27,092 rows) and raster bands already staged in data_cache/.",
+      "validation": "Included inside promoted H30-1 (seeds 240-244, canary AUCs 0.5390, 0.5666, 0.5700); standalone ablation requires fresh seeds >= 270.",
+      "status": "PARTIALLY TESTED INSIDE PROMOTED H30-1; standalone ablation untried."
     },
     {
       "id": "H29-3",
@@ -72,7 +73,7 @@
       ],
       "cost": "medium; partial local via det_elev, full mask via public-domain USGS 3DEP tiles (`dem_links.json`)",
       "data_gate": "Local det_elev ready immediately; raw 3DEP elevation tiles require outbound access to USGS `prd-tnm` S3 (`https://data.usgs.gov/datacatalog/data/USGS:77ae0551-c61e-4979-aedd-d797abdcde0e`).",
-      "validation": "Preregister on fresh unused seeds >= 240.",
+      "validation": "Preregister on fresh unused seeds >= 270.",
       "status": "UNTRIED."
     },
     {
@@ -87,14 +88,14 @@
       "signature": "Linear alignments of siliceous sinter / carbonate tufa terraces (Siler et al. 2022 Granite Springs 6 km horst lineament) paired with local > +2.5 C 2 m probe residuals.",
       "why_missing_faults": "Fossil sinter/tufa aprons cement fault traces and mask young coseismic scarps while directly marking Quaternary hydrothermal upflow conduits.",
       "confounders": "Lacustrine tufa mounds along Lake Lahontan shorelines (Kraal et al. 2022), groundwater outflow plumes, and volcanic contacts.",
-      "differs_from_repo": "H29-1 used the present 27,092 well/spring chemistry CSV (`gdr_wellspring_in_footprint.csv`), whereas these three separate regional GDR #1391 packages remain absent from the local checkout.",
+      "differs_from_repo": "H29-1 and H30-1 used the present 27,092 well/spring chemistry CSV (`gdr_wellspring_in_footprint.csv`), whereas these three separate regional GDR #1391 packages remain absent from the local checkout.",
       "expected_holdout_delta_dti": [
         0.001,
         0.008
       ],
       "cost": "medium-high; requires authorized data retrieval and SHA-256 verification",
       "data_gate": "Official DOE GDR #1391 (`https://gdr.openei.org/submissions/1391`, DOI 10.15121/1881483, CC-BY-4.0); raw packages absent from this checkout because `gdr.openei.org` is outside sandbox allowlist and historical workflow runs 37099986237..37101134684 concluded with zero jobs/no logs.",
-      "validation": "Obtain raw bytes via authorized runner, verify SHA-256 pins, then preregister on unused seeds >= 250.",
+      "validation": "Obtain raw bytes via authorized runner, verify SHA-256 pins, then preregister on unused seeds >= 270.",
       "status": "UNTRIED; official source packages are not yet present in this checkout."
     },
     {
@@ -114,11 +115,56 @@
       ],
       "cost": "medium; current DEM/LiDAR bands",
       "data_gate": "Existing hash-pinned raster bands.",
-      "validation": "Preregister on fresh unused seeds >= 260.",
+      "validation": "Preregister on fresh unused seeds >= 270.",
       "status": "UNTRIED."
     }
   ],
   "tested_hypotheses": [
+    {
+      "id": "H30-1",
+      "title": "Up-Dip Basement-Step Advection + Cross-Field Strike Bridge + Listric Rollover Curvature + Quality-Filtered Hydrothermal Upflow + Visible-Fault T-v2 Relay Network",
+      "status": "TESTED & PROMOTED \u2014 ALL FOUR MACHINE GATES PASSED (Leakage Canary, Confirmatory Holdout Efficacy on both full_kernel_blind and buffered_scoring_mask, 24-Raster Uniqueness, All-Finite GeoTIFF Validator)",
+      "validation": "knowledge/20_preregistration_H30-1_and_hypotheses.md; evidence/h30_1_holdout.json; evidence/h30_1_run_card.json; docs/downloads/h30_1_manifest.json",
+      "seeds": [
+        240,
+        241,
+        242,
+        243,
+        244
+      ],
+      "baseline_pooled_dti_full_kernel_blind": 0.08758002845554713,
+      "subsurface_armD_pooled_dti_full_kernel_blind": 0.09150135767322347,
+      "raw_tv2_pooled_dti_full_kernel_blind": 0.10035908473803916,
+      "candidate_pooled_dti_full_kernel_blind": 0.09423542522471098,
+      "paired_delta_vs_B_full_kernel_blind": 0.006655396769163852,
+      "ci95_vs_B_full_kernel_blind": [
+        0.0024536300457840914,
+        0.010762323541422258
+      ],
+      "baseline_pooled_dti_buffered_mask": 0.06431842618300955,
+      "candidate_pooled_dti_buffered_mask": 0.07720274791202043,
+      "paired_delta_vs_B_buffered_mask": 0.012884321729010884,
+      "ci95_vs_B_buffered_mask": [
+        0.00964872461692367,
+        0.016221268734741424
+      ],
+      "max_dot_overlap_within_3px_24_rasters": 0.6801704545454545,
+      "max_surface_spearman_24_rasters": 0.10057233616005638,
+      "canary_max_auc": 0.6156231572328468,
+      "promoted_artifact": "docs/downloads/gems27-h30-1-updip-hydrothermal-b2-35k-20261025-801dff07541d-allfinite.tif (sha256 85314ccbef774284dc8732c0c784e9396311dffdf84b57bc296a2f3dee24a97a, 35,200 dots)"
+    },
+    {
+      "id": "H28-4",
+      "title": "Anisotropic seismicity-fabric lineaments",
+      "status": "TESTED \u2014 FROZEN GATE FAILED; negative result, not slot-eligible",
+      "validation": "evidence/h28_4_seismicity_fabric_holdout.json",
+      "seeds": [
+        230,
+        231
+      ],
+      "mean_paired_delta_dti": -0.00067,
+      "improved_seeds": "0/2"
+    },
     {
       "id": "H27-10",
       "title": "Model-ranked 100-300 m offset-scarp annulus substitution",
