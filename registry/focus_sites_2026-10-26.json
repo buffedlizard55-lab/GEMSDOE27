@@ -1,0 +1,165 @@
+{
+ "as_of_utc": "2026-10-26",
+ "score_label": "OWNER-REPORTED (2026-10-26 owner prompt; no ORGANIZER-CONFIRMED receipt stored in this repo)",
+ "measured_note": "dots/nesting/overlaps MEASURED from hash-verified bytes this session",
+ "fleet_best": {
+  "site": "GEMSDOE32",
+  "file": "h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros",
+  "score": 0.2778,
+  "verdict": "DO NOT RESUBMIT - already scored; deterministic scorer",
+  "construction_measured": "g28_h27_4_r1 (40199 dots) minus exactly 2545 dots in (1,2] px catalogue annulus = 37654"
+ },
+ "sites": [
+  {
+   "site": "GEMSDOE24",
+   "url": "https://buffedlizard55-lab.github.io/GEMSDOE24/",
+   "best_file": "h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan",
+   "score": 0.2477,
+   "dots": 60069,
+   "peer_id": "g24_d15",
+   "sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
+   "mechanism": "H19-5 dotted d1.5",
+   "also": [
+    {
+     "file": "gems24-gvc1-negative-geothermal-lineament-submod-20261025-abe8e51c719d-zeros",
+     "score": 0.0859
+    }
+   ],
+   "verdict": "DO NOT SUBMIT - scored, superseded"
+  },
+  {
+   "site": "GEMSDOE25",
+   "url": "https://buffedlizard55-lab.github.io/GEMSDOE25/",
+   "best_file": "dotted-h19-5-d2-8-20261002-e56ea318af89-nan",
+   "score": 0.26,
+   "dots": 44090,
+   "peer_id": "g25_d28",
+   "sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
+   "mechanism": "H19-5 dotted d2.8; champion parent",
+   "also": [
+    {
+     "file": "gems25-h66-mgd-flank-sapd3-0-k3p5-20261025-da617550a0e9-zeros",
+     "score": 0.0742
+    }
+   ],
+   "verdict": "DO NOT SUBMIT - scored, dominated by B2 child"
+  },
+  {
+   "site": "GEMSDOE27",
+   "url": "https://buffedlizard55-lab.github.io/GEMSDOE27/",
+   "best_file": "topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan",
+   "score": 0.2449,
+   "dots": 61328,
+   "peer_id": "g27_tv2_d15",
+   "sha256": "33003374335d84bf885f2d8f5e9dd4c57044c8ec58fa6a0d7fa581e8bc41c11d",
+   "mechanism": "T-v2 gap closure on D1.5; live A/B below its parent",
+   "also": [
+    {
+     "file": "gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-allfinite",
+     "score": 0.219,
+     "note": "score first reported in 2026-10-26 prompt; previously UNSCORED in repo"
+    }
+   ],
+   "verdict": "DO NOT RESUBMIT scored files; only this session's H31 is unscored here - follow machine badge"
+  },
+  {
+   "site": "GEMSDOE28",
+   "url": "https://buffedlizard55-lab.github.io/GEMSDOE28/",
+   "best_file": "h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan",
+   "score": 0.271,
+   "dots": 37660,
+   "peer_id": "g28_h36_1",
+   "sha256": "5556aa1438fd67376b60d5ffc99228ec09dcc11a8408298a743ccb88d6163641",
+   "mechanism": "D2.8 re-pack + 1px flank prune cluster (0.2649-0.2710)",
+   "also": [
+    {
+     "file": "h27-4-r1-solo-d2-8",
+     "score": 0.2708
+    },
+    {
+     "file": "h38-1-hf-euler-r30-r1",
+     "score": 0.2707
+    },
+    {
+     "file": "h32-1-prethin-tip-euler-d2-8",
+     "score": 0.2649
+    },
+    {
+     "file": "gems28-s18-mxtp-20261025-3e95505c011a-allfinite",
+     "score": 0.0217
+    }
+   ],
+   "verdict": "DO NOT SUBMIT - scored cluster"
+  },
+  {
+   "site": "GEMSDOE30",
+   "url": "https://buffedlizard55-lab.github.io/GEMSDOE30/",
+   "best_file": "d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca",
+   "score": 0.26,
+   "dots": 44090,
+   "peer_id": "g30_d28",
+   "sha256": "8cf893ead5667df21d3288a9968c35fd5385c425b029d82ee71d311715b129fd",
+   "mechanism": "MEASURED dot-identical to GEMSDOE25 d2.8 (symdiff 0)",
+   "also": [
+    {
+     "file": "gems30-MSDB1-edge44090-20261025-e7856ec3f14a",
+     "score": 0.1462
+    }
+   ],
+   "verdict": "DO NOT SUBMIT - scored duplicate dot field"
+  },
+  {
+   "site": "GEMSDOE31",
+   "url": "https://buffedlizard55-lab.github.io/GEMSDOE31/docs/",
+   "best_file": "h27-4-solo-d28-20261004-8acb75e1-nan",
+   "score": 0.2708,
+   "dots": 40199,
+   "peer_id": "g31_h27_4",
+   "sha256": "07b6db440535404bb41ec8ddc797713e200d308e3da35937393efde5eb84bc40",
+   "mechanism": "MEASURED dot-identical to GEMSDOE28 solo (symdiff 0)",
+   "verdict": "DO NOT SUBMIT - scored duplicate lineage"
+  },
+  {
+   "site": "GEMSDOE32",
+   "url": "https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html",
+   "best_file": "h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros",
+   "score": 0.2778,
+   "dots": 37654,
+   "peer_id": "g32_h33_2_b2",
+   "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+   "mechanism": "B2 (200m) catalogue-flank prune of 0.2708 base; fleet best",
+   "also": [
+    {
+     "file": "gemsdoe32-r6-stepprofile-b2-37654-20261026T002502Z-23fbbb51-zeros.tif",
+     "score": null,
+     "sha256": "c7f094c1f4d00f2dd9a056dc80fecc94bf1d636363acd020c9da3659eae56547",
+     "note": "UNSCORED parallel-session file fetched 2026-10-26; peer-claimed PROMOTE on SGMC instrument; their catalogue-hidden instrument ranks it below champion; MEASURED <=0.211 directed 3px overlap vs every pinned peer; selector decision required"
+    }
+   ],
+   "verdict": "Champion DO NOT RESUBMIT (scored); R6 = selector decision, unscored"
+  },
+  {
+   "site": "GEMSDOE33",
+   "url": "https://buffedlizard55-lab.github.io/GEMSDOE33/",
+   "best_file": "h33d-analog-tip-stepover-r30-20261004-cb490425926e",
+   "score": 0.2632,
+   "dots": 41865,
+   "peer_id": "g33_h33d",
+   "sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+   "mechanism": "tip/step-over protection + Euler additions",
+   "verdict": "DO NOT SUBMIT - scored, below champion"
+  },
+  {
+   "site": "GEMSDOE36",
+   "url": "https://buffedlizard55-lab.github.io/GEMSDOE36/docs/",
+   "best_file": "anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros",
+   "score": 0.275,
+   "dots": 38854,
+   "peer_id": "g36_anderson",
+   "sha256": "e15891020b9c57056ac7fa874a5e506fbd6ed9314a4ea8e73af0753887a3708a",
+   "mechanism": "MEASURED exact superset: all 37654 champion dots + 1200",
+   "verdict": "DO NOT SUBMIT - scored champion superset"
+  }
+ ],
+ "answer_best_new_submission": "No already-scored file should be resubmitted. A new slot may only be filled by an unscored unique file whose machine readiness gate says promote (this repo: evidence/h31_run_card.json via gems27.readiness.publication_decision; fleet: GEMSDOE32 R6 pending selector instrument decision)."
+}
