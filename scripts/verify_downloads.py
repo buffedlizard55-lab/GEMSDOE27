@@ -373,6 +373,58 @@ def main() -> int:
            and rc32["holdout"]["gate_efficacy_pass"] is False,
            "h32/gate-consistency: verdict=negative ok_to_submit=False (DO NOT SUBMIT)")
 
+    # ---- Session 12 H31-3 negative research artifact (must stay NOT approved) ----
+    h313_card_path = ROOT / "evidence" / "h31_3_run_card_2026-10-26.json"
+    if h313_card_path.exists():
+        rc313 = json.loads(h313_card_path.read_text())
+        r313 = rc313["raster"]
+        d313 = ROOT / r313["directory"]
+        for variant, fname in (("allfinite", r313["primary_allfinite"]),
+                               ("nan", r313["companion_nan"])):
+            p313 = d313 / fname
+            with rasterio.open(p313) as s313:
+                a313 = s313.read(1)
+                prof313 = (s313.crs.to_epsg(), s313.shape, tuple(s313.transform)[:6],
+                           s313.dtypes[0])
+                nd313, cnt313 = s313.nodata, s313.count
+            t313 = f"h31_3/{variant}"
+            ok(prof313 == tprof, f"{t313}: same CRS/shape/transform/dtype as template")
+            ok(cnt313 == 1, f"{t313}: single band")
+            in313, out313 = a313[foot], a313[~foot]
+            ok(bool(np.isfinite(in313).all()), f"{t313}: every in-footprint value finite")
+            ok(float(in313.min()) >= 0.0 and float(in313.max()) <= 1.0,
+               f"{t313}: in-footprint range in [0,1]")
+            ok(set(np.unique(in313).tolist()) <= {0.0, 1.0}, f"{t313}: exact binary")
+            ok(int((in313 == 1.0).sum()) == r313["dots"],
+               f"{t313}: emitted {r313['dots']} dots")
+            ok(not bool((a313 == 1.0)[cat].any()), f"{t313}: 0 catalogue overlap")
+            ok(bool((distance_transform_edt(~cat)[a313 == 1.0] > 2.0).all()),
+               f"{t313}: strict B2 collar > 2.0 px")
+            if variant == "allfinite":
+                ok(bool(np.isfinite(a313).all() and (out313 == 0.0).all() and nd313 is None),
+                   f"{t313}: all cells finite in [0,1], zeros outside, nodata=None")
+                ok(sha(p313) == r313["sha256"], f"{t313}: sha256 matches H31-3 run card")
+            else:
+                ok(int(np.isnan(out313).sum()) == out313.size and nd313 is not None
+                   and np.isnan(nd313), f"{t313}: NaN outside footprint, nodata=NaN")
+        z313 = d313 / r313["zip"]
+        with zipfile.ZipFile(z313) as zf:
+            ok(zf.namelist() == [r313["primary_allfinite"]]
+               and zf.read(r313["primary_allfinite"])
+               == (d313 / r313["primary_allfinite"]).read_bytes(),
+               "h31_3/zip: holds exactly the single allfinite GeoTIFF, byte-identical")
+        stem313 = r313["primary_allfinite"][:-len("-allfinite.tif")]
+        note313 = (d313 / f"note-{stem313}-allfinite.txt").read_text().strip()
+        ok(len(note313) <= 140 and note313 == rc313["note_max_140_chars"],
+           f"h31_3/note: {len(note313)} chars (<= 140) and matches run card")
+        u313 = rc313["uniqueness_vs_registry"]
+        ok(u313["peer_gate_pass"] and u313["max_dot_overlap_vs_12_peers"] <= 0.70
+           and u313["max_surface_spearman_armD"] <= 0.90 and not u313["pass"],
+           "h31_3/uniqueness: peer screen passes; strict local screen fails (recorded, not hidden)")
+        ok(rc313["verdict"] == "negative" and rc313["ok_to_submit"] is False
+           and rc313["holdout"]["gate_efficacy_pass"] is False,
+           "h31_3/gate-consistency: verdict=negative ok_to_submit=False (DO NOT SUBMIT)")
+
     print(f"\n{len(FAIL)} failure(s)")
     return 1 if FAIL else 0
 

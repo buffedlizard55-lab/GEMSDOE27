@@ -1,0 +1,98 @@
+{
+  "experiment": "E2 H31-3 versus H31-S paired spatial holdout",
+  "preregistration": "knowledge/28_preregistration_H31-3_mt_graben_2026-10-26.md",
+  "preregistration_sha256": "02094e538f614209933149e761da9b16b9f45dac5a0b80ad16438003050dec73",
+  "label": "HOLDOUT-DTI",
+  "provenance_note": "Catalogue-internal whole-segment hide-and-recover; NOT a live organizer score.",
+  "evaluator": "gems27.metric.dti_binary v1 (alpha=0.2, beta=0.8, R=3px triangular) + buffered quadrant holdout (buffer_px=6)",
+  "seeds": [
+    510,
+    511,
+    512,
+    513,
+    514,
+    515,
+    516,
+    517,
+    518,
+    519
+  ],
+  "folds": [
+    "NW",
+    "NE_LidarGapHeavy",
+    "SW",
+    "SE"
+  ],
+  "n_cells": 40,
+  "n_withheld_positives_total": 121745,
+  "budget_total": 37654,
+  "budget_per_fold": [
+    8414,
+    10404,
+    10410,
+    8426
+  ],
+  "b_exclusion_px": 2.0,
+  "pooled_holdout_dti_buffered": {
+    "H31-S": 0.044965632215401626,
+    "H31-3-S": 0.04533198975831834
+  },
+  "per_fold_holdout_dti_buffered": {
+    "NW": {
+      "H31-S": 0.038207853123434755,
+      "H31-3-S": 0.04346139225510141
+    },
+    "NE_LidarGapHeavy": {
+      "H31-S": 0.06198790956258072,
+      "H31-3-S": 0.06056358380164533
+    },
+    "SW": {
+      "H31-S": 0.030721499773487017,
+      "H31-3-S": 0.03248234279621927
+    },
+    "SE": {
+      "H31-S": 0.05166370108998449,
+      "H31-3-S": 0.048300694613225774
+    }
+  },
+  "paired_candidate_minus_B": {
+    "pooled_delta_dti": 0.00036635754291671624,
+    "mean_seed_paired_delta_dti": 0.0003920418194129277,
+    "ci95": [
+      -0.0011822506169628661,
+      0.0018226981938480069
+    ],
+    "positive_seeds": 6,
+    "n_seeds": 10,
+    "positive_folds": 2,
+    "n_folds": 4,
+    "per_seed_pooled_delta_dti": [
+      -0.0015778648639089426,
+      -0.0008871366963717139,
+      0.002483609078948054,
+      0.0001632427510625603,
+      0.0018793844767578394,
+      -0.000308932551067613,
+      0.0028963938566951564,
+      0.0003249967247901525,
+      0.003941266364206782,
+      -0.004994540946982998
+    ],
+    "per_fold_pooled_delta_dti": {
+      "NW": 0.005253539131666651,
+      "NE_LidarGapHeavy": -0.0014243257609353882,
+      "SW": 0.0017608430227322516,
+      "SE": -0.0033630064767587176
+    }
+  },
+  "frozen_gate_clauses": {
+    "pooled_candidate_gt_h31s": true,
+    "mean_seed_delta_ge_0_001": false,
+    "ci95_lower_gt_zero": false,
+    "positive_seeds_ge_7_of_10": false,
+    "positive_folds_ge_3_of_4": false
+  },
+  "gate_efficacy_pass": false,
+  "verdict_stage_e2": "negative",
+  "runtime_s": 982.9
+}

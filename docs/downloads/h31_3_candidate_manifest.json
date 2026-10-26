@@ -1,0 +1,17 @@
+{
+  "hypothesis_id": "H31-3",
+  "content_id": "0f397db36baf",
+  "directory": "docs/downloads/research",
+  "allfinite": "gems27-h31-3-mt-graben-celf28-20261026-0f397db36baf-allfinite.tif",
+  "nan": "gems27-h31-3-mt-graben-celf28-20261026-0f397db36baf-nan.tif",
+  "zip_allfinite": "gems27-h31-3-mt-graben-celf28-20261026-0f397db36baf-allfinite.zip",
+  "checks_allfinite": "checks-gems27-h31-3-mt-graben-celf28-20261026-0f397db36baf-allfinite.json",
+  "checks_nan": "checks-gems27-h31-3-mt-graben-celf28-20261026-0f397db36baf-nan.json",
+  "note_file": "note-gems27-h31-3-mt-graben-celf28-20261026-0f397db36baf-allfinite.txt",
+  "note": "27GEMSDOE H31-3 MTgraben B2 CELF2.8 37654px | id 0f397db36baf | RESEARCH NEGATIVE DO NOT SUBMIT",
+  "sha256_allfinite": "da29080bf6acfdc91a835b06464e7d64c056703067967129505af886a59a9d68",
+  "emitted_px": 37654,
+  "ok_to_submit": false,
+  "verdict": "negative",
+  "run_card": "evidence/h31_3_run_card_2026-10-26.json"
+}

@@ -107,6 +107,20 @@
       "slot_authorized": false,
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
+    "h31_3_run_card_2026-10-26.json": {
+      "ok_to_publish_as_submission": false,
+      "reasons": [
+        "run card does not authorize submission",
+        "verdict is not promote",
+        "efficacy gate not explicitly passed",
+        "paired improvement CI missing or does not exclude zero",
+        "uniqueness gate not passed",
+        "dot overlap missing or exceeds threshold"
+      ],
+      "actual_sha256": "da29080bf6acfdc91a835b06464e7d64c056703067967129505af886a59a9d68",
+      "slot_authorized": false,
+      "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
+    },
     "h31_run_card.json": {
       "ok_to_publish_as_submission": false,
       "reasons": [

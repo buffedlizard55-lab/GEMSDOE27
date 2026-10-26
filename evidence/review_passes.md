@@ -1,3 +1,41 @@
+# Session 12 (2026-10-26) — H31-3 MT-graben negative gate and evidence closure
+
+**Branch:** `arena/bfdc5d2d-gemsdoe27`<br>
+**Lane:** `L-S12-H31-3-MTGRABEN`<br>
+**Budget:** one preregistered geological experiment, E1/E2/E3; no DrivenData interaction or weekly slot spent.<br>
+**Verdict:** **negative / DO NOT SUBMIT**. H31-1 remains the only independently machine-authorized candidate; that does not itself submit or score it.
+
+## Pass 1 — implement and verify
+
+- Re-read `README.md`, `AGENTS.md`, current H31/H32 evidence, and the nine-focus-site executive audit. Restored hash-pinned inputs, prepared the 32-band feature matrix, and fetched/verified all 12 parallel peer rasters before H31-3 computation.
+- Committed the H31-3 preregistration as `83ceee5` before feature/module/runner creation. The frozen method uses only `cond_surf`, `depth_to_base_surf`, `iso_grav_anom`, and `geod_dilaterate`; it appends eight bounded signed normal-direction transforms to the shared H31 template, not a private detector fork.
+- Repaired the shared H31 helper to accept an optional extra-physics matrix while preserving the original H31-1 defaults. Focused tests for signed normal sampling, deterministic/range-safe construction, and shared feature layout passed.
+- **E1 passed:** fresh seeds 510–519; maximum individual direction-invariant canary AUC **0.5319425** and maximum pre-placement 12-peer surface Spearman **0.1101066**. No canary flag or registry duplicate stop occurred.
+- **E2 failed:** 40 buffered whole-segment cells and **121,745 withheld positives**. H31-3-S pooled **HOLDOUT-DTI 0.04533199** versus H31-S **0.04496563**; mean paired seed difference **+0.00039204**, deterministic 95% CI **[-0.00118225, +0.00182270]**, 6/10 seeds and 2/4 folds positive. Four of five preregistered efficacy clauses failed; no tuning/rerun is permitted.
+- **E3 closed the negative:** generated the byte-bound all-finite research TIFF `0f397db36baf`, SHA-256 `da29080bf6acfdc91a835b06464e7d64c056703067967129505af886a59a9d68`. It is single-band float32 on the template, exact binary `{0,1}`, 0 NaN/Inf, zeros outside the footprint, 37,654 B2 dots, no catalogue dots, and has a one-member ZIP. It passes the 12-peer final-dot screen (maximum 56.74% within 3 px; max final rank rho 0.04669), but the extended local check finds 86.87% overlap with H31-1. The manifest and run card are fail-closed: `ok_to_submit: false`, `verdict: negative`.
+
+## Pass 2 — bugs, assumptions, and edge cases
+
+- The shared H31 API now validates that optional physics has exactly one finite row per footprint pixel, appends it consistently in M_Sub, M_Full, and stage 2, and keeps `None` behavior/cache locations unchanged. The derived lane uses its own cache directory/tag to avoid reusing H31-1 predictions with a different feature schema.
+- Explicitly tested the named non-fault mimic: the transform remains an unproven discrimination test against conductive evaporite/playa fill at a lithologic contact; the E2 gate is the scientific decision, not an asserted geological discovery.
+- The candidate's small positive pooled delta was not mistaken for success: the confidence interval crosses zero and the precommitted stability clauses fail. It is documented as **HOLDOUT-DTI**, a catalogue-internal proxy, and never as a live/organizer score.
+- E3 records both required 12-peer measurements and the stricter local-raster check. The site calls the peer screen a pass but makes clear that the local H31-1 overlap plus failed efficacy makes this file ineligible. No download button for H31-3 is exposed.
+- Extended `scripts/verify_downloads.py` with automated independent re-read checks for both H31-3 TIFF variants, hash, ZIP, note, B2 collar, peer/local-screen status, and negative gate consistency. This is validation through the project, not visual/manual inspection.
+
+## Pass 3 — recheck against the request
+
+| Requirement | Evidence / result | Status |
+|---|---|---|
+| Unique submit-ready candidate only | The existing H31-1 remains the sole “OK TO DOWNLOAD AND SUBMIT” file. H31-3 is in `downloads/research/` and badged **DO NOT SUBMIT**. | Pass; no slot/upload was performed. |
+| Automated [0,1] prevention | H31-3 all-finite read-back confirms every cell finite/in `[0,1]`, exact binary output, `nodata=None`, 0 outside footprint; NaN companion verified separately. | Pass. |
+| Leakage, holdout, peer/duplicate gates | E1 clean; E2 frozen efficacy failed; 12-peer surface/final screen passed, extended local screen failed. | Negative correctly retained; no post-hoc change. |
+| Evidence ledger and source qualification | Preregistration, E1/E2 receipts, run card, validator receipts, registry/next-hypotheses and live-score audit, executive summary, README, and generated site updated. Mirrored hash-pinned inputs remain qualified as not organizer-authenticated primary downloads. | Pass. |
+| Three-pass review / no unsupported claims | This section, full test/lint/format commands, and machine audit were completed. No DrivenData access, upload, live score, PR, merge, or deployment is claimed. | Pass. |
+
+**Final checks:** `python -m pytest -q` → **143 passed**; Ruff and `py_compile` pass; `git diff --check` passes; `python scripts/verify_downloads.py` reports **0 failures** including H31-3; `python scripts/audit_submission_readiness.py` records H31-3 as not publishable. Static Pages files were rebuilt from `scripts/build_site.py` and show the Session 12 negative card before prior session cards.
+
+---
+
 # Review Passes — Arena Session 2026-10-26 (arena/3bb1590c-gemsdoe27)
 
 **Branch:** `arena/3bb1590c-gemsdoe27` from `927322e` (main)

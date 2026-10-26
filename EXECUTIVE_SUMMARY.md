@@ -1,14 +1,15 @@
-> **Current correction (2026-10-26):** [Read the latest executive audit](knowledge/28_submission_readiness_audit_2026-10-26.md).
-> Existing H31 is evidence-qualified and downloadable, **not authorized for a weekly slot by this audit**.
-> Historical “OK TO SUBMIT” wording below does not replace a separate selector/current-registry/cap check.
-> No new geological lane was supplied; no new TIFF or experiment was produced this turn.
+> **Current correction (2026-10-26):** Read the [readiness audit](knowledge/28_submission_readiness_audit_2026-10-26.md) and the subsequent [H31-3 result](knowledge/29_h31_3_mt_graben_result_2026-10-26.md).
+> H31-1 is evidence-qualified and downloadable, but **not authorized for a weekly slot without a separate selector/current-registry/cap check**.
+> H31-3 was subsequently preregistered and tested; it is a negative research artifact, never an eligible download.
+> Historical “OK TO SUBMIT” wording below is superseded by this selector requirement.
 
 # Executive Summary: GEMSDOE Competition — Highest-Scoring Submissions Analysis & Unique Submission Strategy
 
 **Repository:** `buffedlizard55-lab/GEMSDOE27`  
 **Date:** 2026-10-26  
-**Session:** 10 (Lane L-S10-2026-10-26 / H31-1)  
-**Status:** ✅ **OK TO DOWNLOAD AND SUBMIT — ALL AUTOMATED MACHINE VALIDATION GATES PASSED**
+**Session:** 12 (H31-1 approved; H32 and H31-3 negative research lanes completed)<br>
+**Status:** ✅ **H31-1 ONLY: EVIDENCE PASS / DOWNLOAD VALIDATED — HUMAN SELECTOR REQUIRED BEFORE ANY WEEKLY SUBMISSION**<br>
+**Latest research result:** ❌ **H31-3 MT-graben: DO NOT SUBMIT** — its frozen H31-S comparison failed 4/5 efficacy clauses; no live organizer score is claimed.
 
 ---
 
@@ -24,9 +25,10 @@
 | **GEMSDOE25** | `dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif` (sha256: `91eae1ca…`) | **0.2600** | 44,090 | 0.0668 | 5.80× | 88.2% | **55.9%** | ALREADY SUBMITTED (unpruned d=2.8) — DO NOT RE-SUBMIT. |
 | **GEMSDOE30** | `d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca-zeros.tif` (sha256: `8cf893ea…`) | **0.2600** | 44,090 | 0.0668 | 5.80× | 88.2% | **55.9%** | ALREADY SUBMITTED (byte-identical in-footprint to GEMSDOE25) — DO NOT RE-SUBMIT. |
 | **GEMSDOE24** | `h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif` (sha256: `68d0e2e4…`) | **0.2477** | 60,069 | 0.0751 | 5.77× | 88.5% | **57.4%** | ALREADY SUBMITTED (over-dense d=1.5) — DO NOT RE-SUBMIT. |
-| **GEMSDOE27** | Slot 1: `topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif` (0.2449) | **0.2449** | 61,328 | 0.0764 | 5.67× | 86.7% | **57.7%** | **THIS REPO** — Both Slot 1 and H29-S (0.2190) ALREADY SUBMITTED. Only **Session-10 H31-1** is eligible. |
+| **GEMSDOE27** | Slot 1: `topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif` (0.2449) | **0.2449** | 61,328 | 0.0764 | 5.67× | 86.7% | **57.7%** | **THIS REPO** — Both Slot 1 and H29-S (0.2190) ALREADY SUBMITTED. Only **Session-10 H31-1** is evidence-qualified; selector/cap review remains required. |
 | **GEMSDOE27** | **H29-S**: `gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-allfinite.tif` | **0.2190** | 37,654 | 0.0527 | 5.79× | 56.1% | **62.8%** | **#1 of 2026-10-25 non-H19-5 cohort** — ALREADY SUBMITTED; do not re-upload. |
-| **GEMSDOE27** | **H31-1 (Session 10)**: `gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif` (sha256: `2c002b02…`) | **UNSCORED** | 37,654 | **0.0636** | **5.94× (est.)** | **50.2%** | **N/A (THIS FILE)** | ✅ **OK TO DOWNLOAD AND SUBMIT** — 5/5 frozen holdout gates passed, 27-raster uniqueness PASS, [0,1] all-finite GeoTIFF. |
+| **GEMSDOE27** | **H31-1 (Session 10)**: `gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif` (sha256: `2c002b02…`) | **UNSCORED** | 37,654 | **0.0636** | **5.94× (est.)** | **50.2%** | **N/A (THIS FILE)** | ✅ **EVIDENCE PASS / DOWNLOAD VALIDATED** — all automated gates passed, but a human selector must recheck cap/current registry before any weekly submission. |
+| **GEMSDOE27** | **H31-3 (Session 12)**: `gems27-h31-3-mt-graben-celf28-20261026-0f397db36baf-allfinite.tif` (research only; sha256: `da29080b…`) | **UNSCORED** | 37,654 | n/a | n/a | **49.2%** | **86.9%** | ❌ **DO NOT SUBMIT** — H31-3−H31-S pooled HOLDOUT-DTI +0.000366, CI [−0.001182,+0.001823], 6/10 seeds and 2/4 folds; 4/5 frozen efficacy clauses failed. |
 
 ---
 
@@ -116,39 +118,49 @@ The leaderboard gap (0.3195–0.4413) implies the leader's credit density is ~25
 
 ---
 
-## 5. Five Candidate Geological Hypotheses Not Yet Tried
+## 5. Session 12 Negative Result: H31-3 MT Graben-Margin Coupling
 
-Following PARALLEL-RUN PROTOCOL §7: generate 3–5 genuinely untried hypotheses, each naming specific layers, physical signature, why it catches catalogue-missing faults, how it differs from repo, ranked by expected DTI improvement × implementation cost.
+**Verdict: DO NOT SUBMIT.** H31-3 added eight preregistered label-free cross-strike transforms from `cond_surf`, `depth_to_base_surf`, `iso_grav_anom`, and `geod_dilaterate` to the H31 dual-regime model. It tested the prediction that a conductive clay-cap/brine anomaly lies 300–900 m basinward of a steep basement-margin gradient; the named non-fault mimic was conductive evaporite/playa fill at a lithologic contact.
+
+- **E1 pass:** maximum single-feature direction-invariant AUC = **0.53194** (no leakage); maximum pre-placement Spearman vs the 12 pinned peers = **0.11011**.
+- **E2 fail (HOLDOUT-DTI, not an organizer score):** fresh seeds 510–519, 40 buffered spatial cells, 121,745 withheld positives. H31-3-S = **0.045332** vs exact H31-S = **0.044966**; paired mean delta **+0.000392**, 95% CI **[−0.001182, +0.001823]**, 6/10 positive seeds and 2/4 positive folds. Only 1/5 frozen efficacy clauses passed.
+- **E3 research binding:** all-finite `{0,1}` GeoTIFF validation passed. It passes the 12-peer uniqueness screen (max 56.74% 3-px overlap; max final rank correlation 0.04669), but has **86.87%** 3-px overlap with the existing H31-1 in the stricter all-local-raster check. Its manifest sets `ok_to_submit: false` and it is deliberately stored only under `docs/downloads/research/`.
+
+Receipts: `knowledge/29_h31_3_mt_graben_result_2026-10-26.md`, `evidence/h31_3_e1_canary_and_surface_510_519.json`, `evidence/h31_3_e2_holdout_510_519.json`, and `evidence/h31_3_run_card_2026-10-26.json`. The seed block is closed: do not tune or rerun H31-3 on 510–519.
+
+---
+
+## 6. Research Ledger: Tested and Remaining Geological Hypotheses
+
+The following table preserves the originally ranked candidates while marking those now conclusively tested. Any future candidate must be newly preregistered, use fresh seeds, pass E1/E2/E3, and improve holdout before it can be considered for a weekly slot.
 
 | Rank | ID | Hypothesis | Specific Layers | Physical Signature / Transform | Why Missing from USGS/INGENIOUS | Non-Fault Mimic | Differs from Repo | Expected ΔHOLDOUT-DTI | Cost | Data Availability |
 |------|-----|------------|-----------------|-------------------------------|----------------------------------|-----------------|-------------------|----------------------|------|-------------------|
-| **#1** | **H31-2** | **Poisson-Theorem Gravity–Pseudogravity Hydrothermal Demagnetization Residual (ΔM→0, Δρ≠0)** | `rtp`, `iso_grav_anom_vg`, `iso_grav_anom_hg`, `tmi_vg`, `TMI_up150`, `K`, `Th` | Local sliding-window regression residual `iso_grav_anom_vg - (α_loc·rtp + β_loc)` gated by high `iso_grav_anom_hg` and low `tmi_vg` (≤0) | Hydrothermal upflow alters crustal magnetite → non-magnetic hematite/pyrite/illite, erasing magnetic edge while preserving basement density fault step | Non-magnetic Paleozoic carbonate-on-granite pluton contacts | Existing `H28-1` and `subsurface_features.py` multiply `min(grad_rtp, grad_grav)`, which **zeros out** magnetite-destroyed geothermal fault conduits! | +0.001 to +0.005 | Low–Medium (~10 min CPU) | **100% locally hash-pinned** — VIABLE NOW |
-| **#2** | **H31-3** | **Magnetotelluric Brittle–Ductile Conduit & Basement-Relief Asymmetric Graben Margin Coupling** | `cond_surf`, `depth_to_base_surf`, `iso_grav_anom`, `geod_dilaterate`, `det_elev` | Cross-strike pairing: steep `∇depth_to_base_surf` basin-bounding fault walls + adjacent hanging-wall `cond_surf` conductive clay-cap/brine plumes within 300–900m down-dropped toward basin minimum | Buried range-front/intrabasin geothermal faults exhibit low-resistivity smectite caps offset basinward of resistive footwall basement step (Gasperikova et al. 2022) | Conductive evaporative playa salt pans | `H28-3` tested co-located `dilaterate × cond_surf` globally (-0.0026), **never** cross-strike asymmetric pairing against `∇depth_to_base_surf` | +0.001 to +0.004 | Medium (~15 min CPU) | **100% locally hash-pinned** — VIABLE NOW |
+| **#1** | **H31-2 / H32** | **Poisson-Theorem Gravity–Pseudogravity Hydrothermal Demagnetization Residual (ΔM→0, Δρ≠0)** | `rtp`, `iso_grav_anom_vg`, `iso_grav_anom_hg`, `tmi_vg`, `TMI_up150`, `K`, `Th` | Local sliding-window regression residual `iso_grav_anom_vg - (α_loc·rtp + β_loc)` gated by high `iso_grav_anom_hg` and low `tmi_vg` (≤0) | Hydrothermal upflow alters crustal magnetite → non-magnetic hematite/pyrite/illite, erasing magnetic edge while preserving basement density fault step | Non-magnetic Paleozoic carbonate-on-granite pluton contacts | Existing `H28-1` and `subsurface_features.py` multiply `min(grad_rtp, grad_grav)`, which **zeros out** magnetite-destroyed geothermal fault conduits! | +0.001 to +0.005 | Low–Medium (~10 min CPU) | **TESTED AS H32 — NEGATIVE** on seeds 500–509; frozen efficacy gate failed. Do not retry the tested formulation. |
+| **#2** | **H31-3** | **Magnetotelluric Brittle–Ductile Conduit & Basement-Relief Asymmetric Graben Margin Coupling** | `cond_surf`, `depth_to_base_surf`, `iso_grav_anom`, `geod_dilaterate`, `det_elev` | Cross-strike pairing: steep `∇depth_to_base_surf` basin-bounding fault walls + adjacent hanging-wall `cond_surf` conductive clay-cap/brine plumes within 300–900m down-dropped toward basin minimum | Buried range-front/intrabasin geothermal faults exhibit low-resistivity smectite caps offset basinward of resistive footwall basement step (Gasperikova et al. 2022) | Conductive evaporative playa salt pans | `H28-3` tested co-located `dilaterate × cond_surf` globally (-0.0026), **never** cross-strike asymmetric pairing against `∇depth_to_base_surf` | +0.001 to +0.004 | Medium (~15 min CPU) | **TESTED — NEGATIVE** on fresh seeds 510–519: 4/5 frozen efficacy clauses failed and local H31-1 overlap is 86.87%. Do not tune/rerun. |
 | **#3** | **H31-4** | **Supervised Seismogenic Transfer Learning: USGS Quaternary Fault Slip-Rate Labels → Great Basin Microseismicity** | `ieq_n100a15`, `deq_n100a15`, `geod_shearrate`, `geod_dilaterate`, USGS Q-faults slip-rate (vector) | Fine-tune `HistGradientBoosting` on USGS Q-fault slip-rate classes (categorical: <0.2, 0.2–1, >1 mm/yr) using 15 subsurface transforms as features; transfer to Great Basin microseismicity clusters | USGS Q-faults scope ≈ evidence of coseismic surface deformation in ~1.6 Ma; **faults without young scarps** (buried beneath alluvium/older bedrock) are preferentially missing — they express in seismicity, not lidar-scarp bands | Tectonic tremor / slow slip unrelated to Quaternary faulting | First **supervised transfer** from labelled USGS slip-rates to unlabelled Great Basin microseismicity; `H31-1` uses `ieq/deq` only as unsupervised coherence | +0.002 to +0.006 | Medium–High (~30 min CPU + GPU fine-tune) | **100% locally hash-pinned** USGS Q-faults vector (fetched via `scripts/fetch_vector_faults.py`) — VIABLE NOW |
 | **#4** | **H31-5** | **Hydrothermal Alteration Mineralogy from ASTER TIR Emissivity (Quartz/Sericite/Chlorite Indices)** | ASTER L2 Surface Emissivity (Bands 10–14), `geodawn_rad_u8`, `geodawn_extensions_u8` | Quartz Index = (B13-B12)/(B13+B12); Sericite = (B11-B12)/(B11+B12); Chlorite = (B10-B12)/(B10+B12); aligned linear anomalies along fault traces | Fossil/active hydrothermal fault upflow zones marked by siliceous sinter, argillic (sericite), propylitic (chlorite) alteration halos — **invisible to USGS Q-faults** which require surface rupture evidence | Lacustrine Lake Lahontan carbonate muds, playa evaporites, unaltered volcanic glass | **No optical/thermal mineralogy transform exists in repo** — `H29` uses only magnetic/gravity/strain/lidar; ASTER TIR is orthogonal to potential fields | +0.002 to +0.007 | High (requires ASTER ingest) | **Free official NASA LP DAAC** (ASTER GED/GDS, `https://lpdaac.usgs.gov/products/ast_07xt/`); **blocked in sandbox egress** — requires external download |
 | **#5** | **H27-16** | **DOE GDR #1391: Paleo-Geothermal Sinter/Tufa Aprons + 2m Temperature Probes + Quaternary Volcanics** | GDR #1391: `paleo_geothermal_regional.zip`, `2m_temperature_probe_INGENIOUS_regional_data.zip`, `great_basin_q_volcanics.zip` | Anisotropic linear alignments of siliceous sinter/carbonate tufa terraces (Siler et al. 2022) coupled with >+2.5°C 2m probe thermal anomalies (Kraal et al. 2022) | Fossil sinter/travertine cementation masks Holocene scarps while directly marking fossil/active hydrothermal fault upflow zones | Lacustrine Lake Lahontan tufa mounds & lateral outflow plumes | Uses **3 official regional vector/probe packages** absent from `gdr_wellspring_in_footprint.csv` | +0.002 to +0.008 | Medium–High (external ingest) | **Free official US DOE CC-BY-4.0** (`https://gdr.openei.org/submissions/1391`, DOI 10.15121/1881483); **SHA-256-pinned in `scripts/fetch_external_layers.py`** — **blocked in sandbox** until raw zips supplied |
 
 ---
 
-## 6. Recommended Next Steps (Priority Order)
+## 7. Recommended Next Steps (Priority Order)
 
-### Immediate (This Session)
-1. ✅ **H31-1 is ready** — Download `gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif` and submit per `docs/how-to-submit.html`
-2. **Validate H31-2 (Poisson-Theorem Residual)** on holdout seeds 410–419 (fresh, unconsumed) before any weekly slot
-3. **Validate H31-3 (MT Asymmetric Graben Margin)** on holdout seeds 420–429
+### Current Decision
+1. ✅ **H31-1 remains the only evidence-qualified candidate** — its download and manual portal instructions are at `docs/how-to-submit.html`. A human weekly-slot selector/cap/current-registry decision remains separate and must not be automated.
+2. ❌ **H32 (formerly H31-2) and H31-3 are closed negative lanes.** Neither may be tuned, re-emitted, uploaded, or used to spend a weekly slot.
 
-### Next Session (If H31-2 or H31-3 Pass Holdout)
-4. Build H31-2 or H31-3 submission (whichever passes frozen gates) with dual-regime architecture + min_sep_px=2.8 CELF
-5. Run full 27-raster uniqueness screen (12 peers + 2 live GEMSDOE27 + 13 research)
-6. If PASS: submit as Session 11 unique candidate
+### Next Research Gate
+3. Preregister one genuinely new, label-free candidate with a new seed block only after reviewing the completed negative cards; it must pass E1 leakage/peer checks and improve E2 HOLDOUT-DTI before E3 promotion.
+4. Candidate directions still requiring a new preregistration: supervised but leakage-guarded microseismic transfer (H31-4), or an external-data hypothesis only after bytes are authorized, restored, and SHA-256 verified.
 
 ### External Data Gates (Requires Owner Action)
-7. **H31-4 (ASTER TIR):** Download ASTER L2 emissivity tiles covering footprint from NASA LP DAAC (free, CC-BY-4.0)
-8. **H27-16 (GDR #1391):** Trigger successful `fetch-gdr-external-layers.yml` workflow run (currently 0 job runs — IR-2026-10-25-18) to hash-verify raw zips
+5. **H31-5 (ASTER TIR):** Download ASTER L2 emissivity tiles covering footprint from NASA LP DAAC (free, CC-BY-4.0), record checksums, and only then assess a label-free transform.
+6. **H27-16 (GDR #1391):** Obtain the raw official packages via an authorized route and hash-verify them before feature creation; sandbox egress currently cannot retrieve `gdr.openei.org`.
 
 ---
 
-## 7. [0,1] Portal Error: Root Cause & Permanent Fix
+## 8. [0,1] Portal Error: Root Cause & Permanent Fix
 
 **Root Cause 1 (NaN outside footprint):** `sample_submission.tif` has 7,111,787 NaN pixels outside the 5,167,373-pixel study footprint. Strict validator `((arr >= 0.0) & (arr <= 1.0)).all()` returns `False` if any NaN exists anywhere in the 3730×3292 array. Official reference notebook Cell 19 initializes `y_out = np.zeros(...)` with `nodata=None`.
 
@@ -158,7 +170,7 @@ Following PARALLEL-RUN PROTOCOL §7: generate 3–5 genuinely untried hypotheses
 
 ---
 
-## 8. Limitations & Access Needed
+## 9. Limitations & Access Needed
 
 | Limitation | Impact | Owner Action Required |
 |------------|--------|----------------------|
@@ -170,7 +182,7 @@ Following PARALLEL-RUN PROTOCOL §7: generate 3–5 genuinely untried hypotheses
 
 ---
 
-## 9. Compliance Checklist
+## 10. Compliance Checklist
 
 - [x] **Automation:** Never requests `drivendata.org` (Terms of Use prohibit bots)
 - [x] **AI Disclosure:** Stated in `AI_DISCLOSURE.md` (Official Rules requirement)
@@ -178,11 +190,11 @@ Following PARALLEL-RUN PROTOCOL §7: generate 3–5 genuinely untried hypotheses
 - [x] **Finalist Deliverables:** This repository is the code + documentation deliverable
 - [x] **Unique Submission:** H31-1 passes 27-raster uniqueness (max 62.8% ≤ 70%)
 - [x] **Format Validation:** All-finite [0,1] GeoTIFF, CRS/shape/transform match sample
-- [x] **Negative Results Delivered:** H28-3, H30, H29-2, H31-RankEnsemble all documented as negative
+- [x] **Negative Results Delivered:** H28-3, H30, H29-2, H31-RankEnsemble, H32, and H31-3 all documented as negative
 
 ---
 
-## 10. Sources & Verification Links (Official, Verified)
+## 11. Sources & Verification Links (Official, Verified)
 
 | Resource | URL | Status |
 |----------|-----|--------|
@@ -202,7 +214,7 @@ Following PARALLEL-RUN PROTOCOL §7: generate 3–5 genuinely untried hypotheses
 
 ---
 
-## 11. Verification Commands (Run Before Any Submission)
+## 12. Verification Commands (Run Before Any Submission)
 
 ```bash
 # 1. Restore hash-pinned data (17 artifacts)
@@ -229,15 +241,15 @@ python -m pytest -q
 
 ---
 
-## 12. Conclusion
+## 13. Conclusion
 
-**The best unique submission available right now is `gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif` (H31-1).** It has passed 100% of automated machine validation gates without human intervention:
+**The best evidence-qualified unique file is `gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif` (H31-1).** It has passed 100% of automated machine validation gates without human intervention, but is **not authorized for a weekly slot until a human selector rechecks cap and current registry**:
 - 5/5 frozen holdout clauses on fresh seeds 400–409 (new #1 blind pooled HOLDOUT-DTI 0.0473)
 - 27-raster uniqueness (max 3-px overlap 62.8% ≤ 70%; 50.2% vs GEMSDOE32 0.2778)
 - Strict [0,1] all-finite GeoTIFF validation (fixes "Predicted values must be in range [0, 1]")
 
 **Do not re-submit any historical file from GEMSDOE24–36** — all have already been submitted, and 8 of 9 belong to the exhausted H19-5 ridge clone cluster (86.7%–100% 3-px overlap with GEMSDOE32).
 
-**To exceed 0.2778 (and reach 0.3195+), we must validate H31-2 or H31-3 on the spatially-blocked holdout before spending a weekly slot.** These are the only two hypotheses that are 100% locally hash-pinned, genuinely untried, and target the catalogue-missing fault population (buried geothermal conduits + Walker Lane transtensional stepovers) via physical mechanisms orthogonal to the H19-5 lidar-scarp lineage.
+**H32/H31-2 and H31-3 were both tested against spatially blocked holdout and are negative.** Their tiny or adverse effects do not support a weekly slot, and their results do not imply a live-score projection. To exceed the OWNER-REPORTED 0.2778 benchmark, a future approach must introduce genuinely new information, be preregistered, use fresh seeds, improve the spatial HOLDOUT-DTI gate, and pass the complete uniqueness/validator screen before a separate selector decision.
 
-**Next session should validate H31-2 on fresh seeds 410–419.** If it passes frozen gates, build and submit. If not, validate H31-3 on seeds 420–429. External data hypotheses (H31-4, H27-16) require owner-provided data access first.
+**Next research session:** choose only one new direction after preregistration—leakage-guarded H31-4 microseismic transfer if its independent target construction can be demonstrated, or an external-data geological hypothesis only after authorized checksum-verified acquisition. No automation may upload it to DrivenData.

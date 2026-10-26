@@ -2,18 +2,18 @@
 
 ## Current audit correction — 2026-10-26 (takes precedence over archived session claims)
 
-**Download is format-valid; a weekly submission is NOT authorized by this audit.**
-[Executive audit](knowledge/28_submission_readiness_audit_2026-10-26.md) documents the nine-site comparison,
-the existing H31 download, and unresolved gates. The prior “OK TO SUBMIT” headings below are historical
-and must not override the separate selector step in the parallel-run protocol.
+**H31-1 is an evidence-qualified, format-valid download; a weekly submission remains a separate human selector/cap/current-registry decision.**
+[Executive audit](knowledge/28_submission_readiness_audit_2026-10-26.md) documents the nine-site comparison and
+readiness limitations; [the subsequent H31-3 result](knowledge/29_h31_3_mt_graben_result_2026-10-26.md) closes a
+new preregistered lane as negative. Historical “OK TO SUBMIT” headings below do not override the selector step.
 
-- No single-method lane paragraph was supplied in the latest prompt. **Zero new experiments, zero new TIFFs, zero uploads.**
-- Existing H31: **HOLDOUT-DTI 0.047302**, 95% CI **[0.044527, 0.049619]**, **120,778 withheld-positive occurrences** (not 289,180),
-  evaluator `gems27.metric v1 + holdout-blind-buffered-v2`, seeds 400–409. Saved evaluation evidence, not a new evaluation.
+- **H31-3 was subsequently tested; it is DO NOT SUBMIT.** Fresh seeds 510–519 gave H31-3−H31-S pooled HOLDOUT-DTI +0.000366, mean paired +0.000392 (95% CI [−0.001182,+0.001823]), 6/10 seeds and 2/4 folds; 4/5 frozen efficacy clauses failed. Its technically valid TIFF is research-only with `ok_to_submit: false` (`evidence/h31_3_run_card_2026-10-26.json`).
+- Existing H31-1: **HOLDOUT-DTI 0.047302**, 95% CI **[0.044527, 0.049619]**, **120,778 withheld-positive occurrences**,
+  evaluator `gems27.metric v1 + holdout-blind-buffered-v2`, seeds 400–409. This is saved evaluation evidence, not an organizer score.
 - The ~0.235 anchor-transfer figure is a **PROJECTION, not a score or validated live-score prediction**.
 - Historical scores remain **OWNER-REPORTED, not ORGANIZER-CONFIRMED**. No receipts or current weekly-cap evidence are available.
 - All prior generated TIFFs retain their original bytes; do not rename an existing file to claim a new submission.
-- Shared readiness gate now checks `max(AUC, 1-AUC)`; strong inverse prediction is not exempt from leakage screening.
+- Shared readiness gate checks `max(AUC, 1-AUC)`; strong inverse prediction is not exempt from leakage screening. No DrivenData upload occurred.
 
 ## Session 11 Lane L-S11/H32 Executive Summary & Download Verdict (`2026-10-26` — READ FIRST; parallel Session-11 lane below concurs)
 **Full report:** [`knowledge/27_session11_executive_summary_and_h32_result_2026-10-26.md`](knowledge/27_session11_executive_summary_and_h32_result_2026-10-26.md) (9-focus-site table, byte-verified 0.2778 autopsy, projections, run card).

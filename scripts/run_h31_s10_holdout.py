@@ -107,21 +107,34 @@ def get_or_fit_h31_quad_oof(
     labels: np.ndarray,
     foot: np.ndarray,
     lid_valid: np.ndarray,
+    *,
+    cache_dir: Path = CACHE_DIR,
+    cache_tag: str = "quad",
+    seed: int = 400,
+    extra_physics: np.ndarray | None = None,
+    extra_mmap_path: Path | None = None,
+    fold_masks: list[np.ndarray] | None = None,
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
-    CACHE_DIR.mkdir(parents=True, exist_ok=True)
-    psub_p = CACHE_DIR / "prob_h31_sub_quad.npy"
-    ps1_p = CACHE_DIR / "prob_h31_s1_quad.npy"
-    ps2_p = CACHE_DIR / "prob_h31_s2_quad.npy"
+    """Get/fit a reusable H31 OOF surface; optional physics extends the shared template.
+
+    Defaults intentionally preserve H31-1's original cache paths and numerical behavior. A
+    later preregistered feature arm supplies a distinct cache directory/tag, avoiding a private
+    fork and preventing cached predictions with a different feature schema from being reused.
+    """
+    cache_dir.mkdir(parents=True, exist_ok=True)
+    psub_p = cache_dir / f"prob_h31_sub_{cache_tag}.npy"
+    ps1_p = cache_dir / f"prob_h31_s1_{cache_tag}.npy"
+    ps2_p = cache_dir / f"prob_h31_s2_{cache_tag}.npy"
     if psub_p.exists() and ps1_p.exists() and ps2_p.exists():
         return np.load(psub_p), np.load(ps1_p), np.load(ps2_p)
-    print("fitting H31-1 dual-regime 2-stage nested spatial cross-fit (Quadrant 4-fold)...", flush=True)
+    print(f"fitting H31 dual-regime 2-stage nested spatial cross-fit ({cache_tag})...", flush=True)
     t0 = time.time()
     mmap_ps = (
         paths.PREPARED_FEATURES,
         CACHE_DIR / "subsurface15.npy",
         CACHE_DIR / "h29_features.npy",
         CACHE_DIR / "h31_features.npy",
-    )
+    ) + ((extra_mmap_path,) if extra_mmap_path is not None else ())
     p_sub, p_s1, p_s2 = h31.fit_predict_dual_regime_oof(
         base_X,
         sub15_X,
@@ -130,13 +143,15 @@ def get_or_fit_h31_quad_oof(
         labels,
         foot,
         lid_valid,
+        fold_masks=fold_masks,
         buffer_px=h31.BUFFER_PX,
-        seed=400,
-        cache_dir=CACHE_DIR,
-        cache_tag="quad",
+        seed=seed,
+        cache_dir=cache_dir,
+        cache_tag=cache_tag,
         mmap_paths=mmap_ps,
+        extra_physics=extra_physics,
     )
-    print(f"  finished H31-1 Quadrant OOF in {time.time() - t0:.1f}s", flush=True)
+    print(f"  finished H31 OOF ({cache_tag}) in {time.time() - t0:.1f}s", flush=True)
     np.save(psub_p, p_sub)
     np.save(ps1_p, p_s1)
     np.save(ps2_p, p_s2)
