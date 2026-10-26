@@ -1,0 +1,1 @@
+27GEMSDOE unique 20261026 scatter farfield | 27GEMSDOE unique 20261026 scatter farfield B2 38k sigma1.85 d1.5 vs 12 peers+repo; far-field blind probe, not live- | id 6c2790d67dc6 | not yet live-scored
