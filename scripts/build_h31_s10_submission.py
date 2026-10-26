@@ -466,7 +466,7 @@ def main() -> int:
         "holdout_efficacy_pass": bool(holdout_pass),
         "run_card": str(rc_path.relative_to(paths.REPO)),
     }
-    (DL_DIR / "h31_candidate_manifest.json").write_text(json.dumps(cand_man, indent=2) + "\n")
+    (DL_DIR / "h31_s10_candidate_manifest.json").write_text(json.dumps(cand_man, indent=2) + "\n")
 
     decision = readiness.publication_decision(run_card, paths.REPO)
     print("READINESS PUBLICATION DECISION:", json.dumps(decision), flush=True)

@@ -56,6 +56,9 @@ def get_or_build_subsurface15(foot: np.ndarray, names: list[str]) -> np.ndarray:
         return np.load(p, mmap_mode="r")
     p.parent.mkdir(parents=True, exist_ok=True)
     X = np.load(paths.PREPARED_FEATURES, mmap_mode="r")
+    # Shared-tool fix (Session 10, 2026-10-26): build_transforms requires every band in
+    # sub.SUBSURFACE_BANDS; the stale 10-band tuple here raised ValueError whenever the
+    # lane cache was absent.
     grids = {}
     for b in sub.SUBSURFACE_BANDS:
         g = np.full(grid.SHAPE, np.nan, dtype=np.float32)

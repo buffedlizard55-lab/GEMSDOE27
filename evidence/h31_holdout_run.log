@@ -1,0 +1,32 @@
+fitting baseline OOF arm D0...
+  finished D0 in 106.1s
+  canary ENS: raw=0.6744
+  canary H29S: raw=0.6664
+  canary D0S: raw=0.6708
+  Spearman ENS vs g24_d15: raw=0.1153 k3=0.4799
+  Spearman ENS vs g25_d28: raw=0.0968 k3=0.4795
+  Spearman ENS vs g27_tv2_d15: raw=0.1141 k3=0.4768
+  Spearman ENS vs g28_h27_4_r1: raw=0.0902 k3=0.4680
+  Spearman ENS vs g28_h32_1: raw=0.0941 k3=0.4741
+  Spearman ENS vs g28_h36_1: raw=0.0873 k3=0.4672
+  Spearman ENS vs g28_h38_1: raw=0.0874 k3=0.4690
+  Spearman ENS vs g30_d28: raw=0.0968 k3=0.4795
+  Spearman ENS vs g31_h27_4: raw=0.0902 k3=0.4680
+  Spearman ENS vs g32_h33_2_b2: raw=0.0864 k3=0.4538
+  Spearman ENS vs g33_h33d: raw=0.0913 k3=0.4688
+  Spearman ENS vs g36_anderson: raw=0.0846 k3=0.4501
+  Spearman ENS vs g32_r6_step: raw=-0.0162 k3=0.1055
+E1 PASS=True max_auc=0.6744 max_rho=0.4799 -> /home/user/GEMSDOE27/evidence/h31_e1_canary_and_surface.json
+seed 260 (40.6s) buffered: ENS=0.0377 H29S=0.0472 D0S=0.0455
+seed 261 (40.8s) buffered: ENS=0.0364 H29S=0.0450 D0S=0.0451
+seed 262 (39.9s) buffered: ENS=0.0389 H29S=0.0449 D0S=0.0388
+seed 263 (39.7s) buffered: ENS=0.0393 H29S=0.0532 D0S=0.0450
+seed 264 (39.5s) buffered: ENS=0.0353 H29S=0.0392 D0S=0.0414
+seed 265 (40.8s) buffered: ENS=0.0376 H29S=0.0465 D0S=0.0427
+seed 266 (40.7s) buffered: ENS=0.0315 H29S=0.0383 D0S=0.0392
+seed 267 (40.6s) buffered: ENS=0.0389 H29S=0.0445 D0S=0.0385
+seed 268 (41.6s) buffered: ENS=0.0369 H29S=0.0411 D0S=0.0419
+seed 269 (40.5s) buffered: ENS=0.0346 H29S=0.0403 D0S=0.0364
+POOLED BUFFERED: {"ENS": 0.036711, "H29S": 0.04402, "D0S": 0.041419}
+POOLED UNBUFFERED: {"ENS": 0.103534, "H29S": 0.104816, "D0S": 0.103717}
+CLAUSES: {"a_pooled_beats_both": false, "b_mean_paired_vs_H29S_ge_0p0010": false, "c_ci95_lower_gt_zero_vs_H29S": false, "d_folds_ge_3_of_4_vs_both": false, "e_seeds_ge_8_of_10_vs_H29S": false, "f_e1_pass": true} GATE=False -> /home/user/GEMSDOE27/evidence/h31_e2_holdout_260_269.json

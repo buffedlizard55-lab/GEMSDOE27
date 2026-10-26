@@ -135,5 +135,18 @@
   "lane_check_passed": true,
   "validation_hard_passed": true,
   "generated_utc": "2026-10-25T20:24:16Z"
+ },
+ "unique_20261026": {
+  "file": "gems27-unique-20261026-20261026-6c2790d67dc6-allfinite.tif",
+  "zip": "gems27-unique-20261026-20261026-6c2790d67dc6-allfinite.zip",
+  "content_id": "6c2790d67dc6",
+  "note": "27GEMSDOE unique 20261026 scatter farfield | 27GEMSDOE unique 20261026 scatter farfield B2 38k sigma1.85 d1.5 vs 12 peers+repo; far-field blind probe, not live- | id 6c2790d67dc6 | not yet live-scored",
+  "note_chars": 200,
+  "emitted_px": 21312,
+  "sha256_tif": "defe8b2184d5e9732d53362eb4dd0b337198a493d76087ecdaf84c01f99f4ea1",
+  "status": "UNIQUE RESEARCH PROBE 20261026 \u2014 NOT CERTIFIED (far-field blind)",
+  "lane_check_passed": true,
+  "validation_hard_passed": true,
+  "generated_utc": "2026-10-26T00:38:52Z"
  }
 }

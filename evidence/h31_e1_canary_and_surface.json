@@ -1,0 +1,106 @@
+{
+  "experiment": "E1_H31_canary_and_surface",
+  "lane": "H31-ENS",
+  "preregistration": "knowledge/23_preregistration_H31_2026-10-26.md",
+  "seeds": [
+    260,
+    261,
+    262,
+    263,
+    264,
+    265,
+    266,
+    267,
+    268,
+    269
+  ],
+  "n_unique_withheld_positive_pixels": 54457,
+  "canary_threshold_auc": 0.9,
+  "canary_surfaces": {
+    "ENS": {
+      "raw_auc": 0.67445,
+      "direction_invariant_auc": 0.67445
+    },
+    "H29S": {
+      "raw_auc": 0.66639,
+      "direction_invariant_auc": 0.66639
+    },
+    "D0S": {
+      "raw_auc": 0.67085,
+      "direction_invariant_auc": 0.67085
+    }
+  },
+  "canary_max_direction_invariant_auc": 0.67445,
+  "surface_spearman_threshold": 0.9,
+  "n_peer_rasters_checked": 13,
+  "peer_surface_spearman": {
+    "g24_d15": {
+      "raw_spearman": 0.11534,
+      "kernel3_spearman": 0.4799,
+      "max_abs_spearman": 0.4799
+    },
+    "g25_d28": {
+      "raw_spearman": 0.09678,
+      "kernel3_spearman": 0.47948,
+      "max_abs_spearman": 0.47948
+    },
+    "g27_tv2_d15": {
+      "raw_spearman": 0.11407,
+      "kernel3_spearman": 0.47677,
+      "max_abs_spearman": 0.47677
+    },
+    "g28_h27_4_r1": {
+      "raw_spearman": 0.09023,
+      "kernel3_spearman": 0.46797,
+      "max_abs_spearman": 0.46797
+    },
+    "g28_h32_1": {
+      "raw_spearman": 0.09415,
+      "kernel3_spearman": 0.47407,
+      "max_abs_spearman": 0.47407
+    },
+    "g28_h36_1": {
+      "raw_spearman": 0.08733,
+      "kernel3_spearman": 0.46723,
+      "max_abs_spearman": 0.46723
+    },
+    "g28_h38_1": {
+      "raw_spearman": 0.08736,
+      "kernel3_spearman": 0.469,
+      "max_abs_spearman": 0.469
+    },
+    "g30_d28": {
+      "raw_spearman": 0.09678,
+      "kernel3_spearman": 0.47948,
+      "max_abs_spearman": 0.47948
+    },
+    "g31_h27_4": {
+      "raw_spearman": 0.09023,
+      "kernel3_spearman": 0.46797,
+      "max_abs_spearman": 0.46797
+    },
+    "g32_h33_2_b2": {
+      "raw_spearman": 0.08639,
+      "kernel3_spearman": 0.45383,
+      "max_abs_spearman": 0.45383
+    },
+    "g33_h33d": {
+      "raw_spearman": 0.09128,
+      "kernel3_spearman": 0.46879,
+      "max_abs_spearman": 0.46879
+    },
+    "g36_anderson": {
+      "raw_spearman": 0.08455,
+      "kernel3_spearman": 0.45009,
+      "max_abs_spearman": 0.45009
+    },
+    "g32_r6_step": {
+      "raw_spearman": -0.01621,
+      "kernel3_spearman": 0.10547,
+      "max_abs_spearman": 0.10547
+    }
+  },
+  "max_peer_abs_spearman": 0.4799,
+  "gate_e1_pass": true,
+  "runtime_s": 135.4
+}

@@ -698,11 +698,36 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
 
     # ---- Session 10 H31-1 Automated Gate + 9-Focus-Site Executive Summary (100% machine-driven) ----
     h31_rc_path = EV / "h31_s10_run_card_2026-10-26.json"
-    h31_man_path = DOCS / "downloads" / "h31_candidate_manifest.json"
+    h31_man_path = DOCS / "downloads" / "h31_s10_candidate_manifest.json"
     focus_sum_path = EV / "focus_sites_executive_summary_20261026.json"
     h31_rc = J(h31_rc_path) if h31_rc_path.exists() else None
     h31_man = J(h31_man_path) if h31_man_path.exists() else None
     focus_sum = J(focus_sum_path) if focus_sum_path.exists() else None
+
+    parallel_s10_box = ""
+    h30_1_rc_path = EV / "h30_1_run_card.json"
+    h31_ens_rc_path = EV / "h31_run_card.json"
+    if h30_1_rc_path.exists() or h31_ens_rc_path.exists():
+        p_lines = []
+        if h30_1_rc_path.exists():
+            c30_1 = J(h30_1_rc_path)
+            ok30_1 = publication_decision(c30_1, ROOT)["ok_to_publish_as_submission"]
+            p_lines.append(
+                f"<li><b>Parallel Lane H30-1 (<code>{e(c30_1['submission_name'])}</code>, <code>{e(c30_1['raster']['primary_allfinite'])}</code>):</b> "
+                f"machine audit status = <code>{'APPROVED' if ok30_1 else 'NOT APPROVED'}</code> (44.3% 3-px overlap vs primary <code>H31-1 DRCG-WL</code>; "
+                f"note: evaluated on seeds 240&ndash;244 previously consumed in Session 9 PRs #24/#25 and includes 1,137 T-v2 relay dots &mdash; "
+                f"prioritize fresh-seed <b>H31-1 DRCG-WL (`cf8e1bbef244`, seeds 400&ndash;409)</b> first).</li>"
+            )
+        if h31_ens_rc_path.exists():
+            c31_e = J(h31_ens_rc_path)
+            p_lines.append(
+                f"<li><b>Parallel Lane H31 Rank-Ensemble (<code>{e(c31_e['submission_name'])}</code>, <code>{e(c31_e['raster']['primary_allfinite'])}</code>):</b> "
+                f"<b>DO NOT SUBMIT</b> &mdash; negative on seeds 260&ndash;269 (56.6% 3-px overlap vs primary <code>H31-1 DRCG-WL</code>; routed to <code>downloads/research/</code>).</li>"
+            )
+        parallel_s10_box = (
+            '<div class="card"><h3 style="margin-top:0">Merged Parallel-Session Run Cards (Cross-Screened Against H31-1 DRCG-WL)</h3>'
+            f'<ul class="tight">{"".join(p_lines)}</ul></div>'
+        )
 
     h31_ok = bool(h31_rc and h31_man and publication_decision(h31_rc, ROOT)["ok_to_publish_as_submission"] and h31_man.get("ok_to_submit"))
     approved_submission_name = h31_man["submission_name"] if h31_ok else None
@@ -865,6 +890,7 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
 {top_badges}</p>
 {h31_hero_index}
 {focus_sites_exec_section}
+{parallel_s10_box}
 <h2>Prior Session Archive (Audit &amp; Historical Benchmarks Only &mdash; Do Not Re-Submit)</h2>
 {h29_2_box}
 {h30_dipgap_box}
@@ -925,6 +951,7 @@ The agent never uploads anything; you press the button.</div>
 <p class="lead">Unmistakable automated machine-gate submission verdict, 9-focus-site executive comparison (`GEMSDOE24`&ndash;`GEMSDOE36`), one-click unique GeoTIFF download &amp; copyable note, and <a href="how-to-submit.html">step-by-step DrivenData #306 submission subpage</a>.</p>
 {h31_hero_exec}
 {focus_sites_exec_section}
+{parallel_s10_box}
 <div class="card"><h2 style="margin-top:0">Decision in one table</h2>
 <table><tr><th>Question</th><th>Answer</th></tr>
 <tr><td>What to submit now</td><td>{exec_decision_answer}</td></tr>

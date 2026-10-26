@@ -298,7 +298,7 @@
         "preplacement_surface_spearman": 0.13031
       }
     },
-    "extended_unscored_repo_max_3px_overlap": 0.56238,
+    "extended_unscored_repo_max_3px_overlap": 0.56634,
     "extended_unscored_repo_entries": {
       "gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-allfinite.tif": {
         "ref_dots": 41507,
@@ -321,6 +321,13 @@
         "postplacement_dot_spearman": 0.05256,
         "preplacement_surface_spearman": 0.11252
       },
+      "gems27-h30-1-updip-hydrothermal-b2-35k-20261025-801dff07541d-allfinite.tif": {
+        "ref_dots": 35200,
+        "candidate_dot_fraction_within_3px": 0.44279,
+        "reference_dot_fraction_within_3px": 0.47284,
+        "postplacement_dot_spearman": 0.0464,
+        "preplacement_surface_spearman": 0.07893
+      },
       "gems27-topo-gap-closure-t-v2-on-d2-8-20261002-3ebd51534bb1-allfinite.tif": {
         "ref_dots": 45374,
         "candidate_dot_fraction_within_3px": 0.56238,
@@ -334,6 +341,13 @@
         "reference_dot_fraction_within_3px": 0.57055,
         "postplacement_dot_spearman": 0.04802,
         "preplacement_surface_spearman": 0.11349
+      },
+      "gems27-unique-20261026-20261026-6c2790d67dc6-allfinite.tif": {
+        "ref_dots": 21312,
+        "candidate_dot_fraction_within_3px": 0.05487,
+        "reference_dot_fraction_within_3px": 0.15212,
+        "postplacement_dot_spearman": -0.00133,
+        "preplacement_surface_spearman": 0.02638
       },
       "gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.tif": {
         "ref_dots": 24482,
@@ -383,6 +397,13 @@
         "reference_dot_fraction_within_3px": 0.52147,
         "postplacement_dot_spearman": 0.05096,
         "preplacement_surface_spearman": 0.09196
+      },
+      "gems27-h31-rankens-celf-b2-20261026-93c8af046660-allfinite.tif": {
+        "ref_dots": 37654,
+        "candidate_dot_fraction_within_3px": 0.56634,
+        "reference_dot_fraction_within_3px": 0.76929,
+        "postplacement_dot_spearman": 0.08585,
+        "preplacement_surface_spearman": 0.11886
       },
       "gems27-lane-subsurface-buried-fault-20261025-fc6d8c3acf6c-allfinite.tif": {
         "ref_dots": 38000,
@@ -509,5 +530,5 @@
     "checks_allfinite_json": "docs/downloads/checks-gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.json",
     "checks_nan_json": "docs/downloads/checks-gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-nan.json"
   },
-  "runtime_s": 37.5
+  "runtime_s": 41.1
 }

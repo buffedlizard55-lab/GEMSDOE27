@@ -215,8 +215,18 @@
    "family": "H29-1 / Lane L-S7-2026-10-25 (dual-partition stitched-OOF hydrothermal + piedmont flexure + destriped mag + Frangi vesselness + weighted 300 m CELF cover, B2 > 200 m)",
    "emitted_px": 37654,
    "owner_reported_public_score": 0.219,
-   "status": "OWNER-REPORTED 0.2190 in 2026-10-26 prompt (#1 of the 5-submission 2026-10-25 non-H19-5 cohort: 0.2190 vs 0.1462, 0.0859, 0.0742, 0.0217). ALREADY SUBMITTED — DO NOT RE-SUBMIT.",
-   "corroboration": "owner_prompt_2026_10_26_snapshot; evidence/h29_run_card_2026-10-25.json; evidence/focus_sites_executive_summary_20261026.json"
+   "status": "SCORED 0.2190 OWNER-REPORTED (2026-10-26 prompt; previously UNSCORED Session-7 candidate; HOLDOUT-DTI 0.0422 buffered / 0.1039 unbuffered); no organizer receipt stored",
+   "corroboration": "evidence/h29_run_card_2026-10-25.json; scripts/verify_downloads.py 0 failures"
+  },
+  {
+   "repo": "buffedlizard55-lab/GEMSDOE27",
+   "label": "gems27-h31-rankens-celf-b2-20261026-93c8af046660-allfinite.tif",
+   "sha256": "714faac68e781f4ea4bc761acbe261d39fb6ea42062c4fad55e5c60a5de009c4",
+   "family": "H31 complementary OOF-surface rank ensemble (H29S + D0 percentile-rank mean) + weighted CELF, B2, 37,654 dots",
+   "emitted_px": 37654,
+   "owner_reported_public_score": null,
+   "status": "UNSCORED Session-10 candidate built 2026-10-26; FROZEN GATE FAILED (HOLDOUT-DTI ENS 0.036711 vs H29S 0.044020, seeds 260-269); verdict negative / DO NOT SUBMIT (evidence/h31_run_card.json)",
+   "corroboration": "knowledge/23 preregistration (commit c645135); knowledge/25 result; evidence/h31_e2_holdout_260_269.json"
   }
  ],
  "owner_reported_prompt_2026_10_25": {
@@ -233,29 +243,6 @@
    "49GEMSDOE_unreconciled_prompt_claim": 0.4413
   },
   "slot1_ab_inversion_ref": "evidence/slot1_live_ab_inversion.json"
- },
- "owner_reported_prompt_2026_10_26": {
-  "provenance": "OWNER-REPORTED in 2026-10-26 prompt; no DrivenData JSON/screenshot receipt stored in this repository. All figures below are treated strictly as OWNER-REPORTED, never ORGANIZER-CONFIRMED.",
-  "claimed_leaderboard_high_unverified": 0.4413,
-  "new_2026_10_25_non_h19_5_cohort": {
-   "27gemsdoe-h29-hydrothermal-piedmont-celf-20261025-511898747886-allfinite": 0.219,
-   "30gemsdoe-msdb1-oof-submod-b2-37654-20261025-c878ed0c318c-zeros": 0.1462,
-   "24gemsdoe-gvc1-offcat-b2-20261025-88c3b8e804c6-zeros": 0.0859,
-   "25gemsdoe-h66-mgd-20261025-83539880f9da-zeros": 0.0742,
-   "28gemsdoe-s18-mxtp-37654-20261025-05fc81ca2760-zeros": 0.0217
-  },
-  "focus_site_historical_highs": {
-   "32GEMSDOE_h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros": 0.2778,
-   "36GEMSDOE_gemsdoe36-anderson-geothermal-pinn-38854-20261004T063428Z-c7e9bc92-zeros": 0.275,
-   "31GEMSDOE_gemsdoe31-h32-2-b1-only-20261004-777da82e-allfinite": 0.271,
-   "28GEMSDOE_gems28-h28-solo-r1-20261003-27c0796d-nan": 0.2708,
-   "33GEMSDOE_GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e": 0.2632,
-   "25GEMSDOE_gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros": 0.26,
-   "30GEMSDOE_GEMSDOE30_dotted-h19-5-d2-8_20261003T061212Z_e56ea318-zeros": 0.26,
-   "24GEMSDOE_gems24-dotted-h19-5-d1-5-20261001-989f59505db1": 0.2477,
-   "27GEMSDOE_gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan": 0.2449
-  },
-  "executive_summary_ref": "evidence/focus_sites_executive_summary_20261026.json"
  },
  "27GEMSDOE": [
   {
@@ -379,5 +366,27 @@
   "caution": "The five rows whose values coincide with owner-reported artifacts (0.2477 #16 wbg1, 0.1922 #28 smrtdoog5, 0.1894 #30 SDCF9, 0.1855 #33 extradr19, 0.1563 #41 smashi34) are matches BY VALUE ONLY. A 4-decimal coincidence does not identify an account and no inference about ownership is drawn or should be drawn.",
   "why_it_matters": "Rank 2 (nchuzhoy) reached 0.3128 with only TWO submissions, and rank 5 reached 0.2941 with seven. Session 3's inversion shows the group's best file ever earned 0.508|G| of credit while 0.3195 at 60,069 px needs 0.570|G|. A team scoring 0.31+ on two attempts is evidence of a materially better DETECTOR, not of a better emission schedule - which is exactly where this programme is stuck."
  },
- "note_session4": "Session 4 (2026-10-02): added the 16GEMSDOE H18-4 SGMC-gap probe (0.0360), the 21st hash-authenticated (raster, score) pair; inverted in evidence/sgmc_gap_inversion.json."
+ "note_session4": "Session 4 (2026-10-02): added the 16GEMSDOE H18-4 SGMC-gap probe (0.0360), the 21st hash-authenticated (raster, score) pair; inverted in evidence/sgmc_gap_inversion.json.",
+ "owner_reported_prompt_2026_10_26": {
+  "provenance": "OWNER-REPORTED in 2026-10-26 prompt; no DrivenData receipt stored. Leaderboard high stated in the same prompt as both 0.4413 and 0.3195 (unreconciled; see knowledge/24).",
+  "focus_fleet_best": {
+   "GEMSDOE24": 0.2477,
+   "GEMSDOE25": 0.26,
+   "GEMSDOE27": 0.2449,
+   "GEMSDOE28": 0.271,
+   "GEMSDOE30": 0.26,
+   "GEMSDOE31": 0.2708,
+   "GEMSDOE32": 0.2778,
+   "GEMSDOE33": 0.2632,
+   "GEMSDOE36": 0.275
+  },
+  "additional_focus_scores": {
+   "GEMSDOE24_gvc1_negative": 0.0859,
+   "GEMSDOE25_h66_mgd_flank": 0.0742,
+   "GEMSDOE27_h29_511898747886": 0.219,
+   "GEMSDOE28_s18_mxtp": 0.0217,
+   "GEMSDOE30_MSDB1": 0.1462
+  },
+  "focus_sites_ref": "registry/focus_sites_2026-10-26.json"
+ }
 }

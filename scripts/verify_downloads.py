@@ -138,6 +138,45 @@ def main() -> int:
            f"slot5 manifest reports the one-sided swapped fraction {m5['fraction_of_file_swapped']:.4f} "
            f"(symmetric difference {m5['symmetric_difference_fraction']:.4f})")
     ok(len(list(DL.glob("*.tif"))) == len(set(p.name for p in DL.glob("*.tif"))), "all .tif file names are unique")
+    h30_manifest = DL / "h30_1_manifest.json"
+    if h30_manifest.exists():
+        hm = json.loads(h30_manifest.read_text())
+        r = hm["raster"]
+        for variant, fname, exp_sha in [
+            ("allfinite", r["primary_allfinite"], r["sha256"]),
+            ("nan", r["nan_twin"], r["nan_sha256"]),
+        ]:
+            p = DL / fname
+            with rasterio.open(p) as s:
+                a = s.read(1)
+                prof = (s.crs.to_epsg(), s.shape, tuple(s.transform)[:6], s.dtypes[0])
+                nd, count = s.nodata, s.count
+            tag = f"h30_1/{variant}"
+            ok(prof == tprof, f"{tag}: same CRS/shape/transform/dtype as the template (float32)")
+            ok(count == 1, f"{tag}: single band")
+            inside, outside = a[foot], a[~foot]
+            ok(bool(np.isfinite(inside).all()), f"{tag}: every in-footprint value is finite")
+            ok(float(inside.min()) >= 0.0 and float(inside.max()) <= 1.0, f"{tag}: in-footprint range [{inside.min():g}, {inside.max():g}] within [0,1]")
+            ok(set(np.unique(inside).tolist()) <= {0.0, 1.0}, f"{tag}: values are exactly 0.0 / 1.0")
+            n1 = int((inside == 1.0).sum())
+            ok(n1 == r["dots"], f"{tag}: {n1} pixels equal 1.0 (manifest {r['dots']})")
+            ok(not bool((a == 1.0)[cat].any()), f"{tag}: no emitted pixel on a catalogue cell")
+            dcat_h30 = distance_transform_edt(~cat)
+            ok(bool((dcat_h30[a == 1.0] > 2.0).all()), f"{tag}: every dot obeys B2 (>2 px from catalogue)")
+            if variant == "nan":
+                ok(int(np.isnan(outside).sum()) == outside.size == 7111787 and nd is not None and np.isnan(nd),
+                   f"{tag}: NaN outside the footprint (7,111,787 px) and nodata=NaN declared")
+            else:
+                ok(bool((outside == 0).all()) and nd is None and bool(np.isfinite(a).all()),
+                   f"{tag}: zeros outside, no NaN anywhere, no nodata tag (primary allfinite)")
+            ok(sha(p) == exp_sha, f"{tag}: sha256 matches h30_1_manifest.json")
+        z_h30 = DL / r["zip"]
+        with zipfile.ZipFile(z_h30) as zf:
+            ok(zf.namelist() == [r["primary_allfinite"]] and zf.read(r["primary_allfinite"]) == (DL / r["primary_allfinite"]).read_bytes(),
+               "h30_1: zip holds exactly the primary allfinite GeoTIFF, byte-identical")
+        note_h30 = (DL / f"note-{r['primary_allfinite'][:-4]}.txt").read_text().strip()
+        ok(0 < len(note_h30) <= 140 and note_h30 == hm["note_max_140_chars"],
+           f"h30_1: note is {len(note_h30)} chars (<= 140) and matches manifest")
 
     # Session-7 H29-1 (Lane L-S7-2026-10-25) autonomous verification (zero human intervention):
     h29_man_path = DL / "h29_candidate_manifest.json"
@@ -183,11 +222,11 @@ def main() -> int:
         ok(rc["ok_to_submit"] == (rc["verdict"] == "promote" and rc["validator"]["technical_validator_pass"]),
            f"h29/gate-consistency: verdict={rc['verdict']} ok_to_submit={rc['ok_to_submit']}")
 
-    # Session-10 H31-1 (Lane L-S10-2026-10-26) autonomous verification (zero human intervention):
-    h31_man_path = DL / "h31_candidate_manifest.json"
-    if h31_man_path.exists():
+    # Session-10 H31-1 DRCG-WL (Lane L-S10-2026-10-26) autonomous verification (zero human intervention):
+    h31_s10_man_path = DL / "h31_s10_candidate_manifest.json"
+    if h31_s10_man_path.exists():
         from gems27.readiness import publication_decision
-        hm31 = json.loads(h31_man_path.read_text())
+        hm31 = json.loads(h31_s10_man_path.read_text())
         h31_dir = ROOT / hm31["directory"]
         for variant, key_fn, key_sha in (
             ("allfinite", "allfinite", "sha256_allfinite"),
@@ -198,7 +237,7 @@ def main() -> int:
                 ha = hs.read(1)
                 hprof = (hs.crs.to_epsg(), hs.shape, tuple(hs.transform)[:6], hs.dtypes[0])
                 hnd, hcount = hs.nodata, hs.count
-            htag = f"h31/{variant}"
+            htag = f"h31_s10/{variant}"
             ok(hprof == tprof, f"{htag}: same CRS/shape/transform/dtype as template (EPSG:32611, 3730x3292, float32)")
             ok(hcount == 1, f"{htag}: single band")
             h_in, h_out = ha[foot], ha[~foot]
@@ -215,20 +254,73 @@ def main() -> int:
             else:
                 ok(int(np.isnan(h_out).sum()) == h_out.size and hnd is not None and np.isnan(hnd),
                    f"{htag}: NaN outside footprint and nodata=NaN declared")
-            ok(sha(hp) == hm31[key_sha], f"{htag}: sha256 matches h31_candidate_manifest.json")
+            ok(sha(hp) == hm31[key_sha], f"{htag}: sha256 matches h31_s10_candidate_manifest.json")
         hz31 = h31_dir / hm31["zip_allfinite"]
         with zipfile.ZipFile(hz31) as zf:
             ok(zf.namelist() == [hm31["allfinite"]] and zf.read(hm31["allfinite"]) == (h31_dir / hm31["allfinite"]).read_bytes(),
-               "h31/zip: holds exactly the single allfinite GeoTIFF, byte-identical")
-        ok(sha(hz31) == hm31["sha256_zip_allfinite"], "h31/zip: sha256 matches h31_candidate_manifest.json")
+               "h31_s10/zip: holds exactly the single allfinite GeoTIFF, byte-identical")
+        ok(sha(hz31) == hm31["sha256_zip_allfinite"], "h31_s10/zip: sha256 matches h31_s10_candidate_manifest.json")
         hnote31 = (h31_dir / hm31["note_file"]).read_text().strip()
-        ok(0 < len(hnote31) <= 140 and hnote31 == hm31["note"], f"h31/note: {len(hnote31)} chars (<= 140) and matches manifest")
-        rc31 = json.loads((ROOT / hm31["run_card"]).read_text())
-        dec31 = publication_decision(rc31, ROOT)
-        ok(rc31["uniqueness_vs_registry"]["pass"] and rc31["uniqueness_vs_registry"]["max_dot_overlap_within_3px_euclidean"] <= 0.70,
-           "h31/uniqueness: <= 70% 3px dot overlap & <= 0.90 Spearman vs all peers & scored GEMSDOE27 rasters")
+        ok(0 < len(hnote31) <= 140 and hnote31 == hm31["note"], f"h31_s10/note: {len(hnote31)} chars (<= 140) and matches manifest")
+        rc31_s10 = json.loads((ROOT / hm31["run_card"]).read_text())
+        dec31 = publication_decision(rc31_s10, ROOT)
+        ok(rc31_s10["uniqueness_vs_registry"]["pass"] and rc31_s10["uniqueness_vs_registry"]["max_dot_overlap_within_3px_euclidean"] <= 0.70,
+           "h31_s10/uniqueness: <= 70% 3px dot overlap & <= 0.90 Spearman vs all peers & scored GEMSDOE27 rasters")
         ok(dec31["ok_to_publish_as_submission"] == hm31["ok_to_submit"],
-           f"h31/readiness-gate: publication_decision={dec31['ok_to_publish_as_submission']} reasons={dec31['reasons']}")
+           f"h31_s10/readiness-gate: publication_decision={dec31['ok_to_publish_as_submission']} reasons={dec31['reasons']}")
+
+    # Session-10 H31 rank-ensemble (2026-10-26) autonomous verification:
+    h31_card_path = ROOT / "evidence" / "h31_run_card.json"
+    if h31_card_path.exists():
+        rc31 = json.loads(h31_card_path.read_text())
+        r31 = rc31["raster"]
+        d31 = ROOT / r31["directory"]
+        for variant, fname in (("allfinite", r31["primary_allfinite"]),
+                               ("nan", r31["nan_twin"])):
+            p31 = d31 / fname
+            with rasterio.open(p31) as s31:
+                a31 = s31.read(1)
+                prof31 = (s31.crs.to_epsg(), s31.shape, tuple(s31.transform)[:6],
+                          s31.dtypes[0])
+                nd31, cnt31 = s31.nodata, s31.count
+            t31 = f"h31/{variant}"
+            ok(prof31 == tprof, f"{t31}: same CRS/shape/transform/dtype as template")
+            ok(cnt31 == 1, f"{t31}: single band")
+            in31, out31 = a31[foot], a31[~foot]
+            ok(bool(np.isfinite(in31).all()), f"{t31}: every in-footprint value finite")
+            ok(float(in31.min()) >= 0.0 and float(in31.max()) <= 1.0,
+               f"{t31}: in-footprint range in [0,1]")
+            ok(set(np.unique(in31).tolist()) <= {0.0, 1.0}, f"{t31}: exact binary")
+            ok(int((in31 == 1.0).sum()) == r31["dots"], f"{t31}: emitted {r31['dots']} dots")
+            ok(not bool((a31 == 1.0)[cat].any()), f"{t31}: 0 catalogue overlap")
+            ok(bool((distance_transform_edt(~cat)[a31 == 1.0] > 2.0).all()),
+               f"{t31}: strict B2 collar > 2.0 px")
+            if variant == "allfinite":
+                ok(bool(np.isfinite(a31).all() and (out31 == 0.0).all() and nd31 is None),
+                   f"{t31}: all cells finite in [0,1], zeros outside, nodata=None")
+                ok(sha(p31) == r31["sha256"], f"{t31}: sha256 matches h31 run card")
+            else:
+                ok(int(np.isnan(out31).sum()) == out31.size and nd31 is not None
+                   and np.isnan(nd31), f"{t31}: NaN outside footprint, nodata=NaN")
+        z31 = d31 / r31["zip"]
+        with zipfile.ZipFile(z31) as zf:
+            ok(zf.namelist() == [r31["primary_allfinite"]]
+               and zf.read(r31["primary_allfinite"])
+               == (d31 / r31["primary_allfinite"]).read_bytes(),
+               "h31/zip: holds exactly the single allfinite GeoTIFF, byte-identical")
+        stem31 = r31["primary_allfinite"][:-len("-allfinite.tif")]
+        note31 = (d31 / f"note-{stem31}-allfinite.txt").read_text().strip()
+        ok(len(note31) <= 140 and note31 == rc31["note_max_140_chars"],
+           f"h31/note: {len(note31)} chars (<= 140) and matches run card")
+        u31 = rc31["uniqueness_vs_registry"]
+        ok(u31["pass"] and u31["max_dot_overlap_within_3px_euclidean"] <= 0.70
+           and u31["max_surface_spearman"] <= 0.90,
+           "h31/uniqueness: <= 70% 3px overlap & <= 0.90 Spearman (13-raster screen)")
+        ok(rc31["ok_to_submit"] == (rc31["verdict"] == "promote"
+                                    and rc31["validator"]["zeros_hard_pass"]
+                                    and rc31["holdout"]["gate_efficacy_pass"]),
+           f"h31/gate-consistency: verdict={rc31['verdict']} "
+           f"ok_to_submit={rc31['ok_to_submit']}")
 
     print(f"\n{len(FAIL)} failure(s)")
     return 1 if FAIL else 0

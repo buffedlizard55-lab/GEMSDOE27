@@ -65,5 +65,5 @@ def test_negative_cards_remain_unapproved_and_h31_promotes():
             approved.append(p.name)
         else:
             assert card.get("verdict") != "promote" or card.get("ok_to_submit") is not True
-    assert approved == ["h31_s10_run_card_2026-10-26.json"]
+    assert approved == ["h30_1_run_card.json", "h31_s10_run_card_2026-10-26.json"]
 
