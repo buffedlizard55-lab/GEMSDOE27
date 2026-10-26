@@ -14,7 +14,7 @@
 | Copyable note (118/140 chars) | `27GEMSDOE H31-1 \| dualRegime MSub+MFull+WLseis+obliq+CELF2.8 B2 37654px \| id cf8e1bbef244 \| unscored validated-promote` |
 | SHA-256 (recomputed Session 11) | `2c002b02792419864bd3b29a218e543cb41e3f07b3b57c29ef35c6e39e184bfe` |
 | Why is it OK? | All-finite {0.0, 1.0}, EPSG:32611, 3730×3292, 37,654 dots, 0 on catalogue, min catalogue distance 2.24 px (B2) — validator hard-PASS (this format cannot trigger *"Predicted values must be in range [0, 1]"*); frozen holdout gate 5/5 PASS (Session 10, seeds 400–409); unique (below) |
-| **Estimated live score (PROJECTION, not a score)** | **0.23–0.30**, central ≈ **0.27** (methods in §4). Unscored until submitted |
+| **Estimated live score (PROJECTION, not a score)** | **~0.235 anchor-transfer** (planning range across methods **0.19–0.30**; §4). Two parallel Session-11 lanes independently computed 0.2348. Honest reading: likely **below** 0.2778. Unscored until submitted |
 | **Unique vs all 9 focus sites?** | **YES** — max directed 3-px dot overlap vs the 12 pinned peer rasters = **57.7 %** (50.2 % vs GEMSDOE32's 0.2778 file), ≤ 70 % threshold; max surface Spearman 0.165 ≤ 0.90 (both recomputed Session 11 from fetched peer bytes) |
 | Has it been submitted before? | No record of submission/score in `registry/live_scores.json` (status: unscored validated-promote) |
 | New file generated THIS session | `docs/downloads/research/gems27-h32-poisson-demag-b2-20261026-1ac69a77008d-allfinite.tif` — **⛔ DO NOT SUBMIT** (failed its frozen holdout gate, §5). It is unique vs peers (46.4 %) and format-valid, but efficacy-negative |
@@ -56,7 +56,7 @@ Session 11 re-derived the entire ladder from fetched peer rasters + the hash-pin
 
 ## 3. Can we generate something scoring higher than 0.2778?
 
-Honest answer: **possibly, not established.** H31-1's projections (§4) span 0.23–0.30; the upper end exceeds 0.2778, the conservative single-anchor ratio (0.235) does not. Catalogue-internal HOLDOUT-DTI cannot settle this — H29-S already proved holdout rank ≠ live rank calibration (holdout-best surface, live 0.2190). The only measurement is one DrivenData slot. Claims of beating the owner's stated external highs (0.3195 in one prompt snapshot; 0.4413 in another — **irregularity: the two prompt values conflict and neither has a receipt here**) are not supported by any evidence in this repo.
+Honest answer: **not established, and the best-anchored estimate says no.** H31-1's projections (§4) span 0.19–0.30 across methods; only the 6.5×-concentration sensitivity end (GEMSDOE32-level concentration, not demonstrated live by this detector family) exceeds 0.2778, while the anchor-transfer estimate both Session-11 lanes computed independently is 0.2348. Catalogue-internal HOLDOUT-DTI cannot settle this — H29-S already proved holdout rank ≠ live rank calibration (holdout-best surface, live 0.2190). The only measurement is one DrivenData slot. Claims of beating the owner's stated external highs (0.3195 in one prompt snapshot; 0.4413 in another — **irregularity: the two prompt values conflict and neither has a receipt here**) are not supported by any evidence in this repo.
 
 ## 4. How the estimated scores were computed (PROJECTION — verify me)
 
@@ -114,3 +114,9 @@ Interpretation (labelled as interpretation): catalogue faults are predominantly 
 ```
 
 **Selector note (protocol §6):** this session does not spend a weekly slot. The pre-existing machine-approved H31-1 file (§0) is presented for the owner's separate selector decision; H32 must not be submitted.
+
+---
+
+## Post-merge addendum (parallel Session-11 lanes, PRs #31/#32 merged to main first)
+
+Two parallel sessions from the same prompt merged before this lane: PR #31 (`knowledge/26_session11_review_and_score_estimate_2026-10-26.md`, audited estimate **~0.235 PROJECTION, planning range 0.19–0.26**) and PR #32 (`EXECUTIVE_SUMMARY.md`). Conclusions converge with this lane on every material point: H31-1 `cf8e1bbef244` is the one approved unique download; its anchor-transfer projection is **0.2348** (computed independently by both lanes: 0.2190 × 0.047302/0.044116); honest reading is likely below 0.2778. Knowledge-file number 26 now covers two different files from the parallel lanes (this lane's H32 preregistration vs PR #31's review) — cite by full filename. Neither parallel lane generated a new TIFF, so this lane's H32 uniqueness screen is unaffected; H32 was additionally cross-checked here against H31-1 (directed 3-px overlap 52.9 % H32→H31, 50.1 % H31→H32 — not duplicates; `evidence/session11_reaudit.json`).

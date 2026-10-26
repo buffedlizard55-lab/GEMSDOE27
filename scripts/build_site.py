@@ -766,7 +766,7 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
             f'(5.8&times;) / {proj["conc_6.5x"]:.3f} (6.5&times;) with |G|=12,226 and &rho;=1.38 assumed; '
             f'single-anchor holdout-ratio projection {ratio["H31_ratio_projection"]:.3f} '
             f'(H29-S live 0.2190 OWNER-REPORTED / holdout {ratio["H29S_holdout_in_H31_experiment_seeds400_409"]}). '
-            f'No projection is an organizer score; only a DrivenData submission measures it. Full tables: '
+            f'Best-anchored reading (anchor-transfer, both Session-11 lanes): likely below 0.2778. No projection is an organizer score; only a DrivenData submission measures it. Full tables: '
             f'<code>knowledge/27</code> in the repository; machine receipts in '
             f'<code>evidence/session11_reaudit.json</code> and <code>evidence/h32_e2_holdout_500_509.json</code>.</p></div>'
         )
@@ -1004,6 +1004,18 @@ The agent never uploads anything; you press the button.</div>
 <tr><td>How to upload to DrivenData #306</td><td>Open the dedicated subpage <a href="how-to-submit.html"><b>How to Submit to DrivenData #306 (`how-to-submit.html`)</b></a> for exact pre-flight checks, portal upload steps, 5/week slot rules, and score logging.</td></tr>
 <tr><td>Is 0.3195 / 0.4413 reachable?</td><td>Rearranging H19-5 ceilings at &asymp;0.278 (achieved by <code>GEMSDOE32</code> B2). Exceeding 0.3195 requires raising off-catalogue recall/concentration via dual-regime corroborated subsurface + morphotectonic detection + axial-crest 300&nbsp;m CELF cover (<a href="research.html#h31-1">Session 10 H31-1 details</a>). Unverified <code>0.4413</code> vs <code>0.3195</code> discrepancy is flagged in <code>sources.html#irregularities</code>.</td></tr></table></div>
 
+<div class="card"><h2 style="margin-top:0">Estimated live score — PROJECTION, never a score (Protocol &sect;3)</h2>
+<table><tr><th>File to download</th><th>Label</th><th class="num">Score / estimate</th><th>Unique vs 9 focus sites?</th><th>Action</th></tr>
+<tr><td><code>docs/downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif</code></td><td>PROJECTION (anchor-transfer model)</td><td class="num"><b>~0.235</b> (planning range 0.19&ndash;0.26)</td><td><b>YES</b> — max 57.7% 3-px overlap vs 12 peers (50.2% vs GEMSDOE32), Spearman &le;0.17</td><td><b>DOWNLOAD &amp; SUBMIT THIS ONE</b></td></tr>
+<tr><td>GEMSDOE32 <code>h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros</code></td><td>OWNER-REPORTED live</td><td class="num">0.2778</td><td>NO — already submitted; re-upload is a duplicate</td><td>DO NOT SUBMIT</td></tr>
+<tr><td>GEMSDOE36 Anderson-PINN 38854</td><td>OWNER-REPORTED live</td><td class="num">0.2750</td><td>NO — already submitted</td><td>DO NOT SUBMIT</td></tr>
+<tr><td>GEMSDOE28 rung30 / GEMSDOE31 h27-4-solo</td><td>OWNER-REPORTED live</td><td class="num">0.2710 / 0.2708</td><td>NO — already submitted, 91&ndash;100% clone family</td><td>DO NOT SUBMIT</td></tr>
+<tr><td>GEMSDOE25 d2.8 / GEMSDOE30 d28-poisson</td><td>OWNER-REPORTED live</td><td class="num">0.2600 / 0.2600</td><td>NO — already submitted</td><td>DO NOT SUBMIT</td></tr>
+<tr><td>GEMSDOE24 h25-1 d1.5 / GEMSDOE27 Slot-1 T-v2</td><td>OWNER-REPORTED live</td><td class="num">0.2477 / 0.2449</td><td>NO — already submitted</td><td>DO NOT SUBMIT</td></tr>
+<tr><td>GEMSDOE33 h33d analog-tip</td><td>OWNER-REPORTED live</td><td class="num">0.2632</td><td>NO — already submitted</td><td>DO NOT SUBMIT</td></tr>
+<tr><td>GEMSDOE27 H29-S <code>511898747886</code></td><td>OWNER-REPORTED live (anchor)</td><td class="num">0.2190</td><td>NO — already submitted</td><td>DO NOT SUBMIT</td></tr></table>
+<p class="small"><b>How the ~0.235 projection is derived (auditable, not a receipt):</b> anchor H29-S HOLDOUT-DTI 0.044116 (seeds 400&ndash;409, 120,778 withheld positives) &rarr; OWNER-REPORTED live 0.2190. H31-S HOLDOUT-DTI 0.047302 is +7.22% relative; linear anchor transfer gives 0.2190 &times; 0.047302/0.044116 = <b>0.2348</b>. The 0.19&ndash;0.26 planning range reflects catalogue-internal&rarr;hidden-test transfer error observed for H29-S-class detectors; it is <b>not</b> a confidence interval and <b>not</b> a claim to beat 0.2778. Honest reading: H31-1 is this repo's best <i>validated unique</i> candidate, with expected live score most likely <i>below</i> the already-exhausted 0.2778 clone — beating 0.2778/0.3195 requires a new detector generation (see knowledge/26), not a re-thin. Only an organizer receipt converts this projection into a score.</p></div>
+
 <h2>Historical Negative &amp; Prior Session Archive (Do Not Submit)</h2>
 {h30_box}
 {h29_hero_exec}
@@ -1019,7 +1031,7 @@ The agent never uploads anything; you press the button.</div>
 
 <h2>Submission-format rule enforced by machine validator</h2>
 <div class="card">
-<p>To prevent DrivenData's <code>&ldquo;Predicted values must be in range [0, 1]&rdquo;</code> portal error, <code>gems27.submission.verify_geotiff</code> and <code>scripts/verify_downloads.py</code> enforce on every approved file: single-band <code>float32</code> GeoTIFF on <code>EPSG:32611</code>, shape <code>3730&times;3292</code>, transform <code>(100.0, 0.0, 323344.2347, 0.0, -100.0, 4565845.3247)</code>; all <code>12,279,160</code> cells finite in <code>[0.0, 1.0]</code> with <code>0.0</code> outside footprint and <code>nodata=None</code>; <code>0</code> catalogue overlap (<code>B2 &gt; 200 m</code>); single-member ZIP; and &le;140-character note.</p>
+<p>To prevent DrivenData's <code>&ldquo;Predicted values must be in range [0, 1]&rdquo;</code> portal error, <code>gems27.submission.verify_geotiff</code> and <code>scripts/verify_downloads.py</code> enforce on every approved file: single-band <code>float32</code> GeoTIFF on <code>EPSG:32611</code>, shape <code>3730&times;3292</code>, transform <code>(100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)</code>; all <code>12,279,160</code> cells finite in <code>[0.0, 1.0]</code> with <code>0.0</code> outside footprint and <code>nodata=None</code>; <code>0</code> catalogue overlap (<code>B2 &gt; 200 m</code>); single-member ZIP; and &le;140-character note.</p>
 </div>
 
 <h2>Historical weekly-slot decision tree — archived and suspended</h2>
@@ -1082,7 +1094,7 @@ The agent never uploads anything; you press the button.</div>
  <ul class="tight">
   <li><b>Root cause 1 (NaN outside footprint):</b> <code>sample_submission.tif</code> contains <code>7,111,787</code> <code>NaN</code> pixels outside the irregular <code>5,167,373</code>-pixel study footprint. Under IEEE-754 floating-point semantics, a strict validator evaluating <code>((arr &gt;= 0.0) &amp; (arr &lt;= 1.0)).all()</code> returns <code>False</code> if <i>any</i> <code>NaN</code> exists anywhere in the <code>3730&times;3292</code> array. Official reference notebook Cell 19 (<code>drivendataorg/gems-prize-reference-solution</code>) initializes <code>y_out = np.zeros(...)</code> with <code>nodata=None</code>.</li>
   <li><b>Root cause 2 (Float32 sentinel bleed):</b> raw <code>training_features.tif</code> stores <code>-3.4028235e+38</code> sentinels on <code>3,061</code> cells <i>inside</i> the valid footprint; unclipped linear or sigmoid pipelines propagate out-of-range values.</li>
-  <li><b>Automated machine guarantee on <code>{e(h31_tif_name)}</code>:</b> single-band <code>float32</code>, <code>EPSG:32611</code>, shape <code>(3730, 3292)</code>, transform <code>(100.0, 0.0, 323344.2347, 0.0, -100.0, 4565845.3247)</code>, <code>nodata=None</code>, <code>0</code> NaNs and <code>0</code> Infs across all <code>12,279,160</code> pixels, and value set strictly <code>{{0.0, 1.0}}</code> (<a href="downloads/{e(h31_man['checks_allfinite']) if h31_man else ''}">machine validator JSON receipt</a>).</li>
+  <li><b>Automated machine guarantee on <code>{e(h31_tif_name)}</code>:</b> single-band <code>float32</code>, <code>EPSG:32611</code>, shape <code>(3730, 3292)</code>, transform <code>(100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)</code>, <code>nodata=None</code>, <code>0</code> NaNs and <code>0</code> Infs across all <code>12,279,160</code> pixels, and value set strictly <code>{{0.0, 1.0}}</code> (<a href="downloads/{e(h31_man['checks_allfinite']) if h31_man else ''}">machine validator JSON receipt</a>).</li>
  </ul>
 </div>
 <p class="small">Back to <a href="executive-summary.html">Executive summary</a> &middot; <a href="index.html">Submit status</a> &middot; <a href="{REPO_URL}/blob/main/AI_DISCLOSURE.md">AI Disclosure (Official Rules compliance)</a>.</p>

@@ -338,7 +338,7 @@
    "used_for": "Verification of competition raster projection parameters (WGS 84 / UTM zone 11N, central meridian 117W, scale factor 0.9996, false easting 500,000 m, metric 100 m pixel units).",
    "status": "read first-hand 2026-10-25",
    "accessed": "2026-10-25",
-   "evidence": "Matches sample_submission.tif CRS EPSG:32611 and transform (100.0, 0.0, 323344.2347, 0.0, -100.0, 4565845.3247).",
+   "evidence": "Matches competition-grid CRS EPSG:32611; NOTE Session-11 correction: the GEMS grid transform verified on every shipped raster is (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0) per src/gems27/grid.py — an earlier 323344.2347/4565845.3247 string was an erroneous transcription, flagged IR-2026-10-26-05.",
    "feed": false
   },
   {
