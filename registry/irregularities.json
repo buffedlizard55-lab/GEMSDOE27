@@ -360,6 +360,12 @@
    "severity": "medium",
    "issue": "scripts/run_h29_holdout.py get_or_build_subsurface15 passed a stale 10-band tuple to gems27.subsurface_features.build_transforms, which requires all 16 SUBSURFACE_BANDS; any cache-miss run raised ValueError (missing mag_anom, tmi, iso_grav_anom_hg/vg/slope, geod_shearrate). Session 7 never exercised the branch (lane cache always present), so the frozen H29 results are unaffected, but the shared runner was not reproducible from a clean data_cache.",
    "action": "Fixed once in the shared runner (needed = tuple(sub.SUBSURFACE_BANDS), matching every other runner; formulas unchanged) and reported in knowledge/25 section 5 per PARALLEL-RUN PROTOCOL section 2. Failed first-attempt log preserved at evidence/h31_holdout_run_attempt1_failed.log."
+  },
+  {
+   "id": "IR-2026-10-26-05-parallel-session10-lanes-collision",
+   "severity": "medium",
+   "issue": "Two parallel Session-10 (2026-10-26) lanes from the same prompt produced separate executive summaries and unique TIFFs: PR #27 (knowledge/24_focus_sites_executive_summary_20261026.md, knowledge/25_hypothesis_screen_20261026.md, gems27-unique-20261026-6c2790d67dc6 far-field probe in docs/downloads/, verdict negative) merged before PR #28 (knowledge/24_focus_sites_executive_summary_2026-10-26.md, knowledge/25_h31_result_2026-10-26.md, H31 93c8af046660 in docs/downloads/research/, verdict negative). Knowledge numbers 24 and 25 now each cover two distinct files. The PR #27 lane's run card reports n_withheld_positives_total=0 (far-field probe not holdout-gated); the H31 lane consumed seeds 260-269. Cross-screen measured post-merge: 5.69%/10.16% directed 3px overlaps - not duplicates (evidence/h31_cross_session_overlap.json).",
+   "action": "Both evidence sets preserved on merge; site regenerated from merged JSON; merged readiness audit approves nothing. Cite knowledge files by full filename. Selector should pre-assign lane numbers/filenames/seed blocks to parallel sessions (repeat of IR-2026-10-25-16 pattern)."
   }
  ]
 }
