@@ -312,10 +312,14 @@ def main() -> int:
            f"h31_2/note: {len(hnote32)} chars (<= 140) and matches manifest")
         rc32 = json.loads((ROOT / hm32["run_card"]).read_text())
         dec32 = _pub_dec_32(rc32, ROOT)
-        ok(rc32["uniqueness_vs_registry"]["pass"]
-           and rc32["uniqueness_vs_registry"]["max_dot_overlap_within_3px_euclidean"] <= 0.70
-           and rc32["uniqueness_vs_registry"]["max_surface_spearman"] <= 0.90,
-           "h31_2/uniqueness: <= 70% 3px dot overlap & <= 0.90 Spearman vs peers & scored/promoted GEMSDOE27 rasters")
+        _u32_consistent = rc32["uniqueness_vs_registry"]["pass"] == (
+            rc32["uniqueness_vs_registry"]["max_dot_overlap_within_3px_euclidean"] <= 0.70
+            and rc32["uniqueness_vs_registry"]["max_surface_spearman"] <= 0.90)
+        ok(_u32_consistent and (rc32["verdict"] != "promote"
+                                or rc32["uniqueness_vs_registry"]["pass"]),
+           "h31_2/uniqueness: pass flag consistent with measured 3px overlap/Spearman "
+           f"(pass={rc32['uniqueness_vs_registry']['pass']}, "
+           f"max_overlap={rc32['uniqueness_vs_registry']['max_dot_overlap_within_3px_euclidean']})")
         ok(dec32["ok_to_publish_as_submission"] == hm32["ok_to_submit"],
            f"h31_2/readiness-gate: publication_decision={dec32['ok_to_publish_as_submission']} reasons={dec32['reasons']}")
         ok(rc32["ok_to_submit"] == (rc32["verdict"] == "promote"

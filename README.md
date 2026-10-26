@@ -1,5 +1,12 @@
 # 27GEMSDOE - geothermal & structural fault discovery lab for DrivenData #306 (DOE GEMS)
 
+## Session 11 addendum (`2026-10-26`, Lane `L-S11-2026-10-26` / `H31-2` — NEGATIVE; download unchanged)
+**The one-click download below (Session 10 `H31-1`, `cf8e1bbef244`) remains the only OK-TO-SUBMIT file.** This session re-read the verbatim prompt in this README, ranked 5 untried geological hypotheses, preregistered the top one (**H31-2**, Poisson-relation gravity→pseudogravity **demagnetization-residual** stacker; `knowledge/26`, committed before any seed ran) and tested it on fresh seeds `410–419`:
+- **⛔ H31-2 NEGATIVE (no tuning):** buffered pooled `HOLDOUT-DTI` DEMAG **`0.040469`** vs H31S control **`0.043994`** (paired **`−0.003547`**, 95% CI `[−0.004721, −0.002433]`, **0/10 seeds**) and vs no-demag stacker STK0 **`0.042847`** (`−0.002391`, CI `[−0.004221, −0.000722]`); 119,130 withheld positive occurrences, leakage canary max AUC `0.5304` (clean). Damage concentrates in SE Walker Lane (`−0.0123`), consistent with the named mimic (reversely magnetised tuffs / deep-basin depth decay). Its format-valid TIF also fails uniqueness vs its H31-1 parent (**71.8%** of dots within 3 px > 70% limit) → `docs/downloads/research/` only (`evidence/h31_2_run_card.json`, synthesis `knowledge/27`). Structural lesson: incremental stackers on a promoted file's OOF surfaces cannot yield a protocol-unique submission.
+- **MODEL estimated live score (new, explicit — a projection, not a score):** within-family anchoring to H29-S live `0.2190` OWNER-REPORTED gives H31-1 a **MODEL central ≈ `0.2348`**, interval `[0.2190, 0.2372]` (`scripts/model_live_estimates.py` → `evidence/model_live_estimates_2026-10-26.json`). Beating `0.2778` at the same 37,654-dot budget needs `1.26×` the weighted credit H29-S achieved; H31-1's same-instrument holdout ratio is `1.07×`, so it is the best unique unscored file but **MODEL-unlikely to exceed 0.2778**. Seeds `410–419` consumed; H31-3 (seeds ≥420) is the next untried lane. 142 tests pass; `verify_downloads.py` 0 failures.
+
+---
+
 ## Session 10 Automated Gate Verdict (`2026-10-26`, Lane `L-S10-2026-10-26` / `H31-1` — READ FIRST)
 **✅ OK TO DOWNLOAD AND SUBMIT — ALL AUTOMATED MACHINE VALIDATION GATES PASSED (ZERO HUMAN INTERVENTION).**
 - **Approved Unique Submission File (`[0, 1]` all-finite GeoTIFF):** `docs/downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif` (`825,820` B, SHA-256 `2c002b02792419864bd3b29a218e543cb41e3f07b3b57c29ef35c6e39e184bfe`)

@@ -37,8 +37,28 @@
       "anchor_holdout_buffered": 0.044116,
       "candidate_holdout_buffered": 0.047302,
       "candidate_holdout_label": "HOLDOUT-DTI (gems27.metric v1 + holdout-blind-buffered-v2 (alpha=0.2, beta=0.8, R=3px triangular, buffer_px=6.0); 120778 withheld positive occurrences)"
+    },
+    {
+      "file_label": "H31-2 DEMAG candidate (UNSCORED; file name in evidence/h31_2_run_card.json)",
+      "label": "MODEL (projection from stated formula; NOT a leaderboard score)",
+      "anchor_live_owner_reported": 0.219,
+      "holdout_buffered_ratio_vs_anchor_arm": 0.98631,
+      "holdout_unbuffered_ratio_vs_anchor_arm": 1.0286,
+      "model_no_transfer": 0.219,
+      "model_proportional_central": 0.216,
+      "model_interval": [
+        0.219,
+        0.2253
+      ],
+      "model_algebra_crosscheck_tpw_scaled": 0.216,
+      "formula": "central = anchor_live * (pooled buffered HOLDOUT-DTI ratio, same seeds/instrument)",
+      "anchor_arm": "chained: H29-S (400-409) x H31S-arm (410-419); extra uncertainty",
+      "anchor_holdout_buffered": 0.044116,
+      "candidate_holdout_buffered": 0.040469,
+      "candidate_holdout_label": "HOLDOUT-DTI (gems27.metric v1 + holdout-blind-buffered-v2 (alpha=0.2, beta=0.8, R=3px triangular, buffer_px=6.0); 119130 withheld positive occurrences)",
+      "gate_e2_pass": false
     }
   ],
-  "chaining_note": null,
+  "chaining_note": "H31-2 row chains two same-instrument ratios across disjoint seed sets; treat its interval as optimistic-narrow and its no-transfer bound (0.2190) as the floor.",
   "validation_of_method": "The inversion constants reproduce the focus-site autopsy (evidence/focus_sites_executive_summary_20261026.json: H29-S credit fraction 0.305). The proportional-transfer assumption itself is unvalidated on live data (only one family member, H29-S, has both a same-instrument holdout and a live score); that is why the no-transfer bound is always reported alongside the central value."
 }

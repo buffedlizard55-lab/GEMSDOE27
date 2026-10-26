@@ -828,6 +828,107 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
 <div class="tw"><table><thead><tr><th>Reference Raster</th><th>SHA-256</th><th class="num">3-px Overlap</th><th class="num">Spearman</th><th>Verdict</th></tr></thead><tbody>{peer31_rows}</tbody></table></div></details>
 """
 
+    # ---- Session 11 (Lane L-S11-2026-10-26 / H31-2 DEMAG + MODEL estimates; JSON-only) ----
+    model_est_path = EV / "model_live_estimates_2026-10-26.json"
+    model_est = J(model_est_path) if model_est_path.exists() else None
+    h31_2_rc_path = EV / "h31_2_run_card.json"
+    h31_2_rc = J(h31_2_rc_path) if h31_2_rc_path.exists() else None
+    model_decision_section = ""
+    h31_2_research_section = ""
+    if model_est:
+        est_rows = ""
+        for r in model_est["estimates"]:
+            gate = r.get("gate_e2_pass", True)
+            action = ("<b>DOWNLOAD &amp; SUBMIT (unscored)</b>" if gate and "cf8e1bbef244" in r["file_label"]
+                      else "&#9940; DO NOT SUBMIT &mdash; frozen gate FAILED (research only)")
+            est_rows += (
+                f"<tr><td><code>{e(r['file_label'])}</code></td>"
+                f"<td class='num'><b>{r['model_proportional_central']:.4f}</b><br>"
+                f"<span class='small'>interval [{r['model_interval'][0]:.4f}, {r['model_interval'][1]:.4f}]; "
+                f"algebra cross-check {r['model_algebra_crosscheck_tpw_scaled']:.4f}</span></td>"
+                f"<td class='num'>{r['candidate_holdout_buffered']:.6f}<br>"
+                f"<span class='small'>vs anchor {r['anchor_holdout_buffered']:.6f} "
+                f"(ratio {r['holdout_buffered_ratio_vs_anchor_arm']:.3f})</span></td>"
+                f"<td>{action}</td></tr>"
+            )
+        bc = model_est["beat_champion_arithmetic"]
+        h312_line = ""
+        if h31_2_rc:
+            h2 = h31_2_rc["holdout"]
+            u2 = h31_2_rc["uniqueness_vs_registry"]
+            h312_line = (
+                f"<p><b>Session 11 H31-2 demagnetization experiment (seeds 410&ndash;419, preregistered in "
+                f"<a href='{REPO_URL}/blob/main/knowledge/26_preregistration_H31-2_2026-10-26.md'>knowledge/26</a>): "
+                f"&#9940; NEGATIVE.</b> HOLDOUT-DTI DEMAG {h2['pooled_dti_DEMAG_candidate']:.6f} "
+                f"(95% CI [{h2['pooled_dti_DEMAG_ci95'][0]:.6f}, {h2['pooled_dti_DEMAG_ci95'][1]:.6f}]) vs H31S "
+                f"{h2['pooled_dti_H31S_control']:.6f} (paired {h2['paired_candidate_minus_B']['mean_delta']:+.6f}, "
+                f"CI [{h2['paired_candidate_minus_B']['ci95'][0]:+.6f}, {h2['paired_candidate_minus_B']['ci95'][1]:+.6f}], "
+                f"{h2['paired_candidate_minus_B']['positive_seeds']}/10 seeds) and vs no-demag stacker STK0 "
+                f"{h2['pooled_dti_STK0_control']:.6f}; {h2['n_withheld_positives_total']:,} withheld positive occurrences, "
+                f"{e(h2['evaluator'])}. The demagnetization signature also produced a protocol duplicate of its parent "
+                f"({u2['max_dot_overlap_within_3px_euclidean']:.1%} of dots within 3 px of H31-1 &gt; 70% limit). "
+                f"Its TIF is research-only; H31-1 remains the download. Synthesis: "
+                f"<a href='{REPO_URL}/blob/main/knowledge/27_h31_2_results_2026-10-26.md'>knowledge/27</a>.</p>"
+            )
+        model_decision_section = f"""
+<div class="card" id="model-estimates" style="border-left:4px solid #2563eb">
+ <h2 style="margin-top:0">Download decision &amp; estimated score (MODEL &mdash; not a leaderboard score)</h2>
+ <p>The unscored file has no organizer score and none is claimed. The table gives a <b>MODEL</b> projection
+ computed by one stated formula (within-family anchoring to H29-S live 0.2190 OWNER-REPORTED at the same
+ 37,654-dot operating point; <a href="{REPO_URL}/blob/main/evidence/model_live_estimates_2026-10-26.json">evidence/model_live_estimates_2026-10-26.json</a>).
+ Cross-family anchoring is not used because H29-S was holdout-best in its session yet scored 0.2190 live
+ against the H19-5 family's 0.2778.</p>
+ <div class="tw"><table>
+  <thead><tr><th>File</th><th class="num">MODEL estimated live DTI (projection)</th><th class="num">HOLDOUT-DTI (buffered pooled)</th><th>Action</th></tr></thead>
+  <tbody>{est_rows}</tbody>
+ </table></div>
+ <p class="small"><b>Can it beat 0.2778?</b> At the same 37,654-dot budget, 0.2778 requires implied weighted
+ credit {bc['required_tpw_for_0p2778_same_N']:.0f} px ({bc['required_credit_fraction_for_0p2778']:.1%} of |G|),
+ i.e. {bc['required_tpw_ratio_vs_h29s']:.2f}&times; the credit H29-S achieved live. H31-1's same-instrument
+ HOLDOUT-DTI ratio vs H29-S is only ~1.07&times;, so the MODEL verdict is: <b>best unique unscored file, but
+ MODEL-unlikely to exceed 0.2778</b> (central &asymp;0.235). Exceeding 0.2778 needs genuinely new ranking
+ information worth roughly +26% more weighted recall, plus a live measurement.</p>
+ {h312_line}
+</div>"""
+    if h31_2_rc:
+        h2 = h31_2_rc["holdout"]
+        u2 = h31_2_rc["uniqueness_vs_registry"]
+        r2 = h31_2_rc["raster"]
+        h31_2_research_section = f"""
+<h2 id="h31-2">Session 11 Lane L-S11-2026-10-26 (H31-2) &mdash; Poisson Demagnetization-Residual Stacker (NEGATIVE, RESEARCH ONLY)</h2>
+<div class="card" style="border-left:4px solid #b00">
+<p><span class="badge bad">&#9940; DO NOT SUBMIT &mdash; frozen holdout gate failed and dot field duplicates its H31-1 parent</span></p>
+<p><b>Hypothesis:</b> hydrothermal magnetite destruction makes some true conduits show a gravity step with
+suppressed magnetic expression (positive Poisson-relation residual), which co-located magnetic+gravity
+"corroboration" suppresses. Eight label-free residual/edge-deficit features were stacked (quadrant-OOF,
+6 px guard) on the frozen H31-1 surfaces; emission identical to H31-1. Preregistered before any seed ran:
+<a href="{REPO_URL}/blob/main/knowledge/26_preregistration_H31-2_2026-10-26.md">knowledge/26</a> &middot;
+synthesis <a href="{REPO_URL}/blob/main/knowledge/27_h31_2_results_2026-10-26.md">knowledge/27</a> &middot;
+run card <a href="{REPO_URL}/blob/main/evidence/h31_2_run_card.json">evidence/h31_2_run_card.json</a>.</p>
+<ul class="tight">
+<li><b>HOLDOUT-DTI (seeds 410&ndash;419, {h2['n_withheld_positives_total']:,} withheld positives, {e(h2['evaluator'])}):</b>
+ DEMAG {h2['pooled_dti_DEMAG_candidate']:.6f} vs H31S {h2['pooled_dti_H31S_control']:.6f}
+ (paired {h2['paired_candidate_minus_B']['mean_delta']:+.6f}, 95% CI [{h2['paired_candidate_minus_B']['ci95'][0]:+.6f},
+ {h2['paired_candidate_minus_B']['ci95'][1]:+.6f}], {h2['paired_candidate_minus_B']['positive_seeds']}/10 seeds);
+ vs no-demag stacker STK0 {h2['pooled_dti_STK0_control']:.6f}
+ (paired {h2['paired_candidate_minus_STK0']['mean_delta']:+.6f},
+ CI [{h2['paired_candidate_minus_STK0']['ci95'][0]:+.6f}, {h2['paired_candidate_minus_STK0']['ci95'][1]:+.6f}]);
+ uniform null U0 {h2['pooled_dti_U0_null']:.6f}. Leakage canary max AUC {h2['canary_max_auc']:.4f} (clean).</li>
+<li><b>Mechanism read:</b> the damage concentrates in the SE Walker Lane quadrant (fold delta
+ {h2['paired_candidate_minus_B']['per_fold_pooled_delta_dti']['SE']:+.4f} vs H31S), consistent with the named
+ mimic &mdash; reversely magnetised Tertiary tuffs and deep-basin depth decay dominate the residual there.
+ Univariate canary AUCs 0.505&ndash;0.530 show the residual adds almost no marginal ranking on withheld
+ catalogue faults.</li>
+<li><b>Uniqueness (measured):</b> {u2['max_dot_overlap_within_3px_euclidean']:.1%} of DEMAG dots within 3 px of
+ the promoted H31-1 file &gt; 70% protocol limit &mdash; an incremental stacker on the parent surfaces cannot
+ make a protocol-unique file even when it helps. Max vs 12 focus-site peers {u2['max_dot_overlap_vs_12_peers']:.1%};
+ max surface Spearman {u2['max_surface_spearman']:.3f}.</li>
+<li><b>Format:</b> machine-valid (all-finite [0,1], {r2['dots']:,} dots, content-id <code>{e(r2['content_id'])}</code>,
+ sha256 {e(r2['sha256'][:16])}&hellip;) but retained in <code>downloads/research/</code> as a negative result.</li>
+</ul>
+</div>
+"""
+
     if focus_sum and h31_rc:
         peer_ov_map = {p["id"]: p["candidate_dot_fraction_within_3px"] for p in h31_rc["uniqueness_vs_registry"]["peer_entries"]}
         site_to_peer_id = {
@@ -889,6 +990,7 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
 <p class="lead">27GEMSDOE · DrivenData #306 DOE GEMS. Machine validation runs automatically without human intervention (`gems27.readiness.publication_decision` + `scripts/verify_downloads.py`) across technical `[0, 1]` GeoTIFF bounds, 27-raster uniqueness (12 focus-site peers + 2 live-scored GEMSDOE27 + 13 in-repo research rasters), and spatially blocked 40-cell holdouts.<br>
 {top_badges}</p>
 {h31_hero_index}
+{model_decision_section}
 {focus_sites_exec_section}
 {parallel_s10_box}
 <h2>Prior Session Archive (Audit &amp; Historical Benchmarks Only &mdash; Do Not Re-Submit)</h2>
@@ -950,6 +1052,7 @@ The agent never uploads anything; you press the button.</div>
 <h1>Executive summary</h1>
 <p class="lead">Unmistakable automated machine-gate submission verdict, 9-focus-site executive comparison (`GEMSDOE24`&ndash;`GEMSDOE36`), one-click unique GeoTIFF download &amp; copyable note, and <a href="how-to-submit.html">step-by-step DrivenData #306 submission subpage</a>.</p>
 {h31_hero_exec}
+{model_decision_section}
 {focus_sites_exec_section}
 {parallel_s10_box}
 <div class="card"><h2 style="margin-top:0">Decision in one table</h2>
@@ -1135,6 +1238,7 @@ Where a network sits near threshold, individual closures matter more than in a w
     pages["research.html"] = ("Research", f"""
 <h1>Research</h1>
 <p class="lead">Session 10 H31-1 promoted results, PhD forensic autopsy of 0.2778 (`GEMSDOE32`) and 0.2190 (`H29-S`), why Slot 1 scored 0.2449, and ranked untried hypotheses.</p>
+{h31_2_research_section}
 {h31_research_section}
 <h2>H29-2 test and submission status (Session 9 Archive)</h2>
 {h29_2_box}

@@ -33,6 +33,26 @@ Format PASS alone never authorizes a slot; negative and duplicate files remain r
  <p class="small"><b>Important:</b> Prior Session-7 <code>H29-S</code> (<code>511898747886</code>) was ALREADY SUBMITTED (<code>0.2190</code> <code>OWNER-REPORTED</code>, #1 of the 2026-10-25 non-<code>H19-5</code> cohort) &mdash; do not re-upload <code>511898747886</code>. Historical negative runs (<code>H28-3</code>, <code>H30</code>, <code>H29-2</code>) remain <b>DO NOT SUBMIT H28-3 / NOT APPROVED FOR SUBMISSION</b>.</p>
 </div>
 
+<div class="card" id="model-estimates" style="border-left:4px solid #2563eb">
+ <h2 style="margin-top:0">Download decision &amp; estimated score (MODEL &mdash; not a leaderboard score)</h2>
+ <p>The unscored file has no organizer score and none is claimed. The table gives a <b>MODEL</b> projection
+ computed by one stated formula (within-family anchoring to H29-S live 0.2190 OWNER-REPORTED at the same
+ 37,654-dot operating point; <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/evidence/model_live_estimates_2026-10-26.json">evidence/model_live_estimates_2026-10-26.json</a>).
+ Cross-family anchoring is not used because H29-S was holdout-best in its session yet scored 0.2190 live
+ against the H19-5 family's 0.2778.</p>
+ <div class="tw"><table>
+  <thead><tr><th>File</th><th class="num">MODEL estimated live DTI (projection)</th><th class="num">HOLDOUT-DTI (buffered pooled)</th><th>Action</th></tr></thead>
+  <tbody><tr><td><code>gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif (H31-1, UNSCORED)</code></td><td class='num'><b>0.2348</b><br><span class='small'>interval [0.2190, 0.2372]; algebra cross-check 0.2351</span></td><td class='num'>0.047302<br><span class='small'>vs anchor 0.044116 (ratio 1.072)</span></td><td><b>DOWNLOAD &amp; SUBMIT (unscored)</b></td></tr><tr><td><code>H31-2 DEMAG candidate (UNSCORED; file name in evidence/h31_2_run_card.json)</code></td><td class='num'><b>0.2160</b><br><span class='small'>interval [0.2190, 0.2253]; algebra cross-check 0.2160</span></td><td class='num'>0.040469<br><span class='small'>vs anchor 0.044116 (ratio 0.986)</span></td><td>&#9940; DO NOT SUBMIT &mdash; frozen gate FAILED (research only)</td></tr></tbody>
+ </table></div>
+ <p class="small"><b>Can it beat 0.2778?</b> At the same 37,654-dot budget, 0.2778 requires implied weighted
+ credit 4710 px (38.5% of |G|),
+ i.e. 1.26&times; the credit H29-S achieved live. H31-1's same-instrument
+ HOLDOUT-DTI ratio vs H29-S is only ~1.07&times;, so the MODEL verdict is: <b>best unique unscored file, but
+ MODEL-unlikely to exceed 0.2778</b> (central &asymp;0.235). Exceeding 0.2778 needs genuinely new ranking
+ information worth roughly +26% more weighted recall, plus a live measurement.</p>
+ <p><b>Session 11 H31-2 demagnetization experiment (seeds 410&ndash;419, preregistered in <a href='https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/26_preregistration_H31-2_2026-10-26.md'>knowledge/26</a>): &#9940; NEGATIVE.</b> HOLDOUT-DTI DEMAG 0.040469 (95% CI [0.037621, 0.043063]) vs H31S 0.043994 (paired -0.003547, CI [-0.004721, -0.002433], 0/10 seeds) and vs no-demag stacker STK0 0.042847; 119,130 withheld positive occurrences, gems27.metric v1 + holdout-blind-buffered-v2 (alpha=0.2, beta=0.8, R=3px triangular, buffer_px=6.0). The demagnetization signature also produced a protocol duplicate of its parent (71.8% of dots within 3 px of H31-1 &gt; 70% limit). Its TIF is research-only; H31-1 remains the download. Synthesis: <a href='https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/27_h31_2_results_2026-10-26.md'>knowledge/27</a>.</p>
+</div>
+
 <div class="card" id="focus-sites">
  <h2 style="margin-top:0">Executive Summary of All 9 Focus Sites (<code>GEMSDOE24</code>&ndash;<code>GEMSDOE36</code>)</h2>
  <p>All 9 focus-site best rasters were hash-verified from local <code>data_cache/parallel_registry/</code> and sibling tarballs (<a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/evidence/focus_sites_executive_summary_20261026.json">evidence/focus_sites_executive_summary_20261026.json</a>; full PhD forensic autopsy in <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/23_focus_sites_and_02778_phd_autopsy_20261026.md">knowledge/23</a>). Every historical live score is explicitly labelled <code>OWNER-REPORTED</code> (`|G| = 12,226` blind-lattice anchor).</p>
@@ -229,5 +249,5 @@ The 59,243-dot all-finite research TIFF is format-valid and cleared the duplicat
 <li>Owner actions: submit and record the score; paste the exact portal message if rejected; paste the original task prompt into the README placeholder; optional geologist review of the 345 dossiers; optional CI download of USGS Qfaults/Siler data.</li></ul>
 <p>Full lists: <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/06_limitations_and_access.md">limitations &amp; access</a> · <a href="sources.html#irregularities">flagged irregularities</a>.</p>
 </main>
-<footer>Built 2026-10-26 03:30 UTC from <a href="https://github.com/buffedlizard55-lab/GEMSDOE27">the repository</a>. Machine-validated unique submission ready: 27GEMSDOE-H31-DRCG-WL-20261026-cf8e1bbef244 (unscored). No unverified leaderboard score is claimed on this site; historical scores shown are explicitly labelled OWNER-REPORTED. This site never contacts drivendata.org.</footer>
+<footer>Built 2026-10-26 21:07 UTC from <a href="https://github.com/buffedlizard55-lab/GEMSDOE27">the repository</a>. Machine-validated unique submission ready: 27GEMSDOE-H31-DRCG-WL-20261026-cf8e1bbef244 (unscored). No unverified leaderboard score is claimed on this site; historical scores shown are explicitly labelled OWNER-REPORTED. This site never contacts drivendata.org.</footer>
 <script src="assets/app.js"></script></body></html>
