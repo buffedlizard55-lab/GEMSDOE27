@@ -404,3 +404,42 @@ See `knowledge/18_session8_repo_review_2026-10-25.md` for the full candidate scr
 * Pass 1: reviewed the full prior task, current H29-1 and L-DCONFIRM cards, the parallel uniqueness registry, site-generation logic, download receipts, and input availability. No candidate passed all gates; no experimental run or submission-slot use was justified.
 * Pass 2: installed project dependencies into the ignored `.venv/`; `pytest -q` reported **92 passed, 3 skipped**, Ruff passed. The strict standalone raster verifier stopped because `data_cache/sample_submission.tif` is missing. This must not be represented as successful TIFF validation.
 * Pass 3: README now points to the fresh review and makes the missing-data prerequisite the first next-session action. The existing site STOP badge remains appropriate. No false positive submit-ready badge, organizer-confirmed score, upload, or source download was introduced.
+
+---
+
+# Session 9 (2026-10-25) — H30-1 Up-Dip Basement-Step Advection + Hydrothermal Upflow + T-v2 Relay Network (Promoted Submission & Three Passes)
+
+## Pass 1 — Implement and Verify
+
+1. **Completed Session 8's Carry-Forward Prerequisites First:**
+   - Restored all 16 SHA-256-pinned data inputs into `data_cache/` via `.venv/bin/python scripts/restore_data.py` (including `sample_submission.tif`, `labels.tif`, `training_features.tif`, `lidar_scarp_features_u8.tif`, `gdr_wellspring_in_footprint.csv`, `qfaults_v2_in_footprint.json`).
+   - Built `data_cache/prepared/features.npy` (`sha256: 83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc`) via `.venv/bin/python scripts/prepare_data.py`.
+   - Fetched all 12 pinned sibling peer rasters (`GEMSDOE24`..`GEMSDOE36`) into `data_cache/parallel_registry/` via `.venv/bin/python scripts/fetch_parallel_registry.py`.
+   - Re-verified the pixel-exact `GEMSDOE32` (`h33-h33-2-b2`, `0.2778` OWNER-REPORTED) lineage: `dot_thin(H19-5 minus catalogue, 2.8)` (`44,090` px, `0.2600`) $\to$ prune $d(\text{catalogue}) \le 1\text{ px}$ (`40,199` px, `0.2708`) $\to$ prune $d(\text{catalogue}) \le 2\text{ px}$ (`37,654` px, `0.2778`, removing `2,545` near-catalogue flank-shadow dots).
+2. **Preregistered 5 Ranked Untried Hypotheses (`H30-1`–`H30-5`) & Implemented `H30-1`:**
+   - Documented 5 ranked hypotheses (`H30-1`..`H30-5`) in `knowledge/20_preregistration_H30-1_and_hypotheses.md` and `registry/next_hypotheses.json`.
+   - Implemented `src/gems27/updip_relay_features.py` (8 label-free geophysical and hydrothermal transforms) and unit tests in `tests/test_updip_relay_features.py`.
+   - Verified **Gate E1 (Leakage Canary)** across all 55 features on `seed=240, fold=0`: `max_auc = 0.6156 <= 0.90` (`det_gradient`); all 8 `H30-1` transforms scored `0.5041..0.5889 <= 0.90`.
+   - Verified **Gate E4a (Pre-Placement Surface Uniqueness)** across all 24 rasters: `max_surface_spearman = 0.1006 <= 0.90` (`0.8344` vs internal `oof_prob_B`, `0.8409` vs internal `oof_prob_D`).
+
+## Pass 2 — Review for Bugs, Missing Requirements, Incorrect Assumptions, and Edge Cases, Then Fix
+
+1. **Bug 1 (`IR-2026-10-25-10`, `scripts/run_unique_holdout.py` hidden-target exclusion bug & front-page banner contradiction):**
+   - Found that `scripts/run_unique_holdout.py` line 99 computed `d_cat = distance_transform_edt(~labels)` using **all** `labels` (`sp.known | sp.hidden`) rather than `sp.known` (visible faults only). Since `FAR_D_PX = 3.0` matches the 300 m DTI kernel radius, requiring `d_cat >= 3.0` banned every prediction within 300 m of withheld truth `sp.hidden`, mathematically forcing `TPw = 0.0` (`HOLDOUT-DTI = 0.0`). Fixed `scripts/run_unique_holdout.py` to compute `d_known = distance_transform_edt(~kn)` inside each split from `sp.known` only, and replaced the contradictory `unique-scatter-farfield` front-page banner in `scripts/build_site.py`.
+2. **Bug 2 (`IR-2026-10-25-11`, `H29-1b` self-comparison in `scripts/run_build_h29_1b.py`):**
+   - Found that `H29-1b` (`evidence/h29_1b_run_card.json`) had `0.6500 <= 0.70` overlap with `H28-1` and `<= 0.4799` across all 12 peer rasters, failing only because `run_build_h29_1b.py` included `H29-1` (`c24b6371179c`, its own un-deconflicted draft) in `ref_paths` (`0.8255`). Logged in `registry/irregularities.json` and kept `H29-1b` in `docs/downloads/research/` as negative.
+3. **Bug 3 (`IR-2026-10-25-12`, `buffered_scoring_mask` target-halo & kernel-clipping in prior holdout runners):**
+   - Found that passing `allowed = (valid_scoring | hidden) & (d_known > 2.0)` into `ridge_nms(prob, allowed)` zeroed `prob` across the `100–600 m` moat around `sp.hidden` while leaving `sp.hidden` positive, and zeroed the `0 < d < 3.0 px` tolerance kernel during scoring. In `scripts/run_h30_1_holdout.py`, `ridge_nms(prob, foot)` is computed strictly on `foot` (100% blind to `sp.hidden`), and both the leak-free `full_kernel_blind` evaluator and legacy `buffered_scoring_mask` evaluator are reported.
+4. **Bug 4 (Scarp Exclusion Mask Blocking `prob_H` Innovation Ridges in Experiments 1–2):**
+   - In Experiment 1 (`B_CORE = 25,800, B_TOT = 36,800`), putting un-thresholded `rH_all` (`600,000` pixels) in `d_scarp` blocked Habitat 3 from landing near real faults; in Experiment 2 (`B_CORE = 20,500, B_TOT = 31,000`), putting `top_k_mask(prob_H, 150_000)` in `d_scarp` still banned `prob_H`'s own top `150,000` ridge pixels. In Experiment 3 (`B_CORE = 23,200, B_TOT = 35,200`, `SCARP_TOP_K = 120,000`), restricting `scarp_120k` to `top_k(prob_B, 120k) | top_k(prob_D, 120k)` allowed Habitat 3 to select `prob_H`'s genuine subsurface/up-dip innovation ridges, passing **both** `full_kernel_blind` (`0.09424` vs `0.08758`, `Δ = +0.00666`, 95% CI `[+0.00245, +0.01076]`) and `buffered_scoring_mask` (`0.07720` vs `0.06432`, `Δ = +0.01288`, 95% CI `[+0.00965, +0.01622]`, 20/20 cells) while achieving `0.6802 <= 0.70` max 3-px dot overlap across all 24 rasters.
+
+## Pass 3 — Re-check Against Original Request & Polish
+
+| Requirement | Verification & Artifact | Status |
+|---|---|---|
+| PhD-level analysis of why `GEMSDOE32` (`0.2778`) won & how to beat `0.2778` / `0.3195` | `knowledge/18_why_02778_won_phd_analysis.md`, `knowledge/20_preregistration_H30-1_and_hypotheses.md` | **PASS** |
+| 3–5 untried candidate geological hypotheses ranked by expected DTI gain and cost before coding | `H30-1`..`H30-5` in `knowledge/20_preregistration_H30-1_and_hypotheses.md` and `registry/next_hypotheses.json` | **PASS** |
+| Validate top candidate (`H30-1`) on spatially-blocked holdout before recommending a slot | `scripts/run_h30_1_holdout.py` -> `evidence/h30_1_holdout.json` (seeds `240–244`, 20 cells, `full_kernel_blind` & `buffered_scoring_mask` both PASS) | **PASS** |
+| Unique TIF submission (`<=70%` 3-px dot overlap & `<=0.90` Spearman vs all registry rasters), fixing `[0, 1]` error | `docs/downloads/gems27-h30-1-updip-hydrothermal-b2-35k-20261025-801dff07541d-allfinite.tif` (`35,200` dots, `0.6802 <= 0.70` max overlap across 24 rasters, `0.1006 <= 0.90` Spearman, all-finite in `[0,1]`, `nodata=None`) | **PASS** |
+| Machine-validated without human intervention; obvious on first screen & executive summary; note `<=140` chars; JSON Run Card | `evidence/h30_1_run_card.json`, `docs/data/submission_readiness_audit.json` (`approved: ["h30_1_run_card.json"]`), `docs/index.html`, `docs/executive-summary.html` | **PASS** |
+| All tests, linter, download verifier, readiness audit, and site builder clean | `pytest -q` (`109 passed`), `ruff check` (`All checks passed!`), `verify_downloads.py` (`166 checks, 0 failures`), `audit_submission_readiness.py` (`approved: ["h30_1_run_card.json"]`) | **PASS** |

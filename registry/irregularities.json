@@ -282,6 +282,24 @@
    "severity": "high",
    "issue": "Parallel sessions H29-1 (Session 7) and L-DCONFIRM independently built arm-D B2/38k files; measured post-merge directed dot overlap within 3px is 87.5%/87.8% (exact shared 15,727/38,000), exceeding the 70% duplicate threshold in both directions. Both also fail the extended self-registry screen vs H28-1 (85.4%/85.2%). Selection seeds 210-214 were independently chosen by both sessions, so pooled selection numbers are identical by determinism, not independent replication; L-DCONFIRM adds disjoint confirmation seeds 215-224.",
    "action": "Both files remain verdict=negative, ok_to_submit=false. Selector must treat H29-1/H29-1b/L-DCONFIRM as ONE candidate family (evidence/dconfirm_cross_session_overlap.json). No slot may be spent twice on this family."
+  },
+  {
+   "id": "IR-2026-10-25-10-unique-holdout-hidden-mask-and-banner-contradiction",
+   "severity": "high",
+   "issue": "scripts/run_unique_holdout.py line 99 computed d_cat = distance_transform_edt(~labels) using ALL labels (sp.known | sp.hidden) instead of sp.known (visible faults only). Because FAR_D_PX = 3.0 and the DTI kernel radius is 3.0 px (300 m), requiring d_cat >= 3.0 banned every prediction within 300 m of withheld truth sp.hidden, mathematically forcing TPw = 0.0 and HOLDOUT-DTI = 0.0 across all 20 cells. Furthermore, PR #21 re-added a green 'Unique submission TIF — ready to download' banner for gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.tif directly above 'NO TIFF IS APPROVED TO SUBMIT' in scripts/build_site.py, even though src/gems27/readiness.py rejects that Run Card on 6 machine checks and its submission note was truncated mid-word at 200 characters (exceeding the 140-character Run Card limit).",
+   "action": "Fixed scripts/run_unique_holdout.py to compute d_known = distance_transform_edt(~kn) from visible faults only inside each split, and replaced the contradictory unique-scatter-farfield banner in scripts/build_site.py with the machine-gated H30-1 Run Card panel verified by src/gems27/readiness.py."
+  },
+  {
+   "id": "IR-2026-10-25-11-h29-1b-self-comparison-in-uniqueness-screen",
+   "severity": "medium",
+   "issue": "In evidence/h29_1b_run_card.json (lines 210-231), H29-1b achieved 0.6500 (65.0% <= 70%) 3-px dot overlap with H28-1 and <= 0.4799 across all 12 peer rasters and Slots 1-5; the reported 0.8255 maximum was against H29-1 (c24b6371179c, its own un-deconflicted draft) because scripts/run_build_h29_1b.py included H29-1 in ref_paths. However, H29-1b also reused selection seeds 210-214 and applied post-hoc mask deconfliction against H28-1 rather than a self-contained geophysical lane.",
+   "action": "Keep H29-1b in docs/downloads/research/ with verdict=negative. Implemented H30-1 as a self-contained 3-habitat geophysical lane evaluated on fresh confirmatory seeds 240-244 that achieves <= 0.6802 3-px dot overlap across ALL 24 rasters (including H28-1, H29-1, H29-1b, and L-DCONFIRM) without post-hoc registry deconfliction."
+  },
+  {
+   "id": "IR-2026-10-25-12-buffered-scoring-mask-target-halo-and-kernel-clipping",
+   "severity": "high",
+   "issue": "holdout.buffered_scoring_mask(sp, foot) excludes ring = (d_hidden <= 6.0) & ~sp.hidden. Passing allowed = (valid_scoring | hidden) & (d_known > 2.0) into emit() and ridge_nms(prob, allowed) in scripts/run_lane_holdout.py, scripts/run_h29_1_holdout.py, and scripts/run_dconfirm_holdout.py zeroed prob across the 100-600 m moat surrounding sp.hidden while leaving sp.hidden (d == 0) positive, and zeroed the 0 < d < 3.0 px (100-300 m) triangular tolerance kernel during scoring (which is why FPw was an exact .0 integer in all 20 cells of those holdout JSONs).",
+   "action": "In scripts/run_h30_1_holdout.py, ridge_nms(prob, foot) is computed strictly on foot (100% blind to sp.hidden), and holdout evaluation reports BOTH the primary leak-free full_kernel_blind evaluator (where emit sees only fold_mask and visible_known = sp.known & (d(hidden) > 6.0), and the full 300 m kernel is active) AND the legacy buffered_scoring_mask evaluator. H30-1 passes both evaluators with 95% bootstrap CIs strictly above zero."
   }
  ]
 }

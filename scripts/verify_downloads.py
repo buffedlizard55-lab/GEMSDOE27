@@ -138,6 +138,45 @@ def main() -> int:
            f"slot5 manifest reports the one-sided swapped fraction {m5['fraction_of_file_swapped']:.4f} "
            f"(symmetric difference {m5['symmetric_difference_fraction']:.4f})")
     ok(len(list(DL.glob("*.tif"))) == len(set(p.name for p in DL.glob("*.tif"))), "all .tif file names are unique")
+    h30_manifest = DL / "h30_1_manifest.json"
+    if h30_manifest.exists():
+        hm = json.loads(h30_manifest.read_text())
+        r = hm["raster"]
+        for variant, fname, exp_sha in [
+            ("allfinite", r["primary_allfinite"], r["sha256"]),
+            ("nan", r["nan_twin"], r["nan_sha256"]),
+        ]:
+            p = DL / fname
+            with rasterio.open(p) as s:
+                a = s.read(1)
+                prof = (s.crs.to_epsg(), s.shape, tuple(s.transform)[:6], s.dtypes[0])
+                nd, count = s.nodata, s.count
+            tag = f"h30_1/{variant}"
+            ok(prof == tprof, f"{tag}: same CRS/shape/transform/dtype as the template (float32)")
+            ok(count == 1, f"{tag}: single band")
+            inside, outside = a[foot], a[~foot]
+            ok(bool(np.isfinite(inside).all()), f"{tag}: every in-footprint value is finite")
+            ok(float(inside.min()) >= 0.0 and float(inside.max()) <= 1.0, f"{tag}: in-footprint range [{inside.min():g}, {inside.max():g}] within [0,1]")
+            ok(set(np.unique(inside).tolist()) <= {0.0, 1.0}, f"{tag}: values are exactly 0.0 / 1.0")
+            n1 = int((inside == 1.0).sum())
+            ok(n1 == r["dots"], f"{tag}: {n1} pixels equal 1.0 (manifest {r['dots']})")
+            ok(not bool((a == 1.0)[cat].any()), f"{tag}: no emitted pixel on a catalogue cell")
+            dcat_h30 = distance_transform_edt(~cat)
+            ok(bool((dcat_h30[a == 1.0] > 2.0).all()), f"{tag}: every dot obeys B2 (>2 px from catalogue)")
+            if variant == "nan":
+                ok(int(np.isnan(outside).sum()) == outside.size == 7111787 and nd is not None and np.isnan(nd),
+                   f"{tag}: NaN outside the footprint (7,111,787 px) and nodata=NaN declared")
+            else:
+                ok(bool((outside == 0).all()) and nd is None and bool(np.isfinite(a).all()),
+                   f"{tag}: zeros outside, no NaN anywhere, no nodata tag (primary allfinite)")
+            ok(sha(p) == exp_sha, f"{tag}: sha256 matches h30_1_manifest.json")
+        z_h30 = DL / r["zip"]
+        with zipfile.ZipFile(z_h30) as zf:
+            ok(zf.namelist() == [r["primary_allfinite"]] and zf.read(r["primary_allfinite"]) == (DL / r["primary_allfinite"]).read_bytes(),
+               "h30_1: zip holds exactly the primary allfinite GeoTIFF, byte-identical")
+        note_h30 = (DL / f"note-{r['primary_allfinite'][:-4]}.txt").read_text().strip()
+        ok(0 < len(note_h30) <= 140 and note_h30 == hm["note_max_140_chars"],
+           f"h30_1: note is {len(note_h30)} chars (<= 140) and matches manifest")
     print(f"\n{len(FAIL)} failure(s)")
     return 1 if FAIL else 0
 

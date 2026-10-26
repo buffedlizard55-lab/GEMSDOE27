@@ -51,6 +51,8 @@ def test_repository_root_front_page_shows_current_submission_decision():
 
 def test_front_page_does_not_offer_failed_h28_3_as_submission():
     idx = (DOCS / "index.html").read_text()
+    assert "GEMSDOE27-H30-1-UPDIP-HYDROTHERMAL-B2-35K" in idx
+    assert "gems27-h30-1-updip-hydrothermal-b2-35k-20261025-801dff07541d-allfinite.tif" in idx
     assert "NO TIFF IS APPROVED TO SUBMIT" in idx
     assert "There is no one-click submission download for this run." in idx
     assert "NOT APPROVED FOR SUBMISSION" in idx
@@ -58,6 +60,7 @@ def test_front_page_does_not_offer_failed_h28_3_as_submission():
     assert 'download class="mono"' not in idx
     assert ".tif\" download" not in idx
     summary = (DOCS / "executive-summary.html").read_text()
+    assert "GEMSDOE27-H30-1-UPDIP-HYDROTHERMAL-B2-35K" in summary
     assert "NO TIFF IS APPROVED TO SUBMIT" in summary
     assert ".tif\" download" not in summary
 

@@ -1,0 +1,264 @@
+{
+  "stem": "gems27-h30-1-updip-hydrothermal-b2-35k-20261025-801dff07541d",
+  "run_card": "H30-1 Up-Dip Basement-Step + Hydrothermal Upflow + T-v2 Relay (parallel-run protocol \u00a75)",
+  "generated_utc": "2026-10-26T00:53:19Z",
+  "hypothesis": "Normal faults in the Great Basin dip 45-60 deg down the basement-depth gradient, displacing deep RTP magnetic and isostatic gravity contacts 300-550 m down-dip of surface traces while burying sub-alluvial relay steps and blind hydrothermal upflow plumes under piedmont fans. Combining 8 label-free up-dip advection, cross-field strike bridging, listric rollover, oblique transfer rotation, and quality-filtered well/spring thermal & chemical geothermometer features with visible-catalogue T-v2 relay bridges and 3-habitat emission improves holdout fault recovery over the 32-band baseline (Arm B) and 47-band subsurface detector (Arm D) while remaining <=70% 3-px dot overlap with all 24 peer and in-repo rasters.",
+  "mechanism": "55-band HGB detector (32 base + 15 subsurface + 8 H30-1 up-dip/hydrothermal transforms in gems27.updip_relay_features) + 3-habitat B2 (>200 m catalogue collar) Poisson-disk (>=2.8 px) emission: (1) 23,200 core hybrid ridges, (2) 1,137 visible-fault T-v2 relay bridges, and (3) 10,863 sub-alluvial innovation ridges outside the top-120k shallow scarp skeletons of Arm B and Arm D (total 35,200 binary {0,1} dots).",
+  "named_non_fault_mimic": "Unfaulted buttress unconformities along steep paleotopographic range fronts; Pleistocene Lake Lahontan wave-cut shoreline scarps and alluvial-fan terrace risers; lateral down-hydraulic-gradient warm-water outflow plumes in permeable piedmont gravels.",
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "evaluator": "gems27.holdout+metric@2026-10-25.v3-leakfree-and-buffered",
+    "pooled_dti_H30_1_lane": 0.09423542522471098,
+    "pooled_dti_H30_raw_tv2": 0.10035908473803916,
+    "pooled_dti_D_subsurface": 0.09150135767322347,
+    "pooled_dti_B_control": 0.08758002845554713,
+    "paired_D_minus_B": {
+      "pooled_candidate": 0.09423542522471098,
+      "pooled_reference": 0.08758002845554713,
+      "pooled_delta": 0.006655396769163852,
+      "ci95": [
+        0.0024536300457840914,
+        0.010762323541422258
+      ],
+      "mean_cell_delta": 0.006852745198573188,
+      "cells_improved": 16,
+      "total_cells": 20
+    },
+    "paired_H30_1_minus_B_full_kernel_blind": {
+      "pooled_candidate": 0.09423542522471098,
+      "pooled_reference": 0.08758002845554713,
+      "pooled_delta": 0.006655396769163852,
+      "ci95": [
+        0.0024536300457840914,
+        0.010762323541422258
+      ],
+      "mean_cell_delta": 0.006852745198573188,
+      "cells_improved": 16,
+      "total_cells": 20
+    },
+    "paired_H30_1_minus_B_buffered_mask": {
+      "pooled_candidate": 0.07720274791202043,
+      "pooled_reference": 0.06431842618300955,
+      "pooled_delta": 0.012884321729010884,
+      "ci95": [
+        0.00964872461692367,
+        0.016221268734741424
+      ],
+      "mean_cell_delta": 0.013195572818613282,
+      "cells_improved": 20,
+      "total_cells": 20
+    },
+    "buffered_scoring_mask_pooled_dti": {
+      "B": 0.06431842618300955,
+      "D": 0.06684075901069697,
+      "H30_raw_tv2": 0.07384601895568592,
+      "H30_1": 0.07720274791202043
+    },
+    "n_withheld_positives_total": 53861,
+    "n_withheld_positives_buffered_total": 59372,
+    "seeds": [
+      240,
+      241,
+      242,
+      243,
+      244
+    ],
+    "canary_max_auc": 0.6156231572328468,
+    "canary_h30_1_aucs": {
+      "updip_rtp_edge_advected": 0.5040849942063744,
+      "updip_grav_edge_advected": 0.5886464874696024,
+      "updip_concordance_x_bstep": 0.5747639196774925,
+      "crossfield_strike_bridge_s6": 0.587836570201673,
+      "listric_rollover_curv_x_bstep": 0.58888782694463,
+      "oblique_transfer_strike_rot": 0.5390386560935917,
+      "hydrothermal_temp_upflow_x_bstep": 0.5666365354570352,
+      "hydrothermal_geotherm_upflow_grad": 0.5700076347179375
+    },
+    "gate_efficacy_pass": true
+  },
+  "uniqueness_vs_registry": {
+    "max_dot_overlap_within_3px_euclidean": 0.6802272727272727,
+    "max_dot_overlap_raster": "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-allfinite.tif",
+    "per_raster": {
+      "g24_d15.tif": 0.3999715909090909,
+      "g25_d28.tif": 0.3864772727272727,
+      "g27_tv2_d15.tif": 0.43210227272727275,
+      "g28_h27_4_r1.tif": 0.3751988636363636,
+      "g28_h32_1.tif": 0.3824715909090909,
+      "g28_h36_1.tif": 0.3710227272727273,
+      "g28_h38_1.tif": 0.376875,
+      "g30_d28.tif": 0.3864772727272727,
+      "g31_h27_4.tif": 0.3751988636363636,
+      "g32_h33_2_b2.tif": 0.36073863636363634,
+      "g33_h33d.tif": 0.38235795454545457,
+      "g36_anderson.tif": 0.3653409090909091,
+      "gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-allfinite.tif": 0.4085511363636364,
+      "gems27-farfield-swap-augmented-detector-probe-20261002-a34b0799df59-allfinite.tif": 0.4462784090909091,
+      "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-allfinite.tif": 0.6802272727272727,
+      "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-allfinite.tif": 0.43210227272727275,
+      "gems27-topo-gap-closure-t-v2-on-d2-8-20261002-3ebd51534bb1-allfinite.tif": 0.4193181818181818,
+      "gems27-topo-gap-closure-t-v2-plus-h27-4-r1-on-d1-5-20261002-d466b251f309-allfinite.tif": 0.42292613636363635,
+      "gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.tif": 0.1637784090909091,
+      "gems27-dconfirm-hybrid-armd-b2-38k-20261025-5ea0385b7e70-allfinite.tif": 0.6098295454545455,
+      "gems27-h28-3-strain-conductivity-negative-research-20261025-27d6875f3b22-allfinite.tif": 0.6760795454545454,
+      "gems27-h29-1-drefill-b2-38k-20261025-c24b6371179c-allfinite.tif": 0.6407670454545454,
+      "gems27-h29-1b-drefill-deconf-b2-38k-20261025-14e416a1a380-allfinite.tif": 0.6530397727272728,
+      "gems27-lane-subsurface-buried-fault-20261025-fc6d8c3acf6c-allfinite.tif": 0.4534943181818182
+    },
+    "max_surface_spearman": 0.10057233616005638,
+    "max_surface_spearman_armD": 0.10057233616005638,
+    "max_surface_spearman_vs": "gems27-h28-3-strain-conductivity-negative-research-20261025-27d6875f3b22-allfinite.tif",
+    "internal_surface_spearman": {
+      "oof_prob_B": 0.8344432044232722,
+      "oof_prob_D": 0.8409003371853935
+    },
+    "thresholds": {
+      "dot_overlap": 0.7,
+      "spearman": 0.9
+    },
+    "pass": true
+  },
+  "raster": {
+    "primary_allfinite": "gems27-h30-1-updip-hydrothermal-b2-35k-20261025-801dff07541d-allfinite.tif",
+    "sha256": "85314ccbef774284dc8732c0c784e9396311dffdf84b57bc296a2f3dee24a97a",
+    "bytes": 821530,
+    "dots": 35200,
+    "habitat_breakdown": {
+      "core_hybrid_dots": 23200,
+      "tv2_relay_bridge_dots": 1165,
+      "suballuvial_innovation_dots": 10835,
+      "total_dots": 35200
+    },
+    "content_id": "801dff07541d",
+    "zip": "gems27-h30-1-updip-hydrothermal-b2-35k-20261025-801dff07541d-allfinite.zip",
+    "nan_twin": "gems27-h30-1-updip-hydrothermal-b2-35k-20261025-801dff07541d-nan.tif",
+    "nan_sha256": "043b902bb99fb36f6eba1bf8686a62b70a3f3db09ff527b45dcc96a83a26ddbc",
+    "directory": "docs/downloads"
+  },
+  "validator": {
+    "zeros_hard_pass": true,
+    "zeros_checks": {
+      "grid_matches_template": {
+        "pass": true,
+        "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+        "hard": true
+      },
+      "single_band_float32": {
+        "pass": true,
+        "detail": "count=1 dtype=float32",
+        "hard": true
+      },
+      "inside_footprint_all_finite": {
+        "pass": true,
+        "detail": "0 non-finite inside 5167373 px",
+        "hard": true
+      },
+      "inside_footprint_in_0_1": {
+        "pass": true,
+        "detail": "min=0 max=1",
+        "hard": true
+      },
+      "no_infinities_anywhere": {
+        "pass": true,
+        "detail": "np.isinf(whole array) is empty",
+        "hard": true
+      },
+      "outside_footprint_is_zero_and_finite": {
+        "pass": true,
+        "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+        "hard": true
+      },
+      "strict_whole_array_range": {
+        "pass": true,
+        "detail": "whole-array min=0 max=1",
+        "hard": true
+      },
+      "profile_driver_gtiff": {
+        "pass": true,
+        "detail": "GTiff",
+        "hard": false
+      },
+      "compression_like_sample": {
+        "pass": true,
+        "detail": "Compression.lzw",
+        "hard": false
+      }
+    },
+    "nan_hard_pass": true,
+    "nan_checks": {
+      "grid_matches_template": {
+        "pass": true,
+        "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+        "hard": true
+      },
+      "single_band_float32": {
+        "pass": true,
+        "detail": "count=1 dtype=float32",
+        "hard": true
+      },
+      "inside_footprint_all_finite": {
+        "pass": true,
+        "detail": "0 non-finite inside 5167373 px",
+        "hard": true
+      },
+      "inside_footprint_in_0_1": {
+        "pass": true,
+        "detail": "min=0 max=1",
+        "hard": true
+      },
+      "no_infinities_anywhere": {
+        "pass": true,
+        "detail": "np.isinf(whole array) is empty",
+        "hard": true
+      },
+      "outside_footprint_is_nan": {
+        "pass": true,
+        "detail": "7111787/7111787 NaN outside the footprint (as in the sample)",
+        "hard": true
+      },
+      "nodata_tag_is_nan": {
+        "pass": true,
+        "detail": "nodata=NaN declared, same as the sample submission",
+        "hard": true
+      },
+      "masked_read_in_0_1": {
+        "pass": true,
+        "detail": "masked count=5167373, min=0, max=1",
+        "hard": true
+      },
+      "nan_aware_range_in_0_1": {
+        "pass": true,
+        "detail": "nanmin=0 nanmax=1",
+        "hard": true
+      },
+      "strict_whole_array_range_ignoring_nan_is_informational": {
+        "pass": false,
+        "detail": "A validator that compares NaN directly would fail ANY file with NaN outside the footprint, including the sample. Informational only; use the allfinite fallback if the portal rejects.",
+        "hard": false
+      },
+      "profile_driver_gtiff": {
+        "pass": true,
+        "detail": "GTiff",
+        "hard": false
+      },
+      "compression_like_sample": {
+        "pass": true,
+        "detail": "Compression.lzw",
+        "hard": false
+      }
+    }
+  },
+  "submission_name": "GEMSDOE27-H30-1-UPDIP-HYDROTHERMAL-B2-35K",
+  "note_max_140_chars": "27GEMSDOE H30-1 updip+hydro+Tv2 B2 35.2k; HOLDOUT-DTI 0.0942 vs B 0.0876 (buf 0.0772); UNSCORED | id 801dff07541d",
+  "note_chars": 113,
+  "ok_to_submit": true,
+  "verdict": "promote",
+  "live_score": null,
+  "live_score_label": "UNSCORED \u2014 no ORGANIZER-CONFIRMED score exists for this file",
+  "readiness_audit": {
+    "ok_to_publish_as_submission": true,
+    "reasons": [],
+    "actual_sha256": "85314ccbef774284dc8732c0c784e9396311dffdf84b57bc296a2f3dee24a97a",
+    "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
+  }
+}

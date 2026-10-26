@@ -1,6 +1,8 @@
 {
   "purpose": "Fail-closed evidence/byte audit, not a new geological experiment",
-  "approved": [],
+  "approved": [
+    "h30_1_run_card.json"
+  ],
   "results": {
     "dconfirm_run_card_2026-10-25.json": {
       "ok_to_publish_as_submission": false,
@@ -42,6 +44,12 @@
       "actual_sha256": "ad7d90f43c5d913f029b748d9b15ae9a4e9368e3d2e953aafac67ce91ced460a",
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
+    "h30_1_run_card.json": {
+      "ok_to_publish_as_submission": true,
+      "reasons": [],
+      "actual_sha256": "85314ccbef774284dc8732c0c784e9396311dffdf84b57bc296a2f3dee24a97a",
+      "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
+    },
     "lane_run_card_2026-10-25.json": {
       "ok_to_publish_as_submission": false,
       "reasons": [
@@ -54,6 +62,27 @@
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
     "run_card_unique_scatter_farfield.json": {
+      "ok_to_publish_as_submission": false,
+      "reasons": [
+        "run card does not authorize submission",
+        "verdict is not promote",
+        "missing HOLDOUT-DTI label",
+        "missing evaluator version",
+        "missing withheld positive count",
+        "efficacy gate not explicitly passed",
+        "paired improvement CI missing or does not exclude zero",
+        "canary missing or leakage threshold exceeded",
+        "uniqueness gate not passed",
+        "dot overlap missing or exceeds threshold",
+        "surface correlation missing or exceeds threshold",
+        "all-finite validator not passed",
+        "missing or overlong submission note",
+        "raster missing or outside repository"
+      ],
+      "actual_sha256": null,
+      "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
+    },
+    "run_card_unique_scatter_farfield_20261025.json": {
       "ok_to_publish_as_submission": false,
       "reasons": [
         "run card does not authorize submission",

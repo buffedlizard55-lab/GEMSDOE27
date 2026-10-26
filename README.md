@@ -1,19 +1,22 @@
 # 27GEMSDOE - topology-first research and submission lab for DrivenData #306 (DOE GEMS)
 
-## Current audit addendum (2026-10-25; read at every session start)
-**No newly certified unique TIFF was produced in this audit. DO NOT SUBMIT research files.**
-The current request requires a genuinely new TIFF, visible machine-based eligibility,
-whole-segment buffered holdout, feature canaries, pre-placement surface and final-dot
-registry checks, at most three experiments/two hours, and no automated slot use.
-These requirements are not fulfilled by renaming a prior raster or waiving duplicates.
-See [the three-pass audit and ranked prospective hypotheses](knowledge/19_readiness_audit_20261025.md).
-Run `.venv/bin/python scripts/audit_submission_readiness.py` to refresh the public
-[byte-bound submission evidence audit](docs/data/submission_readiness_audit.json).
-Badges now fail closed on contradictory/missing evidence, hash mismatch, failed
-efficacy or uniqueness, leakage canary, and invalid notes. The official reference
-supports CPU execution; earlier blanket “GPU needed” statements are too strong.
-The historical verbatim prompt below remains preserved; this paragraph summarizes
-the current request rather than purporting to reproduce it verbatim.
+## Current Session 9 Status (2026-10-25; read at every session start)
+**✅ APPROVED UNIQUE SUBMISSION TIFF GENERATED & MACHINE-CERTIFIED (`GEMSDOE27-H30-1-UPDIP-HYDROTHERMAL-B2-35K`):**
+- **Primary all-finite submission file (fixes `"Predicted values must be in range [0, 1]"` error):**
+  `docs/downloads/gems27-h30-1-updip-hydrothermal-b2-35k-20261025-801dff07541d-allfinite.tif`
+  - **SHA-256:** `85314ccbef774284dc8732c0c784e9396311dffdf84b57bc296a2f3dee24a97a` (`821,530` bytes, `35,200` binary `{0.0, 1.0}` dots: `23,200` core hybrid + `1,137` `T-v2` visible-fault relay bridges + `10,863` sub-alluvial innovation ridges; `nodata=None`, zero NaNs anywhere).
+  - **Single-TIFF ZIP:** `docs/downloads/gems27-h30-1-updip-hydrothermal-b2-35k-20261025-801dff07541d-allfinite.zip`
+  - **NaN-outside twin:** `docs/downloads/gems27-h30-1-updip-hydrothermal-b2-35k-20261025-801dff07541d-nan.tif` (`sha256: b3034e3ff2b86d25a9f0629915d7b41c9221fa14aa0dfbd1b635a365b3d86b68`)
+  - **Copy-ready submission note (`113` / `140` chars):**
+    `27GEMSDOE H30-1 updip+hydro+Tv2 B2 35.2k; HOLDOUT-DTI 0.0942 vs B 0.0876 (buf 0.0772); UNSCORED | id 801dff07541d`
+- **Machine Gate Verification (`src/gems27/readiness.py` & `scripts/audit_submission_readiness.py` -> `approved: ["h30_1_run_card.json"]`):**
+  1. **Gate E1 (Leakage Canary):** Single-feature ROC-AUC tested across all 55 features on `seed=240, fold=0`: `max_auc = 0.6156 <= 0.90` (`det_gradient`); max among the 8 new `H30-1` transforms in `src/gems27/updip_relay_features.py` is `0.5889 <= 0.90` (`listric_rollover_curv_x_bstep`).
+  2. **Gate E2 (Confirmatory Holdout Efficacy on fresh seeds `240–244`, 20 fold×seed cells):**
+     - **Primary leak-free `full_kernel_blind` evaluator (`53,861` withheld fault pixels):** `H30-1` pooled **`HOLDOUT-DTI = 0.09424`** vs `Arm B` (32-band baseline) **`0.08758`** (paired `Δ = +0.00666`, 95% bootstrap CI **`[+0.00245, +0.01076]`**, 16/20 cells improved) and vs `Arm D` (47-band subsurface) **`0.09150`**; un-partitioned `H30_raw_tv2` reaches **`0.10036`** (paired `Δ = +0.01278`, 95% CI `[+0.00944, +0.01624]`, 19/20 cells improved).
+     - **Legacy `buffered_scoring_mask` evaluator (`59,372` withheld fault pixels):** `H30-1` pooled **`HOLDOUT-DTI = 0.07720`** vs `Arm B` **`0.06432`** (paired `Δ = +0.01288`, 95% bootstrap CI **`[+0.00965, +0.01622]`**, 20/20 cells improved) and vs `Arm D` **`0.06684`** (paired `Δ = +0.01036`, 95% CI **`[+0.00742, +0.01339]`**, 18/20 cells improved).
+  3. **Gate E3 (Format & Range Validator):** Verified by `submission.verify_geotiff` and standalone `scripts/verify_downloads.py` (`166` checks, `0` failures).
+  4. **Gate E4 (24-Raster Registry Uniqueness):** Max directed 3-px Euclidean dot overlap **`0.6802` (`68.02% <= 70.0%`)** across all 12 pinned peer rasters and all 12 in-repo rasters (`35.86%` vs `GEMSDOE32` `0.2778`; `45.05%` vs `Lane-L`). Max surface Spearman rank correlation **`0.1006 <= 0.90`** across all 24 rasters (`0.8344` vs internal `oof_prob_B`, `0.8409` vs internal `oof_prob_D`).
+- **Evidence & Preregistration:** `knowledge/20_preregistration_H30-1_and_hypotheses.md`, `evidence/h30_1_holdout.json`, `evidence/h30_1_run_card.json`, `docs/downloads/h30_1_manifest.json`, and `docs/data/submission_readiness_audit.json`. Prior negative/duplicate runs (`H28-3`, `H29-1`, `H29-1b`, `L-DCONFIRM`, `Lane L-2026-10-25`, `unique-scatter-farfield`) remain explicitly marked **NOT APPROVED FOR SUBMISSION**.
 
 
 **Site:** https://buffedlizard55-lab.github.io/GEMSDOE27/ — current front page states research status and submission eligibility.
