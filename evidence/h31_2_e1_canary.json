@@ -1,0 +1,62 @@
+{
+  "experiment": "E1_H31-2_leakage_canary",
+  "lane": "L-S11-2026-10-26",
+  "hypothesis_id": "H31-2",
+  "preregistration_doc": "knowledge/26_preregistration_H31-2_2026-10-26.md",
+  "preregistration_sha256": "d78ab93908d115e0c50f72b46b9fb3adc5a90028682595491d39e2c3a0a2d433",
+  "evaluator_version": "gems27.metric v1 + holdout-blind-buffered-v2 (alpha=0.2, beta=0.8, R=3px triangular, buffer_px=6.0)",
+  "provenance_label": "HOLDOUT-DTI canary (catalogue-internal; NOT a live organizer score)",
+  "seeds": [
+    410,
+    411,
+    412,
+    413,
+    414,
+    415,
+    416,
+    417,
+    418,
+    419
+  ],
+  "n_withheld_positive_pixels_union": 53121,
+  "n_negative_sample": 250000,
+  "canary_demag_features": {
+    "demag_resid_abs_s8": {
+      "raw_auc": 0.50812,
+      "direction_invariant_auc": 0.50812
+    },
+    "demag_resid_pos_s8": {
+      "raw_auc": 0.50525,
+      "direction_invariant_auc": 0.50525
+    },
+    "demag_resid_gated_s8": {
+      "raw_auc": 0.5111,
+      "direction_invariant_auc": 0.5111
+    },
+    "demag_edge_deficit": {
+      "raw_auc": 0.52008,
+      "direction_invariant_auc": 0.52008
+    },
+    "demag_edge_deficit_x_gE": {
+      "raw_auc": 0.52082,
+      "direction_invariant_auc": 0.52082
+    },
+    "demag_shallow_quiet_x_gE": {
+      "raw_auc": 0.53037,
+      "direction_invariant_auc": 0.53037
+    },
+    "demag_resid_pos_s20": {
+      "raw_auc": 0.50947,
+      "direction_invariant_auc": 0.50947
+    },
+    "demag_up150_deficit_x_gE": {
+      "raw_auc": 0.5102,
+      "direction_invariant_auc": 0.5102
+    }
+  },
+  "max_direction_invariant_auc": 0.53037,
+  "auc_stop_threshold": 0.9,
+  "leakage_flags": {},
+  "gate_e1_canary_pass": true,
+  "runtime_s": 36.4
+}
