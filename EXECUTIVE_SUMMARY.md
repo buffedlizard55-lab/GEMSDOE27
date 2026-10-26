@@ -1,9 +1,14 @@
+> **Current correction (2026-10-26):** Read the [readiness audit](knowledge/28_submission_readiness_audit_2026-10-26.md) and the subsequent [H31-3 result](knowledge/29_h31_3_mt_graben_result_2026-10-26.md).
+> H31-1 is evidence-qualified and downloadable, but **not authorized for a weekly slot without a separate selector/current-registry/cap check**.
+> H31-3 was subsequently preregistered and tested; it is a negative research artifact, never an eligible download.
+> Historical “OK TO SUBMIT” wording below is superseded by this selector requirement.
+
 # Executive Summary: GEMSDOE Competition — Highest-Scoring Submissions Analysis & Unique Submission Strategy
 
 **Repository:** `buffedlizard55-lab/GEMSDOE27`  
 **Date:** 2026-10-26  
 **Session:** 12 (H31-1 approved; H32 and H31-3 negative research lanes completed)<br>
-**Status:** ✅ **H31-1 ONLY: OK TO DOWNLOAD AND SUBMIT — ALL AUTOMATED MACHINE VALIDATION GATES PASSED**<br>
+**Status:** ✅ **H31-1 ONLY: EVIDENCE PASS / DOWNLOAD VALIDATED — HUMAN SELECTOR REQUIRED BEFORE ANY WEEKLY SUBMISSION**<br>
 **Latest research result:** ❌ **H31-3 MT-graben: DO NOT SUBMIT** — its frozen H31-S comparison failed 4/5 efficacy clauses; no live organizer score is claimed.
 
 ---
@@ -20,9 +25,9 @@
 | **GEMSDOE25** | `dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif` (sha256: `91eae1ca…`) | **0.2600** | 44,090 | 0.0668 | 5.80× | 88.2% | **55.9%** | ALREADY SUBMITTED (unpruned d=2.8) — DO NOT RE-SUBMIT. |
 | **GEMSDOE30** | `d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca-zeros.tif` (sha256: `8cf893ea…`) | **0.2600** | 44,090 | 0.0668 | 5.80× | 88.2% | **55.9%** | ALREADY SUBMITTED (byte-identical in-footprint to GEMSDOE25) — DO NOT RE-SUBMIT. |
 | **GEMSDOE24** | `h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif` (sha256: `68d0e2e4…`) | **0.2477** | 60,069 | 0.0751 | 5.77× | 88.5% | **57.4%** | ALREADY SUBMITTED (over-dense d=1.5) — DO NOT RE-SUBMIT. |
-| **GEMSDOE27** | Slot 1: `topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif` (0.2449) | **0.2449** | 61,328 | 0.0764 | 5.67× | 86.7% | **57.7%** | **THIS REPO** — Both Slot 1 and H29-S (0.2190) ALREADY SUBMITTED. Only **Session-10 H31-1** is eligible. |
+| **GEMSDOE27** | Slot 1: `topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif` (0.2449) | **0.2449** | 61,328 | 0.0764 | 5.67× | 86.7% | **57.7%** | **THIS REPO** — Both Slot 1 and H29-S (0.2190) ALREADY SUBMITTED. Only **Session-10 H31-1** is evidence-qualified; selector/cap review remains required. |
 | **GEMSDOE27** | **H29-S**: `gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-allfinite.tif` | **0.2190** | 37,654 | 0.0527 | 5.79× | 56.1% | **62.8%** | **#1 of 2026-10-25 non-H19-5 cohort** — ALREADY SUBMITTED; do not re-upload. |
-| **GEMSDOE27** | **H31-1 (Session 10)**: `gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif` (sha256: `2c002b02…`) | **UNSCORED** | 37,654 | **0.0636** | **5.94× (est.)** | **50.2%** | **N/A (THIS FILE)** | ✅ **OK TO DOWNLOAD AND SUBMIT** — 5/5 frozen holdout gates passed, 27-raster uniqueness PASS, [0,1] all-finite GeoTIFF. |
+| **GEMSDOE27** | **H31-1 (Session 10)**: `gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif` (sha256: `2c002b02…`) | **UNSCORED** | 37,654 | **0.0636** | **5.94× (est.)** | **50.2%** | **N/A (THIS FILE)** | ✅ **EVIDENCE PASS / DOWNLOAD VALIDATED** — all automated gates passed, but a human selector must recheck cap/current registry before any weekly submission. |
 | **GEMSDOE27** | **H31-3 (Session 12)**: `gems27-h31-3-mt-graben-celf28-20261026-0f397db36baf-allfinite.tif` (research only; sha256: `da29080b…`) | **UNSCORED** | 37,654 | n/a | n/a | **49.2%** | **86.9%** | ❌ **DO NOT SUBMIT** — H31-3−H31-S pooled HOLDOUT-DTI +0.000366, CI [−0.001182,+0.001823], 6/10 seeds and 2/4 folds; 4/5 frozen efficacy clauses failed. |
 
 ---
@@ -142,7 +147,7 @@ The following table preserves the originally ranked candidates while marking tho
 ## 7. Recommended Next Steps (Priority Order)
 
 ### Current Decision
-1. ✅ **H31-1 remains the only approved candidate** — its download and manual portal instructions are at `docs/how-to-submit.html`. A weekly-slot decision remains separate and must not be automated.
+1. ✅ **H31-1 remains the only evidence-qualified candidate** — its download and manual portal instructions are at `docs/how-to-submit.html`. A human weekly-slot selector/cap/current-registry decision remains separate and must not be automated.
 2. ❌ **H32 (formerly H31-2) and H31-3 are closed negative lanes.** Neither may be tuned, re-emitted, uploaded, or used to spend a weekly slot.
 
 ### Next Research Gate
@@ -238,7 +243,7 @@ python -m pytest -q
 
 ## 13. Conclusion
 
-**The best unique submission available right now is `gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif` (H31-1).** It has passed 100% of automated machine validation gates without human intervention:
+**The best evidence-qualified unique file is `gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif` (H31-1).** It has passed 100% of automated machine validation gates without human intervention, but is **not authorized for a weekly slot until a human selector rechecks cap and current registry**:
 - 5/5 frozen holdout clauses on fresh seeds 400–409 (new #1 blind pooled HOLDOUT-DTI 0.0473)
 - 27-raster uniqueness (max 3-px overlap 62.8% ≤ 70%; 50.2% vs GEMSDOE32 0.2778)
 - Strict [0,1] all-finite GeoTIFF validation (fixes "Predicted values must be in range [0, 1]")

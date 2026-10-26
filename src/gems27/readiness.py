@@ -34,10 +34,10 @@ def publication_decision(card: dict, root: Path) -> dict:
     require(isinstance(ci, list) and len(ci) == 2 and all(_finite(x) for x in ci)
             and 0 < ci[0] <= ci[1], "paired improvement CI missing or does not exclude zero")
     auc = hold.get("canary_max_auc")
-    # Floor 0.40 (template fix, Session 9): a canary meaningfully BELOW 0.5 is anti-predictive,
-    # not leaky -- leakage is a HIGH AUC. The old 0.5 floor mis-flagged no-signal canaries
-    # (e.g. H30's 0.4993) and failed closed for the wrong reason. Reported per protocol §2.
-    require(_finite(auc) and 0.40 <= auc <= 0.90, "canary missing or leakage threshold exceeded")
+    # A feature and its negation carry the same information. Test both directions:
+    # AUC 0.05 is as suspicious as 0.95; AUC 0.30 is not evidence of leakage.
+    require(_finite(auc) and 0 <= auc <= 1 and max(auc, 1 - auc) <= 0.90,
+            "canary missing or direction-invariant leakage threshold exceeded")
     uniqueness = card.get("uniqueness_vs_registry", {})
     require(uniqueness.get("pass") is True, "uniqueness gate not passed")
     overlap = uniqueness.get("max_dot_overlap_within_3px_euclidean")
@@ -65,6 +65,7 @@ def publication_decision(card: dict, root: Path) -> dict:
         require(actual_hash == raster.get("sha256"), "raster hash differs from evidence")
     return {"ok_to_publish_as_submission": not reasons, "reasons": reasons,
             "actual_sha256": actual_hash,
+            "slot_authorized": False,
             "scope": "Recorded evidence audit only; selector and current-registry recheck still required"}
 
 

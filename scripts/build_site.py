@@ -37,7 +37,7 @@ def e(x) -> str:
 def layout(fname: str, title: str, body: str, stamp: str, approved_name: str | None = None) -> str:
     nav = "".join(f'<a href="{h}"{" class=on" if h == fname else ""}>{e(t)}</a>' for h, t in NAV)
     status_meta = (
-        f"Machine-validated unique submission ready: {approved_name} (unscored)."
+        f"Evidence-qualified download; selector required: {approved_name} (unscored)."
         if approved_name else "No current TIFF is approved for submission."
     )
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -47,6 +47,10 @@ def layout(fname: str, title: str, body: str, stamp: str, approved_name: str | N
 <main><div class="card"><b>Automatic submission evidence audit (zero human intervention):</b>
 <a href="data/submission_readiness_audit.json">Read byte-bound gate decisions and blockers</a> &middot;
 <a href="how-to-submit.html">How to submit to DrivenData #306</a>.
+<a href="../knowledge/28_submission_readiness_audit_2026-10-26.md">Latest executive audit and limitations</a>.<br>
+<strong>NOT AUTHORIZED FOR A WEEKLY SLOT:</strong> evidence PASS is not selector approval.
+The current weekly cap and registry must be checked in a separate selector step before upload.
+H31-3 is a completed negative research lane; this audit emits no new eligible candidate.
 Format PASS alone never authorizes a slot; negative and duplicate files remain research-only.
 </div>{body}</main>
 <footer>Built {e(stamp)} from <a href="{REPO_URL}">the repository</a>. {e(status_meta)} No unverified leaderboard score is claimed on this site; historical scores shown are explicitly labelled OWNER-REPORTED. This site never contacts drivendata.org.</footer>
@@ -82,7 +86,7 @@ def build() -> None:
     if lane:
         r, h, u = lane["raster"], lane["holdout"], lane["uniqueness_vs_registry"]
         ok = publication_decision(lane, ROOT)["ok_to_publish_as_submission"]
-        badge = ('<span class="badge ok" style="font-size:1.05rem">&#9989; VALIDATED &mdash; OK TO DOWNLOAD &amp; SUBMIT '
+        badge = ('<span class="badge ok" style="font-size:1.05rem">&#9989; VALIDATED &mdash; EVIDENCE PASS — SELECTOR REQUIRED '
                  '(format + uniqueness + holdout gates PASS; still UNSCORED)</span>') if ok else (
                  '<span class="badge bad" style="font-size:1.05rem">&#9940; RESEARCH ONLY &mdash; DO NOT SUBMIT '
                  '(holdout gate failed; see run card)</span>')
@@ -109,7 +113,7 @@ def build() -> None:
         peer_max = max(peers.values()) if peers else 0.0
         g32_ov = u29["per_raster"].get("g32_h33_2_b2.tif", 0.0)
         ok29 = publication_decision(c29, ROOT)["ok_to_publish_as_submission"]
-        badge29 = ('<span class="badge ok" style="font-size:1.05rem">&#9989; VALIDATED &mdash; OK TO DOWNLOAD &amp; SUBMIT '
+        badge29 = ('<span class="badge ok" style="font-size:1.05rem">&#9989; VALIDATED &mdash; EVIDENCE PASS — SELECTOR REQUIRED '
                    '(all machine gates PASS; still UNSCORED)</span>') if ok29 else (
                    '<span class="badge bad" style="font-size:1.05rem">&#9940; NOT CERTIFIED UNIQUE &mdash; DO NOT SUBMIT AS THE UNIQUE LANE FILE '
                    '(extended duplicate screen failed; see run card)</span>')
@@ -140,7 +144,7 @@ def build() -> None:
         c30 = J(h30_card_path)
         h30, u30, r30 = c30["holdout"], c30["uniqueness_vs_registry"], c30["raster"]
         ok30 = publication_decision(c30, ROOT)["ok_to_publish_as_submission"]
-        badge30 = ('<span class="badge ok" style="font-size:1.05rem">&#9989; VALIDATED &mdash; OK TO DOWNLOAD &amp; SUBMIT '
+        badge30 = ('<span class="badge ok" style="font-size:1.05rem">&#9989; VALIDATED &mdash; EVIDENCE PASS — SELECTOR REQUIRED '
                    '(all machine gates PASS; still UNSCORED)</span>') if ok30 else (
                    '<span class="badge bad" style="font-size:1.05rem">&#9940; DO NOT SUBMIT &mdash; frozen holdout '
                    'selection gate FAILED (negative research artifact)</span>')
@@ -192,7 +196,7 @@ def build() -> None:
         rel_dir = r["directory"].replace("docs/", "", 1)
         tif_href = f"{rel_dir}/{r['primary_allfinite']}"
         checks_href = f"{rel_dir}/checks-{dc['stem']}-allfinite.json"
-        badge = ('<span class="badge ok" style="font-size:1.05rem">&#9989; VALIDATED &mdash; OK TO DOWNLOAD &amp; SUBMIT '
+        badge = ('<span class="badge ok" style="font-size:1.05rem">&#9989; VALIDATED &mdash; EVIDENCE PASS — SELECTOR REQUIRED '
                  '(all machine gates PASS; still UNSCORED)</span>') if publication_decision(dc, ROOT)["ok_to_publish_as_submission"] else (
                  '<span class="badge bad" style="font-size:1.05rem">&#9940; DO NOT SUBMIT &mdash; duplicate of the H29-1 lane '
                  'family (selector treats both as one candidate)</span>')
@@ -221,7 +225,7 @@ def build() -> None:
         h30 = J(h30_card_path)
         r30, hh30, u30 = h30["raster"], h30["holdout"], h30["uniqueness_vs_registry"]
         ok30 = publication_decision(h30, ROOT)["ok_to_publish_as_submission"]
-        badge30 = ('<span class="badge ok" style="font-size:1.05rem">&#9989; VALIDATED &mdash; OK TO DOWNLOAD &amp; SUBMIT '
+        badge30 = ('<span class="badge ok" style="font-size:1.05rem">&#9989; VALIDATED &mdash; EVIDENCE PASS — SELECTOR REQUIRED '
                    '(holdout + uniqueness + format gates PASS; still UNSCORED)</span>') if ok30 else (
                    '<span class="badge bad" style="font-size:1.05rem">&#9940; NOT CERTIFIED &mdash; DO NOT SUBMIT '
                    '(efficacy gate FAILED: holdout DTI below control; unique and format-valid are not enough)</span>')
@@ -759,8 +763,7 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
             f'{h31r["n_dots"]:,} dots; 0 dots on catalogue pixels; min catalogue distance '
             f'{h31r["min_catalogue_dist_px"]:.2f} px (B2); kernel coverage c={h31r["kernel_coverage_c"]:.4f}; '
             f'max directed 3-px overlap vs the 12 pinned focus-site peers {h31r["max_peer_overlap_3px"]:.1%} '
-            f'&le; 70%; all-finite [0,1] validator hard-PASS. <b>It remains the one file marked OK TO DOWNLOAD '
-            f'AND SUBMIT above.</b></p>'
+            f'&le; 70%; all-finite [0,1] validator hard-PASS. <b>It remains the one file marked EVIDENCE PASS — SELECTOR REQUIRED above.</b></p>'
             f'<p class="small"><b>Estimated live score for H31-1 (PROJECTION, not a score; unscored):</b> '
             f'concentration-model sensitivity {proj["conc_5.0x"]:.3f} (5.0&times;) / {proj["conc_5.8x"]:.3f} '
             f'(5.8&times;) / {proj["conc_6.5x"]:.3f} (6.5&times;) with |G|=12,226 and &rho;=1.38 assumed; '
@@ -796,7 +799,7 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
             f'pinned focus peers (maximum final-dot overlap {peer_max:.1%}), but it is <b>not an eligible download</b>: '
             f'it also has {local_max:.1%} 3-px overlap with the existing H31-1 candidate in the extended local screen. '
             f'Its machine run card is <code>evidence/h31_3_run_card_2026-10-26.json</code>; its labelled research bytes '
-            f'live only under <code>downloads/research/</code>. H31-1 remains the only file shown as OK TO DOWNLOAD AND SUBMIT.</p>'
+            f'live only under <code>downloads/research/</code>. H31-1 remains the only file shown as EVIDENCE PASS — SELECTOR REQUIRED.</p>'
             '</div>'
         )
     parallel_s10_box = s12_box + s11_box + parallel_s10_box
@@ -822,12 +825,12 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
         g32_ov31 = next((p["candidate_dot_fraction_within_3px"] for p in hu["peer_entries"] if p["id"] == "g32_h33_2_b2"), 0.5023)
         h29_ov31 = hu["scored_gems27_entries"]["gems27_h29s_511898747886_02190"]["candidate_dot_fraction_within_3px"]
         if h31_ok:
-            b_head = "OK TO DOWNLOAD AND SUBMIT &mdash; ALL AUTOMATED MACHINE VALIDATION GATES PASSED"
+            b_head = "EVIDENCE PASS — SELECTOR REQUIRED &mdash; ALL AUTOMATED MACHINE VALIDATION GATES PASSED"
             b_cls = "ok"
             b_col = "#1a7f37"
             dl_block = f"""
  <div class="row" style="margin:.75rem 0">
-  <a class="btn" href="{e(rel_h31)}/{e(hr['primary_allfinite'])}" download>Download Approved .tif ({hr['allfinite_bytes'] // 1024:,} KB &middot; {e(hr['primary_allfinite'])})</a>
+  <a class="btn" href="{e(rel_h31)}/{e(hr['primary_allfinite'])}" download>Download Validated .tif ({hr['allfinite_bytes'] // 1024:,} KB &middot; {e(hr['primary_allfinite'])})</a>
   <a class="btn alt" href="{e(rel_h31)}/{e(hr['zip'])}" download>Download Single-TIFF .zip ({hr['zip_bytes'] // 1024:,} KB)</a>
   <a class="btn alt" href="how-to-submit.html">How to Submit to DrivenData #306</a>
   <a class="btn alt" href="{e(rel_h31)}/{e(h31_man['checks_allfinite'])}">Validator JSON Receipt</a>
@@ -950,7 +953,7 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
 
     # ---------------------------------------------------------------- index
     top_badges = (
-        '<span class="badge ok">OK TO DOWNLOAD &amp; SUBMIT: H31-1 (cf8e1bbef244)</span> '
+        '<span class="badge ok">EVIDENCE PASS — SELECTOR REQUIRED: H31-1 (cf8e1bbef244)</span> '
         '<span class="badge ok">ALL 5/5 FROZEN HOLDOUT + 27-RASTER UNIQUENESS + [0,1] GATES PASS</span> '
         '<span class="badge bad">DO NOT SUBMIT H28-3 / H30 / H29-2</span>'
         if h31_ok else
@@ -1010,7 +1013,7 @@ The agent never uploads anything; you press the button.</div>
     # ---------------------------------------------------------------- executive summary
     rows_pay = "".join(f"<tr><td class='num'>{k}</td><td class='num'>{v:+.4f}</td></tr>" for k, v in pay.items())
     exec_decision_answer = (
-        f"<b>OK TO DOWNLOAD AND SUBMIT: <code>{e(h31_rc['raster']['primary_allfinite'])}</code> (<code>{e(h31_rc['submission_name'])}</code>).</b> "
+        f"<b>EVIDENCE PASS — SELECTOR REQUIRED: <code>{e(h31_rc['raster']['primary_allfinite'])}</code> (<code>{e(h31_rc['submission_name'])}</code>).</b> "
         "Passed 100% of automated machine validation gates without human intervention: all 5/5 frozen holdout clauses on fresh seeds 400&ndash;409 "
         "(new #1 blind pooled HOLDOUT-DTI <code>0.0473</code> buffered / <code>0.1156</code> unbuffered, beating <code>B0</code> 10/10 seeds, <code>D0</code> 10/10 seeds, "
         "and live-0.2190 <code>H29-S</code> 9/10 seeds), 27-raster uniqueness (max 3-px overlap <code>62.8% &le; 70%</code>; <code>50.2%</code> vs <code>GEMSDOE32</code>), "
@@ -1052,8 +1055,8 @@ The agent never uploads anything; you press the button.</div>
 
 <h2>Exact submission steps (summary &mdash; full guide on <a href="how-to-submit.html">how-to-submit.html</a>)</h2>
 <ol class="steps">
-<li><b>Automated gate check:</b> verify the top banner above reads <b>OK TO DOWNLOAD AND SUBMIT</b> (computed automatically by <code>gems27.readiness.publication_decision</code>). Historical research files (<code>H28-3</code>, <code>H30</code>, <code>H29-2</code>) and already-scored files (<code>511898747886</code>, <code>5512495c6bd1</code>) must never be uploaded.</li>
-<li>Download the approved all-finite <b>.tif</b> (<code>{e(h31_rc['raster']['primary_allfinite']) if h31_rc else ''}</code>) without opening or re-saving it in GIS software, and copy the &le;140-character note shown in the green box above.</li>
+<li><b>Automated gate check:</b> verify the top banner above reads <b>EVIDENCE PASS — SELECTOR REQUIRED</b> (computed automatically by <code>gems27.readiness.publication_decision</code>). Historical research files (<code>H28-3</code>, <code>H30</code>, <code>H29-2</code>) and already-scored files (<code>511898747886</code>, <code>5512495c6bd1</code>) must never be uploaded.</li>
+<li>Download the evidence-qualified all-finite <b>.tif</b> (<code>{e(h31_rc['raster']['primary_allfinite']) if h31_rc else ''}</code>) without opening or re-saving it in GIS software, and copy the &le;140-character note shown in the green box above.</li>
 <li>Sign in as a human at DrivenData and open <a href="{DD_COMP}">DrivenData #306 (DOE GEMS)</a> (this project never accesses <code>drivendata.org</code> automatically).</li>
 <li>Open the competition submission form, upload the single-band <b>.tif</b> (or its single-member <b>.zip</b>), and paste the short note.</li>
 <li>Submit, save the organizer confirmation / public leaderboard score, and record it in <code>registry/live_scores.json</code>.</li></ol>
@@ -1098,9 +1101,9 @@ The agent never uploads anything; you press the button.</div>
 <p class="lead">Executive-summary subpage: step-by-step human upload guide, automated machine-gate checklist, how the <code>[0, 1]</code> portal error is prevented, and post-submission score logging.</p>
 <div class="card hero" style="border:2px solid {'#1a7f37' if h31_ok else '#cf222e'}">
  <h2 style="margin-top:0">1. Current Automated Machine-Gate Status</h2>
- <p><span class="badge {'ok' if h31_ok else 'bad'}" style="font-size:1.05rem">{'&#9989; OK TO DOWNLOAD AND SUBMIT: ' + e(h31_sub_name) if h31_ok else '&#9940; DO NOT SUBMIT — FAIL-CLOSED GATE NOT PASSED'}</span></p>
+ <p><span class="badge {'ok' if h31_ok else 'bad'}" style="font-size:1.05rem">{'&#9989; EVIDENCE PASS — SELECTOR REQUIRED: ' + e(h31_sub_name) if h31_ok else '&#9940; DO NOT SUBMIT — FAIL-CLOSED GATE NOT PASSED'}</span></p>
  <p>Inspection is executed <b>100% automatically by project code without human intervention</b> via <code>gems27.readiness.publication_decision</code> (<a href="data/submission_readiness_audit.json"><code>docs/data/submission_readiness_audit.json</code></a>) and <code>scripts/verify_downloads.py</code>.</p>
- {'<div class="row"><a class="btn" href="downloads/' + e(h31_tif_name) + '" download>1. Download Approved .tif (' + e(h31_tif_name) + ')</a> <a class="btn alt" href="downloads/' + e(h31_zip_name) + '" download>Alternative: Single-TIFF .zip</a></div>' if h31_ok else ''}
+ {'<div class="row"><a class="btn" href="downloads/' + e(h31_tif_name) + '" download>1. Download Validated .tif (' + e(h31_tif_name) + ')</a> <a class="btn alt" href="downloads/' + e(h31_zip_name) + '" download>Alternative: Single-TIFF .zip</a></div>' if h31_ok else ''}
  <p class="small"><b>SHA-256 to verify locally (optional):</b> <code>{e(h31_sha)}</code><br>
  <b>Short note to paste (&le;140 chars):</b> <code>{e(h31_note_str)}</code> ({len(h31_note_str)} chars)</p>
 </div>
@@ -1109,7 +1112,7 @@ The agent never uploads anything; you press the button.</div>
  <h2 style="margin-top:0">2. Step-by-Step Upload Procedure (Human Only)</h2>
  <ol class="steps">
   <li><b>Never automate <code>drivendata.org</code>:</b> DrivenData's Terms of Use prohibit bots, scrapers, or automated requests. Always open the portal manually in your browser.</li>
-  <li><b>Download the exact binary file above:</b> click <b>Download Approved .tif</b> (<code>{e(h31_tif_name)}</code>). <b>Do NOT open and re-save</b> the file in QGIS/ArcGIS/GDAL, as GIS exports can re-inject a <code>nodata=NaN</code> tag or alter geotransform precision.</li>
+  <li><b>Download the exact binary file above:</b> click <b>Download Validated .tif</b> (<code>{e(h31_tif_name)}</code>). <b>Do NOT open and re-save</b> the file in QGIS/ArcGIS/GDAL, as GIS exports can re-inject a <code>nodata=NaN</code> tag or alter geotransform precision.</li>
   <li><b>Sign in to DrivenData:</b> visit <a href="{DD_COMP}">{DD_COMP}</a> and click <b>Submit</b>.</li>
   <li><b>Upload the single-band GeoTIFF (or single-TIFF ZIP):</b> select <code>{e(h31_tif_name)}</code> (806 KB) or <code>{e(h31_zip_name)}</code> (180 KB, verified to contain <i>only</i> that single <code>.tif</code> with no <code>__MACOSX</code> metadata).</li>
   <li><b>Paste the short description note:</b> paste <code>{e(h31_note_str)}</code> so the content hash <code>{e(h31_rc['raster']['content_id']) if h31_rc else ''}</code> and hypothesis <code>H31-1</code> are permanently paired on your Submissions tab.</li>

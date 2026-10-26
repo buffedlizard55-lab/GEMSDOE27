@@ -1,7 +1,22 @@
 # 27GEMSDOE - geothermal & structural fault discovery lab for DrivenData #306 (DOE GEMS)
 
-## Session 12 Executive Summary & Download Verdict (`2026-10-26` — READ FIRST)
-**Current reports:** [`EXECUTIVE_SUMMARY.md`](EXECUTIVE_SUMMARY.md), [`knowledge/27_session11_executive_summary_and_h32_result_2026-10-26.md`](knowledge/27_session11_executive_summary_and_h32_result_2026-10-26.md), and [`knowledge/29_h31_3_mt_graben_result_2026-10-26.md`](knowledge/29_h31_3_mt_graben_result_2026-10-26.md). The H31-1 approval is unchanged; H32 and H31-3 are negative research lanes.
+## Current audit correction — 2026-10-26 (takes precedence over archived session claims)
+
+**H31-1 is an evidence-qualified, format-valid download; a weekly submission remains a separate human selector/cap/current-registry decision.**
+[Executive audit](knowledge/28_submission_readiness_audit_2026-10-26.md) documents the nine-site comparison and
+readiness limitations; [the subsequent H31-3 result](knowledge/29_h31_3_mt_graben_result_2026-10-26.md) closes a
+new preregistered lane as negative. Historical “OK TO SUBMIT” headings below do not override the selector step.
+
+- **H31-3 was subsequently tested; it is DO NOT SUBMIT.** Fresh seeds 510–519 gave H31-3−H31-S pooled HOLDOUT-DTI +0.000366, mean paired +0.000392 (95% CI [−0.001182,+0.001823]), 6/10 seeds and 2/4 folds; 4/5 frozen efficacy clauses failed. Its technically valid TIFF is research-only with `ok_to_submit: false` (`evidence/h31_3_run_card_2026-10-26.json`).
+- Existing H31-1: **HOLDOUT-DTI 0.047302**, 95% CI **[0.044527, 0.049619]**, **120,778 withheld-positive occurrences**,
+  evaluator `gems27.metric v1 + holdout-blind-buffered-v2`, seeds 400–409. This is saved evaluation evidence, not an organizer score.
+- The ~0.235 anchor-transfer figure is a **PROJECTION, not a score or validated live-score prediction**.
+- Historical scores remain **OWNER-REPORTED, not ORGANIZER-CONFIRMED**. No receipts or current weekly-cap evidence are available.
+- All prior generated TIFFs retain their original bytes; do not rename an existing file to claim a new submission.
+- Shared readiness gate checks `max(AUC, 1-AUC)`; strong inverse prediction is not exempt from leakage screening. No DrivenData upload occurred.
+
+## Session 11 Lane L-S11/H32 Executive Summary & Download Verdict (`2026-10-26` — READ FIRST; parallel Session-11 lane below concurs)
+**Full report:** [`knowledge/27_session11_executive_summary_and_h32_result_2026-10-26.md`](knowledge/27_session11_executive_summary_and_h32_result_2026-10-26.md) (9-focus-site table, byte-verified 0.2778 autopsy, projections, run card).
 **✅ THE ONE FILE TO DOWNLOAD AND SUBMIT (unchanged, independently re-audited this session from bytes, zero human inspection):**
 - **File:** `docs/downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif` (SHA-256 `2c002b02792419864bd3b29a218e543cb41e3f07b3b57c29ef35c6e39e184bfe`, recomputed Session 11) · single-TIFF ZIP beside it.
 - **Name:** `27GEMSDOE-H31-DRCG-WL-20261026-cf8e1bbef244` · **Note (118/140):** `27GEMSDOE H31-1 | dualRegime MSub+MFull+WLseis+obliq+CELF2.8 B2 37654px | id cf8e1bbef244 | unscored validated-promote`
@@ -9,8 +24,7 @@
 - **Unique vs all 9 focus sites? YES** — max directed 3-px overlap **57.7%** vs the 12 pinned peer rasters (**50.2%** vs GEMSDOE32), ≤ 70%; max surface Spearman 0.165 ≤ 0.90; 0 catalogue dots; all-finite `[0,1]` validator hard-PASS (Session 11 re-audit: `evidence/session11_reaudit.json`).
 - **Why 0.2778 won (byte-verified Session 11):** `GEMSDOE32 ≡ GEMSDOE25(d=2.8) ∧ EDT(catalogue) > 2px` exactly (symdiff 0) — the fleet-best is catalogue-collar deletion on the H19-5 family, now exhausted; all nine focus-site best files are already submitted and 8/9 are 86.7–100% clones. Never re-upload them.
 - **NEW this session — ⛔ DO NOT SUBMIT:** H32 Poisson-demagnetization TIFF `docs/downloads/research/gems27-h32-poisson-demag-b2-20261026-1ac69a77008d-allfinite.tif` (unique vs peers 46.4%, format-valid) **failed its preregistered frozen gate** on fresh seeds 500–509: pooled HOLDOUT-DTI P 0.03573 < D 0.03922, P−D −0.00349 (95% CI [−0.00477, −0.00223], 1/10 seeds, 0/4 folds; canary max AUC 0.546). Negative results are deliverables; no tuning followed. Prereg: `knowledge/26…`; evidence: `evidence/h32_e2_holdout_500_509.json`, run card `evidence/h32_run_card_2026-10-26.json`. Machine audit (`docs/data/submission_readiness_audit.json`) still approves exactly H31-1 (+ second-priority H30-1) and blocks H32.
-- **NEW Session 12 — ⛔ DO NOT SUBMIT:** H31-3 MT-graben research TIFF `docs/downloads/research/gems27-h31-3-mt-graben-celf28-20261026-0f397db36baf-allfinite.tif` (SHA-256 `da29080bf6acfdc91a835b06464e7d64c056703067967129505af886a59a9d68`) is all-finite and passes the 12-peer screen (max 56.74% final-dot overlap), but failed 4/5 frozen efficacy clauses against exact H31-S on fresh seeds 510–519: pooled HOLDOUT-DTI +0.000366; paired mean +0.000392, 95% CI [−0.001182,+0.001823], 6/10 seeds, 2/4 folds. It additionally overlaps H31-1 by 86.87% in the extended local screen. It is research-only, `ok_to_submit: false`, and must never be uploaded or tuned on these seeds. Evidence: `evidence/h31_3_run_card_2026-10-26.json`.
-- **Site:** https://buffedlizard55-lab.github.io/GEMSDOE27/ — first screen keeps the H31-1 download buttons and now renders Session 12's H31-3 negative card from JSON via `scripts/build_site.py`.
+- **Site:** https://buffedlizard55-lab.github.io/GEMSDOE27/ — first screen keeps the H31-1 download buttons; Session 11 box (H32 negative + re-audit + projection) is rendered from JSON by `scripts/build_site.py`.
 
 ---
 
@@ -39,7 +53,7 @@
      - Max 3-px dot overlap vs live-scored `GEMSDOE27`: **`62.80% <= 70%`** vs `H29-S` (`37.2%` = `14,008` dots are brand-new discovery locations `> 300 m` outside `H29-S`) and **`57.70%`** vs `Slot 1`.
      - Max 3-px dot overlap vs all 13 unscored repo rasters: **`56.24% <= 70%`**.
      - Max Spearman rank correlation (both pre-placement stitched surface and post-placement dots): **`0.1645 <= 0.90`**.
-  4. **Blind 40-Cell Spatial Holdout (`E2`, fresh unconsumed seeds `400–409`, `289,180` withheld positive occurrences, `gems27.metric.dti_binary v1 + 600m-buffered-quadrant-40cell`) — `ALL 5/5 FROZEN CLAUSES PASS`:**
+  4. **Blind 40-Cell Spatial Holdout (`E2`, fresh unconsumed seeds `400–409`, `120,778` withheld positive occurrences, `gems27.metric.dti_binary v1 + 600m-buffered-quadrant-40cell`) — `ALL 5/5 FROZEN CLAUSES PASS`:**
      - **`H31-S` sets a NEW ALL-TIME REPOSITORY #1 BLIND POOLED `HOLDOUT-DTI = 0.047302`** (unbuffered diagnostic **`0.115636`**), beating `H31-A = 0.045202`, `H29-S = 0.044116`, `D0 = 0.040298`, `H28_1_B2 = 0.039091`, `B0 = 0.037725`, `U0 = 0.014825` (catalogue-internal `HOLDOUT-DTI`, NOT a live organizer score).
      - **`H31-S` minus `B0`:** **`+0.009577`**, 95% CI **`[+0.0080, +0.0112]`**, **`10/10` seeds**, **`4/4` folds**.
      - **`H31-S` minus `D0`:** **`+0.007004`**, 95% CI **`[+0.0046, +0.0090]`**, **`10/10` seeds**, **`4/4` folds** (`NW +0.0001`, `NE_LidarGapHeavy +0.0168`, `SW +0.0040`, `SE +0.0067`).
@@ -367,9 +381,9 @@ Verify no hallucinations.
 Metric, thinning and holdout conventions re-implement the owner's sibling repository `buffedlizard55-lab/GEMSDOE24` (credited in each module); the graph, link, candidate, connectivity-theory, vector-attribution, OOF-detector, and submission-verification code is new.
 This work was produced by an AI agent on Arena.ai; see `AI_DISCLOSURE.md` (the Official Rules require generative-AI use to be stated in the narrative).
 
-## Current session task prompt (verbatim)
+## Current session operating brief (condensed; not verbatim)
 
-The following is the full task prompt for this session, to be re-read at the start of every work session as the starting point for what is being built.
+The following is a condensed operating brief from prior sessions, not a verbatim copy of the full user message. Re-read it and the latest audit correction at the start of every session.
 
 ```
 Focus on the highest scoring submissions from these sites: GEMSDOE24, GEMSDOE25, GEMSDOE27, GEMSDOE28, GEMSDOE30, GEMSDOE31, GEMSDOE32, GEMSDOE33, GEMSDOE36.
