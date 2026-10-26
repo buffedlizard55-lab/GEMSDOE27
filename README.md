@@ -1,5 +1,20 @@
 # 27GEMSDOE - geothermal & structural fault discovery lab for DrivenData #306 (DOE GEMS)
 
+## Current audit correction — 2026-10-26 (takes precedence over archived session claims)
+
+**Download is format-valid; a weekly submission is NOT authorized by this audit.**
+[Executive audit](knowledge/28_submission_readiness_audit_2026-10-26.md) documents the nine-site comparison,
+the existing H31 download, and unresolved gates. The prior “OK TO SUBMIT” headings below are historical
+and must not override the separate selector step in the parallel-run protocol.
+
+- No single-method lane paragraph was supplied in the latest prompt. **Zero new experiments, zero new TIFFs, zero uploads.**
+- Existing H31: **HOLDOUT-DTI 0.047302**, 95% CI **[0.044527, 0.049619]**, **120,778 withheld-positive occurrences** (not 289,180),
+  evaluator `gems27.metric v1 + holdout-blind-buffered-v2`, seeds 400–409. Saved evaluation evidence, not a new evaluation.
+- The ~0.235 anchor-transfer figure is a **PROJECTION, not a score or validated live-score prediction**.
+- Historical scores remain **OWNER-REPORTED, not ORGANIZER-CONFIRMED**. No receipts or current weekly-cap evidence are available.
+- All prior generated TIFFs retain their original bytes; do not rename an existing file to claim a new submission.
+- Shared readiness gate now checks `max(AUC, 1-AUC)`; strong inverse prediction is not exempt from leakage screening.
+
 ## Session 11 Lane L-S11/H32 Executive Summary & Download Verdict (`2026-10-26` — READ FIRST; parallel Session-11 lane below concurs)
 **Full report:** [`knowledge/27_session11_executive_summary_and_h32_result_2026-10-26.md`](knowledge/27_session11_executive_summary_and_h32_result_2026-10-26.md) (9-focus-site table, byte-verified 0.2778 autopsy, projections, run card).
 **✅ THE ONE FILE TO DOWNLOAD AND SUBMIT (unchanged, independently re-audited this session from bytes, zero human inspection):**
@@ -38,7 +53,7 @@
      - Max 3-px dot overlap vs live-scored `GEMSDOE27`: **`62.80% <= 70%`** vs `H29-S` (`37.2%` = `14,008` dots are brand-new discovery locations `> 300 m` outside `H29-S`) and **`57.70%`** vs `Slot 1`.
      - Max 3-px dot overlap vs all 13 unscored repo rasters: **`56.24% <= 70%`**.
      - Max Spearman rank correlation (both pre-placement stitched surface and post-placement dots): **`0.1645 <= 0.90`**.
-  4. **Blind 40-Cell Spatial Holdout (`E2`, fresh unconsumed seeds `400–409`, `289,180` withheld positive occurrences, `gems27.metric.dti_binary v1 + 600m-buffered-quadrant-40cell`) — `ALL 5/5 FROZEN CLAUSES PASS`:**
+  4. **Blind 40-Cell Spatial Holdout (`E2`, fresh unconsumed seeds `400–409`, `120,778` withheld positive occurrences, `gems27.metric.dti_binary v1 + 600m-buffered-quadrant-40cell`) — `ALL 5/5 FROZEN CLAUSES PASS`:**
      - **`H31-S` sets a NEW ALL-TIME REPOSITORY #1 BLIND POOLED `HOLDOUT-DTI = 0.047302`** (unbuffered diagnostic **`0.115636`**), beating `H31-A = 0.045202`, `H29-S = 0.044116`, `D0 = 0.040298`, `H28_1_B2 = 0.039091`, `B0 = 0.037725`, `U0 = 0.014825` (catalogue-internal `HOLDOUT-DTI`, NOT a live organizer score).
      - **`H31-S` minus `B0`:** **`+0.009577`**, 95% CI **`[+0.0080, +0.0112]`**, **`10/10` seeds**, **`4/4` folds**.
      - **`H31-S` minus `D0`:** **`+0.007004`**, 95% CI **`[+0.0046, +0.0090]`**, **`10/10` seeds**, **`4/4` folds** (`NW +0.0001`, `NE_LidarGapHeavy +0.0168`, `SW +0.0040`, `SE +0.0067`).
@@ -366,9 +381,9 @@ Verify no hallucinations.
 Metric, thinning and holdout conventions re-implement the owner's sibling repository `buffedlizard55-lab/GEMSDOE24` (credited in each module); the graph, link, candidate, connectivity-theory, vector-attribution, OOF-detector, and submission-verification code is new.
 This work was produced by an AI agent on Arena.ai; see `AI_DISCLOSURE.md` (the Official Rules require generative-AI use to be stated in the narrative).
 
-## Current session task prompt (verbatim)
+## Current session operating brief (condensed; not verbatim)
 
-The following is the full task prompt for this session, to be re-read at the start of every work session as the starting point for what is being built.
+The following is a condensed operating brief from prior sessions, not a verbatim copy of the full user message. Re-read it and the latest audit correction at the start of every session.
 
 ```
 Focus on the highest scoring submissions from these sites: GEMSDOE24, GEMSDOE25, GEMSDOE27, GEMSDOE28, GEMSDOE30, GEMSDOE31, GEMSDOE32, GEMSDOE33, GEMSDOE36.

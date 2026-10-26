@@ -37,7 +37,7 @@ def test_boolean_alone_never_approves(tmp_path, field):
     assert not publication_decision(card, tmp_path)["ok_to_publish_as_submission"]
 
 
-@pytest.mark.parametrize("value", [float("nan"), float("inf"), 0.90001, True, None])
+@pytest.mark.parametrize("value", [float("nan"), float("inf"), 0.90001, 0.09999, -0.1, 1.1, True, None])
 def test_canary_fails_closed(tmp_path, value):
     card = valid_card(tmp_path)
     card["holdout"]["canary_max_auc"] = value
@@ -67,3 +67,12 @@ def test_negative_cards_remain_unapproved_and_h31_promotes():
             assert card.get("verdict") != "promote" or card.get("ok_to_submit") is not True
     assert approved == ["h30_1_run_card.json", "h31_s10_run_card_2026-10-26.json"]
 
+
+
+@pytest.mark.parametrize("value", [0.1, 0.3, 0.4993, 0.9])
+def test_canary_checks_both_directions_without_arbitrary_floor(tmp_path, value):
+    card = valid_card(tmp_path)
+    card["holdout"]["canary_max_auc"] = value
+    decision = publication_decision(card, tmp_path)
+    assert decision["ok_to_publish_as_submission"]
+    assert decision["slot_authorized"] is False
