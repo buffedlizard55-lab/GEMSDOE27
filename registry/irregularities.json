@@ -220,7 +220,7 @@
   {
    "id": "h27-10-first-run-spacing-diagnostic-self-distance",
    "severity": "low",
-   "issue": "The first H27-10 run (seeds 150-159) correctly generated the frozen equal-count candidate and measured mean paired ΔDTI +0.00084615, 4/4 fold means and 7/10 seed means improved, and annulus gross efficiency 0.03357 < m(0.2477)=0.05212. Its spacing integrity check incorrectly measured each added pixel against a mask that included itself, so it necessarily returned zero and marked the spacing data check false. This is a diagnostic false negative, not evidence of a spacing violation.",
+   "issue": "The first H27-10 run (seeds 150-159) correctly generated the frozen equal-count candidate and measured mean paired \u0394DTI +0.00084615, 4/4 fold means and 7/10 seed means improved, and annulus gross efficiency 0.03357 < m(0.2477)=0.05212. Its spacing integrity check incorrectly measured each added pixel against a mask that included itself, so it necessarily returned zero and marked the spacing data check false. This is a diagnostic false negative, not evidence of a spacing violation.",
    "action": "Preserved the first JSON as evidence/h27_10_annulus_holdout_initial.json. Corrected only the spacing-check implementation and added tests; the frozen masks, ranker, K, gate, and seeds are unchanged. The deterministic integrity rerun on the same used seeds passed all data checks; all 40 cell outcomes, aggregate metrics, and the frozen FAIL are unchanged in evidence/h27_10_annulus_holdout.json. This rerun is non-confirmatory and cannot change the negative gate result."
   },
   {
@@ -232,8 +232,8 @@
   {
    "id": "IR-2026-10-25-01-lane-paragraph-missing",
    "severity": "high",
-   "issue": "PARALLEL-RUN PROTOCOL §1 says 'Your lane is the single method paragraph below', but the prompt as received contains no delimited single method paragraph; parallel sessions may therefore collide or diverge silently.",
-   "action": "This session DECLARED Lane L-2026-10-25 explicitly in knowledge/13 §1 before implementing, stayed inside it, and enforced the numeric uniqueness tests (surface Spearman <0.90; <70% final dots within 3px Euclidean of any single registry raster). Owner: confirm the intended lane text for future parallel runs."
+   "issue": "PARALLEL-RUN PROTOCOL \u00a71 says 'Your lane is the single method paragraph below', but the prompt as received contains no delimited single method paragraph; parallel sessions may therefore collide or diverge silently.",
+   "action": "This session DECLARED Lane L-2026-10-25 explicitly in knowledge/13 \u00a71 before implementing, stayed inside it, and enforced the numeric uniqueness tests (surface Spearman <0.90; <70% final dots within 3px Euclidean of any single registry raster). Owner: confirm the intended lane text for future parallel runs."
   },
   {
    "id": "IR-2026-10-25-02-leader-score-conflict",
@@ -244,14 +244,14 @@
   {
    "id": "IR-2026-10-25-03-portal-error-mechanism-verified",
    "severity": "medium",
-   "issue": "Updates item portal-0-1-error-cause-unknown: GEMSDOE32's two mechanisms were re-measured this session — training_features.tif nodata -3.4028234663852886e+38 occupies 3,061 cells INSIDE the footprint; NaN-outside files risk strict whole-array validators. This repo's front-page primary button historically pointed at the NaN variant.",
+   "issue": "Updates item portal-0-1-error-cause-unknown: GEMSDOE32's two mechanisms were re-measured this session \u2014 training_features.tif nodata -3.4028234663852886e+38 occupies 3,061 cells INSIDE the footprint; NaN-outside files risk strict whole-array validators. This repo's front-page primary button historically pointed at the NaN variant.",
    "action": "Lane primary download is all-finite zeros-outside (nodata=None), NaN twin secondary; site order-of-try updated for the lane file. Legacy slot files unchanged (history); their allfinite fallbacks remain the safe choice."
   },
   {
    "id": "IR-2026-10-25-04-holdout-buffer-template-fix",
    "severity": "medium",
-   "issue": "Shared holdout harness buffered training but scored up to hidden segments (feature support could overlap hidden neighbourhoods). Protocol §2 requires segments withheld WITH a buffer.",
-   "action": "Fixed once in the template: gems27.holdout.buffered_scoring_mask() excludes the 600 m ring around hidden segments from scoring; catalogue-derived masks use visible faults only. Reported here per protocol §2; siblings should adopt."
+   "issue": "Shared holdout harness buffered training but scored up to hidden segments (feature support could overlap hidden neighbourhoods). Protocol \u00a72 requires segments withheld WITH a buffer.",
+   "action": "Fixed once in the template: gems27.holdout.buffered_scoring_mask() excludes the 600 m ring around hidden segments from scoring; catalogue-derived masks use visible faults only. Reported here per protocol \u00a72; siblings should adopt."
   },
   {
    "id": "IR-2026-10-25-05-index-hand-edit-desync",
@@ -269,7 +269,7 @@
    "id": "IR-2026-10-25-07-lane-paragraph-missing-sessionB",
    "severity": "medium",
    "issue": "Parallel session B (Lane L-DCONFIRM) prompt again contained no delimited single method paragraph (same class as IR-2026-10-25-01).",
-   "action": "Lane declared explicitly in knowledge/15_lane_dconfirm_preregistration.md §2 before implementation; numeric uniqueness tests enforced on surface and final dots."
+   "action": "Lane declared explicitly in knowledge/15_lane_dconfirm_preregistration.md \u00a72 before implementation; numeric uniqueness tests enforced on surface and final dots."
   },
   {
    "id": "IR-2026-10-25-08-knowledge-numbering-collision",
@@ -336,6 +336,30 @@
    "severity": "high",
    "issue": "Two parallel Session-9 lanes both used the H30 label, the same evidence/script filenames, and fresh holdout seeds 240-244 PR #24 (merged, commit b7dc19f): chemistry-verified deconflicted emission, evidence/h30_holdout.json + evidence/h30_run_card.json, knowledge/20_preregistration_H30.md (seeds 240-244). PR #25 lane L-H30-DIPGAP: dip-advection/gap-flanking/soft emission, originally identical filenames and the same seeds 240-244 (knowledge/20_lane_h30_preregistration_2026-10-25.md); its files were renamed to evidence/h30_dipgap_*.json and scripts/*_h30_dipgap_*.py before merging (commit 5383045) so neither lane overwrote the other. Both lanes gated different arms against closely related controls on the same seed block, so the two selection results are NOT independent replications; neither used the other's outcomes before running (parallel sessions). knowledge/20 and knowledge/21 numeric prefixes now each cover two different files. Recommend: the selector assigns hypothesis numbers, knowledge-file numbers, seed blocks and unique evidence filename prefixes before parallel sessions start.",
    "action": "flagged for manual review; L-H30-DIPGAP files renamed (h30_dipgap_*) before merge so neither lane overwrote the other; selector must pre-assign hypothesis/knowledge numbers, seed blocks and filename prefixes to parallel lanes"
+  },
+  {
+   "id": "IR-2026-10-26-01-h29-6-seed-plan-collision",
+   "severity": "high",
+   "issue": "Inherited next-step text (knowledge/06, knowledge/16, site copy) prescribes H29-6 on 'fresh unused seeds 220-229', but L-DCONFIRM already consumed seeds 215-224 (evidence/dconfirm_holdout_2026-10-25.json), so 220-224 are NOT fresh. Running H29-6 as written would have reused confirmation seeds.",
+   "action": "Flagged in knowledge/23 before any run; Session 10 used verified-unused seeds 260-269. H29-6 remains untried; if revived it needs a new preregistration on seeds >=270 (245-254 reserved-consumed, 260-269 now consumed by H31). Site copy referencing 220-229 corrected this session."
+  },
+  {
+   "id": "IR-2026-10-26-02-gemsdoe32-r6-instrument-disagreement",
+   "severity": "high",
+   "issue": "GEMSDOE32's site (fetched 2026-10-26) promotes a new unscored file gemsdoe32-r6-stepprofile-b2-37654-20261026T002502Z-23fbbb51-zeros.tif as 'OK TO DOWNLOAD AND SUBMIT / PROMOTE' based on an SGMC-truth DTI instrument (0.1413 vs champion 0.0961 in their round6_run_card.json), while their own catalogue-hidden instrument in the same run card ranks the candidate BELOW the champion (pooled 0.00338 vs 0.00452). The pinned 12-peer registry (2026-10-25) predates this file, so screens against 'the registry' alone no longer cover the fleet's newest promoted lane.",
+   "action": "File hash-verified from the GEMSDOE32 repo tarball this session (sha256 c7f094c1f4d00f2dd9a056dc80fecc94bf1d636363acd020c9da3659eae56547, 37,654 dots, <=0.211 directed 3px overlap vs every pinned peer - genuinely decorrelated). Added as a 13th peer to H31's surface and dot screens (knowledge/23). This repo neither promotes nor blocks R6: the selector must reconcile the SGMC vs catalogue-hidden instrument disagreement before any slot decision. registry/parallel_submission_registry.json was NOT rewritten mid-session; selector should re-pin it."
+  },
+  {
+   "id": "IR-2026-10-26-03-h29s-live-score-vs-repo-status",
+   "severity": "medium",
+   "issue": "This repo's H29-S file (gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-allfinite.tif) was recorded UNSCORED in registry/live_scores.json and README, but the 2026-10-26 owner prompt lists gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-allfinite: 0.2190 under GEMSDOE27. Additionally the same prompt lists second scored files for GEMSDOE24 (0.0859), GEMSDOE25 (0.0742), GEMSDOE28 (0.0217) and GEMSDOE30 (0.1462) that were absent from the focus registries.",
+   "action": "Recorded as OWNER-REPORTED in registry/live_scores.json (owner_reported_prompt_2026_10_26) and registry/focus_sites_2026-10-26.json; H29-S artifact row updated to scored 0.2190 OWNER-REPORTED. No organizer receipt exists; evidence class unchanged. Consequence recorded in knowledge/25: the repo's best holdout surface scored below the 0.2778 family champion live."
+  },
+  {
+   "id": "IR-2026-10-26-04-run-h29-holdout-10band-bug",
+   "severity": "medium",
+   "issue": "scripts/run_h29_holdout.py get_or_build_subsurface15 passed a stale 10-band tuple to gems27.subsurface_features.build_transforms, which requires all 16 SUBSURFACE_BANDS; any cache-miss run raised ValueError (missing mag_anom, tmi, iso_grav_anom_hg/vg/slope, geod_shearrate). Session 7 never exercised the branch (lane cache always present), so the frozen H29 results are unaffected, but the shared runner was not reproducible from a clean data_cache.",
+   "action": "Fixed once in the shared runner (needed = tuple(sub.SUBSURFACE_BANDS), matching every other runner; formulas unchanged) and reported in knowledge/25 section 5 per PARALLEL-RUN PROTOCOL section 2. Failed first-attempt log preserved at evidence/h31_holdout_run_attempt1_failed.log."
   }
  ]
 }

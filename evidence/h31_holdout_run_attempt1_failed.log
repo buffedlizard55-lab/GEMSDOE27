@@ -1,0 +1,25 @@
+fitting H29 2-stage nested spatial cross-fit (Quadrant 4-fold)...
+  finished H29 Quadrant OOF in 390.2s
+fitting baseline OOF arm D0...
+Traceback (most recent call last):
+  File "/home/user/GEMSDOE27/scripts/run_h31_holdout.py", line 250, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/user/GEMSDOE27/scripts/run_h31_holdout.py", line 245, in main
+    rc = run_e1()
+         ^^^^^^^^
+  File "/home/user/GEMSDOE27/scripts/run_h31_holdout.py", line 71, in run_e1
+    foot, labels, fold, surf = get_surfaces()
+                               ^^^^^^^^^^^^^^
+  File "/home/user/GEMSDOE27/scripts/run_h31_holdout.py", line 58, in get_surfaces
+    prob_d0 = h29run.get_or_fit_baseline_oof("D0", foot, labels, fold, names)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/GEMSDOE27/scripts/run_h29_holdout.py", line 136, in get_or_fit_baseline_oof
+    T_sub = get_or_build_subsurface15(foot, names)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/GEMSDOE27/scripts/run_h29_holdout.py", line 68, in get_or_build_subsurface15
+    T = sub.build_transforms(grids, foot)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/GEMSDOE27/src/gems27/subsurface_features.py", line 92, in build_transforms
+    raise ValueError(f"missing prepared bands required by subsurface transforms: {missing}")
+ValueError: missing prepared bands required by subsurface transforms: ['mag_anom', 'tmi', 'iso_grav_anom_hg', 'iso_grav_anom_vg', 'iso_grav_anom_slope', 'geod_shearrate']
