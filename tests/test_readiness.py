@@ -53,6 +53,12 @@ def test_duplicate_and_ci_gate(tmp_path):
     assert not publication_decision(card, tmp_path)["ok_to_publish_as_submission"]
 
 
+def test_negative_spearman_fails_closed(tmp_path):
+    card = valid_card(tmp_path)
+    card["uniqueness_vs_registry"]["max_surface_spearman"] = -0.95
+    assert not publication_decision(card, tmp_path)["ok_to_publish_as_submission"]
+
+
 def test_negative_cards_remain_unapproved_and_h31_promotes():
     root = Path(__file__).resolve().parents[1]
     cards = sorted((root / "evidence").glob("*run_card*.json"))
@@ -65,5 +71,6 @@ def test_negative_cards_remain_unapproved_and_h31_promotes():
             approved.append(p.name)
         else:
             assert card.get("verdict") != "promote" or card.get("ok_to_submit") is not True
-    assert approved == ["h30_1_run_card.json", "h31_s10_run_card_2026-10-26.json"]
+    assert "h30_1_run_card.json" not in approved
+    assert "h31_s10_run_card_2026-10-26.json" in approved
 

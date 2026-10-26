@@ -44,7 +44,7 @@ def publication_decision(card: dict, root: Path) -> dict:
     rho = uniqueness.get("max_surface_spearman_armD",
                          uniqueness.get("max_surface_spearman"))
     require(_finite(overlap) and 0 <= overlap <= 0.70, "dot overlap missing or exceeds threshold")
-    require(_finite(rho) and -1 <= rho <= 0.90, "surface correlation missing or exceeds threshold")
+    require(_finite(rho) and abs(rho) <= 0.90, "surface correlation missing or exceeds threshold")
     validator = card.get("validator", {})
     checks = validator.get("zeros_checks", {})
     require(validator.get("zeros_hard_pass") is True and bool(checks)

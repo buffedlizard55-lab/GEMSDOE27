@@ -328,11 +328,12 @@ def main() -> int:
             b_tot = max(1, int(round(B_TOT * frac)))
             k_scarp = max(1, int(round(SCARP_TOP_K * frac)))
 
-            # Leak-free full-kernel blind evaluation: visible_known excludes 6-px buffer around hidden
-            vis_known = sp.known & (distance_transform_edt(~sp.hidden) > 6.0)
+            # Forensic fix (Session 11, IR-2026-10-26-06): never read withheld `sp.hidden` or
+            # `valid_buf` when constructing visible catalogue graphs or emission masks.
+            vis_known = sp.known
             d_vis = distance_transform_edt(~vis_known)
-            emit_blind = fm & (d_vis > B2_COLLAR_PX)
-            r1_blind = fm & (d_vis > 1.0)
+            emit_blind = fm & (~vis_known) & (d_vis > B2_COLLAR_PX)
+            r1_blind = fm & (~vis_known) & (d_vis > 1.0)
 
             gr = build_graph(vis_known, with_edges=False)
             lf = links.generate_links(gr, region=sp.fold_mask, **RULE)
@@ -379,8 +380,9 @@ def main() -> int:
             # Legacy buffered_scoring_mask evaluation (for direct comparability with H29-1 / DCONFIRM)
             valid_buf = holdout.buffered_scoring_mask(sp, foot)
             d_known_std = distance_transform_edt(~sp.known)
-            emit_buf = (valid_buf | sp.hidden) & (d_known_std > B2_COLLAR_PX)
-            r1_buf = (valid_buf | sp.hidden) & (d_known_std > 1.0)
+            # Forensic fix (Session 11, IR-2026-10-26-06): blind emission cannot condition on `valid_buf | sp.hidden`.
+            emit_buf = fm & (~sp.known) & (d_known_std > B2_COLLAR_PX)
+            r1_buf = fm & (~sp.known) & (d_known_std > 1.0)
             topo_buf = topo_blind & emit_buf
 
             dB_b = priority_poisson_disk(prob_B, rB_all & emit_buf, min_dist=MIN_DIST_PX, budget=b_ctrl)

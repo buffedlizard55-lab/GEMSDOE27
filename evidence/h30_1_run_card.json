@@ -73,7 +73,8 @@
       "hydrothermal_temp_upflow_x_bstep": 0.5666365354570352,
       "hydrothermal_geotherm_upflow_grad": 0.5700076347179375
     },
-    "gate_efficacy_pass": true
+    "gate_efficacy_pass": false,
+    "forensic_invalidation_note": "QUARANTINED FAIL-CLOSED (IR-2026-10-26-06): scripts/run_h30_1_holdout.py leaked withheld test truth `sp.hidden` at inference time in two places (`vis_known = sp.known & (distance_transform_edt(~sp.hidden) > 6.0)` creating synthetic fault gaps bridged directly across `sp.hidden` by T-v2 links, and `emit_buf = (valid_buf | sp.hidden) & ...` repeating the IR-2026-10-25-10 hidden-ring mask leak), reused already-consumed seeds 240-244, and emitted 1,165 live-refuted T-v2 bridge dots."
   },
   "uniqueness_vs_registry": {
     "max_dot_overlap_within_3px_euclidean": 0.6802272727272727,
@@ -253,15 +254,20 @@
     }
   },
   "submission_name": "GEMSDOE27-H30-1-UPDIP-HYDROTHERMAL-B2-35K",
-  "note_max_140_chars": "27GEMSDOE H30-1 updip+hydro+Tv2 B2 35.2k; HOLDOUT-DTI 0.0942 vs B 0.0876 (buf 0.0772); UNSCORED | id 801dff07541d",
-  "note_chars": 113,
-  "ok_to_submit": true,
-  "verdict": "promote",
+  "note_max_140_chars": "27GEMSDOE H30-1 updip+hydro+Tv2 B2 35.2k; QUARANTINED DO NOT SUBMIT (sp.hidden holdout leak) | id 801dff07541d",
+  "note_chars": 110,
+  "ok_to_submit": false,
+  "verdict": "negative",
+  "forensic_retraction_2026_10_26": "Quarantined fail-closed in Session 11 (IR-2026-10-26-06): inference-time sp.hidden target leakage in scripts/run_h30_1_holdout.py lines 332 and 381, consumed seed reuse (240-244), and 1,165 live-refuted T-v2 dots.",
   "live_score": null,
   "live_score_label": "UNSCORED \u2014 no ORGANIZER-CONFIRMED score exists for this file",
   "readiness_audit": {
-    "ok_to_publish_as_submission": true,
-    "reasons": [],
+    "ok_to_publish_as_submission": false,
+    "reasons": [
+      "run card does not authorize submission",
+      "verdict is not promote",
+      "efficacy gate not explicitly passed"
+    ],
     "actual_sha256": "85314ccbef774284dc8732c0c784e9396311dffdf84b57bc296a2f3dee24a97a",
     "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
   }

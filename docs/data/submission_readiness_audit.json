@@ -1,7 +1,6 @@
 {
   "purpose": "Fail-closed evidence/byte audit, not a new geological experiment",
   "approved": [
-    "h30_1_run_card.json",
     "h31_s10_run_card_2026-10-26.json"
   ],
   "results": {
@@ -72,8 +71,12 @@
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
     "h30_1_run_card.json": {
-      "ok_to_publish_as_submission": true,
-      "reasons": [],
+      "ok_to_publish_as_submission": false,
+      "reasons": [
+        "run card does not authorize submission",
+        "verdict is not promote",
+        "efficacy gate not explicitly passed"
+      ],
       "actual_sha256": "85314ccbef774284dc8732c0c784e9396311dffdf84b57bc296a2f3dee24a97a",
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },

@@ -73,7 +73,7 @@ def main() -> int:
             directed_overlap = float(within.mean())
         else:
             directed_overlap = 0.0
-        duplicate = bool(correlation > RANK_STOP or directed_overlap > OVERLAP_STOP)
+        duplicate = bool(abs(correlation) > RANK_STOP or directed_overlap > OVERLAP_STOP)
         report_entries.append(
             {
                 "id": item["id"],
