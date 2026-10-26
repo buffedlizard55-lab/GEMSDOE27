@@ -60,7 +60,7 @@ duplicate and the lane stops. Nothing else changes; no post-hoc tuning.
 
 Grids are taken from `data_cache/prepared/features.npy` by band name, scattered onto the full
 grid, footprint-mean-filled outside finite footprint values (same convention as
-`gems27.solarsubsurface_features._fill`). `G_σ` = `scipy.ndimage.gaussian_filter(mode="nearest")`;
+`gems27.subsurface_features._fill`). `G_σ` = `scipy.ndimage.gaussian_filter(mode="nearest")`;
 local moments use Gaussian-weighted means, e.g. `E_w[R]=G_σ(R)`,
 `Cov_w(R,Y)=G_σ(RY)−G_σ(R)G_σ(Y)`, `Var_w(R)=Cov_w(R,R)`.
 
