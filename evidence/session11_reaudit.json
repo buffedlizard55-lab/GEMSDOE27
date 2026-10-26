@@ -1,0 +1,286 @@
+{
+  "audit": "Session 11 independent byte re-audit (machine only, no human inspection)",
+  "template": {
+    "footprint_px": 5167373,
+    "catalogue_px": 60988
+  },
+  "peer_table_measured_from_bytes": {
+    "g24_d15": {
+      "n_dots": 60069,
+      "kernel_coverage_c": 0.0751304909464268,
+      "directed_overlap_3px_vs_g32": 0.88476585260284,
+      "dots_on_catalogue": 0,
+      "min_catalogue_dist_px": 1.0,
+      "dots_le_2px_from_catalogue": 8769
+    },
+    "g25_d28": {
+      "n_dots": 44090,
+      "kernel_coverage_c": 0.06683024194654673,
+      "directed_overlap_3px_vs_g32": 0.8817192107053754,
+      "dots_on_catalogue": 0,
+      "min_catalogue_dist_px": 1.0,
+      "dots_le_2px_from_catalogue": 6436
+    },
+    "g27_tv2_d15": {
+      "n_dots": 61328,
+      "kernel_coverage_c": 0.0769707407270585,
+      "directed_overlap_3px_vs_g32": 0.8671895382207149,
+      "dots_on_catalogue": 0,
+      "min_catalogue_dist_px": 1.0,
+      "dots_le_2px_from_catalogue": 8875
+    },
+    "g28_h27_4_r1": {
+      "n_dots": 40199,
+      "kernel_coverage_c": 0.06261978527568629,
+      "directed_overlap_3px_vs_g32": 0.9539043259782581,
+      "dots_on_catalogue": 0,
+      "min_catalogue_dist_px": 1.4142135623730951,
+      "dots_le_2px_from_catalogue": 2545
+    },
+    "g28_h32_1": {
+      "n_dots": 42294,
+      "kernel_coverage_c": 0.06504658179674035,
+      "directed_overlap_3px_vs_g32": 0.9158982361564288,
+      "dots_on_catalogue": 0,
+      "min_catalogue_dist_px": 1.0,
+      "dots_le_2px_from_catalogue": 4637
+    },
+    "g28_h36_1": {
+      "n_dots": 37660,
+      "kernel_coverage_c": 0.06046540154255132,
+      "directed_overlap_3px_vs_g32": 0.9547265002655337,
+      "dots_on_catalogue": 0,
+      "min_catalogue_dist_px": 1.4142135623730951,
+      "dots_le_2px_from_catalogue": 2353
+    },
+    "g28_h38_1": {
+      "n_dots": 37860,
+      "kernel_coverage_c": 0.06078836282804017,
+      "directed_overlap_3px_vs_g32": 0.9501320655044903,
+      "dots_on_catalogue": 0,
+      "min_catalogue_dist_px": 1.4142135623730951,
+      "dots_le_2px_from_catalogue": 2353
+    },
+    "g30_d28": {
+      "n_dots": 44090,
+      "kernel_coverage_c": 0.06683024194654673,
+      "directed_overlap_3px_vs_g32": 0.8817192107053754,
+      "dots_on_catalogue": 0,
+      "min_catalogue_dist_px": 1.0,
+      "dots_le_2px_from_catalogue": 6436
+    },
+    "g31_h27_4": {
+      "n_dots": 40199,
+      "kernel_coverage_c": 0.06261978527568629,
+      "directed_overlap_3px_vs_g32": 0.9539043259782581,
+      "dots_on_catalogue": 0,
+      "min_catalogue_dist_px": 1.4142135623730951,
+      "dots_le_2px_from_catalogue": 2545
+    },
+    "g32_h33_2_b2": {
+      "n_dots": 37654,
+      "kernel_coverage_c": 0.05924154435983293,
+      "directed_overlap_3px_vs_g32": 1.0,
+      "dots_on_catalogue": 0,
+      "min_catalogue_dist_px": 2.23606797749979,
+      "dots_le_2px_from_catalogue": 0
+    },
+    "g33_h33d": {
+      "n_dots": 41865,
+      "kernel_coverage_c": 0.06487414872599127,
+      "directed_overlap_3px_vs_g32": 0.9264301922847247,
+      "dots_on_catalogue": 0,
+      "min_catalogue_dist_px": 1.0,
+      "dots_le_2px_from_catalogue": 3894
+    },
+    "g36_anderson": {
+      "n_dots": 38854,
+      "kernel_coverage_c": 0.0609633204405968,
+      "directed_overlap_3px_vs_g32": 0.9740309878004839,
+      "dots_on_catalogue": 0,
+      "min_catalogue_dist_px": 2.23606797749979,
+      "dots_le_2px_from_catalogue": 0
+    }
+  },
+  "h19_5_family_identities_measured": {
+    "g32_equals_g25_and_edt_gt_2": true,
+    "g28_r1_equals_g25_and_edt_gt_1": true,
+    "g31_equals_g28_r1_in_footprint": true,
+    "g30_equals_g25_in_footprint": true,
+    "g36_minus_g32_dots": 1200,
+    "g32_minus_g36_dots": 0
+  },
+  "candidates": {
+    "H31-S10_cf8e1bbef244": {
+      "file": "gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif",
+      "sha256": "2c002b02792419864bd3b29a218e543cb41e3f07b3b57c29ef35c6e39e184bfe",
+      "bytes": 825820,
+      "n_dots": 37654,
+      "kernel_coverage_c": 0.06359132199729134,
+      "dots_on_catalogue": 0,
+      "min_catalogue_dist_px": 2.23606797749979,
+      "validator_hard_pass": true,
+      "directed_overlap_3px_vs_peers": {
+        "g24_d15": 0.5736707919477346,
+        "g25_d28": 0.55879853402029,
+        "g27_tv2_d15": 0.5770436075848515,
+        "g28_h27_4_r1": 0.5300897646996335,
+        "g28_h32_1": 0.5474053221437297,
+        "g28_h36_1": 0.5247516864078186,
+        "g28_h38_1": 0.5272481011313539,
+        "g30_d28": 0.55879853402029,
+        "g31_h27_4": 0.5300897646996335,
+        "g32_h33_2_b2": 0.5023370691028841,
+        "g33_h33d": 0.5431826631964731,
+        "g36_anderson": 0.5048600414298614
+      },
+      "projection_sensitivity_not_a_score": {
+        "conc_5.0x": 0.2284,
+        "conc_5.8x": 0.2657,
+        "conc_6.5x": 0.2985
+      },
+      "max_peer_overlap_3px": 0.5770436075848515
+    },
+    "H30-1_801dff07541d": {
+      "file": "gems27-h30-1-updip-hydrothermal-b2-35k-20261025-801dff07541d-allfinite.tif",
+      "sha256": "85314ccbef774284dc8732c0c784e9396311dffdf84b57bc296a2f3dee24a97a",
+      "bytes": 821530,
+      "n_dots": 35200,
+      "kernel_coverage_c": 0.057782526865399406,
+      "dots_on_catalogue": 0,
+      "min_catalogue_dist_px": 2.23606797749979,
+      "validator_hard_pass": true,
+      "directed_overlap_3px_vs_peers": {
+        "g24_d15": 0.3999715909090909,
+        "g25_d28": 0.3864772727272727,
+        "g27_tv2_d15": 0.43210227272727275,
+        "g28_h27_4_r1": 0.3751988636363636,
+        "g28_h32_1": 0.3824715909090909,
+        "g28_h36_1": 0.3710227272727273,
+        "g28_h38_1": 0.376875,
+        "g30_d28": 0.3864772727272727,
+        "g31_h27_4": 0.3751988636363636,
+        "g32_h33_2_b2": 0.36073863636363634,
+        "g33_h33d": 0.38235795454545457,
+        "g36_anderson": 0.3653409090909091
+      },
+      "projection_sensitivity_not_a_score": {
+        "conc_5.0x": 0.2134,
+        "conc_5.8x": 0.2482,
+        "conc_6.5x": 0.2788
+      },
+      "max_peer_overlap_3px": 0.43210227272727275
+    },
+    "H29-S_511898747886_scored_0.2190_owner_reported": {
+      "file": "gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-allfinite.tif",
+      "sha256": "8585c5e870f197f84fda5bac7f22047d646fb73d455eb8b1129486c79bb976cf",
+      "bytes": 825276,
+      "n_dots": 37654,
+      "kernel_coverage_c": 0.05266408229061723,
+      "dots_on_catalogue": 0,
+      "min_catalogue_dist_px": 2.23606797749979,
+      "validator_hard_pass": true,
+      "directed_overlap_3px_vs_peers": {
+        "g24_d15": 0.6396664365007702,
+        "g25_d28": 0.6204387316088597,
+        "g27_tv2_d15": 0.6421362936208637,
+        "g28_h27_4_r1": 0.5905879853402028,
+        "g28_h32_1": 0.6085940404737876,
+        "g28_h36_1": 0.584453178945132,
+        "g28_h38_1": 0.5877728793753652,
+        "g30_d28": 0.6204387316088597,
+        "g31_h27_4": 0.5905879853402028,
+        "g32_h33_2_b2": 0.5612152759334997,
+        "g33_h33d": 0.604955648802252,
+        "g36_anderson": 0.5624634832952674
+      },
+      "projection_sensitivity_not_a_score": {
+        "conc_5.0x": 0.1886,
+        "conc_5.8x": 0.2193,
+        "conc_6.5x": 0.2463
+      },
+      "max_peer_overlap_3px": 0.6421362936208637
+    },
+    "H32_1ac69a77008d_negative": {
+      "file": "gems27-h32-poisson-demag-b2-20261026-1ac69a77008d-allfinite.tif",
+      "sha256": "8ff3b255b9399871f5bb034da289cfb5c7c0cddda97cf77d3371c3b79fee60ed",
+      "bytes": 826116,
+      "n_dots": 37654,
+      "kernel_coverage_c": 0.06082340023239445,
+      "dots_on_catalogue": 0,
+      "min_catalogue_dist_px": 2.23606797749979,
+      "validator_hard_pass": true,
+      "directed_overlap_3px_vs_peers": {
+        "g24_d15": 0.45450682530408454,
+        "g25_d28": 0.4396345673766399,
+        "g27_tv2_d15": 0.46438625378445847,
+        "g28_h27_4_r1": 0.4273649545864981,
+        "g28_h32_1": 0.4355978116534764,
+        "g28_h36_1": 0.4223986827428693,
+        "g28_h38_1": 0.4279492218622192,
+        "g30_d28": 0.4396345673766399,
+        "g31_h27_4": 0.4273649545864981,
+        "g32_h33_2_b2": 0.41143039252137886,
+        "g33_h33d": 0.4341371434641738,
+        "g36_anderson": 0.4144314017103097
+      },
+      "projection_sensitivity_not_a_score": {
+        "conc_5.0x": 0.2183,
+        "conc_5.8x": 0.2539,
+        "conc_6.5x": 0.2853
+      },
+      "max_peer_overlap_3px": 0.46438625378445847
+    },
+    "H31_vs_H32_directed_overlap_3px": 0.5014341105858607,
+    "H32_vs_H31_directed_overlap_3px": 0.5292399213894938,
+    "H31_vs_H29S_directed_overlap_3px": 0.6279810909863494
+  },
+  "readiness_publication_decisions": {
+    "h31_s10_run_card_2026-10-26.json": {
+      "ok_to_publish_as_submission": true,
+      "reasons": [],
+      "actual_sha256": "2c002b02792419864bd3b29a218e543cb41e3f07b3b57c29ef35c6e39e184bfe",
+      "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
+    },
+    "h30_1_run_card.json": {
+      "ok_to_publish_as_submission": true,
+      "reasons": [],
+      "actual_sha256": "85314ccbef774284dc8732c0c784e9396311dffdf84b57bc296a2f3dee24a97a",
+      "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
+    },
+    "h32_run_card_2026-10-26.json": {
+      "ok_to_publish_as_submission": false,
+      "reasons": [
+        "run card does not authorize submission",
+        "verdict is not promote",
+        "efficacy gate not explicitly passed",
+        "paired improvement CI missing or does not exclude zero",
+        "uniqueness gate not passed",
+        "dot overlap missing or exceeds threshold"
+      ],
+      "actual_sha256": "8ff3b255b9399871f5bb034da289cfb5c7c0cddda97cf77d3371c3b79fee60ed",
+      "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
+    }
+  },
+  "projection_method": {
+    "formula": "DTI = TP/(0.8|G| + 0.2N + 0.2(1-rho)TP), TP = concentration * c * |G|",
+    "assumptions": {
+      "|G|": 12226,
+      "rho": 1.38,
+      "concentrations": [
+        5.0,
+        5.8,
+        6.5
+      ],
+      "provenance": "knowledge/23 fitted model; |G| unconfirmed; PROJECTION only"
+    },
+    "holdout_ratio_anchor": {
+      "H29S_owner_reported_live": 0.219,
+      "H29S_holdout_in_H31_experiment_seeds400_409": 0.044116,
+      "ratio": 4.964,
+      "H31_holdout_seeds400_409": 0.047302,
+      "H31_ratio_projection": 0.2348,
+      "warning": "single-anchor ratio; catalogue holdout is not the organizer label set"
+    }
+  }
+}

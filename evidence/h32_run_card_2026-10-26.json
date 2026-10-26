@@ -1,0 +1,224 @@
+{
+  "schema": "parallel-run-card-v2",
+  "generated_utc": "2026-10-26",
+  "lane": "L-S11-2026-10-26",
+  "hypothesis_id": "H32",
+  "hypothesis": "Poisson-theorem gravity-to-pseudogravity hydrothermal demagnetization residual features (8) added to base-32 + subsurface-15 detector; blind B2 Poisson-2.8 emission, 37,654 dots",
+  "mechanism": "Hydrothermal magnetite destruction along blind fault conduits erases the RTP magnetic edge while the isostatic-gravity density step persists; local (sigma=15px) gravity-on-RTP regression residual + gravity-edge-without-magnetic-edge contrasts expose conduits that coincident-edge features suppress.",
+  "named_non_fault_mimic": "Non-magnetic Paleozoic carbonate faulted against granite and reversely magnetised Tertiary ash-flow tuffs (gravity edge, no magnetic edge, no conduit); RTP flight-line levelling seams.",
+  "verdict": "negative",
+  "ok_to_submit": false,
+  "submission_name": "27GEMSDOE-H32-POISSON-20261026-1ac69a77008d",
+  "note_max_140_chars": "27GEMSDOE H32 PoissonDemag B2 37654px HOLDOUT-DTI P-D -0.0035 | id 1ac69a77008d | RESEARCH NEGATIVE DO NOT SUBMIT",
+  "note_chars": 113,
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "provenance_note": "Catalogue-internal buffered hide-and-recover; NOT a live organizer score.",
+    "evaluator": "gems27.metric.dti_binary v1 (alpha=0.2, beta=0.8, R=3px triangular) + buffered quadrant holdout (buffer 6px)",
+    "seeds": [
+      500,
+      501,
+      502,
+      503,
+      504,
+      505,
+      506,
+      507,
+      508,
+      509
+    ],
+    "n_cells": 40,
+    "n_withheld_positives_total": 118039,
+    "canary_max_auc": 0.5460497634986348,
+    "pooled_holdout_dti_buffered": {
+      "B": 0.03646742090192212,
+      "D": 0.03921873362073872,
+      "P": 0.03573204638892547
+    },
+    "paired_candidate_minus_B": {
+      "pooled_delta_dti": -0.0007353745129966491,
+      "mean_seed_paired_delta_dti": -0.0007292940229528765,
+      "ci95": [
+        -0.0017066265075229871,
+        0.0005295277802327033
+      ],
+      "positive_seeds": 2,
+      "n_seeds": 10,
+      "positive_folds": 1,
+      "n_folds": 4,
+      "per_fold_pooled_delta_dti": {
+        "NW": -0.0018138167702006075,
+        "NE_LidarGapHeavy": -0.001897482189408009,
+        "SW": -0.002134364928598604,
+        "SE": 0.002733600237492591
+      },
+      "per_seed_pooled_delta_dti": [
+        -0.0013917204523787759,
+        -0.0009517402906752126,
+        -0.0016264344214533127,
+        -0.0005282319615770581,
+        0.004127577808387885,
+        0.0010837764890079468,
+        -0.001705578463734661,
+        -0.0020170667281252316,
+        -0.0017679059436862751,
+        -0.0025156162652940697
+      ],
+      "positive_cells": 15,
+      "n_cells": 40
+    },
+    "paired_P_minus_D": {
+      "pooled_delta_dti": -0.0034866872318132514,
+      "mean_seed_paired_delta_dti": -0.0034586096083012927,
+      "ci95": [
+        -0.004767184119816798,
+        -0.0022281492515763422
+      ],
+      "positive_seeds": 1,
+      "n_seeds": 10,
+      "positive_folds": 0,
+      "n_folds": 4,
+      "per_fold_pooled_delta_dti": {
+        "NW": -0.005967645726278913,
+        "NE_LidarGapHeavy": -0.003395834826167371,
+        "SW": -0.001997808192989274,
+        "SE": -0.0035359225472162067
+      },
+      "per_seed_pooled_delta_dti": [
+        -0.004241684188482156,
+        -0.003265629368480155,
+        -0.0022316140801278764,
+        -0.007453346685475808,
+        -0.0012673772403618139,
+        0.00014740235175691313,
+        -0.0032134804734736816,
+        -0.0031911882130970584,
+        -0.00396672128626558,
+        -0.0059024568990057105
+      ],
+      "positive_cells": 10,
+      "n_cells": 40
+    },
+    "paired_D_minus_B": {
+      "pooled_delta_dti": 0.0027513127188166023,
+      "mean_seed_paired_delta_dti": 0.002729315585348416,
+      "ci95": [
+        0.001621365404525107,
+        0.003971401490300869
+      ],
+      "positive_seeds": 10,
+      "n_seeds": 10,
+      "positive_folds": 3,
+      "n_folds": 4,
+      "per_fold_pooled_delta_dti": {
+        "NW": 0.004153828956078305,
+        "NE_LidarGapHeavy": 0.001498352636759362,
+        "SW": -0.00013655673560932988,
+        "SE": 0.0062695227847087975
+      },
+      "per_seed_pooled_delta_dti": [
+        0.00284996373610338,
+        0.0023138890778049426,
+        0.0006051796586745636,
+        0.0069251147238987495,
+        0.005394955048749699,
+        0.0009363741372510337,
+        0.0015079020097390206,
+        0.0011741214849718268,
+        0.002198815342579305,
+        0.003386840633711641
+      ],
+      "positive_cells": 29,
+      "n_cells": 40
+    },
+    "frozen_gate_clauses": {
+      "pooled_P_gt_D_and_B": false,
+      "mean_seed_delta_P_minus_D_ge_0.0010": false,
+      "ci95_lower_P_minus_D_gt_0": false,
+      "seeds_positive_P_minus_D_ge_7_of_10": false,
+      "folds_positive_P_minus_D_ge_3_of_4": false
+    },
+    "gate_efficacy_pass": false,
+    "oof_pr_auc_catalogue_descriptive": {
+      "B": 0.024577752304290764,
+      "D": 0.02484995604409433,
+      "P": 0.024162450896410795
+    }
+  },
+  "uniqueness_vs_registry": {
+    "pass": false,
+    "max_dot_overlap_within_3px_euclidean": 0.8553407340521592,
+    "max_dot_overlap_within_3px_vs_peers": 0.46438625378445847,
+    "max_dot_overlap_within_3px_vs_repo": 0.8553407340521592,
+    "max_surface_spearman": 0.7177813977831953,
+    "max_surface_spearman_armD": 0.7177813977831953,
+    "n_rasters_screened": 31,
+    "detail_file": "evidence/h32_uniqueness_vs_registry.json"
+  },
+  "validator": {
+    "zeros_hard_pass": true,
+    "zeros_checks": {
+      "grid_matches_template": {
+        "pass": true,
+        "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+        "hard": true
+      },
+      "single_band_float32": {
+        "pass": true,
+        "detail": "count=1 dtype=float32",
+        "hard": true
+      },
+      "inside_footprint_all_finite": {
+        "pass": true,
+        "detail": "0 non-finite inside 5167373 px",
+        "hard": true
+      },
+      "inside_footprint_in_0_1": {
+        "pass": true,
+        "detail": "min=0 max=1",
+        "hard": true
+      },
+      "no_infinities_anywhere": {
+        "pass": true,
+        "detail": "np.isinf(whole array) is empty",
+        "hard": true
+      },
+      "outside_footprint_is_zero_and_finite": {
+        "pass": true,
+        "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+        "hard": true
+      },
+      "strict_whole_array_range": {
+        "pass": true,
+        "detail": "whole-array min=0 max=1",
+        "hard": true
+      },
+      "profile_driver_gtiff": {
+        "pass": true,
+        "detail": "GTiff",
+        "hard": false
+      },
+      "compression_like_sample": {
+        "pass": true,
+        "detail": "Compression.lzw",
+        "hard": false
+      }
+    },
+    "technical_validator_pass": true
+  },
+  "raster": {
+    "primary_allfinite": "gems27-h32-poisson-demag-b2-20261026-1ac69a77008d-allfinite.tif",
+    "sha256": "8ff3b255b9399871f5bb034da289cfb5c7c0cddda97cf77d3371c3b79fee60ed",
+    "directory": "docs/downloads/research",
+    "nan_twin": "gems27-h32-poisson-demag-b2-20261026-1ac69a77008d-nan.tif",
+    "zip": "gems27-h32-poisson-demag-b2-20261026-1ac69a77008d-allfinite.zip"
+  },
+  "sha256": "8ff3b255b9399871f5bb034da289cfb5c7c0cddda97cf77d3371c3b79fee60ed",
+  "bytes": 826116,
+  "n_dots": 37654,
+  "kernel_coverage_c_active_footprint": 0.06082340023239445,
+  "min_catalogue_distance_px": 2.23606797749979,
+  "budget": "3 experiments (E1 canary, E2 holdout seeds 500-509, E3 build)",
+  "runtime_s": 96.6,
+  "location_note": "Moved to docs/downloads/research/ (negative artifact; root downloads dir reserved for eligible files). Bytes unchanged."
+}

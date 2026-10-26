@@ -1,0 +1,17 @@
+{
+  "candidate": "gems27-h32-poisson-demag-b2-20261026-1ac69a77008d",
+  "content_id": "1ac69a77008d",
+  "run_card": "/home/user/GEMSDOE27/evidence/h32_run_card_2026-10-26.json",
+  "files": {
+    "allfinite": "gems27-h32-poisson-demag-b2-20261026-1ac69a77008d-allfinite.tif",
+    "nan": "gems27-h32-poisson-demag-b2-20261026-1ac69a77008d-nan.tif",
+    "zip": "gems27-h32-poisson-demag-b2-20261026-1ac69a77008d-allfinite.zip"
+  },
+  "sha256_allfinite": "8ff3b255b9399871f5bb034da289cfb5c7c0cddda97cf77d3371c3b79fee60ed",
+  "n_dots": 37654,
+  "ok_to_submit": false,
+  "verdict": "negative",
+  "note": "27GEMSDOE H32 PoissonDemag B2 37654px HOLDOUT-DTI P-D -0.0035 | id 1ac69a77008d | RESEARCH NEGATIVE DO NOT SUBMIT",
+  "directory": "docs/downloads/research",
+  "status": "NEGATIVE research artifact - DO NOT SUBMIT"
+}

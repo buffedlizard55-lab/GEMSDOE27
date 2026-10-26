@@ -729,6 +729,49 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
             f'<ul class="tight">{"".join(p_lines)}</ul></div>'
         )
 
+    # ---- Session 11 (Lane L-S11): H32 Poisson-demag NEGATIVE + independent byte re-audit ----
+    s11_box = ""
+    h32_rc_path = EV / "h32_run_card_2026-10-26.json"
+    s11_path = EV / "session11_reaudit.json"
+    if h32_rc_path.exists() and s11_path.exists():
+        c32 = J(h32_rc_path)
+        s11 = J(s11_path)
+        h32h = c32["holdout"]
+        pooled = h32h["pooled_holdout_dti_buffered"]
+        pmd = h32h["paired_P_minus_D"]
+        h31r = s11["candidates"]["H31-S10_cf8e1bbef244"]
+        proj = h31r["projection_sensitivity_not_a_score"]
+        ratio = s11["projection_method"]["holdout_ratio_anchor"]
+        s11_box = (
+            '<div class="card"><h3 style="margin-top:0">Session 11 Update (2026-10-26, Lane L-S11) &mdash; '
+            'new experiment NEGATIVE; approved file unchanged and independently re-audited</h3>'
+            f'<p><b>H32 Poisson-theorem demagnetization residual: DO NOT SUBMIT.</b> Preregistered '
+            f'(<code>knowledge/26</code>) and tested on fresh seeds 500&ndash;509 (40 cells, '
+            f'{h32h["n_withheld_positives_total"]:,} withheld positives): pooled HOLDOUT-DTI '
+            f'P={pooled["P"]:.5f} &lt; B={pooled["B"]:.5f} &lt; D={pooled["D"]:.5f}; '
+            f'P&minus;D {pmd["pooled_delta_dti"]:+.5f} (95% CI [{pmd["ci95"][0]:+.4f}, {pmd["ci95"][1]:+.4f}], '
+            f'{pmd["positive_seeds"]}/10 seeds, {pmd["positive_folds"]}/4 folds). Frozen gate failed 0/5 clauses; '
+            f'leakage canary max direction-invariant AUC {h32h["canary_max_auc"]:.3f} (clean). The unique H32 TIFF '
+            f'(<code>{e(c32["raster"]["primary_allfinite"])}</code>, 46.4% max 3-px overlap vs the 12 focus peers) '
+            f'is a labelled negative research artifact in <code>downloads/research/</code> &mdash; never upload it.</p>'
+            f'<p><b>Independent machine re-audit of the approved H31-1 file (bytes recomputed this session, '
+            f'zero human inspection):</b> SHA-256 <code>{e(h31r["sha256"])}</code> matches the run card; '
+            f'{h31r["n_dots"]:,} dots; 0 dots on catalogue pixels; min catalogue distance '
+            f'{h31r["min_catalogue_dist_px"]:.2f} px (B2); kernel coverage c={h31r["kernel_coverage_c"]:.4f}; '
+            f'max directed 3-px overlap vs the 12 pinned focus-site peers {h31r["max_peer_overlap_3px"]:.1%} '
+            f'&le; 70%; all-finite [0,1] validator hard-PASS. <b>It remains the one file marked OK TO DOWNLOAD '
+            f'AND SUBMIT above.</b></p>'
+            f'<p class="small"><b>Estimated live score for H31-1 (PROJECTION, not a score; unscored):</b> '
+            f'concentration-model sensitivity {proj["conc_5.0x"]:.3f} (5.0&times;) / {proj["conc_5.8x"]:.3f} '
+            f'(5.8&times;) / {proj["conc_6.5x"]:.3f} (6.5&times;) with |G|=12,226 and &rho;=1.38 assumed; '
+            f'single-anchor holdout-ratio projection {ratio["H31_ratio_projection"]:.3f} '
+            f'(H29-S live 0.2190 OWNER-REPORTED / holdout {ratio["H29S_holdout_in_H31_experiment_seeds400_409"]}). '
+            f'Best-anchored reading (anchor-transfer, both Session-11 lanes): likely below 0.2778. No projection is an organizer score; only a DrivenData submission measures it. Full tables: '
+            f'<code>knowledge/27</code> in the repository; machine receipts in '
+            f'<code>evidence/session11_reaudit.json</code> and <code>evidence/h32_e2_holdout_500_509.json</code>.</p></div>'
+        )
+    parallel_s10_box = s11_box + parallel_s10_box
+
     h31_ok = bool(h31_rc and h31_man and publication_decision(h31_rc, ROOT)["ok_to_publish_as_submission"] and h31_man.get("ok_to_submit"))
     approved_submission_name = h31_man["submission_name"] if h31_ok else None
 
