@@ -164,23 +164,12 @@ This H28 run used seeds 140–149. At the time, H27-10 was reserved for seeds **
   efficacy, so nothing was promoted by that scoping; the selector should
   still settle a standing scope rule (IR-2026-10-25-06).
 
-## Carry-forward priorities (next session, in order)
-1. **Selector decision on the Arm-D family (owner action, unchanged):** H29-1 /
-   L-DCONFIRM remain the only detectors with a replicated holdout gain. Either
-   record a standing registry-scope decision (IR-2026-10-25-06) or accept that
-   no D-descendant can be certified; do not let any session silently re-badge.
-2. **Detector-class change, not more feature appends:** per-pixel HGB + extra
-   hand transforms is now repeatedly refuted as a route past Arm D
-   (L-DCONFIRM arm E; H30 DIP/GAP; soft emission). The credible untried lever
-   is spatially contextual supervised segmentation (official reference
-   solution runs on CPU per its README snapshot; GPU only speeds it). Any
-   attempt needs its own preregistration, fresh seeds, and the same buffered
-   whole-segment holdout + canary + registry gates.
-3. **Official GDR #1391 bytes** for H27-16/H28-5 remain unobtained in-sandbox
-   (allowlist excludes gdr.openei.org). Obtain via an authorized runner,
-   verify SHA-256 against the recorded pins, *then* preregister.
-4. Restore the missing H28-4 evidence JSON or retract its numbers
-   (IR-2026-10-25-18).
-5. If the owner ever submits any file, record the exact portal receipt in
-   `registry/live_scores.json` — until then every score here stays
-   OWNER-REPORTED and every 27GEMSDOE file UNSCORED.
+## Carry-forward priorities & Session 11 update (`2026-10-26`)
+1. **Current Machine-Approved vs Fail-Closed Candidates (`GEMSDOE27`):**
+   - **Sole Machine-Approved `OK TO SUBMIT` Candidate:** Session-10 `H31-1` (`docs/downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif`, `evidence/h31_s10_run_card_2026-10-26.json`) passed all `5/5` frozen clauses on seeds `400–409` (`0.047302` buffered `HOLDOUT-DTI`, `57.70%` max peer overlap). Transparent replication disclosure: on fresh Session-11 seeds `500–509`, `H31-S` measured `0.042714` buffered / `0.109572` unbuffered / `0.165491` whole-quadrant OOF due to `SW` `lidar_valid` sediment-cover suppression (`IR-2026-10-26-16`).
+   - **Session-11 `H32-1` (`PDHC-K`) Research Deliverable (`DO NOT SUBMIT`):** `docs/downloads/research/gems27-h32-pdhc-kernel-celf28-20261026-324a95651136-allfinite.tif` (`evidence/h32_s11_run_card_2026-10-26.json`) ranked **#1 of all 8 arms** on untouched seeds `500–509` (`0.044990` buffered, `0.113813` unbuffered, `0.169096` whole-quadrant OOF), beating `H31-S` (`+0.002276`, `9/10` seeds), `D0` (`+0.005631`, `10/10`), and `B0` (`+0.008537`, `10/10`), yet failed closed (`5/6` frozen clauses) because Clause 4 vs `H29-S` (`CI [-0.000819, +0.003063]`, `6/10` seeds) straddled zero on short isolated `600 m`-buffered `NE` fragments (and shares `79.56%` 3-px proximity with unscored `H31-1`).
+   - **Quarantined (`IR-2026-10-26-13`):** PR #29 `H30-1` (`801dff07541d`) leaked `sp.hidden` via `visible_known = sp.known & (d_hid > 6.0)`; fixed in `scripts/run_h30_1_holdout.py` and retracted (`ok_to_submit = False`).
+2. **Consumed Holdout Seed Blocks (Never Reuse for Gating):** `0–2`, `100–169`, `200–204`, `210–224`, `230–231`, `240–254`, `260–269`, `300–309`, `400–409`, `500–509`. All Session-12 preregistrations must use fresh seeds `>= 600`.
+3. **External Data Gate (`H32-4` / `H27-16`):** Sandbox outbound network egress is restricted to `github.com` and `pypi.org`. Official DOE GDR #1391 sinter/travertine (`faffcf69...`) and 2 m probe (`1301f70d...`) packages and USGS ScienceBase 3D Great Basin MT resistivity slices must be fetched outside the sandbox, SHA-256-pinned in `data/manifest.json`, and preregistered on seeds `>= 620`.
+4. **Queued Local Hypotheses (`registry/next_hypotheses.json`):** `H32-2` (`TRG-M` Miller-Singh tilt-angle depth equalization, seeds `600–609`), `H32-3` (`BDSS-A` 2D vector-advected hanging-wall MT clay-cap / basement-step coupling, seeds `610–619`), and `H32-5` (`DS28-OPT` closed-loop Dinkelbach budget + spacing optimization on `H32-1` OOF, seeds `630–639`).
+5. **Score Provenance Discipline:** `Slot 1` (`0.2449`) and `H29-S` (`0.2190`) are `OWNER-REPORTED` live scores (already submitted; never re-upload). Every unscored file remains `UNSCORED` until an exact portal receipt is recorded in `registry/live_scores.json`.

@@ -119,6 +119,16 @@
       "actual_sha256": "2c002b02792419864bd3b29a218e543cb41e3f07b3b57c29ef35c6e39e184bfe",
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
+    "h32_s11_run_card_2026-10-26.json": {
+      "ok_to_publish_as_submission": false,
+      "reasons": [
+        "run card does not authorize submission",
+        "verdict is not promote",
+        "efficacy gate not explicitly passed"
+      ],
+      "actual_sha256": "6ae965f5f92a23ebaf660291dd4c1c0dd7f0f710282a559fe3389786d5a2857e",
+      "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
+    },
     "lane_run_card_2026-10-25.json": {
       "ok_to_publish_as_submission": false,
       "reasons": [

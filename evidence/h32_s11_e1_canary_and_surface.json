@@ -1,0 +1,215 @@
+{
+  "experiment": "E1_H32_leakage_canary_and_surface_uniqueness",
+  "lane": "L-S11-2026-10-26",
+  "preregistration_doc": "knowledge/26_preregistration_H32_2026-10-26.md",
+  "preregistration_sha256": "28e3ff2ec51d72ec97ae7477690de550725597a93a94e0b0a00dbcdc447a10d5",
+  "seeds": [
+    500,
+    501,
+    502,
+    503,
+    504,
+    505,
+    506,
+    507,
+    508,
+    509
+  ],
+  "n_withheld_positive_pixels_union": 54250,
+  "n_negative_sample": 250000,
+  "n_features_checked": 95,
+  "canary_h32_features": {
+    "h32_poisson_demag_resid_s15": {
+      "raw_auc": 0.52644,
+      "direction_invariant_auc": 0.52644
+    },
+    "h32_poisson_alpha_slope_s15": {
+      "raw_auc": 0.47728,
+      "direction_invariant_auc": 0.52272
+    },
+    "h32_hydro_demag_conduit_idx": {
+      "raw_auc": 0.50549,
+      "direction_invariant_auc": 0.50549
+    },
+    "h32_shallow_mag_attenuation": {
+      "raw_auc": 0.50476,
+      "direction_invariant_auc": 0.50476
+    },
+    "h32_rad_potassic_alteration": {
+      "raw_auc": 0.50545,
+      "direction_invariant_auc": 0.50545
+    },
+    "h32_rad_uth_redox_front": {
+      "raw_auc": 0.53249,
+      "direction_invariant_auc": 0.53249
+    },
+    "h32_mt_local_clay_excess": {
+      "raw_auc": 0.50436,
+      "direction_invariant_auc": 0.50436
+    },
+    "h32_clay_cap_asym_400m": {
+      "raw_auc": 0.49316,
+      "direction_invariant_auc": 0.50684
+    },
+    "h32_clay_cap_asym_800m": {
+      "raw_auc": 0.49332,
+      "direction_invariant_auc": 0.50668
+    },
+    "h32_graben_clay_conduit_idx": {
+      "raw_auc": 0.50122,
+      "direction_invariant_auc": 0.50122
+    },
+    "h32_dtb_hinge_axial_crest": {
+      "raw_auc": 0.51061,
+      "direction_invariant_auc": 0.51061
+    },
+    "h32_qvent_strain_corridor": {
+      "raw_auc": 0.50076,
+      "direction_invariant_auc": 0.50076
+    },
+    "h32_piedmont_knickpoint_impulse": {
+      "raw_auc": 0.58879,
+      "direction_invariant_auc": 0.58879
+    },
+    "h32_canyon_mouth_collinearity_1200m": {
+      "raw_auc": 0.59536,
+      "direction_invariant_auc": 0.59536
+    },
+    "h32_lidar_knick_fan_apex": {
+      "raw_auc": 0.58132,
+      "direction_invariant_auc": 0.58132
+    },
+    "h32_sediment_cover_blindness": {
+      "raw_auc": 0.53168,
+      "direction_invariant_auc": 0.53168
+    }
+  },
+  "canary_h31_direction_invariant_auc": {
+    "h31_blakely_rtp_crest_s15": 0.52288,
+    "h31_blakely_grav_crest_s20": 0.52378,
+    "h31_joint_blakely_crest": 0.52035,
+    "h31_wl_ieq_aniso_s2": 0.51107,
+    "h31_wl_deq_aniso_s4": 0.50476,
+    "h31_wl_transtension_shear_x_dil": 0.56413,
+    "h31_wl_seis_x_shear": 0.56465,
+    "h31_dem_breakline_crest": 0.55892,
+    "h31_hydro_conduit_corrob": 0.53,
+    "h31_contour_obliquity_sin2": 0.52826,
+    "h31_basin_oblique_scarp": 0.52917,
+    "h31_lahontan_mimic_score": 0.52166
+  },
+  "canary_h29_direction_invariant_auc": {
+    "h29_piedmont_concave_s3": 0.57935,
+    "h29_piedmont_concave_s8": 0.57374,
+    "h29_deconf_lappos": 0.52475,
+    "h29_deconf_step": 0.52999,
+    "h29_deconf_ex": 0.50505,
+    "h29_piedmont_scarp_coh": 0.51112,
+    "h29_rtp_destripe_hgm": 0.53371,
+    "h29_rtp_destripe_tilt0": 0.50468,
+    "h29_mag_shallow_res": 0.52774,
+    "h29_mag_shallow_grad": 0.51041,
+    "h29_grav_tilt0": 0.50558,
+    "h29_basin_horst_step": 0.50811,
+    "h29_basin_horst_relief": 0.5347,
+    "h29_k_th_alter_grad": 0.5078,
+    "h29_thk_mag_coupled": 0.51049,
+    "h29_cond_strain_piedmont": 0.53139,
+    "h29_gdr_teq_nw_s12": 0.51678,
+    "h29_gdr_diseq_nw_s12": 0.51149,
+    "h29_gdr_teq_grad": 0.50419,
+    "h29_gdr_upflow_prox": 0.50308
+  },
+  "canary_sub15_direction_invariant_auc": {
+    "sub_gm_rtp_s2": 0.5342,
+    "sub_gm_rtp_s5": 0.53963,
+    "sub_tiltabs_rtp": 0.50164,
+    "sub_analytic_rtp": 0.53421,
+    "sub_gm_grav_s2": 0.53829,
+    "sub_gm_grav_s5": 0.54196,
+    "sub_crossfield_coherence": 0.53052,
+    "sub_gm_cond_s3": 0.50709,
+    "sub_gm_depth_s3": 0.53237,
+    "sub_gm_depth_s8": 0.52987,
+    "sub_gm_dilate_s3": 0.55671,
+    "sub_gm_2ndinv_s3": 0.53924,
+    "sub_strain_x_cond": 0.525,
+    "sub_seismic_fabric_ieq": 0.50604,
+    "sub_seismic_fabric_deq": 0.50885
+  },
+  "canary_base32_direction_invariant_auc": {
+    "mag_anom": 0.51002,
+    "rtp": 0.50381,
+    "tmi_hg": 0.52755,
+    "geod_2ndinv": 0.57142,
+    "iso_grav_anom_slope": 0.53245,
+    "geod_shearrate": 0.56948,
+    "geod_dilaterate": 0.52955,
+    "tmi_vg": 0.513,
+    "deq_n100a15": 0.55129,
+    "iso_grav_anom_vg": 0.52761,
+    "det_elev": 0.51222,
+    "iso_grav_anom": 0.54215,
+    "tmi": 0.5117,
+    "depth_to_base_surf": 0.51215,
+    "ieq_n100a15": 0.56927,
+    "cond_surf": 0.51476,
+    "iso_grav_anom_hg": 0.50372,
+    "det_elev_slope": 0.56046,
+    "lidar_ex_max": 0.57115,
+    "lidar_ex_mean": 0.55838,
+    "lidar_step_max": 0.57247,
+    "lidar_lapneg_max": 0.57809,
+    "lidar_lappos_max": 0.58353,
+    "lidar_downface_max": 0.58438,
+    "lidar_upface_max": 0.59194,
+    "lidar_cross_max": 0.5788,
+    "lidar_relief": 0.57403,
+    "lidar_coh100": 0.52282,
+    "lidar_cos2strike": 0.52893,
+    "lidar_sin2strike": 0.51184,
+    "det_local_relief": 0.5857,
+    "det_gradient": 0.57765
+  },
+  "max_h32_direction_invariant_auc": 0.59536,
+  "max_all_95_direction_invariant_auc": 0.59536,
+  "auc_stop_threshold": 0.9,
+  "leakage_flags": {},
+  "preplacement_surface_spearman_vs_12_peers": {
+    "g24_d15.tif": 0.10848,
+    "g25_d28.tif": 0.09087,
+    "g27_tv2_d15.tif": 0.10782,
+    "g28_h27_4_r1.tif": 0.0839,
+    "g28_h32_1.tif": 0.08775,
+    "g28_h36_1.tif": 0.07994,
+    "g28_h38_1.tif": 0.08004,
+    "g30_d28.tif": 0.09087,
+    "g31_h27_4.tif": 0.0839,
+    "g32_h33_2_b2.tif": 0.07946,
+    "g33_h33d.tif": 0.08529,
+    "g36_anderson.tif": 0.07857
+  },
+  "preplacement_surface_spearman_vs_20261026_siblings": {
+    "g24_dkrn1_20261026.tif": 0.07776,
+    "g24_dprf1_20261026.tif": 0.09055,
+    "g25_objbin_20261026.tif": 0.06566,
+    "g28_s20_nchc_20261026.tif": 0.05288,
+    "g30_geocor_20261026.tif": 0.01489,
+    "g31_h31t_20261026.tif": 0.06698,
+    "g32_h46_20261026.tif": 0.08619,
+    "g32_r6_20261026.tif": -0.01796,
+    "g33_llc_20261026.tif": 0.05551,
+    "g36_hvg36_20261026.tif": 0.06351
+  },
+  "preplacement_surface_spearman_vs_scored_gems27": {
+    "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-allfinite.tif": 0.10782,
+    "gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-allfinite.tif": 0.11255
+  },
+  "preplacement_surface_spearman_vs_unscored_h31": {
+    "gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif": 0.113
+  },
+  "max_abs_preplacement_spearman": 0.11255,
+  "spearman_stop_threshold": 0.9,
+  "gate_e1_pass": true,
+  "runtime_s": 1601.8
+}

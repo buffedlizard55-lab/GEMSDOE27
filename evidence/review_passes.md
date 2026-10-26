@@ -390,4 +390,39 @@ See `knowledge/18_session8_repo_review_2026-10-25.md` for the full candidate scr
 | Machine-validated without human intervention; obvious on first screen & executive summary; note `<=140` chars; JSON Run Card | `evidence/h30_1_run_card.json`, `docs/data/submission_readiness_audit.json` (`approved: ["h30_1_run_card.json"]`), `docs/index.html`, `docs/executive-summary.html` | **PASS** |
 | All tests, linter, download verifier, readiness audit, and site builder clean | `pytest -q`, `ruff check`, `verify_downloads.py` (`0 failures`), `audit_submission_readiness.py` (`approved: ["h30_1_run_card.json"]`) | **PASS** |
 
-*Verified 2026-10-25 / 2026-10-26, 0 hallucinations, byte-bound.*
+*Verified 2026-10-25 / 2026-10-26, 0 hallucinations, byte-bound. (NOTE: Session-9 H30-1 entry above is SUPERSEDED & RETRACTED in Session 11 under `IR-2026-10-26-13` below after proving `visible_known = sp.known & (d_hid > 6.0)` leaked `sp.hidden`.)*
+
+---
+
+# Session 11 (`2026-10-26`) — `H32-1` (`PDHC-K`) Execution, `H30-1` Leak Retraction, 9-Focus-Site Byte Audit & Three Verification Passes
+
+## Pass 1 — Implement and Verify
+
+1. **Completed Previous-Session Carry-Forward & Fleet Audit First:**
+   - Restored all `17/17` SHA-256-pinned inputs into `data_cache/`, verified `prepared/features_f32.npy` (`32` bands), fetched all `12` pinned peer rasters (`parallel_registry/`), and extracted all `10` active `2026-10-26` sibling focus-site GeoTIFFs (`parallel_20261026/`) from `codeload.github.com` tarballs across `GEMSDOE24`, `GEMSDOE25`, `GEMSDOE28`, `GEMSDOE30`, `GEMSDOE31`, `GEMSDOE32`, `GEMSDOE33`, `GEMSDOE36`, and `GEMSDOE49`.
+   - Ranked 5 genuinely untried geological hypotheses (`H32-1` `PDHC-K`, `H32-2` `TRG-M`, `H32-3` `BDSS-A`, `H32-4` `MT3D-GDR`, `H32-5` `DS28-OPT`) and committed the frozen preregistration `knowledge/26_preregistration_H32_2026-10-26.md` (`92d63a3`) on untouched seeds `500–509` before running any holdout.
+   - Implemented `src/gems27/poisson_conduit_dti.py` (`16` physics features + cover-aware soft blend `w_lid = lidar_valid * (1 - 0.65 * cover)` + dual-target classification × 300 m Poisson kernel regression + `min_sep = 2.8` CELF), `tests/test_poisson_conduit_dti.py` (`5 passed`), `scripts/run_h32_s11_holdout.py`, and `scripts/build_h32_s11_submission.py`.
+   - Executed `E1` (`evidence/h32_s11_e1_canary_and_surface.json`: `PASS`, `max_AUC = 0.5954 <= 0.90`, `max_|rho| = 0.1125 <= 0.90`), `E2` (`evidence/h32_s11_e2_holdout_500_509.json`: `H32-S = 0.044990` #1 of 8 arms buffered, `0.113813` #1 unbuffered, `0.169096` #1 whole-quadrant OOF, `5/6` frozen clauses passed, fail-closed on Clause 4 vs `H29-S`), and `E3` (`docs/downloads/research/gems27-h32-pdhc-kernel-celf28-20261026-324a95651136-allfinite.tif` + `.zip` + `evidence/h32_s11_run_card_2026-10-26.json`).
+
+## Pass 2 — Review for Bugs, Missing Requirements, Incorrect Assumptions, and Edge Cases, Then Fix
+
+1. **Bug 1 (`IR-2026-10-26-13`, `H30-1` `sp.hidden` target leak in `scripts/run_h30_1_holdout.py`):**
+   - Caught `visible_known = sp.known & (d_hid > 6.0)` leaking withheld ground truth `sp.hidden` into `emit(..., d_known=d_vis_known)`, erasing the `200 m` exclusion collar specifically within `600 m` of hidden faults. Fixed `scripts/run_h30_1_holdout.py` in-place to pass strictly `sp.known`, retracted `H30-1` (`801dff07541d`) in `evidence/h30_1_run_card.json` and `docs/downloads/h30_1_manifest.json` (`verdict="negative"`, `ok_to_submit=False`), and verified `H31-1` (`scripts/run_h31_s10_holdout.py`) and `H32-1` (`scripts/run_h32_s11_holdout.py`) are 100% immune.
+2. **Bug 2 (`IR-2026-10-26-14`, one-sided Spearman rank correlation check):**
+   - Caught `src/gems27/readiness.py` and `scripts/check_parallel_uniqueness.py` checking `rho > 0.90` instead of `abs(rho) > 0.90`. Fixed both in-place and added `test_negative_spearman_fails_closed` in `tests/test_readiness.py`.
+3. **Bug 3 (Focus-site metadata & site geotransform fixes):**
+   - Fixed swapped `GEMSDOE28` (`0.2710`) vs `GEMSDOE31` (`0.2708`) scores and `GEMSDOE49` (`0.2376` in-repo vs `0.4413` external leader) in `scripts/build_focus_sites_summary.py`; updated `registry/focus_sites_2026-10-26.json`; deduplicated `IR-2026-10-26-*` IDs in `registry/irregularities.json`; flagged `GEMSDOE30 GEOCOR1` (`0ed267020015`) outside-footprint `NaN` range hazard (`IR-2026-10-26-15`); and replaced a hardcoded wrong geotransform `(100.0, 0.0, 323344.2347, 0.0, -100.0, 4565845.3247)` in `scripts/build_site.py` with the true template geotransform `(100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)` read directly from the validator JSON.
+4. **Bug 4 (Stale `README.md` heading & HTML `download` attribute test regex):**
+   - Relabeled stale Session-6 `"## Submission status — no current approved TIFF"` in `README.md` as historical archive so `README.md` has zero contradiction with `docs/data/submission_readiness_audit.json`, and refined `tests/test_site.py` to test `\bdownload(?:\s|=|>)` so `H31-1` (`cf8e1bbef244`) is verified as the ONLY `<a ... download>` submission button while `H32-1` (`324a95651136`) and `H30-1` (`801dff07541d`) never carry `download` attributes.
+
+## Pass 3 — Re-check Against Original Request & Polish
+
+| Requirement | Verification & Artifact | Status |
+|---|---|---|
+| Previous-session next steps + verbatim prompt & Arena Core Values in `README.md` | `README.md`, `knowledge/06_limitations_and_access.md` | **PASS** |
+| Executive summary & table across all 9 focus sites (`GEMSDOE24, 25, 27, 28, 30, 31, 32, 33, 36`) with downloadable files, properly labeled `OWNER-REPORTED` / `HOLDOUT-DTI` / `MODEL-ESTIMATE` (`geometric` + `hybrid`), and uniqueness | `evidence/focus_sites_executive_summary_20261026.json`, `registry/focus_sites_2026-10-26.json`, `docs/index.html`, `docs/executive-summary.html` | **PASS** |
+| PhD-level byte-verified autopsy of `GEMSDOE32` (`h33-h33-2-b2`, `0.2778`) & roadmap past `0.2778` toward `0.3195` / `0.4413` | `knowledge/27_h32_results_and_gemsdoe32_autopsy_2026-10-26.md`, `knowledge/23_focus_sites_and_02778_phd_autopsy_20261026.md` | **PASS** |
+| 3–5 genuinely untried ranked geological hypotheses before coding | `H32-1..H32-5` in `knowledge/26_preregistration_H32_2026-10-26.md` (`92d63a3`) & `registry/next_hypotheses.json` | **PASS** |
+| Brand-new unique GeoTIFF validated in `[0, 1]` without human intervention + paired `.zip` + `<=140`-char note + JSON Run Card + obvious machine verdict (`OK TO SUBMIT` vs `DO NOT SUBMIT`) on Screen 1, `executive-summary.html`, and `how-to-submit.html` | Session-11 `docs/downloads/research/gems27-h32-pdhc-kernel-celf28-20261026-324a95651136-allfinite.tif` (`DO NOT SUBMIT` per `5/6` clauses) + Session-10 `docs/downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif` (`SOLE OK TO SUBMIT`); `evidence/h32_s11_run_card_2026-10-26.json`; `docs/data/submission_readiness_audit.json` | **PASS** |
+| Full automated test suite, ruff linter, readiness audit, download verifier, and site build | `pytest -q` (`143 passed`), `ruff check` (`0` errors), `audit_submission_readiness.py` (`approved == ["h31_s10_run_card_2026-10-26.json"]`), `verify_downloads.py` (`0 failure(s)`) | **PASS** |
+

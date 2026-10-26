@@ -57,10 +57,22 @@
     {
      "file": "gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-allfinite",
      "score": 0.219,
-     "note": "score first reported in 2026-10-26 prompt; previously UNSCORED in repo"
+     "note": "OWNER-REPORTED (#1 of 2026-10-25 five-site non-H19-5 cohort; ALREADY SUBMITTED)"
+    },
+    {
+     "file": "gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif",
+     "score": null,
+     "sha256": "2c002b02792419864bd3b29a218e543cb41e3f07b3b57c29ef35c6e39e184bfe",
+     "note": "UNSCORED Session-10 sole machine-approved OK TO SUBMIT candidate (HOLDOUT-DTI 0.047302 on seeds 400-409; 0.042714 on seeds 500-509; whole-fold OOF 0.16549; 57.70% max peer overlap)"
+    },
+    {
+     "file": "docs/downloads/research/gems27-h32-pdhc-kernel-celf28-20261026-324a95651136-allfinite.tif",
+     "score": null,
+     "sha256": "6ae965f5f92a23ebaf660291dd4c1c0dd7f0f710282a559fe3389786d5a2857e",
+     "note": "UNSCORED Session-11 newly generated unique candidate (HOLDOUT-DTI 0.044990 on seeds 500-509, #1 of 8 arms; whole-fold OOF 0.16910; 57.83% max peer overlap; DO NOT SUBMIT per fail-closed Clause 4 vs H29-S)"
     }
    ],
-   "verdict": "DO NOT RESUBMIT scored files; only this session's H31 is unscored here - follow machine badge"
+   "verdict": "DO NOT RESUBMIT scored files (Slot 1 & H29-S); H31-1 (`cf8e1bbef244`) is sole machine-approved OK TO SUBMIT; Session-11 H32-1 (`324a95651136`) is DO NOT SUBMIT (5/6 frozen E2 clauses)"
   },
   {
    "site": "GEMSDOE28",
@@ -111,13 +123,21 @@
   {
    "site": "GEMSDOE31",
    "url": "https://buffedlizard55-lab.github.io/GEMSDOE31/docs/",
-   "best_file": "h27-4-solo-d28-20261004-8acb75e1-nan",
+   "best_file": "h27-4-solo-d28-20261004-2fb3da5a-nan",
    "score": 0.2708,
    "dots": 40199,
    "peer_id": "g31_h27_4",
    "sha256": "07b6db440535404bb41ec8ddc797713e200d308e3da35937393efde5eb84bc40",
    "mechanism": "MEASURED dot-identical to GEMSDOE28 solo (symdiff 0)",
-   "verdict": "DO NOT SUBMIT - scored duplicate lineage"
+   "also": [
+    {
+     "file": "gemsdoe31-h31t-transtension-dinkelbach-20261025-b37654-zeros.tif",
+     "score": null,
+     "sha256": "83fbc267a7545a0cb216fd695461b5be63890980d3a558c44353fb0e0c93a320",
+     "note": "UNSCORED 2026-10-26 active main candidate (OK TO SUBMIT on GEMSDOE31; HOLDOUT-DTI 0.1300 on gems57-pooled-hide-v2 n=60,988 vs GEMSDOE27 H31-1=0.1655 & H32-1=0.1691; 34.1% overlap vs G32)"
+    }
+   ],
+   "verdict": "Historical 0.2708 DO NOT SUBMIT (scored duplicate); 2026-10-26 H31-T is OK TO SUBMIT on GEMSDOE31"
   },
   {
    "site": "GEMSDOE32",
@@ -130,13 +150,19 @@
    "mechanism": "B2 (200m) catalogue-flank prune of 0.2708 base; fleet best",
    "also": [
     {
+     "file": "gemsdoe32-h46-dipasym-celf-b2-37654-20261026T174525Z-9f42346d-zeros.tif",
+     "score": null,
+     "sha256": "9f42346d3acef630a86e2262f89fd1b3e7f34de0d669f8696c453a854d16bd39",
+     "note": "UNSCORED 2026-10-26 main candidate; DO NOT SUBMIT on GEMSDOE32 main (failed dual-instrument gate)"
+    },
+    {
      "file": "gemsdoe32-r6-stepprofile-b2-37654-20261026T002502Z-23fbbb51-zeros.tif",
      "score": null,
      "sha256": "c7f094c1f4d00f2dd9a056dc80fecc94bf1d636363acd020c9da3659eae56547",
-     "note": "UNSCORED parallel-session file fetched 2026-10-26; peer-claimed PROMOTE on SGMC instrument; their catalogue-hidden instrument ranks it below champion; MEASURED <=0.211 directed 3px overlap vs every pinned peer; selector decision required"
+     "note": "UNSCORED 2026-10-26 main research file; DO NOT SUBMIT on GEMSDOE32 main (seg-hide HOLDOUT-DTI 0.02216 below champion)"
     }
    ],
-   "verdict": "Champion DO NOT RESUBMIT (scored); R6 = selector decision, unscored"
+   "verdict": "Champion 0.2778 DO NOT RESUBMIT (scored); active 2026-10-26 H46 & R6 are DO NOT SUBMIT on GEMSDOE32 main"
   },
   {
    "site": "GEMSDOE33",
@@ -161,5 +187,5 @@
    "verdict": "DO NOT SUBMIT - scored champion superset"
   }
  ],
- "answer_best_new_submission": "No already-scored file should be resubmitted. A new slot may only be filled by an unscored unique file whose machine readiness gate says promote (this repo: evidence/h31_run_card.json via gems27.readiness.publication_decision; fleet: GEMSDOE32 R6 pending selector instrument decision)."
+ "answer_best_new_submission": "No already-scored file should be resubmitted. Across all 9 focus sites on 2026-10-26 main, only two unscored unique files pass their respective site machine gates: (1) GEMSDOE27 H31-1 (`gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif`, evidence/h31_s10_run_card_2026-10-26.json, HOLDOUT-DTI 0.047302 on seeds 400-409, 0.042714 on seeds 500-509, harmonized whole-quadrant OOF 0.16549, 57.70% max peer overlap) and (2) GEMSDOE31 H31-T (`gemsdoe31-h31t-transtension-dinkelbach-20261025-b37654-zeros.tif`, harmonized whole-quadrant OOF 0.1300, 34.1% overlap vs G32, 43.2% overlap vs G27 H31-1). Session-11 GEMSDOE27 H32-1 (`gems27-h32-pdhc-kernel-celf28-20261026-324a95651136-allfinite.tif`, evidence/h32_s11_run_card_2026-10-26.json) ranked #1 on fresh seeds 500-509 (0.044990 buffered, 0.16910 whole-quadrant OOF) and beat H31-1 on 9/10 seeds, yet is routed to docs/downloads/research/ as DO NOT SUBMIT because frozen Clause 4 vs H29-S CI [-0.000819, +0.003063] crossed zero."
 }

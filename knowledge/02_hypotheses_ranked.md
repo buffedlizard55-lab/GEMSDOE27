@@ -235,3 +235,23 @@ Ranking rule: expected DTI gain x probability the test can validate it / cost. B
 * **Status:** TESTED - SELECTION GATE FAILED (Lane L-H30, seeds 240-244, knowledge/20+21). Pooled HOLDOUT-DTI SOFT 0.09943 vs binary D 0.10234 (mean paired -0.00334, 4/20 cells). Consistent with bang-bang optimality of soft Tversky away from truth. No slot.
 * **Expected gain:** negative: pooled delta -0.00291 vs binary Arm D on selection seeds
 * **Cost:** one local pre-registered holdout experiment (Lane L-H30, shared selection); 0 weekly slots
+
+## H31-1 (rank 101): Dual-Regime Corroborated Geothermal Conduit & Walker Lane Transtensional Ridge Synthesis (DRCG-WL) + min_sep=2.8 Axial-Crest 300 m CELF Cover (Lane L-S10-2026-10-26)
+
+* **Layers:** 32-band prepared GeoDAWN + 1 m LiDAR stack + 15 subsurface transforms + 20 H29 hydrothermal/piedmont/destriped-mag features + 12 H31-1 Hessian/seismic-fabric/contour-obliquity features.
+* **Physical signature:** Dual-regime cross-fitted experts (M_Sub 60 LiDAR-free cols + M_Full 79 cols quantile-calibrated in the 24.6% LiDAR gap) + Stage-2 narrow Frangi vesselness + axial-crest-sharpened min_sep=2.8 300 m CELF cover (B2 > 200 m, 37,654 px).
+* **Why it catches a fault missing from USGS/INGENIOUS:** Fixes H29-S's min_sep=2.0 crowding (-11.0% coverage loss), LiDAR-gap starvation, Lake Lahontan paleo-shoreline mimicry, and SE Walker Lane transtensional microseismic gap.
+* **How it differs from the repo:** First dual-regime quantile-calibrated M_Sub + M_Full cross-fit, contour-obliquity transform, and Blakely-Simpson Hessian crest operator in GEMSDOE27.
+* **Status:** TESTED & PROMOTED ON SEEDS 400-409 (evidence/h31_s10_run_card_2026-10-26.json) — ALL 5/5 FROZEN GATES PASSED (0.047302 buffered HOLDOUT-DTI, +0.003185 vs H29-S, 57.70% max peer overlap). Replicated on fresh seeds 500-509 at 0.042714 buffered / 0.109572 unbuffered / 0.165491 whole-quadrant OOF. Sole machine-approved OK TO SUBMIT candidate (`cf8e1bbef244`).
+* **Expected gain:** +0.009577 vs B0, +0.007004 vs D0, +0.003185 vs H29-S on seeds 400-409; replicated at 0.042714 buffered / 0.165491 whole-fold OOF on seeds 500-509.
+* **Cost:** 3 local experiments (E1, E2, E3).
+
+## H32-1 (rank 102): Cover-Aware Poisson-Demagnetized Hydrothermal Conduit, Radiometric Redox & Canyon-Mouth Knickpoint Kernel Synthesis (PDHC-K, Lane L-S11-2026-10-26)
+
+* **Layers:** rtp, tmi, tmi_vg, TMI_up150, iso_grav_anom, iso_grav_anom_hg, iso_grav_anom_vg, K, Th, U, det_elev, det_local_relief, det_gradient, lidar_relief..lidar_valid, cond_surf, depth_to_base_surf, ieq, deq, geod_shearrate, geod_dilaterate, gdr_wellspring_in_footprint.csv.
+* **Physical signature:** 16 new physics transforms (Cordell-Taylor sliding-window Poisson gravity-vs-RTP demagnetization residual, U/Th redox roll-front & Th-normalized K alteration gradients, canyon-mouth knickpoint collinearity, sediment-cover blindness index) + cover-aware soft blend w_lid = lidar_valid * (1 - 0.65 * cover) + dual-target classification x 300 m Poisson kernel regression + min_sep=2.8 CELF (37,654 px).
+* **Why it catches a fault missing from USGS/INGENIOUS:** Recovers magnetite-destroyed blind geothermal conduits, U/Th redox fronts, alluvial-bajada-covered range-front scarps inside LiDAR footprints (fixing H31-1's SW Mojave regression), and directly estimates expected 300 m kernel credit.
+* **How it differs from the repo:** First Cordell-Taylor Poisson demagnetization residual, U/Th redox transform, multi-canyon knickpoint collinearity, cover-aware continuous expert blending, and dual-target Poisson kernel regression in GEMSDOE27.
+* **Status:** TESTED ON FRESH SEEDS 500-509 (evidence/h32_s11_run_card_2026-10-26.json) — RANKED #1 OF 8 ARMS (0.044990 buffered, 0.113813 unbuffered, 0.169096 whole-quadrant OOF), BEATING H31-S (+0.002276, 9/10 seeds, CI [+0.000776, +0.003667]), D0 (+0.005631, 10/10 seeds), AND B0 (+0.008537, 10/10 seeds), YET PASSED 5/6 FROZEN CLAUSES (Clause 4 vs H29-S CI [-0.000819, +0.003063], 6/10 seeds). Per fail-closed governance, shipped to docs/downloads/research/ (`324a95651136`, verdict='negative', ok_to_submit=False).
+* **Expected gain:** +0.008537 vs B0 (10/10), +0.005631 vs D0 (10/10), +0.002276 vs H31-S (9/10), +0.001188 vs H29-S (6/10, CI [-0.000819, +0.003063]).
+* **Cost:** 3 local experiments (E1 canary+surface, E2 40-cell holdout on seeds 500-509, E3 stitched-OOF GeoTIFF build); 0 weekly slots spent.

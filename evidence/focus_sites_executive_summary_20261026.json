@@ -1,13 +1,13 @@
 {
   "generated_utc": "2026-10-26",
-  "purpose": "Byte-authenticated executive summary across all 9 focus sites + PhD forensic inversion of 0.2778 (GEMSDOE32) and 0.2190 (GEMSDOE27 H29-S)",
-  "provenance_rule": "All live scores are OWNER-REPORTED from the user prompt and sibling registries; zero DrivenData endpoints were accessed and zero organizer receipts are claimed.",
+  "purpose": "Byte-authenticated executive summary across all 9 focus sites (historical OWNER-REPORTED bests + active 2026-10-26 main downloads) + PhD forensic inversion of 0.2778 (GEMSDOE32) and 0.2190 (GEMSDOE27 H29-S)",
+  "provenance_rule": "All live scores are OWNER-REPORTED from the user prompt and sibling registries; zero DrivenData endpoints were accessed and zero organizer receipts are claimed. All projections report side-by-side geometric and hybrid MODEL-ESTIMATE bounds.",
   "leaderboard_high_discrepancy_flag": {
     "prompt_2026_10_26_claim": 0.4413,
-    "prompt_49gemsdoe_claim": 0.4413,
-    "oct_2026_sibling_top10_snapshot_high": 0.3195,
-    "status": "FLAGGED_UNVERIFIED_OWNER_REPORTED",
-    "explanation": "The 2026-10-25/26 prompts list Current Leaderboard High Score = 0.4413 and 49GEMSDOE = 0.4413, whereas the earlier sibling snapshot recorded #1 = 0.3195 and no 49GEMSDOE repository or DrivenData receipt exists in buffedlizard55-lab. Treated strictly as unverified OWNER-REPORTED context."
+    "sibling_fleet_high_16gemsdoe": 0.3195,
+    "gemsdoe49_actual_repo_score": 0.2376,
+    "status": "FLAGGED_OWNER_REPORTED_EXTERNAL_LEADER",
+    "explanation": "buffedlizard55-lab/GEMSDOE49 reports 0.2376 OWNER-REPORTED in its own repository; 0.4413 is an external competition leaderboard #1 score (owner-reported, unnamed team), while 0.3195 (16GEMSDOE) is the highest owner-reported score inside the buffedlizard55-lab fleet and 0.2778 (GEMSDOE32) is the highest across the 9 focus sites."
   },
   "best_historical_focus_submission": {
     "site": "GEMSDOE32",
@@ -16,8 +16,8 @@
     "already_submitted_do_not_copy": true,
     "why_it_topped_focus_sites": [
       "1. Multi-line physical corroboration (H19-5): requires primary morphological/structural lineament backed by >= 0.18 independent secondary physical evidence, yielding 6.50x blind truth concentration at 37,654 px.",
-      "2. Exact d=2.8 px Poisson-disk axial spacing: achieves 0.0592 blind footprint coverage with near-zero 2D lateral clumping (only 0.68% of dots have >=3 neighbors within 300 m, vs 8.51% in H29-S min_sep=2.0).",
-      "3. Metric-exact B2 (>200 m) catalogue-collar subtraction: removes 6,436 near-catalogue halo dots (44,090 -> 40,199 -> 37,654) whose OOF marginal efficiency (0.0034-0.0080) is 7-15x below the DTI break-even threshold alpha*DTI/(1 - alpha*DTI) = 0.0588, lifting live DTI monotonically 0.2600 -> 0.2708 -> 0.2778 (+0.0178 gain with zero new truth required).",
+      "2. Exact d=2.8 px Poisson-disk axial spacing: achieves 0.05922 blind footprint coverage with ZERO >=3-neighbor crowding in 300 m (0.00% vs 8.51% in H29-S min_sep=2.0).",
+      "3. Metric-exact B2 (>200 m) catalogue-collar subtraction: removes 6,436 near-catalogue halo dots (44,090 -> 40,199 -> 37,654) whose OOF marginal efficiency (0.0034-0.0080) is 7-17x below the DTI break-even threshold alpha*DTI/(1 - alpha*DTI) = 0.0588, lifting live DTI monotonically 0.2600 -> 0.2708 -> 0.2778 (+0.0178 gain with zero new truth required).",
       "4. Balanced 23.6% emission in the 24.6% 1-m LiDAR coverage gap (vs 18.3% in single-tree H29-S), avoiding basin-interior blind-fault recall collapse."
     ]
   },
@@ -27,10 +27,9 @@
       "repo_url": "https://github.com/buffedlizard55-lab/GEMSDOE32",
       "best_submission": "h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
       "best_live_score": 0.2778,
-      "score_label": "OWNER-REPORTED (highest across all 9 focus sites; no DrivenData receipt in repo)",
-      "recent_2026_10_25_run": "gemsdoe32-r6-stepprofile-b2-37654-20261026T002502Z-23fbbb51-zeros.tif (UNSCORED)",
-      "lineage": "H19-5 4-line corroboration + Poisson d=2.8 + strict B2 (d_cat > 200 m) collar prune (-6,436 zero-yield halo dots vs d=2.8)",
-      "action_verdict": "HISTORICAL BENCHMARK (#1 of 9 focus sites at 0.2778) \u2014 ALREADY SUBMITTED; DO NOT COPY OR RE-SUBMIT.",
+      "score_label": "OWNER-REPORTED (#1 across all 9 focus sites; no organizer receipt in repo)",
+      "lineage": "H19-5 4-line corroboration + Poisson d=2.8 + strict B2 (d_cat > 200 m) collar prune (-6,436 zero-yield halo dots vs d=2.8; -2,545 (100,200] m annulus dots vs B1)",
+      "action_verdict": "HISTORICAL BENCHMARK (#1 of 9 focus sites at 0.2778) \u2014 ALREADY SUBMITTED; active 2026-10-26 H46/R6 files are DO NOT SUBMIT on GEMSDOE32 main.",
       "local_raster_rel": "data_cache/parallel_registry/g32_h33_2_b2.tif",
       "measured_geometry": {
         "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
@@ -69,17 +68,58 @@
         "credit_fraction_of_G": 0.3852,
         "concentration_over_blind": 6.503,
         "marginal_breakeven_tp_per_fp": 0.05883
+      },
+      "active_20261026_download": {
+        "filename": "gemsdoe32-h46-dipasym-celf-b2-37654-20261026T174525Z-9f42346d-zeros.tif",
+        "holdout_dti": "0.02581 (G32 seg-hide) / 0.1612 (G32 SGMC-hide); R6=0.02216",
+        "holdout_ratio_vs_h29s": 0.96,
+        "site_verdict": "DO NOT SUBMIT (failed GEMSDOE32 dual-instrument gate on main)",
+        "measured_geometry": {
+          "sha256": "9f42346d3acecb8d873fb35c70d988ae0afeb99781c6104c644d8cf9f85e0dc3",
+          "bytes": 212436,
+          "outside_mode": "allfinite_zeros",
+          "inside_nan_count": 0,
+          "inside_range": [
+            0.0,
+            1.0
+          ],
+          "n_dots": 37654,
+          "nn_min_px": 1.0,
+          "nn_p10_px": 1.414,
+          "nn_median_px": 2.236,
+          "nbr_le_3px_mean": 1.076,
+          "frac_ge_3nbr_in_3px": 0.0876,
+          "c_blind_coverage": 0.053886,
+          "lidar_missing_dot_share": 0.2182,
+          "d_cat_min_px": 2.236,
+          "d_cat_median_px": 10.63,
+          "d_cat_le_2_share": 0.0,
+          "d_cat_le_5_share": 0.2955,
+          "d_cat_gt_15_share": 0.4014,
+          "quadrant_shares": {
+            "NW": 0.2415,
+            "NE_LidarGapHeavy": 0.1772,
+            "SW": 0.3518,
+            "SE": 0.2294
+          },
+          "overlap_3px_vs_g32_02778": 0.4784
+        },
+        "model_estimated_leaderboard_bounds": {
+          "portal_range_valid": true,
+          "geometric_assumption_dti": 0.2242,
+          "hybrid_assumption_dti": 0.2196,
+          "anchor": "Anchored to GEMSDOE27 H29-S = 0.2190 OWNER-REPORTED (conc=5.792x, G_ref=12,226, rho=1.38)"
+        }
       }
     },
     {
       "site": "GEMSDOE36",
       "repo_url": "https://github.com/buffedlizard55-lab/GEMSDOE36",
-      "best_submission": "gemsdoe36-anderson-geothermal-pinn-38854-20261004T063428Z-c7e9bc92-zeros.tif",
+      "best_submission": "anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif",
       "best_live_score": 0.275,
       "score_label": "OWNER-REPORTED (#2 of 9 focus sites)",
-      "recent_2026_10_25_run": "gemsdoe36-lane36-supgbm-68302-20261026T002651Z-f35cb3e4-zeros.tif (NOT APPROVED)",
-      "lineage": "Exact superset of GEMSDOE32 H33-2-B2 (37,654 px) + 1,200 Anderson geothermal PINN dots (diluted 0.2778 -> 0.2750)",
-      "action_verdict": "ALREADY SUBMITTED & 96.9% 3-px OVERLAP WITH GEMSDOE32 \u2014 DO NOT RE-SUBMIT.",
+      "lineage": "Exact superset of GEMSDOE32 H33-2-B2 (all 37,654 px) + 1,200 Anderson geothermal PINN dots (diluted 0.2778 -> 0.2750)",
+      "action_verdict": "ALREADY SUBMITTED & 96.9% 3-px OVERLAP WITH GEMSDOE32 \u2014 DO NOT RE-SUBMIT; 2026-10-26 HVG36 is DO NOT SUBMIT.",
       "local_raster_rel": "data_cache/parallel_registry/g36_anderson.tif",
       "measured_geometry": {
         "sha256": "e15891020b9c57056ac7fa874a5e506fbd6ed9314a4ea8e73af0753887a3708a",
@@ -118,70 +158,152 @@
         "credit_fraction_of_G": 0.3867,
         "concentration_over_blind": 6.343,
         "marginal_breakeven_tp_per_fp": 0.0582
+      },
+      "active_20261026_download": {
+        "filename": "gemsdoe36-hvg36-hybrid-voxgrav-dipterr-37654-20261026T170720Z-85d56b03-zeros.tif",
+        "holdout_dti": "0.13576 (whole-fold OOF n=60,988; below G36 internal bar)",
+        "holdout_ratio_vs_h29s": 0.875,
+        "site_verdict": "DO NOT SUBMIT (verdict=negative on GEMSDOE36 main)",
+        "measured_geometry": {
+          "sha256": "85d56b03aff18f72d85de9c1e1ca02a2274263fffcd95aa0a6edac7bc9a08596",
+          "bytes": 826000,
+          "outside_mode": "allfinite_zeros",
+          "inside_nan_count": 0,
+          "inside_range": [
+            0.0,
+            1.0
+          ],
+          "n_dots": 37654,
+          "nn_min_px": 3.0,
+          "nn_p10_px": 3.0,
+          "nn_median_px": 3.162,
+          "nbr_le_3px_mean": 0.252,
+          "frac_ge_3nbr_in_3px": 0.0009,
+          "c_blind_coverage": 0.061506,
+          "lidar_missing_dot_share": 0.1824,
+          "d_cat_min_px": 2.236,
+          "d_cat_median_px": 6.4,
+          "d_cat_le_2_share": 0.0,
+          "d_cat_le_5_share": 0.393,
+          "d_cat_gt_15_share": 0.1686,
+          "quadrant_shares": {
+            "NW": 0.1751,
+            "NE_LidarGapHeavy": 0.1893,
+            "SW": 0.3586,
+            "SE": 0.2769
+          },
+          "overlap_3px_vs_g32_02778": 0.3535
+        },
+        "model_estimated_leaderboard_bounds": {
+          "portal_range_valid": true,
+          "geometric_assumption_dti": 0.2565,
+          "hybrid_assumption_dti": 0.2402,
+          "anchor": "Anchored to GEMSDOE27 H29-S = 0.2190 OWNER-REPORTED (conc=5.792x, G_ref=12,226, rho=1.38)"
+        }
       }
     },
     {
-      "site": "GEMSDOE31",
-      "repo_url": "https://github.com/buffedlizard55-lab/GEMSDOE31",
-      "best_submission": "gemsdoe31-h32-2-b1-only-20261004-777da82e-allfinite.tif",
+      "site": "GEMSDOE28",
+      "repo_url": "https://github.com/buffedlizard55-lab/GEMSDOE28",
+      "best_submission": "h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif (0.2710) & h27-4-r1-solo-d2-8-20261003-bc2d0be4c506-nan.tif (0.2708)",
       "best_live_score": 0.271,
-      "score_label": "OWNER-REPORTED (#3 of 9 focus sites; paired B1-prune sibling to GEMSDOE28 0.2708)",
-      "recent_2026_10_25_run": "gemsdoe31-concord31-minbd-concordance-28115-20261026-allfinite.tif (NOT APPROVED; negative)",
-      "lineage": "H19-5 Poisson d=2.8 + B1 (d_cat > 100 m) prune (40,199 dots; leaves 2,545 B2-ring halo dots that cost -0.0068 vs GEMSDOE32)",
-      "action_verdict": "ALREADY SUBMITTED & 93.7% 3-px OVERLAP WITH GEMSDOE32 \u2014 SUPERSEDED BY B2 PRUNE; DO NOT RE-SUBMIT.",
-      "local_raster_rel": "data_cache/parallel_registry/g31_h27_4.tif",
+      "score_label": "OWNER-REPORTED (#3 of 9 focus sites; 0.2710 on H36-1, 0.2708 on H27-4-R1, 0.0217 on 2026-10-25 S18-MXTP)",
+      "lineage": "H19-5 d=2.8 + B1 (d_cat > 100 m) prune + rung-30 blind swap (37,660 px; 99.6% overlap with GEMSDOE32); 2026-10-25 S18-MXTP collapsed to 0.0217",
+      "action_verdict": "ALREADY SUBMITTED (99.6% overlap with GEMSDOE32; `-nan` fails current portal [0,1] rule); 2026-10-26 S20-NCHC is DO NOT SUBMIT.",
+      "local_raster_rel": "data_cache/parallel_registry/g28_h36_1.tif",
       "measured_geometry": {
-        "sha256": "07b6db440535404bb41ec8ddc797713e200d308e3da35937393efde5eb84bc40",
-        "bytes": 199214,
+        "sha256": "5556aa1438fd67376b60d5ffc99228ec09dcc11a8408298a743ccb88d6163641",
+        "bytes": 1590848,
         "outside_mode": "nan",
         "inside_nan_count": 0,
         "inside_range": [
           0.0,
           1.0
         ],
-        "n_dots": 40199,
-        "nn_min_px": 2.828,
-        "nn_p10_px": 2.828,
-        "nn_median_px": 3.0,
-        "nbr_le_3px_mean": 0.639,
-        "frac_ge_3nbr_in_3px": 0.007,
-        "c_blind_coverage": 0.06262,
-        "lidar_missing_dot_share": 0.2333,
+        "n_dots": 37660,
+        "nn_min_px": 3.0,
+        "nn_p10_px": 3.0,
+        "nn_median_px": 3.162,
+        "nbr_le_3px_mean": 0.324,
+        "frac_ge_3nbr_in_3px": 0.0012,
+        "c_blind_coverage": 0.060465,
+        "lidar_missing_dot_share": 0.234,
         "d_cat_min_px": 1.414,
-        "d_cat_median_px": 17.69,
-        "d_cat_le_2_share": 0.0633,
-        "d_cat_le_5_share": 0.2035,
-        "d_cat_gt_15_share": 0.547,
+        "d_cat_median_px": 17.72,
+        "d_cat_le_2_share": 0.0625,
+        "d_cat_le_5_share": 0.2005,
+        "d_cat_gt_15_share": 0.5485,
         "quadrant_shares": {
-          "NW": 0.2338,
-          "NE_LidarGapHeavy": 0.2703,
-          "SW": 0.2877,
-          "SE": 0.2082
+          "NW": 0.2347,
+          "NE_LidarGapHeavy": 0.2702,
+          "SW": 0.2872,
+          "SE": 0.2079
         },
-        "overlap_3px_vs_g32_02778": 0.9539
+        "overlap_3px_vs_g32_02778": 0.9547
       },
       "live_dti_inversion_for_measured_raster": {
         "inverted_score": 0.271,
         "score_provenance": "OWNER-REPORTED",
-        "implied_tpw": 4731.92,
-        "credit_fraction_of_G": 0.387,
-        "concentration_over_blind": 6.181,
+        "implied_tpw": 4597.09,
+        "credit_fraction_of_G": 0.376,
+        "concentration_over_blind": 6.219,
         "marginal_breakeven_tp_per_fp": 0.05731
+      },
+      "active_20261026_download": {
+        "filename": "gems28-s20-nchc-dti-20261026-1d629d6c953c-allfinite.tif",
+        "holdout_dti": "0.0252 (G28 seg-hide; failed G28 gate)",
+        "holdout_ratio_vs_h29s": 0.82,
+        "site_verdict": "DO NOT SUBMIT (verdict=negative on GEMSDOE28 main)",
+        "measured_geometry": {
+          "sha256": "1d629d6c953c94681ecfe51111d4210361f7014b1df41f5fcfa8d81c4f54f853",
+          "bytes": 830586,
+          "outside_mode": "allfinite_zeros",
+          "inside_nan_count": 0,
+          "inside_range": [
+            0.0,
+            1.0
+          ],
+          "n_dots": 40071,
+          "nn_min_px": 2.236,
+          "nn_p10_px": 3.0,
+          "nn_median_px": 3.162,
+          "nbr_le_3px_mean": 0.281,
+          "frac_ge_3nbr_in_3px": 0.0033,
+          "c_blind_coverage": 0.064577,
+          "lidar_missing_dot_share": 0.1476,
+          "d_cat_min_px": 2.236,
+          "d_cat_median_px": 8.25,
+          "d_cat_le_2_share": 0.0,
+          "d_cat_le_5_share": 0.3543,
+          "d_cat_gt_15_share": 0.3159,
+          "quadrant_shares": {
+            "NW": 0.1592,
+            "NE_LidarGapHeavy": 0.1884,
+            "SW": 0.3636,
+            "SE": 0.2888
+          },
+          "overlap_3px_vs_g32_02778": 0.3114
+        },
+        "model_estimated_leaderboard_bounds": {
+          "portal_range_valid": true,
+          "geometric_assumption_dti": 0.2621,
+          "hybrid_assumption_dti": 0.2381,
+          "anchor": "Anchored to GEMSDOE27 H29-S = 0.2190 OWNER-REPORTED (conc=5.792x, G_ref=12,226, rho=1.38)"
+        }
       }
     },
     {
-      "site": "GEMSDOE28",
-      "repo_url": "https://github.com/buffedlizard55-lab/GEMSDOE28",
-      "best_submission": "gems28-h28-solo-r1-20261003-27c0796d-nan.tif",
+      "site": "GEMSDOE31",
+      "repo_url": "https://github.com/buffedlizard55-lab/GEMSDOE31",
+      "best_submission": "h27-4-solo-d28-20261004-2fb3da5a-nan.tif",
       "best_live_score": 0.2708,
-      "score_label": "OWNER-REPORTED (#4 of 9 focus sites); 2026-10-25 S18-MXTP (`05fc81ca2760`) scored 0.0217 OWNER-REPORTED",
-      "recent_2026_10_25_run": "28gemsdoe-s18-mxtp-37654-20261025-05fc81ca2760-zeros.tif (0.0217 OWNER-REPORTED \u2014 severe tip-extrapolation FP collapse)",
-      "lineage": "Pixel-identical in-footprint dot set (40,199 px) to GEMSDOE31 B1-only (`-nan` vs `-allfinite`); new S18-MXTP collapsed to 0.0217",
-      "action_verdict": "ALREADY SUBMITTED (`0.2708` is B1 duplicate of H19-5; `0.0217` S18 failed) \u2014 DO NOT RE-SUBMIT.",
-      "local_raster_rel": "data_cache/parallel_registry/g28_h27_4_r1.tif",
+      "score_label": "OWNER-REPORTED (#4 of 9 focus sites; dot-identical to GEMSDOE28 H27-4-R1 solo)",
+      "lineage": "Historical best is H19-5 d=2.8 + B1 prune (40,199 px; retains 2,545 B2-ring halo dots costing -0.0070 vs GEMSDOE32). Active 2026-10-26 H31-T is a genuinely new transtensional Dinkelbach raster.",
+      "action_verdict": "Historical 0.2708 is ALREADY SUBMITTED; active 2026-10-26 H31-T (`83fbc267a754`) is OK TO SUBMIT in GEMSDOE31 (whole-fold OOF 0.1300 vs GEMSDOE27 H31-1 0.1655).",
+      "local_raster_rel": "data_cache/parallel_registry/g31_h27_4.tif",
       "measured_geometry": {
-        "sha256": "ab02300152248fdda04e988e2cd2a0c13f35eec42fcf670a15e8b76b19e24a73",
-        "bytes": 1595850,
+        "sha256": "07b6db440535404bb41ec8ddc797713e200d308e3da35937393efde5eb84bc40",
+        "bytes": 199214,
         "outside_mode": "nan",
         "inside_nan_count": 0,
         "inside_range": [
@@ -216,17 +338,58 @@
         "credit_fraction_of_G": 0.3868,
         "concentration_over_blind": 6.176,
         "marginal_breakeven_tp_per_fp": 0.05726
+      },
+      "active_20261026_download": {
+        "filename": "gemsdoe31-h31t-transtension-dinkelbach-20261025-b37654-zeros.tif",
+        "holdout_dti": "0.1300 [0.1147, 0.1456] (gems57-pooled-hide-v2 whole-fold OOF n=60,988; vs H32-1=0.1691 & H31-1=0.1655 on same n=60,988)",
+        "holdout_ratio_vs_h29s": 0.838,
+        "site_verdict": "OK TO SUBMIT on GEMSDOE31 (unique: 34.1% overlap vs G32, 43.2% vs G27 H31-1; lower harmonized whole-fold OOF 0.1300 vs G27 H31-1 0.1655)",
+        "measured_geometry": {
+          "sha256": "83fbc267a754d5d58c950baddc92891b53a4cad2c2f90a114f1c2177b4567298",
+          "bytes": 145429,
+          "outside_mode": "allfinite_zeros",
+          "inside_nan_count": 0,
+          "inside_range": [
+            0.0,
+            1.0
+          ],
+          "n_dots": 37654,
+          "nn_min_px": 2.828,
+          "nn_p10_px": 3.606,
+          "nn_median_px": 5.0,
+          "nbr_le_3px_mean": 0.024,
+          "frac_ge_3nbr_in_3px": 0.0,
+          "c_blind_coverage": 0.066949,
+          "lidar_missing_dot_share": 0.2007,
+          "d_cat_min_px": 2.236,
+          "d_cat_median_px": 21.02,
+          "d_cat_le_2_share": 0.0,
+          "d_cat_le_5_share": 0.1191,
+          "d_cat_gt_15_share": 0.6075,
+          "quadrant_shares": {
+            "NW": 0.1306,
+            "NE_LidarGapHeavy": 0.3097,
+            "SW": 0.1512,
+            "SE": 0.4084
+          },
+          "overlap_3px_vs_g32_02778": 0.3408
+        },
+        "model_estimated_leaderboard_bounds": {
+          "portal_range_valid": true,
+          "geometric_assumption_dti": 0.2797,
+          "hybrid_assumption_dti": 0.2566,
+          "anchor": "Anchored to GEMSDOE27 H29-S = 0.2190 OWNER-REPORTED (conc=5.792x, G_ref=12,226, rho=1.38)"
+        }
       }
     },
     {
       "site": "GEMSDOE33",
       "repo_url": "https://github.com/buffedlizard55-lab/GEMSDOE33",
-      "best_submission": "GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif",
+      "best_submission": "h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif",
       "best_live_score": 0.2632,
       "score_label": "OWNER-REPORTED (#5 of 9 focus sites)",
-      "recent_2026_10_25_run": "gemsdoe33-a33-l1-analog-transfer-research-37654-20261025-85c94a805a34-zeros.tif (NOT APPROVED; negative)",
-      "lineage": "H19-5 d=2.8 backbone modified with analog tip/stepover swaps (43,435 px; retains B1/B2 collar drag)",
-      "action_verdict": "ALREADY SUBMITTED & 91.6% 3-px OVERLAP WITH GEMSDOE32 \u2014 DO NOT RE-SUBMIT.",
+      "lineage": "H19-5 d=2.8 modified with analog tip/stepover swaps (41,865 off-cat px; retains B1/B2 collar drag)",
+      "action_verdict": "ALREADY SUBMITTED & 95.3% 3-px OVERLAP WITH GEMSDOE32 \u2014 DO NOT RE-SUBMIT; 2026-10-26 LLC33 is DO NOT SUBMIT.",
       "local_raster_rel": "data_cache/parallel_registry/g33_h33d.tif",
       "measured_geometry": {
         "sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
@@ -265,17 +428,58 @@
         "credit_fraction_of_G": 0.3831,
         "concentration_over_blind": 5.906,
         "marginal_breakeven_tp_per_fp": 0.05556
+      },
+      "active_20261026_download": {
+        "filename": "gemsdoe33-llc33-l1-20261026T174746Z-76f9e157d01b-zeros.tif",
+        "holdout_dti": "0.0235 (G33 seg-hide; failed G33 gate)",
+        "holdout_ratio_vs_h29s": 0.85,
+        "site_verdict": "DO NOT SUBMIT (verdict=negative on GEMSDOE33 main)",
+        "measured_geometry": {
+          "sha256": "76f9e157d01bb9bec2d98c3c5941b6114e06e0f439272d5f140af6e3584c8825",
+          "bytes": 826370,
+          "outside_mode": "allfinite_zeros",
+          "inside_nan_count": 0,
+          "inside_range": [
+            0.0,
+            1.0
+          ],
+          "n_dots": 37654,
+          "nn_min_px": 2.828,
+          "nn_p10_px": 2.828,
+          "nn_median_px": 3.606,
+          "nbr_le_3px_mean": 0.286,
+          "frac_ge_3nbr_in_3px": 0.0008,
+          "c_blind_coverage": 0.062674,
+          "lidar_missing_dot_share": 0.2105,
+          "d_cat_min_px": 2.236,
+          "d_cat_median_px": 12.53,
+          "d_cat_le_2_share": 0.0,
+          "d_cat_le_5_share": 0.2032,
+          "d_cat_gt_15_share": 0.4239,
+          "quadrant_shares": {
+            "NW": 0.2162,
+            "NE_LidarGapHeavy": 0.1479,
+            "SW": 0.4483,
+            "SE": 0.1876
+          },
+          "overlap_3px_vs_g32_02778": 0.3748
+        },
+        "model_estimated_leaderboard_bounds": {
+          "portal_range_valid": true,
+          "geometric_assumption_dti": 0.2615,
+          "hybrid_assumption_dti": 0.2415,
+          "anchor": "Anchored to GEMSDOE27 H29-S = 0.2190 OWNER-REPORTED (conc=5.792x, G_ref=12,226, rho=1.38)"
+        }
       }
     },
     {
       "site": "GEMSDOE25",
       "repo_url": "https://github.com/buffedlizard55-lab/GEMSDOE25",
-      "best_submission": "gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif",
+      "best_submission": "dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
       "best_live_score": 0.26,
-      "score_label": "OWNER-REPORTED (0.2586-0.2600 across d=2.8 runs); 2026-10-25 H66-MGD (`83539880f9da`) scored 0.0742 OWNER-REPORTED",
-      "recent_2026_10_25_run": "25gemsdoe-h66-mgd-20261025-83539880f9da-zeros.tif (0.0742 OWNER-REPORTED \u2014 blind magnetic-only mimic dilution)",
+      "score_label": "OWNER-REPORTED (tied #6; 0.0742 on 2026-10-25 H66-MGD)",
       "lineage": "Unpruned H19-5 Poisson d=2.8 (44,090 px; includes 6,436 <=200 m collar dots that cost -0.0178 vs GEMSDOE32)",
-      "action_verdict": "ALREADY SUBMITTED & 85.4% 3-px OVERLAP WITH GEMSDOE32 \u2014 DO NOT RE-SUBMIT.",
+      "action_verdict": "ALREADY SUBMITTED & 85.4% 3-px OVERLAP WITH GEMSDOE32 \u2014 DO NOT RE-SUBMIT; 2026-10-26 H69-OBJBIN is DO NOT SUBMIT.",
       "local_raster_rel": "data_cache/parallel_registry/g25_d28.tif",
       "measured_geometry": {
         "sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
@@ -314,17 +518,58 @@
         "credit_fraction_of_G": 0.3879,
         "concentration_over_blind": 5.804,
         "marginal_breakeven_tp_per_fp": 0.05485
+      },
+      "active_20261026_download": {
+        "filename": "gems25-h69-objbin-53522-20261026-160dbdc0c2ab-zeros.tif",
+        "holdout_dti": "0.0419 (G25 holdout; 53,522 over-budget dots; failed G25 gate)",
+        "holdout_ratio_vs_h29s": 0.9,
+        "site_verdict": "DO NOT SUBMIT (verdict=negative on GEMSDOE25 main)",
+        "measured_geometry": {
+          "sha256": "160dbdc0c2abc25bd40a3f38a36c2a69f8a02503337dea7ab706f6d77a08934d",
+          "bytes": 854680,
+          "outside_mode": "allfinite_zeros",
+          "inside_nan_count": 0,
+          "inside_range": [
+            0.0,
+            1.0
+          ],
+          "n_dots": 53522,
+          "nn_min_px": 1.0,
+          "nn_p10_px": 2.0,
+          "nn_median_px": 2.828,
+          "nbr_le_3px_mean": 0.947,
+          "frac_ge_3nbr_in_3px": 0.0484,
+          "c_blind_coverage": 0.077748,
+          "lidar_missing_dot_share": 0.1743,
+          "d_cat_min_px": 2.0,
+          "d_cat_median_px": 5.66,
+          "d_cat_le_2_share": 0.0061,
+          "d_cat_le_5_share": 0.4584,
+          "d_cat_gt_15_share": 0.0883,
+          "quadrant_shares": {
+            "NW": 0.1483,
+            "NE_LidarGapHeavy": 0.1878,
+            "SW": 0.3846,
+            "SE": 0.2793
+          },
+          "overlap_3px_vs_g32_02778": 0.3203
+        },
+        "model_estimated_leaderboard_bounds": {
+          "portal_range_valid": true,
+          "geometric_assumption_dti": 0.2744,
+          "hybrid_assumption_dti": 0.2604,
+          "anchor": "Anchored to GEMSDOE27 H29-S = 0.2190 OWNER-REPORTED (conc=5.792x, G_ref=12,226, rho=1.38)"
+        }
       }
     },
     {
       "site": "GEMSDOE30",
       "repo_url": "https://github.com/buffedlizard55-lab/GEMSDOE30",
-      "best_submission": "GEMSDOE30_dotted-h19-5-d2-8_20261003T061212Z_e56ea318-zeros.tif",
+      "best_submission": "d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif",
       "best_live_score": 0.26,
-      "score_label": "OWNER-REPORTED (tied #6); 2026-10-25 MSDB1 (`c878ed0c318c`) scored 0.1462 OWNER-REPORTED",
-      "recent_2026_10_25_run": "30gemsdoe-msdb1-oof-submod-b2-37654-20261025-c878ed0c318c-zeros.tif (0.1462 OWNER-REPORTED \u2014 single-stage OOF without 2-stage vesselness or regime calibration)",
-      "lineage": "Historical best is byte-identical in-footprint to GEMSDOE25 d=2.8 (`e56ea318af89`, 44,090 px); new MSDB1 scored 0.1462",
-      "action_verdict": "ALREADY SUBMITTED (exact in-footprint duplicate of GEMSDOE25 d=2.8) \u2014 DO NOT RE-SUBMIT.",
+      "score_label": "OWNER-REPORTED (tied #6; 0.1462 on 2026-10-25 MSDB1)",
+      "lineage": "Historical best is dot-identical in-footprint to GEMSDOE25 d=2.8 (44,090 px); 2026-10-25 MSDB1 scored 0.1462; 2026-10-26 GEOCOR1 has outside NaNs",
+      "action_verdict": "ALREADY SUBMITTED (exact dot duplicate of GEMSDOE25 d=2.8) \u2014 DO NOT RE-SUBMIT; 2026-10-26 GEOCOR1 fails both gate and [0,1] NaN check.",
       "local_raster_rel": "data_cache/parallel_registry/g30_d28.tif",
       "measured_geometry": {
         "sha256": "8cf893ead5667df21d3288a9968c35fd5385c425b029d82ee71d311715b129fd",
@@ -363,17 +608,58 @@
         "credit_fraction_of_G": 0.3879,
         "concentration_over_blind": 5.804,
         "marginal_breakeven_tp_per_fp": 0.05485
+      },
+      "active_20261026_download": {
+        "filename": "gems30-GEOCOR1-b3-p39324-20261026-0ed267020015.tif",
+        "holdout_dti": "0.0194 (G30 holdout; ALSO contains 7,111,787 NaNs outside footprint!)",
+        "holdout_ratio_vs_h29s": 0.45,
+        "site_verdict": "DO NOT SUBMIT (verdict=negative AND fails DrivenData [0,1] finite range check due to outside NaNs)",
+        "measured_geometry": {
+          "sha256": "0ed2670200159cab23436a5033a90d7582accc63811756d3393441c6bbdac564",
+          "bytes": 375154,
+          "outside_mode": "nan",
+          "inside_nan_count": 0,
+          "inside_range": [
+            0.0,
+            1.0
+          ],
+          "n_dots": 39324,
+          "nn_min_px": 3.0,
+          "nn_p10_px": 3.0,
+          "nn_median_px": 3.0,
+          "nbr_le_3px_mean": 2.357,
+          "frac_ge_3nbr_in_3px": 0.4468,
+          "c_blind_coverage": 0.048403,
+          "lidar_missing_dot_share": 0.2088,
+          "d_cat_min_px": 1.0,
+          "d_cat_median_px": 16.64,
+          "d_cat_le_2_share": 0.0636,
+          "d_cat_le_5_share": 0.1805,
+          "d_cat_gt_15_share": 0.5332,
+          "quadrant_shares": {
+            "NW": 0.2248,
+            "NE_LidarGapHeavy": 0.1753,
+            "SW": 0.3428,
+            "SE": 0.2571
+          },
+          "overlap_3px_vs_g32_02778": 0.1461
+        },
+        "model_estimated_leaderboard_bounds": {
+          "portal_range_valid": false,
+          "geometric_assumption_dti": null,
+          "hybrid_assumption_dti": null,
+          "note": "FAILS DrivenData [0, 1] range check (NaN outside footprint); rejected at portal upload."
+        }
       }
     },
     {
       "site": "GEMSDOE24",
       "repo_url": "https://github.com/buffedlizard55-lab/GEMSDOE24",
-      "best_submission": "gems24-dotted-h19-5-d1-5-20261001-989f59505db1.tif",
+      "best_submission": "h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif",
       "best_live_score": 0.2477,
-      "score_label": "OWNER-REPORTED (#8); 2026-10-25 GVC1 (`88c3b8e804c6`) scored 0.0859 OWNER-REPORTED",
-      "recent_2026_10_25_run": "24gemsdoe-gvc1-offcat-b2-20261025-88c3b8e804c6-zeros.tif (0.0859 OWNER-REPORTED \u2014 off-catalogue geochemical proxy over-emission)",
+      "score_label": "OWNER-REPORTED (#8; 0.0859 on 2026-10-25 GVC1)",
       "lineage": "H19-5 Poisson d=1.5 (60,069 px; over-dense 150 m spacing + unpruned <=200 m collar cost -0.0301 vs GEMSDOE32)",
-      "action_verdict": "ALREADY SUBMITTED & OVER-PACKED H19-5 LINEAGE \u2014 DO NOT RE-SUBMIT.",
+      "action_verdict": "ALREADY SUBMITTED & OVER-PACKED H19-5 LINEAGE \u2014 DO NOT RE-SUBMIT; 2026-10-26 DPRF1/DKRN1 are DO NOT SUBMIT on GEMSDOE24 main.",
       "local_raster_rel": "data_cache/parallel_registry/g24_d15.tif",
       "measured_geometry": {
         "sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
@@ -412,6 +698,48 @@
         "credit_fraction_of_G": 0.4334,
         "concentration_over_blind": 5.769,
         "marginal_breakeven_tp_per_fp": 0.05212
+      },
+      "active_20261026_download": {
+        "filename": "gems24-dprf1-dualpart-rotated-frangi-celf-20261026-c1257c1d4b5a-zeros.tif",
+        "holdout_dti": "0.16379 (whole-fold OOF n=60,988; failed G24 seed-paired gate)",
+        "holdout_ratio_vs_h29s": 1.055,
+        "site_verdict": "DO NOT SUBMIT (verdict=negative on GEMSDOE24 main)",
+        "measured_geometry": {
+          "sha256": "c1257c1d4b5ac9cc0a8e29b0120c614fcaa1f38474bc1f6de98c0a1afb0567f1",
+          "bytes": 825872,
+          "outside_mode": "allfinite_zeros",
+          "inside_nan_count": 0,
+          "inside_range": [
+            0.0,
+            1.0
+          ],
+          "n_dots": 37654,
+          "nn_min_px": 2.828,
+          "nn_p10_px": 3.162,
+          "nn_median_px": 4.243,
+          "nbr_le_3px_mean": 0.093,
+          "frac_ge_3nbr_in_3px": 0.0004,
+          "c_blind_coverage": 0.06528,
+          "lidar_missing_dot_share": 0.2113,
+          "d_cat_min_px": 2.236,
+          "d_cat_median_px": 21.38,
+          "d_cat_le_2_share": 0.0,
+          "d_cat_le_5_share": 0.1541,
+          "d_cat_gt_15_share": 0.6188,
+          "quadrant_shares": {
+            "NW": 0.2859,
+            "NE_LidarGapHeavy": 0.1947,
+            "SW": 0.3432,
+            "SE": 0.1762
+          },
+          "overlap_3px_vs_g32_02778": 0.456
+        },
+        "model_estimated_leaderboard_bounds": {
+          "portal_range_valid": true,
+          "geometric_assumption_dti": 0.2726,
+          "hybrid_assumption_dti": 0.2802,
+          "anchor": "Anchored to GEMSDOE27 H29-S = 0.2190 OWNER-REPORTED (conc=5.792x, G_ref=12,226, rho=1.38)"
+        }
       }
     },
     {
@@ -421,9 +749,8 @@
       "best_live_score": 0.2449,
       "h29s_live_score": 0.219,
       "score_label": "OWNER-REPORTED: Slot 1 (`5512495c6bd1`) = 0.2449; Session-7 unique ML `H29-S` (`511898747886`) = 0.2190 (#1 of all 5 non-H19-5 2026-10-25 runs, beating 0.1462 / 0.0859 / 0.0742 / 0.0217)",
-      "recent_2026_10_25_run": "gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-allfinite.tif (0.2190 OWNER-REPORTED \u2014 ALREADY SUBMITTED; DO NOT RE-SUBMIT)",
-      "lineage": "Slot 1 was H19-5 d=1.5 + 1,259 zero-hit T-v2 straight bridges (retired). H29-S (0.2190) proved 2-stage hydrothermal+piedmont+Frangi OOF works live (5.79x blind concentration), and revealed 4 exact fixable deficits addressed in Session 10 Lane H31-1.",
-      "action_verdict": "THIS REPO \u2014 Both Slot 1 (`5512495c6bd1`) and `H29-S` (`511898747886`) are ALREADY SUBMITTED. Only the newly generated Session-10 `H31-1` unique GeoTIFF (if and only if its automated Run Card gates PASS) may be considered for a new submission.",
+      "lineage": "Slot 1 (0.2449) & H29-S (0.2190) are ALREADY SUBMITTED. Session-10 H31-1 (`cf8e1bbef244`) passed all frozen gates on seeds 400-409. Session-11 H32-1 (`324a95651136`) improved pooled HOLDOUT-DTI over H31-1 (+0.002276, 9/10 seeds) and ranked #1 on seeds 500-509, but failed closed on Clause 4 vs H29-S.",
+      "action_verdict": "THIS REPO \u2014 Only H31-1 (`cf8e1bbef244`) is machine-approved `OK TO SUBMIT` (with transparent 500-509 replication disclosure); newly generated Session-11 H32-1 (`324a95651136`) is shipped in `docs/downloads/research/` as `DO NOT SUBMIT`.",
       "local_raster_rel": "docs/downloads/gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-allfinite.tif",
       "measured_geometry": {
         "sha256": "8585c5e870f197f84fda5bac7f22047d646fb73d455eb8b1129486c79bb976cf",
@@ -462,9 +789,95 @@
         "credit_fraction_of_G": 0.305,
         "concentration_over_blind": 5.792,
         "marginal_breakeven_tp_per_fp": 0.04581
+      },
+      "active_20261026_download": {
+        "filename": "gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif (PRIMARY OK TO SUBMIT) & research/gems27-h32-pdhc-kernel-celf28-20261026-324a95651136-allfinite.tif (SESSION-11 RESEARCH / DO NOT SUBMIT)",
+        "holdout_dti": "H31-1: 0.047302 [0.044527, 0.049619] on seeds 400-409 (0.042714 on 500-509; whole-fold OOF 0.16549) | H32-1: 0.044990 [0.042371, 0.047546] on seeds 500-509 (#1 of 8 arms; whole-fold OOF 0.16910; 5/6 E2 clauses)",
+        "holdout_ratio_vs_h29s": 1.0765,
+        "site_verdict": "H31-1 (`cf8e1bbef244`) = SOLE MACHINE-APPROVED OK TO SUBMIT CANDIDATE | Session-11 H32-1 (`324a95651136`) = DO NOT SUBMIT (5/6 frozen E2 clauses; Clause 4 CI vs H29-S [-0.000819, +0.003063] crossed zero)",
+        "measured_geometry": {
+          "sha256": "2c002b02792419864bd3b29a218e543cb41e3f07b3b57c29ef35c6e39e184bfe",
+          "bytes": 825820,
+          "outside_mode": "allfinite_zeros",
+          "inside_nan_count": 0,
+          "inside_range": [
+            0.0,
+            1.0
+          ],
+          "n_dots": 37654,
+          "nn_min_px": 2.828,
+          "nn_p10_px": 3.0,
+          "nn_median_px": 4.123,
+          "nbr_le_3px_mean": 0.234,
+          "frac_ge_3nbr_in_3px": 0.0019,
+          "c_blind_coverage": 0.063591,
+          "lidar_missing_dot_share": 0.2092,
+          "d_cat_min_px": 2.236,
+          "d_cat_median_px": 16.28,
+          "d_cat_le_2_share": 0.0,
+          "d_cat_le_5_share": 0.2307,
+          "d_cat_gt_15_share": 0.524,
+          "quadrant_shares": {
+            "NW": 0.2689,
+            "NE_LidarGapHeavy": 0.2031,
+            "SW": 0.3219,
+            "SE": 0.2061
+          },
+          "overlap_3px_vs_g32_02778": 0.5023
+        },
+        "model_estimated_leaderboard_bounds": {
+          "portal_range_valid": true,
+          "geometric_assumption_dti": 0.2654,
+          "hybrid_assumption_dti": 0.2757,
+          "anchor": "Anchored to GEMSDOE27 H29-S = 0.2190 OWNER-REPORTED (conc=5.792x, G_ref=12,226, rho=1.38)"
+        }
       }
     }
   ],
+  "gemsdoe27_session11_h32_measured": {
+    "submission": "gems27-h32-pdhc-kernel-celf28-20261026-324a95651136-allfinite.tif",
+    "directory": "docs/downloads/research",
+    "verdict": "negative (DO NOT SUBMIT \u2014 5/6 frozen E2 clauses passed; Clause 4 vs H29-S CI [-0.000819, +0.003063] crossed zero)",
+    "holdout_dti_seeds_500_509_buffered": 0.04499,
+    "holdout_dti_seeds_500_509_unbuffered": 0.113813,
+    "holdout_dti_whole_quadrant_n60988": 0.169096,
+    "measured_geometry": {
+      "sha256": "6ae965f5f92a23ebaf660291dd4c1c0dd7f0f710282a559fe3389786d5a2857e",
+      "bytes": 825798,
+      "outside_mode": "allfinite_zeros",
+      "inside_nan_count": 0,
+      "inside_range": [
+        0.0,
+        1.0
+      ],
+      "n_dots": 37654,
+      "nn_min_px": 2.828,
+      "nn_p10_px": 3.0,
+      "nn_median_px": 4.123,
+      "nbr_le_3px_mean": 0.267,
+      "frac_ge_3nbr_in_3px": 0.0026,
+      "c_blind_coverage": 0.063054,
+      "lidar_missing_dot_share": 0.1986,
+      "d_cat_min_px": 2.236,
+      "d_cat_median_px": 15.62,
+      "d_cat_le_2_share": 0.0,
+      "d_cat_le_5_share": 0.2416,
+      "d_cat_gt_15_share": 0.5101,
+      "quadrant_shares": {
+        "NW": 0.2636,
+        "NE_LidarGapHeavy": 0.2034,
+        "SW": 0.2997,
+        "SE": 0.2333
+      },
+      "overlap_3px_vs_g32_02778": 0.5
+    },
+    "model_estimated_leaderboard_bounds": {
+      "portal_range_valid": true,
+      "geometric_assumption_dti": 0.2631,
+      "hybrid_assumption_dti": 0.2667,
+      "anchor": "Anchored to GEMSDOE27 H29-S = 0.2190 OWNER-REPORTED (conc=5.792x, G_ref=12,226, rho=1.38)"
+    }
+  },
   "gemsdoe27_slot1_measured": {
     "submission": "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-allfinite.tif",
     "owner_reported_score": 0.2449,
@@ -512,20 +925,20 @@
       "submission": "gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-allfinite",
       "owner_reported_score": 0.219,
       "method": "2-stage nested spatial OOF (32 base + 20 hydrothermal/piedmont/destriped-mag + 10 Frangi vesselness) + B2 + weighted 300 m CELF (min_sep=2.0)",
-      "diagnostic": "Best of the 5-submission 2026-10-25 non-H19-5 cohort (+0.0728 over #2). Reached 5.79x blind concentration (matching H19-5's 5.66x), proving multi-physics OOF transfers live, but lost ~0.03-0.05 DTI to min_sep=2.0 2D blob crowding (-11.0% coverage c=0.0527 vs 0.0592), single-tree LiDAR-gap starvation (18.3% vs 24.6% area), d<=5 halo bleed (24.1% vs 15.0%), and missing SE seismic fabric."
+      "diagnostic": "Best of the 5-submission 2026-10-25 non-H19-5 cohort (+0.0728 over #2). Reached 5.79x blind concentration (matching H19-5's 5.66x), proving multi-physics OOF transfers live, while revealing min_sep=2.0 crowding (-11.0% coverage c=0.0527 vs 0.0592) and LiDAR-gap starvation (18.3% vs 24.6% area)."
     },
     {
       "rank_in_cohort": 2,
       "site": "GEMSDOE30",
-      "submission": "30gemsdoe-msdb1-oof-submod-b2-37654-20261025-c878ed0c318c-zeros",
+      "submission": "gems30-MSDB1-edge44090-20261025-e7856ec3f14a",
       "owner_reported_score": 0.1462,
-      "method": "Single-stage multi-scale OOF + submodular B2 (37,654 px)",
+      "method": "Single-stage multi-scale OOF + submodular B2",
       "diagnostic": "Lacked 2-stage axial Frangi vesselness, hydrothermal geothermometry, and LiDAR-gap regime calibration (-0.0728 behind GEMSDOE27 H29-S)."
     },
     {
       "rank_in_cohort": 3,
       "site": "GEMSDOE24",
-      "submission": "24gemsdoe-gvc1-offcat-b2-20261025-88c3b8e804c6-zeros",
+      "submission": "gems24-gvc1-negative-geothermal-lineament-submod-20261025-abe8e51c719d-zeros",
       "owner_reported_score": 0.0859,
       "method": "Off-catalogue geothermal/vent geochemical proxy (B2)",
       "diagnostic": "Broad geochemical dispersion plumes without structural scarp/potential-field crest localization emit predominantly off-fault false positives."
@@ -533,7 +946,7 @@
     {
       "rank_in_cohort": 4,
       "site": "GEMSDOE25",
-      "submission": "25gemsdoe-h66-mgd-20261025-83539880f9da-zeros",
+      "submission": "gems25-h66-mgd-flank-sapd3-0-k3p5-20261025-da617550a0e9-zeros",
       "owner_reported_score": 0.0742,
       "method": "Blind magnetic-gradient domain + SGMC reactivation",
       "diagnostic": "Unfiltered Tertiary volcanic flow edges and pluton rims mimic magnetic fault steps when uncorroborated by gravity/terrain/seismicity."
@@ -541,7 +954,7 @@
     {
       "rank_in_cohort": 5,
       "site": "GEMSDOE28",
-      "submission": "28gemsdoe-s18-mxtp-37654-20261025-05fc81ca2760-zeros",
+      "submission": "gems28-s18-mxtp-20261025-3e95505c011a-allfinite",
       "owner_reported_score": 0.0217,
       "method": "37,654-dot mixed catalogue-tip extrapolation (MXTP)",
       "diagnostic": "Reconfirms Slot-1/82GEMSDOE/91GEMSDOE failure mode: extrapolating off mapped tips without multi-physics surface/subsurface evidence yields near-blind precision."
@@ -564,7 +977,7 @@
       "site": "GEMSDOE27",
       "submission": "H29-S (511898747886)",
       "owner_reported_score": 0.219,
-      "lesson": "2-stage hydrothermal + piedmont flexure + Frangi vesselness + CELF (min_sep=2.0); #1 of 2026-10-25 five-site cohort, with +0.03-0.05 recoverable DTI from fixing min_sep=2.8, LiDAR-gap dual-expert calibration, and SE Walker Lane seismic fabric."
+      "lesson": "2-stage hydrothermal + piedmont flexure + Frangi vesselness + CELF (min_sep=2.0); #1 of 2026-10-25 five-site cohort."
     }
   ]
 }

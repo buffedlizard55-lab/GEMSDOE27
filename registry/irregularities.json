@@ -383,31 +383,55 @@
    "id": "IR-2026-10-26-08-buffered-scoring-mask-target-halo-and-kernel-clipping",
    "severity": "high",
    "issue": "holdout.buffered_scoring_mask(sp, foot) excludes ring = (d_hidden <= 6.0) & ~sp.hidden. Passing allowed = (valid_scoring | hidden) & (d_known > 2.0) into emit() and ridge_nms(prob, allowed) zeroed prob across the 100-600 m moat surrounding sp.hidden while leaving sp.hidden (d == 0) positive, and zeroed the 0 < d < 3.0 px (100-300 m) triangular tolerance kernel during scoring.",
-   "action": "In scripts/run_h30_1_holdout.py, ridge_nms(prob, foot) is computed strictly on foot (100% blind to sp.hidden), and holdout evaluation reports BOTH the primary leak-free full_kernel_blind evaluator (where emit sees only fold_mask and visible_known = sp.known & (d(hidden) > 6.0), and the full 300 m kernel is active) AND the legacy buffered_scoring_mask evaluator. H30-1 passes both evaluators with 95% bootstrap CIs strictly above zero."
+   "action": "SUPERSEDED BY IR-2026-10-26-13: PR #29's attempted fix in scripts/run_h30_1_holdout.py computed visible_known = sp.known & (d(hidden) > 6.0), which leaked sp.hidden into emit()'s exclusion mask. Fixed in Session 11 so emit() receives strictly sp.known, and H30-1 (`801dff07541d`) is quarantined with verdict=negative, ok_to_submit=False."
   },
   {
-   "id": "IR-2026-10-26-01-restore-data-codeload-upgrade",
+   "id": "IR-2026-10-26-09-restore-data-codeload-upgrade",
    "severity": "medium",
    "issue": "`scripts/restore_data.py` fetched 21 manifest entries via per-file `gh api repos/.../contents/...`, hitting GitHub core REST API rate-limit exhaustion (`HTTP 403`, `core.remaining=0/5100`) after 2 files in sandboxed sessions.",
    "action": "Fixed in-place per Protocol \u00a72: `scripts/restore_data.py` now streams each pinned `(repo, commit)` archive once from `https://codeload.github.com/{repo}/tar.gz/{commit}` (0 REST API calls), verifies byte lengths and SHA-256 hashes for all 17 inputs, cleans split `.part*` temporaries, and retains `gh_raw` only as fallback."
   },
   {
-   "id": "IR-2026-10-26-02-live-cohort-inversion-h29s-02190",
+   "id": "IR-2026-10-26-10-live-cohort-inversion-h29s-02190",
    "severity": "medium",
-   "issue": "2026-10-26 prompt reports five new 2026-10-25 live scores (`OWNER-REPORTED`; no DrivenData receipt stored in repo): `27GEMSDOE H29-S` (`511898747886`) = `0.2190` (#1 of cohort), `30GEMSDOE MSDB1` (`c878ed0c318c`) = `0.1462`, `24GEMSDOE GVC1` (`88c3b8e804c6`) = `0.0859`, `25GEMSDOE H66-MGD` (`83539880f9da`) = `0.0742`, and `28GEMSDOE S18-MXTP` (`05fc81ca2760`) = `0.0217`, plus `Current Leaderboard High Score: 0.4413` / `49GEMSDOE: 0.4413` (unverified vs Oct-2 snapshot high `0.3195`). Exact metric inversion (`evidence/focus_sites_executive_summary_20261026.json`) shows `H29-S` achieved `5.79x` blind truth concentration (matching `GEMSDOE24/25/30`'s `5.77-5.80x`), but `min_sep_px=2.0` packed 2D clusters (`8.5%` >=3 neighbors in 3 px vs `0.7%` in `GEMSDOE32`), cutting blind coverage `c` by `-11.0%` (`0.0527` vs `0.0592`), while single-tree training under-emitted in the `24.6%` LiDAR gap (`18.3%`).",
-   "action": "Recorded in `registry/live_scores.json` under `owner_reported_prompt_2026_10_26` (all labelled `OWNER-REPORTED`); marked `511898747886` as ALREADY SUBMITTED so it is never re-uploaded and added `511898747886` + `5512495c6bd1` to the mandatory scored-submission duplicate screen for Session 10 Lane `H31-1`."
+   "issue": "2026-10-26 prompt reports five new 2026-10-25 live scores (`OWNER-REPORTED`; no DrivenData receipt stored in repo): `27GEMSDOE H29-S` (`511898747886`) = `0.2190` (#1 of cohort), `30GEMSDOE MSDB1` (`c878ed0c318c`) = `0.1462`, `24GEMSDOE GVC1` (`88c3b8e804c6`) = `0.0859`, `25GEMSDOE H66-MGD` (`83539880f9da`) = `0.0742`, and `28GEMSDOE S18-MXTP` (`05fc81ca2760`) = `0.0217`, plus `Current Leaderboard High Score: 0.4413` / `49GEMSDOE: 0.4413` (external leaderboard leader; `buffedlizard55-lab/GEMSDOE49` repo reports `0.2376` OWNER-REPORTED). Exact metric inversion (`evidence/focus_sites_executive_summary_20261026.json`) shows `H29-S` achieved `5.79x` blind truth concentration, while `min_sep_px=2.0` cut blind coverage `c` by `-11.0%` (`0.0527` vs `0.0592`).",
+   "action": "Recorded in `registry/live_scores.json` under `owner_reported_prompt_2026_10_26` (all labelled `OWNER-REPORTED`); marked `511898747886` as ALREADY SUBMITTED so it is never re-uploaded and added `511898747886` + `5512495c6bd1` to the mandatory scored-submission duplicate screen."
   },
   {
-   "id": "IR-2026-10-26-03-h29-2-registry-sync",
+   "id": "IR-2026-10-26-11-h29-2-registry-sync",
    "severity": "low",
    "issue": "`registry/next_hypotheses.json` still listed `H29-2` as `UNTRIED` even after PR #26 (`evidence/h29_2_run_card_2026-10-25.json`, seeds `300-309`) tested `H29-2` and recorded a negative duplicate-stop / zero-gain outcome (`0.1059` vs `0.1060` control).",
-   "action": "Moved `H29-2` to `tested_hypotheses` in `registry/next_hypotheses.json` and registered the fresh `H31` screen (`H31-1..H31-4`) on unconsumed seed block `400-409`."
+   "action": "Moved `H29-2` to `tested_hypotheses` in `registry/next_hypotheses.json` and registered fresh screens on unconsumed seed blocks."
   },
   {
-   "id": "IR-2026-10-26-04-coverage-thin-heap-pool-fix",
+   "id": "IR-2026-10-26-12-coverage-thin-heap-pool-fix",
    "severity": "medium",
-   "issue": "Shared tool `src/gems27/coverage_thin.py::weighted_celf_cover` truncated its initial candidate heap at `keep_n = max(max_candidates=320_000, budget * 3)` before `min_sep_px` exclusion. On quadrant holdouts (`budget ~ 9,150`) `320,000` is `35x` budget so it always reached budget, whereas on full-map emission (`budget = 37,654`) with `min_sep_px = 2.8` (`21` integer lattice offsets blocked per dot along ridges), `320,000` (`8.5x` budget) exhausted `489` dots short (`37,165` vs `37,654`).",
-   "action": "Fixed in-place in `src/gems27/coverage_thin.py` per Parallel-Run Protocol \u00a72 via `block_area = max(3, ceil(pi * max(min_sep_px, 1.0)^2 * 1.35))` (`keep_n = max(max_candidates, budget * block_area)`), preserving identical behavior for quadrant holdouts (`budget ~ 9,150 <= 320,000 / 34`) while reaching exact `37,654` full-map dots at `min_sep_px = 2.8`."
+   "issue": "Shared tool `src/gems27/coverage_thin.py::weighted_celf_cover` truncated its initial candidate heap at `keep_n = max(max_candidates=320_000, budget * 3)` before `min_sep_px` exclusion, exhausting `489` dots short (`37,165` vs `37,654`) on full-map emission at `min_sep_px = 2.8`.",
+   "action": "Fixed in-place in `src/gems27/coverage_thin.py` per Parallel-Run Protocol \u00a72 via `block_area = max(3, ceil(pi * max(min_sep_px, 1.0)^2 * 1.35))`."
+  },
+  {
+   "id": "IR-2026-10-26-13-h30-1-visible-known-hidden-leak-retracted",
+   "severity": "high",
+   "issue": "`scripts/run_h30_1_holdout.py` (PR #29) computed `visible_known = sp.known & (d_hid > 6.0)` and passed `d_vis_known = distance_transform_edt(~visible_known)` into `emit(..., d_known=d_vis_known)`. Because `d_hid` depends on withheld ground truth `sp.hidden`, `d_vis_known` erased the `d_known > 2.0` exclusion collar specifically inside `600 m` of `sp.hidden`, allowing `H30-1` to pack near-tip dots directly onto withheld junctions while banning `>600 m` false positives (`H31-1` `scripts/run_h31_s10_holdout.py` was verified 100% immune because it passes `sp.known` directly).",
+   "action": "Fixed `scripts/run_h30_1_holdout.py` in-place so `emit()` sees only `sp.known` (zero access to `sp.hidden`), quarantined `H30-1` (`801dff07541d`) in `evidence/h30_1_run_card.json` and `docs/downloads/h30_1_manifest.json` (`verdict='negative'`, `ok_to_submit=False`), and synchronized `docs/data/submission_readiness_audit.json` so ONLY `h31_s10_run_card_2026-10-26.json` remains approved."
+  },
+  {
+   "id": "IR-2026-10-26-14-one-sided-spearman-uniqueness-fixed",
+   "severity": "medium",
+   "issue": "`src/gems27/readiness.py` (`surface_corr > MAX_SURFACE_SPEARMAN`) and `scripts/check_parallel_uniqueness.py` (`r > MAX_SPEARMAN`) checked signed `rho > 0.90` rather than `abs(rho) > 0.90`, allowing a sign-inverted `1 - p` duplicate (`rho = -0.95`) to slip past the duplicate screen.",
+   "action": "Fixed both `src/gems27/readiness.py` and `scripts/check_parallel_uniqueness.py` in-place per Protocol \u00a72 to enforce `abs(rho) <= 0.90`, and added `test_rejects_strongly_negative_spearman_surface_duplicate` in `tests/test_readiness.py`."
+  },
+  {
+   "id": "IR-2026-10-26-15-gemsdoe30-20261026-outside-nan-hazard",
+   "severity": "high",
+   "issue": "Byte audit of the 10 active `2026-10-26` sibling focus-site GeoTIFFs revealed that `GEMSDOE30`'s newest downloadable file `gems30-GEOCOR1-b3-p39324-20261026-0ed267020015.tif` contains `7,111,787` `NaN` cells outside the `5,167,373`-px valid footprint (`nodata=nan`), triggering the DrivenData portal error `Predicted values must be in range [0, 1]`.",
+   "action": "Flagged explicitly in `evidence/focus_sites_executive_summary_20261026.json` and the 9-focus-site executive summary table so no operator uploads `0ed267020015`."
+  },
+  {
+   "id": "IR-2026-10-26-16-h31-replication-variance-and-h32-fail-closed",
+   "severity": "medium",
+   "issue": "On fresh untouched seeds `500-509` (`evidence/h32_s11_e2_holdout_500_509.json`), Session-10 champion `H31-S` replicated at `0.042714` buffered `HOLDOUT-DTI` (`-0.001088` below `H29-S = 0.043802` due to SW Mojave `lidar_valid` sediment-cover suppression, `0.027488` vs `0.030706`), while still beating `H29-S` on unbuffered `HOLDOUT-DTI` (`0.109572` vs `0.105277`) and whole-quadrant OOF (`0.165491` vs `0.155231`). Session-11 `H32-1` (`PDHC-K`) fixed `H31-S`'s SW suppression (`0.030949`, `+0.003462`), beat `H31-S` on `9/10` seeds (`+0.002276`, `95% CI [+0.000776, +0.003667]`), and ranked #1 of all 8 arms on pooled buffered (`0.044990`), unbuffered (`0.113813`), and whole-quadrant OOF (`0.169096`), yet passed `5/6` frozen `E2` clauses because Clause 4 (`ci95_gt_zero_and_8seeds_vs_H29S`) straddled zero (`[-0.000819, +0.003063]`, `6/10` seeds) due to `H29-S` `min_sep=2.0` double-packing on short isolated `600 m`-buffered `NE` fragments (`79.56%` 3-px overlap with unscored `H31-1`).",
+   "action": "Per frozen preregistration (`knowledge/26_preregistration_H32_2026-10-26.md`) and `AGENTS.md` ('do not tune thresholds after seeing results'), `H32-1` (`324a95651136`) fails closed (`verdict='negative'`, `ok_to_submit=False`) in `docs/downloads/research/`. `H31-1` (`cf8e1bbef244`) remains the sole machine-approved `OK TO SUBMIT` candidate on `GEMSDOE27`, with full transparent disclosure of its `500-509` replication metrics."
   }
  ]
 }

@@ -1,6 +1,27 @@
 # 27GEMSDOE - geothermal & structural fault discovery lab for DrivenData #306 (DOE GEMS)
 
-## Session 10 Automated Gate Verdict (`2026-10-26`, Lane `L-S10-2026-10-26` / `H31-1` — READ FIRST)
+## Session 11 Automated Gate Verdict (`2026-10-26`, Lane `L-S11-2026-10-26` / `H32-1` — READ FIRST)
+
+### 1. Newly Generated Session-11 Unique GeoTIFF (`H32-1` `PDHC-K`): **⛔ DO NOT SUBMIT — RESEARCH DELIVERABLE (`5/6` Frozen Clauses Passed)**
+- **Unique Research GeoTIFF (`[0, 1]` all-finite):** `docs/downloads/research/gems27-h32-pdhc-kernel-celf28-20261026-324a95651136-allfinite.tif` (SHA-256 `6ae965f5f92a23ebaf660291dd4c1c0dd7f0f710282a559fe3389786d5a2857e`) + paired `.zip` (`docs/downloads/research/gems27-h32-pdhc-kernel-celf28-20261026-324a95651136-allfinite.zip`)
+- **Submission Name & Short Note (`97 / 140` chars):** `27GEMSDOE-H32-PDHC-K-20261026-324a95651136` · `27GEMSDOE H32-1 PDHC-K | 37654px B2 id 324a95651136 | HOLDOUT-DTI 0.0450 (5/6 E2) | DO NOT SUBMIT`
+- **Machine Gate Output (`gems27.readiness.publication_decision` on `evidence/h32_s11_run_card_2026-10-26.json`):** `ok_to_publish_as_submission = false` (`verdict = "negative"`, `ok_to_submit = false`):
+  1. **Format & `[0, 1]` Range Gate — `PASS`:** `EPSG:32611`, `3730×3292`, `float32`, `nodata = None`, **all `12,279,160` cells finite in `[0.0, 1.0]`** (`0` `NaN`, `0` `Inf`, `37,654` dots, `0` catalogue overlap, `B2 > 200 m`).
+  2. **Leakage Canary (`E1`) — `PASS`:** Max single-feature ROC-AUC across all 16 new `H32-1` transforms and all 95 columns = **`0.5954 <= 0.90`** (`evidence/h32_s11_e1_canary_and_surface.json`).
+  3. **25-Raster Fleet Uniqueness (`E1 + E3`) — `PASS`:** Max 3-px dot overlap = **`57.83% <= 70%`** vs 12 pinned focus peers, **`58.55% <= 70%`** vs 10 active `2026-10-26` sibling focus-site `.tif`s, and **`59.31% <= 70%`** vs live-scored `GEMSDOE27` submissions (`max |Spearman| = 0.1222 <= 0.90`; shares `79.56%` 3-px proximity with unscored `H31-1`).
+  4. **Blind 40-Cell Spatial Holdout (`E2`, fresh untouched seeds `500–509`, `111,013` withheld positive fault px) — `#1 OF ALL 8 ARMS`, `5/6` FROZEN CLAUSES PASSED (`Clause 4 FAIL`):**
+     - **Pooled buffered `HOLDOUT-DTI`:** **`H32-S = 0.044990` (#1)** > `H29-S = 0.043802` > `H32-A = 0.043535` > `H31-S = 0.042714` > `D0 = 0.039359` > `B0 = 0.036453` > `H28_1_B2 = 0.036358` > `U0 = 0.015175`.
+     - **Pooled unbuffered `HOLDOUT-DTI`:** **`H32-S = 0.113813` (#1)** > `H31-S = 0.109572` > `H32-A = 0.107291` > `H29-S = 0.105277`.
+     - **Harmonized whole-quadrant OOF (`n = 60,988`):** **`H32-S = 0.169096` (#1 across all 9 focus sites)** > `H31-S = 0.165491` > `GEMSDOE24 DPRF1 = 0.16379` > `H29-S = 0.155231` > `GEMSDOE36 = 0.13576` > `GEMSDOE31 H31-T = 0.1300`.
+     - **Beat `H31-S` (`+0.002276`, `95% CI [+0.000776, +0.003667]`, `9/10` seeds, recovering `SW` `0.027488 -> 0.030949`), `D0` (`+0.005631`, `10/10`), and `B0` (`+0.008537`, `10/10`),** yet missed frozen Clause 4 vs `H29-S` (`+0.001188`, `6/10` seeds, `95% CI [-0.000819, +0.003063]`). Per `AGENTS.md` (*"Do not tune thresholds after seeing results"*), `H32-1` fails closed (`verdict = "negative"`).
+
+### 2. Sole Machine-Approved Submission on `GEMSDOE27`: **✅ Session-10 `H31-1` (`cf8e1bbef244`) — `OK TO DOWNLOAD AND SUBMIT`**
+- **Approved File (`docs/data/submission_readiness_audit.json` `approved = ["h31_s10_run_card_2026-10-26.json"]`):** `docs/downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif` (`.zip` paired; details in Session 10 section immediately below, with full disclosure of its `0.042714` buffered / `0.165491` whole-quadrant OOF replication on seeds `500–509`).
+- **Session-11 Shared-Tool & Audit Fixes (`IR-2026-10-26-13..16`):** Retracted PR #29 `H30-1` (`801dff07541d`) after proving `visible_known = sp.known & (d_hid > 6.0)` leaked `sp.hidden` (`scripts/run_h30_1_holdout.py` fixed in-place); fixed one-sided Spearman checks in `src/gems27/readiness.py` and `scripts/check_parallel_uniqueness.py` to enforce `abs(rho) <= 0.90`; flagged `GEMSDOE30 GEOCOR1` (`0ed267020015`) outside-footprint `NaN` range hazard (`7,111,787` `NaN`s). Full report & PhD autopsy of `GEMSDOE32` (`0.2778`): `knowledge/27_h32_results_and_gemsdoe32_autopsy_2026-10-26.md`.
+
+---
+
+## Session 10 Automated Gate Verdict (`2026-10-26`, Lane `L-S10-2026-10-26` / `H31-1` — SOLE APPROVED CANDIDATE)
 **✅ OK TO DOWNLOAD AND SUBMIT — ALL AUTOMATED MACHINE VALIDATION GATES PASSED (ZERO HUMAN INTERVENTION).**
 - **Approved Unique Submission File (`[0, 1]` all-finite GeoTIFF):** `docs/downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif` (`825,820` B, SHA-256 `2c002b02792419864bd3b29a218e543cb41e3f07b3b57c29ef35c6e39e184bfe`)
 - **Single-TIFF ZIP:** `docs/downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.zip` (`184,837` B, SHA-256 `628dea2cd1b064791272d6a142ca28b88d0d050d0fd1b53028cf00dd87632f63`)
@@ -112,9 +133,9 @@ Owner-reported reference: `24GEMSDOE` scored **0.2477** (`OWNER-REPORTED`); `27G
 6. Before implementing new predictive features: maintain a current screen of 3–5 genuinely untried hypotheses in `knowledge/07_untried_hypotheses.md` and `registry/next_hypotheses.json`; validate any chosen candidate on the spatially blocked holdout **before** a weekly slot is spent. The broader `registry/hypotheses.json` is the historical evidence ledger.
 7. Run three passes: implement+verify; review bugs/assumptions/edge cases; recheck against the original request (`evidence/review_passes.md`).
 
-## Submission status — no current approved TIFF
+## Historical Session 6 archive — H28-3 negative result (superseded by Session 10/11 machine gates above)
 
-**Do not upload any file from this repository as a current recommendation.** The current method lane, H28-3, failed its frozen efficacy gate despite passing its leakage, format, and peer-uniqueness checks. Its download package exists solely for reproducibility and carries the explicit status **NEGATIVE RESEARCH ARTIFACT — NOT APPROVED FOR SUBMISSION**:
+*(Archived Session-6 status preserved for provenance; current machine-validated status is governed by `docs/data/submission_readiness_audit.json` in the Session 11 & Session 10 sections at the top of this README.)* The Session-6 method lane, H28-3, failed its frozen efficacy gate despite passing its leakage, format, and peer-uniqueness checks. Its download package exists solely for reproducibility and carries the explicit status **NEGATIVE RESEARCH ARTIFACT — NOT APPROVED FOR SUBMISSION**:
 
 - Evidence: `evidence/h28_3_strain_holdout.json` and `evidence/h28_3_negative_uniqueness.json`
 - Protocol: `knowledge/13_preregistration_H28-3.md`
@@ -223,12 +244,12 @@ All **20** of the owner's scored rasters that could be matched were recovered fr
 ## Map of the repo
 | path | what |
 |---|---|
-| `src/gems27/` | `metric.py`, `thinning.py`, `holdout.py`, `graph.py`, `links.py`, `candidates.py`, `topology_theory.py`, `submission.py`, `grid.py`, `paths.py`, `vector_graph.py`, `topology_classes.py`, `oof_detector.py`, `potential_edges.py`, `subsurface_features.py` (streamed `<500 MB`), **`coverage_thin.py`** (`weighted_celf_cover` & `expected_weighted_coverage`), **`hydrothermal_piedmont.py`** (`H29-1` 20 hydrothermal/piedmont/destriped-magnetic features + 10 Stage-2 Frangi vesselness + 45°-rotated sectors + 2-stage nested spatial cross-fitting) |
-| `scripts/` | `restore_data.py`, `fetch_parallel_registry.py`, `download_competition_data.sh`, `prepare_data.py`, `fetch_vector_faults.py`, `run_h29_holdout.py` (`E1` canary/surface + `E2` 40-cell blind holdout), `build_h29_submission.py` (`E3` dual-partition stitched-OOF GeoTIFF + Run Card builder), `run_lane_holdout.py` (`IR-2026-10-25-06/07` fixes), `verify_downloads.py` (`162/162` checks), `check_parallel_uniqueness.py`, `build_site.py`, `refresh_source_feed.py` |
-| `knowledge/` | `01` why `0.2477` won; `02` hypothesis ledger; `03` pre-registration; `04` topology & vector argument; `05` verified sources; `06` limitations/access; `07` live-score inversion; `08/09` `H28-1`; `10` far-field limit; `11` `H27-5b` review class; `12` why `0.2778` won; `13/14` `H28-3` & subsurface lane; **`15` geothermal vent discovery & frozen `H29-1` preregistration (`30accf8`)**; **`16` Session 7 `H29-1` results, limitations & next steps (`H29-6`)** |
-| `registry/` | `sources.json` (first-hand verified official links), `hypotheses.json` (historical ledger through `H29-1`), `next_hypotheses.json` (5 untried hypotheses `H29-6, H29-2, H29-3, H27-16, H29-5` + tested `H27-10, H28-3, H29-1`), `parallel_submission_registry.json` (12 SHA-256-pinned peer rasters), `irregularities.json` (`IR-2026-10-25-01..09`), `live_scores.json`, `topology_candidates.json` |
-| `evidence/` | **`h29_e1_canary_and_surface.json`**, **`h29_e2_holdout_210_219.json`**, **`h29_uniqueness_vs_peers.json`**, **`h29_run_card_2026-10-25.json`**, **`slot1_live_ab_inversion.json`**, **`audit_98e59bf8e3ce_uniqueness.json`**, plus historical validation/inversion JSONs and `review_passes.md` |
-| `docs/` | GitHub Pages site (`index.html`, `executive-summary.html`, `topology.html`, `research.html`, `sources.html`), `downloads/` (`gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-{allfinite.tif,allfinite.zip,nan.tif}`, `checks-*.json`, `note-*.txt`, `h29_candidate_manifest.json`, plus historic audit manifests), `data/` |
+| `src/gems27/` | `metric.py`, `thinning.py`, `holdout.py`, `graph.py`, `links.py`, `candidates.py`, `topology_theory.py`, `submission.py`, `readiness.py` (`publication_decision`, `abs(rho) <= 0.90`), `grid.py`, `paths.py`, `vector_graph.py`, `topology_classes.py`, `oof_detector.py`, `potential_edges.py`, `subsurface_features.py`, `coverage_thin.py`, `hydrothermal_piedmont.py` (`H29-1`), `geothermal_conduit_nis.py` (`H31-1` `DRCG-WL`), **`poisson_conduit_dti.py`** (`H32-1` `PDHC-K` 16 features + cover-aware dual-target 300 m kernel-expected OOF + `emit_h32_celf`) |
+| `scripts/` | `restore_data.py`, `fetch_parallel_registry.py`, `download_competition_data.sh`, `prepare_data.py`, `fetch_vector_faults.py`, **`run_h32_s11_holdout.py`**, **`build_h32_s11_submission.py`**, **`build_focus_sites_summary.py`**, `run_h31_s10_holdout.py`, `build_h31_s10_submission.py`, `run_h30_1_holdout.py` (`IR-2026-10-26-13` fixed), `audit_submission_readiness.py`, `verify_downloads.py`, `check_parallel_uniqueness.py` (`IR-2026-10-26-14` fixed), `build_site.py`, `refresh_source_feed.py` |
+| `knowledge/` | `01`–`22` historical analyses & preregistrations; `06` limitations/access; `23` 9-focus-site audit & `0.2778`/`0.2190` autopsy; `24/25` Session 10 `H31-1` preregistration & results; **`26` frozen Session 11 `H32-1..H32-5` preregistration (`92d63a3`)**; **`27` Session 11 `H32-1` results, `GEMSDOE32` (`0.2778`) PhD autopsy & next steps (`H32-2..5`)** |
+| `registry/` | `sources.json` (first-hand verified official links), `hypotheses.json` (historical ledger through `H32-1`), `next_hypotheses.json` (`H32-2..H32-5` queued on seeds `>= 600`), `parallel_submission_registry.json` (12 SHA-256-pinned peer rasters), `focus_sites_2026-10-26.json`, `irregularities.json` (`IR-2026-10-26-01..16`), `live_scores.json`, `topology_candidates.json` |
+| `evidence/` | **`h32_s11_e1_canary_and_surface.json`**, **`h32_s11_e2_holdout_500_509.json`**, **`h32_s11_run_card_2026-10-26.json`**, **`h31_s10_run_card_2026-10-26.json`**, **`focus_sites_executive_summary_20261026.json`**, plus historical validation/inversion JSONs and `review_passes.md` |
+| `docs/` | GitHub Pages site (`index.html`, `executive-summary.html`, `how-to-submit.html`, `topology.html`, `research.html`, `sources.html`), `downloads/` (`gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-*` sole approved candidate + `research/gems27-h32-pdhc-kernel-celf28-20261026-324a95651136-*` Session-11 research deliverable), `data/submission_readiness_audit.json` |
 | `.github/workflows/` | `source-feed.yml` (official sources only; never drivendata.org), `fetch-vector-faults.yml`, `build-site.yml` (stdlib Python 3.11), `ci.yml` (tests + lint + site build) |
 
 ## Reproduce
@@ -237,9 +258,10 @@ pip install -r requirements.txt
 GEMS_DATA_DIR=./data_cache python scripts/restore_data.py          # restores 17 hash-pinned artifacts (or run bash scripts/download_competition_data.sh outside the sandbox)
 python scripts/fetch_parallel_registry.py                          # fetches & SHA-256-authenticates all 12 peer rasters
 python scripts/prepare_data.py                                     # builds 32-band label-free feature matrix (data_cache/prepared/features.npy)
-python scripts/run_h29_holdout.py                                  # E1 (canary + surface Spearman) + E2 (40-cell blind holdout, seeds 210-219)
-python scripts/build_h29_submission.py                             # E3 (dual-partition stitched-OOF GeoTIFF + 12-peer uniqueness + JSON Run Card)
-python scripts/verify_downloads.py                                 # 162/162 automated GeoTIFF, [0,1] range, CRS, transform, ZIP & note checks
+python scripts/run_h32_s11_holdout.py --stage all                  # E1 (canary + surface Spearman) + E2 (40-cell blind holdout, seeds 500-509)
+python scripts/build_h32_s11_submission.py                         # E3 (dual-partition stitched-OOF GeoTIFF + 25-raster uniqueness + JSON Run Card)
+python scripts/audit_submission_readiness.py                       # fail-closed machine gate across all evidence/*run_card*.json
+python scripts/verify_downloads.py                                 # automated GeoTIFF, [0,1] range, CRS, transform, ZIP & note checks (0 failures)
 python scripts/build_site.py && python -m pytest -q
 ```
 

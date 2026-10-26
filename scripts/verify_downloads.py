@@ -322,6 +322,55 @@ def main() -> int:
            f"h31/gate-consistency: verdict={rc31['verdict']} "
            f"ok_to_submit={rc31['ok_to_submit']}")
 
+    # Session-11 H32-1 PDHC-K (Lane L-S11-2026-10-26) autonomous verification:
+    h32_man_path = DL / "h32_s11_candidate_manifest.json"
+    if h32_man_path.exists():
+        hm32 = json.loads(h32_man_path.read_text())
+        h32_dir = ROOT / hm32["directory"]
+        for variant, key_fn, key_sha in (
+            ("allfinite", "allfinite", "sha256_allfinite"),
+            ("nan", "nan", "sha256_nan"),
+        ):
+            hp32 = h32_dir / hm32[key_fn]
+            with rasterio.open(hp32) as hs32:
+                ha32 = hs32.read(1)
+                hprof32 = (hs32.crs.to_epsg(), hs32.shape, tuple(hs32.transform)[:6], hs32.dtypes[0])
+                hnd32, hcount32 = hs32.nodata, hs32.count
+            htag32 = f"h32_s11/{variant}"
+            ok(hprof32 == tprof, f"{htag32}: same CRS/shape/transform/dtype as template (EPSG:32611, 3730x3292, float32)")
+            ok(hcount32 == 1, f"{htag32}: single band")
+            h32_in, h32_out = ha32[foot], ha32[~foot]
+            ok(bool(np.isfinite(h32_in).all()), f"{htag32}: every in-footprint value is finite")
+            ok(float(h32_in.min()) >= 0.0 and float(h32_in.max()) <= 1.0, f"{htag32}: in-footprint range in [0,1]")
+            ok(set(np.unique(h32_in).tolist()) <= {0.0, 1.0}, f"{htag32}: exact binary {{0.0, 1.0}}")
+            ok(int((h32_in == 1.0).sum()) == hm32["emitted_px"], f"{htag32}: emitted {hm32['emitted_px']} dots")
+            ok(not bool((ha32 == 1.0)[cat].any()), f"{htag32}: 0 catalogue overlap")
+            dcat_h32 = distance_transform_edt(~cat)
+            ok(bool((dcat_h32[ha32 == 1.0] > hm32["b_exclusion_px"]).all()), f"{htag32}: strict B2 collar > {hm32['b_exclusion_px']} px")
+            if variant == "allfinite":
+                ok(bool(np.isfinite(ha32).all() and (h32_out == 0.0).all() and hnd32 is None),
+                   f"{htag32}: all 12,279,160 cells finite in [0,1], zeros outside, nodata=None")
+            else:
+                ok(int(np.isnan(h32_out).sum()) == h32_out.size and hnd32 is not None and np.isnan(hnd32),
+                   f"{htag32}: NaN outside footprint and nodata=NaN declared")
+            ok(sha(hp32) == hm32[key_sha], f"{htag32}: sha256 matches h32_s11_candidate_manifest.json")
+        hz32 = h32_dir / hm32["zip_allfinite"]
+        with zipfile.ZipFile(hz32) as zf:
+            ok(zf.namelist() == [hm32["allfinite"]] and zf.read(hm32["allfinite"]) == (h32_dir / hm32["allfinite"]).read_bytes(),
+               "h32_s11/zip: holds exactly the single allfinite GeoTIFF, byte-identical")
+        ok(sha(hz32) == hm32["sha256_zip_allfinite"], "h32_s11/zip: sha256 matches h32_s11_candidate_manifest.json")
+        hnote32 = (h32_dir / hm32["note_file"]).read_text().strip()
+        ok(0 < len(hnote32) <= 140 and hnote32 == hm32["note"], f"h32_s11/note: {len(hnote32)} chars (<= 140) and matches manifest")
+        rc32_s11 = json.loads((ROOT / hm32["run_card"]).read_text())
+        dec32 = publication_decision(rc32_s11, ROOT)
+        ok(rc32_s11["uniqueness_vs_registry"]["pass"] and rc32_s11["uniqueness_vs_registry"]["max_dot_overlap_within_3px_euclidean"] <= 0.70,
+           "h32_s11/uniqueness: <= 70% 3px dot overlap & <= 0.90 Spearman vs 24 peer/sibling/scored rasters")
+        ok(dec32["ok_to_publish_as_submission"] == hm32["ok_to_submit"],
+           f"h32_s11/readiness-gate: publication_decision={dec32['ok_to_publish_as_submission']} reasons={dec32['reasons']}")
+
+    all_tifs = list(DL.glob("*.tif")) + list((DL / "research").glob("*.tif"))
+    ok(len(all_tifs) == len({p.name for p in all_tifs}), "all .tif file names across downloads + research are globally unique")
+
     print(f"\n{len(FAIL)} failure(s)")
     return 1 if FAIL else 0
 

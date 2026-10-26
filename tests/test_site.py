@@ -69,6 +69,14 @@ def test_front_page_promotes_h31_and_does_not_offer_failed_h28_3_as_submission()
     how = (DOCS / "how-to-submit.html").read_text()
     assert "Predicted values must be in range [0, 1]" in how
     assert "gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif" in how
+    assert "gems27-h32-pdhc-kernel-celf28-20261026-324a95651136-allfinite.tif" in how
+    assert "323344.2347" not in how and "(100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)" in how
+    assert "gems27-h32-pdhc-kernel-celf28-20261026-324a95651136-allfinite.tif" in idx
+    assert "DO NOT SUBMIT AS WEEKLY SLOT" in idx
+    dl_buttons = "\n".join(re.findall(r'<a[^>]*\bdownload(?:\s|=|>)[^>]*>', idx))
+    assert "cf8e1bbef244" in dl_buttons
+    assert "324a95651136" not in dl_buttons
+    assert "801dff07541d" not in dl_buttons
 
 
 def test_research_page_lists_preregistered_h28_hypotheses_and_evidence_link():

@@ -71,6 +71,13 @@ def test_negative_cards_remain_unapproved_and_h31_promotes():
             approved.append(p.name)
         else:
             assert card.get("verdict") != "promote" or card.get("ok_to_submit") is not True
-    assert "h30_1_run_card.json" not in approved
-    assert "h31_s10_run_card_2026-10-26.json" in approved
+    assert approved == ["h31_s10_run_card_2026-10-26.json"]
+    rc32 = json.loads((root / "evidence" / "h32_s11_run_card_2026-10-26.json").read_text())
+    dec32 = publication_decision(rc32, root)
+    assert dec32["ok_to_publish_as_submission"] is False
+    assert rc32["verdict"] == "negative" and rc32["ok_to_submit"] is False
+    assert rc32["validator"]["zeros_hard_pass"] is True
+    assert rc32["uniqueness_vs_registry"]["pass"] is True
+    assert 0 < rc32["note_chars"] <= 140
+    assert dec32["actual_sha256"] == rc32["raster"]["sha256"]
 
