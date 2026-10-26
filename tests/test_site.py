@@ -44,7 +44,7 @@ def test_all_internal_links_and_assets_resolve():
 
 def test_repository_root_front_page_shows_current_submission_decision():
     root_idx = (ROOT / "index.html").read_text()
-    assert "OK TO DOWNLOAD AND SUBMIT" in root_idx
+    assert "EVIDENCE PASS — SELECTOR REQUIRED" in root_idx
     assert "27GEMSDOE-H31-DRCG-WL-20261026-cf8e1bbef244" in root_idx
     assert "gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif" in root_idx
     assert "DO NOT SUBMIT H28-3" in root_idx
@@ -53,7 +53,7 @@ def test_repository_root_front_page_shows_current_submission_decision():
 
 def test_front_page_promotes_h31_and_does_not_offer_failed_h28_3_as_submission():
     idx = (DOCS / "index.html").read_text()
-    assert "OK TO DOWNLOAD AND SUBMIT" in idx
+    assert "EVIDENCE PASS — SELECTOR REQUIRED" in idx
     assert "gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif" in idx
     assert "There is no one-click submission download for this run." in idx
     assert "NOT APPROVED FOR SUBMISSION" in idx
@@ -61,7 +61,7 @@ def test_front_page_promotes_h31_and_does_not_offer_failed_h28_3_as_submission()
         re.findall(r'<a[^>]+download[^>]*>', idx)
     )
     summary = (DOCS / "executive-summary.html").read_text()
-    assert "OK TO DOWNLOAD AND SUBMIT" in summary
+    assert "EVIDENCE PASS — SELECTOR REQUIRED" in summary
     assert "how-to-submit.html" in summary
     for site_id in ("GEMSDOE24", "GEMSDOE25", "GEMSDOE27", "GEMSDOE28", "GEMSDOE30",
                     "GEMSDOE31", "GEMSDOE32", "GEMSDOE33", "GEMSDOE36"):
@@ -119,3 +119,11 @@ def test_downloads_have_unique_names_and_zip_single_member():
     for z in (DOCS / "downloads").glob("*.zip"):
         with zipfile.ZipFile(z) as zf:
             assert len(zf.namelist()) == 1 and zf.namelist()[0].endswith(".tif")
+
+
+def test_slot_authorization_is_separate_from_evidence_pass():
+    for name in PAGES:
+        text = (DOCS / name).read_text()
+        assert "NOT AUTHORIZED FOR A WEEKLY SLOT" in text
+        badges = re.findall(r'<span class="badge[^"]*"[^>]*>(.*?)</span>', text)
+        assert all("OK TO DOWNLOAD AND SUBMIT" not in badge for badge in badges)

@@ -408,6 +408,12 @@
    "severity": "medium",
    "issue": "Shared tool `src/gems27/coverage_thin.py::weighted_celf_cover` truncated its initial candidate heap at `keep_n = max(max_candidates=320_000, budget * 3)` before `min_sep_px` exclusion. On quadrant holdouts (`budget ~ 9,150`) `320,000` is `35x` budget so it always reached budget, whereas on full-map emission (`budget = 37,654`) with `min_sep_px = 2.8` (`21` integer lattice offsets blocked per dot along ridges), `320,000` (`8.5x` budget) exhausted `489` dots short (`37,165` vs `37,654`).",
    "action": "Fixed in-place in `src/gems27/coverage_thin.py` per Parallel-Run Protocol \u00a72 via `block_area = max(3, ceil(pi * max(min_sep_px, 1.0)^2 * 1.35))` (`keep_n = max(max_candidates, budget * block_area)`), preserving identical behavior for quadrant holdouts (`budget ~ 9,150 <= 320,000 / 34`) while reaching exact `37,654` full-map dots at `min_sep_px = 2.8`."
+  },
+  {
+   "id": "IR-2026-10-26-audit-selector-count-canary",
+   "severity": "high",
+   "issue": "README and knowledge/25 stated 289,180 withheld positives, while H31 saved evaluator and run card both record 120,778 occurrences. Site confused evidence publication PASS with weekly-slot authorization. Shared canary used an arbitrary 0.40 lower AUC bound instead of checking inverse prediction. Latest prompt omits its promised method lane.",
+   "action": "Correct count from saved evaluator; distinguish evidence PASS from selector authorization on all pages and machine outputs; direction-invariant canary with boundary regression tests. No new experiment or candidate; existing H31 unchanged. Current registry and cap remain unverified."
   }
  ]
 }

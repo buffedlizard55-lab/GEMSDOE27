@@ -1,3 +1,8 @@
+> **Current correction (2026-10-26):** [Read the latest executive audit](knowledge/28_submission_readiness_audit_2026-10-26.md).
+> Existing H31 is evidence-qualified and downloadable, **not authorized for a weekly slot by this audit**.
+> Historical “OK TO SUBMIT” wording below does not replace a separate selector/current-registry/cap check.
+> No new geological lane was supplied; no new TIFF or experiment was produced this turn.
+
 # Executive Summary: GEMSDOE Competition — Highest-Scoring Submissions Analysis & Unique Submission Strategy
 
 **Repository:** `buffedlizard55-lab/GEMSDOE27`  
