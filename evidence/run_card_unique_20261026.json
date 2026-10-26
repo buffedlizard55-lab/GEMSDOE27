@@ -1,0 +1,86 @@
+{
+  "schema": "parallel-run-card-v2",
+  "date_utc": "20261026",
+  "lane": "unique-20261026-farfield",
+  "hypothesis": "scatter-smoothed off-catalogue far-field (unique 20261026)",
+  "hypothesis_id": "UNIQUE-20261026",
+  "physical_mechanism": "Gaussian scatter-smoothed (sigma 1.85px) off-catalogue far-field detector surface, dot-thinned d1.5, B2 exclusion, anti-overlap 3px halo vs all registry rasters; targets blind faults missing from Quaternary catalogue that lack young scarps (Faulds & Hinz 2015 blind 39%)",
+  "named_non_fault_mimics": [
+    "Lake Lahontan wave-cut shorelines",
+    "Erosional canyon walls",
+    "Volcanic tuff contacts"
+  ],
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "evaluator": "gems27.metric v1 alpha0.2 beta0.8 R3px (far-field blind by design)",
+    "n_withheld_positives_total": 0,
+    "gate_efficacy_pass": false,
+    "canary_max_auc": 0.55,
+    "paired_candidate_minus_B": {
+      "ci95": [
+        -0.09,
+        -0.08
+      ]
+    }
+  },
+  "uniqueness_vs_registry": {
+    "pass": true,
+    "max_dot_overlap_within_3px_euclidean": 0.0,
+    "max_surface_spearman": -0.004440117117098896,
+    "max_dot_overlap_within_3px_vs_peers": 0.0,
+    "max_surface_spearman_armD": -0.004440117117098896
+  },
+  "validator": {
+    "zeros_hard_pass": true,
+    "zeros_checks": {
+      "grid_matches_template": {
+        "pass": true,
+        "hard": true
+      },
+      "single_band_float32": {
+        "pass": true,
+        "hard": true
+      },
+      "inside_footprint_all_finite": {
+        "pass": true,
+        "hard": true
+      },
+      "inside_footprint_in_0_1": {
+        "pass": true,
+        "hard": true
+      },
+      "no_infinities_anywhere": {
+        "pass": true,
+        "hard": true
+      },
+      "outside_footprint_is_zero_and_finite": {
+        "pass": true,
+        "hard": true
+      },
+      "strict_whole_array_range": {
+        "pass": true,
+        "hard": true
+      },
+      "profile_driver_gtiff": {
+        "pass": true,
+        "hard": true
+      },
+      "compression_like_sample": {
+        "pass": true,
+        "hard": true
+      }
+    },
+    "technical_validator_pass": true
+  },
+  "raster": {
+    "primary_allfinite": "gems27-unique-20261026-20261026-6c2790d67dc6-allfinite.tif",
+    "sha256": "defe8b2184d5e9732d53362eb4dd0b337198a493d76087ecdaf84c01f99f4ea1",
+    "directory": "docs/downloads"
+  },
+  "note_max_140_chars": "27GEMSDOE unique 20261026 scatter farfield | 27GEMSDOE unique 20261026 scatter farfield B2 38k sigma1.85 d1.5 vs 12 peers+repo; far-field bl",
+  "ok_to_submit": false,
+  "verdict": "negative",
+  "budget": "1 experiment, far-field probe",
+  "sha256": "defe8b2184d5e9732d53362eb4dd0b337198a493d76087ecdaf84c01f99f4ea1",
+  "bytes": 795564
+}

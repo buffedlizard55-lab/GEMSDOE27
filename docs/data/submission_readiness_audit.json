@@ -42,6 +42,21 @@
       "actual_sha256": "ad7d90f43c5d913f029b748d9b15ae9a4e9368e3d2e953aafac67ce91ced460a",
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
+    "h29_2_run_card_2026-10-25.json": {
+      "ok_to_publish_as_submission": false,
+      "reasons": [
+        "run card does not authorize submission",
+        "verdict is not promote",
+        "efficacy gate not explicitly passed",
+        "paired improvement CI missing or does not exclude zero",
+        "uniqueness gate not passed",
+        "dot overlap missing or exceeds threshold",
+        "all-finite validator not passed",
+        "raster missing or outside repository"
+      ],
+      "actual_sha256": null,
+      "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
+    },
     "h29_run_card_2026-10-25.json": {
       "ok_to_publish_as_submission": false,
       "reasons": [
@@ -84,6 +99,18 @@
         "paired improvement CI missing or does not exclude zero"
       ],
       "actual_sha256": "d648a3cc02713612eb5c59637a4732418ae555aa4037ac9dbc815d2e7ab00528",
+      "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
+    },
+    "run_card_unique_20261026.json": {
+      "ok_to_publish_as_submission": false,
+      "reasons": [
+        "run card does not authorize submission",
+        "verdict is not promote",
+        "missing withheld positive count",
+        "efficacy gate not explicitly passed",
+        "paired improvement CI missing or does not exclude zero"
+      ],
+      "actual_sha256": "defe8b2184d5e9732d53362eb4dd0b337198a493d76087ecdaf84c01f99f4ea1",
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
     "run_card_unique_scatter_farfield.json": {

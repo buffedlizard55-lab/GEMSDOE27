@@ -1,0 +1,174 @@
+{
+  "content_id": "6c2790d67dc6",
+  "filename": "gems27-unique-20261026-20261026-6c2790d67dc6-allfinite.tif",
+  "date": "20261026",
+  "slug": "unique-20261026",
+  "note": "27GEMSDOE unique 20261026 scatter farfield | 27GEMSDOE unique 20261026 scatter farfield B2 38k sigma1.85 d1.5 vs 12 peers+repo; far-field blind probe, not live- | id 6c2790d67dc6 | not yet live-scored",
+  "note_chars": 200,
+  "generated_utc": "2026-10-26T00:38:52Z",
+  "status": "UNIQUE RESEARCH PROBE \u2014 NOT CERTIFIED FOR SUBMISSION (far-field blind by design)",
+  "hypothesis": "scatter-smoothed off-catalogue far-field emission (unique 20261026 variant)",
+  "emitted_px": 21312,
+  "b_exclusion_px": 2.0,
+  "scatter_sigma_px": 1.85,
+  "thin_d_px": 1.5,
+  "sha256_tif": "defe8b2184d5e9732d53362eb4dd0b337198a493d76087ecdaf84c01f99f4ea1",
+  "bytes_tif": 795564,
+  "zip": {
+    "file": "gems27-unique-20261026-20261026-6c2790d67dc6-allfinite.zip",
+    "bytes": 120523,
+    "sha256": "da782775e1614a2439a0735369fd0fa59509985861f6fe3c5e3b470f8fb5c7db"
+  },
+  "validation": {
+    "file": "gems27-unique-20261026-20261026-6c2790d67dc6-allfinite.tif",
+    "bytes": 795564,
+    "sha256": "defe8b2184d5e9732d53362eb4dd0b337198a493d76087ecdaf84c01f99f4ea1",
+    "variant": "allfinite",
+    "checks": {
+      "grid_matches_template": {
+        "pass": true,
+        "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+        "hard": true
+      },
+      "single_band_float32": {
+        "pass": true,
+        "detail": "count=1 dtype=float32",
+        "hard": true
+      },
+      "inside_footprint_all_finite": {
+        "pass": true,
+        "detail": "0 non-finite inside 5167373 px",
+        "hard": true
+      },
+      "inside_footprint_in_0_1": {
+        "pass": true,
+        "detail": "min=0 max=1",
+        "hard": true
+      },
+      "no_infinities_anywhere": {
+        "pass": true,
+        "detail": "np.isinf(whole array) is empty",
+        "hard": true
+      },
+      "outside_footprint_is_zero_and_finite": {
+        "pass": true,
+        "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+        "hard": true
+      },
+      "strict_whole_array_range": {
+        "pass": true,
+        "detail": "whole-array min=0 max=1",
+        "hard": true
+      },
+      "profile_driver_gtiff": {
+        "pass": true,
+        "detail": "GTiff",
+        "hard": false
+      },
+      "compression_like_sample": {
+        "pass": true,
+        "detail": "Compression.lzw",
+        "hard": false
+      }
+    },
+    "hard_checks_passed": true,
+    "hard_failures": [],
+    "nonzero_inside_px": 21312,
+    "value_set_inside": [
+      0.0,
+      1.0
+    ]
+  },
+  "lane_check": {
+    "registry_rasters": 15,
+    "duplicates": [],
+    "passed": true,
+    "details": {
+      "gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-allfinite.tif": {
+        "spearman_rho": -0.0057909749585144076,
+        "my_dots_within_3px_frac": 0.0,
+        "duplicate": false
+      },
+      "gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-nan.tif": {
+        "spearman_rho": -0.0057909749585144076,
+        "my_dots_within_3px_frac": 0.0,
+        "duplicate": false
+      },
+      "gems27-farfield-swap-augmented-detector-probe-20261002-a34b0799df59-allfinite.tif": {
+        "spearman_rho": -0.006979173346818945,
+        "my_dots_within_3px_frac": 0.0,
+        "duplicate": false
+      },
+      "gems27-farfield-swap-augmented-detector-probe-20261002-a34b0799df59-nan.tif": {
+        "spearman_rho": -0.006979173346818945,
+        "my_dots_within_3px_frac": 0.0,
+        "duplicate": false
+      },
+      "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-allfinite.tif": {
+        "spearman_rho": -0.006920514639425489,
+        "my_dots_within_3px_frac": 0.0,
+        "duplicate": false
+      },
+      "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.tif": {
+        "spearman_rho": -0.006920514639425489,
+        "my_dots_within_3px_frac": 0.0,
+        "duplicate": false
+      },
+      "gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-allfinite.tif": {
+        "spearman_rho": -0.00551357656848235,
+        "my_dots_within_3px_frac": 0.0,
+        "duplicate": false
+      },
+      "gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-nan.tif": {
+        "spearman_rho": -0.00551357656848235,
+        "my_dots_within_3px_frac": 0.0,
+        "duplicate": false
+      },
+      "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-allfinite.tif": {
+        "spearman_rho": -0.007052802472732464,
+        "my_dots_within_3px_frac": 0.0,
+        "duplicate": false
+      },
+      "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif": {
+        "spearman_rho": -0.007052802472732464,
+        "my_dots_within_3px_frac": 0.0,
+        "duplicate": false
+      },
+      "gems27-topo-gap-closure-t-v2-on-d2-8-20261002-3ebd51534bb1-allfinite.tif": {
+        "spearman_rho": -0.006057011907884629,
+        "my_dots_within_3px_frac": 0.0,
+        "duplicate": false
+      },
+      "gems27-topo-gap-closure-t-v2-on-d2-8-20261002-3ebd51534bb1-nan.tif": {
+        "spearman_rho": -0.006057011907884629,
+        "my_dots_within_3px_frac": 0.0,
+        "duplicate": false
+      },
+      "gems27-topo-gap-closure-t-v2-plus-h27-4-r1-on-d1-5-20261002-d466b251f309-allfinite.tif": {
+        "spearman_rho": -0.006735479240106531,
+        "my_dots_within_3px_frac": 0.0,
+        "duplicate": false
+      },
+      "gems27-topo-gap-closure-t-v2-plus-h27-4-r1-on-d1-5-20261002-d466b251f309-nan.tif": {
+        "spearman_rho": -0.006735479240106531,
+        "my_dots_within_3px_frac": 0.0,
+        "duplicate": false
+      },
+      "gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.tif": {
+        "spearman_rho": -0.004440117117098896,
+        "my_dots_within_3px_frac": 0.0,
+        "duplicate": false
+      }
+    },
+    "max_spearman": -0.004440117117098896,
+    "max_overlap": 0.0
+  },
+  "raster": {
+    "primary_allfinite": "gems27-unique-20261026-20261026-6c2790d67dc6-allfinite.tif",
+    "sha256": "defe8b2184d5e9732d53362eb4dd0b337198a493d76087ecdaf84c01f99f4ea1",
+    "directory": "docs/downloads"
+  },
+  "ok_to_submit": false,
+  "verdict": "negative",
+  "evaluator": "gems27.metric v1 alpha0.2 beta0.8 R3px; holdout blind by design (far-field)"
+}
