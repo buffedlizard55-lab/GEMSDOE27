@@ -1,0 +1,82 @@
+building subsurface transforms...
+building H32 Poisson transforms...
+T (5167373, 15) P8 (5167373, 8) in 34s
+canary poi_resid_abs: AUC 0.4939
+canary poi_resid_signed_pos: AUC 0.5191
+canary poi_resid_grad_s2: AUC 0.5236
+canary poi_resid_grad_s5: AUC 0.5195
+canary poi_demag_edge: AUC 0.4811
+canary poi_demag_vg: AUC 0.5148
+canary poi_gravonly_coh: AUC 0.4602
+canary poi_pseudograv_mismatch_grad: AUC 0.5460
+CANARY max dir-inv AUC 0.546 leak flags: none
+OOF B done
+OOF D done
+OOF P done
+OOF PR-AUC (catalogue pixels, descriptive): {'B': 0.024577752304290764, 'D': 0.02484995604409433, 'P': 0.024162450896410795}
+seed 500 fold 0 (NW): B=0.0392 D=0.0446 P=0.0288
+seed 500 fold 1 (NE_LidarGapHeavy): B=0.0361 D=0.0390 P=0.0342
+seed 500 fold 2 (SW): B=0.0196 D=0.0208 P=0.0226
+seed 500 fold 3 (SE): B=0.0345 D=0.0375 P=0.0350
+seed 501 fold 0 (NW): B=0.0238 D=0.0290 P=0.0168
+seed 501 fold 1 (NE_LidarGapHeavy): B=0.0617 D=0.0630 P=0.0578
+seed 501 fold 2 (SW): B=0.0321 D=0.0291 P=0.0272
+seed 501 fold 3 (SE): B=0.0335 D=0.0414 P=0.0447
+seed 502 fold 0 (NW): B=0.0427 D=0.0478 P=0.0425
+seed 502 fold 1 (NE_LidarGapHeavy): B=0.0464 D=0.0441 P=0.0409
+seed 502 fold 2 (SW): B=0.0233 D=0.0228 P=0.0205
+seed 502 fold 3 (SE): B=0.0364 D=0.0374 P=0.0387
+seed 503 fold 0 (NW): B=0.0288 D=0.0358 P=0.0267
+seed 503 fold 1 (NE_LidarGapHeavy): B=0.0430 D=0.0540 P=0.0444
+seed 503 fold 2 (SW): B=0.0235 D=0.0261 P=0.0243
+seed 503 fold 3 (SE): B=0.0550 D=0.0632 P=0.0525
+seed 504 fold 0 (NW): B=0.0337 D=0.0423 P=0.0381
+seed 504 fold 1 (NE_LidarGapHeavy): B=0.0445 D=0.0549 P=0.0578
+seed 504 fold 2 (SW): B=0.0308 D=0.0293 P=0.0268
+seed 504 fold 3 (SE): B=0.0369 D=0.0442 P=0.0427
+seed 505 fold 0 (NW): B=0.0310 D=0.0303 P=0.0342
+seed 505 fold 1 (NE_LidarGapHeavy): B=0.0505 D=0.0462 P=0.0485
+seed 505 fold 2 (SW): B=0.0325 D=0.0310 P=0.0255
+seed 505 fold 3 (SE): B=0.0330 D=0.0435 P=0.0462
+seed 506 fold 0 (NW): B=0.0319 D=0.0315 P=0.0299
+seed 506 fold 1 (NE_LidarGapHeavy): B=0.0593 D=0.0447 P=0.0512
+seed 506 fold 2 (SW): B=0.0279 D=0.0296 P=0.0277
+seed 506 fold 3 (SE): B=0.0307 D=0.0475 P=0.0330
+seed 507 fold 0 (NW): B=0.0405 D=0.0412 P=0.0370
+seed 507 fold 1 (NE_LidarGapHeavy): B=0.0429 D=0.0479 P=0.0404
+seed 507 fold 2 (SW): B=0.0288 D=0.0247 P=0.0305
+seed 507 fold 3 (SE): B=0.0378 D=0.0418 P=0.0335
+seed 508 fold 0 (NW): B=0.0257 D=0.0314 P=0.0294
+seed 508 fold 1 (NE_LidarGapHeavy): B=0.0495 D=0.0519 P=0.0475
+seed 508 fold 2 (SW): B=0.0251 D=0.0251 P=0.0221
+seed 508 fold 3 (SE): B=0.0373 D=0.0393 P=0.0332
+seed 509 fold 0 (NW): B=0.0373 D=0.0420 P=0.0330
+seed 509 fold 1 (NE_LidarGapHeavy): B=0.0534 D=0.0567 P=0.0453
+seed 509 fold 2 (SW): B=0.0269 D=0.0308 P=0.0221
+seed 509 fold 3 (SE): B=0.0502 D=0.0520 P=0.0566
+{
+  "pooled": {
+    "B": 0.03646742090192212,
+    "D": 0.03921873362073872,
+    "P": 0.03573204638892547
+  },
+  "P-D": {
+    "pooled_delta_dti": -0.0034866872318132514,
+    "mean_seed_paired_delta_dti": -0.0034586096083012927,
+    "ci95": [
+      -0.004767184119816798,
+      -0.0022281492515763422
+    ],
+    "positive_seeds": 1,
+    "positive_folds": 0
+  },
+  "gate": {
+    "pooled_P_gt_D_and_B": false,
+    "mean_seed_delta_P_minus_D_ge_0.0010": false,
+    "ci95_lower_P_minus_D_gt_0": false,
+    "seeds_positive_P_minus_D_ge_7_of_10": false,
+    "folds_positive_P_minus_D_ge_3_of_4": false
+  },
+  "gate_pass": false,
+  "evidence": "/home/user/GEMSDOE27/evidence/h32_e2_holdout_500_509.json"
+}

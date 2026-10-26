@@ -235,3 +235,13 @@ Ranking rule: expected DTI gain x probability the test can validate it / cost. B
 * **Status:** TESTED - SELECTION GATE FAILED (Lane L-H30, seeds 240-244, knowledge/20+21). Pooled HOLDOUT-DTI SOFT 0.09943 vs binary D 0.10234 (mean paired -0.00334, 4/20 cells). Consistent with bang-bang optimality of soft Tversky away from truth. No slot.
 * **Expected gain:** negative: pooled delta -0.00291 vs binary Arm D on selection seeds
 * **Cost:** one local pre-registered holdout experiment (Lane L-H30, shared selection); 0 weekly slots
+
+## H32 (rank 100): Poisson-theorem gravity-to-pseudogravity hydrothermal demagnetization residual (= H31-2)
+
+* **Layers:** rtp, tmi_hg, tmi_vg, iso_grav_anom, iso_grav_anom_hg, iso_grav_anom_vg (training_features.tif, hash-pinned)
+* **Physical signature:** Local sigma=15px gravity-on-RTP regression residual + gradients; gravity-edge-without-magnetic-edge rank contrasts; gravity-only structure coherence; pseudogravity-mismatch gradient (src/gems27/poisson_demag.py, 8 features)
+* **Why it catches a fault missing from USGS/INGENIOUS:** Hydrothermal magnetite destruction along blind conduits erases the magnetic edge while the gravity density step persists; surface-rupture catalogues miss such blind faults.
+* **How it differs from the repo:** subsurface_features multiplies coincident mag+grav edges, suppressing exactly this case; no Poisson-residual feature existed in src/.
+* **Status:** TESTED - FROZEN GATE FAILED (Lane L-S11, fresh seeds 500-509, 40 cells, 118,039 withheld positives, knowledge/26+27). Pooled HOLDOUT-DTI P 0.03573 vs D 0.03922 vs B 0.03647; P-D -0.00349, 95% CI [-0.00477,-0.00223], 1/10 seeds, 0/4 folds; canary max dir-inv AUC 0.546. Unique TIFF 1ac69a77008d is a NEGATIVE research artifact in docs/downloads/research/ - DO NOT SUBMIT. Seeds 500-509 consumed; do not reuse or retune.
+* **Expected gain:** negative: pooled delta -0.00349 vs D (base-32+subsurface-15) on fresh seeds 500-509
+* **Cost:** 3 experiments (E1 canary, E2 holdout, E3 build); 0 weekly slots

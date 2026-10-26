@@ -362,6 +362,19 @@
    "gain": "negative: pooled delta -0.00291 vs binary Arm D on selection seeds",
    "cost": "one local pre-registered holdout experiment (Lane L-H30, shared selection); 0 weekly slots",
    "external": []
+  },
+  {
+   "id": "H32",
+   "rank": 100,
+   "title": "Poisson-theorem gravity-to-pseudogravity hydrothermal demagnetization residual (= H31-2)",
+   "layers": "rtp, tmi_hg, tmi_vg, iso_grav_anom, iso_grav_anom_hg, iso_grav_anom_vg (training_features.tif, hash-pinned)",
+   "signature": "Local sigma=15px gravity-on-RTP regression residual + gradients; gravity-edge-without-magnetic-edge rank contrasts; gravity-only structure coherence; pseudogravity-mismatch gradient (src/gems27/poisson_demag.py, 8 features)",
+   "why": "Hydrothermal magnetite destruction along blind conduits erases the magnetic edge while the gravity density step persists; surface-rupture catalogues miss such blind faults.",
+   "differs": "subsurface_features multiplies coincident mag+grav edges, suppressing exactly this case; no Poisson-residual feature existed in src/.",
+   "status": "TESTED - FROZEN GATE FAILED (Lane L-S11, fresh seeds 500-509, 40 cells, 118,039 withheld positives, knowledge/26+27). Pooled HOLDOUT-DTI P 0.03573 vs D 0.03922 vs B 0.03647; P-D -0.00349, 95% CI [-0.00477,-0.00223], 1/10 seeds, 0/4 folds; canary max dir-inv AUC 0.546. Unique TIFF 1ac69a77008d is a NEGATIVE research artifact in docs/downloads/research/ - DO NOT SUBMIT. Seeds 500-509 consumed; do not reuse or retune.",
+   "gain": "negative: pooled delta -0.00349 vs D (base-32+subsurface-15) on fresh seeds 500-509",
+   "cost": "3 experiments (E1 canary, E2 holdout, E3 build); 0 weekly slots",
+   "external": []
   }
  ]
 }

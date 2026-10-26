@@ -1,6 +1,19 @@
 # 27GEMSDOE - geothermal & structural fault discovery lab for DrivenData #306 (DOE GEMS)
 
-## Session 10 Automated Gate Verdict (`2026-10-26`, Lane `L-S10-2026-10-26` / `H31-1` — READ FIRST)
+## Session 11 Executive Summary & Download Verdict (`2026-10-26`, Lane `L-S11` / `H32` — READ FIRST)
+**Full report:** [`knowledge/27_session11_executive_summary_and_h32_result_2026-10-26.md`](knowledge/27_session11_executive_summary_and_h32_result_2026-10-26.md) (9-focus-site table, byte-verified 0.2778 autopsy, projections, run card).
+**✅ THE ONE FILE TO DOWNLOAD AND SUBMIT (unchanged, independently re-audited this session from bytes, zero human inspection):**
+- **File:** `docs/downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif` (SHA-256 `2c002b02792419864bd3b29a218e543cb41e3f07b3b57c29ef35c6e39e184bfe`, recomputed Session 11) · single-TIFF ZIP beside it.
+- **Name:** `27GEMSDOE-H31-DRCG-WL-20261026-cf8e1bbef244` · **Note (118/140):** `27GEMSDOE H31-1 | dualRegime MSub+MFull+WLseis+obliq+CELF2.8 B2 37654px | id cf8e1bbef244 | unscored validated-promote`
+- **Estimated live score: PROJECTION 0.23–0.30 (central ≈ 0.27), NOT a score** — concentration sensitivity 0.228/0.266/0.299 at 5.0×/5.8×/6.5× (`|G|=12,226`, `ρ=1.38` assumed; `c=0.0636`, `N=37,654` exact) and single-anchor holdout-ratio 0.235. Unscored until submitted; beating 0.2778 (OWNER-REPORTED) is possible within the band, not established.
+- **Unique vs all 9 focus sites? YES** — max directed 3-px overlap **57.7%** vs the 12 pinned peer rasters (**50.2%** vs GEMSDOE32), ≤ 70%; max surface Spearman 0.165 ≤ 0.90; 0 catalogue dots; all-finite `[0,1]` validator hard-PASS (Session 11 re-audit: `evidence/session11_reaudit.json`).
+- **Why 0.2778 won (byte-verified Session 11):** `GEMSDOE32 ≡ GEMSDOE25(d=2.8) ∧ EDT(catalogue) > 2px` exactly (symdiff 0) — the fleet-best is catalogue-collar deletion on the H19-5 family, now exhausted; all nine focus-site best files are already submitted and 8/9 are 86.7–100% clones. Never re-upload them.
+- **NEW this session — ⛔ DO NOT SUBMIT:** H32 Poisson-demagnetization TIFF `docs/downloads/research/gems27-h32-poisson-demag-b2-20261026-1ac69a77008d-allfinite.tif` (unique vs peers 46.4%, format-valid) **failed its preregistered frozen gate** on fresh seeds 500–509: pooled HOLDOUT-DTI P 0.03573 < D 0.03922, P−D −0.00349 (95% CI [−0.00477, −0.00223], 1/10 seeds, 0/4 folds; canary max AUC 0.546). Negative results are deliverables; no tuning followed. Prereg: `knowledge/26…`; evidence: `evidence/h32_e2_holdout_500_509.json`, run card `evidence/h32_run_card_2026-10-26.json`. Machine audit (`docs/data/submission_readiness_audit.json`) still approves exactly H31-1 (+ second-priority H30-1) and blocks H32.
+- **Site:** https://buffedlizard55-lab.github.io/GEMSDOE27/ — first screen keeps the H31-1 download buttons; Session 11 box (H32 negative + re-audit + projection) is rendered from JSON by `scripts/build_site.py`.
+
+---
+
+## Session 10 Automated Gate Verdict (`2026-10-26`, Lane `L-S10-2026-10-26` / `H31-1` — historical, still operative)
 **✅ OK TO DOWNLOAD AND SUBMIT — ALL AUTOMATED MACHINE VALIDATION GATES PASSED (ZERO HUMAN INTERVENTION).**
 - **Approved Unique Submission File (`[0, 1]` all-finite GeoTIFF):** `docs/downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif` (`825,820` B, SHA-256 `2c002b02792419864bd3b29a218e543cb41e3f07b3b57c29ef35c6e39e184bfe`)
 - **Single-TIFF ZIP:** `docs/downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.zip` (`184,837` B, SHA-256 `628dea2cd1b064791272d6a142ca28b88d0d050d0fd1b53028cf00dd87632f63`)

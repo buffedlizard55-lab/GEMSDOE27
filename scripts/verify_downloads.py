@@ -322,6 +322,57 @@ def main() -> int:
            f"h31/gate-consistency: verdict={rc31['verdict']} "
            f"ok_to_submit={rc31['ok_to_submit']}")
 
+    # ---- Session 11 H32 negative research artifact (must stay NOT approved) ----
+    h32_card_path = ROOT / "evidence" / "h32_run_card_2026-10-26.json"
+    if h32_card_path.exists():
+        rc32 = json.loads(h32_card_path.read_text())
+        r32 = rc32["raster"]
+        d32 = ROOT / r32["directory"]
+        for variant, fname in (("allfinite", r32["primary_allfinite"]),
+                               ("nan", r32["nan_twin"])):
+            p32 = d32 / fname
+            with rasterio.open(p32) as s32:
+                a32 = s32.read(1)
+                prof32 = (s32.crs.to_epsg(), s32.shape, tuple(s32.transform)[:6],
+                          s32.dtypes[0])
+                nd32, cnt32 = s32.nodata, s32.count
+            t32 = f"h32/{variant}"
+            ok(prof32 == tprof, f"{t32}: same CRS/shape/transform/dtype as template")
+            ok(cnt32 == 1, f"{t32}: single band")
+            in32, out32 = a32[foot], a32[~foot]
+            ok(bool(np.isfinite(in32).all()), f"{t32}: every in-footprint value finite")
+            ok(float(in32.min()) >= 0.0 and float(in32.max()) <= 1.0,
+               f"{t32}: in-footprint range in [0,1]")
+            ok(set(np.unique(in32).tolist()) <= {0.0, 1.0}, f"{t32}: exact binary")
+            ok(int((in32 == 1.0).sum()) == rc32["n_dots"], f"{t32}: emitted {rc32['n_dots']} dots")
+            ok(not bool((a32 == 1.0)[cat].any()), f"{t32}: 0 catalogue overlap")
+            ok(bool((distance_transform_edt(~cat)[a32 == 1.0] > 2.0).all()),
+               f"{t32}: strict B2 collar > 2.0 px")
+            if variant == "allfinite":
+                ok(bool(np.isfinite(a32).all() and (out32 == 0.0).all() and nd32 is None),
+                   f"{t32}: all cells finite in [0,1], zeros outside, nodata=None")
+                ok(sha(p32) == r32["sha256"], f"{t32}: sha256 matches h32 run card")
+            else:
+                ok(int(np.isnan(out32).sum()) == out32.size and nd32 is not None
+                   and np.isnan(nd32), f"{t32}: NaN outside footprint, nodata=NaN")
+        z32 = d32 / r32["zip"]
+        with zipfile.ZipFile(z32) as zf:
+            ok(zf.namelist() == [r32["primary_allfinite"]]
+               and zf.read(r32["primary_allfinite"])
+               == (d32 / r32["primary_allfinite"]).read_bytes(),
+               "h32/zip: holds exactly the single allfinite GeoTIFF, byte-identical")
+        stem32 = r32["primary_allfinite"][:-len("-allfinite.tif")]
+        note32 = (d32 / f"note-{stem32}-allfinite.txt").read_text().strip()
+        ok(len(note32) <= 140 and note32 == rc32["note_max_140_chars"],
+           f"h32/note: {len(note32)} chars (<= 140) and matches run card")
+        u32 = rc32["uniqueness_vs_registry"]
+        ok(u32["max_dot_overlap_within_3px_vs_peers"] <= 0.70
+           and u32["max_surface_spearman"] <= 0.90 and not u32["pass"],
+           "h32/uniqueness: <= 70% vs peers but strict repo screen fails (recorded, not hidden)")
+        ok(rc32["verdict"] == "negative" and rc32["ok_to_submit"] is False
+           and rc32["holdout"]["gate_efficacy_pass"] is False,
+           "h32/gate-consistency: verdict=negative ok_to_submit=False (DO NOT SUBMIT)")
+
     print(f"\n{len(FAIL)} failure(s)")
     return 1 if FAIL else 0
 

@@ -44,7 +44,7 @@
    "corroboration": "task_statement_only"
   },
   {
-   "label": "GEMSDOE ens12-adopted (7f00890a\u2026)",
+   "label": "GEMSDOE ens12-adopted (7f00890a…)",
    "repo": "buffedlizard55-lab/GEMSDOE",
    "sha256": "7f00890a62878d612fb5eef67a9a364a2df819433dde74b6762ce4fc0fc4fe15",
    "owner_reported_public_score": 0.1563,
@@ -227,6 +227,16 @@
    "owner_reported_public_score": null,
    "status": "UNSCORED Session-10 candidate built 2026-10-26; FROZEN GATE FAILED (HOLDOUT-DTI ENS 0.036711 vs H29S 0.044020, seeds 260-269); verdict negative / DO NOT SUBMIT (evidence/h31_run_card.json)",
    "corroboration": "knowledge/23 preregistration (commit c645135); knowledge/25 result; evidence/h31_e2_holdout_260_269.json"
+  },
+  {
+   "repo": "buffedlizard55-lab/GEMSDOE27",
+   "label": "gems27-h32-poisson-demag-b2-20261026-1ac69a77008d-allfinite.tif",
+   "sha256": "8ff3b255b9399871f5bb034da289cfb5c7c0cddda97cf77d3371c3b79fee60ed",
+   "family": "H32 / Lane L-S11 (base-32 + subsurface-15 + Poisson-demag-8, B2, Poisson 2.8, 37,654 dots)",
+   "emitted_px": 37654,
+   "owner_reported_public_score": null,
+   "status": "UNSCORED Session-11 candidate built 2026-10-26; FROZEN GATE FAILED (HOLDOUT-DTI P 0.03573 vs D 0.03922, seeds 500-509); verdict negative / DO NOT SUBMIT (evidence/h32_run_card_2026-10-26.json)",
+   "corroboration": "knowledge/26 preregistration; knowledge/27 result; evidence/h32_e2_holdout_500_509.json"
   }
  ],
  "owner_reported_prompt_2026_10_25": {
