@@ -1,5 +1,11 @@
 # 27GEMSDOE - geothermal & structural fault discovery lab for DrivenData #306 (DOE GEMS)
 
+## Session 11 Review (2026-10-26) — READ FIRST
+**Approved unique file unchanged (Session 10 H31-1, re-validated this session byte-for-byte): `docs/downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif` — OK TO DOWNLOAD AND SUBMIT.**
+- **Estimated live score: ~0.235 PROJECTION (planning range 0.19–0.26), NOT a score** — anchor transfer 0.2190 × 0.047302/0.044116 = 0.2348 (HOLDOUT-DTI, seeds 400–409). Honest reading: likely **below** the already-submitted GEMSDOE32 0.2778 clone; no honest model here projects >0.2778. Full 9-site table + estimate: `knowledge/26_session11_review_and_score_estimate_2026-10-26.md` and `docs/executive-summary.html`.
+- **New irregularity IR-2026-10-26-05:** site prose misstated the grid transform as (323344.2347, 4565845.3247); verified raster/grid transform is (243350.0, 4508550.0) — prose fixed, raster bytes were always correct.
+- Re-verified this session: SHA-256 matches, {0,1}/0 NaN/37,654 dots, max 3-px overlap 62.8% ≤70%, 134 tests pass.
+
 ## Session 10 Automated Gate Verdict (`2026-10-26`, Lane `L-S10-2026-10-26` / `H31-1` — READ FIRST)
 **✅ OK TO DOWNLOAD AND SUBMIT — ALL AUTOMATED MACHINE VALIDATION GATES PASSED (ZERO HUMAN INTERVENTION).**
 - **Approved Unique Submission File (`[0, 1]` all-finite GeoTIFF):** `docs/downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif` (`825,820` B, SHA-256 `2c002b02792419864bd3b29a218e543cb41e3f07b3b57c29ef35c6e39e184bfe`)
