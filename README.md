@@ -1,6 +1,34 @@
-# 27GEMSDOE - topology-first research and submission lab for DrivenData #306 (DOE GEMS)
+# 27GEMSDOE - geothermal & structural fault discovery lab for DrivenData #306 (DOE GEMS)
 
-## Session 9 addendum (2026-10-25, merged with the parallel Lane L-S7 session; read at every session start)
+## Session 10 Automated Gate Verdict (`2026-10-26`, Lane `L-S10-2026-10-26` / `H31-1` — READ FIRST)
+**✅ OK TO DOWNLOAD AND SUBMIT — ALL AUTOMATED MACHINE VALIDATION GATES PASSED (ZERO HUMAN INTERVENTION).**
+- **Approved Unique Submission File (`[0, 1]` all-finite GeoTIFF):** `docs/downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif` (`825,820` B, SHA-256 `2c002b02792419864bd3b29a218e543cb41e3f07b3b57c29ef35c6e39e184bfe`)
+- **Single-TIFF ZIP:** `docs/downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.zip` (`184,837` B, SHA-256 `628dea2cd1b064791272d6a142ca28b88d0d050d0fd1b53028cf00dd87632f63`)
+- **Unique Submission Name:** `27GEMSDOE-H31-DRCG-WL-20261026-cf8e1bbef244` (`content_id = cf8e1bbef244`)
+- **Copyable Short Note (`118 / 140` chars):** `27GEMSDOE H31-1 | dualRegime MSub+MFull+WLseis+obliq+CELF2.8 B2 37654px | id cf8e1bbef244 | unscored validated-promote`
+- **Dedicated Submission Guide Subpage:** `docs/how-to-submit.html` (linked from `index.html` and `docs/executive-summary.html`).
+- **Automated Fail-Closed Machine Verdict (`gems27.readiness.publication_decision` + `scripts/audit_submission_readiness.py` + `scripts/verify_downloads.py` `0` failures):**
+  1. **Format & `[0, 1]` Range Gate — `PASS`:** Single-band `float32`, `EPSG:32611`, `3730×3292`, exact `{0.0, 1.0}` across all `12,279,160` pixels (`0` NaN, `0` Inf, `nodata=None`), `37,654` dots, `0` catalogue overlap (`B2 > 200 m`), permanently preventing `"Predicted values must be in range [0, 1]"`.
+  2. **Leakage Canary (`E1`) — `PASS`:** Max direction-invariant ROC-AUC across all `79` Stage-1 columns = **`0.5895 <= 0.90`** (`max_H31 = 0.5606`; `evidence/h31_s10_e1_canary_and_surface.json`).
+  3. **27-Raster Uniqueness Gate (`E1 + E3`) — `PASS`:** Screened against **all 12 pinned focus-site peer rasters + both live-scored `GEMSDOE27` submissions (`Slot 1` `5512495c6bd1` & `H29-S` `511898747886`) + all 13 unscored in-repo research rasters**:
+     - Max 3-px dot overlap vs 12 peers: **`57.70% <= 70%`** (**`50.23%`** vs `GEMSDOE32` `0.2778`!).
+     - Max 3-px dot overlap vs live-scored `GEMSDOE27`: **`62.80% <= 70%`** vs `H29-S` (`37.2%` = `14,008` dots are brand-new discovery locations `> 300 m` outside `H29-S`) and **`57.70%`** vs `Slot 1`.
+     - Max 3-px dot overlap vs all 13 unscored repo rasters: **`56.24% <= 70%`**.
+     - Max Spearman rank correlation (both pre-placement stitched surface and post-placement dots): **`0.1645 <= 0.90`**.
+  4. **Blind 40-Cell Spatial Holdout (`E2`, fresh unconsumed seeds `400–409`, `289,180` withheld positive occurrences, `gems27.metric.dti_binary v1 + 600m-buffered-quadrant-40cell`) — `ALL 5/5 FROZEN CLAUSES PASS`:**
+     - **`H31-S` sets a NEW ALL-TIME REPOSITORY #1 BLIND POOLED `HOLDOUT-DTI = 0.047302`** (unbuffered diagnostic **`0.115636`**), beating `H31-A = 0.045202`, `H29-S = 0.044116`, `D0 = 0.040298`, `H28_1_B2 = 0.039091`, `B0 = 0.037725`, `U0 = 0.014825` (catalogue-internal `HOLDOUT-DTI`, NOT a live organizer score).
+     - **`H31-S` minus `B0`:** **`+0.009577`**, 95% CI **`[+0.0080, +0.0112]`**, **`10/10` seeds**, **`4/4` folds**.
+     - **`H31-S` minus `D0`:** **`+0.007004`**, 95% CI **`[+0.0046, +0.0090]`**, **`10/10` seeds**, **`4/4` folds** (`NW +0.0001`, `NE_LidarGapHeavy +0.0168`, `SW +0.0040`, `SE +0.0067`).
+     - **`H31-S` minus `H29-S` (live `0.2190` `OWNER-REPORTED`):** **`+0.003185`**, 95% CI **`[+0.0015, +0.0051]`**, **`9/10` seeds**, **`3/4` folds**.
+     - **Detector-alone ablation (`H31-A` with plain Poisson `d=2.8`):** **`0.045202`**, beating `D0` (`+0.004904`) and even full `H29-S` (`0.044116`) before CELF placement!
+- **Live Score Autopsy (`OWNER-REPORTED`, `knowledge/23_focus_sites_and_02778_phd_autopsy_20261026.md`, `evidence/focus_sites_executive_summary_20261026.json`):**
+  - Session-7 `H29-S` (`511898747886`) received **`0.2190` (`OWNER-REPORTED`)** — **#1 among all five 2026-10-25 non-`H19-5` submissions** (`0.2190` vs `30GEMSDOE 0.1462`, `24GEMSDOE 0.0859`, `25GEMSDOE 0.0742`, `28GEMSDOE 0.0217`), achieving `5.79x` blind truth concentration (matching `GEMSDOE24/25/30`'s `5.77–5.80x`)! `H31-1` fixes all four measured deficits of `H29-S`: raising effective blind 300 m kernel coverage `c` from `0.0527 -> 0.0636` (`+20.7%`) via `min_sep_px=2.8` (`>=3` neighbors in 3 px dropped `8.48% -> 0.186%`), lifting `NE_LidarGapHeavy` blind DTI `0.0579 -> 0.0663` via quantile-calibrated `M_Sub`, and closing `SE` Walker Lane `0.0541 -> 0.0589` via `ieq/deq` seismic anisotropy $\times$ `geod_shearrate`.
+  - **Shared-tool fixes reported per Protocol §2:** `scripts/restore_data.py` (`codeload.github.com` streaming, `IR-2026-10-26-01`), `scripts/run_h29_holdout.py` (`SUBSURFACE_BANDS`), and `src/gems27/coverage_thin.py` (`weighted_celf_cover` `keep_n` spacing-area scaling, `IR-2026-10-26-04`).
+  - **Synthesis & Evidence:** `knowledge/23` (9-focus-site executive summary & `0.2778`/`0.2190` autopsy), `knowledge/24` (frozen preregistration), `knowledge/25` (Session 10 results), `evidence/h31_s10_run_card_2026-10-26.json`.
+
+---
+
+## Session 9 addendum (2026-10-25, merged with the parallel Lane L-S7 session; historical archive)
 **A new unique TIFF was generated (H30) and it is NOT certified for submission — ⛔ DO NOT SUBMIT it.**
 H30 = the twice-confirmed Arm-D subsurface detector, re-ranked by a label-free hydrothermal-chemistry
 field (measured well/spring temperatures; canary AUC 0.499) and emitted with deconflicted placement
@@ -353,6 +381,7 @@ Create a GitHub Page with a clean, user-friendly, simple UI; organized and clean
 
 Run the task through 3 passes: Pass 1 implement + verify; Pass 2 review bugs/assumptions/edge cases and fix; Pass 3 re-check against the original request and polish. Then create a pull request and merge onto main. List remaining work and limitations for the next session.
 
-Leaderboard context from the group's sites (owner-reported unless marked): GEMSDOE24 0.2477, GEMSDOE25 0.2600, GEMSDOE27 (unscored candidates), GEMSDOE28 up to 0.2710, GEMSDOE30 0.2600, GEMSDOE31 0.2708, GEMSDOE32 h33 0.2778, GEMSDOE33 0.2632, GEMSDOE36 0.2750. Public leaderboard #1 cited variously as 0.3195 / 0.3262 / 0.4413 across sources — irregularity, not verified by the agent (no drivendata.org access).
+Leaderboard context from the group's sites (owner-reported unless marked): GEMSDOE24 0.2477, GEMSDOE25 0.2600, GEMSDOE27 (Slot 1 0.2449; H29-S 511898747886 0.2190; Session 10 H31-1 cf8e1bbef244 unscored), GEMSDOE28 up to 0.2708 (gemsdoe28-s18-mxtp-37654-20261025-05fc81ca2760-zeros: 0.0217), GEMSDOE30 0.2600 (gemsdoe30-msdb1-oof-submod-b2-37654-20261025-c878ed0c318c-zeros: 0.1462), GEMSDOE31 0.2710, GEMSDOE32 h33 0.2778, GEMSDOE33 0.2632, GEMSDOE36 0.2750, GEMSDOE24 gvc1-offcat-b2-20261025-88c3b8e804c6-zeros: 0.0859, GEMSDOE25 h66-mgd-20261025-83539880f9da-zeros: 0.0742. Public leaderboard #1 cited variously as 0.3195 / 0.3262 / 0.4413 (49GEMSDOE) across sources — irregularity, not verified by the agent (no drivendata.org access).
 ```
+
 

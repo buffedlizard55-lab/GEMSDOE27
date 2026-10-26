@@ -1,9 +1,16 @@
 #!/usr/bin/env python3
 """Restore hash-pinned inputs into the (git-ignored) data cache.
 
-The sandbox this project was built in can reach only github.com, so inputs are pulled from the
-owner's sibling repositories at pinned commits with the GitHub CLI (`gh api`, raw media type) and
-verified against SHA-256 values in data/manifest.json. Nothing here touches drivendata.org.
+The sandbox this project was built in can reach only github.com and codeload.github.com, so inputs
+are pulled from the owner's sibling repositories at pinned commits and verified against SHA-256
+values in data/manifest.json. Nothing here touches drivendata.org.
+
+Template fix (2026-10-26, Protocol §2): parallel sessions sharing one GitHub user token exhausted
+the 5,100 req/hr REST `contents/` API quota (`HTTP 403 API rate limit exceeded`) when fetching 21
+blobs one by one via `gh api`. `restore_data.py` now streams each pinned `(repo, commit)` archive
+once from `codeload.github.com` (same pattern as `scripts/fetch_parallel_registry.py`, 0 REST API
+calls), verifies byte counts where declared, falls back to `gh api` only if archive extraction
+fails, and verifies every output file's exact SHA-256 against `data/manifest.json`.
 
     python scripts/restore_data.py            # download what is missing, verify everything
     python scripts/restore_data.py --verify   # verify only
@@ -17,7 +24,9 @@ import json
 import shutil
 import subprocess
 import sys
+import tarfile
 import time
+from collections import defaultdict
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
@@ -41,44 +50,143 @@ def sha256(path: Path) -> str:
     return h.hexdigest()
 
 
+def _gh_token() -> str | None:
+    r = subprocess.run(["gh", "auth", "token"], capture_output=True, text=True, check=False)
+    tok = r.stdout.strip()
+    return tok if r.returncode == 0 and tok else None
+
+
+def fetch_group_from_codeload(
+    repo: str,
+    ref: str,
+    wanted: dict[str, tuple[Path, int | None]],
+    retries: int = 3,
+) -> set[str]:
+    """Stream one `codeload.github.com` tar.gz archive and extract all `wanted` repo-relative paths.
+
+    `wanted` maps `repo_rel_path -> (dest_path, expected_bytes_or_None)`.
+    Never writes a partial file to `dest_path`: extracts to `.part`, checks expected size, then
+    atomically renames. Returns the set of `repo_rel_path` keys extracted cleanly.
+    """
+    if not wanted:
+        return set()
+    repo_name = repo.rsplit("/", 1)[-1]
+    prefix = f"{repo_name}-{ref}/"
+    url = f"https://codeload.github.com/{repo}/tar.gz/{ref}"
+    token = _gh_token()
+    extracted: set[str] = set()
+
+    for attempt in range(1, retries + 1):
+        remaining = {k: v for k, v in wanted.items() if k not in extracted}
+        if not remaining:
+            break
+        for dest, _ in remaining.values():
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            part = dest.with_suffix(dest.suffix + ".part")
+            if part.exists():
+                part.unlink()
+        print(
+            f"stream archive {repo}@{ref[:8]} ({len(remaining)} file(s), attempt {attempt}/{retries})",
+            flush=True,
+        )
+        cmd = ["curl", "--fail", "--location", "--silent", "--show-error"]
+        if token:
+            cmd.extend(["-H", f"Authorization: Bearer {token}"])
+        cmd.append(url)
+        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+        try:
+            assert proc.stdout is not None
+            with tarfile.open(fileobj=proc.stdout, mode="r|gz") as tar:
+                for member in tar:
+                    if not member.isfile() or not member.name.startswith(prefix):
+                        continue
+                    rel = member.name[len(prefix) :]
+                    if rel not in remaining:
+                        continue
+                    dest, want_bytes = remaining[rel]
+                    tmp = dest.with_suffix(dest.suffix + ".part")
+                    stream = tar.extractfile(member)
+                    if stream is None:
+                        continue
+                    with stream, open(tmp, "wb") as out:
+                        while chunk := stream.read(1 << 20):
+                            out.write(chunk)
+                    got = tmp.stat().st_size
+                    if want_bytes is not None and got != want_bytes:
+                        tmp.unlink(missing_ok=True)
+                        raise OSError(f"truncated {rel}: {got} B != pinned {want_bytes} B")
+                    tmp.replace(dest)
+                    extracted.add(rel)
+                    if len(extracted) == len(wanted):
+                        # All needed blobs extracted; close stream early without reading trailing archive bytes.
+                        proc.terminate()
+                        break
+            rc = proc.wait(timeout=15)
+            # rc < 0 (SIGTERM after early stop) is expected once all targets are extracted.
+            if len(extracted) == len(wanted):
+                return extracted
+            if rc != 0:
+                raise RuntimeError(f"curl exited with {rc}")
+        except Exception as exc:  # noqa: BLE001
+            proc.kill()
+            proc.wait()
+            for dest, _ in wanted.items():
+                if isinstance(dest, tuple):
+                    continue
+            for rel_key, (dest, _) in remaining.items():
+                if rel_key not in extracted:
+                    dest.with_suffix(dest.suffix + ".part").unlink(missing_ok=True)
+            print(f"  codeload attempt {attempt}/{retries} incomplete for {repo}@{ref[:8]}: {exc}", flush=True)
+            time.sleep(2 * attempt)
+    return extracted
+
+
 def gh_size(repo: str, path: str, ref: str) -> int:
     """Byte size GitHub reports for a blob, used to detect truncated downloads."""
-    r = subprocess.run(["gh", "api", f"repos/{repo}/contents/{path}?ref={ref}", "--jq", ".size"],
-                       capture_output=True, text=True, check=True)
+    r = subprocess.run(
+        ["gh", "api", f"repos/{repo}/contents/{path}?ref={ref}", "--jq", ".size"],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
     return int(r.stdout.strip())
 
 
-def gh_raw(repo: str, path: str, ref: str, dest: Path, retries: int = 3) -> None:
-    """Fetch one blob, verifying its size. Never leaves a truncated `.part` behind.
-
-    Session 4 irregularity `restore-part-truncation-bug`: a failed `gh api` download used to leave a
-    truncated `<name>.part` on disk (transient HTTP/2 INTERNAL_ERROR on the ~94 MB bridge parts). Any
-    later glob-based assembly then silently concatenated the truncated part, producing a corrupt
-    `training_features.tif` (492,887,617 B, sha256 c0e9b856...) instead of the pinned 418,912,844 B,
-    sha256 4371c82e.... The hash check at the end printed BAD but left the corrupt file in place, so
-    the next run skipped it (`dest.exists()`). Now: remove any stale `.part` first, retry, verify the
-    size against GitHub's own metadata, and on failure remove the partial file so a re-run refetches.
-    """
+def gh_raw(
+    repo: str,
+    path: str,
+    ref: str,
+    dest: Path,
+    expected_bytes: int | None = None,
+    retries: int = 3,
+) -> None:
+    """Fallback single-blob fetch via `gh api`, verifying byte size and cleaning stale `.part`."""
     dest.parent.mkdir(parents=True, exist_ok=True)
     tmp = dest.with_suffix(dest.suffix + ".part")
     if tmp.exists():
         tmp.unlink()
-    want = gh_size(repo, path, ref)
+    want = expected_bytes if expected_bytes is not None else gh_size(repo, path, ref)
     last: Exception | None = None
     for attempt in range(1, retries + 1):
         try:
             with open(tmp, "wb") as out:
                 subprocess.run(
-                    ["gh", "api", f"repos/{repo}/contents/{path}?ref={ref}",
-                     "-H", "Accept: application/vnd.github.raw"],
-                    stdout=out, check=True,
+                    [
+                        "gh",
+                        "api",
+                        f"repos/{repo}/contents/{path}?ref={ref}",
+                        "-H",
+                        "Accept: application/vnd.github.raw",
+                    ],
+                    stdout=out,
+                    check=True,
                 )
             got = tmp.stat().st_size
             if got != want:
-                raise IOError(f"truncated download: {got} B, GitHub reports {want} B")
+                raise OSError(f"truncated download: {got} B, expected {want} B")
             tmp.replace(dest)
             return
-        except Exception as e:                                   # noqa: BLE001 - retry any fetch failure
+        except Exception as e:  # noqa: BLE001 - retry any fetch failure
             last = e
             if tmp.exists():
                 tmp.unlink()
@@ -94,39 +202,61 @@ def main() -> int:
     man = json.loads(paths.MANIFEST.read_text())
     src = man["sources"]
     paths.DATA.mkdir(parents=True, exist_ok=True)
+
+    if not args.verify:
+        grouped: dict[tuple[str, str], dict[str, tuple[Path, int | None]]] = defaultdict(dict)
+        for f in man["files"]:
+            name = LOCAL_NAMES.get(f["path"], Path(f["path"]).name)
+            dest = paths.DATA / name
+            if not dest.exists():
+                s = src[f["source"]]
+                grouped[(s["repo"], s["commit"])][f["path"]] = (dest, f.get("bytes"))
+        for a in man["assembled"]:
+            dest = paths.DATA / a["assembled_name"]
+            if not dest.exists():
+                s = src[a["source"]]
+                for p in a["parts"]:
+                    pd = paths.DATA / "parts" / p
+                    if not pd.exists():
+                        grouped[(s["repo"], s["commit"])][f"{a['dir']}/{p}"] = (pd, None)
+
+        for (repo, commit), wanted in grouped.items():
+            got = fetch_group_from_codeload(repo, commit, wanted)
+            for rel_path, (dest, want_bytes) in wanted.items():
+                if rel_path not in got and not dest.exists():
+                    print(f"fallback gh_raw {repo}@{commit[:8]}:{rel_path} -> {dest.name}", flush=True)
+                    gh_raw(repo, rel_path, commit, dest, expected_bytes=want_bytes)
+
     bad = 0
     for f in man["files"]:
         name = LOCAL_NAMES.get(f["path"], Path(f["path"]).name)
         dest = paths.DATA / name
-        if not dest.exists() and not args.verify:
-            s = src[f["source"]]
-            print(f"fetch {s['repo']}@{s['commit'][:8]}:{f['path']} -> {dest.name}")
-            gh_raw(s["repo"], f["path"], s["commit"], dest)
         ok = dest.exists() and sha256(dest) == f["sha256"]
         print(f"{'OK ' if ok else 'BAD'} {dest.name} {f['sha256'][:12]}")
         if not ok and dest.exists() and not args.verify:
             print(f"  removing corrupt {dest.name} so the next run refetches it")
             dest.unlink()
         bad += not ok
+
     for a in man["assembled"]:
         dest = paths.DATA / a["assembled_name"]
         if not dest.exists() and not args.verify:
-            s = src[a["source"]]
-            parts = []
-            for p in a["parts"]:
-                pd = paths.DATA / "parts" / p
-                if not pd.exists():
-                    print(f"fetch part {p}")
-                    gh_raw(s["repo"], f"{a['dir']}/{p}", s["commit"], pd)
-                parts.append(pd)
-            with open(dest, "wb") as out:
-                for pd in parts:
-                    with open(pd, "rb") as fh:
-                        shutil.copyfileobj(fh, out)
+            parts = [paths.DATA / "parts" / p for p in a["parts"]]
+            if all(pd.exists() for pd in parts):
+                tmp = dest.with_suffix(dest.suffix + ".part")
+                tmp.unlink(missing_ok=True)
+                with open(tmp, "wb") as out:
+                    for pd in parts:
+                        with open(pd, "rb") as fh:
+                            shutil.copyfileobj(fh, out)
+                tmp.replace(dest)
         ok = dest.exists() and sha256(dest) == a["sha256"]
         print(f"{'OK ' if ok else 'BAD'} {dest.name} {a['sha256'][:12]}")
-        if not ok and not args.verify:
-            # never leave a corrupt assembly (or a suspect part) where the next run would trust it
+        if ok and not args.verify:
+            # Free ~419 MB of duplicate part files once the assembled file passes SHA-256.
+            for p in a["parts"]:
+                (paths.DATA / "parts" / p).unlink(missing_ok=True)
+        elif not ok and not args.verify:
             if dest.exists():
                 print(f"  removing corrupt {dest.name} so the next run reassembles it")
                 dest.unlink()

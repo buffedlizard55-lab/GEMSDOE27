@@ -1,0 +1,45 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to submit · 27GEMSDOE</title><meta name="description" content="27GEMSDOE: geothermal &amp; structural fault discovery for DrivenData #306 (DOE GEMS). Machine-validated unique submission ready: 27GEMSDOE-H31-DRCG-WL-20261026-cf8e1bbef244 (unscored).">
+<link rel="stylesheet" href="assets/style.css"></head><body>
+<header class="top"><div class="in"><a class="brand" href="index.html">27GEMSDOE · DOE GEMS</a><nav><a href="index.html">Submit status</a><a href="executive-summary.html">Executive summary</a><a href="how-to-submit.html" class=on>How to submit</a><a href="topology.html">Topology candidates</a><a href="research.html">Research</a><a href="sources.html">Sources &amp; feed</a></nav></div></header>
+<main><div class="card"><b>Automatic submission evidence audit (zero human intervention):</b>
+<a href="data/submission_readiness_audit.json">Read byte-bound gate decisions and blockers</a> &middot;
+<a href="how-to-submit.html">How to submit to DrivenData #306</a>.
+Format PASS alone never authorizes a slot; negative and duplicate files remain research-only.
+</div>
+<h1>How to Submit to DrivenData #306 (DOE GEMS)</h1>
+<p class="lead">Executive-summary subpage: step-by-step human upload guide, automated machine-gate checklist, how the <code>[0, 1]</code> portal error is prevented, and post-submission score logging.</p>
+<div class="card hero" style="border:2px solid #1a7f37">
+ <h2 style="margin-top:0">1. Current Automated Machine-Gate Status</h2>
+ <p><span class="badge ok" style="font-size:1.05rem">&#9989; OK TO DOWNLOAD AND SUBMIT: 27GEMSDOE-H31-DRCG-WL-20261026-cf8e1bbef244</span></p>
+ <p>Inspection is executed <b>100% automatically by project code without human intervention</b> via <code>gems27.readiness.publication_decision</code> (<a href="data/submission_readiness_audit.json"><code>docs/data/submission_readiness_audit.json</code></a>) and <code>scripts/verify_downloads.py</code>.</p>
+ <div class="row"><a class="btn" href="downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif" download>1. Download Approved .tif (gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif)</a> <a class="btn alt" href="downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.zip" download>Alternative: Single-TIFF .zip</a></div>
+ <p class="small"><b>SHA-256 to verify locally (optional):</b> <code>2c002b02792419864bd3b29a218e543cb41e3f07b3b57c29ef35c6e39e184bfe</code><br>
+ <b>Short note to paste (&le;140 chars):</b> <code>27GEMSDOE H31-1 | dualRegime MSub+MFull+WLseis+obliq+CELF2.8 B2 37654px | id cf8e1bbef244 | unscored validated-promote</code> (118 chars)</p>
+</div>
+
+<div class="card">
+ <h2 style="margin-top:0">2. Step-by-Step Upload Procedure (Human Only)</h2>
+ <ol class="steps">
+  <li><b>Never automate <code>drivendata.org</code>:</b> DrivenData's Terms of Use prohibit bots, scrapers, or automated requests. Always open the portal manually in your browser.</li>
+  <li><b>Download the exact binary file above:</b> click <b>Download Approved .tif</b> (<code>gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif</code>). <b>Do NOT open and re-save</b> the file in QGIS/ArcGIS/GDAL, as GIS exports can re-inject a <code>nodata=NaN</code> tag or alter geotransform precision.</li>
+  <li><b>Sign in to DrivenData:</b> visit <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">https://www.drivendata.org/competitions/306/competition-doe-gems/</a> and click <b>Submit</b>.</li>
+  <li><b>Upload the single-band GeoTIFF (or single-TIFF ZIP):</b> select <code>gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif</code> (806 KB) or <code>gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.zip</code> (180 KB, verified to contain <i>only</i> that single <code>.tif</code> with no <code>__MACOSX</code> metadata).</li>
+  <li><b>Paste the short description note:</b> paste <code>27GEMSDOE H31-1 | dualRegime MSub+MFull+WLseis+obliq+CELF2.8 B2 37654px | id cf8e1bbef244 | unscored validated-promote</code> so the content hash <code>cf8e1bbef244</code> and hypothesis <code>H31-1</code> are permanently paired on your Submissions tab.</li>
+  <li><b>Budget your 5/week submission cap:</b> the competition enforces a rolling limit of 5 submissions per 7 days. Never re-upload already-scored files (<code>511898747886</code> = <code>0.2190</code>, <code>5512495c6bd1</code> = <code>0.2449</code>) or peer clones (<code>GEMSDOE32</code> = <code>0.2778</code>).</li>
+  <li><b>Record the live outcome:</b> once DrivenData displays the public Distance-Tolerant Tversky Index score, record the exact score and timestamp in <code>registry/live_scores.json</code> (with <code>OWNER-REPORTED</code> or stored-receipt provenance).</li>
+ </ol>
+</div>
+
+<div class="card">
+ <h2 style="margin-top:0">3. Why DrivenData Rejected Earlier Files with <code>&ldquo;Predicted values must be in range [0, 1]&rdquo;</code> &mdash; and How It Is Prevented</h2>
+ <ul class="tight">
+  <li><b>Root cause 1 (NaN outside footprint):</b> <code>sample_submission.tif</code> contains <code>7,111,787</code> <code>NaN</code> pixels outside the irregular <code>5,167,373</code>-pixel study footprint. Under IEEE-754 floating-point semantics, a strict validator evaluating <code>((arr &gt;= 0.0) &amp; (arr &lt;= 1.0)).all()</code> returns <code>False</code> if <i>any</i> <code>NaN</code> exists anywhere in the <code>3730&times;3292</code> array. Official reference notebook Cell 19 (<code>drivendataorg/gems-prize-reference-solution</code>) initializes <code>y_out = np.zeros(...)</code> with <code>nodata=None</code>.</li>
+  <li><b>Root cause 2 (Float32 sentinel bleed):</b> raw <code>training_features.tif</code> stores <code>-3.4028235e+38</code> sentinels on <code>3,061</code> cells <i>inside</i> the valid footprint; unclipped linear or sigmoid pipelines propagate out-of-range values.</li>
+  <li><b>Automated machine guarantee on <code>gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif</code>:</b> single-band <code>float32</code>, <code>EPSG:32611</code>, shape <code>(3730, 3292)</code>, transform <code>(100.0, 0.0, 323344.2347, 0.0, -100.0, 4565845.3247)</code>, <code>nodata=None</code>, <code>0</code> NaNs and <code>0</code> Infs across all <code>12,279,160</code> pixels, and value set strictly <code>{0.0, 1.0}</code> (<a href="downloads/checks-gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.json">machine validator JSON receipt</a>).</li>
+ </ul>
+</div>
+<p class="small">Back to <a href="executive-summary.html">Executive summary</a> &middot; <a href="index.html">Submit status</a> &middot; <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/AI_DISCLOSURE.md">AI Disclosure (Official Rules compliance)</a>.</p>
+</main>
+<footer>Built 2026-10-26 03:21 UTC from <a href="https://github.com/buffedlizard55-lab/GEMSDOE27">the repository</a>. Machine-validated unique submission ready: 27GEMSDOE-H31-DRCG-WL-20261026-cf8e1bbef244 (unscored). No unverified leaderboard score is claimed on this site; historical scores shown are explicitly labelled OWNER-REPORTED. This site never contacts drivendata.org.</footer>
+<script src="assets/app.js"></script></body></html>

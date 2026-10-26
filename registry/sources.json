@@ -352,6 +352,18 @@
    "accessed": "2026-10-25",
    "evidence": "Confirms break-even marginal efficiency m(D) = alpha*D / (1 - alpha*D*(1 - rho)) governing dot-budget optimality.",
    "feed": false
+  },
+  {
+   "id": "blakely-simpson-1986",
+   "title": "Blakely & Simpson (1986) 'Approximating edges of source bodies from magnetic or gravity anomalies' (Geophysics 51(7): 1494-1498)",
+   "publisher": "Society of Exploration Geophysicists (SEG)",
+   "url": "https://doi.org/10.1190/1.1442197",
+   "category": "geophysical-method-reference",
+   "used_for": "Four-azimuth directional curvature crest detection on horizontal gradient magnitude of RTP magnetic and isostatic gravity fields in H31-1 (src/gems27/geothermal_conduit_nis.py).",
+   "status": "standard peer-reviewed geophysical edge-localization operator cited by DOI",
+   "accessed": "2026-10-26",
+   "evidence": "Defines multi-azimuth local maxima of horizontal gradient magnitude ||grad F|| along N-S, E-W, NE-SW, and NW-SE axes above steepest basement-contact dips.",
+   "feed": false
   }
  ]
 }

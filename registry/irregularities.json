@@ -336,6 +336,30 @@
    "severity": "high",
    "issue": "Two parallel Session-9 lanes both used the H30 label, the same evidence/script filenames, and fresh holdout seeds 240-244 PR #24 (merged, commit b7dc19f): chemistry-verified deconflicted emission, evidence/h30_holdout.json + evidence/h30_run_card.json, knowledge/20_preregistration_H30.md (seeds 240-244). PR #25 lane L-H30-DIPGAP: dip-advection/gap-flanking/soft emission, originally identical filenames and the same seeds 240-244 (knowledge/20_lane_h30_preregistration_2026-10-25.md); its files were renamed to evidence/h30_dipgap_*.json and scripts/*_h30_dipgap_*.py before merging (commit 5383045) so neither lane overwrote the other. Both lanes gated different arms against closely related controls on the same seed block, so the two selection results are NOT independent replications; neither used the other's outcomes before running (parallel sessions). knowledge/20 and knowledge/21 numeric prefixes now each cover two different files. Recommend: the selector assigns hypothesis numbers, knowledge-file numbers, seed blocks and unique evidence filename prefixes before parallel sessions start.",
    "action": "flagged for manual review; L-H30-DIPGAP files renamed (h30_dipgap_*) before merge so neither lane overwrote the other; selector must pre-assign hypothesis/knowledge numbers, seed blocks and filename prefixes to parallel lanes"
+  },
+  {
+   "id": "IR-2026-10-26-01-restore-data-codeload-upgrade",
+   "severity": "medium",
+   "issue": "`scripts/restore_data.py` fetched 21 manifest entries via per-file `gh api repos/.../contents/...`, hitting GitHub core REST API rate-limit exhaustion (`HTTP 403`, `core.remaining=0/5100`) after 2 files in sandboxed sessions.",
+   "action": "Fixed in-place per Protocol §2: `scripts/restore_data.py` now streams each pinned `(repo, commit)` archive once from `https://codeload.github.com/{repo}/tar.gz/{commit}` (0 REST API calls), verifies byte lengths and SHA-256 hashes for all 17 inputs, cleans split `.part*` temporaries, and retains `gh_raw` only as fallback."
+  },
+  {
+   "id": "IR-2026-10-26-02-live-cohort-inversion-h29s-02190",
+   "severity": "medium",
+   "issue": "2026-10-26 prompt reports five new 2026-10-25 live scores (`OWNER-REPORTED`; no DrivenData receipt stored in repo): `27GEMSDOE H29-S` (`511898747886`) = `0.2190` (#1 of cohort), `30GEMSDOE MSDB1` (`c878ed0c318c`) = `0.1462`, `24GEMSDOE GVC1` (`88c3b8e804c6`) = `0.0859`, `25GEMSDOE H66-MGD` (`83539880f9da`) = `0.0742`, and `28GEMSDOE S18-MXTP` (`05fc81ca2760`) = `0.0217`, plus `Current Leaderboard High Score: 0.4413` / `49GEMSDOE: 0.4413` (unverified vs Oct-2 snapshot high `0.3195`). Exact metric inversion (`evidence/focus_sites_executive_summary_20261026.json`) shows `H29-S` achieved `5.79x` blind truth concentration (matching `GEMSDOE24/25/30`'s `5.77-5.80x`), but `min_sep_px=2.0` packed 2D clusters (`8.5%` >=3 neighbors in 3 px vs `0.7%` in `GEMSDOE32`), cutting blind coverage `c` by `-11.0%` (`0.0527` vs `0.0592`), while single-tree training under-emitted in the `24.6%` LiDAR gap (`18.3%`).",
+   "action": "Recorded in `registry/live_scores.json` under `owner_reported_prompt_2026_10_26` (all labelled `OWNER-REPORTED`); marked `511898747886` as ALREADY SUBMITTED so it is never re-uploaded and added `511898747886` + `5512495c6bd1` to the mandatory scored-submission duplicate screen for Session 10 Lane `H31-1`."
+  },
+  {
+   "id": "IR-2026-10-26-03-h29-2-registry-sync",
+   "severity": "low",
+   "issue": "`registry/next_hypotheses.json` still listed `H29-2` as `UNTRIED` even after PR #26 (`evidence/h29_2_run_card_2026-10-25.json`, seeds `300-309`) tested `H29-2` and recorded a negative duplicate-stop / zero-gain outcome (`0.1059` vs `0.1060` control).",
+   "action": "Moved `H29-2` to `tested_hypotheses` in `registry/next_hypotheses.json` and registered the fresh `H31` screen (`H31-1..H31-4`) on unconsumed seed block `400-409`."
+  },
+  {
+   "id": "IR-2026-10-26-04-coverage-thin-heap-pool-fix",
+   "severity": "medium",
+   "issue": "Shared tool `src/gems27/coverage_thin.py::weighted_celf_cover` truncated its initial candidate heap at `keep_n = max(max_candidates=320_000, budget * 3)` before `min_sep_px` exclusion. On quadrant holdouts (`budget ~ 9,150`) `320,000` is `35x` budget so it always reached budget, whereas on full-map emission (`budget = 37,654`) with `min_sep_px = 2.8` (`21` integer lattice offsets blocked per dot along ridges), `320,000` (`8.5x` budget) exhausted `489` dots short (`37,165` vs `37,654`).",
+   "action": "Fixed in-place in `src/gems27/coverage_thin.py` per Parallel-Run Protocol §2 via `block_area = max(3, ceil(pi * max(min_sep_px, 1.0)^2 * 1.35))` (`keep_n = max(max_candidates, budget * block_area)`), preserving identical behavior for quadrant holdouts (`budget ~ 9,150 <= 320,000 / 34`) while reaching exact `37,654` full-map dots at `min_sep_px = 2.8`."
   }
  ]
 }

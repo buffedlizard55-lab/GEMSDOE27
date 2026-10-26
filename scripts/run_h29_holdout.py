@@ -56,12 +56,8 @@ def get_or_build_subsurface15(foot: np.ndarray, names: list[str]) -> np.ndarray:
         return np.load(p, mmap_mode="r")
     p.parent.mkdir(parents=True, exist_ok=True)
     X = np.load(paths.PREPARED_FEATURES, mmap_mode="r")
-    needed = (
-        "rtp", "iso_grav_anom", "tmi_vg", "tmi_hg", "cond_surf",
-        "depth_to_base_surf", "geod_dilaterate", "geod_2ndinv", "ieq_n100a15", "deq_n100a15",
-    )
     grids = {}
-    for b in needed:
+    for b in sub.SUBSURFACE_BANDS:
         g = np.full(grid.SHAPE, np.nan, dtype=np.float32)
         g[foot] = X[:, names.index(b)]
         grids[b] = g

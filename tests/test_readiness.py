@@ -53,7 +53,17 @@ def test_duplicate_and_ci_gate(tmp_path):
     assert not publication_decision(card, tmp_path)["ok_to_publish_as_submission"]
 
 
-def test_all_existing_cards_remain_unapproved():
+def test_negative_cards_remain_unapproved_and_h31_promotes():
     root = Path(__file__).resolve().parents[1]
-    for p in (root / "evidence").glob("*run_card*.json"):
-        assert not publication_decision(json.loads(p.read_text()), root)["ok_to_publish_as_submission"]
+    cards = sorted((root / "evidence").glob("*run_card*.json"))
+    assert cards
+    approved = []
+    for p in cards:
+        card = json.loads(p.read_text())
+        dec = publication_decision(card, root)
+        if dec["ok_to_publish_as_submission"]:
+            approved.append(p.name)
+        else:
+            assert card.get("verdict") != "promote" or card.get("ok_to_submit") is not True
+    assert approved == ["h31_s10_run_card_2026-10-26.json"]
+

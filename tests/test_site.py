@@ -7,7 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
-PAGES = ["index.html", "executive-summary.html", "topology.html", "research.html", "sources.html"]
+PAGES = ["index.html", "executive-summary.html", "how-to-submit.html", "topology.html", "research.html", "sources.html"]
 
 
 class Links(HTMLParser):
@@ -44,22 +44,31 @@ def test_all_internal_links_and_assets_resolve():
 
 def test_repository_root_front_page_shows_current_submission_decision():
     root_idx = (ROOT / "index.html").read_text()
-    assert "NO TIFF IS APPROVED TO SUBMIT" in root_idx
+    assert "OK TO DOWNLOAD AND SUBMIT" in root_idx
+    assert "27GEMSDOE-H31-DRCG-WL-20261026-cf8e1bbef244" in root_idx
+    assert "gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif" in root_idx
     assert "DO NOT SUBMIT H28-3" in root_idx
     assert (ROOT / ".nojekyll").exists()
 
 
-def test_front_page_does_not_offer_failed_h28_3_as_submission():
+def test_front_page_promotes_h31_and_does_not_offer_failed_h28_3_as_submission():
     idx = (DOCS / "index.html").read_text()
-    assert "NO TIFF IS APPROVED TO SUBMIT" in idx
+    assert "OK TO DOWNLOAD AND SUBMIT" in idx
+    assert "gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif" in idx
     assert "There is no one-click submission download for this run." in idx
     assert "NOT APPROVED FOR SUBMISSION" in idx
-    assert "h28_3_negative_research_manifest.json" not in idx or "NOT APPROVED" in idx
-    assert 'download class="mono"' not in idx
-    assert ".tif\" download" not in idx
+    assert "h28-3-strain-conductivity" not in idx or "h28-3-strain-conductivity" not in "\n".join(
+        re.findall(r'<a[^>]+download[^>]*>', idx)
+    )
     summary = (DOCS / "executive-summary.html").read_text()
-    assert "NO TIFF IS APPROVED TO SUBMIT" in summary
-    assert ".tif\" download" not in summary
+    assert "OK TO DOWNLOAD AND SUBMIT" in summary
+    assert "how-to-submit.html" in summary
+    for site_id in ("GEMSDOE24", "GEMSDOE25", "GEMSDOE27", "GEMSDOE28", "GEMSDOE30",
+                    "GEMSDOE31", "GEMSDOE32", "GEMSDOE33", "GEMSDOE36"):
+        assert site_id in summary
+    how = (DOCS / "how-to-submit.html").read_text()
+    assert "Predicted values must be in range [0, 1]" in how
+    assert "gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif" in how
 
 
 def test_research_page_lists_preregistered_h28_hypotheses_and_evidence_link():
