@@ -1,0 +1,40 @@
+fitting H31-1 dual-regime 2-stage nested spatial cross-fit (Quadrant 4-fold)...
+    stage1 pair (0,1) done
+    stage1 pair (0,2) done
+    stage1 pair (0,3) done
+    stage1 pair (1,2) done
+    stage1 pair (1,3) done
+    stage1 pair (2,3) done
+    stage2 fold 0 done
+    stage2 fold 1 done
+    stage2 fold 2 done
+    stage2 fold 3 done
+  finished H31-1 Quadrant OOF in 809.0s
+fitting STK0 recalibration stacker [p_s2,p_s1,p_sub]...
+    stacker fold 0 done
+    stacker fold 1 done
+    stacker fold 2 done
+    stacker fold 3 done
+fitting DEMAG stacker [p_s2,p_s1,p_sub]+demag8...
+    stacker fold 0 done
+    stacker fold 1 done
+    stacker fold 2 done
+    stacker fold 3 done
+SURFACE SCREEN pass=True max|rho|=0.11742
+seed 410 (47.2s) buffered pooled: U0=0.0157 H31S=0.0367 STK0=0.0367 DEMAG=0.0319
+seed 411 (46.8s) buffered pooled: U0=0.0127 H31S=0.0384 STK0=0.0396 DEMAG=0.0371
+seed 412 (46.4s) buffered pooled: U0=0.0156 H31S=0.0403 STK0=0.0461 DEMAG=0.0379
+seed 413 (49.4s) buffered pooled: U0=0.0160 H31S=0.0453 STK0=0.0431 DEMAG=0.0442
+seed 414 (50.4s) buffered pooled: U0=0.0142 H31S=0.0455 STK0=0.0410 DEMAG=0.0415
+seed 415 (47.4s) buffered pooled: U0=0.0150 H31S=0.0463 STK0=0.0420 DEMAG=0.0402
+seed 416 (46.8s) buffered pooled: U0=0.0154 H31S=0.0491 STK0=0.0486 DEMAG=0.0463
+seed 417 (47.3s) buffered pooled: U0=0.0145 H31S=0.0430 STK0=0.0395 DEMAG=0.0366
+seed 418 (45.8s) buffered pooled: U0=0.0144 H31S=0.0469 STK0=0.0464 DEMAG=0.0419
+seed 419 (46.8s) buffered pooled: U0=0.0146 H31S=0.0481 STK0=0.0449 DEMAG=0.0464
+POOLED BUFFERED HOLDOUT-DTI: {"U0": 0.014815, "H31S": 0.043994, "STK0": 0.042847, "DEMAG": 0.040469}
+POOLED UNBUFFERED: {"U0": 0.045331, "H31S": 0.108768, "STK0": 0.108401, "DEMAG": 0.103298}
+VS H31S: {"pooled_delta_dti": -0.003525, "mean_delta": -0.003547, "mean_seed_paired_delta_dti": -0.003547, "ci95": [-0.004721, -0.002433], "seed_bootstrap_95_ci": [-0.004721, -0.002433], "positive_seeds": 0, "n_seeds": 10, "positive_folds": 2, "n_folds": 4, "per_fold_pooled_delta_dti": {"NW": 0.000766, "NE_LidarGapHeavy": -0.003256, "SW": 0.000894, "SE": -0.012289}, "positive_cells": 14, "n_cells": 40}
+VS STK0: {"pooled_delta_dti": -0.002378, "mean_delta": -0.002391, "mean_seed_paired_delta_dti": -0.002391, "ci95": [-0.004221, -0.000722], "seed_bootstrap_95_ci": [-0.004221, -0.000722], "positive_seeds": 3, "n_seeds": 10, "positive_folds": 3, "n_folds": 4, "per_fold_pooled_delta_dti": {"NW": 0.000411, "NE_LidarGapHeavy": 0.000939, "SW": 0.000984, "SE": -0.01156}, "positive_cells": 19, "n_cells": 40}
+GATE CLAUSES: {"a_pooled_beats_H31S_and_STK0": false, "b_mean_paired_vs_H31S_ge_0p0010": false, "c_ci95_lower_gt_zero_vs_H31S_and_STK0": false, "d_folds_ge_3_of_4_vs_H31S": false, "e_seeds_ge_8_of_10_vs_H31S": false, "f_e1_pass": true}
+E2 PASS=False | wrote /home/user/GEMSDOE27/evidence/h31_2_e2_holdout_410_419.json
+EXIT:0

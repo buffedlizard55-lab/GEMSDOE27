@@ -269,6 +269,60 @@ def main() -> int:
         ok(dec31["ok_to_publish_as_submission"] == hm31["ok_to_submit"],
            f"h31_s10/readiness-gate: publication_decision={dec31['ok_to_publish_as_submission']} reasons={dec31['reasons']}")
 
+    # Session-11 H31-2 DEMAG stacker (Lane L-S11-2026-10-26) autonomous verification:
+    h31_2_man_path = DL / "h31_2_candidate_manifest.json"
+    if h31_2_man_path.exists():
+        from gems27.readiness import publication_decision as _pub_dec_32
+        hm32 = json.loads(h31_2_man_path.read_text())
+        d32 = ROOT / hm32["directory"]
+        for variant, key_fn, key_sha in (
+            ("allfinite", "allfinite", "sha256_allfinite"),
+            ("nan", "nan", "sha256_nan"),
+        ):
+            hp = d32 / hm32[key_fn]
+            with rasterio.open(hp) as hs:
+                ha = hs.read(1)
+                hprof = (hs.crs.to_epsg(), hs.shape, tuple(hs.transform)[:6], hs.dtypes[0])
+                hnd, hcount = hs.nodata, hs.count
+            htag = f"h31_2/{variant}"
+            ok(hprof == tprof, f"{htag}: same CRS/shape/transform/dtype as template (EPSG:32611, 3730x3292, float32)")
+            ok(hcount == 1, f"{htag}: single band")
+            h_in, h_out = ha[foot], ha[~foot]
+            ok(bool(np.isfinite(h_in).all()), f"{htag}: every in-footprint value is finite")
+            ok(float(h_in.min()) >= 0.0 and float(h_in.max()) <= 1.0, f"{htag}: in-footprint range in [0,1]")
+            ok(set(np.unique(h_in).tolist()) <= {0.0, 1.0}, f"{htag}: exact binary {{0.0, 1.0}}")
+            ok(int((h_in == 1.0).sum()) == hm32["emitted_px"], f"{htag}: emitted {hm32['emitted_px']} dots")
+            ok(not bool((ha == 1.0)[cat].any()), f"{htag}: 0 catalogue overlap")
+            ok(bool((distance_transform_edt(~cat)[ha == 1.0] > hm32["b_exclusion_px"]).all()),
+               f"{htag}: strict B2 collar > {hm32['b_exclusion_px']} px")
+            if variant == "allfinite":
+                ok(bool(np.isfinite(ha).all() and (h_out == 0.0).all() and hnd is None),
+                   f"{htag}: all 12,279,160 cells finite in [0,1], zeros outside, nodata=None")
+            else:
+                ok(int(np.isnan(h_out).sum()) == h_out.size and hnd is not None and np.isnan(hnd),
+                   f"{htag}: NaN outside footprint and nodata=NaN declared")
+            ok(sha(hp) == hm32[key_sha], f"{htag}: sha256 matches h31_2_candidate_manifest.json")
+        hz32 = d32 / hm32["zip_allfinite"]
+        with zipfile.ZipFile(hz32) as zf:
+            ok(zf.namelist() == [hm32["allfinite"]] and zf.read(hm32["allfinite"]) == (d32 / hm32["allfinite"]).read_bytes(),
+               "h31_2/zip: holds exactly the single allfinite GeoTIFF, byte-identical")
+        ok(sha(hz32) == hm32["sha256_zip_allfinite"], "h31_2/zip: sha256 matches h31_2_candidate_manifest.json")
+        hnote32 = (d32 / hm32["note_file"]).read_text().strip()
+        ok(0 < len(hnote32) <= 140 and hnote32 == hm32["note"],
+           f"h31_2/note: {len(hnote32)} chars (<= 140) and matches manifest")
+        rc32 = json.loads((ROOT / hm32["run_card"]).read_text())
+        dec32 = _pub_dec_32(rc32, ROOT)
+        ok(rc32["uniqueness_vs_registry"]["pass"]
+           and rc32["uniqueness_vs_registry"]["max_dot_overlap_within_3px_euclidean"] <= 0.70
+           and rc32["uniqueness_vs_registry"]["max_surface_spearman"] <= 0.90,
+           "h31_2/uniqueness: <= 70% 3px dot overlap & <= 0.90 Spearman vs peers & scored/promoted GEMSDOE27 rasters")
+        ok(dec32["ok_to_publish_as_submission"] == hm32["ok_to_submit"],
+           f"h31_2/readiness-gate: publication_decision={dec32['ok_to_publish_as_submission']} reasons={dec32['reasons']}")
+        ok(rc32["ok_to_submit"] == (rc32["verdict"] == "promote"
+                                    and rc32["validator"]["zeros_hard_pass"]
+                                    and rc32["holdout"]["gate_efficacy_pass"]),
+           f"h31_2/gate-consistency: verdict={rc32['verdict']} ok_to_submit={rc32['ok_to_submit']}")
+
     # Session-10 H31 rank-ensemble (2026-10-26) autonomous verification:
     h31_card_path = ROOT / "evidence" / "h31_run_card.json"
     if h31_card_path.exists():

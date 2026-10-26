@@ -1,0 +1,27 @@
+{
+  "experiment": "E1b_H31-2_preplacement_surface_screen",
+  "lane": "L-S11-2026-10-26",
+  "hypothesis_id": "H31-2",
+  "preregistration_doc": "knowledge/26_preregistration_H31-2_2026-10-26.md",
+  "preregistration_sha256": "d78ab93908d115e0c50f72b46b9fb3adc5a90028682595491d39e2c3a0a2d433",
+  "preplacement_surface_spearman": {
+    "peer:g24_d15.tif": 0.11211,
+    "peer:g25_d28.tif": 0.09519,
+    "peer:g27_tv2_d15.tif": 0.11083,
+    "peer:g28_h27_4_r1.tif": 0.08876,
+    "peer:g28_h32_1.tif": 0.09171,
+    "peer:g28_h36_1.tif": 0.0862,
+    "peer:g28_h38_1.tif": 0.08653,
+    "peer:g30_d28.tif": 0.09519,
+    "peer:g31_h27_4.tif": 0.08876,
+    "peer:g32_h33_2_b2.tif": 0.08444,
+    "peer:g33_h33d.tif": 0.09166,
+    "peer:g36_anderson.tif": 0.0834,
+    "scored:slot1_5512495c6bd1": 0.11083,
+    "scored:h29s_511898747886": 0.11742,
+    "promoted:h31_1_cf8e1bbef244": 0.11504
+  },
+  "max_abs_preplacement_spearman": 0.11742,
+  "spearman_stop_threshold": 0.9,
+  "gate_surface_pass": true
+}

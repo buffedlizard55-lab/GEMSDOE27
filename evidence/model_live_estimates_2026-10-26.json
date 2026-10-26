@@ -1,0 +1,44 @@
+{
+  "generated_utc": "2026-10-26",
+  "purpose": "Executive-summary MODEL estimates for UNSCORED files (knowledge/26 section 5)",
+  "provenance_rule": "Live inputs are OWNER-REPORTED; outputs are MODEL projections, never scores. No ORGANIZER-CONFIRMED receipt exists in this repo.",
+  "constants": {
+    "G_ref": 12226.0,
+    "rho_ref": 1.38,
+    "alpha": 0.2,
+    "beta": 0.8,
+    "operating_point_dots": 37654
+  },
+  "beat_champion_arithmetic": {
+    "champion": "GEMSDOE32 h33-h33-2-b2 = 0.2778 OWNER-REPORTED (already submitted)",
+    "implied_tpw_h29s_at_0p2190": 3729.2,
+    "implied_credit_fraction_h29s": 0.305,
+    "required_tpw_for_0p2778_same_N": 4709.7,
+    "required_credit_fraction_for_0p2778": 0.3852,
+    "required_tpw_ratio_vs_h29s": 1.2629,
+    "reading": "Beating 0.2778 at the same 37,654-dot budget needs ~+26% more weighted credit than H29-S achieved live. A candidate whose same-instrument HOLDOUT-DTI ratio vs its H29-S anchor arm is below the required TPw ratio is MODEL-unlikely to beat 0.2778, however clean its holdout gate is."
+  },
+  "estimates": [
+    {
+      "file_label": "gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif (H31-1, UNSCORED)",
+      "label": "MODEL (projection from stated formula; NOT a leaderboard score)",
+      "anchor_live_owner_reported": 0.219,
+      "holdout_buffered_ratio_vs_anchor_arm": 1.07222,
+      "holdout_unbuffered_ratio_vs_anchor_arm": 1.08307,
+      "model_no_transfer": 0.219,
+      "model_proportional_central": 0.2348,
+      "model_interval": [
+        0.219,
+        0.2372
+      ],
+      "model_algebra_crosscheck_tpw_scaled": 0.2351,
+      "formula": "central = anchor_live * (pooled buffered HOLDOUT-DTI ratio, same seeds/instrument)",
+      "anchor_arm": "H29-S on seeds 400-409 (same instrument)",
+      "anchor_holdout_buffered": 0.044116,
+      "candidate_holdout_buffered": 0.047302,
+      "candidate_holdout_label": "HOLDOUT-DTI (gems27.metric v1 + holdout-blind-buffered-v2 (alpha=0.2, beta=0.8, R=3px triangular, buffer_px=6.0); 120778 withheld positive occurrences)"
+    }
+  ],
+  "chaining_note": null,
+  "validation_of_method": "The inversion constants reproduce the focus-site autopsy (evidence/focus_sites_executive_summary_20261026.json: H29-S credit fraction 0.305). The proportional-transfer assumption itself is unvalidated on live data (only one family member, H29-S, has both a same-instrument holdout and a live score); that is why the no-transfer bound is always reported alongside the central value."
+}

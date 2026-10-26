@@ -1,0 +1,272 @@
+{
+  "experiment": "E2_H31-2_paired_spatial_holdout",
+  "lane": "L-S11-2026-10-26",
+  "hypothesis_id": "H31-2",
+  "preregistration_doc": "knowledge/26_preregistration_H31-2_2026-10-26.md",
+  "preregistration_sha256": "d78ab93908d115e0c50f72b46b9fb3adc5a90028682595491d39e2c3a0a2d433",
+  "evaluator_version": "gems27.metric v1 + holdout-blind-buffered-v2 (alpha=0.2, beta=0.8, R=3px triangular, buffer_px=6.0)",
+  "provenance_label": "HOLDOUT-DTI (catalogue-internal whole-component hide-and-recover; NOT a live organizer score)",
+  "seeds": [
+    410,
+    411,
+    412,
+    413,
+    414,
+    415,
+    416,
+    417,
+    418,
+    419
+  ],
+  "folds": [
+    "NW",
+    "NE_LidarGapHeavy",
+    "SW",
+    "SE"
+  ],
+  "n_cells": 40,
+  "n_withheld_positive_occurrences": 119130,
+  "matched_full_map_budget": 37654,
+  "fold_budgets": [
+    8414,
+    10404,
+    10410,
+    8426
+  ],
+  "b_exclusion_px": 2.0,
+  "celf_params": {
+    "gamma": 1.35,
+    "min_sep_px": 2.8
+  },
+  "pooled_buffered_holdout_dti": {
+    "U0": 0.014815,
+    "H31S": 0.043994,
+    "STK0": 0.042847,
+    "DEMAG": 0.040469
+  },
+  "pooled_buffered_ci95": {
+    "U0": [
+      0.014209,
+      0.01535
+    ],
+    "H31S": [
+      0.041371,
+      0.046315
+    ],
+    "STK0": [
+      0.040616,
+      0.045008
+    ],
+    "DEMAG": [
+      0.037621,
+      0.043063
+    ]
+  },
+  "pooled_unbuffered_diagnostic_holdout_dti": {
+    "U0": 0.045331,
+    "H31S": 0.108768,
+    "STK0": 0.108401,
+    "DEMAG": 0.103298
+  },
+  "per_fold_buffered_holdout_dti": {
+    "NW": {
+      "U0": 0.012904,
+      "H31S": 0.040078,
+      "STK0": 0.040433,
+      "DEMAG": 0.040843
+    },
+    "NE_LidarGapHeavy": {
+      "U0": 0.013529,
+      "H31S": 0.06273,
+      "STK0": 0.058535,
+      "DEMAG": 0.059474
+    },
+    "SW": {
+      "U0": 0.015524,
+      "H31S": 0.027597,
+      "STK0": 0.027507,
+      "DEMAG": 0.028491
+    },
+    "SE": {
+      "U0": 0.01656,
+      "H31S": 0.049269,
+      "STK0": 0.048541,
+      "DEMAG": 0.03698
+    }
+  },
+  "per_seed_buffered_holdout_dti": {
+    "410": {
+      "U0": 0.015687,
+      "H31S": 0.03667,
+      "STK0": 0.03668,
+      "DEMAG": 0.031903
+    },
+    "411": {
+      "U0": 0.012687,
+      "H31S": 0.038405,
+      "STK0": 0.039646,
+      "DEMAG": 0.037128
+    },
+    "412": {
+      "U0": 0.015637,
+      "H31S": 0.040251,
+      "STK0": 0.046086,
+      "DEMAG": 0.037923
+    },
+    "413": {
+      "U0": 0.016017,
+      "H31S": 0.045297,
+      "STK0": 0.04313,
+      "DEMAG": 0.044186
+    },
+    "414": {
+      "U0": 0.014155,
+      "H31S": 0.04548,
+      "STK0": 0.04104,
+      "DEMAG": 0.041528
+    },
+    "415": {
+      "U0": 0.015002,
+      "H31S": 0.046347,
+      "STK0": 0.041956,
+      "DEMAG": 0.040239
+    },
+    "416": {
+      "U0": 0.015443,
+      "H31S": 0.049099,
+      "STK0": 0.048553,
+      "DEMAG": 0.046296
+    },
+    "417": {
+      "U0": 0.014525,
+      "H31S": 0.042965,
+      "STK0": 0.039497,
+      "DEMAG": 0.036619
+    },
+    "418": {
+      "U0": 0.014382,
+      "H31S": 0.046884,
+      "STK0": 0.046447,
+      "DEMAG": 0.041856
+    },
+    "419": {
+      "U0": 0.014565,
+      "H31S": 0.048132,
+      "STK0": 0.04494,
+      "DEMAG": 0.046383
+    }
+  },
+  "paired_comparisons_buffered": {
+    "DEMAG_minus_H31S": {
+      "pooled_delta_dti": -0.003525,
+      "mean_delta": -0.003547,
+      "mean_seed_paired_delta_dti": -0.003547,
+      "ci95": [
+        -0.004721,
+        -0.002433
+      ],
+      "seed_bootstrap_95_ci": [
+        -0.004721,
+        -0.002433
+      ],
+      "positive_seeds": 0,
+      "n_seeds": 10,
+      "positive_folds": 2,
+      "n_folds": 4,
+      "per_fold_pooled_delta_dti": {
+        "NW": 0.000766,
+        "NE_LidarGapHeavy": -0.003256,
+        "SW": 0.000894,
+        "SE": -0.012289
+      },
+      "positive_cells": 14,
+      "n_cells": 40
+    },
+    "DEMAG_minus_STK0": {
+      "pooled_delta_dti": -0.002378,
+      "mean_delta": -0.002391,
+      "mean_seed_paired_delta_dti": -0.002391,
+      "ci95": [
+        -0.004221,
+        -0.000722
+      ],
+      "seed_bootstrap_95_ci": [
+        -0.004221,
+        -0.000722
+      ],
+      "positive_seeds": 3,
+      "n_seeds": 10,
+      "positive_folds": 3,
+      "n_folds": 4,
+      "per_fold_pooled_delta_dti": {
+        "NW": 0.000411,
+        "NE_LidarGapHeavy": 0.000939,
+        "SW": 0.000984,
+        "SE": -0.01156
+      },
+      "positive_cells": 19,
+      "n_cells": 40
+    },
+    "STK0_minus_H31S": {
+      "pooled_delta_dti": -0.001147,
+      "mean_delta": -0.001156,
+      "mean_seed_paired_delta_dti": -0.001156,
+      "ci95": [
+        -0.002834,
+        0.000808
+      ],
+      "seed_bootstrap_95_ci": [
+        -0.002834,
+        0.000808
+      ],
+      "positive_seeds": 3,
+      "n_seeds": 10,
+      "positive_folds": 1,
+      "n_folds": 4,
+      "per_fold_pooled_delta_dti": {
+        "NW": 0.000355,
+        "NE_LidarGapHeavy": -0.004195,
+        "SW": -9e-05,
+        "SE": -0.000728
+      },
+      "positive_cells": 16,
+      "n_cells": 40
+    },
+    "DEMAG_minus_U0": {
+      "pooled_delta_dti": 0.025654,
+      "mean_delta": 0.025596,
+      "mean_seed_paired_delta_dti": 0.025596,
+      "ci95": [
+        0.022703,
+        0.02819
+      ],
+      "seed_bootstrap_95_ci": [
+        0.022703,
+        0.02819
+      ],
+      "positive_seeds": 10,
+      "n_seeds": 10,
+      "positive_folds": 4,
+      "n_folds": 4,
+      "per_fold_pooled_delta_dti": {
+        "NW": 0.02794,
+        "NE_LidarGapHeavy": 0.045944,
+        "SW": 0.012967,
+        "SE": 0.02042
+      },
+      "positive_cells": 40,
+      "n_cells": 40
+    }
+  },
+  "frozen_gate_clauses": {
+    "a_pooled_beats_H31S_and_STK0": false,
+    "b_mean_paired_vs_H31S_ge_0p0010": false,
+    "c_ci95_lower_gt_zero_vs_H31S_and_STK0": false,
+    "d_folds_ge_3_of_4_vs_H31S": false,
+    "e_seeds_ge_8_of_10_vs_H31S": false,
+    "f_e1_pass": true
+  },
+  "gate_e2_pass": false,
+  "verdict_stage_e2": "negative",
+  "runtime_s": 1529.2
+}
