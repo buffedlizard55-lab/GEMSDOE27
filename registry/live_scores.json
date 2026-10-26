@@ -249,6 +249,12 @@
    "file": "(see docs/downloads/manifest.json)",
    "score": null,
    "status": "not yet submitted/scored - add the number here after submitting"
+  },
+  {
+   "file": "docs/downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif",
+   "sha256": "2c002b02792419864bd3b29a218e543cb41e3f07b3b57c29ef35c6e39e184bfe",
+   "score": null,
+   "status": "unscored; machine-validated promote (Session 10 H31-1, all 5/5 frozen gates pass on seeds 400-409, 27-raster unique)"
   }
  ],
  "leaderboard_snapshot_sibling_2026-10-02": {

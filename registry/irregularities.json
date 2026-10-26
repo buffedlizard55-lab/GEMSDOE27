@@ -384,6 +384,30 @@
    "severity": "high",
    "issue": "holdout.buffered_scoring_mask(sp, foot) excludes ring = (d_hidden <= 6.0) & ~sp.hidden. Passing allowed = (valid_scoring | hidden) & (d_known > 2.0) into emit() and ridge_nms(prob, allowed) zeroed prob across the 100-600 m moat surrounding sp.hidden while leaving sp.hidden (d == 0) positive, and zeroed the 0 < d < 3.0 px (100-300 m) triangular tolerance kernel during scoring.",
    "action": "In scripts/run_h30_1_holdout.py, ridge_nms(prob, foot) is computed strictly on foot (100% blind to sp.hidden), and holdout evaluation reports BOTH the primary leak-free full_kernel_blind evaluator (where emit sees only fold_mask and visible_known = sp.known & (d(hidden) > 6.0), and the full 300 m kernel is active) AND the legacy buffered_scoring_mask evaluator. H30-1 passes both evaluators with 95% bootstrap CIs strictly above zero."
+  },
+  {
+   "id": "IR-2026-10-26-01-restore-data-codeload-upgrade",
+   "severity": "medium",
+   "issue": "`scripts/restore_data.py` fetched 21 manifest entries via per-file `gh api repos/.../contents/...`, hitting GitHub core REST API rate-limit exhaustion (`HTTP 403`, `core.remaining=0/5100`) after 2 files in sandboxed sessions.",
+   "action": "Fixed in-place per Protocol \u00a72: `scripts/restore_data.py` now streams each pinned `(repo, commit)` archive once from `https://codeload.github.com/{repo}/tar.gz/{commit}` (0 REST API calls), verifies byte lengths and SHA-256 hashes for all 17 inputs, cleans split `.part*` temporaries, and retains `gh_raw` only as fallback."
+  },
+  {
+   "id": "IR-2026-10-26-02-live-cohort-inversion-h29s-02190",
+   "severity": "medium",
+   "issue": "2026-10-26 prompt reports five new 2026-10-25 live scores (`OWNER-REPORTED`; no DrivenData receipt stored in repo): `27GEMSDOE H29-S` (`511898747886`) = `0.2190` (#1 of cohort), `30GEMSDOE MSDB1` (`c878ed0c318c`) = `0.1462`, `24GEMSDOE GVC1` (`88c3b8e804c6`) = `0.0859`, `25GEMSDOE H66-MGD` (`83539880f9da`) = `0.0742`, and `28GEMSDOE S18-MXTP` (`05fc81ca2760`) = `0.0217`, plus `Current Leaderboard High Score: 0.4413` / `49GEMSDOE: 0.4413` (unverified vs Oct-2 snapshot high `0.3195`). Exact metric inversion (`evidence/focus_sites_executive_summary_20261026.json`) shows `H29-S` achieved `5.79x` blind truth concentration (matching `GEMSDOE24/25/30`'s `5.77-5.80x`), but `min_sep_px=2.0` packed 2D clusters (`8.5%` >=3 neighbors in 3 px vs `0.7%` in `GEMSDOE32`), cutting blind coverage `c` by `-11.0%` (`0.0527` vs `0.0592`), while single-tree training under-emitted in the `24.6%` LiDAR gap (`18.3%`).",
+   "action": "Recorded in `registry/live_scores.json` under `owner_reported_prompt_2026_10_26` (all labelled `OWNER-REPORTED`); marked `511898747886` as ALREADY SUBMITTED so it is never re-uploaded and added `511898747886` + `5512495c6bd1` to the mandatory scored-submission duplicate screen for Session 10 Lane `H31-1`."
+  },
+  {
+   "id": "IR-2026-10-26-03-h29-2-registry-sync",
+   "severity": "low",
+   "issue": "`registry/next_hypotheses.json` still listed `H29-2` as `UNTRIED` even after PR #26 (`evidence/h29_2_run_card_2026-10-25.json`, seeds `300-309`) tested `H29-2` and recorded a negative duplicate-stop / zero-gain outcome (`0.1059` vs `0.1060` control).",
+   "action": "Moved `H29-2` to `tested_hypotheses` in `registry/next_hypotheses.json` and registered the fresh `H31` screen (`H31-1..H31-4`) on unconsumed seed block `400-409`."
+  },
+  {
+   "id": "IR-2026-10-26-04-coverage-thin-heap-pool-fix",
+   "severity": "medium",
+   "issue": "Shared tool `src/gems27/coverage_thin.py::weighted_celf_cover` truncated its initial candidate heap at `keep_n = max(max_candidates=320_000, budget * 3)` before `min_sep_px` exclusion. On quadrant holdouts (`budget ~ 9,150`) `320,000` is `35x` budget so it always reached budget, whereas on full-map emission (`budget = 37,654`) with `min_sep_px = 2.8` (`21` integer lattice offsets blocked per dot along ridges), `320,000` (`8.5x` budget) exhausted `489` dots short (`37,165` vs `37,654`).",
+   "action": "Fixed in-place in `src/gems27/coverage_thin.py` per Parallel-Run Protocol \u00a72 via `block_area = max(3, ceil(pi * max(min_sep_px, 1.0)^2 * 1.35))` (`keep_n = max(max_candidates, budget * block_area)`), preserving identical behavior for quadrant holdouts (`budget ~ 9,150 <= 320,000 / 34`) while reaching exact `37,654` full-map dots at `min_sep_px = 2.8`."
   }
  ]
 }

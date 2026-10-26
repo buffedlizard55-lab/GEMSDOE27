@@ -237,8 +237,9 @@ def weighted_celf_cover(
         return out
 
     gains = init_gain[ys, xs]
+    block_area = max(3, int(np.ceil(np.pi * max(float(min_sep_px), 1.0) ** 2 * 1.35)))
     if ys.size > max_candidates:
-        keep_n = max(int(max_candidates), int(budget) * 3)
+        keep_n = max(int(max_candidates), int(budget) * block_area)
         if ys.size > keep_n:
             idx = np.argpartition(-gains, keep_n - 1)[:keep_n]
             ys, xs, gains = ys[idx], xs[idx], gains[idx]

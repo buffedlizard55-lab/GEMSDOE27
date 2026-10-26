@@ -100,7 +100,7 @@ def test_steppover_links_rejects_perpendicular_strands():
     assert L.empty or bool((L.strike_diff_deg.to_numpy() <= 20.0).all())
 
 
-@pytest.mark.skipif(not (Path(__file__).resolve().parents[1] / "data_cache" / "geodawn_rad_u8.tif").exists(),
+@pytest.mark.skipif(not (newinfo.paths.DATA / "geodawn_rad_u8.tif").exists(),
                     reason="restored input rasters not present")
 def test_aux_bands_have_the_registered_names_and_ranges():
     from gems27 import grid
