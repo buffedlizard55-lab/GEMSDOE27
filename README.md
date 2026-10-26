@@ -1,5 +1,32 @@
 # 27GEMSDOE - topology-first research and submission lab for DrivenData #306 (DOE GEMS)
 
+## Session 10 addendum (2026-10-26; read at every session start)
+**A new unique TIFF was generated (H31) and it is NOT certified for submission — ⛔ DO NOT SUBMIT it.
+Still no TIFF in this repo is approved to submit** (`docs/data/submission_readiness_audit.json`: `approved: []`).
+H31 = preregistered 50/50 percentile-rank ensemble of the two validated OOF surfaces (H29S hydrothermal/piedmont
++ Arm-D subsurface), identical weighted-CELF B2 emission, fresh seeds 260–269 (40 cells, 120,512 withheld
+positives): pooled buffered **HOLDOUT-DTI ENS 0.036711 vs H29S 0.044020 vs D0S 0.041419**; ENS−H29S
+**−0.007308 [−0.009246, −0.005691], 0/10 seeds, 0/4 folds — frozen gate FAILED** (rank uniformisation destroys
+the probability contrast CELF exploits; surface rank-ensembling retired). The unique file
+(`docs/downloads/research/gems27-h31-rankens-celf-b2-20261026-93c8af046660-allfinite.tif`, sha256
+`714faac68e78…`, 37,654 dots) is format-valid and unique on both screens (≤0.555 vs 12 peers + GEMSDOE32 R6;
+≤0.660 vs repo rasters) but **negative on efficacy**. Evidence: `knowledge/23` (prereg, commit `c645135`),
+`knowledge/25` (result), `evidence/h31_run_card.json`.
+**9 focus sites executive summary (`knowledge/24`, `registry/focus_sites_2026-10-26.json`, site table):**
+fleet best = GEMSDOE32 `h33-h33-2-b2` **0.2778 (OWNER-REPORTED)**; every focus site's best file is already
+scored and one nested H19-5 dot family (GEMSDOE25≡GEMSDOE30 and GEMSDOE28≡GEMSDOE31 dot-identical MEASURED;
+GEMSDOE36 = champion + exactly 1,200 dots) — **resubmit none of them**. New OWNER-REPORTED live score recorded:
+this repo's H29-S (`511898747886`) = **0.2190** — best-ever holdout surface, below the family champion live.
+GEMSDOE32's parallel-session R6 file (`23fbbb51`, unscored) is promoted there on an SGMC instrument that its own
+catalogue-hidden numbers contradict (IR-2026-10-26-02) — selector must reconcile before any slot.
+**Corrections/flags:** inherited "H29-6 seeds 220–229" was wrong (220–224 consumed by L-DCONFIRM;
+IR-2026-10-26-01) and its SE-deficit premise did not replicate under matched CELF emission; latent 10-band bug
+in shared `run_h29_holdout.py` fixed once in the template (IR-2026-10-26-04). Seed ledger: 260–269 consumed
+(H31), 245–254 reserved-consumed, next free ≥270. 129 tests pass; ruff clean; `verify_downloads.py` 0 failures
+(now incl. 23 H31 checks).
+**Site:** https://buffedlizard55-lab.github.io/GEMSDOE27/ — first screen shows the H31 machine badge + the
+9-site executive table; the badge is computed fail-closed from run-card JSON (no human inspection).
+
 ## Session 9 addendum (2026-10-25, merged with the parallel Lane L-S7 session; read at every session start)
 **A new unique TIFF was generated (H30) and it is NOT certified for submission — ⛔ DO NOT SUBMIT it.**
 H30 = the twice-confirmed Arm-D subsurface detector, re-ranked by a label-free hydrothermal-chemistry
@@ -295,6 +322,27 @@ PARALLEL-RUN PROTOCOL — read first. This session is one of several running fro
 6. BUDGET. Stop after [3] experiments or [2] hours. Do not pick submissions: promotion to a real slot is a separate selector step, within the weekly cap shown on the submission page.
 THE FOLLOWING IS THE HIGHEST URGENCY AND MUST BE FOLLOWED! MUST GENERATE A UNIQUE TIF SUBMISSION FOR THE COMPETITION. DO NOT COPY A PREVIOUS SUBMISSION UNLESS IT'S FOR LEARNING AND EDUCATION. BUT WE MUST GENERATE A UNIQUE TIF SUBMISSION. IT MUST BE OBVIOUS WHETHER IT IS OK TO DOWNLOAD AND SUBMIT THE GENERATED TIF SUBMISSION.
 ```
+
+## Session 10 prompt (operative text, 2026-10-26; full ~120-site score list elided — focus-site values in `registry/focus_sites_2026-10-26.json`)
+
+Focus on the highest-scoring submissions from GEMSDOE24, GEMSDOE25, GEMSDOE27, GEMSDOE28, GEMSDOE30,
+GEMSDOE31, GEMSDOE32, GEMSDOE33, GEMSDOE36; executive summary per site making obvious which is the best
+submission to submit; it must be unique, not an exact duplicate of any previous submission.
+HIGHEST URGENCY: generate a UNIQUE TIF submission; it must be obvious whether it is OK to download and
+submit; validation must be automated through the project without human intervention. Study why
+GEMSDOE32 `h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros` scored 0.2778 (OWNER-REPORTED; leaderboard highs
+stated as both 0.4413 and 0.3195) and whether >0.2778 is achievable. PARALLEL-RUN PROTOCOL (verbatim in
+the Session 6 prompt section below) applies: stay in lane (Spearman ≤0.90, ≤70% dots within 3 px vs
+registry), reuse cached stack/evaluator/writer, label every number HOLDOUT-DTI or ORGANIZER-CONFIRMED,
+leakage canary ≤0.90 AUC, end with one JSON run card, budget 3 experiments, promotion is a separate
+selector step. Before implementing: 3–5 untried geological hypotheses ranked by expected DTI/cost;
+validate the top candidate on the spatially blocked holdout before any weekly slot; name the free
+official source for any data-blocked idea. Fix the portal error "Predicted values must be in range
+[0, 1]"; one-click download + unique name + short note obvious on the first screen; executive-summary
+subpage explains exactly how to submit. Work the next steps from previous sessions first; 3 passes;
+then PR + merge; list remaining work/limitations. Core Values: Maximize P(Win), Own the Outcome.
+Session-10 execution: `knowledge/23` (5 hypotheses ranked + H31 frozen protocol), `knowledge/24`
+(9-site executive summary), `knowledge/25` (H31 negative result).
 
 ## Core Values (verbatim, owner-supplied)
 ```text
