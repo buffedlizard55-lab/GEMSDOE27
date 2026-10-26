@@ -44,7 +44,7 @@
    "corroboration": "task_statement_only"
   },
   {
-   "label": "GEMSDOE ens12-adopted (7f00890a…)",
+   "label": "GEMSDOE ens12-adopted (7f00890a\u2026)",
    "repo": "buffedlizard55-lab/GEMSDOE",
    "sha256": "7f00890a62878d612fb5eef67a9a364a2df819433dde74b6762ce4fc0fc4fe15",
    "owner_reported_public_score": 0.1563,
@@ -237,6 +237,16 @@
    "owner_reported_public_score": null,
    "status": "UNSCORED Session-11 candidate built 2026-10-26; FROZEN GATE FAILED (HOLDOUT-DTI P 0.03573 vs D 0.03922, seeds 500-509); verdict negative / DO NOT SUBMIT (evidence/h32_run_card_2026-10-26.json)",
    "corroboration": "knowledge/26 preregistration; knowledge/27 result; evidence/h32_e2_holdout_500_509.json"
+  },
+  {
+   "repo": "buffedlizard55-lab/GEMSDOE27",
+   "label": "gems27-h31-3-mt-graben-celf28-20261026-0f397db36baf-allfinite.tif",
+   "sha256": "da29080bf6acfdc91a835b06464e7d64c056703067967129505af886a59a9d68",
+   "family": "H31-3 / Lane L-S12: signed MT conductivity / basement-depth asymmetric graben-margin transforms appended to shared H31 dual-regime OOF detector, B2 CELF, 37,654 dots",
+   "emitted_px": 37654,
+   "owner_reported_public_score": null,
+   "status": "UNSCORED Session-12 research artifact; FROZEN GATE FAILED / DO NOT SUBMIT (HOLDOUT-DTI H31-3-S 0.045332 vs H31-S 0.044966, seeds 510-519; paired CI crosses zero; extended local overlap 86.87% vs H31-1).",
+   "corroboration": "knowledge/28 preregistration commit 83ceee5; knowledge/29 result; evidence/h31_3_run_card_2026-10-26.json"
   }
  ],
  "owner_reported_prompt_2026_10_25": {
@@ -265,6 +275,12 @@
    "sha256": "2c002b02792419864bd3b29a218e543cb41e3f07b3b57c29ef35c6e39e184bfe",
    "score": null,
    "status": "unscored; machine-validated promote (Session 10 H31-1, all 5/5 frozen gates pass on seeds 400-409, 27-raster unique)"
+  },
+  {
+   "file": "docs/downloads/research/gems27-h31-3-mt-graben-celf28-20261026-0f397db36baf-allfinite.tif",
+   "sha256": "da29080bf6acfdc91a835b06464e7d64c056703067967129505af886a59a9d68",
+   "score": null,
+   "status": "unscored research-only negative; never submit (H31-3, seeds 510-519)"
   }
  ],
  "leaderboard_snapshot_sibling_2026-10-02": {

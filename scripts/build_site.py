@@ -770,7 +770,36 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
             f'<code>knowledge/27</code> in the repository; machine receipts in '
             f'<code>evidence/session11_reaudit.json</code> and <code>evidence/h32_e2_holdout_500_509.json</code>.</p></div>'
         )
-    parallel_s10_box = s11_box + parallel_s10_box
+    # ---- Session 12 (Lane L-S12): H31-3 MT-graben NEGATIVE ----
+    s12_box = ""
+    h313_rc_path = EV / "h31_3_run_card_2026-10-26.json"
+    if h313_rc_path.exists():
+        c313 = J(h313_rc_path)
+        h313h = c313["holdout"]
+        h313u = c313["uniqueness_vs_registry"]
+        h313d = h313h["paired_candidate_minus_B"]
+        peer_max = h313u["max_dot_overlap_vs_12_peers"]
+        local_max = h313u["max_dot_overlap_vs_local_rasters"]
+        s12_box = (
+            '<div class="card"><h3 style="margin-top:0">Session 12 Update (2026-10-26, Lane L-S12) &mdash; '
+            'H31-3 MT-graben experiment NEGATIVE; no new submission</h3>'
+            f'<p><b>H31-3 cross-strike MT clay-cap / basement-margin coupling: DO NOT SUBMIT.</b> '
+            f'It was preregistered before data-backed computation and evaluated on fresh seeds 510&ndash;519 '
+            f'(40 cells, {h313h["n_withheld_positives_total"]:,} withheld positives). The E1 leakage canary was clean '
+            f'(maximum direction-invariant AUC {h313h["canary_max_auc"]:.3f}) and its pre-placement 12-peer '
+            f'surface correlation was low. E2 pooled HOLDOUT-DTI was H31-3-S={h313h["pooled_holdout_dti_buffered"]["H31-3-S"]:.5f} '
+            f'versus H31-S={h313h["pooled_holdout_dti_buffered"]["H31-S"]:.5f}, but the paired mean was only '
+            f'{h313d["mean_seed_paired_delta_dti"]:+.5f} (95% CI [{h313d["ci95"][0]:+.4f}, {h313d["ci95"][1]:+.4f}], '
+            f'{h313d["positive_seeds"]}/10 seeds, {h313d["positive_folds"]}/4 folds). It failed four of five frozen '
+            f'efficacy clauses, so no tuning or weekly-slot promotion is permitted.</p>'
+            f'<p>The research TIFF is technically valid (all-finite [0,1], 37,654 dots) and unique versus the 12 '
+            f'pinned focus peers (maximum final-dot overlap {peer_max:.1%}), but it is <b>not an eligible download</b>: '
+            f'it also has {local_max:.1%} 3-px overlap with the existing H31-1 candidate in the extended local screen. '
+            f'Its machine run card is <code>evidence/h31_3_run_card_2026-10-26.json</code>; its labelled research bytes '
+            f'live only under <code>downloads/research/</code>. H31-1 remains the only file shown as OK TO DOWNLOAD AND SUBMIT.</p>'
+            '</div>'
+        )
+    parallel_s10_box = s12_box + s11_box + parallel_s10_box
 
     h31_ok = bool(h31_rc and h31_man and publication_decision(h31_rc, ROOT)["ok_to_publish_as_submission"] and h31_man.get("ok_to_submit"))
     approved_submission_name = h31_man["submission_name"] if h31_ok else None

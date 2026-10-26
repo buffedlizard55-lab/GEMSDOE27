@@ -1,0 +1,77 @@
+{
+  "experiment": "E1 H31-3 MT-graben leakage canary and pre-placement surface uniqueness",
+  "preregistration": "knowledge/28_preregistration_H31-3_mt_graben_2026-10-26.md",
+  "preregistration_sha256": "02094e538f614209933149e761da9b16b9f45dac5a0b80ad16438003050dec73",
+  "label": "HOLDOUT-DTI setup only; no organizer score",
+  "seeds": [
+    510,
+    511,
+    512,
+    513,
+    514,
+    515,
+    516,
+    517,
+    518,
+    519
+  ],
+  "n_hidden_positive_union": 54393,
+  "n_negative_sample": 250000,
+  "canary_new_features": {
+    "mt_depth_grad_s3": {
+      "raw_auc": 0.5319424980052581,
+      "direction_invariant_auc": 0.5319424980052581
+    },
+    "mt_depth_cond_deep_3": {
+      "raw_auc": 0.5080652257827294,
+      "direction_invariant_auc": 0.5080652257827294
+    },
+    "mt_depth_cond_deep_6": {
+      "raw_auc": 0.5080148112073244,
+      "direction_invariant_auc": 0.5080148112073244
+    },
+    "mt_depth_cond_deep_9": {
+      "raw_auc": 0.5073295246814847,
+      "direction_invariant_auc": 0.5073295246814847
+    },
+    "mt_cond_crossstrike_asym_6": {
+      "raw_auc": 0.5024494937951575,
+      "direction_invariant_auc": 0.5024494937951575
+    },
+    "mt_cond_deep_persistence": {
+      "raw_auc": 0.5089838062986045,
+      "direction_invariant_auc": 0.5089838062986045
+    },
+    "mt_grav_margin_cond": {
+      "raw_auc": 0.5104454072031328,
+      "direction_invariant_auc": 0.5104454072031328
+    },
+    "mt_extension_margin_cond": {
+      "raw_auc": 0.5063024400198556,
+      "direction_invariant_auc": 0.5063024400198556
+    }
+  },
+  "canary_max_direction_invariant_auc": 0.5319424980052581,
+  "leakage_flags": {},
+  "preplacement_surface_spearman_vs_12_peer_rasters": {
+    "g24_d15": 0.11010660364583082,
+    "g25_d28": 0.09360712833106988,
+    "g27_tv2_d15": 0.10916040759004955,
+    "g28_h27_4_r1": 0.08753634515217079,
+    "g28_h32_1": 0.09126662764132075,
+    "g28_h36_1": 0.083265219537398,
+    "g28_h38_1": 0.08360450371622469,
+    "g30_d28": 0.09360712833106988,
+    "g31_h27_4": 0.08753634515217079,
+    "g32_h33_2_b2": 0.08326873570232478,
+    "g33_h33d": 0.08798898070547877,
+    "g36_anderson": 0.08183175211521583
+  },
+  "max_abs_preplacement_surface_spearman": 0.11010660364583082,
+  "thresholds": {
+    "canary_auc_max": 0.9,
+    "surface_spearman_abs_max": 0.9
+  },
+  "gate_e1_pass": true,
+  "runtime_s": 1163.2
+}

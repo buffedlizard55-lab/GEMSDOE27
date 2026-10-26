@@ -475,12 +475,25 @@ def _assemble_expert_rows(
     h31_X: np.ndarray,
     *,
     mode: str,
+    extra_physics: np.ndarray | None = None,
     extra_s2: np.ndarray | None = None,
 ) -> np.ndarray:
+    """Assemble H31 expert rows, optionally appending new label-free physics columns.
+
+    ``extra_physics`` is intentionally separate from ``extra_s2``: the former is available to
+    both Stage-1 experts and Stage-2's original-predictor block, while the latter is computed from
+    leak-free Stage-1 probability surfaces within each fold. Keeping this shared hook in the H31
+    template prevents a private detector fork for a later hypothesis.
+    """
     n = idx.size
+    physics_c = 0 if extra_physics is None else extra_physics.shape[1]
     extra_c = 0 if extra_s2 is None else extra_s2.shape[1]
+    if extra_physics is not None and (extra_physics.ndim != 2 or extra_physics.shape[0] != base_X.shape[0]):
+        raise ValueError("extra_physics must be an N-footprint-row matrix")
+    if extra_s2 is not None and extra_s2.shape[0] != n:
+        raise ValueError("extra_s2 rows must align with idx")
     if mode == "sub":
-        out = np.empty((n, 20 + 15 + 16 + 9 + extra_c), dtype=np.float32)
+        out = np.empty((n, 20 + 15 + 16 + 9 + physics_c + extra_c), dtype=np.float32)
         b_all = base_X[idx]
         out[:, 0:20] = b_all[:, BASE_NON_LIDAR_IDX]
         del b_all
@@ -489,17 +502,21 @@ def _assemble_expert_rows(
         out[:, 35:51] = h9_all[:, H29_NON_LIDAR_IDX]
         del h9_all
         out[:, 51:60] = h31_X[idx][:, H31_NON_LIDAR_IDX]
+        if extra_physics is not None:
+            out[:, 60:60 + physics_c] = extra_physics[idx]
         if extra_s2 is not None:
-            out[:, 60:] = extra_s2
+            out[:, 60 + physics_c:] = extra_s2
         return out
     if mode == "full":
-        out = np.empty((n, 32 + 15 + 20 + 12 + extra_c), dtype=np.float32)
+        out = np.empty((n, 32 + 15 + 20 + 12 + physics_c + extra_c), dtype=np.float32)
         out[:, 0:32] = base_X[idx]
         out[:, 32:47] = sub15_X[idx]
         out[:, 47:67] = h29_X[idx]
         out[:, 67:79] = h31_X[idx]
+        if extra_physics is not None:
+            out[:, 79:79 + physics_c] = extra_physics[idx]
         if extra_s2 is not None:
-            out[:, 79:] = extra_s2
+            out[:, 79 + physics_c:] = extra_s2
         return out
     raise ValueError(f"Unknown expert mode: {mode}")
 
@@ -513,6 +530,7 @@ def _predict_chunked(
     h31_X: np.ndarray,
     *,
     mode: str,
+    extra_physics: np.ndarray | None = None,
     extra_s2: np.ndarray | None = None,
     chunk: int = 200_000,
 ) -> np.ndarray:
@@ -520,7 +538,10 @@ def _predict_chunked(
     for s in range(0, idx.size, chunk):
         sl = idx[s : s + chunk]
         s2_sl = None if extra_s2 is None else extra_s2[s : s + chunk]
-        X_sl = _assemble_expert_rows(sl, base_X, sub15_X, h29_X, h31_X, mode=mode, extra_s2=s2_sl)
+        X_sl = _assemble_expert_rows(
+            sl, base_X, sub15_X, h29_X, h31_X, mode=mode,
+            extra_physics=extra_physics, extra_s2=s2_sl,
+        )
         out[s : s + chunk] = clf.predict_proba(X_sl)[:, 1].astype(np.float32)
         del X_sl
     return out
@@ -545,13 +566,21 @@ def fit_predict_dual_regime_oof(
     cache_dir: Path | None = None,
     cache_tag: str = "quad",
     mmap_paths: tuple[Path, ...] = (),
+    extra_physics: np.ndarray | None = None,
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Leak-free dual-regime (M_Sub + M_Full) 2-stage nested spatial cross-fitting.
 
     Returns (prob_sub_oof, prob_s1_synth_oof, prob_s2_oof) as float32 grids of shape foot.shape.
     Every pixel in fold k is predicted strictly from models trained outside fold k with a
-    >= buffer_px (600 m) spatial guard.
+    >= buffer_px (600 m) spatial guard. ``extra_physics`` extends both Stage-1 experts and the
+    Stage-2 original-predictor block without changing H31 behavior when it is ``None``.
     """
+    if extra_physics is not None:
+        extra_physics = np.asarray(extra_physics)
+        if extra_physics.ndim != 2 or extra_physics.shape[0] != int(foot.sum()):
+            raise ValueError("extra_physics must have one finite row per footprint pixel")
+        if not np.isfinite(extra_physics).all():
+            raise ValueError("extra_physics contains non-finite values")
     if fold_masks is None:
         qf = holdout.make_quadrant_folds(foot)
         fold_masks = [foot & (qf == k) for k in range(4)]
@@ -601,7 +630,9 @@ def fit_predict_dual_regime_oof(
         y_tr = np.r_[np.ones(pos_idx.size, dtype=np.int8), np.zeros(neg_idx.size, dtype=np.int8)]
 
         # 1A: M_Sub (60 pure non-LiDAR columns)
-        X_tr_sub = _assemble_expert_rows(tr_idx, base_X, sub15_X, h29_X, h31_X, mode="sub")
+        X_tr_sub = _assemble_expert_rows(
+            tr_idx, base_X, sub15_X, h29_X, h31_X, mode="sub", extra_physics=extra_physics
+        )
         clf_sub = HistGradientBoostingClassifier(
             max_iter=s1_max_iter,
             learning_rate=0.055,
@@ -616,7 +647,9 @@ def fit_predict_dual_regime_oof(
         drop_file_page_cache(*mmap_paths)
 
         # 1B: M_Full (79 columns with contour-obliquity shoreline deconfounding)
-        X_tr_full = _assemble_expert_rows(tr_idx, base_X, sub15_X, h29_X, h31_X, mode="full")
+        X_tr_full = _assemble_expert_rows(
+            tr_idx, base_X, sub15_X, h29_X, h31_X, mode="full", extra_physics=extra_physics
+        )
         clf_full = HistGradientBoostingClassifier(
             max_iter=s1_max_iter,
             learning_rate=0.055,
@@ -636,10 +669,12 @@ def fit_predict_dual_regime_oof(
         for k in rem:
             k_idx = np.flatnonzero(fold_id_foot == k)
             pair_preds_sub[(i, j)][k] = _predict_chunked(
-                clf_sub, k_idx, base_X, sub15_X, h29_X, h31_X, mode="sub"
+                clf_sub, k_idx, base_X, sub15_X, h29_X, h31_X,
+                mode="sub", extra_physics=extra_physics,
             )
             pair_preds_full[(i, j)][k] = _predict_chunked(
-                clf_full, k_idx, base_X, sub15_X, h29_X, h31_X, mode="full"
+                clf_full, k_idx, base_X, sub15_X, h29_X, h31_X,
+                mode="full", extra_physics=extra_physics,
             )
             save_dict[f"sub_{k}"] = pair_preds_sub[(i, j)][k]
             save_dict[f"full_{k}"] = pair_preds_full[(i, j)][k]
@@ -726,7 +761,8 @@ def fit_predict_dual_regime_oof(
         tu_global_idx = np.flatnonzero(tu_foot)[take_tu]
         del tu_foot, take_tu
         X_s2_tr = _assemble_expert_rows(
-            tu_global_idx, base_X, sub15_X, h29_X, h31_X, mode="full", extra_s2=s2_take
+            tu_global_idx, base_X, sub15_X, h29_X, h31_X, mode="full",
+            extra_physics=extra_physics, extra_s2=s2_take,
         )
         del tu_global_idx, s2_take
         drop_file_page_cache(*mmap_paths)
@@ -746,7 +782,8 @@ def fit_predict_dual_regime_oof(
         # Predict on test_mask strictly from fold-f OOF Stage-1 surfaces computed inside test_mask only
         s2_test_mat = stage2_axial_features(prob_s1_oof, prob_sub_oof, test_mask)
         preds_te = _predict_chunked(
-            clf_s2, te_global_idx, base_X, sub15_X, h29_X, h31_X, mode="full", extra_s2=s2_test_mat
+            clf_s2, te_global_idx, base_X, sub15_X, h29_X, h31_X, mode="full",
+            extra_physics=extra_physics, extra_s2=s2_test_mat,
         )
         if ckpt_s2 is not None:
             np.save(ckpt_s2, preds_te)

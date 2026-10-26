@@ -1,6 +1,6 @@
 {
-  "generated": "2026-10-26",
-  "status": "Session 10 screen current as of 2026-10-26: H29-S (511898747886) received OWNER-REPORTED live score 0.2190 (#1 of the 5-submission 2026-10-25 non-H19-5 cohort: 0.2190 vs 0.1462, 0.0859, 0.0742, 0.0217) and revealed four fixable deficits (-11.0% coverage loss from min_sep=2.0, -23% LiDAR-gap starvation, near-catalogue halo bleed, and SE Walker Lane seismic-fabric gap). H29-2 was synced to tested_hypotheses (negative on seeds 300-309 in PR #26). Top untried synthesis H31-1 (Lane L-S10-2026-10-26) is preregistered on fresh unconsumed seeds 400-409 alongside three genuinely untried follow-ups (H31-2, H31-3, H27-16) and H29-5.",
+  "generated": "2026-10-26 | H32/H31-2 and H31-3 moved to tested negative ledger after preregistered fresh-seed gates.",
+  "status": "Current untried directions only; all historical/negative entries preserved under tested_hypotheses. A future lane needs preregistration and fresh seeds.",
   "novelty_scope": "Screened against this checkout, its evidence ledger, all in-repo research artifacts, and the 12-peer parallel registry.",
   "target": "Fault-location pixels in the organizer-created test labels, which remain unobserved here. Catalogue-internal holdouts are only a proxy and cannot validate far-field behavior.",
   "baseline": {
@@ -11,46 +11,6 @@
   },
   "ranking_basis": "Expert priors on potential paired catalogue-holdout \u0394DTI \u00d7 testability / engineering cost, informed by forensic inversion of 0.2778 (GEMSDOE32), 0.2478 (GEMSDOE70), and 0.2190 (GEMSDOE27 H29-S). Planning priors are not leaderboard predictions.",
   "hypotheses": [
-    {
-      "id": "H31-2",
-      "rank": 1,
-      "title": "Poisson-Theorem Gravity-to-Pseudogravity Hydrothermal Demagnetization Residual (Cordell-Taylor Breakdown)",
-      "layers": [
-        "rtp, iso_grav_anom_vg, iso_grav_anom_hg, tmi_vg, TMI_up150, K, Th"
-      ],
-      "signature": "Local sliding-window Poisson regression residual |iso_grav_anom_vg - (alpha_loc * rtp + beta_loc)| gated by high iso_grav_anom_hg and subdued shallow magnetic vertical gradient (tmi_vg <= 0).",
-      "why_missing_faults": "Hydrothermal fluids oxidize crustal magnetite to non-magnetic hematite/pyrite/clay along blind upflow fault conduits, erasing magnetic edges while preserving basement density steps.",
-      "confounders": "Non-magnetic Paleozoic carbonate-on-granite pluton contacts and reversely magnetized Tertiary ash-flow tuffs.",
-      "differs_from_repo": "Existing H28-1 and subsurface_features.py multiply min(grad_rtp, grad_grav), which actively suppresses magnetite-destroyed geothermal conduits.",
-      "expected_holdout_delta_dti": [
-        0.001,
-        0.005
-      ],
-      "cost": "low-medium; locally hash-pinned rasters",
-      "data_gate": "Existing hash-pinned raster bands; no external download needed.",
-      "validation": "Preregister on fresh unused seeds >= 410.",
-      "status": "UNTRIED."
-    },
-    {
-      "id": "H31-3",
-      "rank": 2,
-      "title": "Magnetotelluric Clay-Cap Conduit & Basement-Relief Asymmetric Graben Margin Coupling",
-      "layers": [
-        "cond_surf, depth_to_base_surf, iso_grav_anom, geod_dilaterate, det_elev"
-      ],
-      "signature": "Cross-strike pairing between steep depth_to_base_surf footwall gradients and down-dropped hanging-wall cond_surf conductive smectite/brine anomalies 300-900 m basinward.",
-      "why_missing_faults": "Buried range-front and intrabasin geothermal conduits produce electrically conductive alteration caps offset basinward of resistive footwall steps without surface scarps.",
-      "confounders": "Conductive evaporative playa salt pans.",
-      "differs_from_repo": "H28-3 tested co-located dilaterate x cond_surf globally (-0.0026), never cross-strike asymmetric pairing against depth_to_base_surf.",
-      "expected_holdout_delta_dti": [
-        0.001,
-        0.004
-      ],
-      "cost": "medium; locally hash-pinned rasters",
-      "data_gate": "Existing hash-pinned raster bands; no external download needed.",
-      "validation": "Preregister on fresh unused seeds >= 420.",
-      "status": "UNTRIED."
-    },
     {
       "id": "H27-16",
       "rank": 3,
@@ -251,6 +211,51 @@
       "data_gate": "17/17 hash-pinned inputs verified locally in data_cache/.",
       "validation": "Preregistered in knowledge/24_preregistration_H31_2026-10-26.md on fresh unconsumed seeds 400-409 against U0, B0, H28_1_B2, D0, and H29-S.",
       "status": "TESTED & PROMOTED (Session 10, seeds 400-409) \u2014 ALL 5/5 FROZEN GATES PASSED; NEW #1 BLIND POOLED HOLDOUT-DTI 0.047302 (+0.009577 vs B0, +0.007004 vs D0, +0.003185 vs H29-S); 27-raster unique (max 62.8% <= 70%)."
+    },
+    {
+      "id": "H31-2",
+      "rank": 1,
+      "title": "Poisson-Theorem Gravity-to-Pseudogravity Hydrothermal Demagnetization Residual (Cordell-Taylor Breakdown)",
+      "layers": [
+        "rtp, iso_grav_anom_vg, iso_grav_anom_hg, tmi_vg, TMI_up150, K, Th"
+      ],
+      "signature": "Local sliding-window Poisson regression residual |iso_grav_anom_vg - (alpha_loc * rtp + beta_loc)| gated by high iso_grav_anom_hg and subdued shallow magnetic vertical gradient (tmi_vg <= 0).",
+      "why_missing_faults": "Hydrothermal fluids oxidize crustal magnetite to non-magnetic hematite/pyrite/clay along blind upflow fault conduits, erasing magnetic edges while preserving basement density steps.",
+      "confounders": "Non-magnetic Paleozoic carbonate-on-granite pluton contacts and reversely magnetized Tertiary ash-flow tuffs.",
+      "differs_from_repo": "Existing H28-1 and subsurface_features.py multiply min(grad_rtp, grad_grav), which actively suppresses magnetite-destroyed geothermal conduits.",
+      "expected_holdout_delta_dti": [
+        0.001,
+        0.005
+      ],
+      "cost": "low-medium; locally hash-pinned rasters",
+      "data_gate": "Existing hash-pinned raster bands; no external download needed.",
+      "validation": "Preregister on fresh unused seeds >= 410.",
+      "status": "TESTED \u2014 FROZEN GATE FAILED; negative. Do not retry the tested formulation.",
+      "tested_as": "H32 / Lane L-S11",
+      "result": "Fresh seeds 500\u2013509; P HOLDOUT-DTI 0.035732 vs D 0.039219; P-D -0.003487, 95% CI [-0.004767,-0.002228], 1/10 seeds and 0/4 folds. E1 canary clean; evidence/h32_run_card_2026-10-26.json.",
+      "eligible_for_weekly_slot": false
+    },
+    {
+      "id": "H31-3",
+      "rank": 2,
+      "title": "Magnetotelluric Clay-Cap Conduit & Basement-Relief Asymmetric Graben Margin Coupling",
+      "layers": [
+        "cond_surf, depth_to_base_surf, iso_grav_anom, geod_dilaterate, det_elev"
+      ],
+      "signature": "Cross-strike pairing between steep depth_to_base_surf footwall gradients and down-dropped hanging-wall cond_surf conductive smectite/brine anomalies 300-900 m basinward.",
+      "why_missing_faults": "Buried range-front and intrabasin geothermal conduits produce electrically conductive alteration caps offset basinward of resistive footwall steps without surface scarps.",
+      "confounders": "Conductive evaporative playa salt pans.",
+      "differs_from_repo": "H28-3 tested co-located dilaterate x cond_surf globally (-0.0026), never cross-strike asymmetric pairing against depth_to_base_surf.",
+      "expected_holdout_delta_dti": [
+        0.001,
+        0.004
+      ],
+      "cost": "medium; locally hash-pinned rasters",
+      "data_gate": "Existing hash-pinned raster bands; no external download needed.",
+      "validation": "Preregister on fresh unused seeds >= 420.",
+      "status": "TESTED \u2014 FROZEN GATE FAILED; negative. Do not tune or rerun seeds 510\u2013519.",
+      "result": "H31-3-S HOLDOUT-DTI 0.045332 vs H31-S 0.044966; pooled delta +0.000366, paired mean +0.000392, 95% CI [-0.001182,+0.001823], 6/10 seeds, 2/4 folds; 4/5 efficacy clauses failed. E1 canary max AUC 0.53194. 12-peer max overlap 56.74%, extended local maximum 86.87% vs H31-1; evidence/h31_3_run_card_2026-10-26.json.",
+      "eligible_for_weekly_slot": false
     }
   ],
   "separate_review_class": {
