@@ -1,0 +1,12 @@
+{
+  "purpose": "Post-merge cross-session overlap between two parallel Session-10 (2026-10-26) rasters; neither session saw the other's file before running.",
+  "h31_file": "gems27-h31-rankens-celf-b2-20261026-93c8af046660-allfinite.tif",
+  "h31_dots": 37654,
+  "parallel_file": "gems27-unique-20261026-20261026-6c2790d67dc6-allfinite.tif",
+  "parallel_dots": 21312,
+  "h31_within_3px_of_parallel": 0.0569,
+  "parallel_within_3px_of_h31": 0.1016,
+  "exact_shared_dots": 159,
+  "threshold": 0.7,
+  "duplicate_of_each_other": false
+}

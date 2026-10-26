@@ -1,0 +1,182 @@
+{
+  "run_card": "Lane L-H30 (parallel-run protocol section 5)",
+  "generated_utc": "2026-10-25T23:15:58Z",
+  "preregistration": "knowledge/20_lane_h30_preregistration_2026-10-25.md",
+  "arm": "GAP",
+  "selected_by_E2a": null,
+  "hypothesis": "Where alluvial cover thickens along strike, one continuous buried fault's potential-field edge fades and resumes; locations flanked +/-600 m / +/-1.2 km along strike by collinear RTP/gravity edges continue a structure the surface catalogue cannot list. Full 32-band + 15 subsurface + 4 gap-flanking features (H30-2) beat the Arm-D control ranking at B2/38k.",
+  "mechanism": "Full-fit HGB on 32 bands + 15 subsurface transforms + 4 gap-flank features (gems27.dip_gap_features); ridge NMS; priority Poisson-disk >=2.8px; B2 (200 m) catalogue exclusion; 38,000-dot budget.",
+  "named_non_fault_mimic": "Dipping lithologic contacts and unfaulted basin-margin basement steps; survey seams and remanent magnetisation in potential fields; chance collinearity of unrelated edge segments; clay-cap conductivity highs.",
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "evaluator": "gems27.metric v1 (alpha=0.2, beta=0.8, R=3px triangular)",
+    "pooled_dti_candidate": 0.10180499284068865,
+    "pooled_dti_control_D": 0.10233654533926163,
+    "paired_A_minus_B": {
+      "mean_delta": -0.0007149492208007879,
+      "ci95": [
+        -0.0029084642414617078,
+        0.0016362941976570706
+      ],
+      "cells_positive": 9,
+      "n_cells": 20,
+      "basis": "selection seeds 240-244 only; NO confirmation ran (selection gate failed: pooled candidate did not exceed pooled D control)"
+    },
+    "n_withheld_positives_total": 59372,
+    "seeds_selection": [
+      240,
+      241,
+      242,
+      243,
+      244
+    ],
+    "canary_max_auc": 0.5610526349431818,
+    "canary_max_auc_raw": 0.5610526349431818,
+    "gate_efficacy_pass": false,
+    "selection_pooled_holdout_dti": {
+      "D": 0.10233654533926163,
+      "DIP": 0.09887799235546904,
+      "GAP": 0.10180499284068865,
+      "SOFT": 0.099431373465421
+    }
+  },
+  "uniqueness_vs_registry": {
+    "registry": "registry/parallel_submission_registry.json (12 pinned peers)",
+    "max_dot_overlap_within_3px_euclidean": 0.45742105263157895,
+    "max_dot_overlap_support_gt0_within_3px": 0.45742105263157895,
+    "per_raster": {
+      "g24_d15.tif": 0.4475789473684211,
+      "g25_d28.tif": 0.4328157894736842,
+      "g27_tv2_d15.tif": 0.45742105263157895,
+      "g28_h27_4_r1.tif": 0.42097368421052633,
+      "g28_h32_1.tif": 0.42894736842105263,
+      "g28_h36_1.tif": 0.41528947368421054,
+      "g28_h38_1.tif": 0.4211578947368421,
+      "g30_d28.tif": 0.4328157894736842,
+      "g31_h27_4.tif": 0.42097368421052633,
+      "g32_h33_2_b2.tif": 0.4052368421052632,
+      "g33_h33d.tif": 0.4272105263157895,
+      "g36_anderson.tif": 0.40842105263157896
+    },
+    "per_raster_support_gt0": {},
+    "max_surface_spearman": 0.433143439437209,
+    "max_surface_spearman_final_raster_sampled": 0.03572940657711969,
+    "max_surface_spearman_preplacement_oof": 0.433143439437209,
+    "final_raster_spearman_per_peer_sampled": {
+      "g24_d15.tif": 0.03572940657711969,
+      "g25_d28.tif": 0.02981642887577553,
+      "g27_tv2_d15.tif": 0.035610377597171575,
+      "g28_h27_4_r1.tif": 0.03221201379982015,
+      "g28_h32_1.tif": 0.03166232551759489,
+      "g28_h36_1.tif": 0.030596194310351866,
+      "g28_h38_1.tif": 0.031025440479196843,
+      "g30_d28.tif": 0.02981642887577553,
+      "g31_h27_4.tif": 0.03221201379982015,
+      "g32_h33_2_b2.tif": 0.03374832621930037,
+      "g33_h33d.tif": 0.025207993829006434,
+      "g36_anderson.tif": 0.032976491963510234
+    },
+    "thresholds": {
+      "dot_overlap": 0.7,
+      "spearman": 0.9
+    },
+    "pass": true
+  },
+  "extended_self_overlap_reported_not_gated": {
+    "policy": "knowledge/20 section 5 (pre-result): overlaps vs this repo's own UNSUBMITTED research artifacts are measured and reported, not gated; selector review logged at IR-2026-10-25-06.",
+    "max_dot_overlap_within_3px_euclidean": 0.8467368421052631,
+    "per_raster": {
+      "gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-allfinite.tif": 0.4312105263157895,
+      "gems27-farfield-swap-augmented-detector-probe-20261002-a34b0799df59-allfinite.tif": 0.497,
+      "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-allfinite.tif": 0.8417368421052631,
+      "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-allfinite.tif": 0.45742105263157895,
+      "gems27-topo-gap-closure-t-v2-on-d2-8-20261002-3ebd51534bb1-allfinite.tif": 0.4428157894736842,
+      "gems27-topo-gap-closure-t-v2-plus-h27-4-r1-on-d1-5-20261002-d466b251f309-allfinite.tif": 0.4476842105263158,
+      "gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.tif": 0.12305263157894737,
+      "gems27-dconfirm-hybrid-armd-b2-38k-20261025-5ea0385b7e70-allfinite.tif": 0.8381578947368421,
+      "gems27-h28-3-strain-conductivity-negative-research-20261025-27d6875f3b22-allfinite.tif": 0.8467368421052631,
+      "gems27-h29-1-drefill-b2-38k-20261025-c24b6371179c-allfinite.tif": 0.8389473684210527,
+      "gems27-h29-1b-drefill-deconf-b2-38k-20261025-14e416a1a380-allfinite.tif": 0.7760526315789473,
+      "gems27-lane-subsurface-buried-fault-20261025-fc6d8c3acf6c-allfinite.tif": 0.4718684210526316
+    }
+  },
+  "raster": {
+    "primary_allfinite": "gems27-h30-gapflank-b2-38k-20261025-3107a3007b77-allfinite.tif",
+    "sha256": "deb8b4f10eda333b8965813e3ab6c8cd3c134193f36a06ccb1cbbfdc19994eb3",
+    "bytes": 826824,
+    "dots": 38000,
+    "positives_gt_0": 38000,
+    "effective_mass": 38000.0,
+    "content_id": "3107a3007b77",
+    "zip": "gems27-h30-gapflank-b2-38k-20261025-3107a3007b77-allfinite.zip",
+    "nan_twin": "gems27-h30-gapflank-b2-38k-20261025-3107a3007b77-nan.tif",
+    "directory": "docs/downloads/research"
+  },
+  "emission_checks": {
+    "positives_gt_0": 38000,
+    "dots_gt_0_5": 38000,
+    "effective_mass_sum": 38000.0,
+    "min_distance_to_catalogue_px_gt0": 2.23606797749979,
+    "median_distance_to_catalogue_px_gt0": 8.94427190999916,
+    "min_nearest_neighbour_spacing_px_gt0": 2.8284271247461903,
+    "on_catalogue_gt0": 0
+  },
+  "validator": {
+    "zeros_hard_pass": true,
+    "zeros_checks": {
+      "grid_matches_template": {
+        "pass": true,
+        "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+        "hard": true
+      },
+      "single_band_float32": {
+        "pass": true,
+        "detail": "count=1 dtype=float32",
+        "hard": true
+      },
+      "inside_footprint_all_finite": {
+        "pass": true,
+        "detail": "0 non-finite inside 5167373 px",
+        "hard": true
+      },
+      "inside_footprint_in_0_1": {
+        "pass": true,
+        "detail": "min=0 max=1",
+        "hard": true
+      },
+      "no_infinities_anywhere": {
+        "pass": true,
+        "detail": "np.isinf(whole array) is empty",
+        "hard": true
+      },
+      "outside_footprint_is_zero_and_finite": {
+        "pass": true,
+        "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+        "hard": true
+      },
+      "strict_whole_array_range": {
+        "pass": true,
+        "detail": "whole-array min=0 max=1",
+        "hard": true
+      },
+      "profile_driver_gtiff": {
+        "pass": true,
+        "detail": "GTiff",
+        "hard": false
+      },
+      "compression_like_sample": {
+        "pass": true,
+        "detail": "Compression.lzw",
+        "hard": false
+      }
+    },
+    "nan_hard_pass": true
+  },
+  "submission_name": "GEMSDOE27-H30-GAP-B2-38K",
+  "note_max_140_chars": "27GEMSDOE H30-GAP RESEARCH NEGATIVE NOT APPROVED; HOLDOUT-DTI 0.1018 vs D 0.1023 | id 3107a3007b77",
+  "note_chars": 98,
+  "ok_to_submit": false,
+  "verdict": "negative",
+  "live_score": null,
+  "live_score_label": "UNSCORED - no ORGANIZER-CONFIRMED score exists for this file"
+}

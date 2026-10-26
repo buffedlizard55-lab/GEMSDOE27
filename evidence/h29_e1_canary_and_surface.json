@@ -1,0 +1,205 @@
+{
+  "experiment": "E1_H29_canary_and_surface_uniqueness",
+  "lane": "L-S7-2026-10-25",
+  "preregistration_commit": "30accf8",
+  "seeds": [
+    210,
+    211,
+    212,
+    213,
+    214,
+    215,
+    216,
+    217,
+    218,
+    219
+  ],
+  "n_unique_withheld_positive_pixels": 54584,
+  "canary_threshold_auc": 0.9,
+  "max_h29_direction_invariant_auc": 0.57647,
+  "max_base_direction_invariant_auc": 0.58712,
+  "canary_h29_features": {
+    "h29_piedmont_concave_s3": {
+      "raw_auc": 0.57647,
+      "direction_invariant_auc": 0.57647
+    },
+    "h29_piedmont_concave_s8": {
+      "raw_auc": 0.57164,
+      "direction_invariant_auc": 0.57164
+    },
+    "h29_deconf_lappos": {
+      "raw_auc": 0.52539,
+      "direction_invariant_auc": 0.52539
+    },
+    "h29_deconf_step": {
+      "raw_auc": 0.53223,
+      "direction_invariant_auc": 0.53223
+    },
+    "h29_deconf_ex": {
+      "raw_auc": 0.50699,
+      "direction_invariant_auc": 0.50699
+    },
+    "h29_piedmont_scarp_coh": {
+      "raw_auc": 0.51193,
+      "direction_invariant_auc": 0.51193
+    },
+    "h29_rtp_destripe_hgm": {
+      "raw_auc": 0.53444,
+      "direction_invariant_auc": 0.53444
+    },
+    "h29_rtp_destripe_tilt0": {
+      "raw_auc": 0.50356,
+      "direction_invariant_auc": 0.50356
+    },
+    "h29_mag_shallow_res": {
+      "raw_auc": 0.47092,
+      "direction_invariant_auc": 0.52908
+    },
+    "h29_mag_shallow_grad": {
+      "raw_auc": 0.50654,
+      "direction_invariant_auc": 0.50654
+    },
+    "h29_grav_tilt0": {
+      "raw_auc": 0.50485,
+      "direction_invariant_auc": 0.50485
+    },
+    "h29_basin_horst_step": {
+      "raw_auc": 0.49357,
+      "direction_invariant_auc": 0.50643
+    },
+    "h29_basin_horst_relief": {
+      "raw_auc": 0.53567,
+      "direction_invariant_auc": 0.53567
+    },
+    "h29_k_th_alter_grad": {
+      "raw_auc": 0.50431,
+      "direction_invariant_auc": 0.50431
+    },
+    "h29_thk_mag_coupled": {
+      "raw_auc": 0.50647,
+      "direction_invariant_auc": 0.50647
+    },
+    "h29_cond_strain_piedmont": {
+      "raw_auc": 0.53313,
+      "direction_invariant_auc": 0.53313
+    },
+    "h29_gdr_teq_nw_s12": {
+      "raw_auc": 0.51368,
+      "direction_invariant_auc": 0.51368
+    },
+    "h29_gdr_diseq_nw_s12": {
+      "raw_auc": 0.50904,
+      "direction_invariant_auc": 0.50904
+    },
+    "h29_gdr_teq_grad": {
+      "raw_auc": 0.50278,
+      "direction_invariant_auc": 0.50278
+    },
+    "h29_gdr_upflow_prox": {
+      "raw_auc": 0.50534,
+      "direction_invariant_auc": 0.50534
+    }
+  },
+  "canary_base_features_direction_invariant": {
+    "mag_anom": 0.50811,
+    "rtp": 0.50187,
+    "tmi_hg": 0.5287,
+    "geod_2ndinv": 0.57236,
+    "iso_grav_anom_slope": 0.53432,
+    "geod_shearrate": 0.57127,
+    "geod_dilaterate": 0.52717,
+    "tmi_vg": 0.51213,
+    "deq_n100a15": 0.55437,
+    "iso_grav_anom_vg": 0.52554,
+    "det_elev": 0.51599,
+    "iso_grav_anom": 0.54004,
+    "tmi": 0.50988,
+    "depth_to_base_surf": 0.51269,
+    "ieq_n100a15": 0.57363,
+    "cond_surf": 0.51951,
+    "iso_grav_anom_hg": 0.50307,
+    "det_elev_slope": 0.55586,
+    "lidar_ex_max": 0.56749,
+    "lidar_ex_mean": 0.5549,
+    "lidar_step_max": 0.56971,
+    "lidar_lapneg_max": 0.57433,
+    "lidar_lappos_max": 0.5788,
+    "lidar_downface_max": 0.58085,
+    "lidar_upface_max": 0.58712,
+    "lidar_cross_max": 0.57432,
+    "lidar_relief": 0.56857,
+    "lidar_coh100": 0.52431,
+    "lidar_cos2strike": 0.53052,
+    "lidar_sin2strike": 0.50945,
+    "det_local_relief": 0.58131,
+    "det_gradient": 0.57224
+  },
+  "canary_leak_flags": {},
+  "surface_spearman_threshold": 0.9,
+  "n_peer_rasters_checked": 12,
+  "max_peer_abs_spearman": 0.47761,
+  "peer_surface_spearman": {
+    "g24_d15": {
+      "raw_spearman": 0.11157,
+      "kernel3_spearman": 0.47761,
+      "max_abs_spearman": 0.47761
+    },
+    "g25_d28": {
+      "raw_spearman": 0.09698,
+      "kernel3_spearman": 0.47761,
+      "max_abs_spearman": 0.47761
+    },
+    "g27_tv2_d15": {
+      "raw_spearman": 0.11076,
+      "kernel3_spearman": 0.47356,
+      "max_abs_spearman": 0.47356
+    },
+    "g28_h27_4_r1": {
+      "raw_spearman": 0.09094,
+      "kernel3_spearman": 0.46706,
+      "max_abs_spearman": 0.46706
+    },
+    "g28_h32_1": {
+      "raw_spearman": 0.093,
+      "kernel3_spearman": 0.47261,
+      "max_abs_spearman": 0.47261
+    },
+    "g28_h36_1": {
+      "raw_spearman": 0.08597,
+      "kernel3_spearman": 0.46595,
+      "max_abs_spearman": 0.46595
+    },
+    "g28_h38_1": {
+      "raw_spearman": 0.08629,
+      "kernel3_spearman": 0.46733,
+      "max_abs_spearman": 0.46733
+    },
+    "g30_d28": {
+      "raw_spearman": 0.09698,
+      "kernel3_spearman": 0.47761,
+      "max_abs_spearman": 0.47761
+    },
+    "g31_h27_4": {
+      "raw_spearman": 0.09094,
+      "kernel3_spearman": 0.46706,
+      "max_abs_spearman": 0.46706
+    },
+    "g32_h33_2_b2": {
+      "raw_spearman": 0.08666,
+      "kernel3_spearman": 0.45324,
+      "max_abs_spearman": 0.45324
+    },
+    "g33_h33d": {
+      "raw_spearman": 0.09069,
+      "kernel3_spearman": 0.46775,
+      "max_abs_spearman": 0.46775
+    },
+    "g36_anderson": {
+      "raw_spearman": 0.08547,
+      "kernel3_spearman": 0.44975,
+      "max_abs_spearman": 0.44975
+    }
+  },
+  "gate_e1_pass": true,
+  "runtime_s": 37.5
+}

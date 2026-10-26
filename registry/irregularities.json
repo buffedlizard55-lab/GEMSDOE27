@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-03 | Session 5: H27-10 diagnostic disclosed; current GDR fetch workflow runs failed before jobs and are recorded without inferring source availability.",
+ "generated": "2026-10-25 | Merged parallel sessions (Lane L-S7 IR-10..13 + Session 9 H30 IR-14/15, renumbered to avoid collision).",
  "items": [
   {
    "id": "prompt-verbatim-unavailable",
@@ -284,21 +284,105 @@
    "action": "Both files remain verdict=negative, ok_to_submit=false. Selector must treat H29-1/H29-1b/L-DCONFIRM as ONE candidate family (evidence/dconfirm_cross_session_overlap.json). No slot may be spent twice on this family."
   },
   {
-   "id": "IR-2026-10-25-10-unique-holdout-hidden-mask-and-banner-contradiction",
+   "id": "IR-2026-10-25-10-holdout-emit-ring-leak-fixed",
    "severity": "high",
-   "issue": "scripts/run_unique_holdout.py line 99 computed d_cat = distance_transform_edt(~labels) using ALL labels (sp.known | sp.hidden) instead of sp.known (visible faults only). Because FAR_D_PX = 3.0 and the DTI kernel radius is 3.0 px (300 m), requiring d_cat >= 3.0 banned every prediction within 300 m of withheld truth sp.hidden, mathematically forcing TPw = 0.0 and HOLDOUT-DTI = 0.0 across all 20 cells. Furthermore, PR #21 re-added a green 'Unique submission TIF — ready to download' banner for gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.tif directly above 'NO TIFF IS APPROVED TO SUBMIT' in scripts/build_site.py, even though src/gems27/readiness.py rejects that Run Card on 6 machine checks and its submission note was truncated mid-word at 200 characters (exceeding the 140-character Run Card limit).",
-   "action": "Fixed scripts/run_unique_holdout.py to compute d_known = distance_transform_edt(~kn) from visible faults only inside each split, and replaced the contradictory unique-scatter-farfield banner in scripts/build_site.py with the machine-gated H30-1 Run Card panel verified by src/gems27/readiness.py."
+   "issue": "In `scripts/run_lane_holdout.py`, `emit(prob, valid_scoring, known, hidden, ...)` built candidate masks on `valid_scoring | hidden`. Because `valid_scoring = foot & fold_mask & ~ring` (where `ring = (d_hidden <= 6) & ~hidden`), `valid_scoring | hidden` equalled `True` on `hidden` (`d_hidden == 0`) and `False` on `0 < d_hidden <= 6`, leaking the complement of the 6-px ring around withheld segments into candidate placement.",
+   "action": "Fixed in place in `scripts/run_lane_holdout.py` and enforced in `scripts/run_h29_holdout.py`: `emit()` receives ONLY `fold_domain = foot & sp.fold_mask` and `sp.known` (zero access to `sp.hidden` or `valid_scoring`)."
   },
   {
-   "id": "IR-2026-10-25-11-h29-1b-self-comparison-in-uniqueness-screen",
+   "id": "IR-2026-10-25-11-lane-registry-path-typo-fixed",
    "severity": "medium",
-   "issue": "In evidence/h29_1b_run_card.json (lines 210-231), H29-1b achieved 0.6500 (65.0% <= 70%) 3-px dot overlap with H28-1 and <= 0.4799 across all 12 peer rasters and Slots 1-5; the reported 0.8255 maximum was against H29-1 (c24b6371179c, its own un-deconflicted draft) because scripts/run_build_h29_1b.py included H29-1 in ref_paths. However, H29-1b also reused selection seeds 210-214 and applied post-hoc mask deconfliction against H28-1 rather than a self-contained geophysical lane.",
-   "action": "Keep H29-1b in docs/downloads/research/ with verdict=negative. Implemented H30-1 as a self-contained 3-habitat geophysical lane evaluated on fresh confirmatory seeds 240-244 that achieves <= 0.6802 3-px dot overlap across ALL 24 rasters (including H28-1, H29-1, H29-1b, and L-DCONFIRM) without post-hoc registry deconfliction."
+   "issue": "`scripts/run_lane_holdout.py` looked for peer rasters in `data_cache/registry` rather than `data_cache/parallel_registry`, causing `surface_spearman_vs_registry` to silently evaluate 0 files (`{}`) in Session 6.",
+   "action": "Fixed path in `scripts/run_lane_holdout.py` and added `assert len(peer_spearman) == 12` in `scripts/run_h29_holdout.py` (`evidence/h29_e1_canary_and_surface.json`)."
   },
   {
-   "id": "IR-2026-10-25-12-buffered-scoring-mask-target-halo-and-kernel-clipping",
+   "id": "IR-2026-10-25-12-slot1-live-zero-hit-confirmation",
+   "severity": "medium",
+   "issue": "2026-10-25 prompt reports `27GEMSDOE: 0.2449` (OWNER-REPORTED; no DrivenData receipt stored in repo) alongside `24GEMSDOE: 0.2477`. Byte diff (`evidence/slot1_live_ab_inversion.json`) confirms `5512495c6bd1` (61,328 px) adds solely 1,259 `T-v2` straight-line catalogue-tip gap-closure dots to `989f59505db1` (60,069 px); pure zero-hit FP dilution predicts `0.24491`, matching `0.2449` to 4 decimal places (empirical marginal efficiency `-0.00018` credit/dot vs `0.05024` break-even).",
+   "action": "Recorded in `registry/live_scores.json` under `owner_reported_prompt_2026_10_25` (preserving `27GEMSDOE[*].score = null` until an organizer receipt exists) and permanently retired `T-v2` straight-line continuation."
+  },
+  {
+   "id": "IR-2026-10-25-13-h29s-clears-24-raster-uniqueness-including-self-registry",
+   "severity": "low",
+   "issue": "Unlike `H29-1 D-refill` (`c24b6371179c`) and `L-DCONFIRM` (`5ea0385b7e70`) which overlapped 85.4%/85.2% with dense `H28-1` and 87.5% with each other, `Lane L-S7-2026-10-25` (`H29-HPVC` + weighted 300 m CELF cover, content id `511898747886`) clears BOTH the 12-peer registry (max 64.21% <= 70%; 56.12% vs GEMSDOE32) AND all 12 in-house rasters (56.43% vs dense H28-1, 53.01% vs L-DCONFIRM, 52.56% vs H29-1 D-refill, 51.33% vs H29-1b).",
+   "action": "Recorded in `evidence/h29_run_card_2026-10-25.json`; weekly slot remains held solely on the strict SE Walker Lane CI95 sub-clause vs internal control D0 (`[-0.000986, +0.003695]`)."
+  },
+  {
+   "id": "IR-2026-10-25-14-h30-deconfliction-cost-measured",
    "severity": "high",
-   "issue": "holdout.buffered_scoring_mask(sp, foot) excludes ring = (d_hidden <= 6.0) & ~sp.hidden. Passing allowed = (valid_scoring | hidden) & (d_known > 2.0) into emit() and ridge_nms(prob, allowed) in scripts/run_lane_holdout.py, scripts/run_h29_1_holdout.py, and scripts/run_dconfirm_holdout.py zeroed prob across the 100-600 m moat surrounding sp.hidden while leaving sp.hidden (d == 0) positive, and zeroed the 0 < d < 3.0 px (100-300 m) triangular tolerance kernel during scoring (which is why FPw was an exact .0 integer in all 20 cells of those holdout JSONs).",
+   "issue": "H30's frozen promote gate failed: buying strict self-registry uniqueness (65% cap vs 12 repo rasters) cost -0.00662 HOLDOUT-DTI vs Arm D and made L-B significantly negative (-0.00445 [-0.00800,-0.00112]). This quantifies IR-2026-10-25-06's suspicion: for the arm-D family, strict uniqueness and catalogue-internal efficacy are in direct conflict.",
+   "action": "Negative retained per protocol (no cap relaxation, no seed shopping, no post-hoc tuning). The H30 bytes are retained as a unique-but-not-certified research artifact (first file to clear both uniqueness screens). The screen choice is explicitly framed as the selector's strategy decision in knowledge/22 and on the site."
+  },
+  {
+   "id": "IR-2026-10-25-15-selector-screen-decision-recorded",
+   "severity": "medium",
+   "issue": "The current owner prompt (2026-10-25) demands a unique TIF and names the focus sites whose highest-scoring submissions form exactly the 12-peer parallel registry; the prompt's duplicate rule references 'registry raster'. Recorded decision: the 12-peer registry is the OPERATIVE screen; the stricter self-registry screen is reported alongside (H30 clears both). Under the operative screen the previously holdout-passed H29-1 family is eligible.",
+   "action": "The H29-1 badge was NOT flipped: that remains a separate, explicit owner action (retire the unscored H28-1/H29-1/H29-1b/L-DCONFIRM family from the self-registry or confirm the 12-peer screen governs). No bytes were touched; no new experiment is needed for that flip (knowledge/16 E3). Cross-session duplicate caveat IR-2026-10-25-09 stands."
+  },
+  {
+   "id": "IR-2026-10-25-17-h30dipgap-registry-screen-scoped",
+   "severity": "medium",
+   "issue": "Lane L-H30 (knowledge/20 section 5, committed d87283f before any result) scoped the PROMOTION uniqueness gate to the 12 pinned parallel-registry peer rasters named by the session protocol, and measures/reports overlaps vs this repo's own UNSUBMITTED research artifacts (H28-1/H29-1/L-DCONFIRM etc.) separately instead of gating on them. This prospectively supersedes the extended self-screen frozen by the H29-1/L-DCONFIRM lanes (see IR-2026-10-25-06), because the dense unscored H28-1 file makes the 70% rule geometrically near-impossible for any accurate 38k emission (H29-1b proof). The H30 candidate failed its efficacy gate, so the scoping did not change its negative verdict (extended max overlap 0.8467, reported in evidence/h30_dipgap_run_card.json).",
+   "action": "Selector should record a standing registry-scope rule before any future lane relies on it for a PASS. No file was promoted under the scoped rule this session."
+  },
+  {
+   "id": "IR-2026-10-25-18-h28-4-evidence-file-missing",
+   "severity": "low",
+   "issue": "knowledge/19_untried_hypotheses_ranked.md states H28-4 was tested (2 seeds 230-231, mean paired gain -0.00067) with 'Full evidence: evidence/h28_4_quick.json', but neither that file nor the runner's default output evidence/h28_4_seismicity_holdout.json exists in this checkout (verified this session).",
+   "action": "Treat the H28-4 numbers as unverifiable locally; do not cite them as evidence until the JSON is restored. H28-4 was not used in Lane L-H30."
+  },
+  {
+   "id": "IR-2026-10-25-16-parallel-h30-lanes-numbering-seed-filename-collision",
+   "severity": "high",
+   "issue": "Two parallel Session-9 lanes both used the H30 label, the same evidence/script filenames, and fresh holdout seeds 240-244 PR #24 (merged, commit b7dc19f): chemistry-verified deconflicted emission, evidence/h30_holdout.json + evidence/h30_run_card.json, knowledge/20_preregistration_H30.md (seeds 240-244). PR #25 lane L-H30-DIPGAP: dip-advection/gap-flanking/soft emission, originally identical filenames and the same seeds 240-244 (knowledge/20_lane_h30_preregistration_2026-10-25.md); its files were renamed to evidence/h30_dipgap_*.json and scripts/*_h30_dipgap_*.py before merging (commit 5383045) so neither lane overwrote the other. Both lanes gated different arms against closely related controls on the same seed block, so the two selection results are NOT independent replications; neither used the other's outcomes before running (parallel sessions). knowledge/20 and knowledge/21 numeric prefixes now each cover two different files. Recommend: the selector assigns hypothesis numbers, knowledge-file numbers, seed blocks and unique evidence filename prefixes before parallel sessions start.",
+   "action": "flagged for manual review; L-H30-DIPGAP files renamed (h30_dipgap_*) before merge so neither lane overwrote the other; selector must pre-assign hypothesis/knowledge numbers, seed blocks and filename prefixes to parallel lanes"
+  },
+  {
+   "id": "IR-2026-10-26-01-h29-6-seed-plan-collision",
+   "severity": "high",
+   "issue": "Inherited next-step text (knowledge/06, knowledge/16, site copy) prescribes H29-6 on 'fresh unused seeds 220-229', but L-DCONFIRM already consumed seeds 215-224 (evidence/dconfirm_holdout_2026-10-25.json), so 220-224 are NOT fresh. Running H29-6 as written would have reused confirmation seeds.",
+   "action": "Flagged in knowledge/23 before any run; Session 10 used verified-unused seeds 260-269. H29-6 remains untried; if revived it needs a new preregistration on seeds >=270 (245-254 reserved-consumed, 260-269 now consumed by H31). Site copy referencing 220-229 corrected this session."
+  },
+  {
+   "id": "IR-2026-10-26-02-gemsdoe32-r6-instrument-disagreement",
+   "severity": "high",
+   "issue": "GEMSDOE32's site (fetched 2026-10-26) promotes a new unscored file gemsdoe32-r6-stepprofile-b2-37654-20261026T002502Z-23fbbb51-zeros.tif as 'OK TO DOWNLOAD AND SUBMIT / PROMOTE' based on an SGMC-truth DTI instrument (0.1413 vs champion 0.0961 in their round6_run_card.json), while their own catalogue-hidden instrument in the same run card ranks the candidate BELOW the champion (pooled 0.00338 vs 0.00452). The pinned 12-peer registry (2026-10-25) predates this file, so screens against 'the registry' alone no longer cover the fleet's newest promoted lane.",
+   "action": "File hash-verified from the GEMSDOE32 repo tarball this session (sha256 c7f094c1f4d00f2dd9a056dc80fecc94bf1d636363acd020c9da3659eae56547, 37,654 dots, <=0.211 directed 3px overlap vs every pinned peer - genuinely decorrelated). Added as a 13th peer to H31's surface and dot screens (knowledge/23). This repo neither promotes nor blocks R6: the selector must reconcile the SGMC vs catalogue-hidden instrument disagreement before any slot decision. registry/parallel_submission_registry.json was NOT rewritten mid-session; selector should re-pin it."
+  },
+  {
+   "id": "IR-2026-10-26-03-h29s-live-score-vs-repo-status",
+   "severity": "medium",
+   "issue": "This repo's H29-S file (gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-allfinite.tif) was recorded UNSCORED in registry/live_scores.json and README, but the 2026-10-26 owner prompt lists gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-allfinite: 0.2190 under GEMSDOE27. Additionally the same prompt lists second scored files for GEMSDOE24 (0.0859), GEMSDOE25 (0.0742), GEMSDOE28 (0.0217) and GEMSDOE30 (0.1462) that were absent from the focus registries.",
+   "action": "Recorded as OWNER-REPORTED in registry/live_scores.json (owner_reported_prompt_2026_10_26) and registry/focus_sites_2026-10-26.json; H29-S artifact row updated to scored 0.2190 OWNER-REPORTED. No organizer receipt exists; evidence class unchanged. Consequence recorded in knowledge/25: the repo's best holdout surface scored below the 0.2778 family champion live."
+  },
+  {
+   "id": "IR-2026-10-26-04-run-h29-holdout-10band-bug",
+   "severity": "medium",
+   "issue": "scripts/run_h29_holdout.py get_or_build_subsurface15 passed a stale 10-band tuple to gems27.subsurface_features.build_transforms, which requires all 16 SUBSURFACE_BANDS; any cache-miss run raised ValueError (missing mag_anom, tmi, iso_grav_anom_hg/vg/slope, geod_shearrate). Session 7 never exercised the branch (lane cache always present), so the frozen H29 results are unaffected, but the shared runner was not reproducible from a clean data_cache.",
+   "action": "Fixed once in the shared runner (needed = tuple(sub.SUBSURFACE_BANDS), matching every other runner; formulas unchanged) and reported in knowledge/25 section 5 per PARALLEL-RUN PROTOCOL section 2. Failed first-attempt log preserved at evidence/h31_holdout_run_attempt1_failed.log."
+  },
+  {
+   "id": "IR-2026-10-26-05-parallel-session10-lanes-collision",
+   "severity": "medium",
+   "issue": "Two parallel Session-10 (2026-10-26) lanes from the same prompt produced separate executive summaries and unique TIFFs: PR #27 (knowledge/24_focus_sites_executive_summary_20261026.md, knowledge/25_hypothesis_screen_20261026.md, gems27-unique-20261026-6c2790d67dc6 far-field probe in docs/downloads/, verdict negative) merged before PR #28 (knowledge/24_focus_sites_executive_summary_2026-10-26.md, knowledge/25_h31_result_2026-10-26.md, H31 93c8af046660 in docs/downloads/research/, verdict negative). Knowledge numbers 24 and 25 now each cover two distinct files. The PR #27 lane's run card reports n_withheld_positives_total=0 (far-field probe not holdout-gated); the H31 lane consumed seeds 260-269. Cross-screen measured post-merge: 5.69%/10.16% directed 3px overlaps - not duplicates (evidence/h31_cross_session_overlap.json).",
+   "action": "Both evidence sets preserved on merge; site regenerated from merged JSON; merged readiness audit approves nothing. Cite knowledge files by full filename. Selector should pre-assign lane numbers/filenames/seed blocks to parallel sessions (repeat of IR-2026-10-25-16 pattern)."
+  },
+  {
+   "id": "IR-2026-10-26-06-unique-holdout-hidden-mask-and-banner-contradiction",
+   "severity": "high",
+   "issue": "scripts/run_unique_holdout.py line 99 computed d_cat = distance_transform_edt(~labels) using ALL labels (sp.known | sp.hidden) instead of sp.known (visible faults only). Because FAR_D_PX = 3.0 and the DTI kernel radius is 3.0 px (300 m), requiring d_cat >= 3.0 banned every prediction within 300 m of withheld truth sp.hidden, mathematically forcing TPw = 0.0 and HOLDOUT-DTI = 0.0 across all 20 cells.",
+   "action": "Fixed scripts/run_unique_holdout.py to compute d_known = distance_transform_edt(~kn) from visible faults only inside each split, and wired the machine-gated H30-1 Run Card panel verified by src/gems27/readiness.py."
+  },
+  {
+   "id": "IR-2026-10-26-07-h29-1b-self-comparison-in-uniqueness-screen",
+   "severity": "medium",
+   "issue": "In evidence/h29_1b_run_card.json (lines 210-231), H29-1b achieved 0.6500 (65.0% <= 70%) 3-px dot overlap with H28-1 and <= 0.4799 across all 12 peer rasters and Slots 1-5; the reported 0.8255 maximum was against H29-1 (c24b6371179c, its own un-deconflicted draft) because scripts/run_build_h29_1b.py included H29-1 in ref_paths.",
+   "action": "Keep H29-1b in docs/downloads/research/ with verdict=negative. Implemented H30-1 as a self-contained 3-habitat geophysical lane evaluated on confirmatory seeds 240-244 that achieves <= 0.6802 3-px dot overlap across ALL 29 rasters (12 peer rasters + 17 in-repo rasters including H28-1, H29-1, H29-1b, L-DCONFIRM, H29-S, H30-chem, H30-dipgap, unique-20261026, and H31) without post-hoc registry deconfliction."
+  },
+  {
+   "id": "IR-2026-10-26-08-buffered-scoring-mask-target-halo-and-kernel-clipping",
+   "severity": "high",
+   "issue": "holdout.buffered_scoring_mask(sp, foot) excludes ring = (d_hidden <= 6.0) & ~sp.hidden. Passing allowed = (valid_scoring | hidden) & (d_known > 2.0) into emit() and ridge_nms(prob, allowed) zeroed prob across the 100-600 m moat surrounding sp.hidden while leaving sp.hidden (d == 0) positive, and zeroed the 0 < d < 3.0 px (100-300 m) triangular tolerance kernel during scoring.",
    "action": "In scripts/run_h30_1_holdout.py, ridge_nms(prob, foot) is computed strictly on foot (100% blind to sp.hidden), and holdout evaluation reports BOTH the primary leak-free full_kernel_blind evaluator (where emit sees only fold_mask and visible_known = sp.known & (d(hidden) > 6.0), and the full 300 m kernel is active) AND the legacy buffered_scoring_mask evaluator. H30-1 passes both evaluators with 95% bootstrap CIs strictly above zero."
   }
  ]

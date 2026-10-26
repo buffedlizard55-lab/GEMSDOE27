@@ -72,10 +72,11 @@ def oof_for_arm(arm, foot, labels, fold, names, T):
     return prob
 
 
-def emit(prob, valid_scoring, known, hidden, budget, rng=None):
+def emit(prob, fold_domain, known, budget, rng=None):
+    """Blind candidate emission: sees ONLY fold_domain (foot & fold_mask) and known faults."""
     d_vis = distance_transform_edt(~known)
-    ridge = oof_detector.ridge_nms(prob, valid_scoring | hidden)
-    cand = ridge & (valid_scoring | hidden) & ~known & (d_vis > B_EXCL)
+    ridge = oof_detector.ridge_nms(prob, fold_domain)
+    cand = ridge & fold_domain & ~known & (d_vis > B_EXCL)
     return sub.priority_poisson_disk(prob, cand, MIN_DIST, budget, rng=rng)
 
 
@@ -139,7 +140,7 @@ def main() -> int:
     for arm in ["A", "B", "D"]:
         print(f"OOF arm {arm}...", flush=True)
         probs[arm] = oof_for_arm(arm, foot, labels, fold, names, T)
-    reg_dir = paths.DATA / "registry"
+    reg_dir = paths.DATA / "parallel_registry"
     sample = rng.choice(np.flatnonzero(foot.ravel()), size=300_000, replace=False)
     surf_corr = {}
     import rasterio
@@ -160,12 +161,13 @@ def main() -> int:
     for seed in SEEDS:
         for f in range(4):
             sp = holdout.make_split(labels, fold, f, seed=seed)
+            fold_domain = foot & sp.fold_mask
             valid = holdout.buffered_scoring_mask(sp, foot)
             n_withheld += int(sp.hidden.sum())
             for arm in ["A", "B", "D"]:
-                dots = emit(probs[arm], valid, sp.known, sp.hidden, int(fold_budget[f]))
+                dots = emit(probs[arm], fold_domain, sp.known, int(fold_budget[f]))
                 cells[arm].append(score_cell(dots, sp, valid))
-            dots_r = emit(probs["A"], valid, sp.known, sp.hidden, int(fold_budget[f]),
+            dots_r = emit(probs["A"], fold_domain, sp.known, int(fold_budget[f]),
                           rng=np.random.default_rng(seed * 10 + f))
             cells["R"].append(score_cell(dots_r, sp, valid))
             print(f"seed {seed} fold {f}: " +

@@ -177,6 +177,104 @@ def main() -> int:
         note_h30 = (DL / f"note-{r['primary_allfinite'][:-4]}.txt").read_text().strip()
         ok(0 < len(note_h30) <= 140 and note_h30 == hm["note_max_140_chars"],
            f"h30_1: note is {len(note_h30)} chars (<= 140) and matches manifest")
+
+    # Session-7 H29-1 (Lane L-S7-2026-10-25) autonomous verification (zero human intervention):
+    h29_man_path = DL / "h29_candidate_manifest.json"
+    if h29_man_path.exists():
+        hm = json.loads(h29_man_path.read_text())
+        for variant, key_fn, key_sha in (
+            ("allfinite", "allfinite", "sha256_allfinite"),
+            ("nan", "nan", "sha256_nan"),
+        ):
+            hp = DL / hm[key_fn]
+            with rasterio.open(hp) as hs:
+                ha = hs.read(1)
+                hprof = (hs.crs.to_epsg(), hs.shape, tuple(hs.transform)[:6], hs.dtypes[0])
+                hnd, hcount = hs.nodata, hs.count
+            htag = f"h29/{variant}"
+            ok(hprof == tprof, f"{htag}: same CRS/shape/transform/dtype as template (EPSG:32611, 3730x3292, float32)")
+            ok(hcount == 1, f"{htag}: single band")
+            h_in, h_out = ha[foot], ha[~foot]
+            ok(bool(np.isfinite(h_in).all()), f"{htag}: every in-footprint value is finite")
+            ok(float(h_in.min()) >= 0.0 and float(h_in.max()) <= 1.0, f"{htag}: in-footprint range in [0,1]")
+            ok(set(np.unique(h_in).tolist()) <= {0.0, 1.0}, f"{htag}: exact binary {{0.0, 1.0}}")
+            ok(int((h_in == 1.0).sum()) == hm["emitted_px"], f"{htag}: emitted {hm['emitted_px']} dots")
+            ok(not bool((ha == 1.0)[cat].any()), f"{htag}: 0 catalogue overlap")
+            dcat_h = distance_transform_edt(~cat)
+            ok(bool((dcat_h[ha == 1.0] > hm["b_exclusion_px"]).all()), f"{htag}: strict B2 collar > {hm['b_exclusion_px']} px")
+            if variant == "allfinite":
+                ok(bool(np.isfinite(ha).all() and (h_out == 0.0).all() and hnd is None),
+                   f"{htag}: all 12,279,160 cells finite in [0,1], zeros outside, nodata=None")
+            else:
+                ok(int(np.isnan(h_out).sum()) == h_out.size and hnd is not None and np.isnan(hnd),
+                   f"{htag}: NaN outside footprint and nodata=NaN declared")
+            ok(sha(hp) == hm[key_sha], f"{htag}: sha256 matches h29_candidate_manifest.json")
+        hz = DL / hm["zip_allfinite"]
+        with zipfile.ZipFile(hz) as zf:
+            ok(zf.namelist() == [hm["allfinite"]] and zf.read(hm["allfinite"]) == (DL / hm["allfinite"]).read_bytes(),
+               "h29/zip: holds exactly the single allfinite GeoTIFF, byte-identical")
+        ok(sha(hz) == hm["sha256_zip_allfinite"], "h29/zip: sha256 matches h29_candidate_manifest.json")
+        hnote = (DL / hm["note_file"]).read_text().strip()
+        ok(len(hnote) <= 140 and hnote == hm["note"], f"h29/note: {len(hnote)} chars (<= 140) and matches manifest")
+        rc = json.loads((ROOT / hm["run_card"]).read_text())
+        ok(rc["uniqueness_vs_registry"]["pass"] and rc["uniqueness_vs_registry"]["max_dot_overlap_within_3px_vs_peers"] <= 0.70,
+           "h29/uniqueness: <= 70% 3px dot overlap & <= 0.90 Spearman vs all 12 peer rasters")
+        ok(rc["ok_to_submit"] == (rc["verdict"] == "promote" and rc["validator"]["technical_validator_pass"]),
+           f"h29/gate-consistency: verdict={rc['verdict']} ok_to_submit={rc['ok_to_submit']}")
+
+    # Session-10 H31 rank-ensemble (2026-10-26) autonomous verification:
+    h31_card_path = ROOT / "evidence" / "h31_run_card.json"
+    if h31_card_path.exists():
+        rc31 = json.loads(h31_card_path.read_text())
+        r31 = rc31["raster"]
+        d31 = ROOT / r31["directory"]
+        for variant, fname in (("allfinite", r31["primary_allfinite"]),
+                               ("nan", r31["nan_twin"])):
+            p31 = d31 / fname
+            with rasterio.open(p31) as s31:
+                a31 = s31.read(1)
+                prof31 = (s31.crs.to_epsg(), s31.shape, tuple(s31.transform)[:6],
+                          s31.dtypes[0])
+                nd31, cnt31 = s31.nodata, s31.count
+            t31 = f"h31/{variant}"
+            ok(prof31 == tprof, f"{t31}: same CRS/shape/transform/dtype as template")
+            ok(cnt31 == 1, f"{t31}: single band")
+            in31, out31 = a31[foot], a31[~foot]
+            ok(bool(np.isfinite(in31).all()), f"{t31}: every in-footprint value finite")
+            ok(float(in31.min()) >= 0.0 and float(in31.max()) <= 1.0,
+               f"{t31}: in-footprint range in [0,1]")
+            ok(set(np.unique(in31).tolist()) <= {0.0, 1.0}, f"{t31}: exact binary")
+            ok(int((in31 == 1.0).sum()) == r31["dots"], f"{t31}: emitted {r31['dots']} dots")
+            ok(not bool((a31 == 1.0)[cat].any()), f"{t31}: 0 catalogue overlap")
+            ok(bool((distance_transform_edt(~cat)[a31 == 1.0] > 2.0).all()),
+               f"{t31}: strict B2 collar > 2.0 px")
+            if variant == "allfinite":
+                ok(bool(np.isfinite(a31).all() and (out31 == 0.0).all() and nd31 is None),
+                   f"{t31}: all cells finite in [0,1], zeros outside, nodata=None")
+                ok(sha(p31) == r31["sha256"], f"{t31}: sha256 matches h31 run card")
+            else:
+                ok(int(np.isnan(out31).sum()) == out31.size and nd31 is not None
+                   and np.isnan(nd31), f"{t31}: NaN outside footprint, nodata=NaN")
+        z31 = d31 / r31["zip"]
+        with zipfile.ZipFile(z31) as zf:
+            ok(zf.namelist() == [r31["primary_allfinite"]]
+               and zf.read(r31["primary_allfinite"])
+               == (d31 / r31["primary_allfinite"]).read_bytes(),
+               "h31/zip: holds exactly the single allfinite GeoTIFF, byte-identical")
+        stem31 = r31["primary_allfinite"][:-len("-allfinite.tif")]
+        note31 = (d31 / f"note-{stem31}-allfinite.txt").read_text().strip()
+        ok(len(note31) <= 140 and note31 == rc31["note_max_140_chars"],
+           f"h31/note: {len(note31)} chars (<= 140) and matches run card")
+        u31 = rc31["uniqueness_vs_registry"]
+        ok(u31["pass"] and u31["max_dot_overlap_within_3px_euclidean"] <= 0.70
+           and u31["max_surface_spearman"] <= 0.90,
+           "h31/uniqueness: <= 70% 3px overlap & <= 0.90 Spearman (13-raster screen)")
+        ok(rc31["ok_to_submit"] == (rc31["verdict"] == "promote"
+                                    and rc31["validator"]["zeros_hard_pass"]
+                                    and rc31["holdout"]["gate_efficacy_pass"]),
+           f"h31/gate-consistency: verdict={rc31['verdict']} "
+           f"ok_to_submit={rc31['ok_to_submit']}")
+
     print(f"\n{len(FAIL)} failure(s)")
     return 1 if FAIL else 0
 
