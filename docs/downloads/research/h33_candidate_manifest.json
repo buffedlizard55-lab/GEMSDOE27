@@ -1,0 +1,19 @@
+{
+  "ok_to_submit": false,
+  "slot_authorized": false,
+  "verdict": "negative",
+  "download_decision": "DO NOT SUBMIT",
+  "primary_allfinite": "gems27-h33-bss-complement-20261027-9ba8480691ed-allfinite.tif",
+  "sha256": "1373358188a96b20414834b3e0159065d87470fe695153262ced7b46bc1eb492",
+  "note": "H33-1 buried-step complement B2 37654px HOLDOUT-DTI 0.0252 | id 9ba8480691ed | DO NOT SUBMIT",
+  "dots": 37654,
+  "holdout_dti_label": "HOLDOUT-DTI",
+  "pooled_holdout_dti": 0.025210578303887142,
+  "paired_delta_vs_base32": -0.016235173916590497,
+  "ci95": [
+    -0.017575553191933015,
+    -0.014448691462792564
+  ],
+  "n_withheld_positives": 134150,
+  "evaluator": "gems27.metric.dti_binary v1 (alpha=0.2, beta=0.8, R=3px triangular) + whole-FID buffered holdout (buffer_px=6)"
+}

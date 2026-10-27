@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-26 | H32/H31-2 and H31-3 moved to tested negative ledger after preregistered fresh-seed gates.",
+  "generated": "2026-10-27 | H33-1 moved to tested negative ledger. No weekly slot selected.",
   "status": "Current untried directions only; all historical/negative entries preserved under tested_hypotheses. A future lane needs preregistration and fresh seeds.",
   "novelty_scope": "Screened against this checkout, its evidence ledger, all in-repo research artifacts, and the 12-peer parallel registry.",
   "target": "Fault-location pixels in the organizer-created test labels, which remain unobserved here. Catalogue-internal holdouts are only a proxy and cannot validate far-field behavior.",
@@ -256,6 +256,28 @@
       "status": "TESTED \u2014 FROZEN GATE FAILED; negative. Do not tune or rerun seeds 510\u2013519.",
       "result": "H31-3-S HOLDOUT-DTI 0.045332 vs H31-S 0.044966; pooled delta +0.000366, paired mean +0.000392, 95% CI [-0.001182,+0.001823], 6/10 seeds, 2/4 folds; 4/5 efficacy clauses failed. E1 canary max AUC 0.53194. 12-peer max overlap 56.74%, extended local maximum 86.87% vs H31-1; evidence/h31_3_run_card_2026-10-26.json.",
       "eligible_for_weekly_slot": false
+    },
+    {
+      "id": "H33-1",
+      "title": "Short buried basement-step complement emission",
+      "status": "TESTED \u2014 FROZEN GATE FAILED; negative; NOT OK TO SUBMIT",
+      "validation": "knowledge/30_preregistration_H33_2026-10-27.md; knowledge/31_h33_result_2026-10-27.md; evidence/h33_run_card_2026-10-27.json",
+      "seeds": [
+        520,
+        521,
+        522,
+        523,
+        524,
+        525,
+        526,
+        527,
+        528,
+        529
+      ],
+      "pooled_holdout_dti": 0.025210578303887142,
+      "control_pooled_holdout_dti": 0.04144575222047764,
+      "mean_paired_delta_dti": -0.016165482384346848,
+      "ok_to_submit": false
     }
   ],
   "separate_review_class": {

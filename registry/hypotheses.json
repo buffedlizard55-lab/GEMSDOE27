@@ -1,380 +1,391 @@
 {
- "generated": "2026-10-25 | Merged parallel sessions: Lane L-S7 (H29-HPVC/H29-S, slot HELD under strict gate) and Session 9 (H30 chemistry-verified deconflicted emission, negative; deconfliction cost measured).",
- "ranking_rule": "expected DTI gain x probability the test can actually validate it / cost. Session 4 ranks the two routes that add information or settle the question (H27-17, H27-16) above the shipped increments, because Session 3 proved that rearranging pixels cannot exceed ~0.2550 and Session 4 proved that the catalogue-internal proxy cannot see the far-field habitat where 81.4% of the live emission's dots sit.",
- "hypotheses": [
-  {
-   "id": "H27-17",
-   "rank": 1,
-   "title": "Far-field swap probe: settle live whether a better detector pays, at fixed pixel count",
-   "layers": "The owner-reported 0.2477 file (dotted H19-5 d1.5, sha256 68d0e2e4...) plus the 72-band augmented detector fitted on ALL published labels.",
-   "signature": "Not a geological signature but an experimental one: hold the near field, the pixel count (60,069), the d1.5 geometry, the nodata convention and the grid byte-identical, and change only WHICH far-field pixels are emitted - drop the 20% of far-field dots with the lowest augmented probability (9,783 px) and add that detector's 9,783 best far-field ridge dots.",
-   "why": "Section 3 of knowledge/10: the catalogue-internal proxy has 100% of its truth at d=0 from the published catalogue and 0.0% of credit beyond 1 km, while 81.4% of the live emission's dots are >=300 m out. No further gate can decide whether detector work pays; one live comparison can.",
-   "differs": "Every other candidate in this repo changes the emission's budget, geometry or near field as well; this is the programme's first single-variable far-field A/B against a file with a known live score.",
-   "status": "BUILT AND VERIFIED, UNSCORED, MEASUREMENT PROBE - NOT THE RECOMMENDED SUBMISSION. Slot 5 gems27-farfield-swap-augmented-detector-probe-20261002-a34b0799df59-nan.tif (sha256 f8e6c76cf584..., 1,632,158 B, 60,069 px): near field 11,153 px byte-identical, exactly 9,783 far-field dots swapped (16.29% of the file; symmetric difference 32.57%), no pixel changed closer than 300 m to the catalogue, added dots >=1.5 px from every kept dot and off-catalogue, note 194 chars. Mean detector probability: dropped 0.0288, added 0.4380, kept far-field 0.1510; added dots' median catalogue distance 640 m and 31.7% are >=1 km out, so they are not hugging the 300 m boundary. scripts/verify_downloads.py: 0 failures over 5 slots. Registered interpretation (knowledge/03 Addendum E): >=0.2507 adopt the detector; 0.2447-0.2507 no measurable far-field information; <=0.2447 refuted. Declared downside: if it carries no information this randomises 16.3% of the best file's dots and should cost ~0.003-0.008.",
-   "gain": "information: it is the only experiment that can license or close all future detector work",
-   "cost": "one weekly slot; Slot 1 remains the recommendation",
-   "external": []
-  },
-  {
-   "id": "H27-16",
-   "rank": 2,
-   "title": "Three official GDR 1391 layers absent from this checkout; verified fetch pending",
-   "layers": "GDR 1391 paleo-geothermal regional features (84,008 B, sha256 faffcf69...), INGENIOUS 2 m temperature-probe data (1,080,530 B, 1301f70d...), Great Basin Quaternary volcanics polygons (9,898,770 B, c4a2d2df...).",
-   "signature": "Surface and shallow-subsurface thermal/chemical expression of fault-hosted fluid flow: sinter/tufa/travertine and altered bedrock, 2 m sediment temperature anomalies, and Quaternary volcanic unit boundaries and vent alignments.",
-   "why": "This is a possible route to new information rather than rearrangement of existing bands. The 2026-09-30 sibling-runner record reports the pinned sources obtainable, but the raw bytes are absent from this checkout and must be retrieved and verified before use.",
-   "differs": "This repo holds only 21 vent points and 27,092 well/spring rows from GDR 1391; the paleo-geothermal features, the 2 m probe temperatures and the volcanic POLYGONS are in no layer here. H27-12 measured that the layers we DO hold add ~0 to a detector, so these must earn their place the same way - and, per H27-17, the only decisive test is live.",
-   "status": "PROPOSED, UNTRIED; raw packages NOT present in this checkout. The sibling 16GEMSDOE runner record reports the 2026-09-30 pins as ok:true. This repo has a fetch/hash/clip workflow, but the reviewed run set through branch head a58e74d includes runs 37099986237, 37100053264, 37100608786, 37100751573, 37100935082, and 37101134684, all of which concluded failure with zero jobs and no logs; no fresh download, SHA-256 verification, clip, or inventory artifact occurred here. Cause is unknown; do not infer source unavailability. An authorized Actions run or official bytes must be obtained and hash-verified before feature use. The workflow never contacts drivendata.org.",
-   "gain": "unknown; potential new external data, not yet verified or tested in this checkout",
-   "cost": "workflow implemented; requires an authorized Actions run (current attempts produced no jobs), verified local package bytes, then one detector arm per layer group",
-   "external": [
+  "generated": "2026-10-27 | H33-1 tested negative; not slot-authorized",
+  "ranking_rule": "expected DTI gain x probability the test can actually validate it / cost. Session 4 ranks the two routes that add information or settle the question (H27-17, H27-16) above the shipped increments, because Session 3 proved that rearranging pixels cannot exceed ~0.2550 and Session 4 proved that the catalogue-internal proxy cannot see the far-field habitat where 81.4% of the live emission's dots sit.",
+  "hypotheses": [
     {
-     "name": "GDR 1391 paleo-geothermal regional features (sinter/tufa/travertine, altered bedrock)",
-     "url": "https://gdr.openei.org/files/1391/paleo_geothermal_regional.zip",
-     "obtainable": "The sibling 16GEMSDOE/evidence/ci/external_verification.json reportedly records an ok:true check of this package’s size/hash pin on 2026-09-30. Raw bytes are not in this checkout and were not re-downloaded/re-hashed here. The reviewed fetch-workflow run set through branch head a58e74d includes runs 37099986237, 37100053264, 37100608786, 37100751573, 37100935082, and 37101134684, all of which failed before any job and produced no artifact; this does not establish source unavailability. Verify the raw bytes against the pin before use."
+      "id": "H27-17",
+      "rank": 1,
+      "title": "Far-field swap probe: settle live whether a better detector pays, at fixed pixel count",
+      "layers": "The owner-reported 0.2477 file (dotted H19-5 d1.5, sha256 68d0e2e4...) plus the 72-band augmented detector fitted on ALL published labels.",
+      "signature": "Not a geological signature but an experimental one: hold the near field, the pixel count (60,069), the d1.5 geometry, the nodata convention and the grid byte-identical, and change only WHICH far-field pixels are emitted - drop the 20% of far-field dots with the lowest augmented probability (9,783 px) and add that detector's 9,783 best far-field ridge dots.",
+      "why": "Section 3 of knowledge/10: the catalogue-internal proxy has 100% of its truth at d=0 from the published catalogue and 0.0% of credit beyond 1 km, while 81.4% of the live emission's dots are >=300 m out. No further gate can decide whether detector work pays; one live comparison can.",
+      "differs": "Every other candidate in this repo changes the emission's budget, geometry or near field as well; this is the programme's first single-variable far-field A/B against a file with a known live score.",
+      "status": "BUILT AND VERIFIED, UNSCORED, MEASUREMENT PROBE - NOT THE RECOMMENDED SUBMISSION. Slot 5 gems27-farfield-swap-augmented-detector-probe-20261002-a34b0799df59-nan.tif (sha256 f8e6c76cf584..., 1,632,158 B, 60,069 px): near field 11,153 px byte-identical, exactly 9,783 far-field dots swapped (16.29% of the file; symmetric difference 32.57%), no pixel changed closer than 300 m to the catalogue, added dots >=1.5 px from every kept dot and off-catalogue, note 194 chars. Mean detector probability: dropped 0.0288, added 0.4380, kept far-field 0.1510; added dots' median catalogue distance 640 m and 31.7% are >=1 km out, so they are not hugging the 300 m boundary. scripts/verify_downloads.py: 0 failures over 5 slots. Registered interpretation (knowledge/03 Addendum E): >=0.2507 adopt the detector; 0.2447-0.2507 no measurable far-field information; <=0.2447 refuted. Declared downside: if it carries no information this randomises 16.3% of the best file's dots and should cost ~0.003-0.008.",
+      "gain": "information: it is the only experiment that can license or close all future detector work",
+      "cost": "one weekly slot; Slot 1 remains the recommendation",
+      "external": []
     },
     {
-     "name": "GDR 1391 INGENIOUS 2 m temperature-probe regional data",
-     "url": "https://gdr.openei.org/files/1391/2m_temperature_probe_INGENIOUS_regional_data.zip",
-     "obtainable": "The sibling 16GEMSDOE/evidence/ci/external_verification.json reportedly records an ok:true check of this package’s size/hash pin on 2026-09-30. Raw bytes are not in this checkout and were not re-downloaded/re-hashed here. The reviewed fetch-workflow run set through branch head a58e74d includes runs 37099986237, 37100053264, 37100608786, 37100751573, 37100935082, and 37101134684, all of which failed before any job and produced no artifact; this does not establish source unavailability. Verify the raw bytes against the pin before use."
+      "id": "H27-16",
+      "rank": 2,
+      "title": "Three official GDR 1391 layers absent from this checkout; verified fetch pending",
+      "layers": "GDR 1391 paleo-geothermal regional features (84,008 B, sha256 faffcf69...), INGENIOUS 2 m temperature-probe data (1,080,530 B, 1301f70d...), Great Basin Quaternary volcanics polygons (9,898,770 B, c4a2d2df...).",
+      "signature": "Surface and shallow-subsurface thermal/chemical expression of fault-hosted fluid flow: sinter/tufa/travertine and altered bedrock, 2 m sediment temperature anomalies, and Quaternary volcanic unit boundaries and vent alignments.",
+      "why": "This is a possible route to new information rather than rearrangement of existing bands. The 2026-09-30 sibling-runner record reports the pinned sources obtainable, but the raw bytes are absent from this checkout and must be retrieved and verified before use.",
+      "differs": "This repo holds only 21 vent points and 27,092 well/spring rows from GDR 1391; the paleo-geothermal features, the 2 m probe temperatures and the volcanic POLYGONS are in no layer here. H27-12 measured that the layers we DO hold add ~0 to a detector, so these must earn their place the same way - and, per H27-17, the only decisive test is live.",
+      "status": "PROPOSED, UNTRIED; raw packages NOT present in this checkout. The sibling 16GEMSDOE runner record reports the 2026-09-30 pins as ok:true. This repo has a fetch/hash/clip workflow, but the reviewed run set through branch head a58e74d includes runs 37099986237, 37100053264, 37100608786, 37100751573, 37100935082, and 37101134684, all of which concluded failure with zero jobs and no logs; no fresh download, SHA-256 verification, clip, or inventory artifact occurred here. Cause is unknown; do not infer source unavailability. An authorized Actions run or official bytes must be obtained and hash-verified before feature use. The workflow never contacts drivendata.org.",
+      "gain": "unknown; potential new external data, not yet verified or tested in this checkout",
+      "cost": "workflow implemented; requires an authorized Actions run (current attempts produced no jobs), verified local package bytes, then one detector arm per layer group",
+      "external": [
+        {
+          "name": "GDR 1391 paleo-geothermal regional features (sinter/tufa/travertine, altered bedrock)",
+          "url": "https://gdr.openei.org/files/1391/paleo_geothermal_regional.zip",
+          "obtainable": "The sibling 16GEMSDOE/evidence/ci/external_verification.json reportedly records an ok:true check of this package\u2019s size/hash pin on 2026-09-30. Raw bytes are not in this checkout and were not re-downloaded/re-hashed here. The reviewed fetch-workflow run set through branch head a58e74d includes runs 37099986237, 37100053264, 37100608786, 37100751573, 37100935082, and 37101134684, all of which failed before any job and produced no artifact; this does not establish source unavailability. Verify the raw bytes against the pin before use."
+        },
+        {
+          "name": "GDR 1391 INGENIOUS 2 m temperature-probe regional data",
+          "url": "https://gdr.openei.org/files/1391/2m_temperature_probe_INGENIOUS_regional_data.zip",
+          "obtainable": "The sibling 16GEMSDOE/evidence/ci/external_verification.json reportedly records an ok:true check of this package\u2019s size/hash pin on 2026-09-30. Raw bytes are not in this checkout and were not re-downloaded/re-hashed here. The reviewed fetch-workflow run set through branch head a58e74d includes runs 37099986237, 37100053264, 37100608786, 37100751573, 37100935082, and 37101134684, all of which failed before any job and produced no artifact; this does not establish source unavailability. Verify the raw bytes against the pin before use."
+        },
+        {
+          "name": "GDR 1391 Great Basin Quaternary volcanics (polygons)",
+          "url": "https://gdr.openei.org/files/1391/great_basin_q_volcanics.zip",
+          "obtainable": "The sibling 16GEMSDOE/evidence/ci/external_verification.json reportedly records an ok:true check of this package\u2019s size/hash pin on 2026-09-30. Raw bytes are not in this checkout and were not re-downloaded/re-hashed here. The reviewed fetch-workflow run set through branch head a58e74d includes runs 37099986237, 37100053264, 37100608786, 37100751573, 37100935082, and 37101134684, all of which failed before any job and produced no artifact; this does not establish source unavailability. Verify the raw bytes against the pin before use."
+        }
+      ]
     },
     {
-     "name": "GDR 1391 Great Basin Quaternary volcanics (polygons)",
-     "url": "https://gdr.openei.org/files/1391/great_basin_q_volcanics.zip",
-     "obtainable": "The sibling 16GEMSDOE/evidence/ci/external_verification.json reportedly records an ok:true check of this package’s size/hash pin on 2026-09-30. Raw bytes are not in this checkout and were not re-downloaded/re-hashed here. The reviewed fetch-workflow run set through branch head a58e74d includes runs 37099986237, 37100053264, 37100608786, 37100751573, 37100935082, and 37101134684, all of which failed before any job and produced no artifact; this does not establish source unavailability. Verify the raw bytes against the pin before use."
+      "id": "H27-8",
+      "rank": 3,
+      "title": "Stack every validated increment at the live-anchored budget optimum (slot 4)",
+      "layers": "H19-5 emission (h19_5_nan.tif) + catalogue raster (labels.tif) + NBMG INGENIOUS vectors + T-v2 link set. No new external data.",
+      "signature": "dot_thin(H19-5, 2.8) [= the live-anchored budget optimum, 44,090 px] minus the 1 px (100 m) catalogue-flank shadow (H27-4 r<=1, 3,891 px) plus 1,308 non-redundant T-v2 gap-closure dots = 41,507 px.",
+      "why": "Session 3 inverted all 20 hash-authenticated live scores and produced a forward model DTI = TP/(0.2 TP (1-rho) + 0.2 N + 0.8|G|) that reproduces BOTH live anchors exactly (H19-5 solid -> 0.1922, dotted d1.5 -> 0.2477) and whose retention rule predicts a second, unrelated live pair to +4.0%. Under that model the budget optimum is d = 2.25-2.8 -> 0.2550, and the sibling's independent two-parameter fit gave 0.2553. Slot 4 is the first candidate to combine that optimum with the two increments the out-of-fold gate validated (T-v2 +0.0115, H27-4 stacked +0.0141, both 4/4 folds).",
+      "differs": "Slot 2 uses the d2.8 budget but carries only T-v2; slot 3 carries T-v2 + the prune but at d1.5. Nothing in the programme has stacked all three at the anchored optimum.",
+      "status": "BUILT AND VERIFIED, UNSCORED. evidence/candidate_model_scores.json: geometric model 0.2484, hybrid model 0.2781 (highest hybrid of the four). The two models differ ONLY in what the targeted prune is charged; slot 1 vs slot 3 is the live A/B that settles it. 79 format/consistency checks pass (scripts/verify_downloads.py).",
+      "gain": "modelled 0.2484 (geometric) to 0.2781 (hybrid) vs 0.2477 live parent",
+      "cost": "1 submission slot; no new data; no GPU",
+      "external": null
+    },
+    {
+      "id": "H27-1",
+      "rank": 4,
+      "title": "Topology gap-closure: along-strike links between disconnected mapped fault systems",
+      "layers": "Catalogue raster (labels.tif) -> skeleton graph + NBMG INGENIOUS Qfaults vector polylines (qfaults_v2_in_footprint.json, 1,179 features); local strike domain from the same graph.",
+      "signature": "Free tips (degree-1 nodes) whose strike points at a tip of a different system 1-4 km away; straight link; evidence score z = [mutual] + [end-to-end] + [tip within 15 deg] + [local strike agreement >= 0.4] + [merged length <= 8 km]; ship z >= 3 (345 links, 1,259 non-redundant dots vs 0.2477). Network sits near its connectivity threshold (Berkowitz-style P ~ 5.8 vs Pc 5.6-6.0).",
+      "why": "Mapped faults are compiled in pieces; unmapped continuations across short gaps are where an expert panel adds 'new' faults, and surface-contrast detectors cannot see them because the gap itself is low-contrast. Vector attribution against 1,179 NBMG polylines shows 230/345 links bridge intra-FID sub-parts of the same multipart polyline, 115/345 bridge distinct FID polylines, 312/345 lie within the same named fault zone (NAME/NUM), and 333/345 have compatible SLIPSENSE/DIPDIRECT.",
+      "differs": "First use of the catalogue's graph and vector polyline topology. The sibling's h16-continuation (owner-reported 0.0461) is the nearest prior idea; T-v2 differs by requiring a target system, a 1-4 km gap bound, tip-to-tip alignment, and a strike-agreement score, and by being gated on rotated-cone controls across three holdout tiers plus an out-of-fold spatial-CV base.",
+      "status": "VALIDATED across 4 independent protocols: (1) component holdout seeds 100-109 (0.281 vs 0.059 ctrl) and fresh seeds 110-119 (0.280 vs 0.056 ctrl, +0.0117 paired DTI, 4/4 folds); (2) NBMG FID vector-trace holdout seeds 120-129 (0.1003 vs 0.0204 ctrl, 4.92x enrichment, > m(0.30)=0.0638); (3) honest 4-fold spatial-CV out-of-fold detector B_oof on seeds 130-139 (+0.0115 paired DTI, 4/4 folds, marginal efficiency 0.2251).",
+      "gain": "At the 0.2477 operating point: worst case -0.0029 (zero hit rate), break-even at efficiency 0.0522, +0.0024 at the FID vector-trace holdout efficiency 0.1003, and +0.0110 at the component holdout efficiency 0.280-0.293. Shipped as Primary Slot 1 (5512495c6bd1) and Secondary Slot 2 (3ebd51534bb1).",
+      "cost": "Done (this repo). Shipped in Slot 1 & Slot 2.",
+      "external": null
+    },
+    {
+      "id": "H27-4",
+      "rank": 5,
+      "title": "Tip-shadow pruning: drop emission within 100-300 m of masked catalogue pixels",
+      "layers": "Catalogue distance transform (d_cat) + dotted emission surface.",
+      "signature": "A surface trained on catalogued scarps peaks on them; once 1-px catalogue cells are masked, emission survives as 1-3 px 'shadows' beside known faults (further reinforced by 100-400 m USGS-vs-LiDAR scarp offsets documented by Hermant et al. 2025, Fig. 2 & Fig. 9B). In the 0.2477 file (60,069 px), 5,355 dots (8.91%) sit at exactly d_cat = 100 m (1 px) and 8,769 (14.60%) within 200 m.",
+      "why": "Because ground truth G consists of newly created fault labels rather than the unmasked 100-200 m flank of already-catalogued faults, these 1-2 px flank-shadow dots are almost pure false-positive mass; removing them cuts FP without touching recall on new faults.",
+      "differs": "Subset transform driven by catalogue distance geometry and gated on an honest out-of-fold spatial-CV detector; the repo's thinning is geometry-blind.",
+      "status": "VALIDATED on the honest 4-fold spatial-CV out-of-fold detector B_oof (seeds 130-139, evidence/oof_hypothesis_gates.json): dropping dots at d_cat <= 100 m (1 px) removes dots with efficiency 0.0034 (15x below the 0.0521 live break-even), raising DTI in 4/4 folds (+0.0022 solo; +0.0141 when stacked with T-v2 in 4/4 folds). Dropping d_cat <= 200 m (2 px) removes dots with efficiency 0.0080 (+0.0025 solo, 4/4 folds; +0.0147 stacked with T-v2). Dropping d_cat < 300 m (3 px) removes dots with efficiency 0.0140 (+0.0014 solo, 3/4 folds).",
+      "gain": "At the 0.2477 operating point: pruning the 5,355 d_cat=100 m flank-shadow dots alone gives +0.0118 modelled DTI (to ~0.2598); stacking with T-v2 (Slot 3 candidate d466b251f309, 55,992 px) gives +0.0141 modelled DTI under FID_trace efficiency (to ~0.2621) and +0.0223 under component efficiency (to ~0.2702).",
+      "cost": "Done (this repo). Shipped as Tertiary Slot 3 (d466b251f309).",
+      "external": null
+    },
+    {
+      "id": "H27-5",
+      "rank": 6,
+      "title": "Kinematically typed linking with official NBMG/USGS vector fault attributes (SLIPSENSE, DIPDIRECT, NAME)",
+      "layers": "NBMG INGENIOUS Qfaults vector polylines (qfaults_v2_in_footprint.json, 1,179 features with FID, NAME, NUM, FTYPE_, SLIPSENSE, DIPDIRECT, MAPSCALE) + USGS Siler (2022) slip/dilation tendency.",
+      "signature": "Attribute every skeleton endpoint and gap link with its NBMG vector polyline FID, fault zone NAME/NUM, SLIPSENSE (N/RL/LL), and DIPDIRECT, and retain inter-FID links with non-conflicting slip sense and synthetic or conjugate dip directions.",
+      "why": "Distinguishes intra-FID raster discretisation gaps from true inter-FID structural relays and filters out kinematically incompatible cross-links when whole vector polylines are held out.",
+      "differs": "Uses official NBMG/USGS vector polyline topology and kinematic attributes rather than raster-only 8-connected components.",
+      "status": "VALIDATED on the NBMG FID vector-trace holdout (Addendum B, seeds 120-129, evidence/vector_topology_validation.json): on whole-FID holdout, z>=3 dedup achieves 0.1003 vs 0.0204 rotated-cone control (4.92x); filtering to inter-FID + kinematic_compat (H27-5a) raises efficiency to 0.1374 (6.74x control), and inter-FID + same_name + kinematic_compat (H27-5b) reaches 0.1783 (8.74x control). All 345 shipped dossiers in registry/topology_candidates.json are now annotated with these vector attributes.",
+      "gain": "Raises inter-FID holdout efficiency from 0.1003 to 0.1374 (+37% relative) and 0.1783 (+78% relative within named fault zones); 333/345 (96.5%) of shipped T-v2 links already satisfy kinematic_compat.",
+      "cost": "Done for NBMG vector attributes (this repo); Siler (2022) raster stress overlay remains optional.",
+      "external": [
+        {
+          "name": "NBMG Qfaults_INGENIOUS ArcGIS REST layer 0 (1,179 in-footprint polylines restored locally)",
+          "url": "https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0",
+          "obtainable": "verified & restored locally in data_cache/qfaults_v2_in_footprint.json (sha256 4d6efc7b...)"
+        },
+        {
+          "name": "USGS Qfaults GIS (zip, 32.4 MB)",
+          "url": "https://earthquake.usgs.gov/static/lfs/nshm/qfaults/Qfaults_GIS.zip",
+          "obtainable": "verified downloadable from a GitHub runner 2026-10-02 (application/zip)"
+        },
+        {
+          "name": "Siler (2022) slip & dilation tendency, Great Basin (USGS ScienceBase)",
+          "url": "https://www.sciencebase.gov/catalog/item/6296974dd34ec53d276bb33d",
+          "obtainable": "ScienceBase JSON metadata verified; raster overlay optional"
+        }
+      ]
+    },
+    {
+      "id": "H27-10",
+      "rank": 7,
+      "title": "Model-ranked 100-300 m offset-scarp annulus (narrow H27-10 variant)",
+      "layers": "Known-catalogue distance (labels.tif); 32 prepared features including lidar_lappos_max, lidar_step_max, lidar_ex_max and lidar_coh100; six H28-1 multiscale magnetic/gravity edge features; strictly OOF ridge probabilities.",
+      "signature": "Reallocate the exact number of H27-4 r1-pruned OOF dots into the 1 < distance <= 3 px (100-300 m) annulus around known catalogue traces. Rank eligible OOF ridge cells by the frozen H28-1 OOF detector probability; preserve the total dot count, T-v2 links, and >=1.5 px spacing.",
+      "why": "A LiDAR-supported ridge offset from a mapped Quaternary trace may be an unlabelled parallel strand or splay. The official Hermant et al. (2025) PDF says one local USGS/TLS separation can be up to 400 m; it does not establish a typical 150-400 m distribution or validate the selected 100-300 m band. Prior habitat tomography failed validation and is not evidence for the location. The experiment tests this narrow band directly on catalogue-internal hidden components, whose transfer limit is explicit.",
+      "differs": "H27-4 removes d<=1 px emissions; this version tests whether the pruned dot budget is better reallocated to model-ranked 1<d<=3 px OOF ridges than to the current best's lower-probability >3 px dots. It does not use SLIPSENSE/DIPDIRECT to claim a mechanically predicted side: no local stress model or preregistered sidedness rule is available.",
+      "status": "TESTED \u2014 FROZEN GATE FAILED on seeds 150-159; do not treat as untried or use to justify a weekly slot. Mean paired \u0394DTI +0.00084615 (required \u2265+0.001); 4/4 folds but 7/10 seeds (required \u22658/10); annulus addition efficiency 0.03357 < m(0.2477)=0.05212. First-run self-distance spacing diagnostic false-negative is recorded; corrected rerun on the same used seeds passed data checks with numerical result and gate unchanged (integrity check only, not fresh confirmation). See evidence/h27_10_annulus_holdout.json, evidence/h27_10_annulus_holdout_initial.json, and registry/irregularities.json.",
+      "gain": "Observed catalogue-holdout result: +0.00084615 paired mean DTI; frozen gate failed. No live score or weekly slot.",
+      "cost": "low-medium; cached, hash-pinned feature inputs and existing OOF/link code; one holdout run",
+      "external": [
+        {
+          "name": "Hermant, Kiersnowski & Bellanger (2025), Stanford Geothermal Workshop PDF",
+          "url": "https://pangea.stanford.edu/ERE/db/GeoConf/papers/SGW/2025/Hermant.pdf",
+          "obtainable": "PDF fetched/read via page-fetch service 2026-10-02; Fig. 2 reports a local separation can be up to 400 m only. No general 150-400 m distribution and no validation of the 100-300 m band."
+        },
+        {
+          "name": "USGS 3DEP 1 m DEM",
+          "url": "https://data.usgs.gov/datacatalog/data/USGS:77ae0551-c61e-4979-aedd-d797abdcde0e",
+          "obtainable": "Official catalog page verifies the public-domain 1 m bare-earth DEM collection; local LiDAR descriptors are an owner-repository hash-pinned derivative, not a direct USGS download in this session."
+        },
+        {
+          "name": "NBMG INGENIOUS Qfaults vector layer",
+          "url": "https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0",
+          "obtainable": "1,179 in-footprint polylines are restored in the local hash-pinned owner mirror; refresh/network access remains runner-dependent."
+        }
+      ]
+    },
+    {
+      "id": "H27-12",
+      "rank": 8,
+      "title": "The three restored official layers no detector in this repo has ever used, as FEATURES",
+      "layers": "GeoDawn airborne radiometrics (K, Th, U, TC) and extensions (Th/K, U/K, U/Th, TMI_up150); USGS SGMC fault mask (distance, on-mask, within 1 km); GDR 1391 Wellspring thermal/geochemical points (27,092 rows: all, Hot only, quartz geothermometer >=150 C) and the 21 Great Basin Quaternary vents.",
+      "signature": "Alteration and thermal-chemical gradients: potassic/sericitic and clay alteration ratios along permeable fault zones, and hydrothermal fluid pathways marked by hot springs and high-temperature geothermometers.",
+      "why": "Would add information orthogonal to topography and magnetics - the physical signature of a fault that conducts fluid, whether or not it has a scarp.",
+      "differs": "New to THIS repository: those layers were used only by the refuted habitat tomography and a single-channel AUC screen. Not claimed as new to the whole group - the sibling's H19-5 blend already contains a thermal/geochemical conduit expert, and hydro_uk_anom / hydro_rad_edge / hydro_clay_conduit appear in its leaderboard-attribution table.",
+      "status": "MEASURED, NOT PROMOTED (Addendum D, seeds 140-149). +rad (8 bands) PR-AUC 0.02532 (+0.00074) and +thermal (5 bands) 0.02510 (+0.00052) both FAIL the registered +0.005 criterion: radiometric ratios and thermal-point distances add essentially nothing to a 32-band detector here. +sgmc (3 bands) PASSES both criteria (PR-AUC 0.04275, +0.01817; paired DTI +0.02852, 4/4 folds) and +all (40 bands) passes both (0.04635, +0.02177; +0.03414, 4/4) - but the habitat decomposition (evidence/arm_habitat_decomposition.json) shows the entire gain is catalogue proximity: 100% of proxy truth lies at d=0 from the published catalogue and 99.6% of credit is earned within 200 m of it, while the live 0.2477 emission puts 81.4% of its dots >=300 m away. The arms' distinctive far-field behaviour is the SGMC-gap habitat, live-measured at 1.62x blind (H27-11). Passing a gate that cannot see the habitat that pays is not a reason to spend a slot, so neither arm is promoted; the SGMC-featured detector is instead used inside the registered Addendum-E far-field probe (H27-17).",
+      "gain": "proxy +0.034 DTI (not transferable by measurement); live unknown, bounded by H27-11",
+      "cost": "1 session: 85 s to build 40 bands, ~8 min to train 6 arms",
+      "external": [
+        {
+          "name": "GeoDAWN airborne radiometrics + extensions (already restored)",
+          "url": "https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7",
+          "obtainable": "restored locally as data_cache/geodawn_rad_u8.tif (K, Th, U, TC) and geodawn_extensions_u8.tif (Th/K, U/K, U/Th, TMI_up150)"
+        },
+        {
+          "name": "GDR 1391 Wellspring (wells/springs, chemistry, temperatures, geothermometers)",
+          "url": "https://gdr.openei.org/files/1391/wellspringdata.gdb.zip",
+          "obtainable": "restored locally as data_cache/gdr_wellspring_in_footprint.csv (27,092 rows); the 20,810,222 B FileGDB is hash-pinned sha256 7222178427ce0634453846819e6482fd6867536534fe9600987099e3b356590f and HEAD-checked by the workflow"
+        }
+      ]
+    },
+    {
+      "id": "H27-14",
+      "rank": 9,
+      "title": "Rank gap-closure links by graph-connectivity VALUE, not by a local evidence score",
+      "layers": "The catalogue fault graph (src/gems27/graph.py) plus the 345 shipped T-v2 links; Berkowitz-Bour-Davy-Odling (2000) connectivity parameter P via this repo's own unit-tested closed form.",
+      "signature": "Per-link network consequence: bridge status, merged system length, change in the largest-system share of mapped fault length, dP (exact for a single merge: dn = [lA+lB+gap>=lmin] - [lA>=lmin] - [lB>=lmin], P linear in n), and the continuous second-moment increment d(sum l^2) as tie-break.",
+      "why": "Near the connectivity threshold a link that merges two LARGE clusters moves P further than one that merges two small ones, so links are not equal - and knowledge/04 puts this catalogue at P = 5.784 against Pc = 5.6-6.0, i.e. at the threshold.",
+      "differs": "z (the shipped rule) is purely local: mutual nearest, end-to-end, angle, strike compatibility, merged length <= 8 km. Nothing in it is a network quantity.",
+      "status": "REFUTED as a ranking signal; ADOPTED as documentation (Addendum D, D-3, seeds 140-149). Pooled efficiency: top half by |dP| 0.2914 vs all 345 links 0.2889 (ratio 1.008, needed >=1.15) and BELOW the 95th percentile of random same-size halves (0.3117); bottom half 0.2953; exploratory signed-dP top half 0.3054; second-moment top half 0.2463. The values are nevertheless written into every dossier (registry/topology_candidates.json, docs/data/topology_links.csv/.geojson, docs/topology.html) with the structural headline: closing all 345 candidates moves the network from P = 5.784 to P = 6.124, from inside Pc = 5.6-6.0 to above it, and 339 of 345 links are bridges. Disclosed: dP is quantised to {-1,0,+1} x P/n_ge, so it is an ordinal, and the continuous tie-break was added before Stage B ran.",
+      "gain": "none as a ranking (+0.0025 efficiency, inside the random spread); large as reviewer-facing documentation",
+      "cost": "1 module, 4 unit tests, 24 s to rebuild all dossiers",
+      "external": [
+        {
+          "name": "Berkowitz, Bour, Davy & Odling (2000), 'Scaling and connectivity in two-dimensional fracture networks', J. Struct. Geol. 22, 1257-1266",
+          "url": "https://agupubs.onlinelibrary.wiley.com/doi/10.1029/1999GL011241",
+          "obtainable": "read; the connectivity parameter P and Pc = 5.6-6.0 are implemented in src/gems27/topology_theory.py and unit-tested against the paper's numbers"
+        }
+      ]
+    },
+    {
+      "id": "H27-13",
+      "rank": 10,
+      "title": "Multi-scale directional lineament context (the CPU-feasible part of the FaultSEG direction)",
+      "layers": "1 m LiDAR descriptors lappos_max, step_max, ex_max (from lidar_scarp_features_u8.tif) and det_local_relief, integrated along 4 orientations {0,45,90,135} deg at along-strike half-lengths 5/10/20 px (0.5/1/2 km), across-strike sigma 0.8 px: max over orientation and anisotropy (max-mean)/max or (max-mean)/(max-min) for signed layers. 24 bands.",
+      "signature": "Kilometre-scale linear continuity and its anisotropy: a fault scarp is a line, a volcanic cone or playa rim is not, and a pixelwise tabular detector cannot tell them apart.",
+      "why": "Hermant, Kiersnowski & Bellanger (2025) attribute FaultSEG's PR-AUC 0.595 (vs siUNET 0.449) to integrating evidence ALONG the structure; this is that mechanism without a GPU.",
+      "differs": "Every band in the 32-band prepared matrix is a per-pixel or small-window statistic; no band in the programme integrates along an orientation at 0.5-2 km.",
+      "status": "REFUTED (Addendum D, criterion 1). Out-of-fold PR-AUC 0.02559 vs base 0.02458: +0.00101 against a registered requirement of +0.005. 24 oriented line-integral bands do not improve a gradient-boosted detector on this footprint. Reported as a negative result, not re-tuned: the scales, orientations and statistics were frozen before the run.",
+      "gain": "+0.001 PR-AUC (below the registered threshold); no paired-DTI arm was earned",
+      "cost": "85 s to build the bands, 94 s to train the arm",
+      "external": []
+    },
+    {
+      "id": "H27-2",
+      "rank": 11,
+      "title": "Step-over / relay-typed linking (oblique tip-to-tip, overlapping en-echelon tips)",
+      "layers": "Catalogue fault graph components with their principal-axis strikes and pixel extents (src/gems27/graph.py, links.py); no external layer.",
+      "signature": "Tips of parallel strands offset 0.3-3 km, linked by an oblique breaching segment; Faulds & Hinz (2015) report step-overs as the most common structural setting (~32%) of characterised geothermal systems.",
+      "why": "Relay zones are where overlapping strands multiply; an expert panel mapping a geothermal target would add strands there.",
+      "differs": "Adds lateral-offset geometry the forward-cone rule cannot generate (overlapping tips).",
+      "status": "REFUTED, now including the variant that had never been generated. Session 1 found oblique tip-to-tip links uninformative and recorded that OVERLAPPING offsets were never generated; Session 4 implemented exactly that rule (src/gems27/newinfo.steppover_links: strikes agreeing within 20 deg, lateral offset 0.3-3 km, along-strike overlap >=200 m, shortest breaching segment between the overlapping parts) and gated it on seeds 140-149. It finds 148.8 links/cell (median lateral offset 1.36 km, median overlap 1.12 km, median strike difference 8.1 deg, median gap 1.13 km) with pooled efficiency 0.0605 - BELOW the break-even m(0.30) = 0.0638 - and only 1.11x the perpendicular-strike control (0.0545; the registered criterion was >=2.0x). Adding them to the honest OOF base still gives +0.0022 paired DTI in 4/4 folds, which is real but 5.5x weaker than T-v2's +0.0122 at a quarter of the efficiency. Not promoted. Caveat: the control finds only 3.75 links/cell, so the enrichment ratio is measured against a small sample; the absolute efficiency does not depend on it.",
+      "gain": "Not demonstrated.",
+      "cost": "Low.",
+      "external": null
+    },
+    {
+      "id": "H27-11",
+      "rank": 12,
+      "title": "Emit on independently-mapped bedrock faults that the Quaternary catalogue lacks (SGMC-gap emission)",
+      "layers": "USGS State Geologic Map Compilation NV+CA faults (mrdata.usgs.gov/geology/state/shp/NV.zip, CA.zip) >300 m from every catalogue fault, thinned to 1-px lines; no model, no training.",
+      "signature": "Position relative to a SECOND, independent official catalogue: a bedrock geologic map line with no Quaternary counterpart is, on this hypothesis, a fault the compilation missed.",
+      "why": "Would have been a wholly new source of far-field pixels - the habitat that carries 81.4% of the 0.2477 emission's dots.",
+      "differs": "Everything else in the programme emits where a detector trained on the catalogue fires; this emits where the catalogue is silent and another official map speaks.",
+      "status": "LIVE-REFUTED. The group already spent a slot on it (16GEMSDOE H18-4, content id aef8f42c, sha256 736f62c2da58..., owner-reported 0.0360) and Session 4 inverted that score with the repository's own metric code, after re-verifying the construction from the raster bytes (57,783 in-footprint positives, 0 on catalogue px, min catalogue distance 3.16 px, 34 residual 2x2 blocks, 79.66% on the restored SGMC mask) and reproducing Session 3's published anchors to 5 significant figures. Concentration 1.62x blind (exact bracket 0.76-1.65x over MP in [0,N]) against 5.3-6.0x for the H19-5 family; credit fraction 0.062 of |G|; c(S) = 0.0384, i.e. 2.73x BELOW a uniform spray of the same size because contiguous lines waste kernel coverage; best modelled score at its own thinning optimum 0.0424 (d=2.25 px), 5.8x below 0.2477. Barred without new evidence.",
+      "gain": "negative (-0.212 live vs the 0.2477 reference)",
+      "cost": "already paid by the group; inversion cost 10 s",
+      "external": [
+        {
+          "name": "USGS State Geologic Map Compilation - Nevada",
+          "url": "https://mrdata.usgs.gov/geology/state/shp/NV.zip",
+          "obtainable": "hash-pinned sha256 3b333ac025e59aae7f0d827db45ba32c425cf867eb341561a788af1de186b76b (sibling runner record, ok:true 2026-09-30); a 100 m SGMC fault mask is already restored locally as data_cache/derived_sgmc_faults_100m_u8.tif (83,593 px)"
+        },
+        {
+          "name": "USGS State Geologic Map Compilation - California",
+          "url": "https://mrdata.usgs.gov/geology/state/shp/CA.zip",
+          "obtainable": "hash-pinned sha256 78765ba4428df9f25a84f86e0b2529bd0508fc8a2cf65d2f41a830e82bccfd58 (same record)"
+        }
+      ]
+    },
+    {
+      "id": "H27-3",
+      "rank": 13,
+      "title": "Emission-graph coherence filter: keep multi-dot chains, drop isolated 1-dot fragments",
+      "layers": "The dotted emission itself as a point-proximity graph (no new data).",
+      "signature": "Drop isolated emitted dots that have no other emitted dot within 600 m (6 px), on the hypothesis that isolated specks are false-positive noise whereas multi-dot chains are true fault scarps.",
+      "why": "Tests whether isolated dots in a d=1.5 thinned ridge emission have efficiency below the break-even threshold m(D).",
+      "differs": "Graph filter on the emission itself rather than on the catalogue.",
+      "status": "REFUTED on the honest 4-fold spatial-CV out-of-fold detector B_oof (Addendum C, seeds 130-139, evidence/oof_hypothesis_gates.json): isolated dots removed by the 600 m filter had hit efficiency 0.0329 (> m_oof = 0.0175), so dropping them reduced DTI in 4/4 folds (mean -0.0010, min -0.0013, max -0.0006). Because catalogued fault segments have a median length of 1.27 km, a single d=1.5 thinned scarp fragment often consists of 1-2 dots; dropping isolated dots discards real short faults. Rejected \u2014 no submission slot spent.",
+      "gain": "-0.0010 on OOF holdout (negative in 4/4 folds). Do not ship.",
+      "cost": "Tested and rejected on holdout (0 slots spent).",
+      "external": null
+    },
+    {
+      "id": "H27-6",
+      "rank": 14,
+      "title": "Coverage-optimal budget thinning: choose WHICH dots to keep by maximising coverage",
+      "layers": "The emission itself plus the official kernel (no new data).",
+      "signature": "Poisson-disk thinning is a packing rule, blind to how much of the emission's own support survives. Replace it with the subset of N dots that maximises c(S') = mean over the footprint of max over dots of k(d(.,dot)) - a monotone submodular max-coverage problem whose objective IS the metric's credit functional. Batched greedy with exact local marginal gains gain(y) = sum_{|delta|<3} max(0, k(delta) - cov(y+delta)), 29 shifted-array ops per batch.",
+      "why": "Under the live-validated retention rule credit(d) = credit_solid * c(d)/c_solid, the score at fixed budget is monotone in c, so maximising c directly should dominate packing.",
+      "differs": "Every thinning variant in this repository family (dot_thin, score-ordered dotting) ranks dots by geometry or by a detector score. This ranks them by the metric's own coverage functional.",
+      "status": "REFUTED. src/gems27/coverage_thin.py, measured on quadrant NW at matched budgets: at 20,752 px coverage-greedy attains 143,341 coverage mass vs Poisson-disk 165,563 = 0.866x (13% WORSE); at 28,209 px it is a wash (1.010x). On a 1-px-wide ridge network isotropic spacing already is the near-optimal cover, and greedy's early picks are made against an empty coverage map and cannot be undone. Rejected - no slot spent. Do not re-propose.",
+      "gain": "-13% coverage at the sparse budget that matters. Do not ship.",
+      "cost": "Tested and rejected (0 slots spent); ~65 s per quadrant",
+      "external": null
+    },
+    {
+      "id": "H27-7",
+      "rank": 15,
+      "title": "Union-recall ensembling of near-disjoint high-score surfaces",
+      "layers": "h19-5, h16-1, H25-ctx-ridge, r7-nms3-dem10-scarp emissions recovered by SHA-256 from the sibling repos.",
+      "signature": "The best surfaces are nearly pixel-disjoint (Jaccard: h19-5 vs H25-ctx 0.075, vs r7-scarp 0.052, vs h16-1 0.592), which looks like free recall. Union them and thin to the budget optimum.",
+      "why": "If two surfaces cover DIFFERENT truth, the union's credit could exceed either, and credit - not budget - is the binding constraint on 0.3195.",
+      "differs": "The group's scored ensembles (ens12 0.1563, dual-family-union 0.1560) were built by score averaging; this is a set union evaluated under the live-anchored forward model with explicit pessimistic bounds.",
+      "status": "REFUTED as an improvement; BOUNDED as a gamble. Live-anchored model: h19-5 U h16-1 at d2.25 (51,971 px) = 0.2655 central but 0.2310 under the pessimistic bound TP_union = max(TP_A, TP_B); h19-5 U H25-ctx (87,906 px) = 0.2521 / 0.1688. Against those, h19-5 ALONE at d2.25 is 0.2550 with a retention rule validated to 4%. The union's entire edge lives in an unvalidated complementarity assumption and its downside is -0.086. A weekly slot is worth more than that. No slot spent.",
+      "gain": "-0.086 to +0.011 depending on an unmeasurable assumption. Do not ship.",
+      "cost": "Tested and rejected (0 slots spent)",
+      "external": null
+    },
+    {
+      "id": "H27-9",
+      "rank": 16,
+      "title": "Live-truth habitat tomography: recover WHERE the hidden labels live from the scores alone",
+      "layers": "All 20 hash-authenticated scored rasters + catalogue distance field + LiDAR scarp descriptors.",
+      "signature": "TP_i = sum_x lambda(x) K_i(x) is linear in the truth intensity lambda, so 20 scored submissions are 20 measurements of lambda - a designed sensing experiment on the private labels. Expand lambda in geological habitat bases and solve non-negative least squares with the mass constraint sum lambda = |G|.",
+      "why": "Would answer the only question that matters for 0.3195: which habitats the organisers' new expert labels occupy, using the REAL private labels through their scores rather than a catalogue-internal proxy.",
+      "differs": "Every gate in this repository family validates against catalogue-internal holdouts. This uses the live scores as the label signal.",
+      "status": "NOT IDENTIFIABLE - rejected. With overlapping geological bases the fit fails outright (in-sample R2 = -1.24). Restricted to a strict 7-cell catalogue-distance PARTITION (well identified, mass constraint exact) it still fails: in-sample R2 = -0.360, leave-one-submission-out score RMSE 0.0715 against a score spread of 0.0686 - signal ratio 0.96, i.e. no better than predicting the mean. 20 aggregate numbers cannot resolve a 5.2 M-pixel field. The fitted lambda put 66% of truth in the 100-200 m catalogue ring and 34% at 800-1500 m, which is suggestive and consistent with Hermant et al. (2025) 150-400 m LiDAR offsets, but it did not pass its own validation and MUST NOT be used to choose an emission.",
+      "gain": "none - failed its own leave-one-out validation",
+      "cost": "Tested and rejected (0 slots spent); evidence/live_truth_partition_radial.json",
+      "external": null
+    },
+    {
+      "id": "H28-3",
+      "rank": 99,
+      "title": "Dilatational-strain \u00d7 conductivity intersection corridors",
+      "layers": "geod_2ndinv, geod_shearrate, geod_dilaterate, cond_surf, depth_to_base_surf; 300-m label-free gradients and co-location.",
+      "signature": "Positive-dilatation strain core, strain/shear/conductivity gradients, unsigned gradient alignment, and shallow-basement-conditioned corridor.",
+      "why": "A blind or alluvium-covered fault could localize deformation and fluid-altered conductivity without a catalogue-quality surface scarp.",
+      "differs": "Explicit spatial conjunction and gradient alignment, not a scalar-channel threshold, emission re-spacing, catalogue-flank prune, or peer-raster copy.",
+      "status": "TESTED \u2014 FROZEN GATE FAILED. HOLDOUT-DTI pooled candidate 0.103352 vs baseline 0.105946, \u0394 -0.002594; 95% seed-bootstrap CI [-0.004240, -0.000907], 2/10 seeds and 1/4 folds improved. No slot. Negative research TIFF 27d6875f3b22 is format-valid and unique against the pinned peer registry but NOT APPROVED FOR SUBMISSION.",
+      "gain": "negative: pooled \u0394DTI -0.002594",
+      "cost": "one local pre-registered holdout experiment; 0 weekly slots",
+      "external": []
+    },
+    {
+      "id": "H29-1",
+      "rank": 100,
+      "title": "Hydrothermal Upflow Disequilibrium \u00d7 Piedmont-Toe Concave Flexure \u00d7 Destriped Shallow Geophysical Vesselness + Probability-Weighted 300 m CELF Submodular Cover (Lane L-S7-2026-10-25)",
+      "layers": "gdr_wellspring_in_footprint.csv (temp_c, geothermquartz_c, geothermchalc_c, geothermcat_c ONLY; dist_known_fault_px forbidden), geodawn_extensions_u8.tif (TMI_up150), geodawn_rad_u8.tif (K, Th), training_features.tif, lidar_scarp_features_u8.tif.",
+      "signature": "Piedmont-toe upward concave break-in-slope + slope-deconfounded 1 m LiDAR scarps + E-W 90-deg destriped shallow magnetic demagnetization (TMI - TMI_up150) + K/Th alteration fronts + intra-basin basement horst steps (Siler et al. 2022) + GDR chemical geothermometer disequilibrium (dT = T_eq - T_meas; Kraal et al. 2022) + 2-stage nested cross-fitted Frangi/line-integral vesselness + weighted 300 m CELF cover.",
+      "why": "Reallocates off-catalogue dots from steep erosional mountain walls onto subtle piedmont-toe scarps, buried intra-basin horst faults, and cold-masked hydrothermal conduits outside the 200 m catalogue collar.",
+      "differs": "Zero H19-5 dependency, zero T-v2 continuation; fixes H27-6 unweighted coverage_thin via probability-weighted CELF cover (+0.002500 buffered / +0.005716 unbuffered over Poisson d=2.8 on the identical H29 surface, 8/10 seeds) and emits from dual-partition stitched OOF.",
+      "status": "TESTED ON UNUSED SEEDS 210-219 (commit 30accf8) \u2014 NEW HIGHEST BLIND POOLED HOLDOUT-DTI (0.042198 buffered / 0.103907 unbuffered), DECISIVELY BEATING B0 (+0.005829, 95% CI [+0.00442, +0.00742], 10/10 seeds, 4/4 folds) AND PRIOR PROMOTED CHAMPION H28-1 (+0.004620, 95% CI [+0.00344, +0.00597], 10/10 seeds, 3/4 folds), AND EDGING INTERNAL CONTROL D0 (+0.001295 buffered / +0.005399 unbuffered, 3/4 folds NW/NE/SW), BUT STRICT 6-CLAUSE GATE HELD WEEKLY SLOT (3/6 clauses: 95% CI vs D0 [-0.000986, +0.003695] spans zero due to SE Walker Lane seismicity -0.002526). Format-valid & unique GeoTIFF 511898747886 shipped (all-finite [0, 1], max peer 3px overlap 0.6421 <= 0.70, max Spearman 0.0472 <= 0.90); weekly slot preserved.",
+      "gain": "+0.005829 vs B0 (10/10 seeds), +0.004620 vs H28-1 (10/10 seeds), +0.001295 vs D0 (CI [-0.00099, +0.00370]); weekly slot held under strict composite gate.",
+      "cost": "3 local experiments (E1 canary+surface, E2 40-cell holdout, E3 stitched-OOF build); 0 weekly slots spent.",
+      "external": []
+    },
+    {
+      "id": "H30",
+      "rank": 98,
+      "title": "Hydrothermal-chemistry re-ranking + deconflicted placement of the Arm-D detector",
+      "layers": "INGENIOUS/GDR wellspring station temperatures (temp_c, geothermquartz_c; dist_known_fault_px never read) x 32-band stack + 15 subsurface transforms (Arm D).",
+      "signature": "Local thermal-anomaly field (station temp vs 15 px local median), rank-normalised, bounded +/-40% multiplicative re-ranking; deconflicted priority Poisson-disk with <=65% of the 38k budget within 3 px of repo-shipped rasters.",
+      "why": "Buried/basement faults with active upflow host warm wells without young scarps; measured temperatures carry information the lidar-scarp regime cannot see; deconfliction buys uniqueness vs every shipped raster.",
+      "differs": "H27-12 used distance-to-spring features (refuted); no prior use of measured values or post-detector re-ranking; deconfliction generalised from H29-1b's single-raster cap to all 12 repo rasters.",
+      "status": "TESTED - FROZEN GATE FAILED (negative, deliverable). HOLDOUT-DTI pooled L 0.09608 vs B 0.10031 (paired -0.00445 [-0.00800,-0.00112], 7/20 cells) and L-D -0.00662 [-0.00845,-0.00463]; canary 0.499 clean; D-B replicated +0.00217 [-0.00126,+0.00531] 15/20 cells on third fresh seed set. Uniqueness: unique vs ALL 12 peers (max 0.320) AND all 12 repo rasters (max 0.648) - clears both screens (the parallel session's H29-S also clears the 24-raster screen; H30 additionally clears vs H29-S at 0.302 post-merge re-screen); format hard-PASS. Bytes retained as NEGATIVE RESEARCH ARTIFACT (ad5a68bb0535); ok_to_submit=false. Evidence: evidence/h30_holdout.json, evidence/h30_run_card.json, knowledge/22.",
+      "gain": "Prior +0.002..+0.008 vs B (MODEL); realised -0.0044 (the deconfliction cost, MEASURED).",
+      "cost": "Low-medium (TESTED this session; consumed seeds 240-244)"
+    },
+    {
+      "id": "H30-1",
+      "rank": 99,
+      "title": "Dip-advection correction of subsurface edges (feature form of H29-2)",
+      "layers": "rtp, iso_grav_anom, depth_to_base_surf from the pinned 32-band stack",
+      "signature": "Ranked RTP/gravity/basement-step edge strength sampled down-dip (along the depth-to-basement gradient) by clip(depth*cot(dip)/100 m, 0, 8 px), dip 50/70 deg (5 features, gems27.dip_gap_features)",
+      "why": "A dipping buried fault's deep edge is offset hundreds of metres from its surface trace; a per-pixel detector otherwise scores the deep-edge pixel, not the trace.",
+      "differs": "Directed depth-scaled advection; differs from the undirected dip-offset doublets of L-DCONFIRM (which also hurt) and from any emission-side shift.",
+      "status": "TESTED - SELECTION GATE FAILED (Lane L-H30, seeds 240-244, knowledge/20+21). Pooled HOLDOUT-DTI DIP 0.09888 vs Arm-D control 0.10234 (mean paired -0.00359, 6/20 cells, 0/4 fold means up). Canary AUC <=0.561. No slot.",
+      "gain": "negative: pooled delta -0.00346 vs Arm D on selection seeds",
+      "cost": "one local pre-registered holdout experiment (Lane L-H30, shared selection); 0 weekly slots",
+      "external": []
+    },
+    {
+      "id": "H30-2",
+      "rank": 99,
+      "title": "Along-strike gap flanking of potential-field edges",
+      "layers": "rtp, iso_grav_anom ranked edges (sigma=2)",
+      "signature": "max over 4 strikes of min(E(x-d*u), E(x+d*u)), lag d=6/12 px (4 features)",
+      "why": "Collinear edge segments bounding a low-amplitude interval mark one buried fault continuing under thicker cover where the surface catalogue stops.",
+      "differs": "Min-of-flanks at fixed lags on potential-field edges; Addendum-D directional bands averaged lidar layers along strike (refuted) - different input and operator.",
+      "status": "TESTED - SELECTION GATE FAILED (Lane L-H30, seeds 240-244, knowledge/20+21). Pooled HOLDOUT-DTI GAP 0.10180 vs Arm-D control 0.10234 (mean paired -0.00071, 95% CI [-0.00291,+0.00164], 9/20 cells, 2/4 fold means up). Closest contender; built as the session's single NEGATIVE research TIFF 3107a3007b77 (format+peer-uniqueness PASS, efficacy FAIL, NOT APPROVED FOR SUBMISSION). No slot.",
+      "gain": "negative: pooled delta -0.00053 vs Arm D on selection seeds",
+      "cost": "one local pre-registered holdout experiment (Lane L-H30, shared selection); 0 weekly slots",
+      "external": []
+    },
+    {
+      "id": "H30-3",
+      "rank": 99,
+      "title": "Soft rank-taper emission at matched effective mass (H29-3)",
+      "layers": "Arm-D detector probability surface only",
+      "signature": "76,000-px Poisson support with values 1-k/N by descending probability, rescaled to effective mass 38,000, scored under exact soft DTI",
+      "why": "Fractional values could hedge second-tier candidates for uncatalogued faults at fractional false-positive cost.",
+      "differs": "Every scored family file is binary; this is the family's first soft-emission gate.",
+      "status": "TESTED - SELECTION GATE FAILED (Lane L-H30, seeds 240-244, knowledge/20+21). Pooled HOLDOUT-DTI SOFT 0.09943 vs binary D 0.10234 (mean paired -0.00334, 4/20 cells). Consistent with bang-bang optimality of soft Tversky away from truth. No slot.",
+      "gain": "negative: pooled delta -0.00291 vs binary Arm D on selection seeds",
+      "cost": "one local pre-registered holdout experiment (Lane L-H30, shared selection); 0 weekly slots",
+      "external": []
+    },
+    {
+      "id": "H32",
+      "rank": 100,
+      "title": "Poisson-theorem gravity-to-pseudogravity hydrothermal demagnetization residual (= H31-2)",
+      "layers": "rtp, tmi_hg, tmi_vg, iso_grav_anom, iso_grav_anom_hg, iso_grav_anom_vg (training_features.tif, hash-pinned)",
+      "signature": "Local sigma=15px gravity-on-RTP regression residual + gradients; gravity-edge-without-magnetic-edge rank contrasts; gravity-only structure coherence; pseudogravity-mismatch gradient (src/gems27/poisson_demag.py, 8 features)",
+      "why": "Hydrothermal magnetite destruction along blind conduits erases the magnetic edge while the gravity density step persists; surface-rupture catalogues miss such blind faults.",
+      "differs": "subsurface_features multiplies coincident mag+grav edges, suppressing exactly this case; no Poisson-residual feature existed in src/.",
+      "status": "TESTED - FROZEN GATE FAILED (Lane L-S11, fresh seeds 500-509, 40 cells, 118,039 withheld positives, knowledge/26+27). Pooled HOLDOUT-DTI P 0.03573 vs D 0.03922 vs B 0.03647; P-D -0.00349, 95% CI [-0.00477,-0.00223], 1/10 seeds, 0/4 folds; canary max dir-inv AUC 0.546. Unique TIFF 1ac69a77008d is a NEGATIVE research artifact in docs/downloads/research/ - DO NOT SUBMIT. Seeds 500-509 consumed; do not reuse or retune.",
+      "gain": "negative: pooled delta -0.00349 vs D (base-32+subsurface-15) on fresh seeds 500-509",
+      "cost": "3 experiments (E1 canary, E2 holdout, E3 build); 0 weekly slots",
+      "external": []
+    },
+    {
+      "id": "H33-1",
+      "rank": 101,
+      "title": "Short buried basement-step complement emission",
+      "layers": "cached 32-band stack plus depth_to_base_surf gradients/coherence, low-scarp residual, and short anisotropy (src/gems27/buried_step.py)",
+      "signature": "A short basement-depth step under weak lidar relief, emitted only outside the 3 px neighborhood of every positive pixel in the 12 pinned focus-site rasters",
+      "why": "Catalogue pixels the d=2.8 family does not cover sit under thicker basin fill and weaker scarps; a unique detector has to live there or it is a duplicate.",
+      "differs": "Not a collar deletion of the 0.2778 file and not a tilt/analytic-signal rerun. Complement emission is a hard constraint, not a post-hoc prune of family dots.",
+      "status": "TESTED - FROZEN GATE FAILED (Lane L-S13-H33, seeds 520-529). HOLDOUT-DTI 0.025211 vs base-32 0.041446; paired 95% CI [-0.017576, -0.014449]; 0/10 seeds. Unique vs 12 peers (overlap 0.000). NOT OK TO SUBMIT.",
+      "evidence": "knowledge/30_preregistration_H33_2026-10-27.md; knowledge/31_h33_result_2026-10-27.md; evidence/h33_run_card_2026-10-27.json"
     }
-   ]
-  },
-  {
-   "id": "H27-8",
-   "rank": 3,
-   "title": "Stack every validated increment at the live-anchored budget optimum (slot 4)",
-   "layers": "H19-5 emission (h19_5_nan.tif) + catalogue raster (labels.tif) + NBMG INGENIOUS vectors + T-v2 link set. No new external data.",
-   "signature": "dot_thin(H19-5, 2.8) [= the live-anchored budget optimum, 44,090 px] minus the 1 px (100 m) catalogue-flank shadow (H27-4 r<=1, 3,891 px) plus 1,308 non-redundant T-v2 gap-closure dots = 41,507 px.",
-   "why": "Session 3 inverted all 20 hash-authenticated live scores and produced a forward model DTI = TP/(0.2 TP (1-rho) + 0.2 N + 0.8|G|) that reproduces BOTH live anchors exactly (H19-5 solid -> 0.1922, dotted d1.5 -> 0.2477) and whose retention rule predicts a second, unrelated live pair to +4.0%. Under that model the budget optimum is d = 2.25-2.8 -> 0.2550, and the sibling's independent two-parameter fit gave 0.2553. Slot 4 is the first candidate to combine that optimum with the two increments the out-of-fold gate validated (T-v2 +0.0115, H27-4 stacked +0.0141, both 4/4 folds).",
-   "differs": "Slot 2 uses the d2.8 budget but carries only T-v2; slot 3 carries T-v2 + the prune but at d1.5. Nothing in the programme has stacked all three at the anchored optimum.",
-   "status": "BUILT AND VERIFIED, UNSCORED. evidence/candidate_model_scores.json: geometric model 0.2484, hybrid model 0.2781 (highest hybrid of the four). The two models differ ONLY in what the targeted prune is charged; slot 1 vs slot 3 is the live A/B that settles it. 79 format/consistency checks pass (scripts/verify_downloads.py).",
-   "gain": "modelled 0.2484 (geometric) to 0.2781 (hybrid) vs 0.2477 live parent",
-   "cost": "1 submission slot; no new data; no GPU",
-   "external": null
-  },
-  {
-   "id": "H27-1",
-   "rank": 4,
-   "title": "Topology gap-closure: along-strike links between disconnected mapped fault systems",
-   "layers": "Catalogue raster (labels.tif) -> skeleton graph + NBMG INGENIOUS Qfaults vector polylines (qfaults_v2_in_footprint.json, 1,179 features); local strike domain from the same graph.",
-   "signature": "Free tips (degree-1 nodes) whose strike points at a tip of a different system 1-4 km away; straight link; evidence score z = [mutual] + [end-to-end] + [tip within 15 deg] + [local strike agreement >= 0.4] + [merged length <= 8 km]; ship z >= 3 (345 links, 1,259 non-redundant dots vs 0.2477). Network sits near its connectivity threshold (Berkowitz-style P ~ 5.8 vs Pc 5.6-6.0).",
-   "why": "Mapped faults are compiled in pieces; unmapped continuations across short gaps are where an expert panel adds 'new' faults, and surface-contrast detectors cannot see them because the gap itself is low-contrast. Vector attribution against 1,179 NBMG polylines shows 230/345 links bridge intra-FID sub-parts of the same multipart polyline, 115/345 bridge distinct FID polylines, 312/345 lie within the same named fault zone (NAME/NUM), and 333/345 have compatible SLIPSENSE/DIPDIRECT.",
-   "differs": "First use of the catalogue's graph and vector polyline topology. The sibling's h16-continuation (owner-reported 0.0461) is the nearest prior idea; T-v2 differs by requiring a target system, a 1-4 km gap bound, tip-to-tip alignment, and a strike-agreement score, and by being gated on rotated-cone controls across three holdout tiers plus an out-of-fold spatial-CV base.",
-   "status": "VALIDATED across 4 independent protocols: (1) component holdout seeds 100-109 (0.281 vs 0.059 ctrl) and fresh seeds 110-119 (0.280 vs 0.056 ctrl, +0.0117 paired DTI, 4/4 folds); (2) NBMG FID vector-trace holdout seeds 120-129 (0.1003 vs 0.0204 ctrl, 4.92x enrichment, > m(0.30)=0.0638); (3) honest 4-fold spatial-CV out-of-fold detector B_oof on seeds 130-139 (+0.0115 paired DTI, 4/4 folds, marginal efficiency 0.2251).",
-   "gain": "At the 0.2477 operating point: worst case -0.0029 (zero hit rate), break-even at efficiency 0.0522, +0.0024 at the FID vector-trace holdout efficiency 0.1003, and +0.0110 at the component holdout efficiency 0.280-0.293. Shipped as Primary Slot 1 (5512495c6bd1) and Secondary Slot 2 (3ebd51534bb1).",
-   "cost": "Done (this repo). Shipped in Slot 1 & Slot 2.",
-   "external": null
-  },
-  {
-   "id": "H27-4",
-   "rank": 5,
-   "title": "Tip-shadow pruning: drop emission within 100-300 m of masked catalogue pixels",
-   "layers": "Catalogue distance transform (d_cat) + dotted emission surface.",
-   "signature": "A surface trained on catalogued scarps peaks on them; once 1-px catalogue cells are masked, emission survives as 1-3 px 'shadows' beside known faults (further reinforced by 100-400 m USGS-vs-LiDAR scarp offsets documented by Hermant et al. 2025, Fig. 2 & Fig. 9B). In the 0.2477 file (60,069 px), 5,355 dots (8.91%) sit at exactly d_cat = 100 m (1 px) and 8,769 (14.60%) within 200 m.",
-   "why": "Because ground truth G consists of newly created fault labels rather than the unmasked 100-200 m flank of already-catalogued faults, these 1-2 px flank-shadow dots are almost pure false-positive mass; removing them cuts FP without touching recall on new faults.",
-   "differs": "Subset transform driven by catalogue distance geometry and gated on an honest out-of-fold spatial-CV detector; the repo's thinning is geometry-blind.",
-   "status": "VALIDATED on the honest 4-fold spatial-CV out-of-fold detector B_oof (seeds 130-139, evidence/oof_hypothesis_gates.json): dropping dots at d_cat <= 100 m (1 px) removes dots with efficiency 0.0034 (15x below the 0.0521 live break-even), raising DTI in 4/4 folds (+0.0022 solo; +0.0141 when stacked with T-v2 in 4/4 folds). Dropping d_cat <= 200 m (2 px) removes dots with efficiency 0.0080 (+0.0025 solo, 4/4 folds; +0.0147 stacked with T-v2). Dropping d_cat < 300 m (3 px) removes dots with efficiency 0.0140 (+0.0014 solo, 3/4 folds).",
-   "gain": "At the 0.2477 operating point: pruning the 5,355 d_cat=100 m flank-shadow dots alone gives +0.0118 modelled DTI (to ~0.2598); stacking with T-v2 (Slot 3 candidate d466b251f309, 55,992 px) gives +0.0141 modelled DTI under FID_trace efficiency (to ~0.2621) and +0.0223 under component efficiency (to ~0.2702).",
-   "cost": "Done (this repo). Shipped as Tertiary Slot 3 (d466b251f309).",
-   "external": null
-  },
-  {
-   "id": "H27-5",
-   "rank": 6,
-   "title": "Kinematically typed linking with official NBMG/USGS vector fault attributes (SLIPSENSE, DIPDIRECT, NAME)",
-   "layers": "NBMG INGENIOUS Qfaults vector polylines (qfaults_v2_in_footprint.json, 1,179 features with FID, NAME, NUM, FTYPE_, SLIPSENSE, DIPDIRECT, MAPSCALE) + USGS Siler (2022) slip/dilation tendency.",
-   "signature": "Attribute every skeleton endpoint and gap link with its NBMG vector polyline FID, fault zone NAME/NUM, SLIPSENSE (N/RL/LL), and DIPDIRECT, and retain inter-FID links with non-conflicting slip sense and synthetic or conjugate dip directions.",
-   "why": "Distinguishes intra-FID raster discretisation gaps from true inter-FID structural relays and filters out kinematically incompatible cross-links when whole vector polylines are held out.",
-   "differs": "Uses official NBMG/USGS vector polyline topology and kinematic attributes rather than raster-only 8-connected components.",
-   "status": "VALIDATED on the NBMG FID vector-trace holdout (Addendum B, seeds 120-129, evidence/vector_topology_validation.json): on whole-FID holdout, z>=3 dedup achieves 0.1003 vs 0.0204 rotated-cone control (4.92x); filtering to inter-FID + kinematic_compat (H27-5a) raises efficiency to 0.1374 (6.74x control), and inter-FID + same_name + kinematic_compat (H27-5b) reaches 0.1783 (8.74x control). All 345 shipped dossiers in registry/topology_candidates.json are now annotated with these vector attributes.",
-   "gain": "Raises inter-FID holdout efficiency from 0.1003 to 0.1374 (+37% relative) and 0.1783 (+78% relative within named fault zones); 333/345 (96.5%) of shipped T-v2 links already satisfy kinematic_compat.",
-   "cost": "Done for NBMG vector attributes (this repo); Siler (2022) raster stress overlay remains optional.",
-   "external": [
-    {
-     "name": "NBMG Qfaults_INGENIOUS ArcGIS REST layer 0 (1,179 in-footprint polylines restored locally)",
-     "url": "https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0",
-     "obtainable": "verified & restored locally in data_cache/qfaults_v2_in_footprint.json (sha256 4d6efc7b...)"
-    },
-    {
-     "name": "USGS Qfaults GIS (zip, 32.4 MB)",
-     "url": "https://earthquake.usgs.gov/static/lfs/nshm/qfaults/Qfaults_GIS.zip",
-     "obtainable": "verified downloadable from a GitHub runner 2026-10-02 (application/zip)"
-    },
-    {
-     "name": "Siler (2022) slip & dilation tendency, Great Basin (USGS ScienceBase)",
-     "url": "https://www.sciencebase.gov/catalog/item/6296974dd34ec53d276bb33d",
-     "obtainable": "ScienceBase JSON metadata verified; raster overlay optional"
-    }
-   ]
-  },
-  {
-   "id": "H27-10",
-   "rank": 7,
-   "title": "Model-ranked 100-300 m offset-scarp annulus (narrow H27-10 variant)",
-   "layers": "Known-catalogue distance (labels.tif); 32 prepared features including lidar_lappos_max, lidar_step_max, lidar_ex_max and lidar_coh100; six H28-1 multiscale magnetic/gravity edge features; strictly OOF ridge probabilities.",
-   "signature": "Reallocate the exact number of H27-4 r1-pruned OOF dots into the 1 < distance <= 3 px (100-300 m) annulus around known catalogue traces. Rank eligible OOF ridge cells by the frozen H28-1 OOF detector probability; preserve the total dot count, T-v2 links, and >=1.5 px spacing.",
-   "why": "A LiDAR-supported ridge offset from a mapped Quaternary trace may be an unlabelled parallel strand or splay. The official Hermant et al. (2025) PDF says one local USGS/TLS separation can be up to 400 m; it does not establish a typical 150-400 m distribution or validate the selected 100-300 m band. Prior habitat tomography failed validation and is not evidence for the location. The experiment tests this narrow band directly on catalogue-internal hidden components, whose transfer limit is explicit.",
-   "differs": "H27-4 removes d<=1 px emissions; this version tests whether the pruned dot budget is better reallocated to model-ranked 1<d<=3 px OOF ridges than to the current best's lower-probability >3 px dots. It does not use SLIPSENSE/DIPDIRECT to claim a mechanically predicted side: no local stress model or preregistered sidedness rule is available.",
-   "status": "TESTED — FROZEN GATE FAILED on seeds 150-159; do not treat as untried or use to justify a weekly slot. Mean paired ΔDTI +0.00084615 (required ≥+0.001); 4/4 folds but 7/10 seeds (required ≥8/10); annulus addition efficiency 0.03357 < m(0.2477)=0.05212. First-run self-distance spacing diagnostic false-negative is recorded; corrected rerun on the same used seeds passed data checks with numerical result and gate unchanged (integrity check only, not fresh confirmation). See evidence/h27_10_annulus_holdout.json, evidence/h27_10_annulus_holdout_initial.json, and registry/irregularities.json.",
-   "gain": "Observed catalogue-holdout result: +0.00084615 paired mean DTI; frozen gate failed. No live score or weekly slot.",
-   "cost": "low-medium; cached, hash-pinned feature inputs and existing OOF/link code; one holdout run",
-   "external": [
-    {
-     "name": "Hermant, Kiersnowski & Bellanger (2025), Stanford Geothermal Workshop PDF",
-     "url": "https://pangea.stanford.edu/ERE/db/GeoConf/papers/SGW/2025/Hermant.pdf",
-     "obtainable": "PDF fetched/read via page-fetch service 2026-10-02; Fig. 2 reports a local separation can be up to 400 m only. No general 150-400 m distribution and no validation of the 100-300 m band."
-    },
-    {
-     "name": "USGS 3DEP 1 m DEM",
-     "url": "https://data.usgs.gov/datacatalog/data/USGS:77ae0551-c61e-4979-aedd-d797abdcde0e",
-     "obtainable": "Official catalog page verifies the public-domain 1 m bare-earth DEM collection; local LiDAR descriptors are an owner-repository hash-pinned derivative, not a direct USGS download in this session."
-    },
-    {
-     "name": "NBMG INGENIOUS Qfaults vector layer",
-     "url": "https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0",
-     "obtainable": "1,179 in-footprint polylines are restored in the local hash-pinned owner mirror; refresh/network access remains runner-dependent."
-    }
-   ]
-  },
-  {
-   "id": "H27-12",
-   "rank": 8,
-   "title": "The three restored official layers no detector in this repo has ever used, as FEATURES",
-   "layers": "GeoDawn airborne radiometrics (K, Th, U, TC) and extensions (Th/K, U/K, U/Th, TMI_up150); USGS SGMC fault mask (distance, on-mask, within 1 km); GDR 1391 Wellspring thermal/geochemical points (27,092 rows: all, Hot only, quartz geothermometer >=150 C) and the 21 Great Basin Quaternary vents.",
-   "signature": "Alteration and thermal-chemical gradients: potassic/sericitic and clay alteration ratios along permeable fault zones, and hydrothermal fluid pathways marked by hot springs and high-temperature geothermometers.",
-   "why": "Would add information orthogonal to topography and magnetics - the physical signature of a fault that conducts fluid, whether or not it has a scarp.",
-   "differs": "New to THIS repository: those layers were used only by the refuted habitat tomography and a single-channel AUC screen. Not claimed as new to the whole group - the sibling's H19-5 blend already contains a thermal/geochemical conduit expert, and hydro_uk_anom / hydro_rad_edge / hydro_clay_conduit appear in its leaderboard-attribution table.",
-   "status": "MEASURED, NOT PROMOTED (Addendum D, seeds 140-149). +rad (8 bands) PR-AUC 0.02532 (+0.00074) and +thermal (5 bands) 0.02510 (+0.00052) both FAIL the registered +0.005 criterion: radiometric ratios and thermal-point distances add essentially nothing to a 32-band detector here. +sgmc (3 bands) PASSES both criteria (PR-AUC 0.04275, +0.01817; paired DTI +0.02852, 4/4 folds) and +all (40 bands) passes both (0.04635, +0.02177; +0.03414, 4/4) - but the habitat decomposition (evidence/arm_habitat_decomposition.json) shows the entire gain is catalogue proximity: 100% of proxy truth lies at d=0 from the published catalogue and 99.6% of credit is earned within 200 m of it, while the live 0.2477 emission puts 81.4% of its dots >=300 m away. The arms' distinctive far-field behaviour is the SGMC-gap habitat, live-measured at 1.62x blind (H27-11). Passing a gate that cannot see the habitat that pays is not a reason to spend a slot, so neither arm is promoted; the SGMC-featured detector is instead used inside the registered Addendum-E far-field probe (H27-17).",
-   "gain": "proxy +0.034 DTI (not transferable by measurement); live unknown, bounded by H27-11",
-   "cost": "1 session: 85 s to build 40 bands, ~8 min to train 6 arms",
-   "external": [
-    {
-     "name": "GeoDAWN airborne radiometrics + extensions (already restored)",
-     "url": "https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7",
-     "obtainable": "restored locally as data_cache/geodawn_rad_u8.tif (K, Th, U, TC) and geodawn_extensions_u8.tif (Th/K, U/K, U/Th, TMI_up150)"
-    },
-    {
-     "name": "GDR 1391 Wellspring (wells/springs, chemistry, temperatures, geothermometers)",
-     "url": "https://gdr.openei.org/files/1391/wellspringdata.gdb.zip",
-     "obtainable": "restored locally as data_cache/gdr_wellspring_in_footprint.csv (27,092 rows); the 20,810,222 B FileGDB is hash-pinned sha256 7222178427ce0634453846819e6482fd6867536534fe9600987099e3b356590f and HEAD-checked by the workflow"
-    }
-   ]
-  },
-  {
-   "id": "H27-14",
-   "rank": 9,
-   "title": "Rank gap-closure links by graph-connectivity VALUE, not by a local evidence score",
-   "layers": "The catalogue fault graph (src/gems27/graph.py) plus the 345 shipped T-v2 links; Berkowitz-Bour-Davy-Odling (2000) connectivity parameter P via this repo's own unit-tested closed form.",
-   "signature": "Per-link network consequence: bridge status, merged system length, change in the largest-system share of mapped fault length, dP (exact for a single merge: dn = [lA+lB+gap>=lmin] - [lA>=lmin] - [lB>=lmin], P linear in n), and the continuous second-moment increment d(sum l^2) as tie-break.",
-   "why": "Near the connectivity threshold a link that merges two LARGE clusters moves P further than one that merges two small ones, so links are not equal - and knowledge/04 puts this catalogue at P = 5.784 against Pc = 5.6-6.0, i.e. at the threshold.",
-   "differs": "z (the shipped rule) is purely local: mutual nearest, end-to-end, angle, strike compatibility, merged length <= 8 km. Nothing in it is a network quantity.",
-   "status": "REFUTED as a ranking signal; ADOPTED as documentation (Addendum D, D-3, seeds 140-149). Pooled efficiency: top half by |dP| 0.2914 vs all 345 links 0.2889 (ratio 1.008, needed >=1.15) and BELOW the 95th percentile of random same-size halves (0.3117); bottom half 0.2953; exploratory signed-dP top half 0.3054; second-moment top half 0.2463. The values are nevertheless written into every dossier (registry/topology_candidates.json, docs/data/topology_links.csv/.geojson, docs/topology.html) with the structural headline: closing all 345 candidates moves the network from P = 5.784 to P = 6.124, from inside Pc = 5.6-6.0 to above it, and 339 of 345 links are bridges. Disclosed: dP is quantised to {-1,0,+1} x P/n_ge, so it is an ordinal, and the continuous tie-break was added before Stage B ran.",
-   "gain": "none as a ranking (+0.0025 efficiency, inside the random spread); large as reviewer-facing documentation",
-   "cost": "1 module, 4 unit tests, 24 s to rebuild all dossiers",
-   "external": [
-    {
-     "name": "Berkowitz, Bour, Davy & Odling (2000), 'Scaling and connectivity in two-dimensional fracture networks', J. Struct. Geol. 22, 1257-1266",
-     "url": "https://agupubs.onlinelibrary.wiley.com/doi/10.1029/1999GL011241",
-     "obtainable": "read; the connectivity parameter P and Pc = 5.6-6.0 are implemented in src/gems27/topology_theory.py and unit-tested against the paper's numbers"
-    }
-   ]
-  },
-  {
-   "id": "H27-13",
-   "rank": 10,
-   "title": "Multi-scale directional lineament context (the CPU-feasible part of the FaultSEG direction)",
-   "layers": "1 m LiDAR descriptors lappos_max, step_max, ex_max (from lidar_scarp_features_u8.tif) and det_local_relief, integrated along 4 orientations {0,45,90,135} deg at along-strike half-lengths 5/10/20 px (0.5/1/2 km), across-strike sigma 0.8 px: max over orientation and anisotropy (max-mean)/max or (max-mean)/(max-min) for signed layers. 24 bands.",
-   "signature": "Kilometre-scale linear continuity and its anisotropy: a fault scarp is a line, a volcanic cone or playa rim is not, and a pixelwise tabular detector cannot tell them apart.",
-   "why": "Hermant, Kiersnowski & Bellanger (2025) attribute FaultSEG's PR-AUC 0.595 (vs siUNET 0.449) to integrating evidence ALONG the structure; this is that mechanism without a GPU.",
-   "differs": "Every band in the 32-band prepared matrix is a per-pixel or small-window statistic; no band in the programme integrates along an orientation at 0.5-2 km.",
-   "status": "REFUTED (Addendum D, criterion 1). Out-of-fold PR-AUC 0.02559 vs base 0.02458: +0.00101 against a registered requirement of +0.005. 24 oriented line-integral bands do not improve a gradient-boosted detector on this footprint. Reported as a negative result, not re-tuned: the scales, orientations and statistics were frozen before the run.",
-   "gain": "+0.001 PR-AUC (below the registered threshold); no paired-DTI arm was earned",
-   "cost": "85 s to build the bands, 94 s to train the arm",
-   "external": []
-  },
-  {
-   "id": "H27-2",
-   "rank": 11,
-   "title": "Step-over / relay-typed linking (oblique tip-to-tip, overlapping en-echelon tips)",
-   "layers": "Catalogue fault graph components with their principal-axis strikes and pixel extents (src/gems27/graph.py, links.py); no external layer.",
-   "signature": "Tips of parallel strands offset 0.3-3 km, linked by an oblique breaching segment; Faulds & Hinz (2015) report step-overs as the most common structural setting (~32%) of characterised geothermal systems.",
-   "why": "Relay zones are where overlapping strands multiply; an expert panel mapping a geothermal target would add strands there.",
-   "differs": "Adds lateral-offset geometry the forward-cone rule cannot generate (overlapping tips).",
-   "status": "REFUTED, now including the variant that had never been generated. Session 1 found oblique tip-to-tip links uninformative and recorded that OVERLAPPING offsets were never generated; Session 4 implemented exactly that rule (src/gems27/newinfo.steppover_links: strikes agreeing within 20 deg, lateral offset 0.3-3 km, along-strike overlap >=200 m, shortest breaching segment between the overlapping parts) and gated it on seeds 140-149. It finds 148.8 links/cell (median lateral offset 1.36 km, median overlap 1.12 km, median strike difference 8.1 deg, median gap 1.13 km) with pooled efficiency 0.0605 - BELOW the break-even m(0.30) = 0.0638 - and only 1.11x the perpendicular-strike control (0.0545; the registered criterion was >=2.0x). Adding them to the honest OOF base still gives +0.0022 paired DTI in 4/4 folds, which is real but 5.5x weaker than T-v2's +0.0122 at a quarter of the efficiency. Not promoted. Caveat: the control finds only 3.75 links/cell, so the enrichment ratio is measured against a small sample; the absolute efficiency does not depend on it.",
-   "gain": "Not demonstrated.",
-   "cost": "Low.",
-   "external": null
-  },
-  {
-   "id": "H27-11",
-   "rank": 12,
-   "title": "Emit on independently-mapped bedrock faults that the Quaternary catalogue lacks (SGMC-gap emission)",
-   "layers": "USGS State Geologic Map Compilation NV+CA faults (mrdata.usgs.gov/geology/state/shp/NV.zip, CA.zip) >300 m from every catalogue fault, thinned to 1-px lines; no model, no training.",
-   "signature": "Position relative to a SECOND, independent official catalogue: a bedrock geologic map line with no Quaternary counterpart is, on this hypothesis, a fault the compilation missed.",
-   "why": "Would have been a wholly new source of far-field pixels - the habitat that carries 81.4% of the 0.2477 emission's dots.",
-   "differs": "Everything else in the programme emits where a detector trained on the catalogue fires; this emits where the catalogue is silent and another official map speaks.",
-   "status": "LIVE-REFUTED. The group already spent a slot on it (16GEMSDOE H18-4, content id aef8f42c, sha256 736f62c2da58..., owner-reported 0.0360) and Session 4 inverted that score with the repository's own metric code, after re-verifying the construction from the raster bytes (57,783 in-footprint positives, 0 on catalogue px, min catalogue distance 3.16 px, 34 residual 2x2 blocks, 79.66% on the restored SGMC mask) and reproducing Session 3's published anchors to 5 significant figures. Concentration 1.62x blind (exact bracket 0.76-1.65x over MP in [0,N]) against 5.3-6.0x for the H19-5 family; credit fraction 0.062 of |G|; c(S) = 0.0384, i.e. 2.73x BELOW a uniform spray of the same size because contiguous lines waste kernel coverage; best modelled score at its own thinning optimum 0.0424 (d=2.25 px), 5.8x below 0.2477. Barred without new evidence.",
-   "gain": "negative (-0.212 live vs the 0.2477 reference)",
-   "cost": "already paid by the group; inversion cost 10 s",
-   "external": [
-    {
-     "name": "USGS State Geologic Map Compilation - Nevada",
-     "url": "https://mrdata.usgs.gov/geology/state/shp/NV.zip",
-     "obtainable": "hash-pinned sha256 3b333ac025e59aae7f0d827db45ba32c425cf867eb341561a788af1de186b76b (sibling runner record, ok:true 2026-09-30); a 100 m SGMC fault mask is already restored locally as data_cache/derived_sgmc_faults_100m_u8.tif (83,593 px)"
-    },
-    {
-     "name": "USGS State Geologic Map Compilation - California",
-     "url": "https://mrdata.usgs.gov/geology/state/shp/CA.zip",
-     "obtainable": "hash-pinned sha256 78765ba4428df9f25a84f86e0b2529bd0508fc8a2cf65d2f41a830e82bccfd58 (same record)"
-    }
-   ]
-  },
-  {
-   "id": "H27-3",
-   "rank": 13,
-   "title": "Emission-graph coherence filter: keep multi-dot chains, drop isolated 1-dot fragments",
-   "layers": "The dotted emission itself as a point-proximity graph (no new data).",
-   "signature": "Drop isolated emitted dots that have no other emitted dot within 600 m (6 px), on the hypothesis that isolated specks are false-positive noise whereas multi-dot chains are true fault scarps.",
-   "why": "Tests whether isolated dots in a d=1.5 thinned ridge emission have efficiency below the break-even threshold m(D).",
-   "differs": "Graph filter on the emission itself rather than on the catalogue.",
-   "status": "REFUTED on the honest 4-fold spatial-CV out-of-fold detector B_oof (Addendum C, seeds 130-139, evidence/oof_hypothesis_gates.json): isolated dots removed by the 600 m filter had hit efficiency 0.0329 (> m_oof = 0.0175), so dropping them reduced DTI in 4/4 folds (mean -0.0010, min -0.0013, max -0.0006). Because catalogued fault segments have a median length of 1.27 km, a single d=1.5 thinned scarp fragment often consists of 1-2 dots; dropping isolated dots discards real short faults. Rejected — no submission slot spent.",
-   "gain": "-0.0010 on OOF holdout (negative in 4/4 folds). Do not ship.",
-   "cost": "Tested and rejected on holdout (0 slots spent).",
-   "external": null
-  },
-  {
-   "id": "H27-6",
-   "rank": 14,
-   "title": "Coverage-optimal budget thinning: choose WHICH dots to keep by maximising coverage",
-   "layers": "The emission itself plus the official kernel (no new data).",
-   "signature": "Poisson-disk thinning is a packing rule, blind to how much of the emission's own support survives. Replace it with the subset of N dots that maximises c(S') = mean over the footprint of max over dots of k(d(.,dot)) - a monotone submodular max-coverage problem whose objective IS the metric's credit functional. Batched greedy with exact local marginal gains gain(y) = sum_{|delta|<3} max(0, k(delta) - cov(y+delta)), 29 shifted-array ops per batch.",
-   "why": "Under the live-validated retention rule credit(d) = credit_solid * c(d)/c_solid, the score at fixed budget is monotone in c, so maximising c directly should dominate packing.",
-   "differs": "Every thinning variant in this repository family (dot_thin, score-ordered dotting) ranks dots by geometry or by a detector score. This ranks them by the metric's own coverage functional.",
-   "status": "REFUTED. src/gems27/coverage_thin.py, measured on quadrant NW at matched budgets: at 20,752 px coverage-greedy attains 143,341 coverage mass vs Poisson-disk 165,563 = 0.866x (13% WORSE); at 28,209 px it is a wash (1.010x). On a 1-px-wide ridge network isotropic spacing already is the near-optimal cover, and greedy's early picks are made against an empty coverage map and cannot be undone. Rejected - no slot spent. Do not re-propose.",
-   "gain": "-13% coverage at the sparse budget that matters. Do not ship.",
-   "cost": "Tested and rejected (0 slots spent); ~65 s per quadrant",
-   "external": null
-  },
-  {
-   "id": "H27-7",
-   "rank": 15,
-   "title": "Union-recall ensembling of near-disjoint high-score surfaces",
-   "layers": "h19-5, h16-1, H25-ctx-ridge, r7-nms3-dem10-scarp emissions recovered by SHA-256 from the sibling repos.",
-   "signature": "The best surfaces are nearly pixel-disjoint (Jaccard: h19-5 vs H25-ctx 0.075, vs r7-scarp 0.052, vs h16-1 0.592), which looks like free recall. Union them and thin to the budget optimum.",
-   "why": "If two surfaces cover DIFFERENT truth, the union's credit could exceed either, and credit - not budget - is the binding constraint on 0.3195.",
-   "differs": "The group's scored ensembles (ens12 0.1563, dual-family-union 0.1560) were built by score averaging; this is a set union evaluated under the live-anchored forward model with explicit pessimistic bounds.",
-   "status": "REFUTED as an improvement; BOUNDED as a gamble. Live-anchored model: h19-5 U h16-1 at d2.25 (51,971 px) = 0.2655 central but 0.2310 under the pessimistic bound TP_union = max(TP_A, TP_B); h19-5 U H25-ctx (87,906 px) = 0.2521 / 0.1688. Against those, h19-5 ALONE at d2.25 is 0.2550 with a retention rule validated to 4%. The union's entire edge lives in an unvalidated complementarity assumption and its downside is -0.086. A weekly slot is worth more than that. No slot spent.",
-   "gain": "-0.086 to +0.011 depending on an unmeasurable assumption. Do not ship.",
-   "cost": "Tested and rejected (0 slots spent)",
-   "external": null
-  },
-  {
-   "id": "H27-9",
-   "rank": 16,
-   "title": "Live-truth habitat tomography: recover WHERE the hidden labels live from the scores alone",
-   "layers": "All 20 hash-authenticated scored rasters + catalogue distance field + LiDAR scarp descriptors.",
-   "signature": "TP_i = sum_x lambda(x) K_i(x) is linear in the truth intensity lambda, so 20 scored submissions are 20 measurements of lambda - a designed sensing experiment on the private labels. Expand lambda in geological habitat bases and solve non-negative least squares with the mass constraint sum lambda = |G|.",
-   "why": "Would answer the only question that matters for 0.3195: which habitats the organisers' new expert labels occupy, using the REAL private labels through their scores rather than a catalogue-internal proxy.",
-   "differs": "Every gate in this repository family validates against catalogue-internal holdouts. This uses the live scores as the label signal.",
-   "status": "NOT IDENTIFIABLE - rejected. With overlapping geological bases the fit fails outright (in-sample R2 = -1.24). Restricted to a strict 7-cell catalogue-distance PARTITION (well identified, mass constraint exact) it still fails: in-sample R2 = -0.360, leave-one-submission-out score RMSE 0.0715 against a score spread of 0.0686 - signal ratio 0.96, i.e. no better than predicting the mean. 20 aggregate numbers cannot resolve a 5.2 M-pixel field. The fitted lambda put 66% of truth in the 100-200 m catalogue ring and 34% at 800-1500 m, which is suggestive and consistent with Hermant et al. (2025) 150-400 m LiDAR offsets, but it did not pass its own validation and MUST NOT be used to choose an emission.",
-   "gain": "none - failed its own leave-one-out validation",
-   "cost": "Tested and rejected (0 slots spent); evidence/live_truth_partition_radial.json",
-   "external": null
-  },
-  {
-   "id": "H28-3",
-   "rank": 99,
-   "title": "Dilatational-strain × conductivity intersection corridors",
-   "layers": "geod_2ndinv, geod_shearrate, geod_dilaterate, cond_surf, depth_to_base_surf; 300-m label-free gradients and co-location.",
-   "signature": "Positive-dilatation strain core, strain/shear/conductivity gradients, unsigned gradient alignment, and shallow-basement-conditioned corridor.",
-   "why": "A blind or alluvium-covered fault could localize deformation and fluid-altered conductivity without a catalogue-quality surface scarp.",
-   "differs": "Explicit spatial conjunction and gradient alignment, not a scalar-channel threshold, emission re-spacing, catalogue-flank prune, or peer-raster copy.",
-   "status": "TESTED — FROZEN GATE FAILED. HOLDOUT-DTI pooled candidate 0.103352 vs baseline 0.105946, Δ -0.002594; 95% seed-bootstrap CI [-0.004240, -0.000907], 2/10 seeds and 1/4 folds improved. No slot. Negative research TIFF 27d6875f3b22 is format-valid and unique against the pinned peer registry but NOT APPROVED FOR SUBMISSION.",
-   "gain": "negative: pooled ΔDTI -0.002594",
-   "cost": "one local pre-registered holdout experiment; 0 weekly slots",
-   "external": []
-  },
-  {
-   "id": "H29-1",
-   "rank": 100,
-   "title": "Hydrothermal Upflow Disequilibrium × Piedmont-Toe Concave Flexure × Destriped Shallow Geophysical Vesselness + Probability-Weighted 300 m CELF Submodular Cover (Lane L-S7-2026-10-25)",
-   "layers": "gdr_wellspring_in_footprint.csv (temp_c, geothermquartz_c, geothermchalc_c, geothermcat_c ONLY; dist_known_fault_px forbidden), geodawn_extensions_u8.tif (TMI_up150), geodawn_rad_u8.tif (K, Th), training_features.tif, lidar_scarp_features_u8.tif.",
-   "signature": "Piedmont-toe upward concave break-in-slope + slope-deconfounded 1 m LiDAR scarps + E-W 90-deg destriped shallow magnetic demagnetization (TMI - TMI_up150) + K/Th alteration fronts + intra-basin basement horst steps (Siler et al. 2022) + GDR chemical geothermometer disequilibrium (dT = T_eq - T_meas; Kraal et al. 2022) + 2-stage nested cross-fitted Frangi/line-integral vesselness + weighted 300 m CELF cover.",
-   "why": "Reallocates off-catalogue dots from steep erosional mountain walls onto subtle piedmont-toe scarps, buried intra-basin horst faults, and cold-masked hydrothermal conduits outside the 200 m catalogue collar.",
-   "differs": "Zero H19-5 dependency, zero T-v2 continuation; fixes H27-6 unweighted coverage_thin via probability-weighted CELF cover (+0.002500 buffered / +0.005716 unbuffered over Poisson d=2.8 on the identical H29 surface, 8/10 seeds) and emits from dual-partition stitched OOF.",
-   "status": "TESTED ON UNUSED SEEDS 210-219 (commit 30accf8) — NEW HIGHEST BLIND POOLED HOLDOUT-DTI (0.042198 buffered / 0.103907 unbuffered), DECISIVELY BEATING B0 (+0.005829, 95% CI [+0.00442, +0.00742], 10/10 seeds, 4/4 folds) AND PRIOR PROMOTED CHAMPION H28-1 (+0.004620, 95% CI [+0.00344, +0.00597], 10/10 seeds, 3/4 folds), AND EDGING INTERNAL CONTROL D0 (+0.001295 buffered / +0.005399 unbuffered, 3/4 folds NW/NE/SW), BUT STRICT 6-CLAUSE GATE HELD WEEKLY SLOT (3/6 clauses: 95% CI vs D0 [-0.000986, +0.003695] spans zero due to SE Walker Lane seismicity -0.002526). Format-valid & unique GeoTIFF 511898747886 shipped (all-finite [0, 1], max peer 3px overlap 0.6421 <= 0.70, max Spearman 0.0472 <= 0.90); weekly slot preserved.",
-   "gain": "+0.005829 vs B0 (10/10 seeds), +0.004620 vs H28-1 (10/10 seeds), +0.001295 vs D0 (CI [-0.00099, +0.00370]); weekly slot held under strict composite gate.",
-   "cost": "3 local experiments (E1 canary+surface, E2 40-cell holdout, E3 stitched-OOF build); 0 weekly slots spent.",
-   "external": []
-  },
-  {
-   "id": "H30",
-   "rank": 98,
-   "title": "Hydrothermal-chemistry re-ranking + deconflicted placement of the Arm-D detector",
-   "layers": "INGENIOUS/GDR wellspring station temperatures (temp_c, geothermquartz_c; dist_known_fault_px never read) x 32-band stack + 15 subsurface transforms (Arm D).",
-   "signature": "Local thermal-anomaly field (station temp vs 15 px local median), rank-normalised, bounded +/-40% multiplicative re-ranking; deconflicted priority Poisson-disk with <=65% of the 38k budget within 3 px of repo-shipped rasters.",
-   "why": "Buried/basement faults with active upflow host warm wells without young scarps; measured temperatures carry information the lidar-scarp regime cannot see; deconfliction buys uniqueness vs every shipped raster.",
-   "differs": "H27-12 used distance-to-spring features (refuted); no prior use of measured values or post-detector re-ranking; deconfliction generalised from H29-1b's single-raster cap to all 12 repo rasters.",
-   "status": "TESTED - FROZEN GATE FAILED (negative, deliverable). HOLDOUT-DTI pooled L 0.09608 vs B 0.10031 (paired -0.00445 [-0.00800,-0.00112], 7/20 cells) and L-D -0.00662 [-0.00845,-0.00463]; canary 0.499 clean; D-B replicated +0.00217 [-0.00126,+0.00531] 15/20 cells on third fresh seed set. Uniqueness: unique vs ALL 12 peers (max 0.320) AND all 12 repo rasters (max 0.648) - clears both screens (the parallel session's H29-S also clears the 24-raster screen; H30 additionally clears vs H29-S at 0.302 post-merge re-screen); format hard-PASS. Bytes retained as NEGATIVE RESEARCH ARTIFACT (ad5a68bb0535); ok_to_submit=false. Evidence: evidence/h30_holdout.json, evidence/h30_run_card.json, knowledge/22.",
-   "gain": "Prior +0.002..+0.008 vs B (MODEL); realised -0.0044 (the deconfliction cost, MEASURED).",
-   "cost": "Low-medium (TESTED this session; consumed seeds 240-244)"
-  },
-  {
-   "id": "H30-1",
-   "rank": 99,
-   "title": "Dip-advection correction of subsurface edges (feature form of H29-2)",
-   "layers": "rtp, iso_grav_anom, depth_to_base_surf from the pinned 32-band stack",
-   "signature": "Ranked RTP/gravity/basement-step edge strength sampled down-dip (along the depth-to-basement gradient) by clip(depth*cot(dip)/100 m, 0, 8 px), dip 50/70 deg (5 features, gems27.dip_gap_features)",
-   "why": "A dipping buried fault's deep edge is offset hundreds of metres from its surface trace; a per-pixel detector otherwise scores the deep-edge pixel, not the trace.",
-   "differs": "Directed depth-scaled advection; differs from the undirected dip-offset doublets of L-DCONFIRM (which also hurt) and from any emission-side shift.",
-   "status": "TESTED - SELECTION GATE FAILED (Lane L-H30, seeds 240-244, knowledge/20+21). Pooled HOLDOUT-DTI DIP 0.09888 vs Arm-D control 0.10234 (mean paired -0.00359, 6/20 cells, 0/4 fold means up). Canary AUC <=0.561. No slot.",
-   "gain": "negative: pooled delta -0.00346 vs Arm D on selection seeds",
-   "cost": "one local pre-registered holdout experiment (Lane L-H30, shared selection); 0 weekly slots",
-   "external": []
-  },
-  {
-   "id": "H30-2",
-   "rank": 99,
-   "title": "Along-strike gap flanking of potential-field edges",
-   "layers": "rtp, iso_grav_anom ranked edges (sigma=2)",
-   "signature": "max over 4 strikes of min(E(x-d*u), E(x+d*u)), lag d=6/12 px (4 features)",
-   "why": "Collinear edge segments bounding a low-amplitude interval mark one buried fault continuing under thicker cover where the surface catalogue stops.",
-   "differs": "Min-of-flanks at fixed lags on potential-field edges; Addendum-D directional bands averaged lidar layers along strike (refuted) - different input and operator.",
-   "status": "TESTED - SELECTION GATE FAILED (Lane L-H30, seeds 240-244, knowledge/20+21). Pooled HOLDOUT-DTI GAP 0.10180 vs Arm-D control 0.10234 (mean paired -0.00071, 95% CI [-0.00291,+0.00164], 9/20 cells, 2/4 fold means up). Closest contender; built as the session's single NEGATIVE research TIFF 3107a3007b77 (format+peer-uniqueness PASS, efficacy FAIL, NOT APPROVED FOR SUBMISSION). No slot.",
-   "gain": "negative: pooled delta -0.00053 vs Arm D on selection seeds",
-   "cost": "one local pre-registered holdout experiment (Lane L-H30, shared selection); 0 weekly slots",
-   "external": []
-  },
-  {
-   "id": "H30-3",
-   "rank": 99,
-   "title": "Soft rank-taper emission at matched effective mass (H29-3)",
-   "layers": "Arm-D detector probability surface only",
-   "signature": "76,000-px Poisson support with values 1-k/N by descending probability, rescaled to effective mass 38,000, scored under exact soft DTI",
-   "why": "Fractional values could hedge second-tier candidates for uncatalogued faults at fractional false-positive cost.",
-   "differs": "Every scored family file is binary; this is the family's first soft-emission gate.",
-   "status": "TESTED - SELECTION GATE FAILED (Lane L-H30, seeds 240-244, knowledge/20+21). Pooled HOLDOUT-DTI SOFT 0.09943 vs binary D 0.10234 (mean paired -0.00334, 4/20 cells). Consistent with bang-bang optimality of soft Tversky away from truth. No slot.",
-   "gain": "negative: pooled delta -0.00291 vs binary Arm D on selection seeds",
-   "cost": "one local pre-registered holdout experiment (Lane L-H30, shared selection); 0 weekly slots",
-   "external": []
-  },
-  {
-   "id": "H32",
-   "rank": 100,
-   "title": "Poisson-theorem gravity-to-pseudogravity hydrothermal demagnetization residual (= H31-2)",
-   "layers": "rtp, tmi_hg, tmi_vg, iso_grav_anom, iso_grav_anom_hg, iso_grav_anom_vg (training_features.tif, hash-pinned)",
-   "signature": "Local sigma=15px gravity-on-RTP regression residual + gradients; gravity-edge-without-magnetic-edge rank contrasts; gravity-only structure coherence; pseudogravity-mismatch gradient (src/gems27/poisson_demag.py, 8 features)",
-   "why": "Hydrothermal magnetite destruction along blind conduits erases the magnetic edge while the gravity density step persists; surface-rupture catalogues miss such blind faults.",
-   "differs": "subsurface_features multiplies coincident mag+grav edges, suppressing exactly this case; no Poisson-residual feature existed in src/.",
-   "status": "TESTED - FROZEN GATE FAILED (Lane L-S11, fresh seeds 500-509, 40 cells, 118,039 withheld positives, knowledge/26+27). Pooled HOLDOUT-DTI P 0.03573 vs D 0.03922 vs B 0.03647; P-D -0.00349, 95% CI [-0.00477,-0.00223], 1/10 seeds, 0/4 folds; canary max dir-inv AUC 0.546. Unique TIFF 1ac69a77008d is a NEGATIVE research artifact in docs/downloads/research/ - DO NOT SUBMIT. Seeds 500-509 consumed; do not reuse or retune.",
-   "gain": "negative: pooled delta -0.00349 vs D (base-32+subsurface-15) on fresh seeds 500-509",
-   "cost": "3 experiments (E1 canary, E2 holdout, E3 build); 0 weekly slots",
-   "external": []
-  }
- ]
+  ]
 }

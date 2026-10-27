@@ -1,6 +1,38 @@
 # 27GEMSDOE - geothermal & structural fault discovery lab for DrivenData #306 (DOE GEMS)
 
-## Current audit correction — 2026-10-26 (takes precedence over archived session claims)
+## Session 2026-10-27 — read this first
+
+**NOT OK TO SUBMIT** the TIFF generated this session.
+
+File (research only): `docs/downloads/research/gems27-h33-bss-complement-20261027-9ba8480691ed-allfinite.tif`  
+sha256 `1373358188a96b20414834b3e0159065d87470fe695153262ced7b46bc1eb492`  
+Name: `27GEMSDOE-H33-BSS-20261027-9ba8480691ed`  
+Note (92/140): `H33-1 buried-step complement B2 37654px HOLDOUT-DTI 0.0252 | id 9ba8480691ed | DO NOT SUBMIT`
+
+HOLDOUT-DTI **0.025211** vs base-32 control **0.041446** on seeds 520–529 (134,150 withheld-positive occurrences; paired 95% CI [−0.017576, −0.014449]; 0/10 seeds, 0/4 folds). Evaluator: `gems27.metric.dti_binary` v1 + whole-FID buffered holdout. That is not a leaderboard score. The file is unique versus the 12 pinned focus-site rasters (3 px overlap 0.000 by the complement constraint; surface Spearman 0.110) and format-valid (all-finite [0, 1], EPSG:32611). Uniqueness does not make it a submission.
+
+Why 0.2778 (OWNER-REPORTED, GEMSDOE32 `h33-h33-2-b2`) is the family best, and why it was not copied: it is the d=2.8 H19-5 dot field after deleting the 2 px catalogue collar. Copying it fails the uniqueness rule. A blocked-fold screen showed the faults that family misses are not recovered by these 100 m bands (miss-class AUC 0.561). Full write-up: `knowledge/31_h33_result_2026-10-27.md`. Site banner: `docs/index.html` and `docs/executive-summary.html`.
+
+Do not resubmit any focus-site file in the table below. Their scores are OWNER-REPORTED, not ORGANIZER-CONFIRMED. The prompt’s 0.4413 and 0.3195 leaderboard claims were not verified here and disagree with each other.
+
+| Site | Historical best named in the prompt | Label | Unique new submission? | Action |
+|---|---|---|---|---|
+| GEMSDOE32 | `h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros` 0.2778 | OWNER-REPORTED | No — collar deletion of the d=2.8 family | Do not resubmit |
+| GEMSDOE36 | Anderson PINN 38,854 dots 0.2750 | OWNER-REPORTED | No | Do not resubmit |
+| GEMSDOE28 | rung30 0.2710 / r1 d2.8 0.2708 | OWNER-REPORTED; site attribution conflicts with the prompt | No | Do not resubmit |
+| GEMSDOE31 | `h27-4-solo-d28` 0.2708 | OWNER-REPORTED | No | Do not resubmit |
+| GEMSDOE33 | `h33d-analog-tip-stepover-r30` 0.2632 | OWNER-REPORTED | No | Do not resubmit |
+| GEMSDOE25 | dotted h19-5 d=2.8 0.2600 | OWNER-REPORTED | No | Do not resubmit |
+| GEMSDOE30 | d28-poisson 44,090 0.2600 | OWNER-REPORTED | No | Do not resubmit |
+| GEMSDOE24 | dotted h19-5 d=1.5 0.2477 | OWNER-REPORTED | No | Do not resubmit |
+| GEMSDOE27 | this session’s H33-1 file | HOLDOUT-DTI 0.025211, not a live score | Yes, and it lost the holdout | **NOT OK TO SUBMIT** |
+| GEMSDOE27 historical | topo-gap-closure T-v2 on d1.5 0.2449 | OWNER-REPORTED | No | Do not resubmit |
+
+Operating prompt for every later session: read this section, then `knowledge/30_preregistration_H33_2026-10-27.md` and `knowledge/31_h33_result_2026-10-27.md`, then the task prompt further down. Parallel-run rules still bind: one lane, shared holdout and writer, label HOLDOUT-DTI vs ORGANIZER-CONFIRMED, leakage canary at AUC 0.90, stop after 3 experiments, do not select a weekly slot. The single method paragraph promised by the parallel prompt was absent; this session locked H33-1 instead of guessing a sibling lane, and stopped promotion when the gate failed.
+
+Core values in force: Maximize P(Win), Own the Outcome. A unique losing TIFF is a result. Uploading it would spend a scarce slot on a measured loss.
+
+## Current audit correction — 2026-10-26 (historical; does not override the 2026-10-27 NOT OK TO SUBMIT box)
 
 **H31-1 is an evidence-qualified, format-valid download; a weekly submission remains a separate human selector/cap/current-registry decision.**
 [Executive audit](knowledge/28_submission_readiness_audit_2026-10-26.md) documents the nine-site comparison and
@@ -15,31 +47,32 @@ new preregistered lane as negative. Historical “OK TO SUBMIT” headings below
 - All prior generated TIFFs retain their original bytes; do not rename an existing file to claim a new submission.
 - Shared readiness gate checks `max(AUC, 1-AUC)`; strong inverse prediction is not exempt from leakage screening. No DrivenData upload occurred.
 
-## Session 11 Lane L-S11/H32 Executive Summary & Download Verdict (`2026-10-26` — READ FIRST; parallel Session-11 lane below concurs)
+## Session 11 Lane L-S11/H32 archive (`2026-10-26` — historical; do not follow the old download instruction)
+**Superseded by the 2026-10-27 section at the top of this file. Do not download or submit the H31 file from the sentence below.**
 **Full report:** [`knowledge/27_session11_executive_summary_and_h32_result_2026-10-26.md`](knowledge/27_session11_executive_summary_and_h32_result_2026-10-26.md) (9-focus-site table, byte-verified 0.2778 autopsy, projections, run card).
-**✅ THE ONE FILE TO DOWNLOAD AND SUBMIT (unchanged, independently re-audited this session from bytes, zero human inspection):**
+**Historical claim, now withdrawn as an upload instruction:** the 2026-10-26 text called this the one file to download and submit. It was never slot-authorized, and the 2026-10-27 gate did not promote it.
 - **File:** `docs/downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif` (SHA-256 `2c002b02792419864bd3b29a218e543cb41e3f07b3b57c29ef35c6e39e184bfe`, recomputed Session 11) · single-TIFF ZIP beside it.
 - **Name:** `27GEMSDOE-H31-DRCG-WL-20261026-cf8e1bbef244` · **Note (118/140):** `27GEMSDOE H31-1 | dualRegime MSub+MFull+WLseis+obliq+CELF2.8 B2 37654px | id cf8e1bbef244 | unscored validated-promote`
 - **Estimated live score: PROJECTION ~0.235 anchor-transfer (planning range 0.19–0.30 across methods), NOT a score** — both parallel Session-11 lanes independently computed 0.2190 × 0.047302/0.044116 = 0.2348; concentration sensitivity gives 0.228/0.266/0.299 at 5.0×/5.8×/6.5× (`|G|=12,226`, `ρ=1.38` assumed; `c=0.0636`, `N=37,654` exact), where 6.5× is GEMSDOE32-level concentration H31-1 has not demonstrated live. **Honest reading: likely below 0.2778 (OWNER-REPORTED); beating it is not established.** Unscored until submitted.
 - **Unique vs all 9 focus sites? YES** — max directed 3-px overlap **57.7%** vs the 12 pinned peer rasters (**50.2%** vs GEMSDOE32), ≤ 70%; max surface Spearman 0.165 ≤ 0.90; 0 catalogue dots; all-finite `[0,1]` validator hard-PASS (Session 11 re-audit: `evidence/session11_reaudit.json`).
 - **Why 0.2778 won (byte-verified Session 11):** `GEMSDOE32 ≡ GEMSDOE25(d=2.8) ∧ EDT(catalogue) > 2px` exactly (symdiff 0) — the fleet-best is catalogue-collar deletion on the H19-5 family, now exhausted; all nine focus-site best files are already submitted and 8/9 are 86.7–100% clones. Never re-upload them.
 - **NEW this session — ⛔ DO NOT SUBMIT:** H32 Poisson-demagnetization TIFF `docs/downloads/research/gems27-h32-poisson-demag-b2-20261026-1ac69a77008d-allfinite.tif` (unique vs peers 46.4%, format-valid) **failed its preregistered frozen gate** on fresh seeds 500–509: pooled HOLDOUT-DTI P 0.03573 < D 0.03922, P−D −0.00349 (95% CI [−0.00477, −0.00223], 1/10 seeds, 0/4 folds; canary max AUC 0.546). Negative results are deliverables; no tuning followed. Prereg: `knowledge/26…`; evidence: `evidence/h32_e2_holdout_500_509.json`, run card `evidence/h32_run_card_2026-10-26.json`. Machine audit (`docs/data/submission_readiness_audit.json`) still approves exactly H31-1 (+ second-priority H30-1) and blocks H32.
-- **Site:** https://buffedlizard55-lab.github.io/GEMSDOE27/ — first screen keeps the H31-1 download buttons; Session 11 box (H32 negative + re-audit + projection) is rendered from JSON by `scripts/build_site.py`.
+- **Site:** https://buffedlizard55-lab.github.io/GEMSDOE27/ — the first screen is the 2026-10-27 NOT OK TO SUBMIT box. Older H31 buttons were removed from the submit path.
 
 ---
 
-## Session 10 Automated Gate Verdict (`2026-10-26`, Lane `L-S10-2026-10-26` / `H31-1` — historical, still operative)
+## Session 10 Automated Gate Verdict (`2026-10-26`, Lane `L-S10-2026-10-26` / `H31-1` — historical, not operative)
 
 ---
 
-## Session 11 Review (2026-10-26) — READ FIRST
-**Approved unique file unchanged (Session 10 H31-1, re-validated this session byte-for-byte): `docs/downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif` — OK TO DOWNLOAD AND SUBMIT.**
+## Session 11 Review (2026-10-26) — historical archive, not an upload instruction
+**Withdrawn:** the 2026-10-26 text below called `docs/downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif` OK to download and submit. That file is historical. It is not slot-authorized. Do not upload it.
 - **Estimated live score: ~0.235 PROJECTION (planning range 0.19–0.26), NOT a score** — anchor transfer 0.2190 × 0.047302/0.044116 = 0.2348 (HOLDOUT-DTI, seeds 400–409). Honest reading: likely **below** the already-submitted GEMSDOE32 0.2778 clone; no honest model here projects >0.2778. Full 9-site table + estimate: `knowledge/26_session11_review_and_score_estimate_2026-10-26.md` and `docs/executive-summary.html`.
 - **New irregularity IR-2026-10-26-05:** site prose misstated the grid transform as (323344.2347, 4565845.3247); verified raster/grid transform is (243350.0, 4508550.0) — prose fixed, raster bytes were always correct.
 - Re-verified this session: SHA-256 matches, {0,1}/0 NaN/37,654 dots, max 3-px overlap 62.8% ≤70%, 134 tests pass.
 
-## Session 10 Automated Gate Verdict (`2026-10-26`, Lane `L-S10-2026-10-26` / `H31-1` — READ FIRST)
-**✅ OK TO DOWNLOAD AND SUBMIT — ALL AUTOMATED MACHINE VALIDATION GATES PASSED (ZERO HUMAN INTERVENTION).**
+## Session 10 Automated Gate Verdict (`2026-10-26`, Lane `L-S10-2026-10-26` / `H31-1` — historical archive)
+**Withdrawn as an upload instruction.** The 2026-10-26 machine gate called this file format-valid. Format-valid is not a weekly-slot authorization. Do not upload it.
 - **Approved Unique Submission File (`[0, 1]` all-finite GeoTIFF):** `docs/downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif` (`825,820` B, SHA-256 `2c002b02792419864bd3b29a218e543cb41e3f07b3b57c29ef35c6e39e184bfe`)
 - **Single-TIFF ZIP:** `docs/downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.zip` (`184,837` B, SHA-256 `628dea2cd1b064791272d6a142ca28b88d0d050d0fd1b53028cf00dd87632f63`)
 - **Unique Submission Name:** `27GEMSDOE-H31-DRCG-WL-20261026-cf8e1bbef244` (`content_id = cf8e1bbef244`)
