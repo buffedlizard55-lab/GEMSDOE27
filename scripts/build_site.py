@@ -39,8 +39,8 @@ def card_summary(card: dict | None) -> tuple[str, str]:
     """Return a short HTML summary and matching Markdown for the H29-5 lane."""
     if not card:
         return (
-            '<p><b>H29-5:</b> no completed run card is present. The proposed proxy is not approved.</p>',
-            "H29-5: no completed run card is present; the proposed proxy is not approved.",
+            '<p><b>H29-5-PROXY:</b> no completed run card is present. The proposed proxy is not approved.</p>',
+            "H29-5-PROXY: no completed run card is present; the proposed proxy is not approved.",
         )
     status = esc(card.get("verdict", "incomplete"))
     hold = card.get("holdout") or {}
@@ -92,12 +92,12 @@ def card_summary(card: dict | None) -> tuple[str, str]:
     gate_text = ("Evidence gate passes, but no slot has been selected." if gate["ok_to_publish_as_submission"]
                  else "The fail-closed evidence gate does not approve submission.")
     return (
-        f'<div class="card"><h3>H29-5 detrended-relief proxy — {status}</h3>'
+        f'<div class="card"><h3>H29-5-PROXY detrended-relief — {status}</h3>'
         f'<p>{esc(detail)}</p><p><b>{esc(gate_text)}</b> '
         f'<a href="{repo_link("evidence/relief_profile_run_card_20261027.json")}">Machine run card</a> · '
         f'<a href="{repo_link("evidence/relief_profile_registry_20261027.json")}">Uniqueness details</a>.</p>'
         f'{download}{extra}</div>',
-        f"**H29-5 — {card.get('verdict', 'incomplete')}.** {detail} {gate_text} {file_note}",
+        f"**H29-5-PROXY — {card.get('verdict', 'incomplete')}.** {detail} {gate_text} {file_note}",
     )
 
 
@@ -112,7 +112,7 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
     h31_history = (f"The historical H31-1 HOLDOUT-DTI was {h31_hold['pooled_dti_H31S_candidate']:.6f}, "
                    f"95% CI [{h31_ci[0]:.6f}, {h31_ci[1]:.6f}], "
                    f"{h31_hold['n_withheld_positives_total']:,} withheld-positive occurrences, "
-                   f"evaluator {h31_hold['evaluator']}. It used component/quadrant splits, not the H29-5 "
+                   f"evaluator {h31_hold['evaluator']}. It used component/quadrant splits, not the H29-5-PROXY "
                    "whole-FID protocol; these values cannot be compared directly. The required matched H31 "
                    "comparison was not run.")
     rows, md_rows = [], []
