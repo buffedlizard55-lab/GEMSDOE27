@@ -480,6 +480,18 @@
       "severity": "medium",
       "issue": "knowledge/05 records 3 submissions/week from a prior full read of the rules PDF. Several generated site pages say 5/week. The how-to-submit step was corrected to tell the reader to check the live form. Older generated prose still says 5/week.",
       "action": "Do not treat either number as freshly re-read this session. docs.nlr.gov is outside the sandbox allowlist."
+    },
+    {
+      "id": "IR-2026-10-27-session14-readiness",
+      "severity": "high",
+      "issue": "Readiness audit aborted on malformed JSON/non-object cards and accepted improvement intervals above the mathematical DTI range. Checked-in audit also omitted H33-1.",
+      "action": "Reject non-object/unreadable evidence per card, bound positive DTI deltas and intervals at 1, add regression tests, regenerate audit. No promotion."
+    },
+    {
+      "id": "IR-2026-10-27-byte-validation",
+      "severity": "high",
+      "issue": "Readiness previously trusted recorded raster-validator booleans without opening the matching-hash file.",
+      "action": "Fixed shared readiness gate to independently scan raster grid, datatype and all pixel ranges; adversarial tests and audit report added. No candidate promoted."
     }
   ]
 }
