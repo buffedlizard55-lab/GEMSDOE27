@@ -12,9 +12,19 @@ from gems27.readiness import publication_decision  # noqa: E402
 def main():
     cards = sorted((ROOT / "evidence").glob("*run_card*.json"))
     results = {p.name: publication_decision(json.loads(p.read_text()), ROOT) for p in cards}
-    report = {"purpose": "Fail-closed evidence/byte audit, not a new geological experiment",
-              "approved": [k for k, v in results.items() if v["ok_to_publish_as_submission"]],
-              "results": results}
+    evidence_passed = [k for k, v in results.items() if v["ok_to_publish_as_submission"]]
+    # Keep selector authorization distinct from technical/scientific evidence. A passing
+    # run card cannot authorize a weekly slot; the selector must record that separately.
+    slot_authorized = [
+        k for k, v in results.items()
+        if v["ok_to_publish_as_submission"] and v["slot_authorized"] is True
+    ]
+    report = {
+        "purpose": "Fail-closed evidence/byte audit, not a new geological experiment",
+        "evidence_passed_not_slot_authorized": evidence_passed,
+        "slot_authorized": slot_authorized,
+        "results": results,
+    }
     out = ROOT / "docs/data/submission_readiness_audit.json"
     out.write_text(json.dumps(report, indent=2) + "\n")
     print(json.dumps(report, indent=2))

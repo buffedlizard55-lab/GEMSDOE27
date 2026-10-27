@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-25 | Merged parallel sessions (Lane L-S7 IR-10..13 + Session 9 H30 IR-14/15, renumbered to avoid collision).",
+ "generated": "2026-10-27 | Session 12 adds current-site selector and focus-site score conflicts; historical evidence remains explicitly non-authorizing.",
  "items": [
   {
    "id": "prompt-verbatim-unavailable",
@@ -220,7 +220,7 @@
   {
    "id": "h27-10-first-run-spacing-diagnostic-self-distance",
    "severity": "low",
-   "issue": "The first H27-10 run (seeds 150-159) correctly generated the frozen equal-count candidate and measured mean paired \u0394DTI +0.00084615, 4/4 fold means and 7/10 seed means improved, and annulus gross efficiency 0.03357 < m(0.2477)=0.05212. Its spacing integrity check incorrectly measured each added pixel against a mask that included itself, so it necessarily returned zero and marked the spacing data check false. This is a diagnostic false negative, not evidence of a spacing violation.",
+   "issue": "The first H27-10 run (seeds 150-159) correctly generated the frozen equal-count candidate and measured mean paired ΔDTI +0.00084615, 4/4 fold means and 7/10 seed means improved, and annulus gross efficiency 0.03357 < m(0.2477)=0.05212. Its spacing integrity check incorrectly measured each added pixel against a mask that included itself, so it necessarily returned zero and marked the spacing data check false. This is a diagnostic false negative, not evidence of a spacing violation.",
    "action": "Preserved the first JSON as evidence/h27_10_annulus_holdout_initial.json. Corrected only the spacing-check implementation and added tests; the frozen masks, ranker, K, gate, and seeds are unchanged. The deterministic integrity rerun on the same used seeds passed all data checks; all 40 cell outcomes, aggregate metrics, and the frozen FAIL are unchanged in evidence/h27_10_annulus_holdout.json. This rerun is non-confirmatory and cannot change the negative gate result."
   },
   {
@@ -232,8 +232,8 @@
   {
    "id": "IR-2026-10-25-01-lane-paragraph-missing",
    "severity": "high",
-   "issue": "PARALLEL-RUN PROTOCOL \u00a71 says 'Your lane is the single method paragraph below', but the prompt as received contains no delimited single method paragraph; parallel sessions may therefore collide or diverge silently.",
-   "action": "This session DECLARED Lane L-2026-10-25 explicitly in knowledge/13 \u00a71 before implementing, stayed inside it, and enforced the numeric uniqueness tests (surface Spearman <0.90; <70% final dots within 3px Euclidean of any single registry raster). Owner: confirm the intended lane text for future parallel runs."
+   "issue": "PARALLEL-RUN PROTOCOL §1 says 'Your lane is the single method paragraph below', but the prompt as received contains no delimited single method paragraph; parallel sessions may therefore collide or diverge silently.",
+   "action": "This session DECLARED Lane L-2026-10-25 explicitly in knowledge/13 §1 before implementing, stayed inside it, and enforced the numeric uniqueness tests (surface Spearman <0.90; <70% final dots within 3px Euclidean of any single registry raster). Owner: confirm the intended lane text for future parallel runs."
   },
   {
    "id": "IR-2026-10-25-02-leader-score-conflict",
@@ -244,14 +244,14 @@
   {
    "id": "IR-2026-10-25-03-portal-error-mechanism-verified",
    "severity": "medium",
-   "issue": "Updates item portal-0-1-error-cause-unknown: GEMSDOE32's two mechanisms were re-measured this session \u2014 training_features.tif nodata -3.4028234663852886e+38 occupies 3,061 cells INSIDE the footprint; NaN-outside files risk strict whole-array validators. This repo's front-page primary button historically pointed at the NaN variant.",
+   "issue": "Updates item portal-0-1-error-cause-unknown: GEMSDOE32's two mechanisms were re-measured this session — training_features.tif nodata -3.4028234663852886e+38 occupies 3,061 cells INSIDE the footprint; NaN-outside files risk strict whole-array validators. This repo's front-page primary button historically pointed at the NaN variant.",
    "action": "Lane primary download is all-finite zeros-outside (nodata=None), NaN twin secondary; site order-of-try updated for the lane file. Legacy slot files unchanged (history); their allfinite fallbacks remain the safe choice."
   },
   {
    "id": "IR-2026-10-25-04-holdout-buffer-template-fix",
    "severity": "medium",
-   "issue": "Shared holdout harness buffered training but scored up to hidden segments (feature support could overlap hidden neighbourhoods). Protocol \u00a72 requires segments withheld WITH a buffer.",
-   "action": "Fixed once in the template: gems27.holdout.buffered_scoring_mask() excludes the 600 m ring around hidden segments from scoring; catalogue-derived masks use visible faults only. Reported here per protocol \u00a72; siblings should adopt."
+   "issue": "Shared holdout harness buffered training but scored up to hidden segments (feature support could overlap hidden neighbourhoods). Protocol §2 requires segments withheld WITH a buffer.",
+   "action": "Fixed once in the template: gems27.holdout.buffered_scoring_mask() excludes the 600 m ring around hidden segments from scoring; catalogue-derived masks use visible faults only. Reported here per protocol §2; siblings should adopt."
   },
   {
    "id": "IR-2026-10-25-05-index-hand-edit-desync",
@@ -269,7 +269,7 @@
    "id": "IR-2026-10-25-07-lane-paragraph-missing-sessionB",
    "severity": "medium",
    "issue": "Parallel session B (Lane L-DCONFIRM) prompt again contained no delimited single method paragraph (same class as IR-2026-10-25-01).",
-   "action": "Lane declared explicitly in knowledge/15_lane_dconfirm_preregistration.md \u00a72 before implementation; numeric uniqueness tests enforced on surface and final dots."
+   "action": "Lane declared explicitly in knowledge/15_lane_dconfirm_preregistration.md §2 before implementation; numeric uniqueness tests enforced on surface and final dots."
   },
   {
    "id": "IR-2026-10-25-08-knowledge-numbering-collision",
@@ -389,7 +389,7 @@
    "id": "IR-2026-10-26-01-restore-data-codeload-upgrade",
    "severity": "medium",
    "issue": "`scripts/restore_data.py` fetched 21 manifest entries via per-file `gh api repos/.../contents/...`, hitting GitHub core REST API rate-limit exhaustion (`HTTP 403`, `core.remaining=0/5100`) after 2 files in sandboxed sessions.",
-   "action": "Fixed in-place per Protocol \u00a72: `scripts/restore_data.py` now streams each pinned `(repo, commit)` archive once from `https://codeload.github.com/{repo}/tar.gz/{commit}` (0 REST API calls), verifies byte lengths and SHA-256 hashes for all 17 inputs, cleans split `.part*` temporaries, and retains `gh_raw` only as fallback."
+   "action": "Fixed in-place per Protocol §2: `scripts/restore_data.py` now streams each pinned `(repo, commit)` archive once from `https://codeload.github.com/{repo}/tar.gz/{commit}` (0 REST API calls), verifies byte lengths and SHA-256 hashes for all 17 inputs, cleans split `.part*` temporaries, and retains `gh_raw` only as fallback."
   },
   {
    "id": "IR-2026-10-26-02-live-cohort-inversion-h29s-02190",
@@ -407,13 +407,31 @@
    "id": "IR-2026-10-26-04-coverage-thin-heap-pool-fix",
    "severity": "medium",
    "issue": "Shared tool `src/gems27/coverage_thin.py::weighted_celf_cover` truncated its initial candidate heap at `keep_n = max(max_candidates=320_000, budget * 3)` before `min_sep_px` exclusion. On quadrant holdouts (`budget ~ 9,150`) `320,000` is `35x` budget so it always reached budget, whereas on full-map emission (`budget = 37,654`) with `min_sep_px = 2.8` (`21` integer lattice offsets blocked per dot along ridges), `320,000` (`8.5x` budget) exhausted `489` dots short (`37,165` vs `37,654`).",
-   "action": "Fixed in-place in `src/gems27/coverage_thin.py` per Parallel-Run Protocol \u00a72 via `block_area = max(3, ceil(pi * max(min_sep_px, 1.0)^2 * 1.35))` (`keep_n = max(max_candidates, budget * block_area)`), preserving identical behavior for quadrant holdouts (`budget ~ 9,150 <= 320,000 / 34`) while reaching exact `37,654` full-map dots at `min_sep_px = 2.8`."
+   "action": "Fixed in-place in `src/gems27/coverage_thin.py` per Parallel-Run Protocol §2 via `block_area = max(3, ceil(pi * max(min_sep_px, 1.0)^2 * 1.35))` (`keep_n = max(max_candidates, budget * block_area)`), preserving identical behavior for quadrant holdouts (`budget ~ 9,150 <= 320,000 / 34`) while reaching exact `37,654` full-map dots at `min_sep_px = 2.8`."
   },
   {
    "id": "IR-2026-10-26-audit-selector-count-canary",
    "severity": "high",
    "issue": "README and knowledge/25 stated 289,180 withheld positives, while H31 saved evaluator and run card both record 120,778 occurrences. Site confused evidence publication PASS with weekly-slot authorization. Shared canary used an arbitrary 0.40 lower AUC bound instead of checking inverse prediction. Latest prompt omits its promised method lane.",
-   "action": "Correct count from saved evaluator; distinguish evidence PASS from selector authorization on all pages and machine outputs; direction-invariant canary with boundary regression tests. No new experiment or candidate; existing H31 unchanged. Current registry and cap remain unverified."
+   "action": "Correct count from saved evaluator; distinguish evidence PASS from selector authorization on all pages and machine outputs; direction-invariant canary with boundary regression tests. No new experiment or candidate; existing H31 unchanged. Current registry and cap remain unverified. Session 12 hardens this: the site generator now requires explicit selector authorization before rendering an upload CTA, and the audit JSON separates evidence-pass from slot-authorized lists. No such authorization is recorded; H31 is research/audit only."
+  },
+  {
+   "id": "IR-2026-10-27-01-focus-site-28-31-score-order-conflict",
+   "severity": "medium",
+   "issue": "The user-supplied 2026-10-27 focus-site list reports GEMSDOE28 h36-1 at 0.2710 and GEMSDOE31 h27-4 at 0.2708. The repository focus-site evidence instead reports GEMSDOE31 h32-2 at 0.2710 and GEMSDOE28 h27-4 at 0.2708. No organizer receipts or fresh site crawl are available here to reconcile which artifact/value is correct.",
+   "action": "Preserve both as conflicting owner-reported snapshots; do not relabel either ORGANIZER-CONFIRMED or infer the site ranking. Reconcile against submission-page receipts outside this agent."
+  },
+  {
+   "id": "IR-2026-10-27-02-no-current-slot-authorization",
+   "severity": "high",
+   "issue": "README and generated pages inherited language calling H31-1 “OK TO DOWNLOAD AND SUBMIT” or “approved,” while the saved readiness evidence reports slot_authorized=false and no current weekly-cap/current-registry check is stored. The current task also contains no single assigned geological method paragraph, and the ignored data_cache is absent.",
+   "action": "Session 12 changed the site generator to require explicit selector authorization before a submission-download CTA; H31-1 is labelled historical research/audit only. No new TIFF or experiment was produced. Restore/verify inputs and assign a lane before further work; selector authorization must remain separate."
+  },
+  {
+   "id": "IR-2026-10-27-03-stale-h30-2-untried-registry-entry",
+   "severity": "medium",
+   "issue": "`registry/next_hypotheses.json` duplicated H30-2: it appeared in the active untried list as a standalone ablation while also appearing in `tested_hypotheses` as an evaluated, negative selection arm. This could have caused a repeat or a false novelty claim.",
+   "action": "Session 12 removes H30-2 from the active untried list and retains its negative record under tested_hypotheses. Four other screened formulations are listed with explicit caveats in knowledge/30_session12_repo_review_2026-10-27.md."
   }
  ]
 }

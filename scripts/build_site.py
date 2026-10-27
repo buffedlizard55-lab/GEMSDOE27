@@ -47,7 +47,7 @@ def layout(fname: str, title: str, body: str, stamp: str, approved_name: str | N
 <main><div class="card"><b>Automatic submission evidence audit (zero human intervention):</b>
 <a href="data/submission_readiness_audit.json">Read byte-bound gate decisions and blockers</a> &middot;
 <a href="how-to-submit.html">How to submit to DrivenData #306</a>.
-<a href="../knowledge/28_submission_readiness_audit_2026-10-26.md">Latest executive audit and limitations</a>.<br>
+<a href="../knowledge/30_session12_repo_review_2026-10-27.md">Latest executive audit and limitations</a>.<br>
 <strong>NOT AUTHORIZED FOR A WEEKLY SLOT:</strong> evidence PASS is not selector approval.
 The current weekly cap and registry must be checked in a separate selector step before upload.
 H31-3 is a completed negative research lane; this audit emits no new eligible candidate.
@@ -583,7 +583,7 @@ The organizer-created test labels remain unobserved; this is not a fifth weekly 
  <h2 style="margin-top:0">Session 7 Automated Gate &amp; Unique Candidate GeoTIFF (<code>{e(hc['submission_name'])}</code>)</h2>
  <div class="row">{gate_badge}</div>
  <div class="row">{tech_badge}{uniq_badge}{hold_badge}</div>
- <p><b>Automated machine verdict (zero human intervention):</b> Primary all-finite zeros-outside GeoTIFF (<code>nodata=None</code>, exact <code>{{0.0, 1.0}}</code> across all <code>12,279,160</code> cells &mdash; fixing the <code>&ldquo;Predicted values must be in range [0, 1]&rdquo;</code> portal error per official reference notebook Cell 19) is built, SHA-256 pinned, and verified across <b>162 automated checks</b>. On frozen unused spatial holdout seeds <code>210&ndash;219</code> (<code>{hd['n_withheld_positive_occurrences']:,}</code> withheld positive occurrences, <code>{e(hd['evaluator_version'])}</code>), <b>H29-S</b> sets a <b>new repository #1 blind pooled HOLDOUT-DTI = {hd['candidate_H29S_buffered_pooled']:.4f}</b> (unbuffered <code>{hd['candidate_H29S_unbuffered_pooled']:.4f}</code>), beating <code>B0</code> by <b>{vs_b0['pooled_delta_dti']:+.4f}</b> (<code>{vs_b0['positive_seeds']}/10</code> seeds, <code>{vs_b0['positive_folds']}/4</code> folds, 95% CI <code>[{vs_b0['seed_bootstrap_95_ci'][0]:+.4f}, {vs_b0['seed_bootstrap_95_ci'][1]:+.4f}]</code>), beating prior promoted champion <code>H28-1</code> by <b>{vs_h28['pooled_delta_dti']:+.4f}</b> (<code>{vs_h28['positive_seeds']}/10</code> seeds, <code>{vs_h28['positive_folds']}/4</code> folds), proving probability-weighted 300&nbsp;m CELF cover beats Poisson <code>d=2.8</code> by <b>{vs_h29a_delta:+.4f}</b> (<code>8/10</code> seeds), and edging Session-6 internal control <code>D0</code> by <b>{vs_d0['pooled_delta_dti']:+.4f}</b> (<code>{vs_d0['positive_folds']}/4</code> folds: NW, NE_LidarGap, SW). Because the strict 6-clause composite gate requires the 95% CI vs <code>D0</code> (<code>[{vs_d0['seed_bootstrap_95_ci'][0]:+.4f}, {vs_d0['seed_bootstrap_95_ci'][1]:+.4f}]</code>, SE Walker Lane <code>{vs_d0['per_fold_pooled_delta_dti']['SE']:+.4f}</code>) to clear zero, <b>do not spend a scarce 5/week live submission slot yet</b>; the unique GeoTIFF is provided below for one-click audit/inspection while <code>H29-6</code> closes SE on fresh seeds <code>220&ndash;229</code>.</p>
+ <p><b>Automated machine verdict (zero human intervention):</b> Primary all-finite zeros-outside GeoTIFF (<code>nodata=None</code>, exact <code>{{0.0, 1.0}}</code> across all <code>12,279,160</code> cells &mdash; fixing the <code>&ldquo;Predicted values must be in range [0, 1]&rdquo;</code> portal error per official reference notebook Cell 19) is built, SHA-256 pinned, and verified across <b>162 automated checks</b>. On frozen unused spatial holdout seeds <code>210&ndash;219</code> (<code>{hd['n_withheld_positive_occurrences']:,}</code> withheld positive occurrences, <code>{e(hd['evaluator_version'])}</code>), <b>H29-S</b> sets a <b>new repository #1 blind pooled HOLDOUT-DTI = {hd['candidate_H29S_buffered_pooled']:.4f}</b> (unbuffered <code>{hd['candidate_H29S_unbuffered_pooled']:.4f}</code>), beating <code>B0</code> by <b>{vs_b0['pooled_delta_dti']:+.4f}</b> (<code>{vs_b0['positive_seeds']}/10</code> seeds, <code>{vs_b0['positive_folds']}/4</code> folds, 95% CI <code>[{vs_b0['seed_bootstrap_95_ci'][0]:+.4f}, {vs_b0['seed_bootstrap_95_ci'][1]:+.4f}]</code>), beating prior promoted champion <code>H28-1</code> by <b>{vs_h28['pooled_delta_dti']:+.4f}</b> (<code>{vs_h28['positive_seeds']}/10</code> seeds, <code>{vs_h28['positive_folds']}/4</code> folds), proving probability-weighted 300&nbsp;m CELF cover beats Poisson <code>d=2.8</code> by <b>{vs_h29a_delta:+.4f}</b> (<code>8/10</code> seeds), and edging Session-6 internal control <code>D0</code> by <b>{vs_d0['pooled_delta_dti']:+.4f}</b> (<code>{vs_d0['positive_folds']}/4</code> folds: NW, NE_LidarGap, SW). Because the strict 6-clause composite gate requires the 95% CI vs <code>D0</code> (<code>[{vs_d0['seed_bootstrap_95_ci'][0]:+.4f}, {vs_d0['seed_bootstrap_95_ci'][1]:+.4f}]</code>, SE Walker Lane <code>{vs_d0['per_fold_pooled_delta_dti']['SE']:+.4f}</code>) to clear zero, <b>do not spend a weekly submission slot yet; verify the current cap in the portal</b>; the unique GeoTIFF is provided below for one-click audit/inspection while <code>H29-6</code> closes SE on fresh seeds <code>220&ndash;229</code>.</p>
  <div class="row">
   <a class="btn alt" href="downloads/{e(hc['allfinite'])}">One-click GeoTIFF ({hr['allfinite_bytes'] // 1024:,} KB &middot; {e(hc['allfinite'])})</a>
   <a class="btn alt" href="downloads/{e(hc['zip_allfinite'])}">Single-TIFF ZIP ({hr['allfinite_zip_bytes'] // 1024:,} KB)</a>
@@ -718,7 +718,7 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
             ok30_1 = publication_decision(c30_1, ROOT)["ok_to_publish_as_submission"]
             p_lines.append(
                 f"<li><b>Parallel Lane H30-1 (<code>{e(c30_1['submission_name'])}</code>, <code>{e(c30_1['raster']['primary_allfinite'])}</code>):</b> "
-                f"machine audit status = <code>{'APPROVED' if ok30_1 else 'NOT APPROVED'}</code> (44.3% 3-px overlap vs primary <code>H31-1 DRCG-WL</code>; "
+                f"machine evidence = <code>{'PASS; SLOT NOT AUTHORIZED' if ok30_1 else 'NOT APPROVED'}</code> (44.3% 3-px overlap vs primary <code>H31-1 DRCG-WL</code>; "
                 f"note: evaluated on seeds 240&ndash;244 previously consumed in Session 9 PRs #24/#25 and includes 1,137 T-v2 relay dots &mdash; "
                 f"prioritize fresh-seed <b>H31-1 DRCG-WL (`cf8e1bbef244`, seeds 400&ndash;409)</b> first).</li>"
             )
@@ -758,12 +758,12 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
             f'leakage canary max direction-invariant AUC {h32h["canary_max_auc"]:.3f} (clean). The unique H32 TIFF '
             f'(<code>{e(c32["raster"]["primary_allfinite"])}</code>, 46.4% max 3-px overlap vs the 12 focus peers) '
             f'is a labelled negative research artifact in <code>downloads/research/</code> &mdash; never upload it.</p>'
-            f'<p><b>Independent machine re-audit of the approved H31-1 file (bytes recomputed this session, '
+            f'<p><b>Independent machine re-audit of the historical H31-1 research file (bytes recomputed this session, '
             f'zero human inspection):</b> SHA-256 <code>{e(h31r["sha256"])}</code> matches the run card; '
             f'{h31r["n_dots"]:,} dots; 0 dots on catalogue pixels; min catalogue distance '
             f'{h31r["min_catalogue_dist_px"]:.2f} px (B2); kernel coverage c={h31r["kernel_coverage_c"]:.4f}; '
             f'max directed 3-px overlap vs the 12 pinned focus-site peers {h31r["max_peer_overlap_3px"]:.1%} '
-            f'&le; 70%; all-finite [0,1] validator hard-PASS. <b>It remains the one file marked EVIDENCE PASS — SELECTOR REQUIRED above.</b></p>'
+            f'&le; 70%; all-finite [0,1] validator hard-PASS. <b>Historical evidence only; no current slot authorization is recorded.</b></p>'
             f'<p class="small"><b>Estimated live score for H31-1 (PROJECTION, not a score; unscored):</b> '
             f'concentration-model sensitivity {proj["conc_5.0x"]:.3f} (5.0&times;) / {proj["conc_5.8x"]:.3f} '
             f'(5.8&times;) / {proj["conc_6.5x"]:.3f} (6.5&times;) with |G|=12,226 and &rho;=1.38 assumed; '
@@ -799,12 +799,19 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
             f'pinned focus peers (maximum final-dot overlap {peer_max:.1%}), but it is <b>not an eligible download</b>: '
             f'it also has {local_max:.1%} 3-px overlap with the existing H31-1 candidate in the extended local screen. '
             f'Its machine run card is <code>evidence/h31_3_run_card_2026-10-26.json</code>; its labelled research bytes '
-            f'live only under <code>downloads/research/</code>. H31-1 remains the only file shown as EVIDENCE PASS — SELECTOR REQUIRED.</p>'
+            f'live only under <code>downloads/research/</code>. H31-1 is historical evidence only and is not slot-authorized.</p>'
             '</div>'
         )
     parallel_s10_box = s12_box + s11_box + parallel_s10_box
 
-    h31_ok = bool(h31_rc and h31_man and publication_decision(h31_rc, ROOT)["ok_to_publish_as_submission"] and h31_man.get("ok_to_submit"))
+    h31_evidence_pass = bool(
+        h31_rc and h31_man
+        and publication_decision(h31_rc, ROOT)["ok_to_publish_as_submission"]
+        and h31_man.get("ok_to_submit") is True
+    )
+    # Evidence eligibility is not weekly-slot authorization. The selector must set an
+    # explicit, current authorization token; no such authorization is stored in this repo.
+    h31_ok = bool(h31_evidence_pass and h31_man.get("slot_authorized") is True)
     approved_submission_name = h31_man["submission_name"] if h31_ok else None
 
     h31_hero_index = ""
@@ -839,11 +846,17 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
  <label for="note-h31" class="small"><b>Copyable short note ({h31_rc['note_chars']} / 140 chars; portal limit &le; 200):</b></label>
  <textarea id="note-h31" class="note" readonly>{e(h31_rc['note_max_140_chars'])}</textarea>
  <div class="row"><button class="btn copy" type="button" data-copy="#note-h31">Copy note</button><span class="small">{h31_rc['note_chars']} / 140 characters</span></div>"""
-        else:
-            b_head = "DO NOT SUBMIT &mdash; AUTOMATED MACHINE VALIDATION GATE FAILED"
+        elif h31_evidence_pass:
+            b_head = "EVIDENCE PASS — NOT SLOT-AUTHORIZED — DO NOT SUBMIT"
             b_cls = "bad"
             b_col = "#cf222e"
-            dl_block = "<p><b>No submission download is offered:</b> fail-closed machine gate blocked promotion.</p>"
+            dl_block = f"""
+ <p><b>No competition-submission download is authorized.</b> The existing H31-1 TIFF is retained only as a research/audit artifact; it passed recorded historical machine gates but has no current selector authorization, current-registry check, or weekly-cap evidence. <a href="{e(rel_h31)}/{e(hr['primary_allfinite'])}" download>Download H31-1 for research/audit only (DO NOT UPLOAD)</a>.</p>"""
+        else:
+            b_head = "DO NOT SUBMIT — AUTOMATED EVIDENCE GATE FAILED"
+            b_cls = "bad"
+            b_col = "#cf222e"
+            dl_block = "<p><b>No submission download is offered:</b> fail-closed machine evidence gate blocked promotion.</p>"
 
         h31_hero_index = f"""
 <div class="card hero" id="h31-1" style="border:3px solid {b_col}">
@@ -851,7 +864,7 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
  <div class="row"><span class="badge {b_cls}" style="font-size:1.1rem">{'&#9989;' if h31_ok else '&#9940;'} {b_head}</span></div>
  <div class="row">
   <span class="badge {'ok' if hv['zeros_hard_pass'] else 'bad'}">&#9989; [0, 1] RANGE &amp; GRID PASS: float32 &middot; 0 NaN anywhere &middot; exact {{0.0, 1.0}} &middot; EPSG:32611 &middot; 3730&times;3292</span>
-  <span class="badge {'ok' if hu['pass'] else 'bad'}">&#9989; 27-RASTER UNIQUE: max 3-px overlap {hu['max_dot_overlap_within_3px_euclidean']:.1%} &le; 70% ({g32_ov31:.1%} vs GEMSDOE32; {h29_ov31:.1%} vs H29-S) &middot; Spearman {hu['max_surface_spearman']:.4f} &le; 0.90</span>
+  <span class="badge {'ok' if hu['pass'] else 'bad'}">&#9989; HISTORICAL 27-RASTER UNIQUENESS SCREEN (not current registry): max 3-px overlap {hu['max_dot_overlap_within_3px_euclidean']:.1%} &le; 70% ({g32_ov31:.1%} vs GEMSDOE32; {h29_ov31:.1%} vs H29-S) &middot; Spearman {hu['max_surface_spearman']:.4f} &le; 0.90</span>
   <span class="badge {'ok' if hh['gate_efficacy_pass'] else 'bad'}">&#9989; 5/5 FROZEN HOLDOUT GATES PASS (seeds 400&ndash;409): #1 HOLDOUT-DTI {hh['pooled_dti_H31S_candidate']:.4f} buffered / {hh['pooled_unbuffered_diagnostic']['H31-S']:.4f} unbuffered</span>
  </div>
  <p><b>Zero-human-intervention machine inspection (`gems27.readiness.publication_decision`):</b> Primary all-finite GeoTIFF writes exact <code>{{0.0, 1.0}}</code> across all <code>12,279,160</code> cells (<code>nodata=None</code>, <code>0</code> NaNs inside or outside footprint), permanently preventing DrivenData's <code>&ldquo;Predicted values must be in range [0, 1]&rdquo;</code> validator rejection. On fresh unconsumed spatial holdout seeds <code>400&ndash;409</code> (<code>40</code> blind cells, <code>{hh['n_withheld_positives_total']:,}</code> withheld positive occurrences, <code>{e(hh['evaluator'])}</code>; catalogue-internal <code>HOLDOUT-DTI</code>, NOT a live organizer score), <b>H31-1 (`H31-S`)</b> beats <code>B0</code> by <b>{vs_b0_31['pooled_delta_dti']:+.4f}</b> (<code>10/10</code> seeds, <code>4/4</code> folds, 95% CI <code>[{vs_b0_31['ci95'][0]:+.4f}, {vs_b0_31['ci95'][1]:+.4f}]</code>), beats <code>D0</code> by <b>{vs_d0_31['pooled_delta_dti']:+.4f}</b> (<code>10/10</code> seeds, <code>4/4</code> folds, 95% CI <code>[{vs_d0_31['ci95'][0]:+.4f}, {vs_d0_31['ci95'][1]:+.4f}]</code>), and beats Session-7 <code>H29-S</code> (live <code>0.2190</code> <code>OWNER-REPORTED</code>) by <b>{vs_h29_31['pooled_delta_dti']:+.4f}</b> (<code>9/10</code> seeds, 95% CI <code>[{vs_h29_31['ci95'][0]:+.4f}, {vs_h29_31['ci95'][1]:+.4f}]</code>), lifting <code>NE_LidarGapHeavy</code> to <b>{hh['per_fold_buffered']['NE_LidarGapHeavy']['H31-S']:.4f}</b> (<code>+14.6%</code> over <code>H29-S</code>), closing <code>SE</code> Walker Lane to <b>{hh['per_fold_buffered']['SE']['H31-S']:.4f}</b>, and raising blind 300&nbsp;m kernel coverage <code>c</code> from <code>0.0527 &rarr; {hg['c_blind_coverage']:.4f}</code> (<code>+20.7%</code>) at the identical <code>{hr['dots']:,}</code>-dot budget.</p>
@@ -941,7 +954,7 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
 <div class="card" id="focus-sites">
  <h2 style="margin-top:0">Executive Summary of All 9 Focus Sites (<code>GEMSDOE24</code>&ndash;<code>GEMSDOE36</code>)</h2>
  <p>All 9 focus-site best rasters were hash-verified from local <code>data_cache/parallel_registry/</code> and sibling tarballs (<a href="{REPO_URL}/blob/main/evidence/focus_sites_executive_summary_20261026.json">evidence/focus_sites_executive_summary_20261026.json</a>; full PhD forensic autopsy in <a href="{REPO_URL}/blob/main/knowledge/23_focus_sites_and_02778_phd_autopsy_20261026.md">knowledge/23</a>). Every historical live score is explicitly labelled <code>OWNER-REPORTED</code> (`|G| = 12,226` blind-lattice anchor).</p>
- <p><b>Which submission is best to submit right now?</b> Every historical file in the table below (including <code>GEMSDOE32 0.2778</code>, <code>GEMSDOE36 0.2750</code>, <code>GEMSDOE27 Slot 1 0.2449</code>, and <code>GEMSDOE27 H29-S 0.2190</code>) has <b>already been submitted</b> and 8 of 9 belong to the exhausted <code>H19-5</code> ridge clone cluster (<code>86.7%&ndash;100%</code> 3-px overlap). Never re-upload or rename them. The best new unique submission to upload now is <b><code>gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif</code></b> (<code>H31-1</code>: <b>5/5</b> frozen gates passed on seeds <code>400&ndash;409</code>, <b>50.2%&ndash;62.8%</b> 3-px overlap across all 27 rasters &le; 70%).</p>
+ <p><b>What is safe to upload right now?</b> <b>No file is currently authorized for a weekly slot.</b> The historical files in the table have already been reported as submitted; do not re-upload, copy, or rename them. H31-1 is the best saved evidence-qualified research candidate in this checkout, but its live-score estimate is only a <b>PROJECTION</b> and no current selector/cap/registry authorization is recorded. It is therefore <b>NOT OK TO SUBMIT NOW</b>; its existing TIFF is available only for research/audit. The table's reported scores are owner-reported, not organizer receipts.</p>
  <div class="tw"><table>
   <thead><tr><th>Focus Site</th><th>Highest-Scoring Submission</th><th class="num">Best Score</th><th class="num">Dots N</th><th class="num">Blind Cov c</th><th class="num">Implied Conc</th><th class="num">3-px vs G32</th><th class="num">H31-1 vs Site</th><th>Actionable Guidance</th></tr></thead>
   <tbody>{fs_rows}</tbody>
@@ -953,15 +966,19 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
 
     # ---------------------------------------------------------------- index
     top_badges = (
-        '<span class="badge ok">EVIDENCE PASS — SELECTOR REQUIRED: H31-1 (cf8e1bbef244)</span> '
-        '<span class="badge ok">ALL 5/5 FROZEN HOLDOUT + 27-RASTER UNIQUENESS + [0,1] GATES PASS</span> '
-        '<span class="badge bad">DO NOT SUBMIT H28-3 / H30 / H29-2</span>'
-        if h31_ok else
-        '<span class="badge bad">NO TIFF IS APPROVED TO SUBMIT</span> <span class="badge bad">DO NOT SUBMIT H28-3</span>'
+        '<span class="badge ok">SELECTOR AUTHORIZED: H31-1</span>'
+        if h31_ok else (
+            '<span class="badge bad">NO CURRENT TIFF IS AUTHORIZED FOR A WEEKLY SLOT</span> '
+            '<span class="badge ok">H31-1: HISTORICAL EVIDENCE PASS; SELECTOR/CURRENT REGISTRY REQUIRED</span> '
+            '<span class="badge bad">DO NOT SUBMIT H28-3 / H30 / H29-2</span>'
+            if h31_evidence_pass else
+            '<span class="badge bad">NO CURRENT TIFF IS AUTHORIZED FOR A WEEKLY SLOT</span> '
+            '<span class="badge bad">DO NOT SUBMIT H28-3</span>'
+        )
     )
     pages["index.html"] = ("Submit", f"""
 <h1>Submission status: automated fail-closed gate &amp; unique GeoTIFF check</h1>
-<p class="lead">27GEMSDOE · DrivenData #306 DOE GEMS. Machine validation runs automatically without human intervention (`gems27.readiness.publication_decision` + `scripts/verify_downloads.py`) across technical `[0, 1]` GeoTIFF bounds, 27-raster uniqueness (12 focus-site peers + 2 live-scored GEMSDOE27 + 13 in-repo research rasters), and spatially blocked 40-cell holdouts.<br>
+<p class="lead">27GEMSDOE · DrivenData #306 DOE GEMS. Machine validation runs automatically without human intervention (`gems27.readiness.publication_decision` + `scripts/verify_downloads.py`) across technical `[0, 1]` GeoTIFF bounds, historical 27-raster uniqueness screen (not a current registry check), and spatially blocked holdout evidence.<br>
 {top_badges}</p>
 {h31_hero_index}
 {focus_sites_exec_section}
@@ -1013,17 +1030,19 @@ The agent never uploads anything; you press the button.</div>
     # ---------------------------------------------------------------- executive summary
     rows_pay = "".join(f"<tr><td class='num'>{k}</td><td class='num'>{v:+.4f}</td></tr>" for k, v in pay.items())
     exec_decision_answer = (
-        f"<b>EVIDENCE PASS — SELECTOR REQUIRED: <code>{e(h31_rc['raster']['primary_allfinite'])}</code> (<code>{e(h31_rc['submission_name'])}</code>).</b> "
-        "Passed 100% of automated machine validation gates without human intervention: all 5/5 frozen holdout clauses on fresh seeds 400&ndash;409 "
-        "(new #1 blind pooled HOLDOUT-DTI <code>0.0473</code> buffered / <code>0.1156</code> unbuffered, beating <code>B0</code> 10/10 seeds, <code>D0</code> 10/10 seeds, "
-        "and live-0.2190 <code>H29-S</code> 9/10 seeds), 27-raster uniqueness (max 3-px overlap <code>62.8% &le; 70%</code>; <code>50.2%</code> vs <code>GEMSDOE32</code>), "
-        "and strict <code>[0, 1]</code> all-finite GeoTIFF validation. Step-by-step upload guide: <a href='how-to-submit.html'>how-to-submit.html</a>."
-        if h31_ok else
-        "<b>DO NOT SUBMIT / HOLD WEEKLY SLOT (`NO TIFF IS APPROVED TO SUBMIT`).</b> Fail-closed machine gate has not approved a current file."
+        f"<b>SELECTOR AUTHORIZED: <code>{e(h31_rc['raster']['primary_allfinite'])}</code> (<code>{e(h31_rc['submission_name'])}</code>).</b> "
+        "Current selector authorization is explicitly recorded; recheck registry and cap before upload."
+        if h31_ok else (
+            f"<b>NOT OK TO SUBMIT NOW — NO SLOT AUTHORIZATION.</b> Historical H31-1 <code>{e(h31_rc['raster']['primary_allfinite'])}</code> "
+            "passed its saved machine/holdout evidence gates, but no current selector authorization, current-registry comparison, or weekly-cap evidence exists. "
+            "Its estimate is a PROJECTION only. See the research-only link above; do not upload."
+            if h31_evidence_pass else
+            "<b>DO NOT SUBMIT / HOLD WEEKLY SLOT.</b> The fail-closed evidence gate has not approved a current file."
+        )
     )
     pages["executive-summary.html"] = ("Executive summary", f"""
 <h1>Executive summary</h1>
-<p class="lead">Unmistakable automated machine-gate submission verdict, 9-focus-site executive comparison (`GEMSDOE24`&ndash;`GEMSDOE36`), one-click unique GeoTIFF download &amp; copyable note, and <a href="how-to-submit.html">step-by-step DrivenData #306 submission subpage</a>.</p>
+ <p class="lead">Automated submission-readiness verdict, 9-focus-site historical comparison (`GEMSDOE24`&ndash;`GEMSDOE36`), clearly labelled research-only H31-1 artifact, and <a href="how-to-submit.html">step-by-step DrivenData #306 submission instructions</a>. No current file is authorized for upload.</p>
 {h31_hero_exec}
 {focus_sites_exec_section}
 {parallel_s10_box}
@@ -1033,12 +1052,12 @@ The agent never uploads anything; you press the button.</div>
 <tr><td>What fixed the <code>[0, 1]</code> portal error</td><td>Verified first-hand against official reference notebook Cell 19 (<code>drivendataorg/gems-prize-reference-solution</code>): input <code>-3.4028235e+38</code> sentinels occur on <code>3,061</code> inside-footprint cells, and strict whole-array validators reject NaN-outside rasters. Primary <code>{e(h31_rc['raster']['primary_allfinite']) if h31_rc else 'allfinite.tif'}</code> writes <code>0.0</code> outside footprint with <code>nodata=None</code> (<code>0</code> NaN across all <code>12,279,160</code> cells, exact <code>{{0.0, 1.0}}</code>).</td></tr>
 <tr><td>Why <code>GEMSDOE32</code> scored <code>0.2778</code>, <code>H29-S</code> scored <code>0.2190</code>, and Slot 1 scored <code>0.2449</code> (OWNER-REPORTED)</td><td><code>GEMSDOE32</code> (<code>37,654</code> dots) = <code>(GEMSDOE25_D2.8 &gt; 0) &amp; (EDT(~existing_faults) &gt; 2.0)</code>, removing <code>7,865</code> zero-credit <code>0&ndash;200 m</code> collar FPs. <code>H29-S</code> (<code>511898747886</code>, <code>0.2190</code>, #1 of Oct-25 non-<code>H19-5</code> cohort) achieved <code>5.79&times;</code> concentration but lost <code>-11.0%</code> blind coverage from <code>min_sep=2.0</code> clumping and starved the 24.6% LiDAR gap &mdash; both fixed in <code>H31-1</code>. Slot 1 (<code>5512495c6bd1</code>, <code>61,328</code> dots) = <code>24GEMSDOE</code> + <code>1,259</code> <code>T-v2</code> dots (<code>0.24491</code> vs <code>0.2449</code>).</td></tr>
 <tr><td>Historical negative runs (never submit)</td><td>Session 6 <code>H28-3</code> ({h28_3_eval['HOLDOUT_DTI']['candidate_minus_baseline_pooled']:+.6f} pooled; NOT APPROVED FOR SUBMISSION), Session 9 <code>H30</code>, and Session 9 <code>H29-2</code> remain research-only archives.</td></tr>
-<tr><td>How to upload to DrivenData #306</td><td>Open the dedicated subpage <a href="how-to-submit.html"><b>How to Submit to DrivenData #306 (`how-to-submit.html`)</b></a> for exact pre-flight checks, portal upload steps, 5/week slot rules, and score logging.</td></tr>
+<tr><td>How to upload to DrivenData #306</td><td>Open the dedicated subpage <a href="how-to-submit.html"><b>How to Submit to DrivenData #306 (`how-to-submit.html`)</b></a> for generic pre-flight checks, portal upload steps, current-cap verification, and score logging.</td></tr>
 <tr><td>Is 0.3195 / 0.4413 reachable?</td><td>Rearranging H19-5 ceilings at &asymp;0.278 (achieved by <code>GEMSDOE32</code> B2). Exceeding 0.3195 requires raising off-catalogue recall/concentration via dual-regime corroborated subsurface + morphotectonic detection + axial-crest 300&nbsp;m CELF cover (<a href="research.html#h31-1">Session 10 H31-1 details</a>). Unverified <code>0.4413</code> vs <code>0.3195</code> discrepancy is flagged in <code>sources.html#irregularities</code>.</td></tr></table></div>
 
 <div class="card"><h2 style="margin-top:0">Estimated live score — PROJECTION, never a score (Protocol &sect;3)</h2>
 <table><tr><th>File to download</th><th>Label</th><th class="num">Score / estimate</th><th>Unique vs 9 focus sites?</th><th>Action</th></tr>
-<tr><td><code>docs/downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif</code></td><td>PROJECTION (anchor-transfer model)</td><td class="num"><b>~0.235</b> (planning range 0.19&ndash;0.26)</td><td><b>YES</b> — max 57.7% 3-px overlap vs 12 peers (50.2% vs GEMSDOE32), Spearman &le;0.17</td><td><b>DOWNLOAD &amp; SUBMIT THIS ONE</b></td></tr>
+<tr><td><code>docs/downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif</code></td><td>PROJECTION (anchor-transfer; not a score)</td><td class="num"><b>~0.235</b> (planning range 0.19&ndash;0.26; not a CI)</td><td><b>Historical screen passed only</b> — max 57.7% 3-px overlap vs 12 pinned peers (50.2% vs GEMSDOE32); not current registry proof</td><td><b>RESEARCH/AUDIT ONLY — NOT OK TO SUBMIT NOW</b></td></tr>
 <tr><td>GEMSDOE32 <code>h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros</code></td><td>OWNER-REPORTED live</td><td class="num">0.2778</td><td>NO — already submitted; re-upload is a duplicate</td><td>DO NOT SUBMIT</td></tr>
 <tr><td>GEMSDOE36 Anderson-PINN 38854</td><td>OWNER-REPORTED live</td><td class="num">0.2750</td><td>NO — already submitted</td><td>DO NOT SUBMIT</td></tr>
 <tr><td>GEMSDOE28 rung30 / GEMSDOE31 h27-4-solo</td><td>OWNER-REPORTED live</td><td class="num">0.2710 / 0.2708</td><td>NO — already submitted, 91&ndash;100% clone family</td><td>DO NOT SUBMIT</td></tr>
@@ -1101,32 +1120,32 @@ The agent never uploads anything; you press the button.</div>
 <p class="lead">Executive-summary subpage: step-by-step human upload guide, automated machine-gate checklist, how the <code>[0, 1]</code> portal error is prevented, and post-submission score logging.</p>
 <div class="card hero" style="border:2px solid {'#1a7f37' if h31_ok else '#cf222e'}">
  <h2 style="margin-top:0">1. Current Automated Machine-Gate Status</h2>
- <p><span class="badge {'ok' if h31_ok else 'bad'}" style="font-size:1.05rem">{'&#9989; EVIDENCE PASS — SELECTOR REQUIRED: ' + e(h31_sub_name) if h31_ok else '&#9940; DO NOT SUBMIT — FAIL-CLOSED GATE NOT PASSED'}</span></p>
+ <p><span class="badge {'ok' if h31_ok else 'bad'}" style="font-size:1.05rem">{'&#9989; SELECTOR AUTHORIZED: ' + e(h31_sub_name) if h31_ok else ('&#9940; EVIDENCE PASS DOES NOT AUTHORIZE A SLOT — DO NOT SUBMIT' if h31_evidence_pass else '&#9940; DO NOT SUBMIT — FAIL-CLOSED EVIDENCE GATE NOT PASSED')}</span></p>
  <p>Inspection is executed <b>100% automatically by project code without human intervention</b> via <code>gems27.readiness.publication_decision</code> (<a href="data/submission_readiness_audit.json"><code>docs/data/submission_readiness_audit.json</code></a>) and <code>scripts/verify_downloads.py</code>.</p>
- {'<div class="row"><a class="btn" href="downloads/' + e(h31_tif_name) + '" download>1. Download Validated .tif (' + e(h31_tif_name) + ')</a> <a class="btn alt" href="downloads/' + e(h31_zip_name) + '" download>Alternative: Single-TIFF .zip</a></div>' if h31_ok else ''}
+ {'<div class="row"><a class="btn" href="downloads/' + e(h31_tif_name) + '" download>1. Download Slot-Authorized .tif (' + e(h31_tif_name) + ')</a> <a class="btn alt" href="downloads/' + e(h31_zip_name) + '" download>Alternative: Single-TIFF .zip</a></div>' if h31_ok else ('<p><b>No current submission file or note is authorized.</b> The H31-1 artifact linked from the executive summary is for research/audit only and must not be uploaded.</p>' if h31_evidence_pass else '')}
  <p class="small"><b>SHA-256 to verify locally (optional):</b> <code>{e(h31_sha)}</code><br>
- <b>Short note to paste (&le;140 chars):</b> <code>{e(h31_note_str)}</code> ({len(h31_note_str)} chars)</p>
+ <b>Historical H31 note (do not paste unless a future selector explicitly reauthorizes it):</b> <code>{e(h31_note_str)}</code> ({len(h31_note_str)} chars)</p>
 </div>
 
 <div class="card">
- <h2 style="margin-top:0">2. Step-by-Step Upload Procedure (Human Only)</h2>
+ <h2 style="margin-top:0">2. Upload procedure (only after a file is explicitly authorized)</h2>
+ <p><b>No current file is authorized.</b> These are generic steps for a future selected file; do not use the historical H31-1 artifact or its note now.</p>
  <ol class="steps">
-  <li><b>Never automate <code>drivendata.org</code>:</b> DrivenData's Terms of Use prohibit bots, scrapers, or automated requests. Always open the portal manually in your browser.</li>
-  <li><b>Download the exact binary file above:</b> click <b>Download Validated .tif</b> (<code>{e(h31_tif_name)}</code>). <b>Do NOT open and re-save</b> the file in QGIS/ArcGIS/GDAL, as GIS exports can re-inject a <code>nodata=NaN</code> tag or alter geotransform precision.</li>
-  <li><b>Sign in to DrivenData:</b> visit <a href="{DD_COMP}">{DD_COMP}</a> and click <b>Submit</b>.</li>
-  <li><b>Upload the single-band GeoTIFF (or single-TIFF ZIP):</b> select <code>{e(h31_tif_name)}</code> (806 KB) or <code>{e(h31_zip_name)}</code> (180 KB, verified to contain <i>only</i> that single <code>.tif</code> with no <code>__MACOSX</code> metadata).</li>
-  <li><b>Paste the short description note:</b> paste <code>{e(h31_note_str)}</code> so the content hash <code>{e(h31_rc['raster']['content_id']) if h31_rc else ''}</code> and hypothesis <code>H31-1</code> are permanently paired on your Submissions tab.</li>
-  <li><b>Budget your 5/week submission cap:</b> the competition enforces a rolling limit of 5 submissions per 7 days. Never re-upload already-scored files (<code>511898747886</code> = <code>0.2190</code>, <code>5512495c6bd1</code> = <code>0.2449</code>) or peer clones (<code>GEMSDOE32</code> = <code>0.2778</code>).</li>
-  <li><b>Record the live outcome:</b> once DrivenData displays the public Distance-Tolerant Tversky Index score, record the exact score and timestamp in <code>registry/live_scores.json</code> (with <code>OWNER-REPORTED</code> or stored-receipt provenance).</li>
+  <li><b>Never automate <code>drivendata.org</code>:</b> repository policy prohibits automated requests. Open the portal yourself in a browser.</li>
+  <li><b>Download only the exact file linked as “slot-authorized”</b> on the current executive summary. If there is no such link, stop; this site currently provides no upload-authorized file. Do not open and re-save a TIFF in GIS software.</li>
+  <li><b>Check the current rules and account state:</b> visit <a href="{DD_COMP}">the competition page</a>, sign in, and verify the current submission rules/cap before using a slot. The cap must not be inferred from archived project text.</li>
+  <li><b>Select the authorized single-band GeoTIFF or its verified single-TIFF ZIP</b> from the candidate card. Its validator receipt must confirm [0,1] values and matching CRS, shape, and geotransform.</li>
+  <li><b>Use the exact unique submission name and note</b> displayed with that currently authorized file; do not reuse any historical H31-1 note.</li>
+  <li><b>Submit once and preserve the organizer receipt</b> with file SHA-256, timestamp, and score. Record it in <code>registry/live_scores.json</code> with receipt provenance; without a receipt, label it OWNER-REPORTED.</li>
  </ol>
 </div>
 
 <div class="card">
- <h2 style="margin-top:0">3. Why DrivenData Rejected Earlier Files with <code>&ldquo;Predicted values must be in range [0, 1]&rdquo;</code> &mdash; and How It Is Prevented</h2>
+ <h2 style="margin-top:0">3. Preventing the reported <code>&ldquo;Predicted values must be in range [0, 1]&rdquo;</code> error</h2>
  <ul class="tight">
   <li><b>Root cause 1 (NaN outside footprint):</b> <code>sample_submission.tif</code> contains <code>7,111,787</code> <code>NaN</code> pixels outside the irregular <code>5,167,373</code>-pixel study footprint. Under IEEE-754 floating-point semantics, a strict validator evaluating <code>((arr &gt;= 0.0) &amp; (arr &lt;= 1.0)).all()</code> returns <code>False</code> if <i>any</i> <code>NaN</code> exists anywhere in the <code>3730&times;3292</code> array. Official reference notebook Cell 19 (<code>drivendataorg/gems-prize-reference-solution</code>) initializes <code>y_out = np.zeros(...)</code> with <code>nodata=None</code>.</li>
   <li><b>Root cause 2 (Float32 sentinel bleed):</b> raw <code>training_features.tif</code> stores <code>-3.4028235e+38</code> sentinels on <code>3,061</code> cells <i>inside</i> the valid footprint; unclipped linear or sigmoid pipelines propagate out-of-range values.</li>
-  <li><b>Automated machine guarantee on <code>{e(h31_tif_name)}</code>:</b> single-band <code>float32</code>, <code>EPSG:32611</code>, shape <code>(3730, 3292)</code>, transform <code>(100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)</code>, <code>nodata=None</code>, <code>0</code> NaNs and <code>0</code> Infs across all <code>12,279,160</code> pixels, and value set strictly <code>{{0.0, 1.0}}</code> (<a href="downloads/{e(h31_man['checks_allfinite']) if h31_man else ''}">machine validator JSON receipt</a>).</li>
+  <li><b>Historical H31-1 artifact only (not authorized for submission):</b> its saved machine receipt records <code>{e(h31_tif_name)}</code> as single-band <code>float32</code>, <code>EPSG:32611</code>, shape <code>(3730, 3292)</code>, transform <code>(100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)</code>, <code>nodata=None</code>, <code>0</code> NaNs and <code>0</code> Infs across all <code>12,279,160</code> pixels, and value set strictly <code>{{0.0, 1.0}}</code> (<a href="downloads/{e(h31_man['checks_allfinite']) if h31_man else ''}">machine validator JSON receipt</a>).</li>
  </ul>
 </div>
 <p class="small">Back to <a href="executive-summary.html">Executive summary</a> &middot; <a href="index.html">Submit status</a> &middot; <a href="{REPO_URL}/blob/main/AI_DISCLOSURE.md">AI Disclosure (Official Rules compliance)</a>.</p>
@@ -1221,7 +1240,7 @@ Where a network sits near threshold, individual closures matter more than in a w
     )
     pages["research.html"] = ("Research", f"""
 <h1>Research</h1>
-<p class="lead">Session 10 H31-1 promoted results, PhD forensic autopsy of 0.2778 (`GEMSDOE32`) and 0.2190 (`H29-S`), why Slot 1 scored 0.2449, and ranked untried hypotheses.</p>
+<p class="lead">Historical Session 10 H31-1 results (not currently slot-authorized), PhD forensic autopsy of 0.2778 (`GEMSDOE32`) and 0.2190 (`H29-S`), why Slot 1 scored 0.2449, and ranked untried hypotheses.</p>
 {h31_research_section}
 <h2>H29-2 test and submission status (Session 9 Archive)</h2>
 {h29_2_box}
