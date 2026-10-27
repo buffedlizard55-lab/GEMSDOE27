@@ -2,7 +2,9 @@
 
 ## Session 13 audit — 2026-10-27 (read first)
 
-[Session 13 report](knowledge/30_session13_readiness_audit_2026-10-27.md) records a fresh restore/hash-check of the cached inputs, a 32-band matrix rebuild, **151 passing tests**, clean Ruff/compile checks, and zero download-validator failures. It also fixes an executive-page contradiction: H31-1 is the strongest saved evidence-qualified candidate, but **it is not authorized for a weekly upload** until a separate selector checks the current cap and registry. No new experiment was run because the prompt does not assign a single delimited method lane; no seed was consumed. The score projection (~0.235) is not a score and does not establish a result above GEMSDOE32's owner-reported 0.2778.
+[Primary readiness report](knowledge/30_session13_readiness_audit_2026-10-27.md) records the no-lane/no-experiment decision, the historical nine-site comparison, and current upload boundary. [Engineering review and candidate screen](knowledge/30_session13_repo_review_2026-10-27.md) records the restored inputs, 32-band matrix, 12-peer audit, fresh-cache verifier fix, and three candidate directions. The current audit run card is [evidence/session13_run_card_2026-10-27.json](evidence/session13_run_card_2026-10-27.json).
+
+**H31-1 is downloadable for selector review only; it is not authorized for a weekly upload.** Its saved HOLDOUT-DTI is 0.047302 (95% CI [0.044527, 0.049619], 120,778 withheld-positive occurrences); this is not a live score. The ~0.235 value is a PROJECTION only and does not establish a result above GEMSDOE32's OWNER-REPORTED 0.2778 or either conflicting leaderboard claim. No new experiment or slot use occurred because the prompt does not delimit a single method lane.
 
 ## Current audit correction — 2026-10-26 (takes precedence over archived session claims)
 

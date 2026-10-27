@@ -2,7 +2,7 @@
 
 ## Decision first
 
-**No new geological experiment was run and no weekly slot was selected.** The prompt's parallel-run requirement assigns one method paragraph as the lane, but no single paragraph is delimited in the supplied text. Guessing a method would violate the lane rule and make the uniqueness/effectiveness test uninterpretable. The existing H31-1 file is available for audit and separate selector review; this report does **not** authorize an upload.
+**No new geological experiment was run and no weekly slot was selected.** The prompt's parallel-run requirement assigns one method paragraph as the lane, but no single paragraph is delimited in the supplied text. Guessing a method would violate the lane rule and make the uniqueness/effectiveness test uninterpretable. The existing H31-1 file is available for audit and separate selector review; this report does **not** authorize an upload. The [engineering review supplement](30_session13_repo_review_2026-10-27.md) records the ranked candidate screen and clean-cache verifier fix.
 
 - **Downloadable artifact:** [`gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif`](../docs/downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif)
 - **Submission name:** `27GEMSDOE-H31-DRCG-WL-20261026-cf8e1bbef244`
@@ -60,7 +60,7 @@ Official manual-review links are listed in `registry/sources.json` and [`docs/so
 
 - **Pass 1 — implement:** restored pinned data, rebuilt the cached feature stack, and fixed the conflicting site copy in the shared builder with regression tests.
 - **Pass 2 — bug/assumption review:** preserved the explicit selector requirement; distinguished HOLDOUT-DTI from projections and owner-reported historical results; documented the GEMSDOE28/31 mismatch and limited registry coverage; did not invent a lane or consume seeds.
-- **Pass 3 — acceptance review:** regenerated the site; `pytest` **151 passed**; `ruff check src scripts tests` passed; `compileall` passed; `scripts/verify_downloads.py` reported **0 failures** across the registered download package; data inputs and cached matrix hashes verified. No DrivenData access or upload occurred.
+- **Pass 3 — acceptance review:** regenerated the site; `pytest` **152 passed** with the restored cache; `ruff check src scripts tests` passed; `scripts/verify_downloads.py` reported **0 failures** across the registered download package; data inputs and cached matrix hashes verified. The clean-cache verifier regression case is tested separately with a temporary empty cache and returns exit code 2 with a concise restore instruction rather than a traceback. No DrivenData access or upload occurred.
 
 ## Carry-forward priorities
 
