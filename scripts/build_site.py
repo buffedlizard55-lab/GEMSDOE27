@@ -1164,7 +1164,6 @@ The agent never uploads anything; you press the button.</div>
 
     # ---------------------------------------------------------------- how-to-submit subpage
     h31_tif_name = h31_rc["raster"]["primary_allfinite"] if h31_rc else "none"
-    h31_zip_name = h31_rc["raster"]["zip"] if h31_rc else "none"
     h31_sha = h31_rc["raster"]["sha256"] if h31_rc else "none"
     h31_note_str = h31_rc["note_max_140_chars"] if h31_rc else ""
     h31_sub_name = h31_rc["submission_name"] if h31_rc else ""

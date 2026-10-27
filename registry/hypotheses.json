@@ -384,8 +384,10 @@
       "signature": "A short basement-depth step under weak lidar relief, emitted only outside the 3 px neighborhood of every positive pixel in the 12 pinned focus-site rasters",
       "why": "Catalogue pixels the d=2.8 family does not cover sit under thicker basin fill and weaker scarps; a unique detector has to live there or it is a duplicate.",
       "differs": "Not a collar deletion of the 0.2778 file and not a tilt/analytic-signal rerun. Complement emission is a hard constraint, not a post-hoc prune of family dots.",
-      "status": "TESTED - FROZEN GATE FAILED (Lane L-S13-H33, seeds 520-529). HOLDOUT-DTI 0.025211 vs base-32 0.041446; paired 95% CI [-0.017576, -0.014449]; 0/10 seeds. Unique vs 12 peers (overlap 0.000). NOT OK TO SUBMIT.",
-      "evidence": "knowledge/30_preregistration_H33_2026-10-27.md; knowledge/31_h33_result_2026-10-27.md; evidence/h33_run_card_2026-10-27.json"
+      "status": "TESTED - FROZEN GATE FAILED (Lane L-S13-H33, seeds 520-529, 134,150 withheld-positive occurrences, knowledge/30+31). HOLDOUT-DTI 0.025211 vs base-32 0.041446; paired 95% CI [-0.017576, -0.014449]; 0/10 seeds, 0/4 folds; canary max dir-inv AUC 0.568. Unique TIFF 9ba8480691ed is a NEGATIVE research artifact in docs/downloads/research/ - NOT OK TO SUBMIT. Seeds 520-529 consumed; do not reuse or retune.",
+      "gain": "negative: pooled HOLDOUT-DTI 0.025211 vs base-32 0.041446; paired 95% CI [-0.017576, -0.014449]; 0/10 seeds, 0/4 folds",
+      "cost": "1 confirmatory experiment (E1 canary, E2 holdout, E3 raster) on seeds 520-529; 0 weekly slots",
+      "external": []
     }
   ]
 }
