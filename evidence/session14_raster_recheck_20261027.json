@@ -1,0 +1,60 @@
+{
+  "file": "gems27-h33-bss-complement-20261027-9ba8480691ed-allfinite.tif",
+  "bytes": 825910,
+  "sha256": "1373358188a96b20414834b3e0159065d87470fe695153262ced7b46bc1eb492",
+  "variant": "allfinite",
+  "checks": {
+    "grid_matches_template": {
+      "pass": true,
+      "detail": "candidate=(CRS.from_wkt('PROJCS[\"WGS 84 / UTM zone 11N\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Transverse_Mercator\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-117],PARAMETER[\"scale_factor\",0.9996],PARAMETER[\"false_easting\",500000],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"32611\"]]'), (3730, 3292), (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0), (243350.0, 4135550.0, 572550.0, 4508550.0)); template=(CRS.from_wkt('PROJCS[\"WGS 84 / UTM zone 11N\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Transverse_Mercator\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-117],PARAMETER[\"scale_factor\",0.9996],PARAMETER[\"false_easting\",500000],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"32611\"]]'), (3730, 3292), (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0), (243350.0, 4135550.0, 572550.0, 4508550.0))",
+      "hard": true
+    },
+    "single_band_float32": {
+      "pass": true,
+      "detail": "count=1 dtype=float32",
+      "hard": true
+    },
+    "inside_footprint_all_finite": {
+      "pass": true,
+      "detail": "0 non-finite inside 5167373 px",
+      "hard": true
+    },
+    "inside_footprint_in_0_1": {
+      "pass": true,
+      "detail": "min=0 max=1",
+      "hard": true
+    },
+    "no_infinities_anywhere": {
+      "pass": true,
+      "detail": "np.isinf(whole array) is empty",
+      "hard": true
+    },
+    "outside_footprint_is_zero_and_finite": {
+      "pass": true,
+      "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+      "hard": true
+    },
+    "strict_whole_array_range": {
+      "pass": true,
+      "detail": "whole-array min=0 max=1",
+      "hard": true
+    },
+    "profile_driver_gtiff": {
+      "pass": true,
+      "detail": "GTiff",
+      "hard": false
+    },
+    "compression_like_sample": {
+      "pass": true,
+      "detail": "Compression.lzw",
+      "hard": false
+    }
+  },
+  "hard_checks_passed": true,
+  "hard_failures": [],
+  "nonzero_inside_px": 37654,
+  "value_set_inside": [
+    0.0,
+    1.0
+  ]
+}

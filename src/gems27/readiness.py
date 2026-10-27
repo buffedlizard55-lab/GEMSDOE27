@@ -13,6 +13,9 @@ from pathlib import Path
 
 def publication_decision(card: dict, root: Path) -> dict:
     reasons = []
+    if not isinstance(card, dict):
+        card = {}
+        reasons.append("run card must be a JSON object")
 
     def require(condition, reason):
         if not condition:
@@ -42,9 +45,9 @@ def publication_decision(card: dict, root: Path) -> dict:
     require(hold.get("matched_current_best_comparison") is True
             and isinstance(comparison.get("control_id"), str) and bool(comparison["control_id"])
             and comparison.get("same_splits_and_buffer") is True
-            and _finite(comparison.get("pooled_delta")) and comparison["pooled_delta"] > 0
+            and _finite(comparison.get("pooled_delta")) and 0 < comparison["pooled_delta"] <= 1
             and isinstance(best_ci, list) and len(best_ci) == 2 and all(_finite(x) for x in best_ci)
-            and 0 < best_ci[0] <= best_ci[1], "current-best matched control not proven")
+            and 0 < best_ci[0] <= best_ci[1] <= 1, "current-best matched control not proven")
     # Template fix (Session 9): lane arms are named per session (A, D, L, ...); accept the
     # generic "paired_candidate_minus_B" plus the historical arm-specific aliases.
     paired = hold.get("paired_candidate_minus_B",
@@ -52,7 +55,7 @@ def publication_decision(card: dict, root: Path) -> dict:
     paired = paired if isinstance(paired, dict) else {}
     ci = paired.get("ci95", [])
     require(isinstance(ci, list) and len(ci) == 2 and all(_finite(x) for x in ci)
-            and 0 < ci[0] <= ci[1], "paired improvement CI missing or does not exclude zero")
+            and 0 < ci[0] <= ci[1] <= 1, "paired improvement CI missing or does not exclude zero")
     auc = hold.get("canary_max_auc")
     # A feature and its negation carry the same information. Test both directions:
     # AUC 0.05 is as suspicious as 0.95; AUC 0.30 is not evidence of leakage.
