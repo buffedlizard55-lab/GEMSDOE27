@@ -47,8 +47,9 @@ def layout(fname: str, title: str, body: str, stamp: str, approved_name: str | N
 <main><div class="card"><b>Automatic submission evidence audit (zero human intervention):</b>
 <a href="data/submission_readiness_audit.json">Read byte-bound gate decisions and blockers</a> &middot;
 <a href="how-to-submit.html">How to submit to DrivenData #306</a>.
-<a href="../knowledge/30_session13_repo_review_2026-10-27.md">Current repository review (2026-10-27)</a> &middot;
-<a href="../knowledge/28_submission_readiness_audit_2026-10-26.md">9-site executive audit and limitations</a>.<br>
+<a href="../knowledge/30_session13_readiness_audit_2026-10-27.md">Current Session 13 audit</a> &middot;
+<a href="../knowledge/30_session13_repo_review_2026-10-27.md">Engineering review and candidate screen</a> &middot;
+<a href="../knowledge/28_submission_readiness_audit_2026-10-26.md">9-site executive audit</a>.<br>
 <strong>NOT AUTHORIZED FOR A WEEKLY SLOT:</strong> evidence PASS is not selector approval.
 The current weekly cap and registry must be checked in a separate selector step before upload.
 H31-3 is a completed negative research lane; this audit emits no new eligible candidate.
@@ -942,7 +943,7 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
 <div class="card" id="focus-sites">
  <h2 style="margin-top:0">Executive Summary of All 9 Focus Sites (<code>GEMSDOE24</code>&ndash;<code>GEMSDOE36</code>)</h2>
  <p>All 9 focus-site best rasters were hash-verified from local <code>data_cache/parallel_registry/</code> and sibling tarballs (<a href="{REPO_URL}/blob/main/evidence/focus_sites_executive_summary_20261026.json">evidence/focus_sites_executive_summary_20261026.json</a>; full PhD forensic autopsy in <a href="{REPO_URL}/blob/main/knowledge/23_focus_sites_and_02778_phd_autopsy_20261026.md">knowledge/23</a>). Every historical live score is explicitly labelled <code>OWNER-REPORTED</code> (`|G| = 12,226` blind-lattice anchor).</p>
- <p><b>Which submission is best to submit right now?</b> Every historical file in the table below (including <code>GEMSDOE32 0.2778</code>, <code>GEMSDOE36 0.2750</code>, <code>GEMSDOE27 Slot 1 0.2449</code>, and <code>GEMSDOE27 H29-S 0.2190</code>) has <b>already been submitted</b> and 8 of 9 belong to the exhausted <code>H19-5</code> ridge clone cluster (<code>86.7%&ndash;100%</code> 3-px overlap). Never re-upload or rename them. The best new unique submission to upload now is <b><code>gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif</code></b> (<code>H31-1</code>: <b>5/5</b> frozen gates passed on seeds <code>400&ndash;409</code>, <b>50.2%&ndash;62.8%</b> 3-px overlap across all 27 rasters &le; 70%).</p>
+ <p><b>What is the strongest evidence-qualified candidate?</b> Every historical file in the table below (including <code>GEMSDOE32 0.2778</code>, <code>GEMSDOE36 0.2750</code>, <code>GEMSDOE27 Slot 1 0.2449</code>, and <code>GEMSDOE27 H29-S 0.2190</code>) is recorded as already submitted and 8 of 9 belong to the exhausted <code>H19-5</code> ridge clone cluster (<code>86.7%&ndash;100%</code> 3-px overlap); do not re-upload or rename them. H31-1 (<code>gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif</code>) is the strongest <b>repository evidence-qualified candidate</b>: <b>5/5</b> frozen holdout gates passed on seeds <code>400&ndash;409</code>, with <b>50.2%&ndash;62.8%</b> 3-px overlap across the recorded 27-raster screen (&le; 70%). <b>This is not authorization to upload:</b> no selector has assigned it a live weekly slot, and current cap/registry status has not been verified. The file is downloadable for audit and selector review only until that separate decision is recorded.</p>
  <div class="tw"><table>
   <thead><tr><th>Focus Site</th><th>Highest-Scoring Submission</th><th class="num">Best Score</th><th class="num">Dots N</th><th class="num">Blind Cov c</th><th class="num">Implied Conc</th><th class="num">3-px vs G32</th><th class="num">H31-1 vs Site</th><th>Actionable Guidance</th></tr></thead>
   <tbody>{fs_rows}</tbody>

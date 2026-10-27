@@ -1,4 +1,4 @@
-# Session 13 — repository review, data restoration, and evidence boundary (2026-10-27)
+# Session 13 — engineering review and hypothesis-screen supplement (2026-10-27)
 
 **Branch:** `arena/e40840b3-gemsdoe27`  
 **Scope:** three-pass repository review; restore the pinned local inputs; run the existing checks; fix an actionable clean-checkout failure.  
@@ -72,45 +72,6 @@ Source records and review links are in `registry/sources.json`, `docs/sources.ht
 4. Re-pin the peer registry before any future uniqueness verdict, because the existing 12-peer set is frozen to repository commits.
 5. Any owner-submitted score must be transcribed from an actual submission receipt and labelled ORGANIZER-CONFIRMED; do not access or automate DrivenData from this project.
 
-## Session-end audit run card
+## Canonical run card
 
-This is a repository audit card, not a claim that a new detector passed. Holdout values are copied from the saved H31-1 run card and were not re-run in Session 13.
-
-```json
-{
-  "hypothesis": "No new hypothesis tested in Session 13; audit existing H31-1 artifact and submission-readiness boundaries",
-  "mechanism": "Existing H31-1 dual-regime corroborated geothermal-conduit / Walker Lane ridge ranking with axial-crest CELF emission; audit checks evidence provenance, raster validity, and slot-authorization separation",
-  "named_non_fault_process_that_could_mimic_it": "Conductive clay-rich playa or evaporite fill at a basin margin, plus non-fault topographic ridge alignment",
-  "holdout": {
-    "label": "HOLDOUT-DTI (saved prior evidence, not rerun this session)",
-    "evaluator": "gems27.metric v1 + holdout-blind-buffered-v2 (alpha=0.2, beta=0.8, 300 m triangular kernel, buffer_px=6)",
-    "withheld_positive_occurrences": 120778,
-    "pooled_dti": 0.047302,
-    "ci95": [0.044527, 0.049619],
-    "seeds": [400, 401, 402, 403, 404, 405, 406, 407, 408, 409]
-  },
-  "correlation_overlap_vs_pinned_registry": {
-    "max_rank_spearman": 0.16452,
-    "max_candidate_dot_fraction_within_3px": 0.57704,
-    "scope": "12 pinned focus-site peer rasters plus scored-repo comparisons in the H31-1 run card; frozen snapshot, not current global proof"
-  },
-  "raster": {
-    "path": "docs/downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif",
-    "sha256": "2c002b02792419864bd3b29a218e543cb41e3f07b3b57c29ef35c6e39e184bfe"
-  },
-  "validator": {
-    "download_verifier": "PASS, 0 failures",
-    "single_band_float32": true,
-    "no_nan_inside_footprint": true,
-    "inside_footprint_range": [0.0, 1.0],
-    "crs": "EPSG:32611",
-    "shape": [3730, 3292],
-    "transform": [100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0],
-    "slot_authorized": false
-  },
-  "submission_name": "27GEMSDOE-H31-DRCG-WL-20261026-cf8e1bbef244",
-  "note": "27GEMSDOE H31-1 | dualRegime MSub+MFull+WLseis+obliq+CELF2.8 B2 37654px | id cf8e1bbef244 | unscored validated-promote",
-  "verdict": "negative",
-  "verdict_note": "No new candidate is promoted in this review; the existing file is downloadable for selector review only, unscored and not organizer-authorized."
-}
-```
+The single Session 13 audit run card is [`evidence/session13_run_card_2026-10-27.json`](../evidence/session13_run_card_2026-10-27.json). It records zero experiments, the saved (not rerun) H31-1 HOLDOUT-DTI, the pinned-registry overlap results, raster validator output, and the negative/no-promotion verdict. This supplement intentionally does not duplicate the JSON card.

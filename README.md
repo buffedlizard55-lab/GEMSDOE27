@@ -1,13 +1,10 @@
 # 27GEMSDOE - geothermal & structural fault discovery lab for DrivenData #306 (DOE GEMS)
 
-## Session 13 review — 2026-10-27 (read first)
+## Session 13 audit — 2026-10-27 (read first)
 
-**Review report:** [`knowledge/30_session13_repo_review_2026-10-27.md`](knowledge/30_session13_repo_review_2026-10-27.md). This review restored and hash-verified the ignored input cache, prepared the 32-feature matrix, fetched and grid-checked the 12 pinned peer rasters, ran all project tests/lint/download/readiness checks, and fixed the download verifier's clean-checkout missing-data traceback. No new geological experiment, TIFF, DrivenData upload, or organizer score was produced.
+[Primary readiness report](knowledge/30_session13_readiness_audit_2026-10-27.md) records the no-lane/no-experiment decision, the historical nine-site comparison, and current upload boundary. [Engineering review and candidate screen](knowledge/30_session13_repo_review_2026-10-27.md) records the restored inputs, 32-band matrix, 12-peer audit, fresh-cache verifier fix, and three candidate directions. The current audit run card is [evidence/session13_run_card_2026-10-27.json](evidence/session13_run_card_2026-10-27.json).
 
-- **Existing candidate file:** [`H31-1 all-finite GeoTIFF`](docs/downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif) remains available. It passes the byte-level format verifier, but is **unscored; selector required** (`slot_authorized: false`). The saved **HOLDOUT-DTI** is 0.047302, 95% CI [0.044527, 0.049619], 120,778 withheld-positive occurrences; this is not a live score.
-- **Estimated live score:** ~0.235 **PROJECTION** only; it does not establish a result above the owner-reported GEMSDOE32 0.2778 or the conflicting leaderboard figures. No score is organizer-confirmed in this checkout.
-- H29-5 (existing DEM/LiDAR layers) is the leading currently feasible, untested hypothesis in the registered screen. H27-16 has the larger planning prior but requires external GDR #1391 packages not obtained or verifiable through this environment. No new run should begin without an explicit lane and fresh-seed check.
-- Run-start discipline: read this README, `AGENTS.md`, and the newest `knowledge/` review before changes. Scores, estimates, and holdout results must retain their distinct labels.
+**H31-1 is downloadable for selector review only; it is not authorized for a weekly upload.** Its saved HOLDOUT-DTI is 0.047302 (95% CI [0.044527, 0.049619], 120,778 withheld-positive occurrences); this is not a live score. The ~0.235 value is a PROJECTION only and does not establish a result above GEMSDOE32's OWNER-REPORTED 0.2778 or either conflicting leaderboard claim. No new experiment or slot use occurred because the prompt does not delimit a single method lane.
 
 ## Current audit correction — 2026-10-26 (takes precedence over archived session claims)
 

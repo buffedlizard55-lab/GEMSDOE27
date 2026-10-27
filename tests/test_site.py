@@ -51,9 +51,10 @@ def test_repository_root_front_page_shows_current_submission_decision():
     assert (ROOT / ".nojekyll").exists()
 
 
-def test_front_page_promotes_h31_and_does_not_offer_failed_h28_3_as_submission():
+def test_front_page_marks_h31_as_selector_review_only_and_blocks_failed_candidates():
     idx = (DOCS / "index.html").read_text()
     assert "EVIDENCE PASS — SELECTOR REQUIRED" in idx
+    assert "knowledge/30_session13_readiness_audit_2026-10-27.md" in idx
     assert "knowledge/30_session13_repo_review_2026-10-27.md" in idx
     assert "gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif" in idx
     assert "There is no one-click submission download for this run." in idx
@@ -65,6 +66,10 @@ def test_front_page_promotes_h31_and_does_not_offer_failed_h28_3_as_submission()
     assert "EVIDENCE PASS — SELECTOR REQUIRED" in summary
     assert "DOWNLOAD — SELECTOR REQUIRED" in summary
     assert "DOWNLOAD &amp; SUBMIT THIS ONE" not in summary
+    assert "What is the strongest evidence-qualified candidate?" in summary
+    assert "This is not authorization to upload" in summary
+    assert "downloadable for audit and selector review only" in summary
+    assert "The best new unique submission to upload now is" not in summary
     assert "how-to-submit.html" in summary
     for site_id in ("GEMSDOE24", "GEMSDOE25", "GEMSDOE27", "GEMSDOE28", "GEMSDOE30",
                     "GEMSDOE31", "GEMSDOE32", "GEMSDOE33", "GEMSDOE36"):
