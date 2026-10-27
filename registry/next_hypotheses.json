@@ -1,7 +1,7 @@
 {
-  "generated": "2026-10-26 | H32/H31-2 and H31-3 moved to tested negative ledger after preregistered fresh-seed gates.",
-  "status": "Current untried directions only; all historical/negative entries preserved under tested_hypotheses. A future lane needs preregistration and fresh seeds.",
-  "novelty_scope": "Screened against this checkout, its evidence ledger, all in-repo research artifacts, and the 12-peer parallel registry.",
+  "generated": "2026-10-27 | reconciled Session 12/13 with the tested H29-5 detrended-relief proxy.",
+  "status": "Three additional formulations and a separate actual drainage hypothesis remain research ideas; H29-5-PROXY was tested and is negative. No selector authorization.",
+  "novelty_scope": "Screened against current source tree and available experiment/evidence ledgers in this checkout through 2026-10-27; not a global novelty claim across sibling sites or other competitors.",
   "target": "Fault-location pixels in the organizer-created test labels, which remain unobserved here. Catalogue-internal holdouts are only a proxy and cannot validate far-field behavior.",
   "baseline": {
     "name": "Current blind buffered OOF holdout benchmarks",
@@ -9,11 +9,11 @@
     "evidence": "evidence/h29_e2_holdout_210_219.json; seeds 210-219; H29-S pooled buffered HOLDOUT-DTI 0.042198 vs D0 0.040902, H28_1_B2 0.037578, B0 0.036368",
     "limitation": "Catalogue-internal component-hidden, four-quadrant buffered holdout. It is not the organizer-created expert-label set."
   },
-  "ranking_basis": "Expert priors on potential paired catalogue-holdout \u0394DTI \u00d7 testability / engineering cost, informed by forensic inversion of 0.2778 (GEMSDOE32), 0.2478 (GEMSDOE70), and 0.2190 (GEMSDOE27 H29-S). Planning priors are not leaderboard predictions.",
+  "ranking_basis": "Qualitative expert planning only; no numerical prospective gain has been established. The tested proxy, actual drainage, and other suggested transforms are distinct.",
   "hypotheses": [
     {
       "id": "H27-16",
-      "rank": 3,
+      "rank": 1,
       "title": "Add three official GDR 1391 layers absent from the detector (paleo-geothermal sinter/tufa, 2 m probes, Quaternary volcanics)",
       "layers": [
         "Paleo-geothermal sinter/tufa/travertine and altered-bedrock regional vectors (`faffcf69...`)",
@@ -24,18 +24,15 @@
       "why_missing_faults": "Fossil sinter/tufa aprons cement fault traces and mask young coseismic scarps while directly marking Quaternary hydrothermal upflow conduits.",
       "confounders": "Lacustrine tufa mounds along Lake Lahontan shorelines (Kraal et al. 2022), groundwater outflow plumes, and volcanic contacts.",
       "differs_from_repo": "H29-1 and H31-1 use the 27,092 well/spring chemistry CSV (`gdr_wellspring_in_footprint.csv`), whereas these three separate regional GDR #1391 packages remain absent from the local checkout.",
-      "expected_holdout_delta_dti": [
-        0.001,
-        0.008
-      ],
       "cost": "medium-high; requires authorized data retrieval and SHA-256 verification",
       "data_gate": "Official DOE GDR #1391 (`https://gdr.openei.org/submissions/1391`, DOI 10.15121/1881483, CC-BY-4.0); raw packages absent from this checkout and sibling repos (`16/19/70GEMSDOE`) because `gdr.openei.org` is outside sandbox allowlist.",
       "validation": "Obtain raw bytes via authorized runner, verify SHA-256 pins in scripts/fetch_external_layers.py, then preregister on unused seeds >= 430.",
-      "status": "UNTRIED; official source packages are not yet present in this checkout."
+      "status": "UNTRIED; official source packages are not yet present in this checkout.",
+      "expected_benefit": "Uncertain; no numerical improvement is established."
     },
     {
       "id": "H29-5",
-      "rank": 4,
+      "rank": 2,
       "title": "Transverse Range-Front Canyon-Mouth Knickpoint & Alluvial-Fan Apex Collinearity",
       "layers": [
         "det_elev, det_local_relief, det_gradient, lidar_relief, lidar_cross_max"
@@ -43,38 +40,55 @@
       "signature": "Collinear 0.5-2 km alignments of steepened transverse stream-channel outlets and fan apexes along active footwall range fronts where Holocene debris-flow aggradation buries inter-canyon scarps.",
       "why_missing_faults": "Rapidly aggrading bajadas erase continuous surface scarps within centuries while preserving aligned canyon-mouth knickpoints.",
       "confounders": "Resistant stratiform bedrock hogbacks crossed by transverse streams.",
-      "differs_from_repo": "All existing DEM/LiDAR features measure local scarp height or curvature, never multi-canyon outlet collinearity.",
-      "expected_holdout_delta_dti": [
-        0.001,
-        0.005
-      ],
+      "differs_from_repo": "The actual routed-drainage and verified fan-apex alignment operator was not executed; H29-5-PROXY tested only slope-side contrast, concavity and tangent support.",
       "cost": "medium; current DEM/LiDAR bands",
-      "data_gate": "Existing hash-pinned raster bands.",
-      "validation": "Preregister on fresh unused seeds >= 440.",
-      "status": "UNTRIED."
+      "data_gate": "Requires unmodified elevation and conditioned/routed drainage plus verified fan-apex observations; existing detrended-elevation bands alone do not establish stream or outlet geometry, and these inputs were not restored here.",
+      "validation": "If raw inputs become available, preregister separately with unused seeds; never reuse 620\u2013624 or portray the tested proxy as a fresh trial.",
+      "status": "UNTRIED actual conditioned-drainage/fan-apex hypothesis. The related H29-5-PROXY used only detrended-relief features and was tested negative; it was not a stream, fan-apex or outlet analysis.",
+      "expected_benefit": "Uncertain; no numerical improvement is established."
     },
     {
-      "id": "H30-2",
-      "rank": 5,
-      "title": "Standalone Quality-Filtered Hydrothermal Upflow & Oblique Transfer-Zone Detector (H30-2 / H30-3)",
+      "id": "H28-6",
+      "rank": 3,
+      "title": "Gravity analytic-signal scale persistence",
       "layers": [
-        "GDR/INGENIOUS gdr_wellspring_in_footprint.csv (temp_c, geothermquartz_c, geothermchalc_c, geothermcat_c)",
-        "cond_surf",
-        "depth_to_base_surf",
-        "rtp, iso_grav_anom, geod_shearrate (oblique transfer strike-rotation)"
+        "iso_grav_anom",
+        "iso_grav_anom_vg",
+        "iso_grav_anom_hg",
+        "iso_grav_anom_slope"
       ],
-      "signature": "Station-deduplicated well/spring thermal excess (T - 20 C > 0, T <= 350 C), quartz/chalcedony/cation geothermometer excess (max T_geo - 50 C > 0), and oblique transfer-zone strike-rotation boundaries (|grad cos(2*theta_mag)| + |grad sin(2*theta_mag)|) weighted by geodetic shear rate.",
-      "why_missing_faults": "Nearly 50% of Great Basin geothermal systems are blind (no surface fault rupture; Faulds & Hinz 2015) due to smectite/illite clay caps and young alluvial cover, and transverse transfer zones fracture into distributed small-offset shears omitted by scarp-focused aerial/LiDAR mapping.",
-      "confounders": "Lateral down-hydraulic-gradient warm-water outflow plumes in permeable piedmont gravels; clustered agricultural/municipal well fields; pre-Cenozoic plutonic/thrust contacts.",
-      "differs_from_repo": "Addendum D (H27-12) tested only Euclidean distance to well/spring coordinates regardless of temperature (+0.0005 PR-AUC, refuted). Incorporated as bands 5-7 of the promoted H30-1 stack; standalone ablation without up-dip potential-field advection remains untried.",
-      "expected_holdout_delta_dti": [
-        0.001,
-        0.004
+      "signature": "Persistence of gravity edge/analytic-signal ridges across multiple smoothing scales, rather than raw anomaly amplitude.",
+      "why_missing_faults": "Buried density boundaries may remain coherent in gravity derivatives beneath alluvium where surface mapping and LiDAR scarp evidence are weak.",
+      "confounders": "Basin-fill density transitions, lithologic contacts, regional gravity trends and correlated potential-field artifacts.",
+      "differs_from_repo": "The exact standalone multiscale persistence transform was not found in the executed experiment ledger; prior H28-1/H32 experiments used related potential-field combinations, so independence is limited.",
+      "cost": "Low-medium; derive transforms from the existing feature stack.",
+      "data_gate": "Inputs and prepared feature matrix were restored and SHA-256 verified in Session 12; no holdout experiment has yet been run.",
+      "validation": "No implementation or holdout experiment in Session 12. Requires assigned lane, preregistration, individual-feature canaries, and fresh paired holdout seeds.",
+      "status": "UNTRIED exact formulation; lower priority due related prior geophysics tests.",
+      "expected_benefit": "Uncertain; no numerical improvement is established."
+    },
+    {
+      "id": "H28-7",
+      "rank": 4,
+      "title": "Directional radiometric-alteration lineament continuity",
+      "layers": [
+        "GeoDAWN K",
+        "GeoDAWN Th",
+        "GeoDAWN U",
+        "Th/K",
+        "U/K",
+        "U/Th",
+        "TMI_up150"
       ],
-      "cost": "low; implemented in src/gems27/updip_relay_features.py (bands 5-7)",
-      "data_gate": "Hash-pinned gdr_wellspring_in_footprint.csv (27,092 rows) and raster bands already staged in data_cache/.",
-      "validation": "Included inside promoted H30-1 (seeds 240-244, canary AUCs 0.5390, 0.5666, 0.5700); standalone ablation requires fresh seeds >= 270.",
-      "status": "PARTIALLY TESTED INSIDE PROMOTED H30-1; standalone ablation untried."
+      "signature": "Orientation-coherent, scale-persistent alteration fronts rather than pixelwise radiometric-ratio ranks.",
+      "why_missing_faults": "Fault-controlled fluid flow can form elongated alteration patterns extending beyond mapped surface traces.",
+      "confounders": "Lithology/soil contrast, soil moisture, drainage and survey artifacts.",
+      "differs_from_repo": "The exact directional lineament operator was not found as an executed gate. Addendum D already found weak benefit for radiometric-ratio feature addition (+0.0007 PR-AUC against a +0.005 screen), so this is a new transform over weakly supported signals, not an untested source.",
+      "cost": "Low; existing radiometric bands if restored.",
+      "data_gate": "Inputs and prepared feature matrix were restored and SHA-256 verified in Session 12; no holdout experiment has yet been run.",
+      "validation": "No implementation or holdout experiment in Session 12. Requires assigned lane, preregistration, individual-feature canaries, and fresh paired holdout seeds.",
+      "status": "UNTRIED exact formulation; low priority after negative additive ratio arm.",
+      "expected_benefit": "Uncertain; no numerical improvement is established."
     }
   ],
   "tested_hypotheses": [
@@ -256,6 +270,20 @@
       "status": "TESTED \u2014 FROZEN GATE FAILED; negative. Do not tune or rerun seeds 510\u2013519.",
       "result": "H31-3-S HOLDOUT-DTI 0.045332 vs H31-S 0.044966; pooled delta +0.000366, paired mean +0.000392, 95% CI [-0.001182,+0.001823], 6/10 seeds, 2/4 folds; 4/5 efficacy clauses failed. E1 canary max AUC 0.53194. 12-peer max overlap 56.74%, extended local maximum 86.87% vs H31-1; evidence/h31_3_run_card_2026-10-26.json.",
       "eligible_for_weekly_slot": false
+    },
+    {
+      "id": "H29-5-PROXY",
+      "title": "Detrended-relief range-front profile proxy",
+      "status": "TESTED 2026-10-27; negative. Paired control CI includes zero and 79.71% final-dot overlap with H28-1 exceeds the 70% duplicate limit. No TIFF or slot. See evidence/relief_profile_run_card_20261027.json.",
+      "pre_registration": "knowledge/30_lane_2026-10-27_preregistration.md",
+      "seeds": [
+        620,
+        621,
+        622,
+        623,
+        624
+      ],
+      "distinction": "Proxy is not actual drainage or a mapped fan-apex analysis."
     }
   ],
   "separate_review_class": {

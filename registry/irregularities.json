@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-25 | Merged parallel sessions (Lane L-S7 IR-10..13 + Session 9 H30 IR-14/15, renumbered to avoid collision). | 2026-10-27 additional provenance and validation audit.",
+ "generated": "2026-10-27 | merged Session 12/13 audits and relief-profile lane review.",
  "items": [
   {
    "id": "prompt-verbatim-unavailable",
@@ -413,7 +413,25 @@
    "id": "IR-2026-10-26-audit-selector-count-canary",
    "severity": "high",
    "issue": "README and knowledge/25 stated 289,180 withheld positives, while H31 saved evaluator and run card both record 120,778 occurrences. Site confused evidence publication PASS with weekly-slot authorization. Shared canary used an arbitrary 0.40 lower AUC bound instead of checking inverse prediction. Latest prompt omits its promised method lane.",
-   "action": "Correct count from saved evaluator; distinguish evidence PASS from selector authorization on all pages and machine outputs; direction-invariant canary with boundary regression tests. No new experiment or candidate; existing H31 unchanged. Current registry and cap remain unverified."
+   "action": "Correct count from saved evaluator; distinguish evidence PASS from selector authorization on all pages and machine outputs; direction-invariant canary with boundary regression tests. No new experiment or candidate; existing H31 unchanged. Current registry and cap remain unverified. Session 12 hardens this: the site generator now requires explicit selector authorization before rendering an upload CTA, and the audit JSON separates evidence-pass from slot-authorized lists. No such authorization is recorded; H31 is research/audit only."
+  },
+  {
+   "id": "IR-2026-10-27-01-focus-site-28-31-score-order-conflict",
+   "severity": "medium",
+   "issue": "The user-supplied 2026-10-27 focus-site list reports GEMSDOE28 h36-1 at 0.2710 and GEMSDOE31 h27-4 at 0.2708. The repository focus-site evidence instead reports GEMSDOE31 h32-2 at 0.2710 and GEMSDOE28 h27-4 at 0.2708. No organizer receipts or fresh site crawl are available here to reconcile which artifact/value is correct.",
+   "action": "Preserve both as conflicting owner-reported snapshots; do not relabel either ORGANIZER-CONFIRMED or infer the site ranking. Reconcile against submission-page receipts outside this agent."
+  },
+  {
+   "id": "IR-2026-10-27-02-no-current-slot-authorization",
+   "severity": "high",
+   "issue": "README and generated pages inherited language calling H31-1 \u201cOK TO DOWNLOAD AND SUBMIT\u201d or \u201capproved,\u201d while the saved readiness evidence reports slot_authorized=false and no current weekly-cap/current-registry check is stored. The current task also contains no single assigned geological method paragraph, and the ignored data_cache is absent.",
+   "action": "Session 12 changed the site generator to require explicit selector authorization before a submission-download CTA; H31-1 is labelled historical research/audit only. No new TIFF or experiment was produced. Restore/verify inputs and assign a lane before further work; selector authorization must remain separate."
+  },
+  {
+   "id": "IR-2026-10-27-03-stale-h30-2-untried-registry-entry",
+   "severity": "medium",
+   "issue": "`registry/next_hypotheses.json` duplicated H30-2: it appeared in the active untried list as a standalone ablation while also appearing in `tested_hypotheses` as an evaluated, negative selection arm. This could have caused a repeat or a false novelty claim.",
+   "action": "Session 12 removes H30-2 from the active untried list and retains its negative record under tested_hypotheses. Four other screened formulations are listed with explicit caveats in knowledge/30_session12_repo_review_2026-10-27.md."
   },
   {
    "id": "IR-2026-10-27-h31-reported-already-submitted",
@@ -438,6 +456,12 @@
    "severity": "high",
    "issue": "H29-5 grouped hides use approximate nearest-Qfault FIDs stratified by quadrant and a 600 m buffer, not mutually disjoint geographic test blocks. Five repeated hides share catalogue faults; their bootstrap interval does not represent independent faults.",
    "action": "Disclose the limitation and require a more independent geographic-block design and matched H31 comparator before any future selector."
+  },
+  {
+   "id": "IR-2026-10-27-h29-5-proxy-label-collision",
+   "severity": "medium",
+   "issue": "Concurrent audits use H29-5 for an untested actual canyon-mouth/drainage hypothesis, while the preregistered lane used H29-5 for a detrended-relief proxy. The proxy did not use stream routing or validated fan apices.",
+   "action": "Record the executed variant separately as H29-5-PROXY, retain actual drainage as untested and raw-data-blocked, and consume seeds 620\u2013624 only for the proxy. Do not equate the two."
   }
  ]
 }

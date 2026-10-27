@@ -45,6 +45,10 @@ def test_all_internal_links_and_assets_resolve():
 
 
 def test_h31_reported_submitted_and_never_offered_as_new():
+    audit = json.loads((DOCS / "data/submission_readiness_audit.json").read_text())
+    assert audit["slot_authorized"] == []
+    assert audit["evidence_passed_not_slot_authorized"] == []
+    assert "approved" not in audit
     for name in PAGES:
         text = (DOCS / name).read_text()
         assert "DO NOT SUBMIT" in text

@@ -239,7 +239,7 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
 <li><a href="https://github.com/drivendataorg/gems-prize-reference-solution">Official competition reference solution</a> — read from GitHub in this session; not evidence of this repository's scores.</li>
 <li><a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN release</a>, <a href="https://gdr.openei.org/submissions/1391">DOE INGENIOUS GDR listing</a> and <a href="https://www.usgs.gov/3d-elevation-program">USGS 3DEP</a> — official source links, not newly downloaded here.</li>
 <li><a href="{repo_link('data/manifest.json')}">Hash-pinned owner-mirror data manifest</a> — restored bytes are not independently organizer-authenticated.</li></ul>
-<h2>Recorded irregularities</h2><ul>{issue_rows}</ul><p><a href="{repo_link('registry/irregularities.json')}">Full irregularity registry</a>.</p>
+<h2>Recorded irregularities</h2><p>These dated records describe the state when each audit was made; older status statements may since have changed.</p><ul>{issue_rows}</ul><p><a href="{repo_link('registry/irregularities.json')}">Full irregularity registry</a>.</p>
 {history_notice}
 """
     pages = {"index.html": ("Status", home), "executive-summary.html": ("Executive summary", executive),

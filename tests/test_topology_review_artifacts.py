@@ -72,6 +72,11 @@ def test_failed_hypotheses_are_not_currently_untried_or_slot_authorized():
     assert 3 <= len(current_ids) <= 5
     assert "H27-10" not in current_ids
     assert "H28-3" not in current_ids
+    assert "H29-5-PROXY" not in current_ids
+    proxy = next(h for h in screen["tested_hypotheses"] if h["id"] == "H29-5-PROXY")
+    assert "negative" in proxy["status"] and proxy["seeds"] == [620, 621, 622, 623, 624]
+    drainage = next(h for h in screen["hypotheses"] if h["id"] == "H29-5")
+    assert "UNTRIED actual" in drainage["status"] and "not a stream" in drainage["status"]
     tested = next(h for h in screen["tested_hypotheses"] if h["id"] == "H27-10")
     assert "FROZEN GATE FAILED" in tested["status"]
     assert "not eligible to justify a weekly slot" in tested["status"]

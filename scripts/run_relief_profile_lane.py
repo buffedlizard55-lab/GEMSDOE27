@@ -327,6 +327,8 @@ def run_artifact(foot, labels, extra, card) -> None:
 def main() -> int:
     card = {"schema": "parallel-run-card-v3", "generated_utc": datetime.now(timezone.utc).isoformat(),
             "hypothesis": "H29-5 detrended-relief range-front profile proxy",
+            "hypothesis_id": "H29-5-PROXY",
+            "identity_note": "Distinct from untested H29-5 routed-drainage/fan-apex formulation.",
             "mechanism": "signed higher/lower-side slope contrast and transverse concavity with tangent support",
             "named_non_fault_mimic": "erosional valley edges, lithologic contacts and engineered cuts",
             "preregistration": str(PREREG.relative_to(ROOT)), "preregistration_sha256": uniqueness.sha256_file(PREREG),

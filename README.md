@@ -6,6 +6,7 @@
 - [GitHub Pages status](https://buffedlizard55-lab.github.io/GEMSDOE27/) · [Submission instructions](docs/how-to-submit.html) · [Research and run card](docs/research.html) · [Source feed](docs/sources.html)
 - [2026-10-27 hypothesis ranking and preregistration](knowledge/30_lane_2026-10-27_preregistration.md)
 - [Owner-reported submitted-raster ledger](registry/submitted_rasters.json) · [Submission readiness audit](docs/data/submission_readiness_audit.json)
+- Earlier parallel audits: [Session 12](knowledge/30_session12_repo_review_2026-10-27.md) · [Session 13](knowledge/30_session13_repo_review_2026-10-27.md); later evidence here supersedes their then-current status.
 
 ## What is established and what is not
 

@@ -429,3 +429,29 @@ See `knowledge/18_session8_repo_review_2026-10-25.md` for the full candidate scr
 | All tests, linter, download verifier, readiness audit, and site builder clean | `pytest -q`, `ruff check`, `verify_downloads.py` (`0 failures`), `audit_submission_readiness.py` (`approved: ["h30_1_run_card.json"]`) | **PASS** |
 
 *Verified 2026-10-25 / 2026-10-26, 0 hallucinations, byte-bound.*
+
+## Session 12 (2026-10-27): repository audit, selector-language correction, four-hypothesis screen
+
+### Pass 1 — implement and verify
+- Read `README.md`, `AGENTS.md`, latest readiness audit/H31-3 report, current hypothesis registry, run cards and site generator.
+- Added `knowledge/30_session12_repo_review_2026-10-27.md` and `evidence/session12_run_card_2026-10-27.json` documenting the 9 focus sites, status labels, conflicting owner snapshots, four candidate hypotheses, source limitations, and why no new TIFF or experiment was made.
+- Separated evidence pass from selector authorization in the readiness summary JSON. The audit reports H30-1/H31-1 evidence passes separately from an empty `slot_authorized` list.
+- Updated `scripts/build_site.py` so a submission link requires explicit `slot_authorized: true`; H31-1 has no such authorization and is shown only as research/audit download, explicitly `DO NOT UPLOAD`. Updated the generic how-to page so it no longer instructs the user to upload the stale H31 file or assumes a weekly cap number.
+- Reconciled `registry/next_hypotheses.json`: H30-2 was present both as active-untried and as a tested negative. Removed it from active candidates; kept the test record. Added H28-6/H28-7 as distinct, explicitly caveated formulations. Logged score-order, stale H30-2, and selector status conflicts in `registry/irregularities.json`.
+- Updated `README.md` with Session 12 status and current session-start requirements, including the absent assigned lane and no-slot status.
+
+### Pass 2 — bug, assumption, and edge-case review
+- Caught and corrected two generated-page contradictions that static inspection missed: the executive summary still said “DOWNLOAD & SUBMIT THIS ONE” in its projection table, and the upload guide still gave the historical H31 file/note and a hard-coded cap. Both were changed to explicit no-authorization language and generic future-upload instructions.
+- Confirmed historical H31 uniqueness figures are labelled as a past 12/27-peer screen, not a current-registry proof. The projection is labelled PROJECTION, not score/CI. Scores are OWNER-REPORTED, not organizer receipts.
+- Added regression assertions to require an unambiguous `NOT AUTHORIZED` banner and reject `OK TO DOWNLOAD AND SUBMIT` wording on all first-screen pages.
+
+### Pass 3 — final verification against request
+- After restoring the hash-pinned local cache, `.venv/bin/python -m pytest -q`: **151 passed, 0 skipped**.
+- `.venv/bin/ruff check src scripts tests`: **all checks passed**; `git diff --check`: passed.
+- `.venv/bin/python scripts/build_site.py`: completed and regenerated the GitHub Pages content from the source-of-truth inputs.
+- `.venv/bin/python scripts/audit_submission_readiness.py`: two historical run cards pass recorded evidence/byte gates; **zero slot-authorized files**.
+- `scripts/restore_data.py`: all 17 hash-pinned artifacts/assembled training feature raster restored and passed SHA-256 checks; `.venv/bin/python scripts/prepare_data.py` created the 5,167,373 × 32 matrix (SHA-256 `83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc`). The 1.2 GB cache is git-ignored and was not staged. `scripts/verify_downloads.py`: **0 failures** across the prior download set. No holdout retraining/rerun was attempted because no method lane was assigned; no new scientific score, TIFF, or submission was claimed.
+- No request to `drivendata.org`, no upload, no new external-source retrieval, no experiment, and no weekly slot use.
+
+### Carry-forward
+The prompt does not assign one method paragraph/lane. The shared feature cache is now restored; external H27-16 packages remain absent and are not newly verified obtainable here. A maintainer/selector must supply a lane and current slot authorization; only then can an approved candidate proceed through fresh preregistered holdout and uniqueness gates. Current candidate screen and caveats are in `knowledge/30_session12_repo_review_2026-10-27.md`.

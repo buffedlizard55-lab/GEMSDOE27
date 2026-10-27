@@ -73,5 +73,7 @@
     "detail": "evidence/relief_profile_canary_20261027.json"
   },
   "reason": "duplicate final dots: docs/downloads/gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-allfinite.tif",
-  "runtime_seconds": 430.8
+  "runtime_seconds": 430.8,
+  "hypothesis_id": "H29-5-PROXY",
+  "identity_note": "Distinct from the untested H29-5 actual routed-drainage/fan-apex formulation; only detrended-relief features were used."
 }

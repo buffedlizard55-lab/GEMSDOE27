@@ -38,6 +38,24 @@ def sha(p: Path) -> str:
 
 
 def main() -> int:
+    required_inputs = (
+        DATA / "sample_submission.tif",
+        DATA / "labels.tif",
+        DATA / "dotted_h19_5_d1_5_nan.tif",
+    )
+    missing = [path for path in required_inputs if not path.is_file()]
+    if missing:
+        missing_list = "\n".join(f"  - {path}" for path in missing)
+        print(
+            "Cannot verify raster downloads because required local inputs are missing:\n"
+            f"{missing_list}\n"
+            "Restore and verify the hash-pinned owner-repository mirror inputs with "
+            "`python scripts/restore_data.py`, then run `python scripts/verify_downloads.py` "
+            "again. These inputs are not an organizer-authenticated DrivenData download.",
+            file=sys.stderr,
+        )
+        return 2
+
     man = json.loads((DL / "manifest.json").read_text())
     research_manifest = DL / "h28_1_candidate_manifest.json"
     if research_manifest.exists():
