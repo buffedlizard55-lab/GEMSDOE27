@@ -2,14 +2,27 @@ import hashlib
 import json
 from pathlib import Path
 
+import numpy as np
 import pytest
+import rasterio
+from rasterio.transform import Affine
 
+from gems27 import grid
 from gems27.readiness import publication_decision
+
+
+@pytest.fixture(autouse=True)
+def tiny_grid(monkeypatch):
+    monkeypatch.setattr(grid, "SHAPE", (4, 4))
+    monkeypatch.setattr(grid, "BOUNDS", (243350.0, 4508150.0, 243750.0, 4508550.0))
 
 
 def valid_card(tmp_path):
     f = tmp_path / "candidate.tif"
-    f.write_bytes(b"fixture; actual TIFF validation is separately tested")
+    with rasterio.open(f, "w", driver="GTiff", height=4, width=4, count=1,
+                       dtype="float32", crs="EPSG:32611",
+                       transform=Affine(*grid.TRANSFORM)) as dst:
+        dst.write(np.zeros((4, 4), dtype=np.float32), 1)
     registry = tmp_path / "registry"
     registry.mkdir(exist_ok=True)
     (registry / "submitted_rasters.json").write_text(json.dumps({"entries": [
@@ -121,3 +134,33 @@ def test_canary_checks_both_directions_without_arbitrary_floor(tmp_path, value):
     decision = publication_decision(card, tmp_path)
     assert decision["ok_to_publish_as_submission"]
     assert decision["slot_authorized"] is False
+
+
+@pytest.mark.parametrize("bad_value", [float("nan"), float("inf"), -0.01, 1.01])
+def test_self_reported_checks_cannot_hide_invalid_pixels(tmp_path, bad_value):
+    card = valid_card(tmp_path)
+    path = tmp_path / "candidate.tif"
+    with rasterio.open(path, "r+") as dst:
+        values = dst.read(1)
+        values[-1, -1] = bad_value
+        dst.write(values, 1)
+    card["raster"]["sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
+    result = publication_decision(card, tmp_path)
+    assert "independent raster byte validation failed" in result["reasons"]
+
+
+def test_matching_hash_and_forged_validator_cannot_approve_text(tmp_path):
+    card = valid_card(tmp_path)
+    path = tmp_path / "candidate.tif"
+    path.write_bytes(b"not a GeoTIFF")
+    card["raster"]["sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
+    assert not publication_decision(card, tmp_path)["ok_to_publish_as_submission"]
+
+
+def test_matching_hash_cannot_hide_wrong_crs(tmp_path):
+    card = valid_card(tmp_path)
+    path = tmp_path / "candidate.tif"
+    with rasterio.open(path, "r+") as dst:
+        dst.crs = "EPSG:4326"
+    card["raster"]["sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
+    assert not publication_decision(card, tmp_path)["ok_to_publish_as_submission"]
