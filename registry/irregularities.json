@@ -5,7 +5,7 @@
       "id": "prompt-verbatim-unavailable",
       "severity": "low",
       "issue": "In Session 1 the verbatim text of the task prompt was unavailable due to conversation condensation; in Session 2 the user provided the complete verbatim task prompt.",
-      "action": "Resolved in Session 2: the full verbatim task prompt and Arena AI Core Values ('Maximize P(Win)' and 'Own the Outcome') are now recorded word-for-word in README.md."
+      "action": "Current README contains a condensed operating brief, not the verbatim long prompt. Earlier resolved wording was inaccurate; do not claim full prompt preservation."
     },
     {
       "id": "portal-0-1-error-cause-unknown",
@@ -480,6 +480,12 @@
       "severity": "medium",
       "issue": "knowledge/05 records 3 submissions/week from a prior full read of the rules PDF. Several generated site pages say 5/week. The how-to-submit step was corrected to tell the reader to check the live form. Older generated prose still says 5/week.",
       "action": "Do not treat either number as freshly re-read this session. docs.nlr.gov is outside the sandbox allowlist."
+    },
+    {
+      "id": "IR-2026-10-27-byte-validation",
+      "severity": "high",
+      "issue": "Readiness previously trusted recorded raster-validator booleans without opening the matching-hash file.",
+      "action": "Fixed shared readiness gate to independently scan raster grid, datatype and all pixel ranges; adversarial tests and audit report added. No candidate promoted."
     }
   ]
 }

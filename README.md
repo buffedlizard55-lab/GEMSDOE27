@@ -43,3 +43,18 @@ pytest -q
 `build_site.py` regenerates the public HTML and `EXECUTIVE_SUMMARY.md` from recorded evidence without network access. `verify_downloads.py` checks historical raster format and consistency; it does **not** grant permission to submit. The shared raster writer supports an all-finite, zero-outside variant to avoid NaN-related `[0, 1]` rejections; passing local checks does not guarantee acceptance by the organizer.
 
 To examine the recorded 2026-10-27 experiment, read `evidence/relief_profile_run_card_20261027.json`. Seeds are consumed: do not rerun or tune this experiment after seeing its results and present it as a fresh test. Follow `AGENTS.md` for preregistration, evidence, data and portal rules. The earlier reports in `knowledge/` and `evidence/` are preserved for historical audit; where they disagree with the current status, they do not override this README or the fail-closed gate.
+
+## Session-start operating brief — 2026-10-27 safety review
+
+Read this README and `AGENTS.md` every session. This is a **condensed operating brief**, not a verbatim copy of the long user prompt.
+
+- Maximize P(Win); Own the Outcome. Prefer reproducible negative evidence over an unsupported high-score claim.
+- Audit GEMSDOE24/25/27/28/30/31/32/33/36; distinguish historical owner reports, HOLDOUT-DTI and organizer receipts. Never call a projection a score.
+- Before implementing a new geological lane, rank 3–5 hypotheses with layers, signature, catalogue-omission rationale, confounder, novelty and cost. Require obtainable data, preregistration and an assigned lane.
+- Use shared cached features, buffered whole-segment hide-and-recover, visible-only catalogue features, exact visible-fault masking and pooled triangular 300 m DTI (alpha .2, beta .8). Test every feature for direction-invariant AUC > .90 leakage.
+- Stop at three experiments or two hours. Stop duplicate lanes at absolute Spearman > .90 or directed 3-pixel dot overlap > .70; check before placement and after placement against the complete registry.
+- Produce unique content-hashed TIFFs only through the shared writer. Independently open bytes and check grid, one float32 band, finiteness and [0,1]. Publish a clearly marked download, name, <=140-character note and JSON run card. Format validity does not imply efficacy or authorization.
+- Require a matched current-best holdout improvement with uncertainty before the separate weekly-slot selector. Never upload automatically or claim an unknown weekly cap.
+- Preserve sources, access limitations and irregularities honestly. Do not claim line-by-line official verification when the source host is inaccessible.
+
+Latest review: [three-pass safety audit](knowledge/32_submission_safety_review_2026-10-27.md). The readiness gate now rereads TIFF bytes rather than trusting validator booleans. **No new geological experiment or submission slot was used.**
