@@ -1,14 +1,20 @@
 # 27GEMSDOE - geothermal & structural fault discovery lab for DrivenData #306 (DOE GEMS)
 
-## Session 13 audit — 2026-10-27 (read first)
+## Current session status — 2026-10-27 (takes precedence over every historical badge below)
 
-[Primary readiness report](knowledge/30_session13_readiness_audit_2026-10-27.md) records the no-lane/no-experiment decision, the historical nine-site comparison, and current upload boundary. [Engineering review and candidate screen](knowledge/30_session13_repo_review_2026-10-27.md) records the restored inputs, 32-band matrix, 12-peer audit, fresh-cache verifier fix, and three candidate directions. The current audit run card is [evidence/session13_run_card_2026-10-27.json](evidence/session13_run_card_2026-10-27.json).
+**NO FILE IS CURRENTLY AUTHORIZED FOR A WEEKLY SUBMISSION SLOT.** H31-1 is a historical, evidence-qualified research artifact only; no current selector authorization, current-registry check, or weekly-cap evidence is present. The site's executive summary now labels it **NOT OK TO SUBMIT NOW** and makes any research download unmistakable. Do not upload it based on an old “approved” heading.
 
-**H31-1 is downloadable for selector review only; it is not authorized for a weekly upload.** Its saved HOLDOUT-DTI is 0.047302 (95% CI [0.044527, 0.049619], 120,778 withheld-positive occurrences); this is not a live score. The ~0.235 value is a PROJECTION only and does not establish a result above GEMSDOE32's OWNER-REPORTED 0.2778 or either conflicting leaderboard claim. No new experiment or slot use occurred because the prompt does not delimit a single method lane.
+**No new TIF was generated in Session 12.** The parallel-run instruction requires a single assigned method paragraph, which is absent from the current task. I restored the hash-pinned shared inputs and built the prepared feature cache during this session, but data availability does not assign a lane. Selecting a different lane, copying/re-thinning a peer, or inventing a prediction would violate the run protocol. No experiment or submission slot was consumed. See [Session 12 review and hypothesis screen](knowledge/30_session12_repo_review_2026-10-27.md) and [run card](evidence/session12_run_card_2026-10-27.json).
 
-## Current audit correction — 2026-10-26 (takes precedence over archived session claims)
+- Best saved comparator: **HOLDOUT-DTI 0.047302** for H31-S, evaluator `gems27.metric v1 + holdout-blind-buffered-v2`, seeds 400–409, 120,778 withheld-positive occurrences; paired improvement vs B0 95% CI [+0.0080,+0.0112]. Catalogue-internal only, not an organizer score.
+- H31-1's approximate 0.235 is a **PROJECTION**, not a score. Current evidence does not establish that it beats the focus-site GEMSDOE32 owner-reported 0.2778.
+- The current best locally testable hypothesis in the saved screen is H29-5 canyon-mouth knickpoint/fan-apex collinearity; it was **not** tested this session. H27-16 has more nominal prior upside but official raw inputs are absent and not verified obtainable here.
+- The nine-site comparison remains historical. GEMSDOE28 and GEMSDOE31's 0.2710/0.2708 ordering conflicts between the user-supplied snapshot and saved repository evidence. Reported leaderboard maxima 0.3195 and 0.4413 are unresolved, owner-reported claims without receipts.
+- No DrivenData access or upload occurred. Historical “OK TO SUBMIT” / “approved” headings below do not override this current status.
 
-**H31-1 is an evidence-qualified, format-valid download; a weekly submission remains a separate human selector/cap/current-registry decision.**
+## Current audit correction — 2026-10-26 (historical; superseded by Session 12 above)
+
+**H31-1 was an evidence-qualified, format-valid download; a weekly submission remained a separate selector/cap/current-registry decision.**
 [Executive audit](knowledge/28_submission_readiness_audit_2026-10-26.md) documents the nine-site comparison and
 readiness limitations; [the subsequent H31-3 result](knowledge/29_h31_3_mt_graben_result_2026-10-26.md) closes a
 new preregistered lane as negative. Historical “OK TO SUBMIT” headings below do not override the selector step.
@@ -148,13 +154,13 @@ Run `.venv/bin/python scripts/audit_submission_readiness.py` to refresh the publ
 Owner-reported reference: `24GEMSDOE` scored **0.2477** (`OWNER-REPORTED`); `27GEMSDOE` Slot 1 scored **0.2449** (`OWNER-REPORTED`); `GEMSDOE32` `H33-2-B2` scored **0.2778** (`OWNER-REPORTED`); leaderboard #1 is cited as **0.3195** / **0.4413** (`IR-2026-10-25-02`; unconfirmed; the agent never accesses `drivendata.org`).
 
 ## Start here every session (checklist)
-1. Re-read **Task prompt (verbatim)** and **Core Values (verbatim)** below. Maximize P(Win) and Own the Outcome are the focal point of every build, research and implementation decision.
-2. Do the previous sessions' next steps first: for Lane L-S7/H29-S read `knowledge/16_h29_results_and_next_steps.md` (H29-6 Walker Lane closure; seeds 210–224 consumed); for Lane L-H30 read `knowledge/21_h30_result_2026-10-25.md` (DIP/GAP/SOFT all failed selection vs Arm D on seeds 240–244; never reuse 240–254 for confirmation); then `knowledge/06_limitations_and_access.md` -> newest carry-forward sections. Data restore is proven working (Session 9), but `data_cache/` is git-ignored: re-run `scripts/restore_data.py` and `scripts/prepare_data.py` before claiming any fresh validation.
-3. Verify inputs: `python scripts/restore_data.py` (16 hash-pinned artifacts; SHA-256 in `data/manifest.json`), `python scripts/prepare_data.py`, then `python -m pytest -q` and `python scripts/verify_downloads.py`.
+1. Re-read the current Session 12 status at the top, **Task prompt (verbatim/condensed owner-supplied requirements)** and **Core Values (verbatim)** below. Maximize P(Win) and Own the Outcome are the focal point of every build, research and implementation decision.
+2. Read the newest dated audit first: `knowledge/30_session12_repo_review_2026-10-27.md`. Confirm that a single method paragraph explicitly assigns this session's lane before implementing any detector. No lane paragraph means no experiment or new TIFF. Then review the latest tested-negative records and `knowledge/06_limitations_and_access.md`; do not reuse any consumed seed range. `data_cache/` is git-ignored and may be absent in a fresh clone: restore and verify the shared stack before claiming fresh validation.
+3. Verify inputs: `python scripts/restore_data.py --verify` (16 hash-pinned artifacts; SHA-256 in `data/manifest.json`), `python scripts/prepare_data.py`, then `python -m pytest -q`, `ruff check src scripts tests`, and `python scripts/verify_downloads.py`. Record missing ignored data explicitly; never silently skip an experiment prerequisite.
 4. Verify line by line against official sources and give links for manual review (`registry/sources.json`, `docs/sources.html`). Flag irregularities (`registry/irregularities.json`). No hallucinations: unknown stays unknown.
 5. Never automate drivendata.org (Terms of Use); never claim an upload, score, PR or merge without evidence.
-6. Before implementing new predictive features: maintain a current screen of 3–5 genuinely untried hypotheses in `knowledge/07_untried_hypotheses.md` and `registry/next_hypotheses.json`; validate any chosen candidate on the spatially blocked holdout **before** a weekly slot is spent. The broader `registry/hypotheses.json` is the historical evidence ledger.
-7. Run three passes: implement+verify; review bugs/assumptions/edge cases; recheck against the original request (`evidence/review_passes.md`).
+6. Before implementing new predictive features: screen 3–5 genuinely untried hypotheses and document their layers, physical signatures, missed-catalogue rationale, confounders, novelty against the experiment ledger, estimated holdout gain, cost, and data availability. Validate the top viable candidate on the spatially blocked holdout **before** a weekly slot is considered. Planning priors are not scores. The broader `registry/hypotheses.json` is the historical evidence ledger.
+7. A technically valid TIFF, holdout pass, or unique raster is not a slot selection. Require an explicit selector authorization and current registry/cap check; if absent, say NOT OK TO SUBMIT. Run three passes: implement+verify; review bugs/assumptions/edge cases; recheck against the original request (`evidence/review_passes.md`).
 
 ## Submission status — no current approved TIFF
 

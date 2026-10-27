@@ -1,9 +1,10 @@
 {
   "purpose": "Fail-closed evidence/byte audit, not a new geological experiment",
-  "approved": [
+  "evidence_passed_not_slot_authorized": [
     "h30_1_run_card.json",
     "h31_s10_run_card_2026-10-26.json"
   ],
+  "slot_authorized": [],
   "results": {
     "dconfirm_run_card_2026-10-25.json": {
       "ok_to_publish_as_submission": false,
@@ -218,6 +219,48 @@
         "verdict is not promote",
         "missing HOLDOUT-DTI label",
         "missing evaluator version",
+        "missing withheld positive count",
+        "efficacy gate not explicitly passed",
+        "paired improvement CI missing or does not exclude zero",
+        "canary missing or direction-invariant leakage threshold exceeded",
+        "uniqueness gate not passed",
+        "dot overlap missing or exceeds threshold",
+        "surface correlation missing or exceeds threshold",
+        "all-finite validator not passed",
+        "missing or overlong submission note",
+        "raster missing or outside repository"
+      ],
+      "actual_sha256": null,
+      "slot_authorized": false,
+      "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
+    },
+    "session12_run_card_2026-10-27.json": {
+      "ok_to_publish_as_submission": false,
+      "reasons": [
+        "run card does not authorize submission",
+        "verdict is not promote",
+        "missing HOLDOUT-DTI label",
+        "missing evaluator version",
+        "missing withheld positive count",
+        "efficacy gate not explicitly passed",
+        "paired improvement CI missing or does not exclude zero",
+        "canary missing or direction-invariant leakage threshold exceeded",
+        "uniqueness gate not passed",
+        "dot overlap missing or exceeds threshold",
+        "surface correlation missing or exceeds threshold",
+        "all-finite validator not passed",
+        "missing or overlong submission note",
+        "raster missing or outside repository"
+      ],
+      "actual_sha256": null,
+      "slot_authorized": false,
+      "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
+    },
+    "session13_run_card_2026-10-27.json": {
+      "ok_to_publish_as_submission": false,
+      "reasons": [
+        "run card does not authorize submission",
+        "verdict is not promote",
         "missing withheld positive count",
         "efficacy gate not explicitly passed",
         "paired improvement CI missing or does not exclude zero",

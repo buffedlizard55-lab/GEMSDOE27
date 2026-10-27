@@ -44,38 +44,39 @@ def test_all_internal_links_and_assets_resolve():
 
 def test_repository_root_front_page_shows_current_submission_decision():
     root_idx = (ROOT / "index.html").read_text()
-    assert "EVIDENCE PASS — SELECTOR REQUIRED" in root_idx
-    assert "27GEMSDOE-H31-DRCG-WL-20261026-cf8e1bbef244" in root_idx
+    assert "NO CURRENT TIFF IS AUTHORIZED FOR A WEEKLY SLOT" in root_idx
+    assert "EVIDENCE PASS — NOT SLOT-AUTHORIZED — DO NOT SUBMIT" in root_idx
     assert "gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif" in root_idx
+    assert "Download H31-1 for research/audit only (DO NOT UPLOAD)" in root_idx
     assert "DO NOT SUBMIT H28-3" in root_idx
     assert (ROOT / ".nojekyll").exists()
 
 
-def test_front_page_marks_h31_as_selector_review_only_and_blocks_failed_candidates():
+def test_front_page_does_not_authorize_h31_or_offer_failed_h28_3_as_submission():
     idx = (DOCS / "index.html").read_text()
-    assert "EVIDENCE PASS — SELECTOR REQUIRED" in idx
-    assert "knowledge/30_session13_readiness_audit_2026-10-27.md" in idx
-    assert "knowledge/30_session13_repo_review_2026-10-27.md" in idx
-    assert "gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif" in idx
+    assert "NO CURRENT TIFF IS AUTHORIZED FOR A WEEKLY SLOT" in idx
+    assert "EVIDENCE PASS — NOT SLOT-AUTHORIZED — DO NOT SUBMIT" in idx
+    assert "Download H31-1 for research/audit only (DO NOT UPLOAD)" in idx
     assert "There is no one-click submission download for this run." in idx
     assert "NOT APPROVED FOR SUBMISSION" in idx
     assert "h28-3-strain-conductivity" not in idx or "h28-3-strain-conductivity" not in "\n".join(
         re.findall(r'<a[^>]+download[^>]*>', idx)
     )
     summary = (DOCS / "executive-summary.html").read_text()
-    assert "EVIDENCE PASS — SELECTOR REQUIRED" in summary
-    assert "DOWNLOAD — SELECTOR REQUIRED" in summary
+    assert "NOT OK TO SUBMIT NOW" in summary
+    assert "RESEARCH/AUDIT ONLY — NOT OK TO SUBMIT NOW" in summary
     assert "DOWNLOAD &amp; SUBMIT THIS ONE" not in summary
-    assert "What is the strongest evidence-qualified candidate?" in summary
-    assert "This is not authorization to upload" in summary
-    assert "downloadable for audit and selector review only" in summary
-    assert "The best new unique submission to upload now is" not in summary
+    assert "PROJECTION (anchor-transfer; not a score)" in summary
+    audit = json.loads((DOCS / "data" / "submission_readiness_audit.json").read_text())
+    assert audit["slot_authorized"] == []
+    assert "approved" not in audit
     assert "how-to-submit.html" in summary
     for site_id in ("GEMSDOE24", "GEMSDOE25", "GEMSDOE27", "GEMSDOE28", "GEMSDOE30",
                     "GEMSDOE31", "GEMSDOE32", "GEMSDOE33", "GEMSDOE36"):
         assert site_id in summary
     how = (DOCS / "how-to-submit.html").read_text()
     assert "Predicted values must be in range [0, 1]" in how
+    assert "No current submission file or note is authorized" in how
     assert "gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif" in how
 
 

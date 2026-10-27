@@ -1,0 +1,11 @@
+{
+  "hypothesis": "No assigned geological method paragraph was provided in the current parallel-run prompt; do not select a new method unilaterally.",
+  "mechanism": "Repository and evidence audit only. Screened four candidate hypotheses; no new predictor, TIFF, or holdout score was produced.",
+  "named_non_fault_process_that_could_mimic_it": "For the top locally actionable candidate H29-5: resistant stratiform hogbacks and drainage/lithology controls may align transverse channels without a fault.",
+  "holdout_dti": "No new HOLDOUT-DTI. Saved comparator only: H31-S HOLDOUT-DTI=0.047302; evaluator gems27.metric v1 + holdout-blind-buffered-v2 (alpha=0.2, beta=0.8, 300 m triangular kernel, 6 px buffer), seeds 400-409, 120778 withheld-positive occurrences; paired delta vs B0 95% CI [+0.0080,+0.0112]. Not organizer-confirmed.",
+  "correlation_overlap_vs_registry": "No candidate raster generated; no new surface or final-dot comparison. Historical H31 comparisons are stale relative to a current registry refresh.",
+  "raster_sha256": null,
+  "validator_output": "No new raster to validate. Existing H31-1 historical validator evidence is not slot authorization.",
+  "submission_name_and_note": "None. No new TIF generated; submission note not assigned.",
+  "verdict": "negative"
+}
