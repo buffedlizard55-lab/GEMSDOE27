@@ -1,5 +1,12 @@
 # Limitations, access needed, and work for the next session
 
+## Session 13 outcome (2026-10-27) — data restored; no new lane or slot selected
+
+- Re-restored all hash-pinned inputs and rebuilt the 32-band feature stack (`83ed2704…`); `151` tests pass, Ruff/compile pass, and `scripts/verify_downloads.py` reports `0` failures.
+- Corrected the executive page's contradictory claim that H31-1 was the best file “to upload now.” H31-1 is evidence-qualified but is **not authorized for a weekly slot** pending a separate selector/cap/registry decision. The only live scores for 27GEMSDOE remain unrecorded; site scores are owner-reported historical values.
+- No new geological experiment was run: the prompt's single-method lane paragraph is not delimited. Inventing a lane would breach the isolation protocol. No seed range was consumed.
+- Read `knowledge/30_session13_readiness_audit_2026-10-27.md` and `evidence/session13_run_card_2026-10-27.json` for the exact nine-site table, copied HOLDOUT-DTI provenance, unique-screen scope, validator, source-access constraints, and carry-forward actions.
+
 ## Session 7 outcome (2026-10-25) — `Lane L-S7-2026-10-25` (`H29-1`) sets new #1 blind pooled `HOLDOUT-DTI` (`0.0422`); strict `SE` CI sub-clause holds weekly slot
 
 1. **Completed 3-experiment budget (`E1` canary/surface, `E2` 40-cell blind holdout on unused seeds `210–219`, `E3` dual-partition stitched-OOF GeoTIFF + Run Card):**
