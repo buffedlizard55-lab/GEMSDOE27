@@ -1,5 +1,9 @@
 # 27GEMSDOE - geothermal & structural fault discovery lab for DrivenData #306 (DOE GEMS)
 
+## Session 13 audit — 2026-10-27 (read first)
+
+[Session 13 report](knowledge/30_session13_readiness_audit_2026-10-27.md) records a fresh restore/hash-check of the cached inputs, a 32-band matrix rebuild, **151 passing tests**, clean Ruff/compile checks, and zero download-validator failures. It also fixes an executive-page contradiction: H31-1 is the strongest saved evidence-qualified candidate, but **it is not authorized for a weekly upload** until a separate selector checks the current cap and registry. No new experiment was run because the prompt does not assign a single delimited method lane; no seed was consumed. The score projection (~0.235) is not a score and does not establish a result above GEMSDOE32's owner-reported 0.2778.
+
 ## Current audit correction — 2026-10-26 (takes precedence over archived session claims)
 
 **H31-1 is an evidence-qualified, format-valid download; a weekly submission remains a separate human selector/cap/current-registry decision.**
