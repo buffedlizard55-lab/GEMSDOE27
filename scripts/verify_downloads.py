@@ -283,7 +283,7 @@ def main() -> int:
         rc31_s10 = json.loads((ROOT / hm31["run_card"]).read_text())
         dec31 = publication_decision(rc31_s10, ROOT)
         ok(rc31_s10["uniqueness_vs_registry"]["pass"] and rc31_s10["uniqueness_vs_registry"]["max_dot_overlap_within_3px_euclidean"] <= 0.70,
-           "h31_s10/uniqueness: <= 70% 3px dot overlap & <= 0.90 Spearman vs all peers & scored GEMSDOE27 rasters")
+           "h31_s10/historical uniqueness record: thresholds met for its old listed peers; not current/global proof")
         ok(dec31["ok_to_publish_as_submission"] == hm31["ok_to_submit"],
            f"h31_s10/readiness-gate: publication_decision={dec31['ok_to_publish_as_submission']} reasons={dec31['reasons']}")
 

@@ -1,5 +1,7 @@
 # Session 13 — engineering review and hypothesis-screen supplement (2026-10-27)
 
+> **Later 2026-10-27 status:** the user reports H31-1 `cf8e1bbef244` already submitted at 0.2250 (OWNER-REPORTED, no organizer receipt); do not resubmit. The separate detrended-relief **H29-5-PROXY** was subsequently tested and was negative; it did not test the actual routed-drainage/fan-apex hypothesis. See `evidence/relief_profile_run_card_20261027.json` and the current executive summary. The historical text below records the earlier audit state.
+
 **Branch:** `arena/e40840b3-gemsdoe27`
 **Scope:** three-pass repository review; restore the pinned local inputs; run the existing checks; fix an actionable clean-checkout failure.
 **No new geological experiment, candidate raster, leaderboard submission, or organizer score was produced in this review.** The prompt's parallel-run protocol refers to a single method paragraph/lane, but no uniquely specified method paragraph is present in the current task. I therefore did not invent a lane or consume holdout seeds. This is a deliberate stop, not a positive result.

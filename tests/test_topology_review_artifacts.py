@@ -72,6 +72,11 @@ def test_failed_hypotheses_are_not_currently_untried_or_slot_authorized():
     assert 3 <= len(current_ids) <= 5
     assert "H27-10" not in current_ids
     assert "H28-3" not in current_ids
+    assert "H29-5-PROXY" not in current_ids
+    proxy = next(h for h in screen["tested_hypotheses"] if h["id"] == "H29-5-PROXY")
+    assert "negative" in proxy["status"] and proxy["seeds"] == [620, 621, 622, 623, 624]
+    drainage = next(h for h in screen["hypotheses"] if h["id"] == "H29-5")
+    assert "UNTRIED actual" in drainage["status"] and "not a stream" in drainage["status"]
     tested = next(h for h in screen["tested_hypotheses"] if h["id"] == "H27-10")
     assert "FROZEN GATE FAILED" in tested["status"]
     assert "not eligible to justify a weekly slot" in tested["status"]
@@ -92,20 +97,20 @@ def test_failed_hypotheses_are_not_currently_untried_or_slot_authorized():
 def test_topology_and_research_pages_disclose_review_only_and_refuted_signals():
     topology = (ROOT / "docs" / "topology.html").read_text()
     research = (ROOT / "docs" / "research.html").read_text()
-    assert "Geologist-review priority class: H27-5b (81 / 345 links)" in topology
-    assert "existing 345 shipped T-v2 links" in topology and "1–4 km" in topology
-    assert "230 same-FID · 81 H27-5b · 22 other-name compatible · 12 conflict/unknown" in topology
+    assert "Archived H27-5b priority class: 81 of 345 links" in topology
+    assert "existing 345 T-v2 links" in topology and "1–4 km" in topology
+    assert "230 same-FID, 81 H27-5b, 22 other-name compatible and 12 conflict/unknown" in topology
+    assert "not new ground truth or a required human inspection" in topology
     assert "data/topology_priority_h27_5b.csv" in topology
     assert "data/topology_priority_h27_5b.geojson" in topology
     assert "assets/fig_map_h27_5b_priority.png" in topology
     assert (ROOT / "docs" / "assets" / "fig_map_h27_5b_priority.png").is_file()
-    assert "review class</th>" in topology
-    screen = json.loads((ROOT / "registry" / "next_hypotheses.json").read_text())
-    assert f"Current Session 7 untried screen ({len(screen['hypotheses'])} hypotheses)" in research
-    assert "H27-10 annulus result — REJECTED; no weekly slot." in research
-    assert "H28-3 strain × conductivity result — FAILED" in research
-    assert "NOT APPROVED FOR SUBMISSION" in research
+    assert "Review class</th>" in topology
+    assert "30_lane_2026-10-27_preregistration.md" in research
+    assert "H27-10 annulus: rejected" in research
+    assert "H28-3 strain × conductivity: failed" in research
+    assert "Neither is approved for submission" in research
     assert "h27_10_annulus_holdout_initial.json" in research
     assert "not a score or proof of transfer" in topology
     assert "graph-ΔP ranking" in topology and "refuted as holdout-improvement signals" in topology
-    assert "overlapping en-echelon step-over test" in topology
+    assert "overlapping en-echelon step-over" in topology

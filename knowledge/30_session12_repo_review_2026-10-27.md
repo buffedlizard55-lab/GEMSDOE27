@@ -1,5 +1,7 @@
 # Session 12 — repository audit, focus-site comparison, and hypothesis screen (2026-10-27)
 
+> **Later 2026-10-27 status:** the user reports H31-1 `cf8e1bbef244` already submitted at 0.2250 (OWNER-REPORTED, no organizer receipt); do not resubmit. The separate detrended-relief **H29-5-PROXY** was subsequently tested and was negative; it did not test the actual routed-drainage/fan-apex hypothesis. See `evidence/relief_profile_run_card_20261027.json` and the current executive summary. The historical text below records the earlier audit state.
+
 ## Executive decision
 
 **No new TIFF was generated, and no file is authorized for a competition slot in this session.** The user's parallel-run instruction requires one assigned method paragraph; none identifying a single method is present in the current task. At session start, `data_cache/` was absent. I restored the hash-pinned shared inputs from the repository's GitHub mirrors and built the 32-column prepared stack (`5,167,373 × 32`, SHA-256 `83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc`); it is now available in ignored local cache. Data availability does not itself assign a method lane. Selecting a method or fabricating a score/raster would violate the protocol. No experiment or weekly slot was consumed.

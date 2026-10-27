@@ -13,7 +13,7 @@
   "checks_allfinite": "checks-gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-allfinite.json",
   "checks_nan": "checks-gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-nan.json",
   "note_file": "note-gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-allfinite.txt",
-  "note": "27GEMSDOE H29-S | stitchedOOF hydro+piedmont+Frangi+CELF300m B2 37654px | id 511898747886 | unscored hold-slot",
+  "note": "H29-S 511898747886 | ALREADY SUBMITTED; DO NOT RESUBMIT | 0.2190 owner-reported, not organizer-confirmed",
   "emitted_px": 37654,
   "b_exclusion_px": 2.0,
   "min_self_spacing_px": 2.0,
@@ -22,5 +22,7 @@
   "holdout_gate_pass": false,
   "ok_to_submit": false,
   "verdict": "negative",
-  "run_card": "evidence/h29_run_card_2026-10-25.json"
+  "run_card": "evidence/h29_run_card_2026-10-25.json",
+  "status_note": "Owner-reported previously submitted; the historical technical and uniqueness gates do not authorize resubmission.",
+  "owner_reported_value": 0.219
 }

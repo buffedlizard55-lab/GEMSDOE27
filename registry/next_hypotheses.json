@@ -1,6 +1,6 @@
 {
-  "generated": "2026-10-27 | Session 12 reconciled active screen; removed H30-2 from untried list because it is in tested_hypotheses; added distinct gravity persistence and directional radiometric-lineament transforms.",
-  "status": "Four screened candidate formulations remain; no lane is assigned by the current prompt. H27-16 is blocked on official raw bytes; other ideas require restored shared data and preregistration.",
+  "generated": "2026-10-27 | reconciled Session 12/13 with the tested H29-5 detrended-relief proxy.",
+  "status": "Three additional formulations and a separate actual drainage hypothesis remain research ideas; H29-5-PROXY was tested and is negative. No selector authorization.",
   "novelty_scope": "Screened against current source tree and available experiment/evidence ledgers in this checkout through 2026-10-27; not a global novelty claim across sibling sites or other competitors.",
   "target": "Fault-location pixels in the organizer-created test labels, which remain unobserved here. Catalogue-internal holdouts are only a proxy and cannot validate far-field behavior.",
   "baseline": {
@@ -9,7 +9,7 @@
     "evidence": "evidence/h29_e2_holdout_210_219.json; seeds 210-219; H29-S pooled buffered HOLDOUT-DTI 0.042198 vs D0 0.040902, H28_1_B2 0.037578, B0 0.036368",
     "limitation": "Catalogue-internal component-hidden, four-quadrant buffered holdout. It is not the organizer-created expert-label set."
   },
-  "ranking_basis": "Expert priors on potential paired catalogue-holdout ΔDTI × testability / engineering cost, informed by forensic inversion of 0.2778 (GEMSDOE32), 0.2478 (GEMSDOE70), and 0.2190 (GEMSDOE27 H29-S). Planning priors are not leaderboard predictions.",
+  "ranking_basis": "Qualitative expert planning only; no numerical prospective gain has been established. The tested proxy, actual drainage, and other suggested transforms are distinct.",
   "hypotheses": [
     {
       "id": "H27-16",
@@ -24,14 +24,11 @@
       "why_missing_faults": "Fossil sinter/tufa aprons cement fault traces and mask young coseismic scarps while directly marking Quaternary hydrothermal upflow conduits.",
       "confounders": "Lacustrine tufa mounds along Lake Lahontan shorelines (Kraal et al. 2022), groundwater outflow plumes, and volcanic contacts.",
       "differs_from_repo": "H29-1 and H31-1 use the 27,092 well/spring chemistry CSV (`gdr_wellspring_in_footprint.csv`), whereas these three separate regional GDR #1391 packages remain absent from the local checkout.",
-      "expected_holdout_delta_dti": [
-        0.001,
-        0.008
-      ],
       "cost": "medium-high; requires authorized data retrieval and SHA-256 verification",
       "data_gate": "Official DOE GDR #1391 (`https://gdr.openei.org/submissions/1391`, DOI 10.15121/1881483, CC-BY-4.0); raw packages absent from this checkout and sibling repos (`16/19/70GEMSDOE`) because `gdr.openei.org` is outside sandbox allowlist.",
       "validation": "Obtain raw bytes via authorized runner, verify SHA-256 pins in scripts/fetch_external_layers.py, then preregister on unused seeds >= 430.",
-      "status": "UNTRIED; official source packages are not yet present in this checkout."
+      "status": "UNTRIED; official source packages are not yet present in this checkout.",
+      "expected_benefit": "Uncertain; no numerical improvement is established."
     },
     {
       "id": "H29-5",
@@ -43,15 +40,12 @@
       "signature": "Collinear 0.5-2 km alignments of steepened transverse stream-channel outlets and fan apexes along active footwall range fronts where Holocene debris-flow aggradation buries inter-canyon scarps.",
       "why_missing_faults": "Rapidly aggrading bajadas erase continuous surface scarps within centuries while preserving aligned canyon-mouth knickpoints.",
       "confounders": "Resistant stratiform bedrock hogbacks crossed by transverse streams.",
-      "differs_from_repo": "All existing DEM/LiDAR features measure local scarp height or curvature, never multi-canyon outlet collinearity.",
-      "expected_holdout_delta_dti": [
-        0.001,
-        0.005
-      ],
+      "differs_from_repo": "The actual routed-drainage and verified fan-apex alignment operator was not executed; H29-5-PROXY tested only slope-side contrast, concavity and tangent support.",
       "cost": "medium; current DEM/LiDAR bands",
-      "data_gate": "Existing hash-pinned raster bands.",
-      "validation": "Preregister on fresh unused seeds >= 440.",
-      "status": "UNTRIED."
+      "data_gate": "Requires unmodified elevation and conditioned/routed drainage plus verified fan-apex observations; existing detrended-elevation bands alone do not establish stream or outlet geometry, and these inputs were not restored here.",
+      "validation": "If raw inputs become available, preregister separately with unused seeds; never reuse 620\u2013624 or portray the tested proxy as a fresh trial.",
+      "status": "UNTRIED actual conditioned-drainage/fan-apex hypothesis. The related H29-5-PROXY used only detrended-relief features and was tested negative; it was not a stream, fan-apex or outlet analysis.",
+      "expected_benefit": "Uncertain; no numerical improvement is established."
     },
     {
       "id": "H28-6",
@@ -67,14 +61,11 @@
       "why_missing_faults": "Buried density boundaries may remain coherent in gravity derivatives beneath alluvium where surface mapping and LiDAR scarp evidence are weak.",
       "confounders": "Basin-fill density transitions, lithologic contacts, regional gravity trends and correlated potential-field artifacts.",
       "differs_from_repo": "The exact standalone multiscale persistence transform was not found in the executed experiment ledger; prior H28-1/H32 experiments used related potential-field combinations, so independence is limited.",
-      "expected_holdout_delta_dti": [
-        0.0,
-        0.002
-      ],
       "cost": "Low-medium; derive transforms from the existing feature stack.",
       "data_gate": "Inputs and prepared feature matrix were restored and SHA-256 verified in Session 12; no holdout experiment has yet been run.",
       "validation": "No implementation or holdout experiment in Session 12. Requires assigned lane, preregistration, individual-feature canaries, and fresh paired holdout seeds.",
-      "status": "UNTRIED exact formulation; lower priority due related prior geophysics tests."
+      "status": "UNTRIED exact formulation; lower priority due related prior geophysics tests.",
+      "expected_benefit": "Uncertain; no numerical improvement is established."
     },
     {
       "id": "H28-7",
@@ -93,14 +84,11 @@
       "why_missing_faults": "Fault-controlled fluid flow can form elongated alteration patterns extending beyond mapped surface traces.",
       "confounders": "Lithology/soil contrast, soil moisture, drainage and survey artifacts.",
       "differs_from_repo": "The exact directional lineament operator was not found as an executed gate. Addendum D already found weak benefit for radiometric-ratio feature addition (+0.0007 PR-AUC against a +0.005 screen), so this is a new transform over weakly supported signals, not an untested source.",
-      "expected_holdout_delta_dti": [
-        0.0,
-        0.002
-      ],
       "cost": "Low; existing radiometric bands if restored.",
       "data_gate": "Inputs and prepared feature matrix were restored and SHA-256 verified in Session 12; no holdout experiment has yet been run.",
       "validation": "No implementation or holdout experiment in Session 12. Requires assigned lane, preregistration, individual-feature canaries, and fresh paired holdout seeds.",
-      "status": "UNTRIED exact formulation; low priority after negative additive ratio arm."
+      "status": "UNTRIED exact formulation; low priority after negative additive ratio arm.",
+      "expected_benefit": "Uncertain; no numerical improvement is established."
     }
   ],
   "tested_hypotheses": [
@@ -112,7 +100,7 @@
     {
       "id": "H28-4",
       "title": "Anisotropic seismicity-fabric lineaments",
-      "status": "TESTED — FROZEN GATE FAILED; negative result, not slot-eligible",
+      "status": "TESTED \u2014 FROZEN GATE FAILED; negative result, not slot-eligible",
       "validation": "evidence/h28_4_seismicity_fabric_holdout.json",
       "seeds": [
         230,
@@ -124,7 +112,7 @@
     {
       "id": "H27-10",
       "title": "Model-ranked 100-300 m offset-scarp annulus substitution",
-      "status": "TESTED — FROZEN GATE FAILED; not untried and not eligible to justify a weekly slot",
+      "status": "TESTED \u2014 FROZEN GATE FAILED; not untried and not eligible to justify a weekly slot",
       "validation": "knowledge/03_preregistration_topology_gate.md#addendum-f-h27-10; evidence/h27_10_annulus_holdout.json; initial diagnostic output preserved at evidence/h27_10_annulus_holdout_initial.json",
       "seeds": [
         150,
@@ -149,8 +137,8 @@
     },
     {
       "id": "H28-3",
-      "title": "Dilatational-strain × conductivity intersection corridors",
-      "status": "TESTED — FROZEN GATE FAILED; negative result, not slot-eligible",
+      "title": "Dilatational-strain \u00d7 conductivity intersection corridors",
+      "status": "TESTED \u2014 FROZEN GATE FAILED; negative result, not slot-eligible",
       "validation": "knowledge/13_preregistration_H28-3.md; evidence/h28_3_strain_holdout.json; evidence/h28_3_negative_uniqueness.json",
       "seeds": [
         160,
@@ -171,8 +159,8 @@
     },
     {
       "id": "H29-1",
-      "title": "Hydrothermal Upflow Disequilibrium × Piedmont-Toe Concave Flexure × Destriped Shallow Geophysical Vesselness + Probability-Weighted 300 m CELF Submodular Cover (Lane L-S7-2026-10-25)",
-      "status": "TESTED & LIVE-SCORED (OWNER-REPORTED 0.2190, #1 of 2026-10-25 non-H19-5 cohort) — FROZEN HOLDOUT GATE HELD ON SE CI SUB-CLAUSE vs D0 (0.042198 buffered vs 0.040902 D0, 0.036368 B0)",
+      "title": "Hydrothermal Upflow Disequilibrium \u00d7 Piedmont-Toe Concave Flexure \u00d7 Destriped Shallow Geophysical Vesselness + Probability-Weighted 300 m CELF Submodular Cover (Lane L-S7-2026-10-25)",
+      "status": "TESTED & LIVE-SCORED (OWNER-REPORTED 0.2190, #1 of 2026-10-25 non-H19-5 cohort) \u2014 FROZEN HOLDOUT GATE HELD ON SE CI SUB-CLAUSE vs D0 (0.042198 buffered vs 0.040902 D0, 0.036368 B0)",
       "validation": "knowledge/15_geothermal_vent_discovery_and_h29_preregistration.md; evidence/h29_e2_holdout_210_219.json; evidence/h29_run_card_2026-10-25.json",
       "seeds": [
         210,
@@ -202,7 +190,7 @@
     {
       "id": "H29-2",
       "title": "Andersonian 60-degree Hanging-Wall Dip-Offset Geophysical-to-Scarp Doublet Pairing (DIPDIRECT)",
-      "status": "TESTED — FROZEN GATE FAILED / DUPLICATE STOP (seeds 300-309 in PR #26; pooled HOLDOUT-DTI 0.1059 vs Arm-D 0.1060; >70% overlap with dense H28-1; no TIFF promoted)",
+      "status": "TESTED \u2014 FROZEN GATE FAILED / DUPLICATE STOP (seeds 300-309 in PR #26; pooled HOLDOUT-DTI 0.1059 vs Arm-D 0.1060; >70% overlap with dense H28-1; no TIFF promoted)",
       "validation": "knowledge/21_preregistration_H29-2_20261025.md; evidence/h29_2_run_card_2026-10-25.json; knowledge/22_h29_2_result_and_h33_2_b2_audit_20261025.md",
       "seeds": [
         300,
@@ -236,7 +224,7 @@
       "cost": "low-medium; 100% locally hash-pinned rasters (~23 min CPU, <2.2 GiB RAM)",
       "data_gate": "17/17 hash-pinned inputs verified locally in data_cache/.",
       "validation": "Preregistered in knowledge/24_preregistration_H31_2026-10-26.md on fresh unconsumed seeds 400-409 against U0, B0, H28_1_B2, D0, and H29-S.",
-      "status": "TESTED & PROMOTED (Session 10, seeds 400-409) — ALL 5/5 FROZEN GATES PASSED; NEW #1 BLIND POOLED HOLDOUT-DTI 0.047302 (+0.009577 vs B0, +0.007004 vs D0, +0.003185 vs H29-S); 27-raster unique (max 62.8% <= 70%)."
+      "status": "TESTED & PROMOTED (Session 10, seeds 400-409) \u2014 ALL 5/5 FROZEN GATES PASSED; NEW #1 BLIND POOLED HOLDOUT-DTI 0.047302 (+0.009577 vs B0, +0.007004 vs D0, +0.003185 vs H29-S); 27-raster unique (max 62.8% <= 70%)."
     },
     {
       "id": "H31-2",
@@ -256,9 +244,9 @@
       "cost": "low-medium; locally hash-pinned rasters",
       "data_gate": "Existing hash-pinned raster bands; no external download needed.",
       "validation": "Preregister on fresh unused seeds >= 410.",
-      "status": "TESTED — FROZEN GATE FAILED; negative. Do not retry the tested formulation.",
+      "status": "TESTED \u2014 FROZEN GATE FAILED; negative. Do not retry the tested formulation.",
       "tested_as": "H32 / Lane L-S11",
-      "result": "Fresh seeds 500–509; P HOLDOUT-DTI 0.035732 vs D 0.039219; P-D -0.003487, 95% CI [-0.004767,-0.002228], 1/10 seeds and 0/4 folds. E1 canary clean; evidence/h32_run_card_2026-10-26.json.",
+      "result": "Fresh seeds 500\u2013509; P HOLDOUT-DTI 0.035732 vs D 0.039219; P-D -0.003487, 95% CI [-0.004767,-0.002228], 1/10 seeds and 0/4 folds. E1 canary clean; evidence/h32_run_card_2026-10-26.json.",
       "eligible_for_weekly_slot": false
     },
     {
@@ -279,9 +267,23 @@
       "cost": "medium; locally hash-pinned rasters",
       "data_gate": "Existing hash-pinned raster bands; no external download needed.",
       "validation": "Preregister on fresh unused seeds >= 420.",
-      "status": "TESTED — FROZEN GATE FAILED; negative. Do not tune or rerun seeds 510–519.",
+      "status": "TESTED \u2014 FROZEN GATE FAILED; negative. Do not tune or rerun seeds 510\u2013519.",
       "result": "H31-3-S HOLDOUT-DTI 0.045332 vs H31-S 0.044966; pooled delta +0.000366, paired mean +0.000392, 95% CI [-0.001182,+0.001823], 6/10 seeds, 2/4 folds; 4/5 efficacy clauses failed. E1 canary max AUC 0.53194. 12-peer max overlap 56.74%, extended local maximum 86.87% vs H31-1; evidence/h31_3_run_card_2026-10-26.json.",
       "eligible_for_weekly_slot": false
+    },
+    {
+      "id": "H29-5-PROXY",
+      "title": "Detrended-relief range-front profile proxy",
+      "status": "TESTED 2026-10-27; negative. Paired control CI includes zero and 79.71% final-dot overlap with H28-1 exceeds the 70% duplicate limit. No TIFF or slot. See evidence/relief_profile_run_card_20261027.json.",
+      "pre_registration": "knowledge/30_lane_2026-10-27_preregistration.md",
+      "seeds": [
+        620,
+        621,
+        622,
+        623,
+        624
+      ],
+      "distinction": "Proxy is not actual drainage or a mapped fan-apex analysis."
     }
   ],
   "separate_review_class": {
@@ -319,7 +321,7 @@
       "docs/assets/fig_map_h27_5b_priority.png"
     ],
     "refuted_signals": [
-      "graph-ΔP ranking as a holdout-improvement signal (Addendum D-3)",
+      "graph-\u0394P ranking as a holdout-improvement signal (Addendum D-3)",
       "overlapping en-echelon step-over as a holdout-improvement signal (Addendum D-4)"
     ]
   }

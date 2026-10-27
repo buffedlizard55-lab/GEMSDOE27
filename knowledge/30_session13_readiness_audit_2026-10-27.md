@@ -1,5 +1,7 @@
 # Session 13 readiness audit — 2026-10-27
 
+> **Later 2026-10-27 status:** the user reports H31-1 `cf8e1bbef244` already submitted at 0.2250 (OWNER-REPORTED, no organizer receipt); do not resubmit. The separate detrended-relief **H29-5-PROXY** was subsequently tested and was negative; it did not test the actual routed-drainage/fan-apex hypothesis. See `evidence/relief_profile_run_card_20261027.json` and the current executive summary. The historical text below records the earlier audit state.
+
 ## Decision first
 
 **No new geological experiment was run and no weekly slot was selected.** The prompt's parallel-run requirement assigns one method paragraph as the lane, but no single paragraph is delimited in the supplied text. Guessing a method would violate the lane rule and make the uniqueness/effectiveness test uninterpretable. The existing H31-1 file is available for audit and separate selector review; this report does **not** authorize an upload. The [engineering review supplement](30_session13_repo_review_2026-10-27.md) records the ranked candidate screen and clean-cache verifier fix.

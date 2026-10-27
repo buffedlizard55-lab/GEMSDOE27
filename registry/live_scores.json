@@ -274,7 +274,10 @@
    "file": "docs/downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif",
    "sha256": "2c002b02792419864bd3b29a218e543cb41e3f07b3b57c29ef35c6e39e184bfe",
    "score": null,
-   "status": "unscored; machine-validated promote (Session 10 H31-1, all 5/5 frozen gates pass on seeds 400-409, 27-raster unique)"
+   "status": "owner reports already submitted; do not recommend or resubmit; no organizer receipt stored",
+   "owner_reported_value": 0.225,
+   "score_label": "OWNER-REPORTED; not ORGANIZER-CONFIRMED",
+   "source": "2026-10-27 user prompt"
   },
   {
    "file": "docs/downloads/research/gems27-h31-3-mt-graben-celf28-20261026-0f397db36baf-allfinite.tif",
@@ -414,5 +417,18 @@
    "GEMSDOE30_MSDB1": 0.1462
   },
   "focus_sites_ref": "registry/focus_sites_2026-10-26.json"
+ },
+ "owner_reported_prompt_2026_10_27": {
+  "provenance": "User message; no DrivenData receipt or live portal access",
+  "additional_focus_values": {
+   "GEMSDOE27_h31_cf8e1bbef244": 0.225,
+   "GEMSDOE28_s21_puhgb": 0.0206,
+   "GEMSDOE33_s33_seisdil": 0.0963,
+   "GEMSDOE36_kpl36_exp3": 0.1647
+  },
+  "unverified_leaderboard_highs": [
+   0.3195,
+   0.4413
+  ]
  }
 }

@@ -1,0 +1,36 @@
+{
+  "recorded_utc": "2026-10-27T17:29:13.970117+00:00",
+  "method": "Independent comparison of every (site@head:path, SHA256) in the surface report against the completed inventory and its cached bytes; local reference bytes rehashed. This does not authenticate scores or expand the scope.",
+  "focus_inventory_sha256": "381e2563605ad28192eefbcf6f468136b805e7211e61e41cb28996e305ef74b8",
+  "uniqueness_report_sha256": "4f6897c249b77a80e4b04b6e29c0a34c9f6555358a8a2c642a7bb5a5da87c02e",
+  "eligible_focus_files": 393,
+  "surface_focus_rows": 393,
+  "all_focus_identity_and_hash_pairs_match": true,
+  "local_reference_hashes_match": true,
+  "surface_rows": 445,
+  "final_dot_rows_before_stop": 17,
+  "focus_inventory_complete": false,
+  "excluded": [
+    {
+      "site": "GEMSDOE31",
+      "path": "docs/downloads/gems31-tgj31-transfer-20261025-8d912b23db-DO-NOT-SUBMIT.tif",
+      "reason": "ValueError: not a finite binary field within footprint"
+    },
+    {
+      "site": "GEMSDOE31",
+      "path": "docs/downloads/gemsdoe31-csdu-stepover-8cf9dc27-nan.tif",
+      "reason": "ValueError: not a finite binary field within footprint"
+    },
+    {
+      "site": "GEMSDOE32",
+      "path": "docs/downloads/gems32-probe-S2-SCALE-lambda-0.5.tif",
+      "reason": "ValueError: not a finite binary field within footprint"
+    },
+    {
+      "site": "GEMSDOE36",
+      "path": "docs/downloads/GEMS36_FORMAT_TEST_NOT_SUBMISSION.tif",
+      "reason": "ValueError: not a single-band template-grid TIFF"
+    }
+  ],
+  "global_completeness_proven": false
+}

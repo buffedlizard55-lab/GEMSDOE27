@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "as_of": "2026-10-27",
+  "scope": "Owner-reported submissions in this repository; not a complete or organizer-confirmed ledger.",
+  "entries": [
+    {
+      "content_id": "5512495c6bd1",
+      "sha256": "a9bf76b57453a5b3af74c8eef837df53c29a0931162aa540b8763220b36ba3bb",
+      "name": "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1",
+      "owner_reported_value": 0.2449,
+      "label": "OWNER-REPORTED; not ORGANIZER-CONFIRMED",
+      "evidence": "user prompt"
+    },
+    {
+      "content_id": "511898747886",
+      "sha256": "8585c5e870f197f84fda5bac7f22047d646fb73d455eb8b1129486c79bb976cf",
+      "name": "gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886",
+      "owner_reported_value": 0.2190,
+      "label": "OWNER-REPORTED; not ORGANIZER-CONFIRMED",
+      "evidence": "user prompt"
+    },
+    {
+      "content_id": "cf8e1bbef244",
+      "sha256": "2c002b02792419864bd3b29a218e543cb41e3f07b3b57c29ef35c6e39e184bfe",
+      "name": "gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244",
+      "owner_reported_value": 0.2250,
+      "label": "OWNER-REPORTED; not ORGANIZER-CONFIRMED",
+      "evidence": "2026-10-27 user prompt identifies this content ID and value; no receipt is stored"
+    }
+  ]
+}
