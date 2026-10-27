@@ -47,3 +47,7 @@ Saved H33-1 **HOLDOUT-DTI** is 0.0252105783; evaluator `gems27.metric.dti_binary
 No official external source was freshly fetched in this session. Source-review links (not fresh verification): [organizer reference implementation](https://github.com/drivendataorg/gems-prize-reference-solution), [GDR 1391](https://gdr.openei.org/submissions/1391), [rules PDF](https://docs.nlr.gov/docs/fy26osti/96647.pdf). DrivenData automation remains prohibited by repository policy. The network allowlist does not permit GDR/USGS/NLR access; no receipt, current weekly-cap state, expert hidden labels or verified current leaderboard is available.
 
 Next session: pin one explicit method lane, audit consumed seeds across all evidence, establish independent geographic-block splits and a matched current-best control, and obtain/verify official external packages before declaring them viable. Run all feature-alone canaries, then the shared holdout, then complete pre/post-placement registry comparisons. Only a passing candidate can reach the separate selector. Do not upload the existing negative research TIFF.
+
+## Concurrent-main integration
+
+PR #44 initially conflicted with concurrent PR #43's independent byte-validation repair. Merged `origin/main` into the fixed session branch, retained both sets of safety tests and both irregularity entries, regenerated the audit/site, and reran verification: **191 tests passed**, Ruff passed. No scientific result or raster changed during integration.

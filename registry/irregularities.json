@@ -486,6 +486,12 @@
       "severity": "high",
       "issue": "Readiness audit aborted on malformed JSON/non-object cards and accepted improvement intervals above the mathematical DTI range. Checked-in audit also omitted H33-1.",
       "action": "Reject non-object/unreadable evidence per card, bound positive DTI deltas and intervals at 1, add regression tests, regenerate audit. No promotion."
+    },
+    {
+      "id": "IR-2026-10-27-byte-validation",
+      "severity": "high",
+      "issue": "Readiness previously trusted recorded raster-validator booleans without opening the matching-hash file.",
+      "action": "Fixed shared readiness gate to independently scan raster grid, datatype and all pixel ranges; adversarial tests and audit report added. No candidate promoted."
     }
   ]
 }

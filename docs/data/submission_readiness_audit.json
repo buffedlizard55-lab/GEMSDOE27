@@ -26,6 +26,14 @@
         "current, complete comparison scope not proven"
       ],
       "actual_sha256": "40b88a6477b1914a525c587ef139f1016f3d52188442099e5fa5eeab716008c2",
+      "independent_byte_validation": {
+        "pass": true,
+        "checks": {
+          "grid": true,
+          "single_band_float32_geotiff": true,
+          "whole_array_finite_in_0_1": true
+        }
+      },
       "slot_authorized": false,
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
@@ -48,6 +56,14 @@
         "current, complete comparison scope not proven"
       ],
       "actual_sha256": "40dc48a9f512c6b92415e5b2349e809be33107f9fec6661cc67c3a9871b8c84f",
+      "independent_byte_validation": {
+        "pass": true,
+        "checks": {
+          "grid": true,
+          "single_band_float32_geotiff": true,
+          "whole_array_finite_in_0_1": true
+        }
+      },
       "slot_authorized": false,
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
@@ -73,6 +89,14 @@
         "current, complete comparison scope not proven"
       ],
       "actual_sha256": "ad7d90f43c5d913f029b748d9b15ae9a4e9368e3d2e953aafac67ce91ced460a",
+      "independent_byte_validation": {
+        "pass": true,
+        "checks": {
+          "grid": true,
+          "single_band_float32_geotiff": true,
+          "whole_array_finite_in_0_1": true
+        }
+      },
       "slot_authorized": false,
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
@@ -99,6 +123,7 @@
         "raster missing or outside repository"
       ],
       "actual_sha256": null,
+      "independent_byte_validation": null,
       "slot_authorized": false,
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
@@ -122,6 +147,14 @@
         "raster reported already submitted"
       ],
       "actual_sha256": "8585c5e870f197f84fda5bac7f22047d646fb73d455eb8b1129486c79bb976cf",
+      "independent_byte_validation": {
+        "pass": true,
+        "checks": {
+          "grid": true,
+          "single_band_float32_geotiff": true,
+          "whole_array_finite_in_0_1": true
+        }
+      },
       "slot_authorized": false,
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
@@ -140,6 +173,14 @@
         "current, complete comparison scope not proven"
       ],
       "actual_sha256": "85314ccbef774284dc8732c0c784e9396311dffdf84b57bc296a2f3dee24a97a",
+      "independent_byte_validation": {
+        "pass": true,
+        "checks": {
+          "grid": true,
+          "single_band_float32_geotiff": true,
+          "whole_array_finite_in_0_1": true
+        }
+      },
       "slot_authorized": false,
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
@@ -162,6 +203,14 @@
         "current, complete comparison scope not proven"
       ],
       "actual_sha256": "deb8b4f10eda333b8965813e3ab6c8cd3c134193f36a06ccb1cbbfdc19994eb3",
+      "independent_byte_validation": {
+        "pass": true,
+        "checks": {
+          "grid": true,
+          "single_band_float32_geotiff": true,
+          "whole_array_finite_in_0_1": true
+        }
+      },
       "slot_authorized": false,
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
@@ -184,6 +233,14 @@
         "current, complete comparison scope not proven"
       ],
       "actual_sha256": "047f383d9f764fb314738e8e97288511f2e315ede605dee1675b24bf5ceb55c8",
+      "independent_byte_validation": {
+        "pass": true,
+        "checks": {
+          "grid": true,
+          "single_band_float32_geotiff": true,
+          "whole_array_finite_in_0_1": true
+        }
+      },
       "slot_authorized": false,
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
@@ -208,6 +265,14 @@
         "current, complete comparison scope not proven"
       ],
       "actual_sha256": "da29080bf6acfdc91a835b06464e7d64c056703067967129505af886a59a9d68",
+      "independent_byte_validation": {
+        "pass": true,
+        "checks": {
+          "grid": true,
+          "single_band_float32_geotiff": true,
+          "whole_array_finite_in_0_1": true
+        }
+      },
       "slot_authorized": false,
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
@@ -230,6 +295,14 @@
         "current, complete comparison scope not proven"
       ],
       "actual_sha256": "714faac68e781f4ea4bc761acbe261d39fb6ea42062c4fad55e5c60a5de009c4",
+      "independent_byte_validation": {
+        "pass": true,
+        "checks": {
+          "grid": true,
+          "single_band_float32_geotiff": true,
+          "whole_array_finite_in_0_1": true
+        }
+      },
       "slot_authorized": false,
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
@@ -248,6 +321,14 @@
         "raster reported already submitted"
       ],
       "actual_sha256": "2c002b02792419864bd3b29a218e543cb41e3f07b3b57c29ef35c6e39e184bfe",
+      "independent_byte_validation": {
+        "pass": true,
+        "checks": {
+          "grid": true,
+          "single_band_float32_geotiff": true,
+          "whole_array_finite_in_0_1": true
+        }
+      },
       "slot_authorized": false,
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
@@ -272,6 +353,14 @@
         "current, complete comparison scope not proven"
       ],
       "actual_sha256": "8ff3b255b9399871f5bb034da289cfb5c7c0cddda97cf77d3371c3b79fee60ed",
+      "independent_byte_validation": {
+        "pass": true,
+        "checks": {
+          "grid": true,
+          "single_band_float32_geotiff": true,
+          "whole_array_finite_in_0_1": true
+        }
+      },
       "slot_authorized": false,
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
@@ -294,6 +383,14 @@
         "current, complete comparison scope not proven"
       ],
       "actual_sha256": "1373358188a96b20414834b3e0159065d87470fe695153262ced7b46bc1eb492",
+      "independent_byte_validation": {
+        "pass": true,
+        "checks": {
+          "grid": true,
+          "single_band_float32_geotiff": true,
+          "whole_array_finite_in_0_1": true
+        }
+      },
       "slot_authorized": false,
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
@@ -316,6 +413,14 @@
         "current, complete comparison scope not proven"
       ],
       "actual_sha256": "d648a3cc02713612eb5c59637a4732418ae555aa4037ac9dbc815d2e7ab00528",
+      "independent_byte_validation": {
+        "pass": true,
+        "checks": {
+          "grid": true,
+          "single_band_float32_geotiff": true,
+          "whole_array_finite_in_0_1": true
+        }
+      },
       "slot_authorized": false,
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
@@ -336,6 +441,14 @@
         "raster reported already submitted"
       ],
       "actual_sha256": "2c002b02792419864bd3b29a218e543cb41e3f07b3b57c29ef35c6e39e184bfe",
+      "independent_byte_validation": {
+        "pass": true,
+        "checks": {
+          "grid": true,
+          "single_band_float32_geotiff": true,
+          "whole_array_finite_in_0_1": true
+        }
+      },
       "slot_authorized": false,
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
@@ -363,6 +476,7 @@
         "raster missing or outside repository"
       ],
       "actual_sha256": null,
+      "independent_byte_validation": null,
       "slot_authorized": false,
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
@@ -386,6 +500,14 @@
         "current, complete comparison scope not proven"
       ],
       "actual_sha256": "defe8b2184d5e9732d53362eb4dd0b337198a493d76087ecdaf84c01f99f4ea1",
+      "independent_byte_validation": {
+        "pass": true,
+        "checks": {
+          "grid": true,
+          "single_band_float32_geotiff": true,
+          "whole_array_finite_in_0_1": true
+        }
+      },
       "slot_authorized": false,
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
@@ -418,6 +540,7 @@
         "raster missing or outside repository"
       ],
       "actual_sha256": null,
+      "independent_byte_validation": null,
       "slot_authorized": false,
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
@@ -450,6 +573,7 @@
         "raster missing or outside repository"
       ],
       "actual_sha256": null,
+      "independent_byte_validation": null,
       "slot_authorized": false,
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
@@ -482,6 +606,7 @@
         "raster missing or outside repository"
       ],
       "actual_sha256": null,
+      "independent_byte_validation": null,
       "slot_authorized": false,
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
@@ -512,6 +637,7 @@
         "raster missing or outside repository"
       ],
       "actual_sha256": null,
+      "independent_byte_validation": null,
       "slot_authorized": false,
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
@@ -534,6 +660,14 @@
         "current, complete comparison scope not proven"
       ],
       "actual_sha256": "1373358188a96b20414834b3e0159065d87470fe695153262ced7b46bc1eb492",
+      "independent_byte_validation": {
+        "pass": true,
+        "checks": {
+          "grid": true,
+          "single_band_float32_geotiff": true,
+          "whole_array_finite_in_0_1": true
+        }
+      },
       "slot_authorized": false,
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     }

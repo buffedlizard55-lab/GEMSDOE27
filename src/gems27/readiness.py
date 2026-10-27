@@ -10,6 +10,11 @@ import json
 import math
 from pathlib import Path
 
+import numpy as np
+import rasterio
+
+from . import grid
+
 
 def publication_decision(card: dict, root: Path) -> dict:
     reasons = []
@@ -101,10 +106,15 @@ def publication_decision(card: dict, root: Path) -> dict:
     safe = path.is_relative_to(root.resolve()) and path.suffix.lower() == ".tif"
     require(safe and path.is_file(), "raster missing or outside repository")
     actual_hash = None
+    byte_validation = None
     if safe and path.is_file():
         with path.open("rb") as stream:
             actual_hash = hashlib.file_digest(stream, "sha256").hexdigest()
         require(actual_hash == raster.get("sha256"), "raster hash differs from evidence")
+        # Do not let a hash plus self-reported validator booleans approve arbitrary
+        # bytes. Independently read the actual raster, including every data block.
+        byte_validation = inspect_allfinite_raster(path)
+        require(byte_validation["pass"], "independent raster byte validation failed")
     # Owner reports are not organizer receipts, but are sufficient to block a possible
     # duplicate upload. Match both the content id and the actual bytes; never upgrade
     # an owner-reported value to an organizer-confirmed score.
@@ -125,9 +135,36 @@ def publication_decision(card: dict, root: Path) -> dict:
         require(False, "submitted-raster ledger missing or malformed")
     return {"ok_to_publish_as_submission": not reasons, "reasons": reasons,
             "actual_sha256": actual_hash,
+            "independent_byte_validation": byte_validation,
             "slot_authorized": False,
             "scope": "Recorded evidence audit only; selector and current-registry recheck still required"}
 
 
 def _finite(value):
     return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
+
+
+def inspect_allfinite_raster(path: Path) -> dict:
+    """Bounded-memory byte check against the pinned grid, not a portal receipt.
+
+    Whole-array finiteness/range implies footprint finiteness/range. Footprint
+    membership and outside-zero checks still require the shared template validator.
+    """
+    checks = {}
+    try:
+        with rasterio.open(path) as src:
+            checks["grid"] = (src.crs is not None and src.crs.to_epsg() == grid.CRS_EPSG
+                              and src.shape == grid.SHAPE
+                              and tuple(src.transform)[:6] == grid.TRANSFORM
+                              and tuple(src.bounds) == grid.BOUNDS)
+            checks["single_band_float32_geotiff"] = (
+                src.driver == "GTiff" and src.count == 1 and src.dtypes == ("float32",))
+            checks["whole_array_finite_in_0_1"] = True
+            for _, window in src.block_windows(1):
+                values = src.read(1, window=window)
+                if not (np.isfinite(values).all() and ((values >= 0) & (values <= 1)).all()):
+                    checks["whole_array_finite_in_0_1"] = False
+                    break
+        return {"pass": all(checks.values()), "checks": checks}
+    except (OSError, ValueError, rasterio.errors.RasterioError) as exc:
+        return {"pass": False, "checks": checks, "error": str(exc)}
