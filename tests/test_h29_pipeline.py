@@ -170,14 +170,12 @@ def test_h29_site_gate_and_run_card_integrity() -> None:
     zip_path = root / "docs" / "downloads" / man["zip_allfinite"]
     assert tif_path.is_file() and zip_path.is_file()
 
+    # H29-S is an owner-reported prior submission; the current pages must not
+    # offer it as a new candidate, regardless of historic technical checks.
+    assert man["ok_to_submit"] is False and "DO NOT RESUBMIT" in man["note"]
     for page_path in (root / "index.html", root / "docs" / "index.html", root / "docs" / "executive-summary.html"):
         html = page_path.read_text()
-        assert man["submission_name"] in html
-        assert man["allfinite"] in html
-        assert man["note"] in html
-        if man["ok_to_submit"]:
-            assert "APPROVED TO SUBMIT" in html
-        else:
-            assert "HOLD WEEKLY SLOT" in html
-            assert "NO TIFF IS APPROVED TO SUBMIT" in html
+        assert "DO NOT SUBMIT" in html
+        assert "NOT AUTHORIZED FOR A WEEKLY SLOT" in html
+        assert man["allfinite"] not in html
 

@@ -323,7 +323,7 @@
    "publisher": "DrivenData / Portland State University (drivendataorg/gems-prize-reference-solution)",
    "url": "https://github.com/drivendataorg/gems-prize-reference-solution/blob/main/unet-mc-cv-reference-solution.ipynb",
    "category": "official-competition-code",
-   "used_for": "First-hand verification of (1) Cell 5 sentinel handling `X_orig[X_orig < -1e38] = np.nan` and (2) Cell 19 submission GeoTIFF writer (`y_out = np.zeros(...)`, `nodata=None`, finite [0, 1] values across the entire 3730x3292 array), confirming why all-finite zeros-outside GeoTIFFs permanently prevent 'Predicted values must be in range [0, 1]'.",
+   "used_for": "First-hand verification of sentinel handling and an official reference GeoTIFF writer that initializes outside cells to finite zeros. This supports the zero-outside compatibility option but does not establish the cause of a particular portal error or guarantee acceptance.",
    "status": "read first-hand via GitHub API 2026-10-25",
    "accessed": "2026-10-25",
    "evidence": "Cell 16 sets alpha=0.2, beta=0.8 TverskyLoss; Cell 19 writes single-band float32 GTiff with fault_dataset.crs/transform, y_out initialized to zeros, and no nodata=NaN tag.",
@@ -338,7 +338,7 @@
    "used_for": "Verification of competition raster projection parameters (WGS 84 / UTM zone 11N, central meridian 117W, scale factor 0.9996, false easting 500,000 m, metric 100 m pixel units).",
    "status": "read first-hand 2026-10-25",
    "accessed": "2026-10-25",
-   "evidence": "Matches competition-grid CRS EPSG:32611; NOTE Session-11 correction: the GEMS grid transform verified on every shipped raster is (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0) per src/gems27/grid.py — an earlier 323344.2347/4565845.3247 string was an erroneous transcription, flagged IR-2026-10-26-05.",
+   "evidence": "Matches competition-grid CRS EPSG:32611; NOTE Session-11 correction: the GEMS grid transform verified on every shipped raster is (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0) per src/gems27/grid.py \u2014 an earlier 323344.2347/4565845.3247 string was an erroneous transcription, flagged IR-2026-10-26-05.",
    "feed": false
   },
   {
@@ -363,6 +363,18 @@
    "status": "standard peer-reviewed geophysical edge-localization operator cited by DOI",
    "accessed": "2026-10-26",
    "evidence": "Defines multi-azimuth local maxima of horizontal gradient magnitude ||grad F|| along N-S, E-W, NE-SW, and NW-SE axes above steepest basement-contact dips.",
+   "feed": false
+  },
+  {
+   "id": "usgs-3dep-unmodified-dem-20261027",
+   "title": "USGS 3D Elevation Program",
+   "publisher": "U.S. Geological Survey",
+   "url": "https://www.usgs.gov/3d-elevation-program",
+   "category": "candidate-external-data",
+   "used_for": "Official source link for an untested conditioned-DEM drainage hypothesis; no raw tile or routing data was retrieved for H29-5.",
+   "status": "NOT READ in this session; listing link only, accessibility and data availability not reverified.",
+   "accessed": null,
+   "evidence": "knowledge/30_lane_2026-10-27_preregistration.md",
    "feed": false
   }
  ]

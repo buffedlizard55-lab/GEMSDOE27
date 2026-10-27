@@ -1,65 +1,15 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>How to submit · 27GEMSDOE</title><meta name="description" content="27GEMSDOE: geothermal &amp; structural fault discovery for DrivenData #306 (DOE GEMS). 2026-10-27 generated TIFF is NOT OK TO SUBMIT. Historical 27GEMSDOE-H31-DRCG-WL-20261026-cf8e1bbef244 is format-valid and not slot-authorized.">
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Submission instructions · GEMSDOE27</title>
 <link rel="stylesheet" href="assets/style.css"></head><body>
-<header class="top"><div class="in"><a class="brand" href="index.html">27GEMSDOE · DOE GEMS</a><nav><a href="index.html">Submit status</a><a href="executive-summary.html">Executive summary</a><a href="how-to-submit.html" class=on>How to submit</a><a href="topology.html">Topology candidates</a><a href="research.html">Research</a><a href="sources.html">Sources &amp; feed</a></nav></div></header>
-<main><div class="card"><b>Automatic submission evidence audit (zero human intervention):</b>
-<a href="data/submission_readiness_audit.json">Read byte-bound gate decisions and blockers</a> &middot;
-<a href="how-to-submit.html">How to submit to DrivenData #306</a>.
-<a href="../knowledge/28_submission_readiness_audit_2026-10-26.md">Latest executive audit and limitations</a>.<br>
-<strong>NOT AUTHORIZED FOR A WEEKLY SLOT by this page:</strong> evidence PASS is not selector approval.
-The 2026-10-27 unique TIFF verdict is the box at the top of Submit status and the executive summary.
-Format PASS alone never authorizes a slot. Historical focus-site files are not unique resubmissions.
-</div>
-<h1>How to Submit to DrivenData #306 (DOE GEMS)</h1>
-<p class="lead">Executive-summary subpage: step-by-step human upload guide. The box below is the only submit/do-not-submit decision for the TIFF generated this session.</p>
-
-<div class="stopbox" id="h33-verdict">
-<h2>NOT OK TO SUBMIT</h2>
-<p><b>Generated unique file:</b> <code>gems27-h33-bss-complement-20261027-9ba8480691ed-allfinite.tif</code>.
-<b>Decision:</b> DO NOT SUBMIT</p>
-<p>This is <b>HOLDOUT-DTI</b>, not a leaderboard score. Evaluator: gems27.metric.dti_binary v1 (alpha=0.2, beta=0.8, R=3px triangular) + whole-FID buffered holdout (buffer_px=6).
-Pooled candidate HOLDOUT-DTI <b>0.0252</b> on <b>134150</b> withheld-positive occurrences
-(seeds 520–529, whole-FID buffered hide-and-recover). Paired Δ vs base-32 control 95% CI [-0.0176, -0.0144].
-Verdict <code>negative</code>. Weekly slot authorized: <b>no</b>.</p>
-<p><a class="btn alt" href="downloads/research/gems27-h33-bss-complement-20261027-9ba8480691ed-allfinite.tif" download>Download research TIFF — do not submit</a> <span class="small">gems27-h33-bss-complement-20261027-9ba8480691ed-allfinite.tif</span></p>
-<p class="small">Note (≤140 characters, copy only if a selector later authorizes a slot): <code>H33-1 buried-step complement B2 37654px HOLDOUT-DTI 0.0252 | id 9ba8480691ed | DO NOT SUBMIT</code></p>
-<p class="small">sha256 prefix 1373358188a96b20 · dots 37654 · research path, not a historical resubmission.
-Do not upload GEMSDOE32 <code>h33-h33-2-b2</code> or any other focus-site file from this page.</p>
-</div>
-
-<div class="card" style="border:2px solid #9a6700">
- <h2 style="margin-top:0">1. Historical H31-1 file — not this session's generated TIFF</h2>
- <p class="warnbox"><b>Do not upload this historical file.</b> It is not the unique TIFF generated on 2026-10-27, and no weekly slot is authorized from this page. Its ~0.235 figure is a PROJECTION, not a score.</p>
- <p><span class="badge warn">HISTORICAL ONLY — NOT THE FILE TO SUBMIT — 27GEMSDOE-H31-DRCG-WL-20261026-cf8e1bbef244</span></p>
- <p class="small">A prior machine check found the file format-valid. Format-valid is not authorization. Audit: <a href="data/submission_readiness_audit.json"><code>docs/data/submission_readiness_audit.json</code></a>.</p>
- <p class="small">Historical path, not a submit button: <code>downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif</code><br>
- SHA-256: <code>2c002b02792419864bd3b29a218e543cb41e3f07b3b57c29ef35c6e39e184bfe</code><br>
- Historical note, do not paste onto another file: <code>27GEMSDOE H31-1 | dualRegime MSub+MFull+WLseis+obliq+CELF2.8 B2 37654px | id cf8e1bbef244 | unscored validated-promote</code> (118 chars)</p>
-</div>
-
-<div class="card">
- <h2 style="margin-top:0">2. Step-by-Step Upload Procedure (Human Only)</h2>
- <ol class="steps">
-  <li><b>Never automate <code>drivendata.org</code>:</b> DrivenData's Terms of Use prohibit bots, scrapers, or automated requests. Always open the portal manually in your browser.</li>
-  <li><b>Stop unless the box at the top says OK TO DOWNLOAD AND SUBMIT.</b> A red NOT OK TO SUBMIT box means the generated TIFF failed a frozen gate, is a duplicate, or has no weekly-slot authorization. Do not upload it. Do not substitute a historical file.</li>
-  <li><b>If and only if that box is green:</b> download the named all-finite <code>.tif</code> without opening it in QGIS/ArcGIS. GIS re-saves can re-inject <code>nodata=NaN</code> and recreate the <code>[0, 1]</code> portal error.</li>
-  <li><b>Sign in to DrivenData:</b> visit <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">https://www.drivendata.org/competitions/306/competition-doe-gems/</a> and click <b>Submit</b>. This site never does that for you.</li>
-  <li><b>Upload that single-band GeoTIFF</b> (or its single-member zip) and paste the note shown in the box (≤140 characters).</li>
-  <li><b>Historical H31-1 is not the generated file.</b> Its note <code>27GEMSDOE H31-1 | dualRegime MSub+MFull+WLseis+obliq+CELF2.8 B2 37654px | id cf8e1bbef244 | unscored validated-promote</code> belongs to <code>gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif</code> only. Do not paste it onto a different TIFF.</li>
-  <li><b>Check the weekly cap on the submission page before uploading.</b> A prior full read of the rules PDF recorded 3 submissions/week (<code>knowledge/05_sources_and_verification.md</code>). Some older pages on this site say 5/week. Those two claims disagree; the live form is the authority, and this agent does not open drivendata.org. Never re-upload already-scored files (<code>511898747886</code> OWNER-REPORTED 0.2190, <code>5512495c6bd1</code> OWNER-REPORTED 0.2449) or the GEMSDOE32 collar-deletion file (OWNER-REPORTED 0.2778).</li>
-  <li><b>Record the live outcome:</b> once DrivenData displays the public Distance-Tolerant Tversky Index score, record the exact score and timestamp in <code>registry/live_scores.json</code> (with <code>OWNER-REPORTED</code> or stored-receipt provenance).</li>
- </ol>
-</div>
-
-<div class="card">
- <h2 style="margin-top:0">3. Why DrivenData Rejected Earlier Files with <code>&ldquo;Predicted values must be in range [0, 1]&rdquo;</code> &mdash; and How It Is Prevented</h2>
- <ul class="tight">
-  <li><b>Root cause 1 (NaN outside footprint):</b> <code>sample_submission.tif</code> contains <code>7,111,787</code> <code>NaN</code> pixels outside the irregular <code>5,167,373</code>-pixel study footprint. Under IEEE-754 floating-point semantics, a strict validator evaluating <code>((arr &gt;= 0.0) &amp; (arr &lt;= 1.0)).all()</code> returns <code>False</code> if <i>any</i> <code>NaN</code> exists anywhere in the <code>3730&times;3292</code> array. Official reference notebook Cell 19 (<code>drivendataorg/gems-prize-reference-solution</code>) initializes <code>y_out = np.zeros(...)</code> with <code>nodata=None</code>.</li>
-  <li><b>Root cause 2 (Float32 sentinel bleed):</b> raw <code>training_features.tif</code> stores <code>-3.4028235e+38</code> sentinels on <code>3,061</code> cells <i>inside</i> the valid footprint; unclipped linear or sigmoid pipelines propagate out-of-range values.</li>
-  <li><b>Automated machine guarantee on <code>gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif</code>:</b> single-band <code>float32</code>, <code>EPSG:32611</code>, shape <code>(3730, 3292)</code>, transform <code>(100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)</code>, <code>nodata=None</code>, <code>0</code> NaNs and <code>0</code> Infs across all <code>12,279,160</code> pixels, and value set strictly <code>{0.0, 1.0}</code> (<a href="downloads/checks-gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.json">machine validator JSON receipt</a>).</li>
- </ul>
-</div>
-<p class="small">Back to <a href="executive-summary.html">Executive summary</a> &middot; <a href="index.html">Submit status</a> &middot; <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/AI_DISCLOSURE.md">AI Disclosure (Official Rules compliance)</a>.</p>
-</main>
-<footer>Built 2026-10-27 18:08 UTC from <a href="https://github.com/buffedlizard55-lab/GEMSDOE27">the repository</a>. 2026-10-27 generated TIFF is NOT OK TO SUBMIT. Historical 27GEMSDOE-H31-DRCG-WL-20261026-cf8e1bbef244 is format-valid and not slot-authorized. No unverified leaderboard score is claimed on this site; historical scores shown are explicitly labelled OWNER-REPORTED. This site never contacts drivendata.org.</footer>
-<script src="assets/app.js"></script></body></html>
+<header class="top"><div class="in"><a class="brand" href="index.html">GEMSDOE27</a><nav><a class="" href="index.html">Status</a> <a class="" href="executive-summary.html">Executive summary</a> <a class="" href="research.html">Research</a> <a class="on" href="how-to-submit.html">How to submit</a> <a class="" href="topology.html">Topology</a> <a class="" href="sources.html">Sources</a></nav></div></header>
+<main>
+<h1>Submission instructions</h1>
+<p class="lead">Use only after a separate selector authorizes an eligible candidate.</p><div class="card" style="border-left:5px solid #cf222e"><h2 style="margin-top:0">DO NOT SUBMIT — no candidate is approved</h2><p><b>NOT AUTHORIZED FOR A WEEKLY SLOT.</b> H31-1 <code>cf8e1bbef244</code> was reported already submitted at <b>0.2250 OWNER-REPORTED</b>; there is no organizer receipt in this repository. Do not upload or rename it. A valid TIFF, a local holdout pass, or a downloadable research file is not slot authorization.</p></div>
+<div class="card" style="border-left:5px solid #cf222e" id="h33-verdict"><h2 style="margin-top:0">NOT OK TO SUBMIT the generated TIFF</h2><p>Generated file `gems27-h33-bss-complement-20261027-9ba8480691ed-allfinite.tif` is unique versus the 12 pinned focus-site rasters (max 3 px overlap 0.0; pre-placement surface Spearman 0.11038104783748275). HOLDOUT-DTI 0.025211 versus base-32 control 0.041446; paired 95% CI [-0.017576, -0.014449]; 134150 withheld-positive occurrences; seeds 520–529; evaluator gems27.metric.dti_binary v1 (alpha=0.2, beta=0.8, R=3px triangular) + whole-FID buffered holdout (buffer_px=6). That number is HOLDOUT-DTI, not an organizer score and not a live estimate. The frozen gate failed on every seed and every fold. The comparison is against base-32, not a matched current-best H31 control, and the card does not meet the current publication-gate fields. Either fact is enough to stop.</p><p><b>The fail-closed evidence gate does not approve submission. NOT OK TO SUBMIT.</b> <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/evidence/h33_run_card_2026-10-27.json">H33-1 run card</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/31_h33_result_2026-10-27.md">Result note</a>.</p><p><a class="btn alt" href="downloads/research/gems27-h33-bss-complement-20261027-9ba8480691ed-allfinite.tif" download>Download research GeoTIFF — NOT APPROVED FOR SUBMISSION</a></p><p class="small">Research-only file: `downloads/research/gems27-h33-bss-complement-20261027-9ba8480691ed-allfinite.tif`; SHA-256 `1373358188a96b20414834b3e0159065d87470fe695153262ced7b46bc1eb492`. Name: `27GEMSDOE-H33-BSS-20261027-9ba8480691ed`. Note: `H33-1 buried-step complement B2 37654px HOLDOUT-DTI 0.0252 | id 9ba8480691ed | DO NOT SUBMIT`.</p></div>
+<ol class="steps"><li>Read the current run card, the shared readiness audit and the selector decision. No weekly slot is authorized by an evidence pass alone.</li>
+<li>Confirm the candidate is not already submitted, its full-scope pre-placement surface and post-placement dots meet the duplicate thresholds, and a matched current-best holdout comparison passes. If any evidence is missing, stop.</li>
+<li>For an authorized candidate only, download the exact named <code>allfinite.tif</code> or its one-TIFF ZIP. Check the published SHA-256. The file must be float32, single-band, template-aligned and finite within [0,1] throughout, with zeros outside the footprint. A NaN-outside TIFF can trigger “Predicted values must be in range [0, 1]”. Passing our validator does not guarantee organizer acceptance.</li>
+<li>Use the documented name and short note. Open the <a href="https://www.drivendata.org/competitions/306/">competition portal</a> yourself, check remaining slots and upload only if authorized. Record the organizer receipt and resulting score separately.</li></ol>
+<p>There is currently no approved new TIFF. Do not re-upload H31-1 or any old file; do not treat a research link as an invitation to submit.</p>
+<div class="card"><h3>H29-5-PROXY detrended-relief — negative</h3><p>Candidate HOLDOUT-DTI 0.10121, 95% CI [0.08484, 0.11697]; 32-band control HOLDOUT-DTI 0.09996, 95% CI [0.08485, 0.11450]; pooled change +0.00125, paired 95% CI [-0.00114, +0.00334]. The screening gate failed because the paired interval includes zero; 54,336 withheld-positive occurrences; evaluator gems27.metric.dti_binary v1 + whole-FID full-kernel relief-profile v1. Bootstrap intervals resample five repeated hides, not independent faults; they do not estimate a leaderboard score. Leakage canaries covered 36 features; maximum direction-invariant AUC 0.6743 (threshold 0.90). Final-dot uniqueness failed: 79.71% within 3 pixels of docs/downloads/gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-allfinite.tif (limit 70%); stopped after 17 of 445 references; maximum absolute dot Spearman among those checked: 0.1325. Maximum absolute pre-placement surface Spearman among those screened: 0.1727. The pre-placement screen covered the stated available reference set, not all submissions.</p><p><b>The fail-closed evidence gate does not approve submission.</b> <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/evidence/relief_profile_run_card_20261027.json">Machine run card</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/evidence/relief_profile_registry_20261027.json">Uniqueness details</a>.</p><p>No new GeoTIFF is available: the run stopped before publication.</p><p class="small">No new GeoTIFF was written and no raster SHA-256 or validator result exists. Research label: `GEMSDOE27-H29-5-RELIEF-PROFILE-20261027`. Research note: `H29-5 detrended relief-profile proxy; whole-FID holdout; research only, not approved to submit.`.</p></div>
+</main><footer>Reproducible research · owner-reported values are unverified · no automatic portal access</footer></body></html>

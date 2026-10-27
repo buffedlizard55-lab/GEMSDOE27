@@ -1,0 +1,19 @@
+{
+  "generated_utc": "2026-10-27T17:30:48.428214+00:00",
+  "method": "Load pinned peer TIFFs, threshold >0.5 and compare boolean dot masks. For B2, retain G25 dots with Euclidean distance to local catalogue >2 pixels. Byte hashes bind inputs; this is geometry, not an organizer receipt or causal score attribution.",
+  "peer_hashes": {
+    "g25_d28": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
+    "g28_h27_4_r1": "ab02300152248fdda04e988e2cd2a0c13f35eec42fcf670a15e8b76b19e24a73",
+    "g30_d28": "8cf893ead5667df21d3288a9968c35fd5385c425b029d82ee71d311715b129fd",
+    "g31_h27_4": "07b6db440535404bb41ec8ddc797713e200d308e3da35937393efde5eb84bc40",
+    "g32_h33_2_b2": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9"
+  },
+  "labels_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+  "g25_d28_dot_count": 44090,
+  "g32_dot_count": 37654,
+  "g25_minus_catalogue_2px_equals_g32_symdiff_px": 0,
+  "g25_dots_removed_by_collar": 6436,
+  "g25_vs_g30_symdiff_px": 0,
+  "g28_solo_vs_g31_solo_symdiff_px": 0,
+  "receipt_verified": false
+}

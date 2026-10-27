@@ -1,16 +1,16 @@
 name: Rebuild site when registries change
 
-# The site is rendered from JSON only (no rasters). When the owner records a score in registry/live_scores.json
-# (or any registry file changes) on main, this rebuilds docs/*.html and the derived knowledge docs.
+# Rebuild from recorded registries, run cards and source-feed snapshots. The readiness
+# gate checks a candidate's local SHA-256 when a candidate file is present.
 on:
   push:
     branches: [main]
     paths:
-      - 'registry/live_scores.json'
-      - 'registry/irregularities.json'
-      - 'registry/sources.json'
-      - 'registry/hypotheses.json'
+      - 'registry/**'
+      - 'evidence/**'
+      - 'docs/data/feed.json'
       - 'scripts/build_site.py'
+      - 'src/gems27/readiness.py'
   workflow_dispatch:
 
 permissions:
@@ -33,7 +33,7 @@ jobs:
           set -euo pipefail
           git config user.name 'GEMS site build'
           git config user.email 'gems-site@users.noreply.github.com'
-          git add docs knowledge index.html
+          git add docs index.html EXECUTIVE_SUMMARY.md
           git commit -m "site: rebuild from registries" || exit 0
           for i in 1 2 3; do git pull --rebase origin "$GITHUB_REF_NAME" && git push origin "HEAD:$GITHUB_REF_NAME" && exit 0; sleep $((i*4)); done
           exit 1

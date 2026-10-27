@@ -1,0 +1,79 @@
+{
+  "schema": "parallel-run-card-v3",
+  "generated_utc": "2026-10-27T17:20:41.828538+00:00",
+  "hypothesis": "H29-5 detrended-relief range-front profile proxy",
+  "mechanism": "signed higher/lower-side slope contrast and transverse concavity with tangent support",
+  "named_non_fault_mimic": "erosional valley edges, lithologic contacts and engineered cuts",
+  "preregistration": "knowledge/30_lane_2026-10-27_preregistration.md",
+  "preregistration_sha256": "55b1c9da132455957f5c304ca2bc577156be8ce451a2bac0bd2d0aac4cef3fb5",
+  "submission_name": "GEMSDOE27-H29-5-RELIEF-PROFILE-20261027",
+  "note_max_140_chars": "H29-5 detrended relief-profile proxy; whole-FID holdout; research only, not approved to submit.",
+  "verdict": "negative",
+  "ok_to_submit": false,
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "evaluator": "gems27.metric.dti_binary v1 + whole-FID full-kernel relief-profile v1",
+    "n_withheld_positives_total": 54336,
+    "seeds": [
+      620,
+      621,
+      622,
+      623,
+      624
+    ],
+    "statistics": {
+      "candidate_pooled": 0.10120921479504702,
+      "candidate_ci95": [
+        0.08483575225469264,
+        0.11696773823791021
+      ],
+      "control_pooled": 0.09995687133596372,
+      "control_ci95": [
+        0.0848476297931394,
+        0.114501934361703
+      ],
+      "pooled_delta": 0.0012523434590833021,
+      "paired_delta_ci95": [
+        -0.0011407041004148216,
+        0.003342361219199878
+      ],
+      "positive_splits": 4
+    },
+    "canary_max_auc": 0.6743271641593722,
+    "screen_pass": false,
+    "gate_efficacy_pass": false,
+    "h31_same_split_comparison": "not run; required for promotion even if screen passes"
+  },
+  "uniqueness_vs_registry": {
+    "pass": false,
+    "duplicate": "docs/downloads/gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-allfinite.tif",
+    "reference_count": 445,
+    "references_checked_before_stop": 17,
+    "max_surface_abs_spearman": 0.1727492650699708,
+    "max_dot_abs_spearman": 0.13251813634818244,
+    "max_dot_overlap_within_3px_euclidean": 0.7971264673075902,
+    "detail_file": "evidence/relief_profile_registry_20261027.json",
+    "scope": "12 pinned peers, in-repository TIFFs, and available current focus-site TIFFs; not a global registry"
+  },
+  "raster": null,
+  "validator": null,
+  "experiments_started": [
+    "E1 canary",
+    "E2 paired holdout",
+    "E3 full-fit uniqueness and validator"
+  ],
+  "input_hashes": {
+    "prepared_features": "83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc",
+    "group_map": "0211f391f9afae09b31ff85c687566d3c68f7d051acf67663d47a5641343bf86"
+  },
+  "canary": {
+    "pass": true,
+    "max_auc": 0.6743271641593722,
+    "features_tested": 36,
+    "detail": "evidence/relief_profile_canary_20261027.json"
+  },
+  "reason": "duplicate final dots: docs/downloads/gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-allfinite.tif",
+  "runtime_seconds": 430.8,
+  "hypothesis_id": "H29-5-PROXY",
+  "identity_note": "Distinct from the untested H29-5 actual routed-drainage/fan-apex formulation; only detrended-relief features were used."
+}

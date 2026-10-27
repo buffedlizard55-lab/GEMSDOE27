@@ -1,0 +1,57 @@
+{
+  "schema": "parallel-run-card-v2",
+  "date_utc": "2026-10-27",
+  "lane": "readiness audit only; no single method paragraph was assigned",
+  "hypothesis": "No new geological hypothesis tested. The prompt's single-method lane paragraph is not delimited, so selecting one would violate the lane isolation rule.",
+  "mechanism": "No new predictor mechanism. Session work restored the existing hash-pinned feature stack, independently re-ran artifact checks, and corrected contradictory selector-vs-upload language in the site generator.",
+  "named_non_fault_process_that_could_mimic_candidate": "Pleistocene Lake Lahontan wave-cut paleo-shoreline benches and uncorroborated Tertiary volcanic-flow or pluton-contact rims (mimics named in the saved H31-1 run card).",
+  "experiment_count_this_session": 0,
+  "budget": "0 of 3 experiments; <2 hours; no holdout seeds consumed",
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "provenance": "Copied from the existing H31-S run card; not re-run in this session and not an organizer score.",
+    "evaluator": "gems27.metric v1 + holdout-blind-buffered-v2 (alpha=0.2, beta=0.8, R=3px triangular, buffer_px=6.0)",
+    "seeds": [400, 401, 402, 403, 404, 405, 406, 407, 408, 409],
+    "withheld_positive_occurrences": 120778,
+    "pooled_dti": 0.047302,
+    "ci95": [0.044527, 0.049619]
+  },
+  "leakage_canary": {
+    "provenance": "Existing H31-1 evidence, not recomputed this session.",
+    "direction_invariant_max_auc": 0.58947,
+    "threshold": 0.9,
+    "pass": true
+  },
+  "uniqueness_vs_registry": {
+    "provenance": "Existing H31-1 screen; pinned peers only, not a live completeness claim.",
+    "preplacement_max_surface_spearman": 0.13031,
+    "final_surface_max_spearman": 0.16452,
+    "max_directed_dot_overlap_within_3px": 0.62798,
+    "max_dot_overlap_vs_12_pinned_focus_site_peers": 0.57704,
+    "threshold_surface_spearman": 0.9,
+    "threshold_dot_overlap": 0.7,
+    "pass_against_recorded_scope": true
+  },
+  "raster": {
+    "path": "docs/downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif",
+    "sha256": "2c002b02792419864bd3b29a218e543cb41e3f07b3b57c29ef35c6e39e184bfe",
+    "submission_name": "27GEMSDOE-H31-DRCG-WL-20261026-cf8e1bbef244",
+    "note": "27GEMSDOE H31-1 | dualRegime MSub+MFull+WLseis+obliq+CELF2.8 B2 37654px | id cf8e1bbef244 | unscored validated-promote",
+    "note_characters": 118
+  },
+  "validator": {
+    "independently_checked_this_session": true,
+    "no_nan_inside_footprint": true,
+    "inside_values_range": [0.0, 1.0],
+    "inside_all_finite": true,
+    "crs": "EPSG:32611",
+    "shape": [3730, 3292],
+    "transform": [100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0],
+    "single_band_float32": true,
+    "zeros_outside_footprint": true,
+    "downloads_validator_failures": 0
+  },
+  "submission_slot_authorized": false,
+  "verdict": "negative",
+  "decision_note": "Negative for a new promotion this session: no lane was assigned and no selector decision/current-cap check exists. This does not invalidate the saved H31-1 HOLDOUT-DTI gate; it prevents an unsupported claim that this file is authorized to upload or will beat 0.2778/0.3195/0.4413."
+}

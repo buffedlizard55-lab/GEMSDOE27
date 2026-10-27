@@ -23,7 +23,7 @@ import os
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import urljoin, urlparse
 
 import requests
 
@@ -39,6 +39,28 @@ def guard(url: str) -> None:
         raise SystemExit(f"refusing to request {host}: automated access is prohibited by its Terms of Use")
 
 
+def safe_get(url: str, **kwargs):
+    """Check every redirect target *before* requesting it, including cross-host redirects."""
+    kwargs.pop("allow_redirects", None)
+    current = url
+    for _ in range(6):
+        guard(current)
+        response = requests.get(current, allow_redirects=False, **kwargs)
+        if response.status_code not in (301, 302, 303, 307, 308) or not response.headers.get("Location"):
+            return response
+        target = urljoin(current, response.headers["Location"])
+        response.close()
+        guard(target)
+        if urlparse(current).netloc.lower() != urlparse(target).netloc.lower():
+            # Never forward a GitHub bearer token to a different redirect host.
+            headers = dict(kwargs.get("headers") or {})
+            kwargs["headers"] = {k: v for k, v in headers.items() if k.lower() != "authorization"}
+        current = target
+        # A redirect target already supplies its own URL/query.
+        kwargs.pop("params", None)
+    raise ValueError("too many redirects")
+
+
 def fingerprint(b: bytes) -> str:
     return hashlib.sha256(b).hexdigest()[:16]
 
@@ -46,8 +68,8 @@ def fingerprint(b: bytes) -> str:
 def check_http(url: str) -> dict:
     guard(url)
     try:
-        r = requests.get(url, headers={"User-Agent": UA, "Range": "bytes=0-65535"}, timeout=TIMEOUT,
-                         allow_redirects=True, stream=True)
+        r = safe_get(url, headers={"User-Agent": UA, "Range": "bytes=0-65535"}, timeout=TIMEOUT,
+                     stream=True)
         body = next(r.iter_content(65536), b"")
         guard(r.url)
         total = r.headers.get("Content-Range", "").split("/")[-1] or r.headers.get("Content-Length")
@@ -64,7 +86,7 @@ def check_http(url: str) -> dict:
 def check_sciencebase(url: str) -> dict:
     guard(url)
     try:
-        r = requests.get(url, headers={"User-Agent": UA}, timeout=TIMEOUT)
+        r = safe_get(url, headers={"User-Agent": UA}, timeout=TIMEOUT)
         j = r.json()
         files = sorted((f.get("name", ""), f.get("size")) for f in j.get("files", []))
         return {"ok": r.status_code < 400, "http": r.status_code, "title": j.get("title"),
@@ -78,9 +100,9 @@ def check_arcgis(url: str) -> dict:
     """ArcGIS REST layer: metadata (?f=pjson) and a record count, to prove the layer is queryable."""
     guard(url)
     try:
-        meta = requests.get(url, params={"f": "pjson"}, headers={"User-Agent": UA}, timeout=TIMEOUT).json()
-        cnt = requests.get(url.rstrip("/") + "/query", params={"where": "1=1", "returnCountOnly": "true", "f": "json"},
-                           headers={"User-Agent": UA}, timeout=TIMEOUT).json()
+        meta = safe_get(url, params={"f": "pjson"}, headers={"User-Agent": UA}, timeout=TIMEOUT).json()
+        cnt = safe_get(url.rstrip("/") + "/query", params={"where": "1=1", "returnCountOnly": "true", "f": "json"},
+                       headers={"User-Agent": UA}, timeout=TIMEOUT).json()
         return {"ok": "name" in meta, "http": 200, "layer_name": meta.get("name"), "geometry_type": meta.get("geometryType"),
                 "n_fields": len(meta.get("fields", [])), "field_names": [f.get("name") for f in meta.get("fields", [])][:40],
                 "max_record_count": meta.get("maxRecordCount"), "record_count": cnt.get("count"),
@@ -94,10 +116,10 @@ def check_github(repo: str) -> dict:
     if os.environ.get("GITHUB_TOKEN"):
         headers["Authorization"] = f"Bearer {os.environ['GITHUB_TOKEN']}"
     try:
-        r = requests.get(f"https://api.github.com/repos/{repo}", headers=headers, timeout=TIMEOUT)
+        r = safe_get(f"https://api.github.com/repos/{repo}", headers=headers, timeout=TIMEOUT)
         j = r.json()
-        b = requests.get(f"https://api.github.com/repos/{repo}/branches/{j.get('default_branch', 'main')}",
-                         headers=headers, timeout=TIMEOUT).json()
+        b = safe_get(f"https://api.github.com/repos/{repo}/branches/{j.get('default_branch', 'main')}",
+                     headers=headers, timeout=TIMEOUT).json()
         sha = (b.get("commit") or {}).get("sha")
         return {"ok": r.status_code < 400, "http": r.status_code, "pushed_at": j.get("pushed_at"),
                 "head": sha, "fingerprint": fingerprint((sha or "").encode())}

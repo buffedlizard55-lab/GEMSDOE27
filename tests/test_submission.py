@@ -54,6 +54,22 @@ def test_writer_refuses_out_of_range_or_nonfinite(tiny_template, tmp_path, bad):
         submission.write_geotiff(pred, tpl, tmp_path / "bad.tif")
 
 
+def test_validator_compares_actual_template_transform(tiny_template, tmp_path):
+    tpl, foot = tiny_template
+    pred = np.zeros(foot.shape, "float32")
+    output = submission.write_geotiff(pred, tpl, tmp_path / "candidate.tif", outside="zero")
+    shifted = tmp_path / "shifted_template.tif"
+    with rasterio.open(tpl) as source:
+        profile = source.profile.copy()
+        data = source.read(1)
+    profile["transform"] = Affine(100, 0, 243450, 0, -100, 4508550)
+    with rasterio.open(shifted, "w", **profile) as dest:
+        dest.write(data, 1)
+    result = submission.verify_geotiff(output, shifted)
+    assert not result["checks"]["grid_matches_template"]["pass"]
+    assert not result["hard_checks_passed"]
+
+
 def test_zip_contains_exactly_one_identical_tif(tiny_template, tmp_path):
     tpl, foot = tiny_template
     p = submission.write_geotiff(np.zeros(foot.shape, "float32"), tpl, tmp_path / "z-nan.tif")

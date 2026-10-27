@@ -38,6 +38,24 @@ def sha(p: Path) -> str:
 
 
 def main() -> int:
+    required_inputs = (
+        DATA / "sample_submission.tif",
+        DATA / "labels.tif",
+        DATA / "dotted_h19_5_d1_5_nan.tif",
+    )
+    missing = [path for path in required_inputs if not path.is_file()]
+    if missing:
+        missing_list = "\n".join(f"  - {path}" for path in missing)
+        print(
+            "Cannot verify raster downloads because required local inputs are missing:\n"
+            f"{missing_list}\n"
+            "Restore and verify the hash-pinned owner-repository mirror inputs with "
+            "`python scripts/restore_data.py`, then run `python scripts/verify_downloads.py` "
+            "again. These inputs are not an organizer-authenticated DrivenData download.",
+            file=sys.stderr,
+        )
+        return 2
+
     man = json.loads((DL / "manifest.json").read_text())
     research_manifest = DL / "h28_1_candidate_manifest.json"
     if research_manifest.exists():
@@ -265,7 +283,7 @@ def main() -> int:
         rc31_s10 = json.loads((ROOT / hm31["run_card"]).read_text())
         dec31 = publication_decision(rc31_s10, ROOT)
         ok(rc31_s10["uniqueness_vs_registry"]["pass"] and rc31_s10["uniqueness_vs_registry"]["max_dot_overlap_within_3px_euclidean"] <= 0.70,
-           "h31_s10/uniqueness: <= 70% 3px dot overlap & <= 0.90 Spearman vs all peers & scored GEMSDOE27 rasters")
+           "h31_s10/historical uniqueness record: thresholds met for its old listed peers; not current/global proof")
         ok(dec31["ok_to_publish_as_submission"] == hm31["ok_to_submit"],
            f"h31_s10/readiness-gate: publication_decision={dec31['ok_to_publish_as_submission']} reasons={dec31['reasons']}")
 
