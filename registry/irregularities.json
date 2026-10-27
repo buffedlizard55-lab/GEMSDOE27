@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-25 | Merged parallel sessions (Lane L-S7 IR-10..13 + Session 9 H30 IR-14/15, renumbered to avoid collision).",
+ "generated": "2026-10-25 | Merged parallel sessions (Lane L-S7 IR-10..13 + Session 9 H30 IR-14/15, renumbered to avoid collision). | 2026-10-27 additional provenance and validation audit.",
  "items": [
   {
    "id": "prompt-verbatim-unavailable",
@@ -414,6 +414,30 @@
    "severity": "high",
    "issue": "README and knowledge/25 stated 289,180 withheld positives, while H31 saved evaluator and run card both record 120,778 occurrences. Site confused evidence publication PASS with weekly-slot authorization. Shared canary used an arbitrary 0.40 lower AUC bound instead of checking inverse prediction. Latest prompt omits its promised method lane.",
    "action": "Correct count from saved evaluator; distinguish evidence PASS from selector authorization on all pages and machine outputs; direction-invariant canary with boundary regression tests. No new experiment or candidate; existing H31 unchanged. Current registry and cap remain unverified."
+  },
+  {
+   "id": "IR-2026-10-27-h31-reported-already-submitted",
+   "severity": "high",
+   "issue": "The 2026-10-27 user report identifies H31-1 content ID cf8e1bbef244 as already submitted with reported value 0.2250. Older pages and notes called it unscored and recommended it. No organizer receipt is present.",
+   "action": "Block the ID and SHA-256 in the shared readiness ledger; update notes, manifest and site. OWNER-REPORTED only; do not re-upload."
+  },
+  {
+   "id": "IR-2026-10-27-conflicting-score-file-attribution",
+   "severity": "high",
+   "issue": "The 2026-10-26 pinned focus registry and another executive evidence file disagree about the best files/values for GEMSDOE28 and GEMSDOE31, and identify different files for GEMSDOE36; GEMSDOE25 score-to-file attribution is also unresolved.",
+   "action": "Show the pinned registry with a prominent conflict caveat; do not assert any score-file pairing is organizer-confirmed."
+  },
+  {
+   "id": "IR-2026-10-27-partial-nine-site-inventory",
+   "severity": "high",
+   "issue": "The nine-site GitHub inventory found 397 TIFF paths but four are not finite binary template-grid references; an owner-repository snapshot cannot enumerate all worldwide or private submissions.",
+   "action": "Record the exact excluded paths and bind the E3 pre-placement list to its inventory snapshot. Never claim a complete/global uniqueness screen."
+  },
+  {
+   "id": "IR-2026-10-27-whole-fid-blocking-limitation",
+   "severity": "high",
+   "issue": "H29-5 grouped hides use approximate nearest-Qfault FIDs stratified by quadrant and a 600 m buffer, not mutually disjoint geographic test blocks. Five repeated hides share catalogue faults; their bootstrap interval does not represent independent faults.",
+   "action": "Disclose the limitation and require a more independent geographic-block design and matched H31 comparator before any future selector."
   }
  ]
 }

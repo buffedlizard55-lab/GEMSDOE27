@@ -7,12 +7,6 @@ on:
   schedule:
     - cron: '17 6 * * *'
   workflow_dispatch:
-  push:
-    branches: ['arena/**']
-    paths:
-      - 'scripts/refresh_source_feed.py'
-      - 'registry/sources.json'
-      - '.github/workflows/source-feed.yml'
 
 permissions:
   contents: write
@@ -38,12 +32,14 @@ jobs:
         run: python scripts/refresh_source_feed.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Commit feed to this branch only
+      - name: Rebuild public pages from the refreshed snapshot
+        run: python scripts/build_site.py
+      - name: Commit feed and pages to this branch only
         run: |
           set -euo pipefail
           git config user.name 'GEMS source feed'
           git config user.email 'gems-feed@users.noreply.github.com'
-          git add docs/data/feed.json docs/data/feed_history.json
+          git add docs/data/feed.json docs/data/feed_history.json docs/*.html index.html EXECUTIVE_SUMMARY.md
           git commit -m "feed: refresh official-source checks" || exit 0
           for i in 1 2 3 4; do
             git pull --rebase origin "$GITHUB_REF_NAME" && git push origin "HEAD:$GITHUB_REF_NAME" && exit 0

@@ -89,6 +89,7 @@ def verify_geotiff(path: Path | str, template: Path | str) -> dict[str, Any]:
         t_arr = t.read(1)
         foot = np.isfinite(t_arr)
         t_prof = t.profile
+        t_grid = (t.crs, t.shape, tuple(t.transform)[:6], tuple(t.bounds))
     with rasterio.open(path) as s:
         a = s.read(1)
         ma = s.read(1, masked=True)
@@ -102,9 +103,12 @@ def verify_geotiff(path: Path | str, template: Path | str) -> dict[str, Any]:
     def add(name: str, ok: bool, detail: str, hard: bool = True) -> None:
         checks[name] = {"pass": bool(ok), "detail": detail, "hard": hard}
 
-    add("grid_matches_template", info["crs"] is not None and info["crs"].to_epsg() == grid.CRS_EPSG
+    actual_grid = (info["crs"], info["shape"], info["transform"], info["bounds"])
+    add("grid_matches_template", actual_grid == t_grid
+        and info["crs"] is not None and info["crs"].to_epsg() == grid.CRS_EPSG
         and info["shape"] == grid.SHAPE and info["transform"] == grid.TRANSFORM
-        and info["bounds"] == grid.BOUNDS, f"{info['crs']} {info['shape']} {info['transform']}")
+        and info["bounds"] == grid.BOUNDS,
+        f"candidate={actual_grid}; template={t_grid}")
     add("single_band_float32", info["count"] == 1 and info["dtype"] == "float32",
         f"count={info['count']} dtype={info['dtype']}")
     add("inside_footprint_all_finite", bool(np.isfinite(inside).all()),

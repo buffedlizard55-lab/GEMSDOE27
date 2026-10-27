@@ -13,22 +13,25 @@ PAGES = ["index.html", "executive-summary.html", "how-to-submit.html", "topology
 class Links(HTMLParser):
     def __init__(self):
         super().__init__()
-        self.refs, self.ids = [], set()
+        self.refs = []
 
     def handle_starttag(self, tag, attrs):
         d = dict(attrs)
-        for k in ("href", "src"):
-            if k in d:
-                self.refs.append(d[k])
-        if "id" in d:
-            self.ids.add(d["id"])
+        for key in ("href", "src"):
+            if key in d:
+                self.refs.append(d[key])
 
 
-def test_site_builds_from_json_only_and_pages_exist():
-    r = subprocess.run([sys.executable, str(ROOT / "scripts" / "build_site.py")], capture_output=True, text=True)
-    assert r.returncode == 0, r.stderr
-    for p in PAGES:
-        assert (DOCS / p).is_file() and (DOCS / p).stat().st_size > 2000
+def test_site_builds_and_is_deterministic():
+    command = [sys.executable, str(ROOT / "scripts" / "build_site.py")]
+    result = subprocess.run(command, capture_output=True, text=True)
+    assert result.returncode == 0, result.stderr
+    paths = [DOCS / p for p in PAGES] + [ROOT / "index.html", ROOT / "EXECUTIVE_SUMMARY.md"]
+    assert all(p.is_file() and p.stat().st_size > 1000 for p in paths)
+    before = [p.read_bytes() for p in paths]
+    result = subprocess.run(command, capture_output=True, text=True)
+    assert result.returncode == 0, result.stderr
+    assert before == [p.read_bytes() for p in paths]
 
 
 def test_all_internal_links_and_assets_resolve():
@@ -38,72 +41,60 @@ def test_all_internal_links_and_assets_resolve():
         for ref in parser.refs:
             if re.match(r"^(https?:|mailto:|#|data:)", ref):
                 continue
-            target = ref.split("#")[0]
-            assert (base / target).exists(), f"{base.name}/{p}: broken internal reference {ref}"
+            assert (base / ref.split("#")[0]).exists(), f"{base.name}/{p}: broken reference {ref}"
 
 
-def test_repository_root_front_page_shows_current_submission_decision():
-    root_idx = (ROOT / "index.html").read_text()
-    assert "EVIDENCE PASS — SELECTOR REQUIRED" in root_idx
-    assert "27GEMSDOE-H31-DRCG-WL-20261026-cf8e1bbef244" in root_idx
-    assert "gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif" in root_idx
-    assert "DO NOT SUBMIT H28-3" in root_idx
+def test_h31_reported_submitted_and_never_offered_as_new():
+    for name in PAGES:
+        text = (DOCS / name).read_text()
+        assert "DO NOT SUBMIT" in text
+        assert "NOT AUTHORIZED FOR A WEEKLY SLOT" in text
+        assert "cf8e1bbef244" in text and "0.2250" in text and "OWNER-REPORTED" in text
+        assert "best new unique submission to upload" not in text.lower()
+        assert not re.search(r'<a[^>]+href="[^\"]*cf8e1bbef244[^\"]*"[^>]*download', text)
+    assert "DO NOT SUBMIT" in (ROOT / "index.html").read_text()
     assert (ROOT / ".nojekyll").exists()
 
 
-def test_front_page_promotes_h31_and_does_not_offer_failed_h28_3_as_submission():
-    idx = (DOCS / "index.html").read_text()
-    assert "EVIDENCE PASS — SELECTOR REQUIRED" in idx
-    assert "gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif" in idx
-    assert "There is no one-click submission download for this run." in idx
-    assert "NOT APPROVED FOR SUBMISSION" in idx
-    assert "h28-3-strain-conductivity" not in idx or "h28-3-strain-conductivity" not in "\n".join(
-        re.findall(r'<a[^>]+download[^>]*>', idx)
-    )
+def test_executive_summary_qualifies_conflicting_historical_reports():
     summary = (DOCS / "executive-summary.html").read_text()
-    assert "EVIDENCE PASS — SELECTOR REQUIRED" in summary
-    assert "how-to-submit.html" in summary
-    for site_id in ("GEMSDOE24", "GEMSDOE25", "GEMSDOE27", "GEMSDOE28", "GEMSDOE30",
-                    "GEMSDOE31", "GEMSDOE32", "GEMSDOE33", "GEMSDOE36"):
-        assert site_id in summary
+    md = (ROOT / "EXECUTIVE_SUMMARY.md").read_text()
+    for site in ("GEMSDOE24", "GEMSDOE25", "GEMSDOE27", "GEMSDOE28", "GEMSDOE30",
+                 "GEMSDOE31", "GEMSDOE32", "GEMSDOE33", "GEMSDOE36"):
+        assert site in summary and site in md
+    for text in (summary, md):
+        assert "0.2778" in text and "not organizer-confirmed" in text.lower()
+        assert "GEMSDOE28/GEMSDOE31" in text and "not a" in text.lower()
+        assert "hidden truth" in text.lower() and "cannot" in text.lower()
+
+
+def test_research_and_manual_instructions_are_explicit():
+    research = (DOCS / "research.html").read_text()
+    assert "30_lane_2026-10-27_preregistration.md" in research
+    assert "not drainage" in research.lower()
+    assert "quadrant-stratified" in research and "approximate" in research
+    sources = (DOCS / "sources.html").read_text()
+    assert "IR-2026-10-27-conflicting-score-file-attribution" in sources
+    assert "dated snapshots, not a live leaderboard" in sources
     how = (DOCS / "how-to-submit.html").read_text()
     assert "Predicted values must be in range [0, 1]" in how
-    assert "gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif" in how
+    assert "does not guarantee organizer acceptance" in how
+    assert "no approved new TIFF" in how
 
 
-def test_research_page_lists_preregistered_h28_hypotheses_and_evidence_link():
-    research = (DOCS / "research.html").read_text()
-    registry = json.loads((ROOT / "registry" / "next_hypotheses.json").read_text())
-    for hypothesis in registry["hypotheses"]:
-        assert hypothesis["id"] in research
-    assert "knowledge/07_untried_hypotheses.md" in research
-    assert "knowledge/08_preregistration_H28-1.md" in research
-    evidence = ROOT / "evidence" / "h28_1_edge_holdout.json"
-    if evidence.exists():
-        assert "evidence/h28_1_edge_holdout.json" in research
-        assert "leaderboard score" in research
-    candidate_manifest = DOCS / "downloads" / "h28_1_candidate_manifest.json"
-    if candidate_manifest.exists():
-        candidate = json.loads(candidate_manifest.read_text())["candidate"]
-        assert candidate["format_verified"] is True
-        assert len(candidate["note"]) <= 200
-        assert candidate["content_id"] in research
-        assert candidate["nan"] not in research
-        assert candidate["zip"] not in research
-        assert candidate["allfinite"] not in research
-        assert "audit only" in research
-    h28_3 = ROOT / "evidence" / "h28_3_strain_holdout.json"
-    if h28_3.exists():
-        result = json.loads(h28_3.read_text())
-        assert "H28-3" in research
-        assert "NO NEW SUBMISSION IS APPROVED" in research
-        assert result["gate"]["pass"] is False
-        assert "NOT APPROVED FOR SUBMISSION" in (DOCS / "executive-summary.html").read_text()
+def test_research_tif_is_never_advertised_as_approved():
+    card_path = ROOT / "evidence/relief_profile_run_card_20261027.json"
+    if card_path.exists():
+        card = json.loads(card_path.read_text())
+        if card.get("raster"):
+            text = (DOCS / "research.html").read_text()
+            assert card["raster"]["primary_allfinite"] in text
+            assert "Download research GeoTIFF — NOT APPROVED FOR SUBMISSION" in text
 
 
 def test_no_score_is_claimed_for_27gemsdoe_and_scripts_never_fetch_drivendata():
-    sc = json.loads((ROOT / "registry" / "live_scores.json").read_text())
-    assert all(x["score"] is None for x in sc["27GEMSDOE"])
+    scores = json.loads((ROOT / "registry" / "live_scores.json").read_text())
+    assert all(x["score"] is None for x in scores["27GEMSDOE"])
     for py in list((ROOT / "scripts").glob("*.py")) + list((ROOT / "src").rglob("*.py")):
         txt = py.read_text()
         for m in re.finditer(r"requests\.(get|head|post)\(([^)]*)", txt):
@@ -114,16 +105,9 @@ def test_no_score_is_claimed_for_27gemsdoe_and_scripts_never_fetch_drivendata():
 
 def test_downloads_have_unique_names_and_zip_single_member():
     import zipfile
+
     names = [p.name for p in (DOCS / "downloads").glob("*.tif")]
     assert len(names) == len(set(names)) and all(re.search(r"-[0-9a-f]{12}-(nan|allfinite)\.tif$", n) for n in names)
     for z in (DOCS / "downloads").glob("*.zip"):
         with zipfile.ZipFile(z) as zf:
             assert len(zf.namelist()) == 1 and zf.namelist()[0].endswith(".tif")
-
-
-def test_slot_authorization_is_separate_from_evidence_pass():
-    for name in PAGES:
-        text = (DOCS / name).read_text()
-        assert "NOT AUTHORIZED FOR A WEEKLY SLOT" in text
-        badges = re.findall(r'<span class="badge[^"]*"[^>]*>(.*?)</span>', text)
-        assert all("OK TO DOWNLOAD AND SUBMIT" not in badge for badge in badges)

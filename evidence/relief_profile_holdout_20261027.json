@@ -1,0 +1,158 @@
+{
+  "status": "complete",
+  "label": "HOLDOUT-DTI",
+  "evaluator": "gems27.metric.dti_binary v1 + whole-FID full-kernel relief-profile v1",
+  "metric": {
+    "alpha": 0.2,
+    "beta": 0.8,
+    "radius_m": 300,
+    "kernel": "triangular"
+  },
+  "seeds": [
+    620,
+    621,
+    622,
+    623,
+    624
+  ],
+  "n_withheld_positives_total": 54336,
+  "bootstrap": "10000 paired pooled-statistic seed resamples; repeated hides are not independent faults",
+  "statistics": {
+    "candidate_pooled": 0.10120921479504702,
+    "candidate_ci95": [
+      0.08483575225469264,
+      0.11696773823791021
+    ],
+    "control_pooled": 0.09995687133596372,
+    "control_ci95": [
+      0.0848476297931394,
+      0.114501934361703
+    ],
+    "pooled_delta": 0.0012523434590833021,
+    "paired_delta_ci95": [
+      -0.0011407041004148216,
+      0.003342361219199878
+    ],
+    "positive_splits": 4
+  },
+  "screen_pass": false,
+  "h31_same_split_comparison": "not run; required for promotion even if screen passes",
+  "gate_efficacy_pass": false,
+  "per_seed": [
+    {
+      "seed": 620,
+      "hidden_groups": 83,
+      "withheld_positives": 11221,
+      "control": {
+        "TPw": 1577.3775292839493,
+        "FPw": 36989.2233855384,
+        "FNw": 9643.62247071605,
+        "n_truth": 11221,
+        "n_emitted": 37654,
+        "dti": 0.09450965673000487,
+        "recall_w": 0.14057370370590405
+      },
+      "candidate": {
+        "TPw": 1659.2822512452067,
+        "FPw": 36947.223068168256,
+        "FNw": 9561.717748754792,
+        "n_truth": 11221,
+        "n_emitted": 37654,
+        "dti": 0.0993695178204562,
+        "recall_w": 0.14787293924295578
+      }
+    },
+    {
+      "seed": 621,
+      "hidden_groups": 83,
+      "withheld_positives": 10793,
+      "control": {
+        "TPw": 2001.5069813303771,
+        "FPw": 36810.72191582464,
+        "FNw": 8791.493018669622,
+        "n_truth": 10793,
+        "n_emitted": 37654,
+        "dti": 0.12206658574717814,
+        "recall_w": 0.18544491627261903
+      },
+      "candidate": {
+        "TPw": 2039.1293988717493,
+        "FPw": 36784.73401243953,
+        "FNw": 8753.87060112825,
+        "n_truth": 10793,
+        "n_emitted": 37654,
+        "dti": 0.1243434311210642,
+        "recall_w": 0.18893073277788838
+      }
+    },
+    {
+      "seed": 622,
+      "hidden_groups": 83,
+      "withheld_positives": 9797,
+      "control": {
+        "TPw": 1279.7516376681356,
+        "FPw": 37121.865852176445,
+        "FNw": 8517.248362331864,
+        "n_truth": 9797,
+        "n_emitted": 37654,
+        "dti": 0.08246925806970182,
+        "recall_w": 0.13062688962622596
+      },
+      "candidate": {
+        "TPw": 1227.6671036674722,
+        "FPw": 37134.8855703053,
+        "FNw": 8569.332896332528,
+        "n_truth": 9797,
+        "n_emitted": 37654,
+        "dti": 0.07915269855140453,
+        "recall_w": 0.12531051379682273
+      }
+    },
+    {
+      "seed": 623,
+      "hidden_groups": 83,
+      "withheld_positives": 10885,
+      "control": {
+        "TPw": 1347.3733339735568,
+        "FPw": 37088.76096190722,
+        "FNw": 9537.626666026443,
+        "n_truth": 10885,
+        "n_emitted": 37654,
+        "dti": 0.08218082894115213,
+        "recall_w": 0.12378257546840209
+      },
+      "candidate": {
+        "TPw": 1357.8337635818004,
+        "FPw": 37086.00433742796,
+        "FNw": 9527.1662364182,
+        "n_truth": 10885,
+        "n_emitted": 37654,
+        "dti": 0.0828110634379287,
+        "recall_w": 0.12474357037958662
+      }
+    },
+    {
+      "seed": 624,
+      "hidden_groups": 83,
+      "withheld_positives": 11640,
+      "control": {
+        "TPw": 1998.247517656461,
+        "FPw": 36831.01653753562,
+        "FNw": 9641.75248234354,
+        "n_truth": 11640,
+        "n_emitted": 37654,
+        "dti": 0.11700812389911076,
+        "recall_w": 0.1716707489395585
+      },
+      "candidate": {
+        "TPw": 2023.6181338309148,
+        "FPw": 36809.37114856017,
+        "FNw": 9616.381866169086,
+        "n_truth": 11640,
+        "n_emitted": 37654,
+        "dti": 0.11848854050108519,
+        "recall_w": 0.17385035514011296
+      }
+    }
+  ]
+}

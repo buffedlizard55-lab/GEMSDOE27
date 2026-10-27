@@ -1,0 +1,1131 @@
+{
+  "label": "single-feature leakage canary (not a score)",
+  "seeds": [
+    620,
+    621,
+    622,
+    623,
+    624
+  ],
+  "features_tested": 36,
+  "max_direction_invariant_auc": 0.6743271641593722,
+  "threshold": 0.9,
+  "pass": true,
+  "per_seed": [
+    {
+      "seed": 620,
+      "withheld_positives": 11221,
+      "hidden_group_count": 83,
+      "features": {
+        "mag_anom": {
+          "auc": 0.4993284975146005,
+          "direction_invariant_auc": 0.5006715024853995,
+          "positive_observations": 11217,
+          "negative_observations": 99943
+        },
+        "rtp": {
+          "auc": 0.533293819681016,
+          "direction_invariant_auc": 0.533293819681016,
+          "positive_observations": 11217,
+          "negative_observations": 99943
+        },
+        "tmi_hg": {
+          "auc": 0.5316043749287633,
+          "direction_invariant_auc": 0.5316043749287633,
+          "positive_observations": 11217,
+          "negative_observations": 99943
+        },
+        "geod_2ndinv": {
+          "auc": 0.5667564589555192,
+          "direction_invariant_auc": 0.5667564589555192,
+          "positive_observations": 11217,
+          "negative_observations": 99943
+        },
+        "iso_grav_anom_slope": {
+          "auc": 0.5273105250986198,
+          "direction_invariant_auc": 0.5273105250986198,
+          "positive_observations": 11217,
+          "negative_observations": 99943
+        },
+        "geod_shearrate": {
+          "auc": 0.5405428210064402,
+          "direction_invariant_auc": 0.5405428210064402,
+          "positive_observations": 11217,
+          "negative_observations": 99943
+        },
+        "geod_dilaterate": {
+          "auc": 0.6283437077543756,
+          "direction_invariant_auc": 0.6283437077543756,
+          "positive_observations": 11217,
+          "negative_observations": 99943
+        },
+        "tmi_vg": {
+          "auc": 0.48946411222249053,
+          "direction_invariant_auc": 0.5105358877775095,
+          "positive_observations": 11217,
+          "negative_observations": 99943
+        },
+        "deq_n100a15": {
+          "auc": 0.5847515048452361,
+          "direction_invariant_auc": 0.5847515048452361,
+          "positive_observations": 11217,
+          "negative_observations": 99943
+        },
+        "iso_grav_anom_vg": {
+          "auc": 0.5405166792446215,
+          "direction_invariant_auc": 0.5405166792446215,
+          "positive_observations": 11217,
+          "negative_observations": 99943
+        },
+        "det_elev": {
+          "auc": 0.5241907955288816,
+          "direction_invariant_auc": 0.5241907955288816,
+          "positive_observations": 11217,
+          "negative_observations": 99943
+        },
+        "iso_grav_anom": {
+          "auc": 0.453227135045116,
+          "direction_invariant_auc": 0.546772864954884,
+          "positive_observations": 11217,
+          "negative_observations": 99943
+        },
+        "tmi": {
+          "auc": 0.4954522361600976,
+          "direction_invariant_auc": 0.5045477638399024,
+          "positive_observations": 11217,
+          "negative_observations": 99943
+        },
+        "depth_to_base_surf": {
+          "auc": 0.5302451937588378,
+          "direction_invariant_auc": 0.5302451937588378,
+          "positive_observations": 11217,
+          "negative_observations": 99943
+        },
+        "ieq_n100a15": {
+          "auc": 0.6272855656100549,
+          "direction_invariant_auc": 0.6272855656100549,
+          "positive_observations": 11217,
+          "negative_observations": 99943
+        },
+        "cond_surf": {
+          "auc": 0.4746650219313606,
+          "direction_invariant_auc": 0.5253349780686394,
+          "positive_observations": 11217,
+          "negative_observations": 99943
+        },
+        "iso_grav_anom_hg": {
+          "auc": 0.49463562332517597,
+          "direction_invariant_auc": 0.505364376674824,
+          "positive_observations": 11217,
+          "negative_observations": 99943
+        },
+        "det_elev_slope": {
+          "auc": 0.5347723962665851,
+          "direction_invariant_auc": 0.5347723962665851,
+          "positive_observations": 11217,
+          "negative_observations": 99943
+        },
+        "lidar_ex_max": {
+          "auc": 0.5146323060354625,
+          "direction_invariant_auc": 0.5146323060354625,
+          "positive_observations": 9786,
+          "negative_observations": 75232
+        },
+        "lidar_ex_mean": {
+          "auc": 0.5133829898524729,
+          "direction_invariant_auc": 0.5133829898524729,
+          "positive_observations": 9786,
+          "negative_observations": 75232
+        },
+        "lidar_step_max": {
+          "auc": 0.5227534547971855,
+          "direction_invariant_auc": 0.5227534547971855,
+          "positive_observations": 9786,
+          "negative_observations": 75232
+        },
+        "lidar_lapneg_max": {
+          "auc": 0.5242803108491084,
+          "direction_invariant_auc": 0.5242803108491084,
+          "positive_observations": 9786,
+          "negative_observations": 75232
+        },
+        "lidar_lappos_max": {
+          "auc": 0.5286021398930303,
+          "direction_invariant_auc": 0.5286021398930303,
+          "positive_observations": 9786,
+          "negative_observations": 75232
+        },
+        "lidar_downface_max": {
+          "auc": 0.5356860244743682,
+          "direction_invariant_auc": 0.5356860244743682,
+          "positive_observations": 9786,
+          "negative_observations": 75232
+        },
+        "lidar_upface_max": {
+          "auc": 0.5406476836978285,
+          "direction_invariant_auc": 0.5406476836978285,
+          "positive_observations": 9786,
+          "negative_observations": 75232
+        },
+        "lidar_cross_max": {
+          "auc": 0.5371955052935021,
+          "direction_invariant_auc": 0.5371955052935021,
+          "positive_observations": 9786,
+          "negative_observations": 75232
+        },
+        "lidar_relief": {
+          "auc": 0.5223286804763582,
+          "direction_invariant_auc": 0.5223286804763582,
+          "positive_observations": 9786,
+          "negative_observations": 75232
+        },
+        "lidar_coh100": {
+          "auc": 0.4601097362763479,
+          "direction_invariant_auc": 0.5398902637236521,
+          "positive_observations": 9786,
+          "negative_observations": 75232
+        },
+        "lidar_cos2strike": {
+          "auc": 0.47889808403449297,
+          "direction_invariant_auc": 0.521101915965507,
+          "positive_observations": 9786,
+          "negative_observations": 75232
+        },
+        "lidar_sin2strike": {
+          "auc": 0.49784459367947487,
+          "direction_invariant_auc": 0.5021554063205251,
+          "positive_observations": 9786,
+          "negative_observations": 75232
+        },
+        "det_local_relief": {
+          "auc": 0.4264187754712082,
+          "direction_invariant_auc": 0.5735812245287918,
+          "positive_observations": 11217,
+          "negative_observations": 99943
+        },
+        "det_gradient": {
+          "auc": 0.5480397585204293,
+          "direction_invariant_auc": 0.5480397585204293,
+          "positive_observations": 11217,
+          "negative_observations": 99943
+        },
+        "relief_slope_side_contrast": {
+          "auc": 0.5812657379021477,
+          "direction_invariant_auc": 0.5812657379021477,
+          "positive_observations": 11221,
+          "negative_observations": 100000
+        },
+        "relief_transverse_concavity": {
+          "auc": 0.4910248427056413,
+          "direction_invariant_auc": 0.5089751572943587,
+          "positive_observations": 11221,
+          "negative_observations": 100000
+        },
+        "relief_contrast_x_concavity": {
+          "auc": 0.5065695356920061,
+          "direction_invariant_auc": 0.5065695356920061,
+          "positive_observations": 11221,
+          "negative_observations": 100000
+        },
+        "relief_tangent_support": {
+          "auc": 0.4998039648872649,
+          "direction_invariant_auc": 0.500196035112735,
+          "positive_observations": 11221,
+          "negative_observations": 100000
+        }
+      }
+    },
+    {
+      "seed": 621,
+      "withheld_positives": 10793,
+      "hidden_group_count": 83,
+      "features": {
+        "mag_anom": {
+          "auc": 0.46749428762330736,
+          "direction_invariant_auc": 0.5325057123766926,
+          "positive_observations": 10785,
+          "negative_observations": 99942
+        },
+        "rtp": {
+          "auc": 0.4643654979600732,
+          "direction_invariant_auc": 0.5356345020399268,
+          "positive_observations": 10785,
+          "negative_observations": 99942
+        },
+        "tmi_hg": {
+          "auc": 0.5143373007990439,
+          "direction_invariant_auc": 0.5143373007990439,
+          "positive_observations": 10785,
+          "negative_observations": 99942
+        },
+        "geod_2ndinv": {
+          "auc": 0.5097060333008907,
+          "direction_invariant_auc": 0.5097060333008907,
+          "positive_observations": 10785,
+          "negative_observations": 99942
+        },
+        "iso_grav_anom_slope": {
+          "auc": 0.5335387682018297,
+          "direction_invariant_auc": 0.5335387682018297,
+          "positive_observations": 10785,
+          "negative_observations": 99942
+        },
+        "geod_shearrate": {
+          "auc": 0.5170856853117598,
+          "direction_invariant_auc": 0.5170856853117598,
+          "positive_observations": 10785,
+          "negative_observations": 99942
+        },
+        "geod_dilaterate": {
+          "auc": 0.5197154739178487,
+          "direction_invariant_auc": 0.5197154739178487,
+          "positive_observations": 10785,
+          "negative_observations": 99942
+        },
+        "tmi_vg": {
+          "auc": 0.45496332471813716,
+          "direction_invariant_auc": 0.5450366752818628,
+          "positive_observations": 10785,
+          "negative_observations": 99942
+        },
+        "deq_n100a15": {
+          "auc": 0.4918382263010645,
+          "direction_invariant_auc": 0.5081617736989354,
+          "positive_observations": 10785,
+          "negative_observations": 99942
+        },
+        "iso_grav_anom_vg": {
+          "auc": 0.5466562748257688,
+          "direction_invariant_auc": 0.5466562748257688,
+          "positive_observations": 10785,
+          "negative_observations": 99942
+        },
+        "det_elev": {
+          "auc": 0.5183629309821207,
+          "direction_invariant_auc": 0.5183629309821207,
+          "positive_observations": 10785,
+          "negative_observations": 99942
+        },
+        "iso_grav_anom": {
+          "auc": 0.4919503622717773,
+          "direction_invariant_auc": 0.5080496377282226,
+          "positive_observations": 10785,
+          "negative_observations": 99942
+        },
+        "tmi": {
+          "auc": 0.4537711840414961,
+          "direction_invariant_auc": 0.5462288159585039,
+          "positive_observations": 10785,
+          "negative_observations": 99942
+        },
+        "depth_to_base_surf": {
+          "auc": 0.483295207836215,
+          "direction_invariant_auc": 0.5167047921637851,
+          "positive_observations": 10785,
+          "negative_observations": 99942
+        },
+        "ieq_n100a15": {
+          "auc": 0.5076478585674267,
+          "direction_invariant_auc": 0.5076478585674267,
+          "positive_observations": 10785,
+          "negative_observations": 99942
+        },
+        "cond_surf": {
+          "auc": 0.5007282174518893,
+          "direction_invariant_auc": 0.5007282174518893,
+          "positive_observations": 10785,
+          "negative_observations": 99942
+        },
+        "iso_grav_anom_hg": {
+          "auc": 0.49063033796505084,
+          "direction_invariant_auc": 0.5093696620349492,
+          "positive_observations": 10785,
+          "negative_observations": 99942
+        },
+        "det_elev_slope": {
+          "auc": 0.5991239281323734,
+          "direction_invariant_auc": 0.5991239281323734,
+          "positive_observations": 10785,
+          "negative_observations": 99942
+        },
+        "lidar_ex_max": {
+          "auc": 0.5942835540709159,
+          "direction_invariant_auc": 0.5942835540709159,
+          "positive_observations": 8718,
+          "negative_observations": 75440
+        },
+        "lidar_ex_mean": {
+          "auc": 0.5825106047579671,
+          "direction_invariant_auc": 0.5825106047579671,
+          "positive_observations": 8718,
+          "negative_observations": 75440
+        },
+        "lidar_step_max": {
+          "auc": 0.5936543259128917,
+          "direction_invariant_auc": 0.5936543259128917,
+          "positive_observations": 8718,
+          "negative_observations": 75440
+        },
+        "lidar_lapneg_max": {
+          "auc": 0.6046514542990369,
+          "direction_invariant_auc": 0.6046514542990369,
+          "positive_observations": 8718,
+          "negative_observations": 75440
+        },
+        "lidar_lappos_max": {
+          "auc": 0.6141183150157752,
+          "direction_invariant_auc": 0.6141183150157752,
+          "positive_observations": 8718,
+          "negative_observations": 75440
+        },
+        "lidar_downface_max": {
+          "auc": 0.6055332262548664,
+          "direction_invariant_auc": 0.6055332262548664,
+          "positive_observations": 8718,
+          "negative_observations": 75440
+        },
+        "lidar_upface_max": {
+          "auc": 0.6157442385264991,
+          "direction_invariant_auc": 0.6157442385264991,
+          "positive_observations": 8718,
+          "negative_observations": 75440
+        },
+        "lidar_cross_max": {
+          "auc": 0.6057365565922409,
+          "direction_invariant_auc": 0.6057365565922409,
+          "positive_observations": 8718,
+          "negative_observations": 75440
+        },
+        "lidar_relief": {
+          "auc": 0.598174006066604,
+          "direction_invariant_auc": 0.598174006066604,
+          "positive_observations": 8718,
+          "negative_observations": 75440
+        },
+        "lidar_coh100": {
+          "auc": 0.4871517570271232,
+          "direction_invariant_auc": 0.5128482429728768,
+          "positive_observations": 8718,
+          "negative_observations": 75440
+        },
+        "lidar_cos2strike": {
+          "auc": 0.4530124097836851,
+          "direction_invariant_auc": 0.5469875902163148,
+          "positive_observations": 8718,
+          "negative_observations": 75440
+        },
+        "lidar_sin2strike": {
+          "auc": 0.4803934003939144,
+          "direction_invariant_auc": 0.5196065996060856,
+          "positive_observations": 8718,
+          "negative_observations": 75440
+        },
+        "det_local_relief": {
+          "auc": 0.37853657671287083,
+          "direction_invariant_auc": 0.6214634232871292,
+          "positive_observations": 10785,
+          "negative_observations": 99942
+        },
+        "det_gradient": {
+          "auc": 0.6171539293439244,
+          "direction_invariant_auc": 0.6171539293439244,
+          "positive_observations": 10785,
+          "negative_observations": 99942
+        },
+        "relief_slope_side_contrast": {
+          "auc": 0.6490980681923469,
+          "direction_invariant_auc": 0.6490980681923469,
+          "positive_observations": 10793,
+          "negative_observations": 100000
+        },
+        "relief_transverse_concavity": {
+          "auc": 0.5097027392754564,
+          "direction_invariant_auc": 0.5097027392754564,
+          "positive_observations": 10793,
+          "negative_observations": 100000
+        },
+        "relief_contrast_x_concavity": {
+          "auc": 0.5357922116186418,
+          "direction_invariant_auc": 0.5357922116186418,
+          "positive_observations": 10793,
+          "negative_observations": 100000
+        },
+        "relief_tangent_support": {
+          "auc": 0.5147154442694339,
+          "direction_invariant_auc": 0.5147154442694339,
+          "positive_observations": 10793,
+          "negative_observations": 100000
+        }
+      }
+    },
+    {
+      "seed": 622,
+      "withheld_positives": 9797,
+      "hidden_group_count": 83,
+      "features": {
+        "mag_anom": {
+          "auc": 0.45334622200635094,
+          "direction_invariant_auc": 0.5466537779936491,
+          "positive_observations": 9762,
+          "negative_observations": 99948
+        },
+        "rtp": {
+          "auc": 0.4748143056106036,
+          "direction_invariant_auc": 0.5251856943893964,
+          "positive_observations": 9762,
+          "negative_observations": 99948
+        },
+        "tmi_hg": {
+          "auc": 0.5367087556293461,
+          "direction_invariant_auc": 0.5367087556293461,
+          "positive_observations": 9762,
+          "negative_observations": 99948
+        },
+        "geod_2ndinv": {
+          "auc": 0.6078985129837685,
+          "direction_invariant_auc": 0.6078985129837685,
+          "positive_observations": 9762,
+          "negative_observations": 99948
+        },
+        "iso_grav_anom_slope": {
+          "auc": 0.4793144079051408,
+          "direction_invariant_auc": 0.5206855920948592,
+          "positive_observations": 9762,
+          "negative_observations": 99948
+        },
+        "geod_shearrate": {
+          "auc": 0.5847127916883508,
+          "direction_invariant_auc": 0.5847127916883508,
+          "positive_observations": 9762,
+          "negative_observations": 99948
+        },
+        "geod_dilaterate": {
+          "auc": 0.6226743935324139,
+          "direction_invariant_auc": 0.6226743935324139,
+          "positive_observations": 9762,
+          "negative_observations": 99948
+        },
+        "tmi_vg": {
+          "auc": 0.4906948985937346,
+          "direction_invariant_auc": 0.5093051014062654,
+          "positive_observations": 9762,
+          "negative_observations": 99948
+        },
+        "deq_n100a15": {
+          "auc": 0.6364029685725453,
+          "direction_invariant_auc": 0.6364029685725453,
+          "positive_observations": 9762,
+          "negative_observations": 99948
+        },
+        "iso_grav_anom_vg": {
+          "auc": 0.5082899966208202,
+          "direction_invariant_auc": 0.5082899966208202,
+          "positive_observations": 9762,
+          "negative_observations": 99948
+        },
+        "det_elev": {
+          "auc": 0.4884269445188326,
+          "direction_invariant_auc": 0.5115730554811674,
+          "positive_observations": 9762,
+          "negative_observations": 99948
+        },
+        "iso_grav_anom": {
+          "auc": 0.500412894996322,
+          "direction_invariant_auc": 0.500412894996322,
+          "positive_observations": 9762,
+          "negative_observations": 99948
+        },
+        "tmi": {
+          "auc": 0.4676034565017448,
+          "direction_invariant_auc": 0.5323965434982552,
+          "positive_observations": 9762,
+          "negative_observations": 99948
+        },
+        "depth_to_base_surf": {
+          "auc": 0.46135575727815265,
+          "direction_invariant_auc": 0.5386442427218474,
+          "positive_observations": 9762,
+          "negative_observations": 99948
+        },
+        "ieq_n100a15": {
+          "auc": 0.6743271641593722,
+          "direction_invariant_auc": 0.6743271641593722,
+          "positive_observations": 9762,
+          "negative_observations": 99948
+        },
+        "cond_surf": {
+          "auc": 0.49275510276202056,
+          "direction_invariant_auc": 0.5072448972379795,
+          "positive_observations": 9762,
+          "negative_observations": 99948
+        },
+        "iso_grav_anom_hg": {
+          "auc": 0.513913317182669,
+          "direction_invariant_auc": 0.513913317182669,
+          "positive_observations": 9762,
+          "negative_observations": 99948
+        },
+        "det_elev_slope": {
+          "auc": 0.544219376989372,
+          "direction_invariant_auc": 0.544219376989372,
+          "positive_observations": 9762,
+          "negative_observations": 99948
+        },
+        "lidar_ex_max": {
+          "auc": 0.5815394640619234,
+          "direction_invariant_auc": 0.5815394640619234,
+          "positive_observations": 7706,
+          "negative_observations": 75349
+        },
+        "lidar_ex_mean": {
+          "auc": 0.5672675052771221,
+          "direction_invariant_auc": 0.5672675052771221,
+          "positive_observations": 7706,
+          "negative_observations": 75349
+        },
+        "lidar_step_max": {
+          "auc": 0.5799526185782702,
+          "direction_invariant_auc": 0.5799526185782702,
+          "positive_observations": 7706,
+          "negative_observations": 75349
+        },
+        "lidar_lapneg_max": {
+          "auc": 0.5749324114925622,
+          "direction_invariant_auc": 0.5749324114925622,
+          "positive_observations": 7706,
+          "negative_observations": 75349
+        },
+        "lidar_lappos_max": {
+          "auc": 0.5775328413214761,
+          "direction_invariant_auc": 0.5775328413214761,
+          "positive_observations": 7706,
+          "negative_observations": 75349
+        },
+        "lidar_downface_max": {
+          "auc": 0.5707850654377061,
+          "direction_invariant_auc": 0.5707850654377061,
+          "positive_observations": 7706,
+          "negative_observations": 75349
+        },
+        "lidar_upface_max": {
+          "auc": 0.5765107654752064,
+          "direction_invariant_auc": 0.5765107654752064,
+          "positive_observations": 7706,
+          "negative_observations": 75349
+        },
+        "lidar_cross_max": {
+          "auc": 0.5576339692859351,
+          "direction_invariant_auc": 0.5576339692859351,
+          "positive_observations": 7706,
+          "negative_observations": 75349
+        },
+        "lidar_relief": {
+          "auc": 0.5505330680336169,
+          "direction_invariant_auc": 0.5505330680336169,
+          "positive_observations": 7706,
+          "negative_observations": 75349
+        },
+        "lidar_coh100": {
+          "auc": 0.4716978331649333,
+          "direction_invariant_auc": 0.5283021668350667,
+          "positive_observations": 7706,
+          "negative_observations": 75349
+        },
+        "lidar_cos2strike": {
+          "auc": 0.48744488218448356,
+          "direction_invariant_auc": 0.5125551178155164,
+          "positive_observations": 7706,
+          "negative_observations": 75349
+        },
+        "lidar_sin2strike": {
+          "auc": 0.47792089783698,
+          "direction_invariant_auc": 0.52207910216302,
+          "positive_observations": 7706,
+          "negative_observations": 75349
+        },
+        "det_local_relief": {
+          "auc": 0.42289731287190047,
+          "direction_invariant_auc": 0.5771026871280995,
+          "positive_observations": 9762,
+          "negative_observations": 99948
+        },
+        "det_gradient": {
+          "auc": 0.5518572028895304,
+          "direction_invariant_auc": 0.5518572028895304,
+          "positive_observations": 9762,
+          "negative_observations": 99948
+        },
+        "relief_slope_side_contrast": {
+          "auc": 0.5726395462896806,
+          "direction_invariant_auc": 0.5726395462896806,
+          "positive_observations": 9797,
+          "negative_observations": 100000
+        },
+        "relief_transverse_concavity": {
+          "auc": 0.5039933556190671,
+          "direction_invariant_auc": 0.5039933556190671,
+          "positive_observations": 9797,
+          "negative_observations": 100000
+        },
+        "relief_contrast_x_concavity": {
+          "auc": 0.5100563800142901,
+          "direction_invariant_auc": 0.5100563800142901,
+          "positive_observations": 9797,
+          "negative_observations": 100000
+        },
+        "relief_tangent_support": {
+          "auc": 0.49969121516790843,
+          "direction_invariant_auc": 0.5003087848320915,
+          "positive_observations": 9797,
+          "negative_observations": 100000
+        }
+      }
+    },
+    {
+      "seed": 623,
+      "withheld_positives": 10885,
+      "hidden_group_count": 83,
+      "features": {
+        "mag_anom": {
+          "auc": 0.4480014434368476,
+          "direction_invariant_auc": 0.5519985565631524,
+          "positive_observations": 10854,
+          "negative_observations": 99947
+        },
+        "rtp": {
+          "auc": 0.5063910959596867,
+          "direction_invariant_auc": 0.5063910959596867,
+          "positive_observations": 10854,
+          "negative_observations": 99947
+        },
+        "tmi_hg": {
+          "auc": 0.5505181082070789,
+          "direction_invariant_auc": 0.5505181082070789,
+          "positive_observations": 10854,
+          "negative_observations": 99947
+        },
+        "geod_2ndinv": {
+          "auc": 0.5983407556659166,
+          "direction_invariant_auc": 0.5983407556659166,
+          "positive_observations": 10854,
+          "negative_observations": 99947
+        },
+        "iso_grav_anom_slope": {
+          "auc": 0.5190082492385051,
+          "direction_invariant_auc": 0.5190082492385051,
+          "positive_observations": 10854,
+          "negative_observations": 99947
+        },
+        "geod_shearrate": {
+          "auc": 0.6054564746660487,
+          "direction_invariant_auc": 0.6054564746660487,
+          "positive_observations": 10854,
+          "negative_observations": 99947
+        },
+        "geod_dilaterate": {
+          "auc": 0.5797641996618996,
+          "direction_invariant_auc": 0.5797641996618996,
+          "positive_observations": 10854,
+          "negative_observations": 99947
+        },
+        "tmi_vg": {
+          "auc": 0.48534457600099457,
+          "direction_invariant_auc": 0.5146554239990054,
+          "positive_observations": 10854,
+          "negative_observations": 99947
+        },
+        "deq_n100a15": {
+          "auc": 0.5929296327495805,
+          "direction_invariant_auc": 0.5929296327495805,
+          "positive_observations": 10854,
+          "negative_observations": 99947
+        },
+        "iso_grav_anom_vg": {
+          "auc": 0.5042823917424346,
+          "direction_invariant_auc": 0.5042823917424346,
+          "positive_observations": 10854,
+          "negative_observations": 99947
+        },
+        "det_elev": {
+          "auc": 0.5124295446330428,
+          "direction_invariant_auc": 0.5124295446330428,
+          "positive_observations": 10854,
+          "negative_observations": 99947
+        },
+        "iso_grav_anom": {
+          "auc": 0.4271778746992401,
+          "direction_invariant_auc": 0.5728221253007599,
+          "positive_observations": 10854,
+          "negative_observations": 99947
+        },
+        "tmi": {
+          "auc": 0.46794898311030225,
+          "direction_invariant_auc": 0.5320510168896977,
+          "positive_observations": 10854,
+          "negative_observations": 99947
+        },
+        "depth_to_base_surf": {
+          "auc": 0.5433447015475416,
+          "direction_invariant_auc": 0.5433447015475416,
+          "positive_observations": 10854,
+          "negative_observations": 99947
+        },
+        "ieq_n100a15": {
+          "auc": 0.5871074471201817,
+          "direction_invariant_auc": 0.5871074471201817,
+          "positive_observations": 10854,
+          "negative_observations": 99947
+        },
+        "cond_surf": {
+          "auc": 0.47027564649802445,
+          "direction_invariant_auc": 0.5297243535019756,
+          "positive_observations": 10854,
+          "negative_observations": 99947
+        },
+        "iso_grav_anom_hg": {
+          "auc": 0.5265060866449379,
+          "direction_invariant_auc": 0.5265060866449379,
+          "positive_observations": 10854,
+          "negative_observations": 99947
+        },
+        "det_elev_slope": {
+          "auc": 0.5818404433362028,
+          "direction_invariant_auc": 0.5818404433362028,
+          "positive_observations": 10854,
+          "negative_observations": 99947
+        },
+        "lidar_ex_max": {
+          "auc": 0.5832398409257327,
+          "direction_invariant_auc": 0.5832398409257327,
+          "positive_observations": 8292,
+          "negative_observations": 75300
+        },
+        "lidar_ex_mean": {
+          "auc": 0.5536343939245431,
+          "direction_invariant_auc": 0.5536343939245431,
+          "positive_observations": 8292,
+          "negative_observations": 75300
+        },
+        "lidar_step_max": {
+          "auc": 0.5861167206075202,
+          "direction_invariant_auc": 0.5861167206075202,
+          "positive_observations": 8292,
+          "negative_observations": 75300
+        },
+        "lidar_lapneg_max": {
+          "auc": 0.5848024784604947,
+          "direction_invariant_auc": 0.5848024784604947,
+          "positive_observations": 8292,
+          "negative_observations": 75300
+        },
+        "lidar_lappos_max": {
+          "auc": 0.5865744322917368,
+          "direction_invariant_auc": 0.5865744322917368,
+          "positive_observations": 8292,
+          "negative_observations": 75300
+        },
+        "lidar_downface_max": {
+          "auc": 0.6059957877126323,
+          "direction_invariant_auc": 0.6059957877126323,
+          "positive_observations": 8292,
+          "negative_observations": 75300
+        },
+        "lidar_upface_max": {
+          "auc": 0.6088640021038214,
+          "direction_invariant_auc": 0.6088640021038214,
+          "positive_observations": 8292,
+          "negative_observations": 75300
+        },
+        "lidar_cross_max": {
+          "auc": 0.585304986037519,
+          "direction_invariant_auc": 0.585304986037519,
+          "positive_observations": 8292,
+          "negative_observations": 75300
+        },
+        "lidar_relief": {
+          "auc": 0.590294603063866,
+          "direction_invariant_auc": 0.590294603063866,
+          "positive_observations": 8292,
+          "negative_observations": 75300
+        },
+        "lidar_coh100": {
+          "auc": 0.4853856114375109,
+          "direction_invariant_auc": 0.5146143885624891,
+          "positive_observations": 8292,
+          "negative_observations": 75300
+        },
+        "lidar_cos2strike": {
+          "auc": 0.48401828767899935,
+          "direction_invariant_auc": 0.5159817123210007,
+          "positive_observations": 8292,
+          "negative_observations": 75300
+        },
+        "lidar_sin2strike": {
+          "auc": 0.5005575423022494,
+          "direction_invariant_auc": 0.5005575423022494,
+          "positive_observations": 8292,
+          "negative_observations": 75300
+        },
+        "det_local_relief": {
+          "auc": 0.39496687805067365,
+          "direction_invariant_auc": 0.6050331219493263,
+          "positive_observations": 10854,
+          "negative_observations": 99947
+        },
+        "det_gradient": {
+          "auc": 0.5963002375780999,
+          "direction_invariant_auc": 0.5963002375780999,
+          "positive_observations": 10854,
+          "negative_observations": 99947
+        },
+        "relief_slope_side_contrast": {
+          "auc": 0.6200885792374826,
+          "direction_invariant_auc": 0.6200885792374826,
+          "positive_observations": 10885,
+          "negative_observations": 100000
+        },
+        "relief_transverse_concavity": {
+          "auc": 0.5130040252641249,
+          "direction_invariant_auc": 0.5130040252641249,
+          "positive_observations": 10885,
+          "negative_observations": 100000
+        },
+        "relief_contrast_x_concavity": {
+          "auc": 0.5269925062011944,
+          "direction_invariant_auc": 0.5269925062011944,
+          "positive_observations": 10885,
+          "negative_observations": 100000
+        },
+        "relief_tangent_support": {
+          "auc": 0.505364558566835,
+          "direction_invariant_auc": 0.505364558566835,
+          "positive_observations": 10885,
+          "negative_observations": 100000
+        }
+      }
+    },
+    {
+      "seed": 624,
+      "withheld_positives": 11640,
+      "hidden_group_count": 83,
+      "features": {
+        "mag_anom": {
+          "auc": 0.5442067983790222,
+          "direction_invariant_auc": 0.5442067983790222,
+          "positive_observations": 11623,
+          "negative_observations": 99958
+        },
+        "rtp": {
+          "auc": 0.5072455936956828,
+          "direction_invariant_auc": 0.5072455936956828,
+          "positive_observations": 11623,
+          "negative_observations": 99958
+        },
+        "tmi_hg": {
+          "auc": 0.5419437141832384,
+          "direction_invariant_auc": 0.5419437141832384,
+          "positive_observations": 11623,
+          "negative_observations": 99958
+        },
+        "geod_2ndinv": {
+          "auc": 0.5951011474204007,
+          "direction_invariant_auc": 0.5951011474204007,
+          "positive_observations": 11623,
+          "negative_observations": 99958
+        },
+        "iso_grav_anom_slope": {
+          "auc": 0.5649298998274792,
+          "direction_invariant_auc": 0.5649298998274792,
+          "positive_observations": 11623,
+          "negative_observations": 99958
+        },
+        "geod_shearrate": {
+          "auc": 0.589576009173272,
+          "direction_invariant_auc": 0.589576009173272,
+          "positive_observations": 11623,
+          "negative_observations": 99958
+        },
+        "geod_dilaterate": {
+          "auc": 0.5343877401923589,
+          "direction_invariant_auc": 0.5343877401923589,
+          "positive_observations": 11623,
+          "negative_observations": 99958
+        },
+        "tmi_vg": {
+          "auc": 0.49026593277065894,
+          "direction_invariant_auc": 0.5097340672293411,
+          "positive_observations": 11623,
+          "negative_observations": 99958
+        },
+        "deq_n100a15": {
+          "auc": 0.562203506957909,
+          "direction_invariant_auc": 0.562203506957909,
+          "positive_observations": 11623,
+          "negative_observations": 99958
+        },
+        "iso_grav_anom_vg": {
+          "auc": 0.5190741012025188,
+          "direction_invariant_auc": 0.5190741012025188,
+          "positive_observations": 11623,
+          "negative_observations": 99958
+        },
+        "det_elev": {
+          "auc": 0.5074453166570173,
+          "direction_invariant_auc": 0.5074453166570173,
+          "positive_observations": 11623,
+          "negative_observations": 99958
+        },
+        "iso_grav_anom": {
+          "auc": 0.48985140953556516,
+          "direction_invariant_auc": 0.5101485904644348,
+          "positive_observations": 11623,
+          "negative_observations": 99958
+        },
+        "tmi": {
+          "auc": 0.5322961136235078,
+          "direction_invariant_auc": 0.5322961136235078,
+          "positive_observations": 11623,
+          "negative_observations": 99958
+        },
+        "depth_to_base_surf": {
+          "auc": 0.4766198839561828,
+          "direction_invariant_auc": 0.5233801160438172,
+          "positive_observations": 11623,
+          "negative_observations": 99958
+        },
+        "ieq_n100a15": {
+          "auc": 0.5933358189567209,
+          "direction_invariant_auc": 0.5933358189567209,
+          "positive_observations": 11623,
+          "negative_observations": 99958
+        },
+        "cond_surf": {
+          "auc": 0.45703768928902133,
+          "direction_invariant_auc": 0.5429623107109787,
+          "positive_observations": 11623,
+          "negative_observations": 99958
+        },
+        "iso_grav_anom_hg": {
+          "auc": 0.5148445634613841,
+          "direction_invariant_auc": 0.5148445634613841,
+          "positive_observations": 11623,
+          "negative_observations": 99958
+        },
+        "det_elev_slope": {
+          "auc": 0.598763077326341,
+          "direction_invariant_auc": 0.598763077326341,
+          "positive_observations": 11623,
+          "negative_observations": 99958
+        },
+        "lidar_ex_max": {
+          "auc": 0.6246266820734973,
+          "direction_invariant_auc": 0.6246266820734973,
+          "positive_observations": 9351,
+          "negative_observations": 75296
+        },
+        "lidar_ex_mean": {
+          "auc": 0.6110862685085235,
+          "direction_invariant_auc": 0.6110862685085235,
+          "positive_observations": 9351,
+          "negative_observations": 75296
+        },
+        "lidar_step_max": {
+          "auc": 0.6205352588872024,
+          "direction_invariant_auc": 0.6205352588872024,
+          "positive_observations": 9351,
+          "negative_observations": 75296
+        },
+        "lidar_lapneg_max": {
+          "auc": 0.6273954765196211,
+          "direction_invariant_auc": 0.6273954765196211,
+          "positive_observations": 9351,
+          "negative_observations": 75296
+        },
+        "lidar_lappos_max": {
+          "auc": 0.6337196043801584,
+          "direction_invariant_auc": 0.6337196043801584,
+          "positive_observations": 9351,
+          "negative_observations": 75296
+        },
+        "lidar_downface_max": {
+          "auc": 0.6277129161661078,
+          "direction_invariant_auc": 0.6277129161661078,
+          "positive_observations": 9351,
+          "negative_observations": 75296
+        },
+        "lidar_upface_max": {
+          "auc": 0.6359372705558444,
+          "direction_invariant_auc": 0.6359372705558444,
+          "positive_observations": 9351,
+          "negative_observations": 75296
+        },
+        "lidar_cross_max": {
+          "auc": 0.6243969524441843,
+          "direction_invariant_auc": 0.6243969524441843,
+          "positive_observations": 9351,
+          "negative_observations": 75296
+        },
+        "lidar_relief": {
+          "auc": 0.6057186330424217,
+          "direction_invariant_auc": 0.6057186330424217,
+          "positive_observations": 9351,
+          "negative_observations": 75296
+        },
+        "lidar_coh100": {
+          "auc": 0.4842790779982532,
+          "direction_invariant_auc": 0.5157209220017468,
+          "positive_observations": 9351,
+          "negative_observations": 75296
+        },
+        "lidar_cos2strike": {
+          "auc": 0.486863290976877,
+          "direction_invariant_auc": 0.513136709023123,
+          "positive_observations": 9351,
+          "negative_observations": 75296
+        },
+        "lidar_sin2strike": {
+          "auc": 0.48609043770269766,
+          "direction_invariant_auc": 0.5139095622973023,
+          "positive_observations": 9351,
+          "negative_observations": 75296
+        },
+        "det_local_relief": {
+          "auc": 0.3984308159491513,
+          "direction_invariant_auc": 0.6015691840508487,
+          "positive_observations": 11623,
+          "negative_observations": 99958
+        },
+        "det_gradient": {
+          "auc": 0.6149116213082058,
+          "direction_invariant_auc": 0.6149116213082058,
+          "positive_observations": 11623,
+          "negative_observations": 99958
+        },
+        "relief_slope_side_contrast": {
+          "auc": 0.6249012933848797,
+          "direction_invariant_auc": 0.6249012933848797,
+          "positive_observations": 11640,
+          "negative_observations": 100000
+        },
+        "relief_transverse_concavity": {
+          "auc": 0.500560553694158,
+          "direction_invariant_auc": 0.500560553694158,
+          "positive_observations": 11640,
+          "negative_observations": 100000
+        },
+        "relief_contrast_x_concavity": {
+          "auc": 0.5218277637457045,
+          "direction_invariant_auc": 0.5218277637457045,
+          "positive_observations": 11640,
+          "negative_observations": 100000
+        },
+        "relief_tangent_support": {
+          "auc": 0.5144430919243985,
+          "direction_invariant_auc": 0.5144430919243985,
+          "positive_observations": 11640,
+          "negative_observations": 100000
+        }
+      }
+    }
+  ]
+}
