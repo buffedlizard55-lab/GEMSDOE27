@@ -1,5 +1,18 @@
 # GEMSDOE27: fault-discovery research and submission audit
 
+## Project charter — read at the start of every session
+
+This repository is an auditable research system for the DOE GEMS fault-discovery competition. The objective is to discover **previously unmapped faults** using defensible geology and free, official data—not to recreate, rename, or lightly re-thin a prior submission. A high leaderboard result is an objective, not evidence that an unvalidated raster will score well.
+
+1. **Unique submission only.** A raster can be considered only when both its pre-placement surface and final dots clear the pinned duplicate stops: absolute surface rank correlation ≤0.90 and directed 3-pixel dot overlap ≤70% against every available registry raster. Passing this check proves uniqueness only within its recorded scope; it is not organizer acceptance or slot authorization.
+2. **Holdout before a slot.** Pre-register the hypothesis and fresh seeds; derive catalogue-based features only from visible faults; hide whole fault segments with a buffer; pixel-mask visible faults; then report paired **HOLDOUT-DTI** (α=0.2, β=0.8, 300 m triangular kernel), withheld-positive count, and 95% CI. A leakage-canary AUC above 0.90 is a stop. A model projection is never called a score.
+3. **Technical validation without a human gate.** Every emitted GeoTIFF needs an automated re-read showing: single-band float32, same CRS/shape/transform as the template, finite in-footprint values in [0,1], no unintended catalogue dots, content hash, and an all-finite zero-outside fallback. `scripts/verify_downloads.py` and the shared writer are the technical gates; use the all-finite variant if a strict portal range check rejects NaN-outside data.
+4. **Evidence labels are mandatory.** Use `HOLDOUT-DTI` for local measurements and `ORGANIZER-CONFIRMED` only for a submission-page receipt. Historical scores in this repo are owner-reported unless explicitly marked otherwise. Never turn either into a projected leaderboard score.
+5. **No automated DrivenData access or uploads.** The project may link a human to the portal, but it does not scrape the site or upload submissions. A separate selector must authorize any weekly slot after all evidence gates pass.
+6. **Research constraints.** Work in one registered lane, stop after three experiments or two hours, preserve negative results, document a named non-fault mimic, and record data/provenance irregularities. Use official, free sources where available; this sandbox cannot authenticate to DrivenData or independently retrieve all third-party packages.
+
+**Core values:** *Maximize P(Win)* and *Own the Outcome* mean closing evidence gaps, reporting limits, and refusing weak submissions—not overstating confidence.
+
 **DO NOT SUBMIT — no file is currently approved or authorized for a weekly slot.** The user reports that H31-1 content ID `cf8e1bbef244` was already submitted and received **0.2250 OWNER-REPORTED**. There is no organizer receipt in this repository. Do not upload, rename or re-thin that raster as a new submission. A valid GeoTIFF and a local holdout pass are not slot authorization.
 
 **Generated unique TIFF: NOT OK TO SUBMIT.** `docs/downloads/research/gems27-h33-bss-complement-20261027-9ba8480691ed-allfinite.tif` (sha256 `1373358188a96b20414834b3e0159065d87470fe695153262ced7b46bc1eb492`; name `27GEMSDOE-H33-BSS-20261027-9ba8480691ed`). HOLDOUT-DTI **0.025211** versus base-32 **0.041446** on seeds 520–529 (134,150 withheld-positive occurrences; paired 95% CI [−0.017576, −0.014449]; 0/10 seeds). That is not a leaderboard score. It is unique versus the 12 pinned focus-site rasters (3 px overlap 0.000 by the complement constraint) and format-valid. Uniqueness is not authorization. Note (92/140): `H33-1 buried-step complement B2 37654px HOLDOUT-DTI 0.0252 | id 9ba8480691ed | DO NOT SUBMIT`. Write-up: `knowledge/31_h33_result_2026-10-27.md`.
@@ -47,7 +60,7 @@ python scripts/audit_submission_readiness.py
 python scripts/build_site.py
 python scripts/verify_downloads.py
 ruff check src scripts tests
-pytest -q
+python -m pytest -q
 ```
 
 `build_site.py` regenerates the public HTML and `EXECUTIVE_SUMMARY.md` from recorded evidence without network access. `verify_downloads.py` checks historical raster format and consistency; it does **not** grant permission to submit. The shared raster writer supports an all-finite, zero-outside variant to avoid NaN-related `[0, 1]` rejections; passing local checks does not guarantee acceptance by the organizer.
