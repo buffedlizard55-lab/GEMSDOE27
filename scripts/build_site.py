@@ -47,7 +47,8 @@ def layout(fname: str, title: str, body: str, stamp: str, approved_name: str | N
 <main><div class="card"><b>Automatic submission evidence audit (zero human intervention):</b>
 <a href="data/submission_readiness_audit.json">Read byte-bound gate decisions and blockers</a> &middot;
 <a href="how-to-submit.html">How to submit to DrivenData #306</a>.
-<a href="../knowledge/28_submission_readiness_audit_2026-10-26.md">Latest executive audit and limitations</a>.<br>
+<a href="../knowledge/30_session13_repo_review_2026-10-27.md">Current repository review (2026-10-27)</a> &middot;
+<a href="../knowledge/28_submission_readiness_audit_2026-10-26.md">9-site executive audit and limitations</a>.<br>
 <strong>NOT AUTHORIZED FOR A WEEKLY SLOT:</strong> evidence PASS is not selector approval.
 The current weekly cap and registry must be checked in a separate selector step before upload.
 H31-3 is a completed negative research lane; this audit emits no new eligible candidate.
@@ -1038,7 +1039,7 @@ The agent never uploads anything; you press the button.</div>
 
 <div class="card"><h2 style="margin-top:0">Estimated live score — PROJECTION, never a score (Protocol &sect;3)</h2>
 <table><tr><th>File to download</th><th>Label</th><th class="num">Score / estimate</th><th>Unique vs 9 focus sites?</th><th>Action</th></tr>
-<tr><td><code>docs/downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif</code></td><td>PROJECTION (anchor-transfer model)</td><td class="num"><b>~0.235</b> (planning range 0.19&ndash;0.26)</td><td><b>YES</b> — max 57.7% 3-px overlap vs 12 peers (50.2% vs GEMSDOE32), Spearman &le;0.17</td><td><b>DOWNLOAD &amp; SUBMIT THIS ONE</b></td></tr>
+<tr><td><code>docs/downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif</code></td><td>PROJECTION (anchor-transfer model)</td><td class="num"><b>~0.235</b> (planning range 0.19&ndash;0.26)</td><td><b>YES</b> — max 57.7% 3-px overlap vs 12 peers (50.2% vs GEMSDOE32), Spearman &le;0.17</td><td><b>DOWNLOAD — SELECTOR REQUIRED</b></td></tr>
 <tr><td>GEMSDOE32 <code>h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros</code></td><td>OWNER-REPORTED live</td><td class="num">0.2778</td><td>NO — already submitted; re-upload is a duplicate</td><td>DO NOT SUBMIT</td></tr>
 <tr><td>GEMSDOE36 Anderson-PINN 38854</td><td>OWNER-REPORTED live</td><td class="num">0.2750</td><td>NO — already submitted</td><td>DO NOT SUBMIT</td></tr>
 <tr><td>GEMSDOE28 rung30 / GEMSDOE31 h27-4-solo</td><td>OWNER-REPORTED live</td><td class="num">0.2710 / 0.2708</td><td>NO — already submitted, 91&ndash;100% clone family</td><td>DO NOT SUBMIT</td></tr>
