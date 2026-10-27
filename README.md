@@ -14,6 +14,16 @@ Operating prompt for later sessions: read this section first, then `knowledge/30
 - [Owner-reported submitted-raster ledger](registry/submitted_rasters.json) · [Submission readiness audit](docs/data/submission_readiness_audit.json)
 - Earlier parallel audits: [Session 12](knowledge/30_session12_repo_review_2026-10-27.md) · [Session 13](knowledge/30_session13_repo_review_2026-10-27.md); later evidence here supersedes their then-current status.
 
+## Standing task brief — read at every session start
+
+The request is to maximize the probability of a genuinely new, high-performing fault-prediction GeoTIFF, not merely produce a different filename. Focus on GEMSDOE24/25/27/28/30/31/32/33/36; keep their historical file-linked executive table and submission instructions prominent. Preserve Maximize P(Win) and Own the Outcome without overstating evidence.
+
+Before implementation, rank 3–5 geological hypotheses with layers, physical signature, missing-fault rationale, non-fault mimics, novelty limits and cost. Respect the assigned single-method parallel lane, cached stack and shared evaluator/writer; do not invent an omitted lane. Stop at three experiments or two hours. Use whole-segment buffered visible-only hide-and-recover, pixel-exact known-fault masking, feature-alone leakage canaries, pooled triangular 300 m DTI and paired uncertainty. Require a matched current-best holdout win and complete pre/post-placement duplicate checks before any separate selector decision. No automatic portal upload or weekly-slot use.
+
+Every generated candidate needs a content-hashed TIFF/name, a note of at most 140 characters, byte-bound validation of band count, [0,1], finiteness and exact grid, and an unmistakable **OK / NOT OK TO SUBMIT** decision. Format validity and uniqueness alone never imply scientific merit. Label holdout results with evaluator/count/CI; only a receipt establishes ORGANIZER-CONFIRMED status. Keep historical owner reports explicitly distinct, never turn a projection into a score, and leave unknown estimates unknown. Audit official-source provenance honestly; blocked sources are not verified sources. Run three passes (implementation, defects/edge cases, requirement re-check), tests and lint, then record limitations and next steps. Negative results are deliverables. This is a consolidated operating brief, not a verbatim archival copy of the long request.
+
+Latest audit: [Session 14 review and three-pass verification](knowledge/32_session14_review_2026-10-27.md). The readiness audit now includes H33-1; malformed cards fail closed and cannot suppress other audit results. **No new candidate was promoted.**
+
 ## What is established and what is not
 
 Historical values are **OWNER-REPORTED**, not ORGANIZER-CONFIRMED; the association between some values and files conflicts across sibling evidence. The historical GEMSDOE32 value of 0.2778 is not a forecast. Its measured dot set is the GEMSDOE25 d=2.8 dots minus a 2-pixel catalogue collar. Spacing and collar exclusion are plausible ways to reduce redundant or low-yield DTI mass, but the hidden truth and a receipt are unavailable: geometry does not prove the reported score's cause. We do not know whether any untested method will exceed it.

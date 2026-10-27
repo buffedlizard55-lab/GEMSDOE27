@@ -136,6 +136,49 @@ def test_canary_checks_both_directions_without_arbitrary_floor(tmp_path, value):
     assert decision["slot_authorized"] is False
 
 
+@pytest.mark.parametrize("card", [None, [], True, "promote", 1])
+def test_non_object_card_fails_closed(tmp_path, card):
+    decision = publication_decision(card, tmp_path)
+    assert not decision["ok_to_publish_as_submission"]
+    assert "run card must be a JSON object" in decision["reasons"]
+    assert decision["slot_authorized"] is False
+
+
+@pytest.mark.parametrize("field", ["paired_delta_ci95", "pooled_delta", "baseline_ci"])
+def test_impossible_dti_improvement_is_rejected(tmp_path, field):
+    card = valid_card(tmp_path)
+    comparison = card["holdout"]["current_best_comparison"]
+    if field == "baseline_ci":
+        card["holdout"]["paired_D_minus_B"]["ci95"] = [0.1, 1.01]
+    elif field == "pooled_delta":
+        comparison[field] = 1.01
+    else:
+        comparison[field] = [0.1, 1.01]
+    assert not publication_decision(card, tmp_path)["ok_to_publish_as_submission"]
+
+
+def test_audit_keeps_other_cards_when_evidence_is_malformed(tmp_path):
+    import importlib.util
+
+    script = Path(__file__).resolve().parents[1] / "scripts/audit_submission_readiness.py"
+    spec = importlib.util.spec_from_file_location("audit_readiness", script)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    evidence = tmp_path / "evidence"
+    evidence.mkdir()
+    (evidence / "broken_run_card.json").write_text('{"verdict":')
+    (evidence / "null_run_card.json").write_text('null')
+    (evidence / "valid_run_card.json").write_text(json.dumps(valid_card(tmp_path)))
+    report = module.audit_cards(tmp_path)
+    assert len(report["results"]) == 3
+    assert report["evidence_passed_not_slot_authorized"] == ["valid_run_card.json"]
+    assert report["slot_authorized"] == []
+    assert report["results"]["broken_run_card.json"]["reasons"] == [
+        "unreadable run card: JSONDecodeError"
+    ]
+    assert not report["results"]["null_run_card.json"]["ok_to_publish_as_submission"]
+
+
 @pytest.mark.parametrize("bad_value", [float("nan"), float("inf"), -0.01, 1.01])
 def test_self_reported_checks_cannot_hide_invalid_pixels(tmp_path, bad_value):
     card = valid_card(tmp_path)

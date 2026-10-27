@@ -24,4 +24,4 @@ jobs:
       - name: Site builds from JSON only and is unchanged
         run: |
           python scripts/build_site.py
-          git diff --stat -- docs knowledge | tail -5
+          git diff --exit-code -- docs index.html EXECUTIVE_SUMMARY.md

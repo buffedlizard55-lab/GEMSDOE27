@@ -640,6 +640,36 @@
       "independent_byte_validation": null,
       "slot_authorized": false,
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
+    },
+    "session14_run_card_20261027.json": {
+      "ok_to_publish_as_submission": false,
+      "reasons": [
+        "run card does not authorize submission",
+        "verdict is not promote",
+        "efficacy gate not explicitly passed",
+        "whole-FID split evidence missing",
+        "visible-only catalogue features not proven",
+        "hidden-segment training buffer not proven",
+        "blind emission not proven",
+        "full 300m scoring kernel not proven",
+        "not all input features have canaries",
+        "current-best matched control not proven",
+        "paired improvement CI missing or does not exclude zero",
+        "post-placement correlation missing or exceeds threshold",
+        "complete pre- and post-placement registry screen not proven",
+        "current, complete comparison scope not proven"
+      ],
+      "actual_sha256": "1373358188a96b20414834b3e0159065d87470fe695153262ced7b46bc1eb492",
+      "independent_byte_validation": {
+        "pass": true,
+        "checks": {
+          "grid": true,
+          "single_band_float32_geotiff": true,
+          "whole_array_finite_in_0_1": true
+        }
+      },
+      "slot_authorized": false,
+      "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     }
   }
 }
