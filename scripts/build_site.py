@@ -224,11 +224,28 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
               'architecture, strengthen geographic blocking and resolve incomplete registry coverage. Only then may '
               'a separate selector consider a weekly slot. Actual organizer outcome, weekly capacity and '
               'score-to-file receipts are not known here. No portal upload was made.</p>')
+    candidate_file = 'downloads/research/gems27-h33-bss-complement-20261027-9ba8480691ed-allfinite.tif'
+    candidate_download = f'<a href="{candidate_file}" download>H33-1 all-finite GeoTIFF</a>'
+    decision_table = f'''<h2>Download and submission decision</h2>
+<p>This is the decision table for files produced by this repository. An empty “estimated organizer score” is intentional: no local HOLDOUT-DTI can be converted honestly into an organizer score.</p>
+<div class="tw"><table><thead><tr><th>File to download</th><th>Local evidence / estimated organizer score</th><th>Unique?</th><th>May be submitted?</th></tr></thead><tbody>
+<tr><td>{candidate_download}<br><span class="small">SHA-256 1373358188a96b20414834b3e0159065d87470fe695153262ced7b46bc1eb492</span></td><td><b>HOLDOUT-DTI 0.025211</b> vs control 0.041446; paired 95% CI [−0.017576, −0.014449]. <b>No justified organizer-score estimate.</b></td><td>Yes versus the 12 pinned focus-site rasters only (max 3 px overlap 0.000; scope-limited).</td><td><b>No — frozen holdout gate failed.</b></td></tr>
+<tr><td>No currently approved file</td><td>No estimate</td><td>Not applicable</td><td><b>No — selector authorization is absent.</b></td></tr>
+</tbody></table></div>'''
+    decision_table_md = f'''## Download and submission decision
+
+| File to download | Local evidence / estimated organizer score | Unique? | May be submitted? |
+|---|---|---|---|
+| [`H33-1 all-finite GeoTIFF`]({candidate_file}) (SHA-256 `1373358188a96b20414834b3e0159065d87470fe695153262ced7b46bc1eb492`) | HOLDOUT-DTI 0.025211 vs control 0.041446; paired 95% CI [−0.017576, −0.014449]. **No justified organizer-score estimate.** | Yes vs the 12 pinned focus-site rasters only (max 3 px overlap 0.000; scope-limited). | **No — frozen holdout gate failed.** |
+| No currently approved file | No estimate | Not applicable | **No — selector authorization is absent.** |
+
+'''
     home = f"""
 <h1>GEMSDOE27 research and submission status</h1>
 <p class="lead">A transparent audit of nine sites, one pre-registered geological proxy, and the gates between research and a competition submission.</p>
 {important}
 {h33_html}
+{decision_table}
 {lane_html}
 <h2>Executive snapshot</h2>
 <p>The highest owner-reported historical value in the selected nine-site registry is GEMSDOE32's 0.2778, not an independently verified score. No new projected live score is supplied.</p>
@@ -238,7 +255,7 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
     executive = f"""
 <h1>Executive summary · nine focus sites</h1>
 <p class="lead">Historical file provenance, reported values, uniqueness and what can safely be submitted.</p>
-{important}{h33_html}{lane_html}
+{important}{h33_html}{decision_table}{lane_html}
 <h2>Best reported historical submission per site</h2>
 {history_notice}{table}<p class="small">{esc(other_reports)}</p>
 {g32}
@@ -306,7 +323,7 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
 
 ## New result and estimate
 
-{h33_md}
+{decision_table_md}{h33_md}
 
 {lane_md}
 

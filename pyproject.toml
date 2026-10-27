@@ -6,7 +6,9 @@ requires-python = ">=3.11"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-pythonpath = ["src"]
+# Include the repository root so test imports of helper scripts work whether tests
+# are invoked as `pytest` or `python -m pytest`.
+pythonpath = ["src", "."]
 
 [tool.ruff]
 line-length = 100

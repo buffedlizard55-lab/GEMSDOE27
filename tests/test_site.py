@@ -89,6 +89,19 @@ def test_research_and_manual_instructions_are_explicit():
     assert "no approved new TIFF" in how
 
 
+def test_executive_download_decision_table_is_explicit_and_fail_closed():
+    expected = (
+        "Download and submission decision",
+        "No justified organizer-score estimate.",
+        "No currently approved file",
+        "frozen holdout gate failed.",
+    )
+    for path in (DOCS / "index.html", DOCS / "executive-summary.html",
+                 ROOT / "EXECUTIVE_SUMMARY.md"):
+        text = path.read_text()
+        assert all(item in text for item in expected), path
+
+
 def test_generated_h33_tiff_is_shown_and_not_approved():
     name = "gems27-h33-bss-complement-20261027-9ba8480691ed-allfinite.tif"
     for page in ("index.html", "executive-summary.html", "how-to-submit.html"):
