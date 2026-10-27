@@ -373,6 +373,54 @@ def main() -> int:
            and rc32["holdout"]["gate_efficacy_pass"] is False,
            "h32/gate-consistency: verdict=negative ok_to_submit=False (DO NOT SUBMIT)")
 
+    # Session 12 H33-1, H33-2, H33-3 research archives (all fail-closed in docs/downloads/research/)
+    edt_cat = distance_transform_edt(~cat)
+    for tag33, rc_name33 in [
+        ("h33_1", "h33_s12_run_card_2026-10-26.json"),
+        ("h33_2", "h33_2_s12_run_card_2026-10-26.json"),
+        ("h33_3", "h33_3_s12_run_card_2026-10-26.json"),
+    ]:
+        rc33_p = ROOT / "evidence" / rc_name33
+        if not rc33_p.exists():
+            continue
+        rc33 = json.loads(rc33_p.read_text())
+        r33 = rc33["raster"]
+        d33 = ROOT / r33["directory"]
+        for variant, fname in [("allfinite", r33["primary_allfinite"]), ("nan", r33["companion_nan"])]:
+            p33 = d33 / fname
+            with rasterio.open(p33) as s33:
+                a33 = s33.read(1)
+                prof33 = (s33.crs.to_epsg(), s33.shape, tuple(s33.transform)[:6], s33.dtypes[0])
+                nd33, cnt33 = s33.nodata, s33.count
+            t33 = f"{tag33}/{variant}"
+            ok(prof33 == tprof, f"{t33}: same CRS/shape/transform/dtype as template")
+            ok(cnt33 == 1, f"{t33}: single band")
+            in33, out33 = a33[foot], a33[~foot]
+            ok(bool(np.isfinite(in33).all()), f"{t33}: every in-footprint value finite")
+            ok(float(in33.min()) >= 0.0 and float(in33.max()) <= 1.0, f"{t33}: in-footprint range in [0,1]")
+            ok(set(np.unique(in33).tolist()) <= {0.0, 1.0}, f"{t33}: exact binary")
+            ok(int((in33 == 1.0).sum()) == r33["dots"], f"{t33}: emitted {r33['dots']} dots")
+            ok(not bool((a33 == 1.0)[cat].any()), f"{t33}: 0 catalogue overlap")
+            ok(bool((edt_cat[a33 == 1.0] > 2.0).all()), f"{t33}: strict B2 collar > 2.0 px")
+            if variant == "allfinite":
+                ok(bool(np.isfinite(a33).all() and (out33 == 0.0).all() and nd33 is None),
+                   f"{t33}: all cells finite in [0,1], zeros outside, nodata=None")
+                ok(sha(p33) == r33["sha256"], f"{t33}: sha256 matches {rc_name33}")
+            else:
+                ok(int(np.isnan(out33).sum()) == out33.size and nd33 is not None and np.isnan(nd33),
+                   f"{t33}: NaN outside footprint, nodata=NaN")
+        z33 = d33 / r33["zip"]
+        with zipfile.ZipFile(z33) as zf:
+            ok(zf.namelist() == [r33["primary_allfinite"]]
+               and zf.read(r33["primary_allfinite"]) == (d33 / r33["primary_allfinite"]).read_bytes(),
+               f"{tag33}/zip: holds exactly the single allfinite GeoTIFF, byte-identical")
+        note33 = (d33 / f"note-{r33['primary_allfinite'][:-len('-allfinite.tif')]}-allfinite.txt").read_text().strip()
+        ok(len(note33) <= 140 and note33 == rc33["note_max_140_chars"],
+           f"{tag33}/note: {len(note33)} chars (<= 140) and matches run card")
+        ok(rc33["verdict"] == "negative" and rc33["ok_to_submit"] is False
+           and r33["directory"] == "docs/downloads/research",
+           f"{tag33}/gate-consistency: verdict=negative ok_to_submit=False in docs/downloads/research")
+
     print(f"\n{len(FAIL)} failure(s)")
     return 1 if FAIL else 0
 

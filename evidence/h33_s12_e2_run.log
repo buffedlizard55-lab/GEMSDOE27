@@ -1,0 +1,37 @@
+fitting baseline OOF arm B0...
+  finished B0 in 72.3s
+fitting baseline OOF arm D0...
+  finished D0 in 96.4s
+fitting H29-S control Quadrant OOF...
+  finished H29-S control Quadrant OOF in 532.6s
+fitting H31-S control Quadrant OOF (current holdout best)...
+    stage1 pair (0,1) done
+    stage1 pair (0,2) done
+    stage1 pair (0,3) done
+    stage1 pair (1,2) done
+    stage1 pair (1,3) done
+    stage1 pair (2,3) done
+    stage2 fold 0 done
+    stage2 fold 1 done
+    stage2 fold 2 done
+    stage2 fold 3 done
+  finished H31-S control Quadrant OOF in 1353.2s
+seed 600 (84.4s) buffered pooled: U0=0.0157 B0=0.0412 D0=0.0458 H29-S=0.0496 H31-S=0.0482 H33-A=0.0453 H33-S=0.0508
+seed 601 (85.1s) buffered pooled: U0=0.0127 B0=0.0361 D0=0.0396 H29-S=0.0410 H31-S=0.0419 H33-A=0.0462 H33-S=0.0492
+seed 602 (87.5s) buffered pooled: U0=0.0171 B0=0.0376 D0=0.0393 H29-S=0.0426 H31-S=0.0429 H33-A=0.0443 H33-S=0.0444
+seed 603 (86.4s) buffered pooled: U0=0.0130 B0=0.0406 D0=0.0378 H29-S=0.0437 H31-S=0.0403 H33-A=0.0484 H33-S=0.0472
+seed 604 (85.9s) buffered pooled: U0=0.0146 B0=0.0372 D0=0.0385 H29-S=0.0417 H31-S=0.0437 H33-A=0.0405 H33-S=0.0468
+seed 605 (87.9s) buffered pooled: U0=0.0132 B0=0.0414 D0=0.0432 H29-S=0.0462 H31-S=0.0475 H33-A=0.0493 H33-S=0.0506
+seed 606 (88.0s) buffered pooled: U0=0.0149 B0=0.0439 D0=0.0437 H29-S=0.0499 H31-S=0.0552 H33-A=0.0496 H33-S=0.0564
+seed 607 (88.2s) buffered pooled: U0=0.0143 B0=0.0416 D0=0.0424 H29-S=0.0444 H31-S=0.0467 H33-A=0.0504 H33-S=0.0498
+seed 608 (86.7s) buffered pooled: U0=0.0136 B0=0.0346 D0=0.0376 H29-S=0.0460 H31-S=0.0476 H33-A=0.0468 H33-S=0.0474
+seed 609 (85.9s) buffered pooled: U0=0.0152 B0=0.0425 D0=0.0436 H29-S=0.0522 H31-S=0.0523 H33-A=0.0496 H33-S=0.0531
+POOLED BUFFERED HOLDOUT-DTI: {"U0": 0.014412, "B0": 0.039701, "D0": 0.041149, "H29-S": 0.045708, "H31-S": 0.046622, "H33-A": 0.047109, "H33-S": 0.04959}
+POOLED UNBUFFERED DIAGNOSTIC: {"U0": 0.045213, "B0": 0.094576, "D0": 0.098334, "H29-S": 0.108063, "H31-S": 0.114296, "H33-A": 0.11161, "H33-S": 0.120218}
+PER-FOLD BUFFERED: {"NW": {"U0": 0.013181, "B0": 0.03378, "D0": 0.037096, "H29-S": 0.040648, "H31-S": 0.039304, "H33-A": 0.042471, "H33-S": 0.046698}, "NE_LidarGapHeavy": {"U0": 0.013103, "B0": 0.052748, "D0": 0.052873, "H29-S": 0.060779, "H31-S": 0.061533, "H33-A": 0.055138, "H33-S": 0.065836}, "SW": {"U0": 0.013476, "B0": 0.024961, "D0": 0.024371, "H29-S": 0.028968, "H31-S": 0.027622, "H33-A": 0.033082, "H33-S": 0.031518}, "SE": {"U0": 0.017468, "B0": 0.049272, "D0": 0.052824, "H29-S": 0.055269, "H31-S": 0.060441, "H33-A": 0.059271, "H33-S": 0.058091}}
+VS B0: {"pooled_delta_dti": 0.009889, "mean_delta": 0.009899, "mean_seed_paired_delta_dti": 0.009899, "ci95": [0.008517, 0.011271], "seed_bootstrap_95_ci": [0.008517, 0.011271], "positive_seeds": 10, "n_seeds": 10, "positive_folds": 4, "n_folds": 4, "per_fold_pooled_delta_dti": {"NW": 0.012918, "NE_LidarGapHeavy": 0.013088, "SW": 0.006556, "SE": 0.008818}, "positive_cells": 37, "n_cells": 40}
+VS D0: {"pooled_delta_dti": 0.008441, "mean_delta": 0.008415, "mean_seed_paired_delta_dti": 0.008415, "ci95": [0.007041, 0.009756], "seed_bootstrap_95_ci": [0.007041, 0.009756], "positive_seeds": 10, "n_seeds": 10, "positive_folds": 4, "n_folds": 4, "per_fold_pooled_delta_dti": {"NW": 0.009602, "NE_LidarGapHeavy": 0.012963, "SW": 0.007147, "SE": 0.005266}, "positive_cells": 36, "n_cells": 40}
+VS H29-S: {"pooled_delta_dti": 0.003882, "mean_delta": 0.00384, "mean_seed_paired_delta_dti": 0.00384, "ci95": [0.002399, 0.005325], "seed_bootstrap_95_ci": [0.002399, 0.005325], "positive_seeds": 10, "n_seeds": 10, "positive_folds": 4, "n_folds": 4, "per_fold_pooled_delta_dti": {"NW": 0.00605, "NE_LidarGapHeavy": 0.005057, "SW": 0.00255, "SE": 0.002821}, "positive_cells": 29, "n_cells": 40}
+VS H31-S: {"pooled_delta_dti": 0.002968, "mean_delta": 0.002927, "mean_seed_paired_delta_dti": 0.002927, "ci95": [0.001592, 0.004441], "seed_bootstrap_95_ci": [0.001592, 0.004441], "positive_seeds": 9, "n_seeds": 10, "positive_folds": 3, "n_folds": 4, "per_fold_pooled_delta_dti": {"NW": 0.007394, "NE_LidarGapHeavy": 0.004303, "SW": 0.003896, "SE": -0.00235}, "positive_cells": 31, "n_cells": 40}
+GATE CLAUSES: {"a_pooled_beats_all_including_H31S": true, "b_paired_mean_gain_thresholds": true, "c_ci95_and_seed_consistency": true, "d_quadrant_and_western_graben_gain": true, "e_e1_canary_and_uniqueness_pass": true}
+E2 PASS=True | wrote /home/user/GEMSDOE27/evidence/h33_s12_e2_holdout_600_609.json

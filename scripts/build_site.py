@@ -770,7 +770,64 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
             f'<code>knowledge/27</code> in the repository; machine receipts in '
             f'<code>evidence/session11_reaudit.json</code> and <code>evidence/h32_e2_holdout_500_509.json</code>.</p></div>'
         )
-    parallel_s10_box = s11_box + parallel_s10_box
+    # ---- Session 12 (Lanes L-S12 / L-S12B / L-S12C): 3-Experiment H33 Ablation Ledger ----
+    s12_box = ""
+    s12_research_section = ""
+    h33_1_p = EV / "h33_s12_run_card_2026-10-26.json"
+    h33_2_p = EV / "h33_2_s12_run_card_2026-10-26.json"
+    h33_3_p = EV / "h33_3_s12_run_card_2026-10-26.json"
+    if h33_1_p.exists() and h33_2_p.exists() and h33_3_p.exists():
+        c33_1, c33_2, c33_3 = J(h33_1_p), J(h33_2_p), J(h33_3_p)
+        h1, h2, h3 = c33_1["holdout"], c33_2["holdout"], c33_3["holdout"]
+        u1, u2, u3 = c33_1["uniqueness_vs_registry"], c33_2["uniqueness_vs_registry"], c33_3["uniqueness_vs_registry"]
+        d1 = h1["paired_candidate_minus_H31S"]
+        d2 = h2["paired_candidate_minus_H31S"]
+        d3 = h3["paired_candidate_minus_H31S"]
+        s12_rows = (
+            f"<tr><td><b>Exp 1: <code>H33-1</code></b> (<code>{e(c33_1['raster']['content_id'])}</code>)</td>"
+            f"<td><code>600&ndash;609</code> ({h1['n_withheld_positives_total']:,})</td>"
+            f"<td class='num'><b>{h1['pooled_dti_H33S_candidate']:.6f}</b> (vs H31-S {h1['pooled_dti_H31S_prior_best']:.6f})</td>"
+            f"<td class='num'><b>{d1['pooled_delta_dti']:+.6f}</b> [{d1['ci95'][0]:+.4f}, {d1['ci95'][1]:+.4f}] ({d1['positive_seeds']}/10)</td>"
+            f"<td class='num'>{u1['max_dot_overlap_vs_12_peers']:.1%} / <b>{u1['dot_overlap_vs_h31_cf8e1bbef244']:.2%}</b></td>"
+            f"<td><span class='badge bad'>DO NOT CO-SUBMIT</span> (5/5 E2 PASS #1 holdout; held on 71.21% vs unscored <code>cf8e1bbef244</code>)</td></tr>"
+            f"<tr><td><b>Exp 2: <code>H33-2</code></b> (<code>{e(c33_2['raster']['content_id'])}</code>)</td>"
+            f"<td><code>610&ndash;619</code> ({h2['n_withheld_positives_total']:,})</td>"
+            f"<td class='num'>{h2['pooled_dti_H33_2S_candidate']:.6f} (vs H31-S {h2['pooled_dti_H31S_prior_best']:.6f})</td>"
+            f"<td class='num'>{d2['pooled_delta_dti']:+.6f} [{d2['ci95'][0]:+.4f}, {d2['ci95'][1]:+.4f}] ({d2['positive_seeds']}/10)</td>"
+            f"<td class='num'>{u2['max_dot_overlap_vs_12_peers']:.1%} / <b>{u2['dot_overlap_vs_h31_cf8e1bbef244']:.2%}</b></td>"
+            f"<td><span class='badge bad'>DO NOT SUBMIT</span> (uniqueness PASS; raw-LiDAR drop hurt E2)</td></tr>"
+            f"<tr><td><b>Exp 3: <code>H33-3</code></b> (<code>{e(c33_3['raster']['content_id'])}</code>)</td>"
+            f"<td><code>620&ndash;629</code> ({h3['n_withheld_positives_total']:,})</td>"
+            f"<td class='num'><b>{h3['pooled_dti_H33_3S_candidate']:.6f}</b> (vs H31-S {h3['pooled_dti_H31S_prior_best']:.6f})</td>"
+            f"<td class='num'><b>{d3['pooled_delta_dti']:+.6f}</b> [{d3['ci95'][0]:+.4f}, {d3['ci95'][1]:+.4f}] ({d3['positive_seeds']}/10)</td>"
+            f"<td class='num'>{u3['max_dot_overlap_vs_12_peers']:.1%} / <b>{u3['dot_overlap_vs_h31_cf8e1bbef244']:.2%}</b></td>"
+            f"<td><span class='badge bad'>DO NOT SUBMIT</span> (uniqueness PASS &amp; pooled &gt; H31-S; held on strict paired CI/seeds)</td></tr>"
+        )
+        s12_box = (
+            '<div class="card" id="session-12"><h3 style="margin-top:0">Session 12 Update (2026-10-26, Lanes L-S12 / L-S12B / L-S12C) &mdash; '
+            '3 Preregistered H33 Experiments Across 120 Blind Cells; Unscored <code>H31-1 (cf8e1bbef244)</code> Remains Primary Approved Submission</h3>'
+            '<p>Session 12 tested asymmetric half-graben clay-cap dip-coupling (<code>H31-3</code>) + canyon-mouth collinearity (<code>H29-5</code>) '
+            '+ 16-azimuth 2.3&nbsp;km orthogonal-Radon Stage-2 manifolds across 3 fresh disjoint seed blocks (<code>600&ndash;629</code>, '
+            'catalogue-internal <code>HOLDOUT-DTI</code>, NOT a live organizer score): '
+            '<b><code>H33-1</code> achieved a new all-time repository record <code>HOLDOUT-DTI = 0.049590</code></b> '
+            '(<code>+0.002968</code> over <code>H31-S = 0.046622</code>, 95% CI <code>[+0.001592, +0.004441]</code>, 9/10 seeds, 5/5 E2 gates PASS, '
+            '&le;58.67% vs all 12 external peers), held solely because <code>0&deg;+45&deg;</code> stitching nudged 3-px overlap against our own '
+            '<i>unscored</i> <code>H31-1</code> (<code>cf8e1bbef244</code>) from 66.96% to 71.21% &gt; 70%. '
+            '<code>H33-2</code> proved raw 1&nbsp;m LiDAR scarp bands are indispensable, and <code>H33-3</code> (<code>N22.5&deg;E+N67.5&deg;E</code> stitch + '
+            '<code>min_sep=3.15</code>) cut overlap to <code>62.50%</code> and beat <code>H31-S</code> pooled (<code>0.044310 &gt; 0.044042</code>) '
+            'while missing strict paired consistency. All 3 research GeoTIFFs are routed fail-closed to <code>downloads/research/</code>; '
+            '<b>upload <code>cf8e1bbef244</code> in the green banner above</b>.</p>'
+            '<div class="tw"><table><thead><tr><th>Experiment</th><th>Seeds (Withheld Pos)</th><th class="num">Pooled Buffered HOLDOUT-DTI</th>'
+            '<th class="num">Paired &Delta; vs H31-S (95% CI)</th><th class="num">3-px vs Peers / vs H31-1</th><th>Fail-Closed Gate</th></tr></thead>'
+            f'<tbody>{s12_rows}</tbody></table></div>'
+            f'<p class="small">Synthesis &amp; Run Cards: <a href="{REPO_URL}/blob/main/knowledge/31_session12_synthesis_and_h33_results_2026-10-26.md">knowledge/31</a> &middot; '
+            f'<a href="{REPO_URL}/blob/main/evidence/h33_s12_run_card_2026-10-26.json">H33-1 Run Card</a> &middot; '
+            f'<a href="{REPO_URL}/blob/main/evidence/h33_2_s12_run_card_2026-10-26.json">H33-2 Run Card</a> &middot; '
+            f'<a href="{REPO_URL}/blob/main/evidence/h33_3_s12_run_card_2026-10-26.json">H33-3 Run Card</a>.</p></div>'
+        )
+        s12_research_section = s12_box.replace('id="session-12"', 'id="h33-s12"')
+
+    parallel_s10_box = s12_box + s11_box + parallel_s10_box
 
     h31_ok = bool(h31_rc and h31_man and publication_decision(h31_rc, ROOT)["ok_to_publish_as_submission"] and h31_man.get("ok_to_submit"))
     approved_submission_name = h31_man["submission_name"] if h31_ok else None
@@ -877,7 +934,7 @@ Sources: <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults
             "GEMSDOE32": "g32_h33_2_b2",
             "GEMSDOE36": "g36_anderson",
             "GEMSDOE31": "g31_h27_4",
-            "GEMSDOE28": "g28_h27_4_r1",
+            "GEMSDOE28": "g28_h36_1",
             "GEMSDOE33": "g33_h33d",
             "GEMSDOE25": "g25_d28",
             "GEMSDOE30": "g30_d28",
@@ -1053,8 +1110,8 @@ The agent never uploads anything; you press the button.</div>
 <li><b>Finalists</b> deliver code and documentation – this repository is that documentation.</li></ul>
 
 <h2>Limitations and access needed</h2>
-<ul class="tight"><li>No live score exists for any 27GEMSDOE file; validation is catalogue-internal; the paired base is leaky; the graph is raster-based (no names/slip sense).</li>
-<li>Owner actions: submit and record the score; paste the exact portal message if rejected; paste the original task prompt into the README placeholder; optional geologist review of the 345 dossiers; optional CI download of USGS Qfaults/Siler data.</li></ul>
+<ul class="tight"><li><b>Live scores (`OWNER-REPORTED`, no organizer receipt stored):</b> <code>27GEMSDOE</code> Slot 1 (<code>5512495c6bd1</code> = <code>0.2449</code>) and Session-7 <code>H29-S</code> (<code>511898747886</code> = <code>0.2190</code>, #1 of the Oct-25 non-<code>H19-5</code> cohort) are owner-reported; primary approved <code>H31-1</code> (<code>cf8e1bbef244</code>) is currently <b>unscored</b> and ready for manual human upload. All <code>HOLDOUT-DTI</code> figures are catalogue-internal buffered spatial holdouts, not live organizer test scores.</li>
+<li><b>Owner actions &amp; network limits:</b> manually upload <code>gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif</code> on <code>drivendata.org</code> (never automated) and record the live score in <code>registry/live_scores.json</code>; stage official DOE GDR #1391 regional packages (<code>paleo_geothermal_regional.zip</code>, <code>2m_temperature_probe_INGENIOUS_regional_data.zip</code>, <code>great_basin_q_volcanics.zip</code>) from an unrestricted machine if running <code>H27-16</code> (sandbox egress permits only GitHub/PyPI/npm). Verbatim task prompts and Arena Core Values are versioned in <code>README.md</code>.</li></ul>
 <p>Full lists: <a href="{REPO_URL}/blob/main/knowledge/06_limitations_and_access.md">limitations &amp; access</a> · <a href="sources.html#irregularities">flagged irregularities</a>.</p>
 """)
 
@@ -1083,7 +1140,7 @@ The agent never uploads anything; you press the button.</div>
   <li><b>Download the exact binary file above:</b> click <b>Download Approved .tif</b> (<code>{e(h31_tif_name)}</code>). <b>Do NOT open and re-save</b> the file in QGIS/ArcGIS/GDAL, as GIS exports can re-inject a <code>nodata=NaN</code> tag or alter geotransform precision.</li>
   <li><b>Sign in to DrivenData:</b> visit <a href="{DD_COMP}">{DD_COMP}</a> and click <b>Submit</b>.</li>
   <li><b>Upload the single-band GeoTIFF (or single-TIFF ZIP):</b> select <code>{e(h31_tif_name)}</code> (806 KB) or <code>{e(h31_zip_name)}</code> (180 KB, verified to contain <i>only</i> that single <code>.tif</code> with no <code>__MACOSX</code> metadata).</li>
-  <li><b>Paste the short description note:</b> paste <code>{e(h31_note_str)}</code> so the content hash <code>{e(h31_rc['raster']['content_id']) if h31_rc else ''}</code> and hypothesis <code>H31-1</code> are permanently paired on your Submissions tab.</li>
+  <li><b>Enter the unique submission name &amp; optional short description note:</b> use unique name <code>{e(h31_sub_name)}</code> (if a name field is shown) and paste <code>{e(h31_note_str)}</code> ({len(h31_note_str)} / 140 chars) in the optional note field so the content hash <code>{e(h31_rc['raster']['content_id']) if h31_rc else ''}</code> and hypothesis <code>H31-1</code> are permanently paired on your Submissions tab.</li>
   <li><b>Budget your 5/week submission cap:</b> the competition enforces a rolling limit of 5 submissions per 7 days. Never re-upload already-scored files (<code>511898747886</code> = <code>0.2190</code>, <code>5512495c6bd1</code> = <code>0.2449</code>) or peer clones (<code>GEMSDOE32</code> = <code>0.2778</code>).</li>
   <li><b>Record the live outcome:</b> once DrivenData displays the public Distance-Tolerant Tversky Index score, record the exact score and timestamp in <code>registry/live_scores.json</code> (with <code>OWNER-REPORTED</code> or stored-receipt provenance).</li>
  </ol>
@@ -1187,9 +1244,37 @@ Where a network sits near threshold, individual closures matter more than in a w
         f"{h['expected_holdout_delta_dti'][1]:+.3f}<br><span class='small'>cost: {e(h['cost'])}</span></td></tr>"
         for h in h28_hypotheses
     )
+    next_hyp_p = REG / "next_hypotheses.json"
+    next_hyp_section = ""
+    if next_hyp_p.exists():
+        nh_obj = J(next_hyp_p)
+        nh_rows = ""
+        for nh in nh_obj.get("hypotheses", []):
+            dti_lo, dti_hi = nh["expected_holdout_delta_dti"]
+            nh_rows += (
+                f"<tr><td><b>#{nh['rank']} &middot; <code>{e(nh['id'])}</code></b></td>"
+                f"<td><b>{e(nh['title'])}</b><br><span class='small'>{e('; '.join(nh['layers']))}</span></td>"
+                f"<td>{e(nh['signature'])}</td>"
+                f"<td>{e(nh['why_missing_faults'])}</td>"
+                f"<td>{e(nh['confounders'])}</td>"
+                f"<td>{e(nh['differs_from_repo'])}</td>"
+                f"<td><code>{dti_lo:+.3f} to {dti_hi:+.3f}</code><br><span class='small'>cost: {e(nh['cost'])} &middot; {e(nh['data_gate'])}</span></td></tr>"
+            )
+        next_hyp_section = (
+            '<div class="card" id="h34-next-hypotheses"><h3 style="margin-top:0">Ranked Next-Generation Untried Geological Hypotheses '
+            '(<code>registry/next_hypotheses.json</code>, Fresh Seeds &ge; 630)</h3>'
+            '<p class="small">Expected &Delta;HOLDOUT-DTI intervals are pre-experiment priors, never scores. '
+            'All 3 Session-12 experiment slots (<code>600&ndash;629</code>) are permanently consumed.</p>'
+            '<div class="tw"><table><thead><tr><th>Rank &middot; ID</th><th>Hypothesis &middot; Layers</th>'
+            '<th>Physical Signature / Transform</th><th>Why Missing from USGS/INGENIOUS</th>'
+            '<th>Named Non-Fault Mimic</th><th>Difference from Repo</th><th>Expected Gain &middot; Cost &middot; Data</th></tr></thead>'
+            f'<tbody>{nh_rows}</tbody></table></div></div>'
+        )
     pages["research.html"] = ("Research", f"""
 <h1>Research</h1>
-<p class="lead">Session 10 H31-1 promoted results, PhD forensic autopsy of 0.2778 (`GEMSDOE32`) and 0.2190 (`H29-S`), why Slot 1 scored 0.2449, and ranked untried hypotheses.</p>
+<p class="lead">Session 12 H33 3-experiment ablation (seeds 600&ndash;629), Session 10 H31-1 promoted results, PhD forensic autopsy of 0.2778 (`GEMSDOE32`) and 0.2190 (`H29-S`), why Slot 1 scored 0.2449, and ranked untried hypotheses.</p>
+{s12_research_section}
+{next_hyp_section}
 {h31_research_section}
 <h2>H29-2 test and submission status (Session 9 Archive)</h2>
 {h29_2_box}

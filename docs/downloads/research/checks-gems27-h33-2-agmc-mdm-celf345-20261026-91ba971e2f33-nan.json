@@ -1,0 +1,75 @@
+{
+  "file": "gems27-h33-2-agmc-mdm-celf345-20261026-91ba971e2f33-nan.tif",
+  "bytes": 1590166,
+  "sha256": "1770bee45218651c7ea2c454ecd2f0b0d5567ebc9333623c233b30b67bdc2044",
+  "variant": "nan",
+  "checks": {
+    "grid_matches_template": {
+      "pass": true,
+      "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+      "hard": true
+    },
+    "single_band_float32": {
+      "pass": true,
+      "detail": "count=1 dtype=float32",
+      "hard": true
+    },
+    "inside_footprint_all_finite": {
+      "pass": true,
+      "detail": "0 non-finite inside 5167373 px",
+      "hard": true
+    },
+    "inside_footprint_in_0_1": {
+      "pass": true,
+      "detail": "min=0 max=1",
+      "hard": true
+    },
+    "no_infinities_anywhere": {
+      "pass": true,
+      "detail": "np.isinf(whole array) is empty",
+      "hard": true
+    },
+    "outside_footprint_is_nan": {
+      "pass": true,
+      "detail": "7111787/7111787 NaN outside the footprint (as in the sample)",
+      "hard": true
+    },
+    "nodata_tag_is_nan": {
+      "pass": true,
+      "detail": "nodata=NaN declared, same as the sample submission",
+      "hard": true
+    },
+    "masked_read_in_0_1": {
+      "pass": true,
+      "detail": "masked count=5167373, min=0, max=1",
+      "hard": true
+    },
+    "nan_aware_range_in_0_1": {
+      "pass": true,
+      "detail": "nanmin=0 nanmax=1",
+      "hard": true
+    },
+    "strict_whole_array_range_ignoring_nan_is_informational": {
+      "pass": false,
+      "detail": "A validator that compares NaN directly would fail ANY file with NaN outside the footprint, including the sample. Informational only; use the allfinite fallback if the portal rejects.",
+      "hard": false
+    },
+    "profile_driver_gtiff": {
+      "pass": true,
+      "detail": "GTiff",
+      "hard": false
+    },
+    "compression_like_sample": {
+      "pass": true,
+      "detail": "Compression.lzw",
+      "hard": false
+    }
+  },
+  "hard_checks_passed": true,
+  "hard_failures": [],
+  "nonzero_inside_px": 37654,
+  "value_set_inside": [
+    0.0,
+    1.0
+  ]
+}

@@ -1,0 +1,198 @@
+{
+  "experiment": "E1_H33_leakage_canary_and_uniqueness_prescreen",
+  "lane": "L-S12-2026-10-26",
+  "preregistration_doc": "knowledge/28_preregistration_H33_2026-10-26.md",
+  "preregistration_sha256": "dbbe40afd560160a4e85aef24100d674bb83bab84538af5e21b76c63274ba3d5",
+  "seeds": [
+    600,
+    601,
+    602,
+    603,
+    604,
+    605,
+    606,
+    607,
+    608,
+    609
+  ],
+  "n_withheld_positive_pixels_union": 54841,
+  "n_negative_sample": 250000,
+  "n_features_checked": 66,
+  "canary_h33_features": {
+    "h33_hw_fw_cond_jump_400m": {
+      "raw_auc": 0.49935,
+      "direction_invariant_auc": 0.50065
+    },
+    "h33_hw_fw_cond_jump_800m": {
+      "raw_auc": 0.49884,
+      "direction_invariant_auc": 0.50116
+    },
+    "h33_fw_hw_grav_throw_600m": {
+      "raw_auc": 0.53709,
+      "direction_invariant_auc": 0.53709
+    },
+    "h33_fw_hw_elev_throw_600m": {
+      "raw_auc": 0.57427,
+      "direction_invariant_auc": 0.57427
+    },
+    "h33_asymmetric_graben_conduit": {
+      "raw_auc": 0.50598,
+      "direction_invariant_auc": 0.50598
+    },
+    "h33_destripe_rtp_tilt_hgm": {
+      "raw_auc": 0.51052,
+      "direction_invariant_auc": 0.51052
+    },
+    "h33_tmi_up150_tilt_hgm": {
+      "raw_auc": 0.50973,
+      "direction_invariant_auc": 0.50973
+    },
+    "h33_mag_crustal_persistence": {
+      "raw_auc": 0.50773,
+      "direction_invariant_auc": 0.50773
+    },
+    "h33_isograv_flexure_crest": {
+      "raw_auc": 0.52947,
+      "direction_invariant_auc": 0.52947
+    },
+    "h33_k_metasom_thk_depletion_edge": {
+      "raw_auc": 0.50875,
+      "direction_invariant_auc": 0.50875
+    },
+    "h33_hydro_silica_vent_corridor": {
+      "raw_auc": 0.51576,
+      "direction_invariant_auc": 0.51576
+    },
+    "h33_walker_transtension_index": {
+      "raw_auc": 0.57165,
+      "direction_invariant_auc": 0.57165
+    },
+    "h33_piedmont_profile_concavity": {
+      "raw_auc": 0.59924,
+      "direction_invariant_auc": 0.59924
+    },
+    "h33_canyon_mouth_knick_impulse": {
+      "raw_auc": 0.54511,
+      "direction_invariant_auc": 0.54511
+    },
+    "h33_canyon_mouth_collinearity_1200m": {
+      "raw_auc": 0.58717,
+      "direction_invariant_auc": 0.58717
+    },
+    "h33_lidar_slope_norm_scarp": {
+      "raw_auc": 0.56873,
+      "direction_invariant_auc": 0.56873
+    },
+    "h33_lidar_cross_contour_nis": {
+      "raw_auc": 0.56443,
+      "direction_invariant_auc": 0.56443
+    },
+    "h33_lidar_wash_bridge_800m": {
+      "raw_auc": 0.56435,
+      "direction_invariant_auc": 0.56435
+    },
+    "h33_lahontan_shoreline_indicator": {
+      "raw_auc": 0.53445,
+      "direction_invariant_auc": 0.53445
+    }
+  },
+  "canary_sub15_direction_invariant_auc": {
+    "sub_gm_rtp_s2": 0.53061,
+    "sub_gm_rtp_s5": 0.53585,
+    "sub_tiltabs_rtp": 0.50057,
+    "sub_analytic_rtp": 0.53061,
+    "sub_gm_grav_s2": 0.53984,
+    "sub_gm_grav_s5": 0.54268,
+    "sub_crossfield_coherence": 0.5335,
+    "sub_gm_cond_s3": 0.50925,
+    "sub_gm_depth_s3": 0.53434,
+    "sub_gm_depth_s8": 0.53151,
+    "sub_gm_dilate_s3": 0.55788,
+    "sub_gm_2ndinv_s3": 0.53852,
+    "sub_strain_x_cond": 0.5276,
+    "sub_seismic_fabric_ieq": 0.50858,
+    "sub_seismic_fabric_deq": 0.50665
+  },
+  "canary_base32_direction_invariant_auc": {
+    "mag_anom": 0.51103,
+    "rtp": 0.5038,
+    "tmi_hg": 0.52471,
+    "geod_2ndinv": 0.56921,
+    "iso_grav_anom_slope": 0.53586,
+    "geod_shearrate": 0.56864,
+    "geod_dilaterate": 0.52377,
+    "tmi_vg": 0.51557,
+    "deq_n100a15": 0.54965,
+    "iso_grav_anom_vg": 0.52928,
+    "det_elev": 0.51503,
+    "iso_grav_anom": 0.54131,
+    "tmi": 0.51422,
+    "depth_to_base_surf": 0.51255,
+    "ieq_n100a15": 0.56877,
+    "cond_surf": 0.51362,
+    "iso_grav_anom_hg": 0.50203,
+    "det_elev_slope": 0.5566,
+    "lidar_ex_max": 0.57083,
+    "lidar_ex_mean": 0.55761,
+    "lidar_step_max": 0.57268,
+    "lidar_lapneg_max": 0.57715,
+    "lidar_lappos_max": 0.58132,
+    "lidar_downface_max": 0.58242,
+    "lidar_upface_max": 0.58896,
+    "lidar_cross_max": 0.57648,
+    "lidar_relief": 0.57162,
+    "lidar_coh100": 0.52267,
+    "lidar_cos2strike": 0.52775,
+    "lidar_sin2strike": 0.51319,
+    "det_local_relief": 0.58256,
+    "det_gradient": 0.57287
+  },
+  "max_h33_direction_invariant_auc": 0.59924,
+  "max_all_66_direction_invariant_auc": 0.59924,
+  "auc_stop_threshold": 0.9,
+  "leakage_flags": {},
+  "preplacement_surface_spearman_vs_12_peers": {
+    "g24_d15.tif": 0.11199,
+    "g25_d28.tif": 0.09395,
+    "g27_tv2_d15.tif": 0.11098,
+    "g28_h27_4_r1.tif": 0.08712,
+    "g28_h32_1.tif": 0.09167,
+    "g28_h36_1.tif": 0.08412,
+    "g28_h38_1.tif": 0.08415,
+    "g30_d28.tif": 0.09395,
+    "g31_h27_4.tif": 0.08712,
+    "g32_h33_2_b2.tif": 0.08295,
+    "g33_h33d.tif": 0.09065,
+    "g36_anderson.tif": 0.08103
+  },
+  "preplacement_surface_spearman_vs_gems27": {
+    "gems27_slot1_5512495c6bd1_02449": 0.11098,
+    "gems27_h29s_511898747886_02190": 0.11244,
+    "gems27_h31s10_cf8e1bbef244_unscored": 0.10711
+  },
+  "prescreen_3px_dot_overlap_vs_12_peers": {
+    "g24_d15.tif": 0.55118,
+    "g25_d28.tif": 0.53298,
+    "g27_tv2_d15.tif": 0.55471,
+    "g28_h27_4_r1.tif": 0.50274,
+    "g28_h32_1.tif": 0.52138,
+    "g28_h36_1.tif": 0.49588,
+    "g28_h38_1.tif": 0.4987,
+    "g30_d28.tif": 0.53298,
+    "g31_h27_4.tif": 0.50274,
+    "g32_h33_2_b2.tif": 0.47541,
+    "g33_h33d.tif": 0.51649,
+    "g36_anderson.tif": 0.47769
+  },
+  "prescreen_3px_dot_overlap_vs_gems27": {
+    "gems27_slot1_5512495c6bd1_02449": 0.55471,
+    "gems27_h29s_511898747886_02190": 0.5196,
+    "gems27_h31s10_cf8e1bbef244_unscored": 0.6696
+  },
+  "max_abs_preplacement_spearman": 0.11244,
+  "max_prescreen_3px_dot_overlap": 0.6696,
+  "spearman_stop_threshold": 0.9,
+  "dot_overlap_stop_threshold": 0.7,
+  "gate_e1_pass": true,
+  "runtime_s": 142.0
+}

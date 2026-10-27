@@ -1,0 +1,25 @@
+fitting H33-3 dual-regime OOF (rot225)...
+    H33-3 stage1 pair (0,1) done
+    H33-3 stage1 pair (0,2) done
+    H33-3 stage1 pair (0,3) done
+    H33-3 stage1 pair (1,2) done
+    H33-3 stage1 pair (1,3) done
+    H33-3 stage1 pair (2,3) done
+    H33-3 stage2 fold 0 done
+    H33-3 stage2 fold 1 done
+    H33-3 stage2 fold 2 done
+    H33-3 stage2 fold 3 done
+  finished H33-3 OOF (rot225) in 1183.0s
+fitting H33-3 dual-regime OOF (rot675)...
+    H33-3 stage1 pair (0,1) done
+    H33-3 stage1 pair (0,2) done
+    H33-3 stage1 pair (0,3) done
+    H33-3 stage1 pair (1,2) done
+    H33-3 stage1 pair (1,3) done
+    H33-3 stage1 pair (2,3) done
+    H33-3 stage2 fold 0 done
+    H33-3 stage2 fold 1 done
+    H33-3 stage2 fold 2 done
+    H33-3 stage2 fold 3 done
+  finished H33-3 OOF (rot675) in 1161.6s
+E1 PASS=True | max_AUC=0.6008 | max_|rho|=0.1163 | max_stitched_3px_ov=0.6250 (vs_H31_cf8e=0.6250, vs_peers=0.5482) -> /home/user/GEMSDOE27/evidence/h33_3_s12_e1_canary_and_stitched_uniqueness.json

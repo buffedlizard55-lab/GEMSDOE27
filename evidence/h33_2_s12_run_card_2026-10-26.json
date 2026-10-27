@@ -1,0 +1,581 @@
+{
+  "schema": "parallel-run-card-v2",
+  "generated_utc": "2026-10-26",
+  "lane": "L-S12B-2026-10-26",
+  "hypothesis_id": "H33-2",
+  "hypothesis": "Asymmetric Graben-Margin Clay-Cap Dip-Coupling, Multi-Elevation Upward-Continued Magnetic Dip/Verticality Separation, Deconfounded Morphotectonic M_Full & Zero-Overlap min_sep=3.45 1-D Manifold CELF Allocation (AGMC-MDM-CELF345)",
+  "mechanism": "Combines cross-strike hanging-wall minus footwall electrical conductivity jumps (+400 m, +800 m) and footwall-to-hanging-wall density/elevation throws along grad(G_4(depth_to_base_surf)), +/-1.2 km along-strike canyon-mouth incision collinearity, multi-elevation TMI_up150 vs RTP down-dip migration (normal faults) and zero-shift vertical strike-slip persistence + seismic-fabric anisotropy (Walker Lane), and 5 deconfounded slope-normalized cross-contour 1 m LiDAR structural channels (dropping all 12 raw u8 LiDAR columns); fits end-to-end dual-regime nested spatial cross-fits (0-deg + 45-deg stitched) with 16-azimuth 2.3 km orthogonal Radon anisotropy; and places 37,654 B2 dots via 1-D manifold-sharpened min_sep_px=3.45 (nbr_le_3px=0.0000) 300 m CELF cover.",
+  "named_non_fault_mimic": "Symmetric interior evaporative playa salt pans (directional HW-FW conductivity jump cancels to 0), Pleistocene Lake Lahontan contour-parallel shoreline benches and raw bedrock cliffs (raw u8 LiDAR excluded; isolated via sin^2(theta_scarp - theta_contour) and basin shoreline indicator), surficial volcanic boulder float (attenuated in TMI_up150), and 2-D diffuse piedmont aprons (cancelled by 16-azimuth orthogonal Radon anisotropy L(theta*) - L(theta* + pi/2)).",
+  "verdict": "negative",
+  "ok_to_submit": false,
+  "submission_name": "27GEMSDOE-H33-2-AGMC-MDM-20261026-91ba971e2f33",
+  "note_max_140_chars": "27GEMSDOE H33-2 | asymGraben+magDipMig+orthoRadon+CELF3.45 B2 37654px | id 91ba971e2f33 | unscored hold-slot",
+  "note_chars": 108,
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "provenance_note": "Catalogue-internal whole-component hide-and-recover; NOT a live organizer score.",
+    "evaluator": "gems27.metric v1 + holdout-blind-buffered-v2 (alpha=0.2, beta=0.8, R=3px triangular, buffer_px=6.0)",
+    "seeds": [
+      610,
+      611,
+      612,
+      613,
+      614,
+      615,
+      616,
+      617,
+      618,
+      619
+    ],
+    "n_cells": 40,
+    "n_withheld_positives_total": 123135,
+    "canary_max_auc": 0.59655,
+    "canary_h33_2_extra_max_auc": 0.57043,
+    "pooled_dti_H33_2S_candidate": 0.040878,
+    "pooled_dti_H33_2S_ci95": [
+      0.03911,
+      0.04248
+    ],
+    "pooled_dti_H33_2A_detector_poisson_ablation": 0.040549,
+    "pooled_dti_H31S_prior_best": 0.044685,
+    "pooled_dti_H29S_control": 0.042563,
+    "pooled_dti_D0_control": 0.039579,
+    "pooled_dti_B0_control": 0.037209,
+    "pooled_dti_U0_null": 0.015331,
+    "pooled_unbuffered_diagnostic": {
+      "U0": 0.046515,
+      "B0": 0.092124,
+      "D0": 0.097057,
+      "H29-S": 0.104002,
+      "H31-S": 0.11163,
+      "H33_2-A": 0.102541,
+      "H33_2-S": 0.111629
+    },
+    "per_fold_buffered": {
+      "NW": {
+        "U0": 0.012473,
+        "B0": 0.033878,
+        "D0": 0.039123,
+        "H29-S": 0.040341,
+        "H31-S": 0.038037,
+        "H33_2-A": 0.038651,
+        "H33_2-S": 0.041838
+      },
+      "NE_LidarGapHeavy": {
+        "U0": 0.013706,
+        "B0": 0.052247,
+        "D0": 0.050516,
+        "H29-S": 0.056372,
+        "H31-S": 0.060717,
+        "H33_2-A": 0.054415,
+        "H33_2-S": 0.052684
+      },
+      "SW": {
+        "U0": 0.016935,
+        "B0": 0.024825,
+        "D0": 0.026261,
+        "H29-S": 0.029848,
+        "H31-S": 0.02933,
+        "H33_2-A": 0.028325,
+        "H33_2-S": 0.024212
+      },
+      "SE": {
+        "U0": 0.016935,
+        "B0": 0.0411,
+        "D0": 0.046147,
+        "H29-S": 0.047227,
+        "H31-S": 0.053718,
+        "H33_2-A": 0.044251,
+        "H33_2-S": 0.049706
+      }
+    },
+    "paired_candidate_minus_B": {
+      "pooled_delta_dti": 0.003669,
+      "mean_delta": 0.003673,
+      "mean_seed_paired_delta_dti": 0.003673,
+      "ci95": [
+        0.000635,
+        0.006104
+      ],
+      "seed_bootstrap_95_ci": [
+        0.000635,
+        0.006104
+      ],
+      "positive_seeds": 9,
+      "n_seeds": 10,
+      "positive_folds": 3,
+      "n_folds": 4,
+      "per_fold_pooled_delta_dti": {
+        "NW": 0.00796,
+        "NE_LidarGapHeavy": 0.000438,
+        "SW": -0.000613,
+        "SE": 0.008605
+      },
+      "positive_cells": 30,
+      "n_cells": 40
+    },
+    "paired_candidate_minus_D0": {
+      "pooled_delta_dti": 0.001299,
+      "mean_delta": 0.001317,
+      "mean_seed_paired_delta_dti": 0.001317,
+      "ci95": [
+        -0.001716,
+        0.004079
+      ],
+      "seed_bootstrap_95_ci": [
+        -0.001716,
+        0.004079
+      ],
+      "positive_seeds": 7,
+      "n_seeds": 10,
+      "positive_folds": 3,
+      "n_folds": 4,
+      "per_fold_pooled_delta_dti": {
+        "NW": 0.002715,
+        "NE_LidarGapHeavy": 0.002168,
+        "SW": -0.002049,
+        "SE": 0.003559
+      },
+      "positive_cells": 20,
+      "n_cells": 40
+    },
+    "paired_candidate_minus_H29S": {
+      "pooled_delta_dti": -0.001685,
+      "mean_delta": -0.001667,
+      "mean_seed_paired_delta_dti": -0.001667,
+      "ci95": [
+        -0.0045,
+        0.000794
+      ],
+      "seed_bootstrap_95_ci": [
+        -0.0045,
+        0.000794
+      ],
+      "positive_seeds": 5,
+      "n_seeds": 10,
+      "positive_folds": 2,
+      "n_folds": 4,
+      "per_fold_pooled_delta_dti": {
+        "NW": 0.001498,
+        "NE_LidarGapHeavy": -0.003688,
+        "SW": -0.005636,
+        "SE": 0.002479
+      },
+      "positive_cells": 17,
+      "n_cells": 40
+    },
+    "paired_candidate_minus_H31S": {
+      "pooled_delta_dti": -0.003807,
+      "mean_delta": -0.003767,
+      "mean_seed_paired_delta_dti": -0.003767,
+      "ci95": [
+        -0.006783,
+        -0.000882
+      ],
+      "seed_bootstrap_95_ci": [
+        -0.006783,
+        -0.000882
+      ],
+      "positive_seeds": 4,
+      "n_seeds": 10,
+      "positive_folds": 1,
+      "n_folds": 4,
+      "per_fold_pooled_delta_dti": {
+        "NW": 0.003801,
+        "NE_LidarGapHeavy": -0.008033,
+        "SW": -0.005118,
+        "SE": -0.004012
+      },
+      "positive_cells": 15,
+      "n_cells": 40
+    },
+    "frozen_gate_clauses": {
+      "a_pooled_beats_all_including_H31S": false,
+      "b_paired_mean_gain_thresholds": false,
+      "c_ci95_and_seed_consistency": false,
+      "d_quadrant_and_western_graben_gain": false,
+      "e_e1_canary_and_stitched_uniqueness_pass": true
+    },
+    "gate_efficacy_pass": false
+  },
+  "uniqueness_vs_registry": {
+    "pass": true,
+    "operative_scope": "12 pinned focus-site peer rasters + Slot 1 (5512495c6bd1) + H29-S (511898747886) + Session-10 H31-1 (cf8e1bbef244)",
+    "max_dot_overlap_within_3px_euclidean": 0.66888,
+    "max_dot_overlap_vs_12_peers": 0.55025,
+    "max_dot_overlap_vs_operative_gems27": 0.66888,
+    "dot_overlap_vs_h31_cf8e1bbef244": 0.66888,
+    "max_surface_spearman": 0.12026,
+    "max_preplacement_surface_spearman": 0.12026,
+    "max_postplacement_dot_spearman": 0.10346,
+    "peer_entries": [
+      {
+        "id": "g24_d15",
+        "reference_sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
+        "spearman_rank_correlation": 0.040826296957469956,
+        "candidate_dot_fraction_within_3px": 0.5462633451957295,
+        "duplicate": false
+      },
+      {
+        "id": "g25_d28",
+        "reference_sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
+        "spearman_rank_correlation": 0.03331586528786348,
+        "candidate_dot_fraction_within_3px": 0.5281776172518192,
+        "duplicate": false
+      },
+      {
+        "id": "g27_tv2_d15",
+        "reference_sha256": "33003374335d84bf885f2d8f5e9dd4c57044c8ec58fa6a0d7fa581e8bc41c11d",
+        "spearman_rank_correlation": 0.04051143939955439,
+        "candidate_dot_fraction_within_3px": 0.5502469857120094,
+        "duplicate": false
+      },
+      {
+        "id": "g28_h27_4_r1",
+        "reference_sha256": "ab02300152248fdda04e988e2cd2a0c13f35eec42fcf670a15e8b76b19e24a73",
+        "spearman_rank_correlation": 0.03561206628193774,
+        "candidate_dot_fraction_within_3px": 0.49758325808679027,
+        "duplicate": false
+      },
+      {
+        "id": "g28_h32_1",
+        "reference_sha256": "04d31922f5c1ea4016984fc470ab2b0ff8e266c615792f0e86020da3b940d3ff",
+        "spearman_rank_correlation": 0.034618219180862074,
+        "candidate_dot_fraction_within_3px": 0.516386041323631,
+        "duplicate": false
+      },
+      {
+        "id": "g28_h36_1",
+        "reference_sha256": "5556aa1438fd67376b60d5ffc99228ec09dcc11a8408298a743ccb88d6163641",
+        "spearman_rank_correlation": 0.03521898248946356,
+        "candidate_dot_fraction_within_3px": 0.4920592765708822,
+        "duplicate": false
+      },
+      {
+        "id": "g28_h38_1",
+        "reference_sha256": "81d5b87bc8424f162a8f56aa9aac8fbe630c61646b9cac24d5ebbdc1b1951783",
+        "spearman_rank_correlation": 0.035221037776843565,
+        "candidate_dot_fraction_within_3px": 0.49487438253571997,
+        "duplicate": false
+      },
+      {
+        "id": "g30_d28",
+        "reference_sha256": "8cf893ead5667df21d3288a9968c35fd5385c425b029d82ee71d311715b129fd",
+        "spearman_rank_correlation": 0.03331586528786348,
+        "candidate_dot_fraction_within_3px": 0.5281776172518192,
+        "duplicate": false
+      },
+      {
+        "id": "g31_h27_4",
+        "reference_sha256": "07b6db440535404bb41ec8ddc797713e200d308e3da35937393efde5eb84bc40",
+        "spearman_rank_correlation": 0.03561206628193774,
+        "candidate_dot_fraction_within_3px": 0.49758325808679027,
+        "duplicate": false
+      },
+      {
+        "id": "g32_h33_2_b2",
+        "reference_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+        "spearman_rank_correlation": 0.03728288346287307,
+        "candidate_dot_fraction_within_3px": 0.4699899081106921,
+        "duplicate": false
+      },
+      {
+        "id": "g33_h33d",
+        "reference_sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+        "spearman_rank_correlation": 0.034390771324770336,
+        "candidate_dot_fraction_within_3px": 0.5127210920486536,
+        "duplicate": false
+      },
+      {
+        "id": "g36_anderson",
+        "reference_sha256": "e15891020b9c57056ac7fa874a5e506fbd6ed9314a4ea8e73af0753887a3708a",
+        "spearman_rank_correlation": 0.03673999914372098,
+        "candidate_dot_fraction_within_3px": 0.47253943804111115,
+        "duplicate": false
+      }
+    ],
+    "peer_preplacement_surface_spearman": {
+      "g24_d15.tif": 0.12026,
+      "g25_d28.tif": 0.10197,
+      "g27_tv2_d15.tif": 0.11939,
+      "g28_h27_4_r1.tif": 0.09468,
+      "g28_h32_1.tif": 0.0985,
+      "g28_h36_1.tif": 0.08939,
+      "g28_h38_1.tif": 0.08948,
+      "g30_d28.tif": 0.10197,
+      "g31_h27_4.tif": 0.09468,
+      "g32_h33_2_b2.tif": 0.09036,
+      "g33_h33d.tif": 0.09547,
+      "g36_anderson.tif": 0.08922
+    },
+    "operative_gems27_entries": {
+      "gems27_slot1_5512495c6bd1_02449": {
+        "ref_dots": 61328,
+        "candidate_dot_fraction_within_3px": 0.55025,
+        "reference_dot_fraction_within_3px": 0.56866,
+        "postplacement_dot_spearman": 0.03889,
+        "preplacement_surface_spearman": 0.11939
+      },
+      "gems27_h29s_511898747886_02190": {
+        "ref_dots": 37654,
+        "candidate_dot_fraction_within_3px": 0.52704,
+        "reference_dot_fraction_within_3px": 0.78544,
+        "postplacement_dot_spearman": 0.09737,
+        "preplacement_surface_spearman": 0.11941
+      },
+      "gems27_h31s10_cf8e1bbef244_unscored": {
+        "ref_dots": 37654,
+        "candidate_dot_fraction_within_3px": 0.66888,
+        "reference_dot_fraction_within_3px": 0.7021,
+        "postplacement_dot_spearman": 0.10346,
+        "preplacement_surface_spearman": 0.1125
+      }
+    },
+    "extended_unscored_repo_max_3px_overlap": 0.84817,
+    "extended_unscored_repo_entries": {
+      "gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-allfinite.tif": {
+        "ref_dots": 41507,
+        "candidate_dot_fraction_within_3px": 0.50215,
+        "reference_dot_fraction_within_3px": 0.55224,
+        "postplacement_dot_spearman": 0.03181,
+        "preplacement_surface_spearman": 0.09366
+      },
+      "gems27-farfield-swap-augmented-detector-probe-20261002-a34b0799df59-allfinite.tif": {
+        "ref_dots": 60069,
+        "candidate_dot_fraction_within_3px": 0.51819,
+        "reference_dot_fraction_within_3px": 0.57521,
+        "postplacement_dot_spearman": 0.03602,
+        "preplacement_surface_spearman": 0.12203
+      },
+      "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-allfinite.tif": {
+        "ref_dots": 59075,
+        "candidate_dot_fraction_within_3px": 0.49965,
+        "reference_dot_fraction_within_3px": 0.50905,
+        "postplacement_dot_spearman": 0.04283,
+        "preplacement_surface_spearman": 0.10571
+      },
+      "gems27-h30-1-updip-hydrothermal-b2-35k-20261025-801dff07541d-allfinite.tif": {
+        "ref_dots": 35200,
+        "candidate_dot_fraction_within_3px": 0.40694,
+        "reference_dot_fraction_within_3px": 0.45523,
+        "postplacement_dot_spearman": 0.03106,
+        "preplacement_surface_spearman": 0.07348
+      },
+      "gems27-topo-gap-closure-t-v2-on-d2-8-20261002-3ebd51534bb1-allfinite.tif": {
+        "ref_dots": 45374,
+        "candidate_dot_fraction_within_3px": 0.53224,
+        "reference_dot_fraction_within_3px": 0.55212,
+        "postplacement_dot_spearman": 0.0296,
+        "preplacement_surface_spearman": 0.10093
+      },
+      "gems27-topo-gap-closure-t-v2-plus-h27-4-r1-on-d1-5-20261002-d466b251f309-allfinite.tif": {
+        "ref_dots": 55992,
+        "candidate_dot_fraction_within_3px": 0.52287,
+        "reference_dot_fraction_within_3px": 0.56935,
+        "postplacement_dot_spearman": 0.04169,
+        "preplacement_surface_spearman": 0.11089
+      },
+      "gems27-unique-20261026-20261026-6c2790d67dc6-allfinite.tif": {
+        "ref_dots": 21312,
+        "candidate_dot_fraction_within_3px": 0.06472,
+        "reference_dot_fraction_within_3px": 0.15766,
+        "postplacement_dot_spearman": 0.00159,
+        "preplacement_surface_spearman": 0.02335
+      },
+      "gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.tif": {
+        "ref_dots": 24482,
+        "candidate_dot_fraction_within_3px": 0.11096,
+        "reference_dot_fraction_within_3px": 0.22768,
+        "postplacement_dot_spearman": 0.0052,
+        "preplacement_surface_spearman": 0.03536
+      },
+      "gems27-dconfirm-hybrid-armd-b2-38k-20261025-5ea0385b7e70-allfinite.tif": {
+        "ref_dots": 38000,
+        "candidate_dot_fraction_within_3px": 0.46744,
+        "reference_dot_fraction_within_3px": 0.51063,
+        "postplacement_dot_spearman": 0.04372,
+        "preplacement_surface_spearman": 0.08742
+      },
+      "gems27-h28-3-strain-conductivity-negative-research-20261025-27d6875f3b22-allfinite.tif": {
+        "ref_dots": 59243,
+        "candidate_dot_fraction_within_3px": 0.49777,
+        "reference_dot_fraction_within_3px": 0.51025,
+        "postplacement_dot_spearman": 0.03838,
+        "preplacement_surface_spearman": 0.10592
+      },
+      "gems27-h29-1-drefill-b2-38k-20261025-c24b6371179c-allfinite.tif": {
+        "ref_dots": 38000,
+        "candidate_dot_fraction_within_3px": 0.46388,
+        "reference_dot_fraction_within_3px": 0.50811,
+        "postplacement_dot_spearman": 0.04012,
+        "preplacement_surface_spearman": 0.08324
+      },
+      "gems27-h29-1b-drefill-deconf-b2-38k-20261025-14e416a1a380-allfinite.tif": {
+        "ref_dots": 38000,
+        "candidate_dot_fraction_within_3px": 0.45852,
+        "reference_dot_fraction_within_3px": 0.48482,
+        "postplacement_dot_spearman": 0.04023,
+        "preplacement_surface_spearman": 0.08046
+      },
+      "gems27-h30-chem-deconf-b2-38k-20261025-ad5a68bb0535-allfinite.tif": {
+        "ref_dots": 38000,
+        "candidate_dot_fraction_within_3px": 0.40992,
+        "reference_dot_fraction_within_3px": 0.42405,
+        "postplacement_dot_spearman": 0.03542,
+        "preplacement_surface_spearman": 0.07073
+      },
+      "gems27-h30-gapflank-b2-38k-20261025-3107a3007b77-allfinite.tif": {
+        "ref_dots": 38000,
+        "candidate_dot_fraction_within_3px": 0.46521,
+        "reference_dot_fraction_within_3px": 0.50632,
+        "postplacement_dot_spearman": 0.04137,
+        "preplacement_surface_spearman": 0.0862
+      },
+      "gems27-h31-rankens-celf-b2-20261026-93c8af046660-allfinite.tif": {
+        "ref_dots": 37654,
+        "candidate_dot_fraction_within_3px": 0.48526,
+        "reference_dot_fraction_within_3px": 0.68187,
+        "postplacement_dot_spearman": 0.06275,
+        "preplacement_surface_spearman": 0.10984
+      },
+      "gems27-h32-poisson-demag-b2-20261026-1ac69a77008d-allfinite.tif": {
+        "ref_dots": 37654,
+        "candidate_dot_fraction_within_3px": 0.46428,
+        "reference_dot_fraction_within_3px": 0.50961,
+        "postplacement_dot_spearman": 0.04009,
+        "preplacement_surface_spearman": 0.08426
+      },
+      "gems27-h33-agmc-cm-celf30-20261026-423b1d431032-allfinite.tif": {
+        "ref_dots": 37654,
+        "candidate_dot_fraction_within_3px": 0.84817,
+        "reference_dot_fraction_within_3px": 0.91045,
+        "postplacement_dot_spearman": 0.2425,
+        "preplacement_surface_spearman": 0.12904
+      },
+      "gems27-lane-subsurface-buried-fault-20261025-fc6d8c3acf6c-allfinite.tif": {
+        "ref_dots": 38000,
+        "candidate_dot_fraction_within_3px": 0.24523,
+        "reference_dot_fraction_within_3px": 0.27387,
+        "postplacement_dot_spearman": 0.01122,
+        "preplacement_surface_spearman": 0.03087
+      }
+    }
+  },
+  "raster": {
+    "directory": "docs/downloads/research",
+    "primary_allfinite": "gems27-h33-2-agmc-mdm-celf345-20261026-91ba971e2f33-allfinite.tif",
+    "companion_nan": "gems27-h33-2-agmc-mdm-celf345-20261026-91ba971e2f33-nan.tif",
+    "zip": "gems27-h33-2-agmc-mdm-celf345-20261026-91ba971e2f33-allfinite.zip",
+    "content_id": "91ba971e2f33",
+    "sha256": "c2138e68b862a06aabff086b4f06cc1860a7dd87c1fba81c7728b7fb90f57e5d",
+    "sha256_nan": "1770bee45218651c7ea2c454ecd2f0b0d5567ebc9333623c233b30b67bdc2044",
+    "sha256_zip": "e9bef4beefb43114e0f375e8df0cfa3512a3ca5bdcf0e7e303286ac6e7c7da9c",
+    "allfinite_bytes": 825034,
+    "nan_bytes": 1590166,
+    "zip_bytes": 182388,
+    "dots": 37654,
+    "b_exclusion_px": 2.0,
+    "celf_min_sep_px": 3.45,
+    "celf_gamma": 1.3,
+    "geometry_diagnostics": {
+      "n_dots": 37654,
+      "nn_min_px": 3.6056,
+      "nn_p10_px": 3.6056,
+      "nn_median_px": 4.1231,
+      "nbr_le_3px_mean": 0.0,
+      "frac_ge_3nbr_in_3px": 0.0,
+      "c_blind_coverage": 0.064961,
+      "c_gain_vs_h31s_006359": 0.001371,
+      "lidar_missing_dot_share": 0.2132,
+      "footprint_lidar_missing_area_share": 0.2463,
+      "d_cat_min_px": 2.2361,
+      "d_cat_median_px": 15.0,
+      "d_cat_le_5_share": 0.2459,
+      "d_cat_gt_15_share": 0.4991,
+      "quadrant_shares": {
+        "NW": 0.225,
+        "NE_LidarGapHeavy": 0.2922,
+        "SW": 0.2469,
+        "SE": 0.2359
+      }
+    }
+  },
+  "validator": {
+    "zeros_hard_pass": true,
+    "nan_hard_pass": true,
+    "technical_validator_pass": true,
+    "inside_footprint_nan_count": 0,
+    "whole_array_nan_count_allfinite": 0,
+    "inside_footprint_range": [
+      0.0,
+      1.0
+    ],
+    "value_set_inside": [
+      0.0,
+      1.0
+    ],
+    "crs": "EPSG:32611",
+    "shape": [
+      3730,
+      3292
+    ],
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "zeros_checks": {
+      "grid_matches_template": {
+        "pass": true,
+        "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+        "hard": true
+      },
+      "single_band_float32": {
+        "pass": true,
+        "detail": "count=1 dtype=float32",
+        "hard": true
+      },
+      "inside_footprint_all_finite": {
+        "pass": true,
+        "detail": "0 non-finite inside 5167373 px",
+        "hard": true
+      },
+      "inside_footprint_in_0_1": {
+        "pass": true,
+        "detail": "min=0 max=1",
+        "hard": true
+      },
+      "no_infinities_anywhere": {
+        "pass": true,
+        "detail": "np.isinf(whole array) is empty",
+        "hard": true
+      },
+      "outside_footprint_is_zero_and_finite": {
+        "pass": true,
+        "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+        "hard": true
+      },
+      "strict_whole_array_range": {
+        "pass": true,
+        "detail": "whole-array min=0 max=1",
+        "hard": true
+      },
+      "profile_driver_gtiff": {
+        "pass": true,
+        "detail": "GTiff",
+        "hard": false
+      },
+      "compression_like_sample": {
+        "pass": true,
+        "detail": "Compression.lzw",
+        "hard": false
+      }
+    },
+    "checks_allfinite_json": "docs/downloads/research/checks-gems27-h33-2-agmc-mdm-celf345-20261026-91ba971e2f33-allfinite.json",
+    "checks_nan_json": "docs/downloads/research/checks-gems27-h33-2-agmc-mdm-celf345-20261026-91ba971e2f33-nan.json"
+  },
+  "runtime_s": 37.1
+}

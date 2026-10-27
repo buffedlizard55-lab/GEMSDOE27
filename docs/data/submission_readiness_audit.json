@@ -129,6 +129,37 @@
       "actual_sha256": "8ff3b255b9399871f5bb034da289cfb5c7c0cddda97cf77d3371c3b79fee60ed",
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
+    "h33_2_s12_run_card_2026-10-26.json": {
+      "ok_to_publish_as_submission": false,
+      "reasons": [
+        "run card does not authorize submission",
+        "verdict is not promote",
+        "efficacy gate not explicitly passed"
+      ],
+      "actual_sha256": "c2138e68b862a06aabff086b4f06cc1860a7dd87c1fba81c7728b7fb90f57e5d",
+      "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
+    },
+    "h33_3_s12_run_card_2026-10-26.json": {
+      "ok_to_publish_as_submission": false,
+      "reasons": [
+        "run card does not authorize submission",
+        "verdict is not promote",
+        "efficacy gate not explicitly passed"
+      ],
+      "actual_sha256": "1ada0f4f4c5f68403b811ae5538658a3bb52be6ea66f6be649cf51c9c1fc7b16",
+      "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
+    },
+    "h33_s12_run_card_2026-10-26.json": {
+      "ok_to_publish_as_submission": false,
+      "reasons": [
+        "run card does not authorize submission",
+        "verdict is not promote",
+        "uniqueness gate not passed",
+        "dot overlap missing or exceeds threshold"
+      ],
+      "actual_sha256": "1a80299535e0ecbbf75c5a9d6a8b36687916f7923090fee6ee891383555b55eb",
+      "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
+    },
     "lane_run_card_2026-10-25.json": {
       "ok_to_publish_as_submission": false,
       "reasons": [

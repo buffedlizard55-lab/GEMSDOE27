@@ -371,9 +371,48 @@
    "signature": "Local sigma=15px gravity-on-RTP regression residual + gradients; gravity-edge-without-magnetic-edge rank contrasts; gravity-only structure coherence; pseudogravity-mismatch gradient (src/gems27/poisson_demag.py, 8 features)",
    "why": "Hydrothermal magnetite destruction along blind conduits erases the magnetic edge while the gravity density step persists; surface-rupture catalogues miss such blind faults.",
    "differs": "subsurface_features multiplies coincident mag+grav edges, suppressing exactly this case; no Poisson-residual feature existed in src/.",
-   "status": "TESTED - FROZEN GATE FAILED (Lane L-S11, fresh seeds 500-509, 40 cells, 118,039 withheld positives, knowledge/26+27). Pooled HOLDOUT-DTI P 0.03573 vs D 0.03922 vs B 0.03647; P-D -0.00349, 95% CI [-0.00477,-0.00223], 1/10 seeds, 0/4 folds; canary max dir-inv AUC 0.546. Unique TIFF 1ac69a77008d is a NEGATIVE research artifact in docs/downloads/research/ - DO NOT SUBMIT. Seeds 500-509 consumed; do not reuse or retune.",
-   "gain": "negative: pooled delta -0.00349 vs D (base-32+subsurface-15) on fresh seeds 500-509",
+   "status": "TESTED TWICE - FROZEN GATE FAILED IN BOTH SESSIONS 11 & 11B (PR #33 seeds 500-509: P-D -0.00349, CI [-0.00477,-0.00223], 1/10 seeds; PR #34 incremental stack on H31-S: -0.00355, 71.8% overlap vs H31-1). Refuted; do not retry.",
+   "gain": "negative: pooled delta -0.00349 vs D (seeds 500-509) and -0.00355 vs H31-S",
    "cost": "3 experiments (E1 canary, E2 holdout, E3 build); 0 weekly slots",
+   "external": []
+  },
+  {
+   "id": "H33-1",
+   "rank": 101,
+   "title": "Asymmetric Graben-Margin Clay-Cap Dip-Coupling, Canyon-Mouth Range-Front Collinearity & End-to-End Dual-Regime Multi-km Orthogonal-Radon CELF Allocation (AGMC-CM-CELF30)",
+   "layers": "cond_surf, depth_to_base_surf, iso_grav_anom, det_elev, det_local_relief, TMI_up150, rtp, ThK (geodawn_extensions_u8), gdr_wellspring_in_footprint.csv, gdr_vents_in_footprint.csv, lidar_scarp_features_u8.tif",
+   "signature": "Cross-strike hanging-wall minus footwall electrical conductivity jumps (+400 m, +800 m) and footwall-to-hanging-wall density/elevation throws along unit basinward normal grad(G_4(depth_to_base_surf)); +/-1.2 km along-strike canyon-mouth incision collinearity; TMI_up150 deep magnetic persistence; ThK K-metasomatism edges; end-to-end dual-regime nested spatial cross-fitting (50-col M_Sub + 66-col lidar_valid-only M_Full in Stage 1 & Stage 2) with 16-azimuth 2.3 km orthogonal Radon anisotropy + min_sep_px=3.00 CELF.",
+   "why": "Dipping (50-65 deg) Basin-and-Range geothermal conduits exhibit conductive smectite/brine alteration caps offset 400-800 m into the hanging wall relative to resistive horst steps, while rapidly aggrading Holocene alluvial fans bury inter-canyon surface scarps yet preserve aligned canyon-mouth knickpoints.",
+   "differs": "Synthesizes untried H31-3 asymmetric dip-vector pairing + untried H29-5 canyon-mouth collinearity + TMI_up150 + ThK + end-to-end lidar_valid-only Stage-2 cross-fitting + 16-azimuth 2.3 km orthogonal Radon line integrals.",
+   "status": "TESTED ON FRESH SEEDS 600-609 (Lane L-S12-2026-10-26) — PASSED ALL 5/5 FROZEN E2 EFFICACY CLAUSES WITH ALL-TIME REPO RECORD HOLDOUT-DTI = 0.049590 (vs H31-S = 0.046622, +0.002968, 95% CI [+0.001592, +0.004441], 9/10 seeds, 31/40 cells; +0.003882 vs H29-S, 10/10 seeds; +0.008441 vs D0, 10/10 seeds; canary max AUC 0.5992) AND PASSED 12-PEER UNIQUENESS (max 58.67% <= 70%) + LIVE-SCORED GEMSDOE27 UNIQUENESS (58.67%, 56.61%), BUT STITCHED 0+45 OOF NUDGED 3-PX OVERLAP VS UNSCORED H31-1 (cf8e1bbef244) FROM 66.96% TO 71.21% > 70.00%. Fail-closed gate recorded verdict='negative', ok_to_submit=false (gems27-h33-agmc-cm-celf30-20261026-423b1d431032-allfinite.tif in docs/downloads/research/; evidence/h33_s12_run_card_2026-10-26.json).",
+   "gain": "+0.002968 vs H31-S (95% CI [+0.00159, +0.00444], 9/10 seeds) and +0.008441 vs D0 on seeds 600-609; held on 71.21% intra-repo overlap vs unscored cf8e1bbef244.",
+   "cost": "Experiment 1 of 3 in Session 12; 0 weekly slots spent.",
+   "external": []
+  },
+  {
+   "id": "H33-2",
+   "rank": 102,
+   "title": "Deconfounded Morphotectonic M_Full (Dropping Raw Base LiDAR) + Multi-Elevation Magnetic Dip/Verticality & Zero-Overlap min_sep=3.45 CELF (AGMC-MDM-CELF345)",
+   "layers": "53 LiDAR-free cols (20 base + 15 sub15 + 15 H33 + 3 H33-2 TMI_up150 dip-shift / vertical strike-slip / Walker Lane seismic-uranium corridor) + 5 deconfounded 1 m LiDAR cols (zero raw u8 base LiDAR)",
+   "signature": "Removes all 12 raw u8 base_X lidar_* columns to eliminate shared LiDAR scarp splits with H31-1, adds multi-elevation TMI_up150 vs RTP down-dip migration vs vertical strike-slip persistence, and expands CELF exclusion to min_sep_px=3.45 (nbr_le_3px=0.0).",
+   "why": "Tests whether deconfounded slope-normalized cross-contour LiDAR ridges suffice without raw u8 LiDAR descriptors while breaking intra-repo overlap.",
+   "differs": "Controlled raw-LiDAR ablation of H33-1 + multi-elevation TMI_up150 dip/verticality separation + exact stitched E1 uniqueness gate before E2.",
+   "status": "TESTED ON FRESH SEEDS 610-619 (Lane L-S12B-2026-10-26) — PASSED STITCHED E1/E3 UNIQUENESS (max 66.89% <= 70% vs cf8e1bbef244; 55.03% vs 12 peers; canary max AUC 0.5966), BUT FAILED FROZEN E2 HOLDOUT GATE: dropping the 12 raw base_X LiDAR columns cut detector HOLDOUT-DTI from 0.04711 -> 0.04055 (H33_2-S = 0.040878 vs H31-S = 0.044685, -0.003807). Routed to docs/downloads/research/ (91ba971e2f33, ok_to_submit=false; evidence/h33_2_s12_run_card_2026-10-26.json).",
+   "gain": "negative vs H31-S (-0.003807 on seeds 610-619; +0.003669 vs B0, 9/10 seeds) — proved raw 1 m LiDAR scarp bands are indispensable.",
+   "cost": "Experiment 2 of 3 in Session 12; 0 weekly slots spent.",
+   "external": []
+  },
+  {
+   "id": "H33-3",
+   "rank": 103,
+   "title": "Full-Spectrum 69-Col Synthesis (Restoring 32 Base Bands) + N22.5E/N67.5E Basin-and-Range OOF Stitch + min_sep=3.15 N18.4E-Preserving CELF (AGMC-WL-CELF315)",
+   "layers": "All 32 base_X cols + 15 sub15 + 19 H33 + 3 H33-2 non-LiDAR cols (53-col M_Sub + 69-col M_Full, max_features=0.62) + 11 Stage-2 16-azimuth orthogonal-Radon cols",
+   "signature": "Restores all 32 base bands, stitches N22.5E + N67.5E Basin-and-Range strike-aligned 4-sector OOF partitions, and sets min_sep_px=3.15 (blocking r<=3.000 px so nbr_le_3px=0.0 while preserving sqrt(10)=3.1623 px N18.4E strike steps).",
+   "why": "Recovers 1 m LiDAR fault-scarp sensitivity while eliminating <=3.0 px interior crowding and aligning OOF sector boundaries with regional Basin-and-Range fault strike.",
+   "differs": "First N22.5E/N67.5E strike-aligned OOF stitch and exact sqrt(10)=3.1623 px N18.4E lattice-step CELF.",
+   "status": "TESTED ON FRESH SEEDS 620-629 (Lane L-S12C-2026-10-26) — PASSED STITCHED E1/E3 UNIQUENESS WITH LARGE MARGIN (62.50% <= 70% vs cf8e1bbef244; 54.82% vs 12 peers; canary max AUC 0.6008) AND BEAT ALL BENCHMARKS ON POOLED BUFFERED HOLDOUT-DTI (H33_3-S = 0.044310 > H31-S = 0.044042, H29-S = 0.043796, D0 = 0.038705 [+0.005605, 10/10 seeds, 4/4 folds], B0 = 0.036661 [+0.007648, 10/10 seeds, 4/4 folds]; SW +0.005634 & NW +0.000534 vs H31-S), BUT FAILED STRICT PREREGISTERED PAIRED SEED CONSISTENCY CLAUSES (b)/(c) vs H29-S/H31-S (5/10 seeds; max_features=0.62 diluted NE_LidarGapHeavy -0.00573). Fail-closed gate recorded verdict='negative', ok_to_submit=false (99c013f6e930 in docs/downloads/research/; evidence/h33_3_s12_run_card_2026-10-26.json).",
+   "gain": "+0.000267 pooled vs H31-S (+0.005605 vs D0, 10/10 seeds; +0.007648 vs B0, 10/10 seeds), below strict paired consistency gate.",
+   "cost": "Experiment 3 of 3 (FINAL) in Session 12; 0 weekly slots spent.",
    "external": []
   }
  ]

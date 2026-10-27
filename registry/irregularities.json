@@ -408,6 +408,24 @@
    "severity": "medium",
    "issue": "Shared tool `src/gems27/coverage_thin.py::weighted_celf_cover` truncated its initial candidate heap at `keep_n = max(max_candidates=320_000, budget * 3)` before `min_sep_px` exclusion. On quadrant holdouts (`budget ~ 9,150`) `320,000` is `35x` budget so it always reached budget, whereas on full-map emission (`budget = 37,654`) with `min_sep_px = 2.8` (`21` integer lattice offsets blocked per dot along ridges), `320,000` (`8.5x` budget) exhausted `489` dots short (`37,165` vs `37,654`).",
    "action": "Fixed in-place in `src/gems27/coverage_thin.py` per Parallel-Run Protocol \u00a72 via `block_area = max(3, ceil(pi * max(min_sep_px, 1.0)^2 * 1.35))` (`keep_n = max(max_candidates, budget * block_area)`), preserving identical behavior for quadrant holdouts (`budget ~ 9,150 <= 320,000 / 34`) while reaching exact `37,654` full-map dots at `min_sep_px = 2.8`."
+  },
+  {
+   "id": "IR-2026-10-26-09-gemsdoe28-gemsdoe31-swap-and-withheld-count-typos",
+   "severity": "medium",
+   "issue": "Session-12 line-by-line repo audit uncovered four cross-document discrepancies: (1) `scripts/build_focus_sites_summary.py`, `EXECUTIVE_SUMMARY.md`, and `README.md:409` swapped `GEMSDOE28` (`h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif`, OWNER-REPORTED `0.2710`, `37,660` dots) with `GEMSDOE31` (`h27-4-solo-d28-20261004-8acb75e1-nan.tif`, OWNER-REPORTED `0.2708`, `40,199` dots); (2) `README.md:55` and `knowledge/25_h31_results_2026-10-26.md:32` stated `289,180` withheld positive occurrences for `H31-1` seeds `400-409` whereas `evidence/h31_s10_run_card_2026-10-26.json` records `120,778`; (3) `registry/focus_sites_2026-10-26.json` cited negative `evidence/h31_run_card.json` instead of approved `evidence/h31_s10_run_card_2026-10-26.json`; and (4) `scripts/build_site.py` retained a legacy line claiming 'No live score exists for any 27GEMSDOE file' despite `Slot 1 = 0.2449` and `H29-S = 0.2190` (`OWNER-REPORTED`).",
+   "action": "Fixed in-place across `scripts/build_focus_sites_summary.py`, `evidence/focus_sites_executive_summary_20261026.json`, `scripts/build_site.py`, `registry/focus_sites_2026-10-26.json`, `knowledge/25_h31_results_2026-10-26.md`, `EXECUTIVE_SUMMARY.md`, and `README.md`."
+  },
+  {
+   "id": "IR-2026-10-26-10-h33-1-stitched-variance-overlap-jump",
+   "severity": "medium",
+   "issue": "In Session-12 Experiment 1 (`H33-1`, seeds `600-609`, `evidence/h33_s12_run_card_2026-10-26.json`), `H33-S` passed all 5/5 frozen holdout efficacy gates with an all-time repository record `HOLDOUT-DTI = 0.049590` (`+0.002968` over `H31-S = 0.046622`, 95% CI `[+0.001592, +0.004441]`, `9/10` seeds) and passed single-partition `E1` overlap (`66.96% <= 70%`) as well as `E3` uniqueness against all 12 peer rasters (`max 58.67%`) and both live-scored `GEMSDOE27` rasters (`58.67%`, `56.61%`). However, variance reduction from stitching `0.5 * quad + 0.5 * rot45` nudged `3-px` overlap against our own unscored Session-10 candidate `H31-1` (`cf8e1bbef244`) from `66.96%` to `71.21% > 70.00%`.",
+   "action": "Fail-closed readiness gate recorded `verdict='negative'`, `ok_to_submit=false` and routed `423b1d431032` to `docs/downloads/research/` so two live slots are never spent on overlapping surfaces. Upgraded `E1` in `H33-2` and `H33-3` to fit BOTH OOF partitions and gate exact stitched `3-px` overlap (`<= 70%`) BEFORE consuming any holdout seed (`66.89%` in `H33-2`; `62.50%` in `H33-3`)."
+  },
+  {
+   "id": "IR-2026-10-26-11-raw-lidar-scarp-ablation-and-max-features-tradeoff",
+   "severity": "low",
+   "issue": "Controlled Session-12 ablations on disjoint fresh seed blocks `610-619` (`H33-2`) and `620-629` (`H33-3`) established two quantitative architectural constraints: (1) dropping the 12 raw `base_X` 1 m LiDAR columns (`lidar_coh100`, `lidar_lapneg_max`, `lidar_cross_max`, `lidar_relief`) in `H33-2` cut detector `HOLDOUT-DTI` by `-0.00656` (`0.04711 -> 0.04055`); (2) restoring all 32 `base_X` bands with `min_sep_px=3.15` (`r_min=sqrt(10)=3.162 px`, `nbr_le_3px=0.0`) and `N22.5E+N67.5E` stitch in `H33-3` beat all controls including `H31-S` on pooled `HOLDOUT-DTI` (`0.044310 > 0.044042`) at `62.50%` overlap vs `H31-1`, but lowering `max_features` from `0.72` to `0.62` diluted `NE_LidarGapHeavy` (`-0.00573`), missing paired CI/seed consistency clauses `(b)` and `(c)`.",
+   "action": "Both `H33-2` (`91ba971e2f33`) and `H33-3` (`99c013f6e930`) are preserved as negative research artifacts in `docs/downloads/research/` (`ok_to_submit=false`). Unscored Session-10 `H31-1` (`cf8e1bbef244`) remains the sole primary live-slot candidate (`OK TO DOWNLOAD AND SUBMIT`)."
   }
  ]
 }

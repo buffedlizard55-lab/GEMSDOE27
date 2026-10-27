@@ -1,0 +1,34 @@
+building/loading subsurface15 (15 ch) and H33 (19 ch) feature matrices...
+  feature matrices ready in 0.0s
+  canary H33 h33_hw_fw_cond_jump_400m            : raw=0.4993 dir_inv=0.5007
+  canary H33 h33_hw_fw_cond_jump_800m            : raw=0.4988 dir_inv=0.5012
+  canary H33 h33_fw_hw_grav_throw_600m           : raw=0.5371 dir_inv=0.5371
+  canary H33 h33_fw_hw_elev_throw_600m           : raw=0.5743 dir_inv=0.5743
+  canary H33 h33_asymmetric_graben_conduit       : raw=0.5060 dir_inv=0.5060
+  canary H33 h33_destripe_rtp_tilt_hgm           : raw=0.5105 dir_inv=0.5105
+  canary H33 h33_tmi_up150_tilt_hgm              : raw=0.5097 dir_inv=0.5097
+  canary H33 h33_mag_crustal_persistence         : raw=0.5077 dir_inv=0.5077
+  canary H33 h33_isograv_flexure_crest           : raw=0.5295 dir_inv=0.5295
+  canary H33 h33_k_metasom_thk_depletion_edge    : raw=0.5087 dir_inv=0.5087
+  canary H33 h33_hydro_silica_vent_corridor      : raw=0.5158 dir_inv=0.5158
+  canary H33 h33_walker_transtension_index       : raw=0.5716 dir_inv=0.5716
+  canary H33 h33_piedmont_profile_concavity      : raw=0.5992 dir_inv=0.5992
+  canary H33 h33_canyon_mouth_knick_impulse      : raw=0.5451 dir_inv=0.5451
+  canary H33 h33_canyon_mouth_collinearity_1200m : raw=0.5872 dir_inv=0.5872
+  canary H33 h33_lidar_slope_norm_scarp          : raw=0.5687 dir_inv=0.5687
+  canary H33 h33_lidar_cross_contour_nis         : raw=0.5644 dir_inv=0.5644
+  canary H33 h33_lidar_wash_bridge_800m          : raw=0.5644 dir_inv=0.5644
+  canary H33 h33_lahontan_shoreline_indicator    : raw=0.5345 dir_inv=0.5345
+fitting H33-1 end-to-end dual-regime 2-stage nested spatial cross-fit (Quadrant 4-fold)...
+    loaded cached H33 stage1 pair (0,1)
+    loaded cached H33 stage1 pair (0,2)
+    loaded cached H33 stage1 pair (0,3)
+    loaded cached H33 stage1 pair (1,2)
+    loaded cached H33 stage1 pair (1,3)
+    loaded cached H33 stage1 pair (2,3)
+    loaded cached H33 stage2 fold 0
+    loaded cached H33 stage2 fold 1
+    loaded cached H33 stage2 fold 2
+    H33 stage2 fold 3 done
+  finished H33-1 Quadrant OOF in 91.9s
+E1 PASS=True | max_H33_AUC=0.5992 max_all66_AUC=0.5992 | max_|rho|=0.1124 | max_3px_ov=0.6696 (vs_H31_cf8e=0.6696) -> /home/user/GEMSDOE27/evidence/h33_s12_e1_canary_and_surface.json

@@ -58,9 +58,15 @@
      "file": "gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-allfinite",
      "score": 0.219,
      "note": "score first reported in 2026-10-26 prompt; previously UNSCORED in repo"
+    },
+    {
+     "file": "gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif",
+     "score": null,
+     "sha256": "2c002b02792419864bd3b29a218e543cb41e3f07b3b57c29ef35c6e39e184bfe",
+     "note": "UNSCORED Session-10 promoted primary submission (ok_to_publish_as_submission=true via evidence/h31_s10_run_card_2026-10-26.json; max 3px peer overlap 57.7%, HOLDOUT-DTI 0.047302)"
     }
    ],
-   "verdict": "DO NOT RESUBMIT scored files; only this session's H31 is unscored here - follow machine badge"
+   "verdict": "DO NOT RESUBMIT scored files; Session-10 H31-1 (cf8e1bbef244) is unscored and machine-approved (OK TO DOWNLOAD AND SUBMIT)"
   },
   {
    "site": "GEMSDOE28",
@@ -161,5 +167,5 @@
    "verdict": "DO NOT SUBMIT - scored champion superset"
   }
  ],
- "answer_best_new_submission": "No already-scored file should be resubmitted. A new slot may only be filled by an unscored unique file whose machine readiness gate says promote (this repo: evidence/h31_run_card.json via gems27.readiness.publication_decision; fleet: GEMSDOE32 R6 pending selector instrument decision)."
+ "answer_best_new_submission": "No already-scored file should be resubmitted. A new slot may only be filled by an unscored unique file whose machine readiness gate says promote (this repo: evidence/h31_s10_run_card_2026-10-26.json -> docs/downloads/gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allfinite.tif via gems27.readiness.publication_decision; fleet: GEMSDOE32 R6 pending selector instrument decision)."
 }
