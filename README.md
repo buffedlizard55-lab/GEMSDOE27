@@ -2,6 +2,12 @@
 
 **DO NOT SUBMIT — no file is currently approved or authorized for a weekly slot.** The user reports that H31-1 content ID `cf8e1bbef244` was already submitted and received **0.2250 OWNER-REPORTED**. There is no organizer receipt in this repository. Do not upload, rename or re-thin that raster as a new submission. A valid GeoTIFF and a local holdout pass are not slot authorization.
 
+**Generated unique TIFF: NOT OK TO SUBMIT.** `docs/downloads/research/gems27-h33-bss-complement-20261027-9ba8480691ed-allfinite.tif` (sha256 `1373358188a96b20414834b3e0159065d87470fe695153262ced7b46bc1eb492`; name `27GEMSDOE-H33-BSS-20261027-9ba8480691ed`). HOLDOUT-DTI **0.025211** versus base-32 **0.041446** on seeds 520–529 (134,150 withheld-positive occurrences; paired 95% CI [−0.017576, −0.014449]; 0/10 seeds). That is not a leaderboard score. It is unique versus the 12 pinned focus-site rasters (3 px overlap 0.000 by the complement constraint) and format-valid. Uniqueness is not authorization. Note (92/140): `H33-1 buried-step complement B2 37654px HOLDOUT-DTI 0.0252 | id 9ba8480691ed | DO NOT SUBMIT`. Write-up: `knowledge/31_h33_result_2026-10-27.md`.
+
+Why the owner-reported 0.2778 file is not copied: it is the d=2.8 family after a 2 px catalogue-collar deletion. Copying it fails the uniqueness rule, and these 100 m bands do not recover the faults that family misses. The prompt’s 0.4413 and 0.3195 figures were not read from the leaderboard and disagree with each other. They are not scores to beat with a projection.
+
+Operating prompt for later sessions: read this section first, then `knowledge/30_preregistration_H33_2026-10-27.md` and `knowledge/31_h33_result_2026-10-27.md`. One lane, shared holdout and writer, label HOLDOUT-DTI versus ORGANIZER-CONFIRMED, leakage canary at AUC 0.90, stop after 3 experiments, do not select a weekly slot. Core values: Maximize P(Win), Own the Outcome. A unique losing TIFF is a result. Uploading it would spend a scarce slot on a measured loss.
+
 - [Executive summary of GEMSDOE24/25/27/28/30/31/32/33/36](EXECUTIVE_SUMMARY.md)
 - [GitHub Pages status](https://buffedlizard55-lab.github.io/GEMSDOE27/) · [Submission instructions](docs/how-to-submit.html) · [Research and run card](docs/research.html) · [Source feed](docs/sources.html)
 - [2026-10-27 hypothesis ranking and preregistration](knowledge/30_lane_2026-10-27_preregistration.md)

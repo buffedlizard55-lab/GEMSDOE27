@@ -245,3 +245,13 @@ Ranking rule: expected DTI gain x probability the test can validate it / cost. B
 * **Status:** TESTED - FROZEN GATE FAILED (Lane L-S11, fresh seeds 500-509, 40 cells, 118,039 withheld positives, knowledge/26+27). Pooled HOLDOUT-DTI P 0.03573 vs D 0.03922 vs B 0.03647; P-D -0.00349, 95% CI [-0.00477,-0.00223], 1/10 seeds, 0/4 folds; canary max dir-inv AUC 0.546. Unique TIFF 1ac69a77008d is a NEGATIVE research artifact in docs/downloads/research/ - DO NOT SUBMIT. Seeds 500-509 consumed; do not reuse or retune.
 * **Expected gain:** negative: pooled delta -0.00349 vs D (base-32+subsurface-15) on fresh seeds 500-509
 * **Cost:** 3 experiments (E1 canary, E2 holdout, E3 build); 0 weekly slots
+
+## H33-1 (rank 101): Short buried basement-step complement emission
+
+* **Layers:** cached 32-band stack plus depth_to_base_surf gradients/coherence, low-scarp residual, and short anisotropy (src/gems27/buried_step.py)
+* **Physical signature:** A short basement-depth step under weak lidar relief, emitted only outside the 3 px neighborhood of every positive pixel in the 12 pinned focus-site rasters
+* **Why it catches a fault missing from USGS/INGENIOUS:** Catalogue pixels the d=2.8 family does not cover sit under thicker basin fill and weaker scarps; a unique detector has to live there or it is a duplicate.
+* **How it differs from the repo:** Not a collar deletion of the 0.2778 file and not a tilt/analytic-signal rerun. Complement emission is a hard constraint, not a post-hoc prune of family dots.
+* **Status:** TESTED - FROZEN GATE FAILED (Lane L-S13-H33, seeds 520-529, 134,150 withheld-positive occurrences, knowledge/30+31). HOLDOUT-DTI 0.025211 vs base-32 0.041446; paired 95% CI [-0.017576, -0.014449]; 0/10 seeds, 0/4 folds; canary max dir-inv AUC 0.568. Unique TIFF 9ba8480691ed is a NEGATIVE research artifact in docs/downloads/research/ - NOT OK TO SUBMIT. Seeds 520-529 consumed; do not reuse or retune.
+* **Expected gain:** negative: pooled HOLDOUT-DTI 0.025211 vs base-32 0.041446; paired 95% CI [-0.017576, -0.014449]; 0/10 seeds, 0/4 folds
+* **Cost:** 1 confirmatory experiment (E1 canary, E2 holdout, E3 raster) on seeds 520-529; 0 weekly slots

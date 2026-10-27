@@ -30,6 +30,9 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
 img.fig{max-width:100%;height:auto;border:1px solid var(--line);border-radius:8px;background:#fff}
 figcaption{color:var(--muted);font-size:.88rem;margin:.3rem 0 1rem}
 .small{font-size:.86rem;color:var(--muted)}.warnbox{border-left:4px solid #d4a72c;background:#fff8c5;padding:.6rem .9rem;border-radius:6px;margin:1rem 0}
+.stopbox{border:3px solid #9b1c1c;background:#fff5f5;padding:1rem 1.1rem;border-radius:8px;margin:1rem 0}
+.okbox{border:3px solid #1b7f3a;background:#f3fff6;padding:1rem 1.1rem;border-radius:8px;margin:1rem 0}
+.stopbox h2,.okbox h2{margin:.1rem 0 .4rem}
 .okbox{border-left:4px solid #2da44e;background:#dafbe1;padding:.6rem .9rem;border-radius:6px;margin:1rem 0}
 tr.dossier td{background:#f6f8fa;font-size:.86rem}tr.link{cursor:pointer}tr.link:hover td{background:#eef6ff}
 input.filter{padding:.45rem .6rem;border:1px solid var(--line);border-radius:6px;width:min(100%,22rem);font:inherit}

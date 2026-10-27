@@ -1,0 +1,86 @@
+{
+  "experiment": "E1 H33-1 canary and pre-placement surface",
+  "label": "HOLDOUT-DTI setup only; no organizer score",
+  "preregistration_sha256": "a7f55404f03b214e3f27bdedcfb60702bc8797578c786534f12e5187e2355f27",
+  "seeds": [
+    520,
+    521,
+    522,
+    523,
+    524,
+    525,
+    526,
+    527,
+    528,
+    529
+  ],
+  "group_map": {
+    "n_features": 1179,
+    "n_segments_rasterized": 15404,
+    "n_fids_on_catalogue": 411,
+    "median_catalogue_to_vector_px": 0.0,
+    "share_catalogue_within_3px": 1.0
+  },
+  "n_hidden_positive_union": 55768,
+  "n_negative_sample": 250000,
+  "canary_new_features": {
+    "bss_depth_grad_s2": {
+      "raw_auc": 0.5319608760579544,
+      "direction_invariant_auc": 0.5319608760579544
+    },
+    "bss_depth_grad_s6": {
+      "raw_auc": 0.53146515496342,
+      "direction_invariant_auc": 0.53146515496342
+    },
+    "bss_depth_coh_s4": {
+      "raw_auc": 0.5223226587290202,
+      "direction_invariant_auc": 0.5223226587290202
+    },
+    "bss_lowscarp": {
+      "raw_auc": 0.4321319728159518,
+      "direction_invariant_auc": 0.5678680271840482
+    },
+    "bss_buried_step": {
+      "raw_auc": 0.508348667264381,
+      "direction_invariant_auc": 0.508348667264381
+    },
+    "bss_short_aniso": {
+      "raw_auc": 0.49181990557308847,
+      "direction_invariant_auc": 0.5081800944269115
+    }
+  },
+  "canary_max_direction_invariant_auc": 0.5678680271840482,
+  "leakage_flags": {},
+  "preplacement_surface_spearman_vs_12_peer_rasters": {
+    "g24_d15": 0.10992589329354135,
+    "g25_d28": 0.09180524716038221,
+    "g27_tv2_d15": 0.11038104783748275,
+    "g28_h27_4_r1": 0.08445661838983216,
+    "g28_h32_1": 0.08818410553368573,
+    "g28_h36_1": 0.079867605149186,
+    "g28_h38_1": 0.08041545544854917,
+    "g30_d28": 0.09180524716038221,
+    "g31_h27_4": 0.08445661838983216,
+    "g32_h33_2_b2": 0.0790327057126108,
+    "g33_h33d": 0.08638201260343302,
+    "g36_anderson": 0.07892384357389723
+  },
+  "max_abs_preplacement_surface_spearman": 0.11038104783748275,
+  "registry_ids": [
+    "g24_d15",
+    "g25_d28",
+    "g27_tv2_d15",
+    "g28_h27_4_r1",
+    "g28_h32_1",
+    "g28_h36_1",
+    "g28_h38_1",
+    "g30_d28",
+    "g31_h27_4",
+    "g32_h33_2_b2",
+    "g33_h33d",
+    "g36_anderson"
+  ],
+  "gate_e1_pass": true,
+  "duplicate_stop": false,
+  "runtime_s": 70.5
+}

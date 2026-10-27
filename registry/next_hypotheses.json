@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-27 | reconciled Session 12/13 with the tested H29-5 detrended-relief proxy.",
+  "generated": "2026-10-27 | H29-5-PROXY and H33-1 are tested negatives. No selector authorization.",
   "status": "Three additional formulations and a separate actual drainage hypothesis remain research ideas; H29-5-PROXY was tested and is negative. No selector authorization.",
   "novelty_scope": "Screened against current source tree and available experiment/evidence ledgers in this checkout through 2026-10-27; not a global novelty claim across sibling sites or other competitors.",
   "target": "Fault-location pixels in the organizer-created test labels, which remain unobserved here. Catalogue-internal holdouts are only a proxy and cannot validate far-field behavior.",
@@ -284,6 +284,28 @@
         624
       ],
       "distinction": "Proxy is not actual drainage or a mapped fan-apex analysis."
+    },
+    {
+      "id": "H33-1",
+      "title": "Short buried basement-step complement emission",
+      "status": "TESTED \u2014 FROZEN GATE FAILED; negative; NOT OK TO SUBMIT",
+      "validation": "knowledge/30_preregistration_H33_2026-10-27.md; knowledge/31_h33_result_2026-10-27.md; evidence/h33_run_card_2026-10-27.json",
+      "seeds": [
+        520,
+        521,
+        522,
+        523,
+        524,
+        525,
+        526,
+        527,
+        528,
+        529
+      ],
+      "pooled_holdout_dti": 0.025210578303887142,
+      "control_pooled_holdout_dti": 0.04144575222047764,
+      "mean_paired_delta_dti": -0.016165482384346848,
+      "ok_to_submit": false
     }
   ],
   "separate_review_class": {

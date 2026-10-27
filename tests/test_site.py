@@ -56,7 +56,10 @@ def test_h31_reported_submitted_and_never_offered_as_new():
         assert "cf8e1bbef244" in text and "0.2250" in text and "OWNER-REPORTED" in text
         assert "best new unique submission to upload" not in text.lower()
         assert not re.search(r'<a[^>]+href="[^\"]*cf8e1bbef244[^\"]*"[^>]*download', text)
-    assert "DO NOT SUBMIT" in (ROOT / "index.html").read_text()
+    root = (ROOT / "index.html").read_text()
+    assert "DO NOT SUBMIT" in root
+    assert "gems27-h33-bss-complement-20261027-9ba8480691ed-allfinite.tif" in root
+    assert "NOT OK TO SUBMIT the generated TIFF" in root
     assert (ROOT / ".nojekyll").exists()
 
 
@@ -84,6 +87,17 @@ def test_research_and_manual_instructions_are_explicit():
     assert "Predicted values must be in range [0, 1]" in how
     assert "does not guarantee organizer acceptance" in how
     assert "no approved new TIFF" in how
+
+
+def test_generated_h33_tiff_is_shown_and_not_approved():
+    name = "gems27-h33-bss-complement-20261027-9ba8480691ed-allfinite.tif"
+    for page in ("index.html", "executive-summary.html", "how-to-submit.html"):
+        text = (DOCS / page).read_text()
+        assert name in text
+        assert "NOT OK TO SUBMIT the generated TIFF" in text
+        assert "Download research GeoTIFF — NOT APPROVED FOR SUBMISSION" in text
+        assert "OK TO DOWNLOAD AND SUBMIT" not in text
+    assert name in (ROOT / "EXECUTIVE_SUMMARY.md").read_text()
 
 
 def test_research_tif_is_never_advertised_as_approved():
