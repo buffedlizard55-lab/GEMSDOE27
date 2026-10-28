@@ -35,6 +35,26 @@ def repo_link(relative: str) -> str:
     return f"{REPO}/blob/main/{relative}"
 
 
+def verified_research_path(card: dict, gate: dict) -> tuple[str, str] | None:
+    """Link only evidence-bound, byte-validated files located under docs/.
+
+    Research downloadability is independent of scientific/slot authorization.
+    A missing or modified TIFF must not be advertised as a valid download.
+    """
+    raster = card.get("raster") or {}
+    if not isinstance(raster, dict):
+        return None
+    name, directory = raster.get("primary_allfinite"), raster.get("directory", "docs/downloads/research")
+    if not isinstance(name, str) or not isinstance(directory, str) or not name:
+        return None
+    path = (ROOT / directory / name).resolve()
+    if (not path.is_relative_to(DOCS.resolve()) or not path.is_file()
+            or gate.get("actual_sha256") != raster.get("sha256")
+            or not (gate.get("independent_byte_validation") or {}).get("pass")):
+        return None
+    return path.relative_to(DOCS).as_posix(), gate["actual_sha256"]
+
+
 def card_summary(card: dict | None) -> tuple[str, str]:
     """Return a short HTML summary and matching Markdown for the H29-5 lane."""
     if not card:
@@ -64,13 +84,12 @@ def card_summary(card: dict | None) -> tuple[str, str]:
     else:
         detail = "Efficacy evaluation is incomplete; no holdout estimate is available."
     gate = publication_decision(card, ROOT)
-    raster = card.get("raster") or {}
-    path = ROOT / raster.get("directory", "docs/downloads/research") / raster.get("primary_allfinite", "")
-    if raster.get("primary_allfinite") and path.is_file():
-        relative = path.relative_to(DOCS).as_posix()
+    verified = verified_research_path(card, gate)
+    if verified:
+        relative, actual_hash = verified
         download = (f'<p><a class="btn alt" href="{esc(relative)}" download>Download research GeoTIFF — '
                     'NOT APPROVED FOR SUBMISSION</a></p>')
-        file_note = (f"Research-only file: `{relative}`; SHA-256 `{raster.get('sha256', 'missing')}`. "
+        file_note = (f"Research-only file: `{relative}`; SHA-256 `{actual_hash}`. "
                      f"Submission name: `{card.get('submission_name', 'not supplied')}`. "
                      f"Short note: `{card.get('note_max_140_chars', 'not supplied')}`.")
         extra = f'<p class="small">{esc(file_note)}</p>'
@@ -130,12 +149,12 @@ def h33_summary() -> tuple[str, str]:
     gate_text = ("Evidence gate passes, but no slot has been selected."
                  if gate["ok_to_publish_as_submission"]
                  else "The fail-closed evidence gate does not approve submission. NOT OK TO SUBMIT.")
-    path = ROOT / raster.get("directory", "docs/downloads/research") / raster.get("primary_allfinite", "")
-    if raster.get("primary_allfinite") and path.is_file():
-        relative = path.relative_to(DOCS).as_posix()
+    verified = verified_research_path(card, gate)
+    if verified:
+        relative, actual_hash = verified
         download = (f'<p><a class="btn alt" href="{esc(relative)}" download>Download research GeoTIFF — '
                     'NOT APPROVED FOR SUBMISSION</a></p>')
-        file_note = (f"Research-only file: `{relative}`; SHA-256 `{raster.get('sha256', 'missing')}`. "
+        file_note = (f"Research-only file: `{relative}`; SHA-256 `{actual_hash}`. "
                      f"Name: `{card.get('submission_name', 'not supplied')}`. "
                      f"Note: `{card.get('note_max_140_chars', 'not supplied')}`.")
     else:
@@ -273,19 +292,33 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
               'architecture, strengthen geographic blocking and resolve incomplete registry coverage. Only then may '
               'a separate selector consider a weekly slot. Actual organizer outcome, weekly capacity and '
               'score-to-file receipts are not known here. No portal upload was made.</p>')
-    candidate_file = 'downloads/research/gems27-h33-bss-complement-20261027-9ba8480691ed-allfinite.tif'
-    candidate_download = f'<a href="{candidate_file}" download>H33-1 all-finite GeoTIFF</a>'
+    # A static link/claimed hash can outlive a replaced or deleted research file.
+    # Bind the decision table to the same independent byte re-read as the verdict.
+    h33_card = read("evidence/h33_run_card_2026-10-27.json", {})
+    verified = verified_research_path(h33_card, publication_decision(h33_card, ROOT))
+    if verified:
+        candidate_file, candidate_hash = verified
+        candidate_download = (f'<a href="{esc(candidate_file)}" download>H33-1 all-finite GeoTIFF '
+                              '— RESEARCH ONLY, DO NOT SUBMIT</a>')
+        md_download = (f'[`H33-1 all-finite GeoTIFF — RESEARCH ONLY, DO NOT SUBMIT`]'
+                       f'(docs/{candidate_file})')
+        sha_html = f'<br><span class="small">SHA-256 {esc(candidate_hash)}</span>'
+        sha_md = f' (SHA-256 `{candidate_hash}`)'
+    else:
+        candidate_download = 'No verified research TIFF available (missing or byte validation failed)'
+        md_download = candidate_download
+        sha_html = sha_md = ''
     decision_table = f'''<h2>Download and submission decision</h2>
 <p>This is the decision table for files produced by this repository. An empty “estimated organizer score” is intentional: no local HOLDOUT-DTI can be converted honestly into an organizer score.</p>
 <div class="tw"><table><thead><tr><th>File to download</th><th>Local evidence / estimated organizer score</th><th>Unique?</th><th>May be submitted?</th></tr></thead><tbody>
-<tr><td>{candidate_download}<br><span class="small">SHA-256 1373358188a96b20414834b3e0159065d87470fe695153262ced7b46bc1eb492</span></td><td><b>HOLDOUT-DTI 0.025211</b> vs control 0.041446; paired 95% CI [−0.017576, −0.014449]. <b>No justified organizer-score estimate.</b></td><td>Yes versus the 12 pinned focus-site rasters only (max 3 px overlap 0.000; scope-limited).</td><td><b>No — frozen holdout gate failed.</b></td></tr>
+<tr><td>{candidate_download}{sha_html}</td><td><b>HOLDOUT-DTI 0.025211</b> vs control 0.041446; paired 95% CI [−0.017576, −0.014449]. <b>No justified organizer-score estimate.</b></td><td>Yes versus the 12 pinned focus-site rasters only (max 3 px overlap 0.000; scope-limited).</td><td><b>No — frozen holdout gate failed.</b></td></tr>
 <tr><td>No currently approved file</td><td>No estimate</td><td>Not applicable</td><td><b>No — selector authorization is absent.</b></td></tr>
 </tbody></table></div>'''
     decision_table_md = f'''## Download and submission decision
 
 | File to download | Local evidence / estimated organizer score | Unique? | May be submitted? |
 |---|---|---|---|
-| [`H33-1 all-finite GeoTIFF`]({candidate_file}) (SHA-256 `1373358188a96b20414834b3e0159065d87470fe695153262ced7b46bc1eb492`) | HOLDOUT-DTI 0.025211 vs control 0.041446; paired 95% CI [−0.017576, −0.014449]. **No justified organizer-score estimate.** | Yes vs the 12 pinned focus-site rasters only (max 3 px overlap 0.000; scope-limited). | **No — frozen holdout gate failed.** |
+| {md_download}{sha_md} | HOLDOUT-DTI 0.025211 vs control 0.041446; paired 95% CI [−0.017576, −0.014449]. **No justified organizer-score estimate.** | Yes vs the 12 pinned focus-site rasters only (max 3 px overlap 0.000; scope-limited). | **No — frozen holdout gate failed.** |
 | No currently approved file | No estimate | Not applicable | **No — selector authorization is absent.** |
 
 '''
