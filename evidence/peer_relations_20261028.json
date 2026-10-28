@@ -1,0 +1,400 @@
+{
+ "created_utc": "2026-10-28T11:40:52+00:00",
+ "purpose": "Descriptive byte-level dot-set audit of pinned peers. Not a score, not a receipt.",
+ "label_convention": "owner-reported scores copied from registry; HOLDOUT-DTI not computed here",
+ "registry_sha256": "a433a83f433cf33e9230056165fd92e7fc1097e4f8a0b3d4bfd95129137e0601",
+ "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+ "labels_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+ "catalogue_cells": 60988,
+ "candidate": {
+  "path": "docs/downloads/research/gems27-h33-bss-complement-20261027-9ba8480691ed-allfinite.tif",
+  "sha256": "1373358188a96b20414834b3e0159065d87470fe695153262ced7b46bc1eb492",
+  "dots": 37654
+ },
+ "per_peer": {
+  "g24_d15": {
+   "repo": "buffedlizard55-lab/GEMSDOE24",
+   "commit": "05f6f85c695ff25546dcc2cbbfa34b3c2a8f4f4c",
+   "path": "docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif",
+   "manual_review_url": "https://github.com/buffedlizard55-lab/GEMSDOE24/blob/05f6f85c695ff25546dcc2cbbfa34b3c2a8f4f4c/docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif",
+   "cached_file": "data_cache/parallel_registry/g24_d15.tif",
+   "file_sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
+   "dots_in_footprint": 60069,
+   "nan_pixels_in_template_footprint": 0,
+   "owner_reported_score": 0.2477,
+   "score_label": "OWNER-REPORTED"
+  },
+  "g25_d28": {
+   "repo": "buffedlizard55-lab/GEMSDOE25",
+   "commit": "0f73c51dc954306468875c02cf98634e64ac0751",
+   "path": "docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+   "manual_review_url": "https://github.com/buffedlizard55-lab/GEMSDOE25/blob/0f73c51dc954306468875c02cf98634e64ac0751/docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+   "cached_file": "data_cache/parallel_registry/g25_d28.tif",
+   "file_sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
+   "dots_in_footprint": 44090,
+   "nan_pixels_in_template_footprint": 0,
+   "owner_reported_score": 0.26,
+   "score_label": "OWNER-REPORTED; peer sources flag score-to-file attribution unresolved"
+  },
+  "g27_tv2_d15": {
+   "repo": "buffedlizard55-lab/GEMSDOE27",
+   "commit": "b8dd298e10884afffa05436673ac73aeaf850b8c",
+   "path": "docs/downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif",
+   "manual_review_url": "https://github.com/buffedlizard55-lab/GEMSDOE27/blob/b8dd298e10884afffa05436673ac73aeaf850b8c/docs/downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif",
+   "cached_file": "data_cache/parallel_registry/g27_tv2_d15.tif",
+   "file_sha256": "33003374335d84bf885f2d8f5e9dd4c57044c8ec58fa6a0d7fa581e8bc41c11d",
+   "dots_in_footprint": 61328,
+   "nan_pixels_in_template_footprint": 0,
+   "owner_reported_score": 0.2449,
+   "score_label": "OWNER-REPORTED"
+  },
+  "g28_h27_4_r1": {
+   "repo": "buffedlizard55-lab/GEMSDOE28",
+   "commit": "78e724f95337a6528b1248be5c113c6d6d502891",
+   "path": "docs/downloads/gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.tif",
+   "manual_review_url": "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/78e724f95337a6528b1248be5c113c6d6d502891/docs/downloads/gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.tif",
+   "cached_file": "data_cache/parallel_registry/g28_h27_4_r1.tif",
+   "file_sha256": "ab02300152248fdda04e988e2cd2a0c13f35eec42fcf670a15e8b76b19e24a73",
+   "dots_in_footprint": 40199,
+   "nan_pixels_in_template_footprint": 0,
+   "owner_reported_score": 0.2708,
+   "score_label": "OWNER-REPORTED"
+  },
+  "g28_h32_1": {
+   "repo": "buffedlizard55-lab/GEMSDOE28",
+   "commit": "78e724f95337a6528b1248be5c113c6d6d502891",
+   "path": "docs/downloads/gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35eee884e-nan.tif",
+   "manual_review_url": "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/78e724f95337a6528b1248be5c113c6d6d502891/docs/downloads/gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35eee884e-nan.tif",
+   "cached_file": "data_cache/parallel_registry/g28_h32_1.tif",
+   "file_sha256": "04d31922f5c1ea4016984fc470ab2b0ff8e266c615792f0e86020da3b940d3ff",
+   "dots_in_footprint": 42294,
+   "nan_pixels_in_template_footprint": 0,
+   "owner_reported_score": 0.2649,
+   "score_label": "OWNER-REPORTED"
+  },
+  "g28_h36_1": {
+   "repo": "buffedlizard55-lab/GEMSDOE28",
+   "commit": "78e724f95337a6528b1248be5c113c6d6d502891",
+   "path": "docs/downloads/gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif",
+   "manual_review_url": "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/78e724f95337a6528b1248be5c113c6d6d502891/docs/downloads/gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif",
+   "cached_file": "data_cache/parallel_registry/g28_h36_1.tif",
+   "file_sha256": "5556aa1438fd67376b60d5ffc99228ec09dcc11a8408298a743ccb88d6163641",
+   "dots_in_footprint": 37660,
+   "nan_pixels_in_template_footprint": 0,
+   "owner_reported_score": 0.271,
+   "score_label": "OWNER-REPORTED"
+  },
+  "g28_h38_1": {
+   "repo": "buffedlizard55-lab/GEMSDOE28",
+   "commit": "78e724f95337a6528b1248be5c113c6d6d502891",
+   "path": "docs/downloads/gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif",
+   "manual_review_url": "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/78e724f95337a6528b1248be5c113c6d6d502891/docs/downloads/gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif",
+   "cached_file": "data_cache/parallel_registry/g28_h38_1.tif",
+   "file_sha256": "81d5b87bc8424f162a8f56aa9aac8fbe630c61646b9cac24d5ebbdc1b1951783",
+   "dots_in_footprint": 37860,
+   "nan_pixels_in_template_footprint": 0,
+   "owner_reported_score": 0.2707,
+   "score_label": "OWNER-REPORTED"
+  },
+  "g30_d28": {
+   "repo": "buffedlizard55-lab/GEMSDOE30",
+   "commit": "3d5bec2af5f29291617f97c9e2dfe443be6f55c3",
+   "path": "docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif",
+   "manual_review_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/3d5bec2af5f29291617f97c9e2dfe443be6f55c3/docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif",
+   "cached_file": "data_cache/parallel_registry/g30_d28.tif",
+   "file_sha256": "8cf893ead5667df21d3288a9968c35fd5385c425b029d82ee71d311715b129fd",
+   "dots_in_footprint": 44090,
+   "nan_pixels_in_template_footprint": 0,
+   "owner_reported_score": 0.26,
+   "score_label": "OWNER-REPORTED; peer source calls attribution unresolved"
+  },
+  "g31_h27_4": {
+   "repo": "buffedlizard55-lab/GEMSDOE31",
+   "commit": "cf13282fcd86290f1539f0a86446c8ba7205a79b",
+   "path": "docs/downloads/gemsdoe31-h27-4-solo-d28-20261004-8acb75e1-nan.tif",
+   "manual_review_url": "https://github.com/buffedlizard55-lab/GEMSDOE31/blob/cf13282fcd86290f1539f0a86446c8ba7205a79b/docs/downloads/gemsdoe31-h27-4-solo-d28-20261004-8acb75e1-nan.tif",
+   "cached_file": "data_cache/parallel_registry/g31_h27_4.tif",
+   "file_sha256": "07b6db440535404bb41ec8ddc797713e200d308e3da35937393efde5eb84bc40",
+   "dots_in_footprint": 40199,
+   "nan_pixels_in_template_footprint": 0,
+   "owner_reported_score": 0.2708,
+   "score_label": "OWNER-REPORTED"
+  },
+  "g32_h33_2_b2": {
+   "repo": "buffedlizard55-lab/GEMSDOE32",
+   "commit": "012e17b2a115c3c0d5e7885bea625bf9657c99fc",
+   "path": "docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+   "manual_review_url": "https://github.com/buffedlizard55-lab/GEMSDOE32/blob/012e17b2a115c3c0d5e7885bea625bf9657c99fc/docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+   "cached_file": "data_cache/parallel_registry/g32_h33_2_b2.tif",
+   "file_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+   "dots_in_footprint": 37654,
+   "nan_pixels_in_template_footprint": 0,
+   "owner_reported_score": 0.2778,
+   "score_label": "OWNER-REPORTED in task; peer audit calls file UNSCORED"
+  },
+  "g33_h33d": {
+   "repo": "buffedlizard55-lab/GEMSDOE33",
+   "commit": "f52533110fe62cd03e77f1228e9e5ecac412c463",
+   "path": "docs/downloads/GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif",
+   "manual_review_url": "https://github.com/buffedlizard55-lab/GEMSDOE33/blob/f52533110fe62cd03e77f1228e9e5ecac412c463/docs/downloads/GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif",
+   "cached_file": "data_cache/parallel_registry/g33_h33d.tif",
+   "file_sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+   "dots_in_footprint": 41865,
+   "nan_pixels_in_template_footprint": 0,
+   "owner_reported_score": 0.2632,
+   "score_label": "OWNER-REPORTED"
+  },
+  "g36_anderson": {
+   "repo": "buffedlizard55-lab/GEMSDOE36",
+   "commit": "c9ad59ec6f969ed931d089a03044c1567a633e84",
+   "path": "docs/downloads/gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif",
+   "manual_review_url": "https://github.com/buffedlizard55-lab/GEMSDOE36/blob/c9ad59ec6f969ed931d089a03044c1567a633e84/docs/downloads/gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif",
+   "cached_file": "data_cache/parallel_registry/g36_anderson.tif",
+   "file_sha256": "e15891020b9c57056ac7fa874a5e506fbd6ed9314a4ea8e73af0753887a3708a",
+   "dots_in_footprint": 38854,
+   "nan_pixels_in_template_footprint": 0,
+   "owner_reported_score": 0.275,
+   "score_label": "OWNER-REPORTED"
+  }
+ },
+ "identical_in_footprint_pairs": [
+  [
+   "g25_d28",
+   "g30_d28"
+  ],
+  [
+   "g28_h27_4_r1",
+   "g31_h27_4"
+  ]
+ ],
+ "strict_subset_relations": [
+  {
+   "parent": "g25_d28",
+   "child": "g28_h27_4_r1",
+   "parent_dots": 44090,
+   "child_dots": 40199,
+   "removed_dots": 3891,
+   "removed_dots_catalogue_distance_px": {
+    "<= 1px": 3891,
+    "<= 2px": 3891,
+    "<= 3px": 3891,
+    "max": 1.0
+   },
+   "min_catalogue_distance_of_kept_dots_px": 1.414
+  },
+  {
+   "parent": "g25_d28",
+   "child": "g31_h27_4",
+   "parent_dots": 44090,
+   "child_dots": 40199,
+   "removed_dots": 3891,
+   "removed_dots_catalogue_distance_px": {
+    "<= 1px": 3891,
+    "<= 2px": 3891,
+    "<= 3px": 3891,
+    "max": 1.0
+   },
+   "min_catalogue_distance_of_kept_dots_px": 1.414
+  },
+  {
+   "parent": "g25_d28",
+   "child": "g32_h33_2_b2",
+   "parent_dots": 44090,
+   "child_dots": 37654,
+   "removed_dots": 6436,
+   "removed_dots_catalogue_distance_px": {
+    "<= 1px": 3891,
+    "<= 2px": 6436,
+    "<= 3px": 6436,
+    "max": 2.0
+   },
+   "min_catalogue_distance_of_kept_dots_px": 2.236
+  },
+  {
+   "parent": "g27_tv2_d15",
+   "child": "g24_d15",
+   "parent_dots": 61328,
+   "child_dots": 60069,
+   "removed_dots": 1259,
+   "removed_dots_catalogue_distance_px": {
+    "<= 1px": 58,
+    "<= 2px": 106,
+    "<= 3px": 249,
+    "max": 19.313
+   },
+   "min_catalogue_distance_of_kept_dots_px": 1.0
+  },
+  {
+   "parent": "g28_h27_4_r1",
+   "child": "g32_h33_2_b2",
+   "parent_dots": 40199,
+   "child_dots": 37654,
+   "removed_dots": 2545,
+   "removed_dots_catalogue_distance_px": {
+    "<= 1px": 0,
+    "<= 2px": 2545,
+    "<= 3px": 2545,
+    "max": 2.0
+   },
+   "min_catalogue_distance_of_kept_dots_px": 2.236
+  },
+  {
+   "parent": "g28_h38_1",
+   "child": "g28_h36_1",
+   "parent_dots": 37860,
+   "child_dots": 37660,
+   "removed_dots": 200,
+   "removed_dots_catalogue_distance_px": {
+    "<= 1px": 0,
+    "<= 2px": 0,
+    "<= 3px": 19,
+    "max": 87.71
+   },
+   "min_catalogue_distance_of_kept_dots_px": 1.414
+  },
+  {
+   "parent": "g30_d28",
+   "child": "g28_h27_4_r1",
+   "parent_dots": 44090,
+   "child_dots": 40199,
+   "removed_dots": 3891,
+   "removed_dots_catalogue_distance_px": {
+    "<= 1px": 3891,
+    "<= 2px": 3891,
+    "<= 3px": 3891,
+    "max": 1.0
+   },
+   "min_catalogue_distance_of_kept_dots_px": 1.414
+  },
+  {
+   "parent": "g30_d28",
+   "child": "g31_h27_4",
+   "parent_dots": 44090,
+   "child_dots": 40199,
+   "removed_dots": 3891,
+   "removed_dots_catalogue_distance_px": {
+    "<= 1px": 3891,
+    "<= 2px": 3891,
+    "<= 3px": 3891,
+    "max": 1.0
+   },
+   "min_catalogue_distance_of_kept_dots_px": 1.414
+  },
+  {
+   "parent": "g30_d28",
+   "child": "g32_h33_2_b2",
+   "parent_dots": 44090,
+   "child_dots": 37654,
+   "removed_dots": 6436,
+   "removed_dots_catalogue_distance_px": {
+    "<= 1px": 3891,
+    "<= 2px": 6436,
+    "<= 3px": 6436,
+    "max": 2.0
+   },
+   "min_catalogue_distance_of_kept_dots_px": 2.236
+  },
+  {
+   "parent": "g31_h27_4",
+   "child": "g32_h33_2_b2",
+   "parent_dots": 40199,
+   "child_dots": 37654,
+   "removed_dots": 2545,
+   "removed_dots_catalogue_distance_px": {
+    "<= 1px": 0,
+    "<= 2px": 2545,
+    "<= 3px": 2545,
+    "max": 2.0
+   },
+   "min_catalogue_distance_of_kept_dots_px": 2.236
+  },
+  {
+   "parent": "g36_anderson",
+   "child": "g32_h33_2_b2",
+   "parent_dots": 38854,
+   "child_dots": 37654,
+   "removed_dots": 1200,
+   "removed_dots_catalogue_distance_px": {
+    "<= 1px": 0,
+    "<= 2px": 0,
+    "<= 3px": 110,
+    "max": 91.049
+   },
+   "min_catalogue_distance_of_kept_dots_px": 2.236
+  }
+ ],
+ "candidate_vs_peers": {
+  "g24_d15": {
+   "spearman": -0.009292,
+   "dot_overlap_within_3px": 0.0,
+   "exact_overlap_dots": 0,
+   "peer_dots": 60069
+  },
+  "g25_d28": {
+   "spearman": -0.007948,
+   "dot_overlap_within_3px": 0.0,
+   "exact_overlap_dots": 0,
+   "peer_dots": 44090
+  },
+  "g27_tv2_d15": {
+   "spearman": -0.00939,
+   "dot_overlap_within_3px": 0.0,
+   "exact_overlap_dots": 0,
+   "peer_dots": 61328
+  },
+  "g28_h27_4_r1": {
+   "spearman": -0.007586,
+   "dot_overlap_within_3px": 0.0,
+   "exact_overlap_dots": 0,
+   "peer_dots": 40199
+  },
+  "g28_h32_1": {
+   "spearman": -0.007783,
+   "dot_overlap_within_3px": 0.0,
+   "exact_overlap_dots": 0,
+   "peer_dots": 42294
+  },
+  "g28_h36_1": {
+   "spearman": -0.007341,
+   "dot_overlap_within_3px": 0.0,
+   "exact_overlap_dots": 0,
+   "peer_dots": 37660
+  },
+  "g28_h38_1": {
+   "spearman": -0.007361,
+   "dot_overlap_within_3px": 0.0,
+   "exact_overlap_dots": 0,
+   "peer_dots": 37860
+  },
+  "g30_d28": {
+   "spearman": -0.007948,
+   "dot_overlap_within_3px": 0.0,
+   "exact_overlap_dots": 0,
+   "peer_dots": 44090
+  },
+  "g31_h27_4": {
+   "spearman": -0.007586,
+   "dot_overlap_within_3px": 0.0,
+   "exact_overlap_dots": 0,
+   "peer_dots": 40199
+  },
+  "g32_h33_2_b2": {
+   "spearman": -0.00734,
+   "dot_overlap_within_3px": 0.0,
+   "exact_overlap_dots": 0,
+   "peer_dots": 37654
+  },
+  "g33_h33d": {
+   "spearman": -0.007743,
+   "dot_overlap_within_3px": 0.0,
+   "exact_overlap_dots": 0,
+   "peer_dots": 41865
+  },
+  "g36_anderson": {
+   "spearman": -0.007457,
+   "dot_overlap_within_3px": 0.0,
+   "exact_overlap_dots": 0,
+   "peer_dots": 38854
+  }
+ }
+}

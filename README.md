@@ -35,7 +35,7 @@ Before implementation, rank 3–5 geological hypotheses with layers, physical si
 
 Every generated candidate needs a content-hashed TIFF/name, a note of at most 140 characters, byte-bound validation of band count, [0,1], finiteness and exact grid, and an unmistakable **OK / NOT OK TO SUBMIT** decision. Format validity and uniqueness alone never imply scientific merit. Label holdout results with evaluator/count/CI; only a receipt establishes ORGANIZER-CONFIRMED status. Keep historical owner reports explicitly distinct, never turn a projection into a score, and leave unknown estimates unknown. Audit official-source provenance honestly; blocked sources are not verified sources. Run three passes (implementation, defects/edge cases, requirement re-check), tests and lint, then record limitations and next steps. Negative results are deliverables. This is a consolidated operating brief, not a verbatim archival copy of the long request.
 
-Latest audit: [Session 14 review and three-pass verification](knowledge/32_session14_review_2026-10-27.md). The readiness audit now includes H33-1; malformed cards fail closed and cannot suppress other audit results. **No new candidate was promoted.**
+Latest audit: [Session 15 review, byte-level peer audit and the 0.2778 answer](knowledge/33_session15_review_2026-10-28.md). It reproduces the restored inputs; it measures GEMSDOE32 as the GEMSDOE25 d=2.8 field minus its 2-px catalogue collar; and it records two peer pairs that are identical in value (GEMSDOE25 = GEMSDOE30; GEMSDOE28 H27-4 = GEMSDOE31). **No file is OK to submit, and no new candidate was promoted.** Earlier: [Session 14 review](knowledge/32_session14_review_2026-10-27.md) (malformed cards fail closed; the readiness audit includes H33-1).
 
 ## What is established and what is not
 
@@ -59,6 +59,7 @@ python scripts/fetch_parallel_registry.py
 python scripts/audit_submission_readiness.py
 python scripts/build_site.py
 python scripts/verify_downloads.py
+python scripts/verify_peer_relations.py      # byte-level peer dot-set audit -> evidence/peer_relations_20261028.json
 ruff check src scripts tests
 python -m pytest -q
 ```

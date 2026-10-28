@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-27 | merged Session 12/13, relief-profile review, and H33-1 lane. No weekly slot authorized.",
+  "generated": "2026-10-27 | merged Session 12/13, relief-profile review, and H33-1 lane. 2026-10-28 session 15 peer-relation audit appended (IR-2026-10-28-*). No weekly slot authorized.",
   "items": [
     {
       "id": "prompt-verbatim-unavailable",
@@ -492,6 +492,36 @@
       "severity": "high",
       "issue": "Readiness previously trusted recorded raster-validator booleans without opening the matching-hash file.",
       "action": "Fixed shared readiness gate to independently scan raster grid, datatype and all pixel ranges; adversarial tests and audit report added. No candidate promoted."
+    },
+    {
+      "id": "IR-2026-10-28-01-gemsdoe28-31-identical-dots",
+      "severity": "high",
+      "issue": "Byte-level audit (scripts/verify_peer_relations.py, evidence/peer_relations_20261028.json): the pinned GEMSDOE28 H27-4 R1 raster and the pinned GEMSDOE31 H27-4 raster have identical in-footprint values (40,199 dots) but different SHA-256 (ab0230015224\u2026 vs 07b6db440535\u2026). Both are owner-reported at 0.2708.",
+      "action": "Treat as one dot field under two names until an organizer receipt or owner statement says which upload carried 0.2708. Do not count as two independent results. Record in the focus-site registry."
+    },
+    {
+      "id": "IR-2026-10-28-02-gemsdoe30-equals-gemsdoe25",
+      "severity": "high",
+      "issue": "Re-verified from bytes on 2026-10-28: the pinned GEMSDOE30 'offcat-44090' raster equals the GEMSDOE25 d=2.8 raster in every in-footprint value (44,090 dots); only the outside-footprint encoding differs (zeros vs NaN; SHA-256 8cf893ead566\u2026 vs 91eae1ca42ec\u2026). Owner-reported 0.2600 for both.",
+      "action": "Duplicate, not a new method. Keep as a single entry for uniqueness purposes; any scoring claim for GEMSDOE30 is the GEMSDOE25 field's claim."
+    },
+    {
+      "id": "IR-2026-10-28-03-collar-dose-response-owner-reported",
+      "severity": "medium",
+      "issue": "Measured on pinned bytes: GEMSDOE32 (0.2778 owner-reported) = GEMSDOE25 d=2.8 minus every dot within 2 px of a catalogue cell (6,436 removed; nearest kept dot 2.236 px); GEMSDOE31 (0.2708) = GEMSDOE25 minus dots within 1 px (3,891 removed); GEMSDOE32 = GEMSDOE31 minus 2,545 dots at 2 px. Owner-reported scores step 0.2600 -> 0.2708 -> 0.2778 with collar width. One family, one raster per step, owner-reported values.",
+      "action": "Report as a dose-response in owner-reported numbers, not as a causal mechanism. Any further collar widening is a subset and has 100% directed 3 px overlap with GEMSDOE32, so it fails the 70% duplicate rule."
+    },
+    {
+      "id": "IR-2026-10-28-04-official-links-unreachable-from-sandbox",
+      "severity": "high",
+      "issue": "Link check of 62 unique URLs in the executive summary, sources and registries: 26 github.com URLs returned HTTP 200. The 36 others (DrivenData, docs.nlr.gov, gdr.openei.org, usgs.gov, sciencebase.gov, osti.gov, epsg.io, Wikipedia, doi.org, researchgate, and all *.github.io Pages hosts) returned no connection (code 000) from the sandbox allowlist.",
+      "action": "These are NOT verified from this environment. Human reviewers should open them in a browser. The site must not claim line-by-line official verification for them."
+    },
+    {
+      "id": "IR-2026-10-28-05-verbatim-prompt-not-in-readme",
+      "severity": "medium",
+      "issue": "The user asked that the full prompt be placed in the README. README.md holds a condensed operating brief, which AGENTS.md permits, and states it is not verbatim. The full prompt is very long and repeats the same instructions many times.",
+      "action": "Open decision for the owner: keep the condensed brief in README and archive a verbatim copy as a separate file, or replace the brief with the verbatim text. Not changed in session 15."
     }
   ]
 }

@@ -21,7 +21,7 @@ The local HOLDOUT-DTI is not an organizer score or a prediction of the eventual 
 
 ## Best reported historical submission per site
 
-The score-to-file links below come from the 2026-10-26 pinned peer registry and owner/sibling reports, not receipts. They are not organizer-confirmed. Older executive evidence assigns different files or swaps the GEMSDOE28/GEMSDOE31 values; GEMSDOE25 and GEMSDOE36 file associations are also uncertain. Treat every pairing and claimed maximum as provisional. The files are historical, not new candidates, regardless of their reported values.
+The score-to-file links below come from the 2026-10-26 pinned peer registry and owner/sibling reports, not receipts. They are not organizer-confirmed. Older executive evidence assigns different files or swaps the GEMSDOE28/GEMSDOE31 values; GEMSDOE25 and GEMSDOE36 file associations are also uncertain. Treat every pairing and claimed maximum as provisional. The files are historical, not new candidates, regardless of their reported values. Byte-level check: GEMSDOE25 and GEMSDOE30 have identical in-footprint dot values (44,090 dots; SHA-256 91eae1ca42ec… vs 8cf893ead566…). GEMSDOE28 and GEMSDOE31 have identical in-footprint dot values (40,199 dots; SHA-256 ab0230015224… vs 07b6db440535…). Different files with identical values are one submission under two names, not independent results.
 
 | Site | Pinned historical raster | Owner-reported value | Geometry / provenance | Action |
 |---|---|---:|---|---|
@@ -41,7 +41,7 @@ SHA-256 hashes and pinned sources are in [the focus-site registry](https://githu
 
 ## GEMSDOE32: why it may look strong
 
-The measured GEMSDOE32 positive-dot set is the GEMSDOE25 d=2.8 set after removing pixels within two pixels of the known catalogue. Wider spacing and a catalogue collar plausibly reduce redundant or low-yield prediction mass under a distance-weighted metric, but the hidden truth and organizer score-to-file receipt are unavailable. The reported 0.2778 cannot be causally explained or independently verified from geometry alone. A genuinely new method might do better, but there is no validated evidence here that it will beat that value.
+The measured GEMSDOE32 positive-dot set is the GEMSDOE25 d=2.8 set after removing pixels within two pixels of the known catalogue. Wider spacing and a catalogue collar plausibly reduce redundant or low-yield prediction mass under a distance-weighted metric, but the hidden truth and organizer score-to-file receipt are unavailable. The reported 0.2778 cannot be causally explained or independently verified from geometry alone. A genuinely new method might do better, but there is no validated evidence here that it will beat that value. Measured on the pinned peer bytes (evidence/peer_relations_20261028.json): the owner-reported GEMSDOE32 file (37,654 dots) is a strict subset of the GEMSDOE25 d=2.8 field (44,090 dots). All 6,436 removed dots lie within 2 px of a catalogue cell, and the nearest kept dot is 2.236 px away. GEMSDOE31 is the same field with 3,891 dots within 1 px removed; GEMSDOE32 is GEMSDOE31 minus 2,545 dots at 2 px. Owner-reported scores therefore step 0.2600 → 0.2708 → 0.2778 as the removed collar widens from none to 1 px to 2 px. That is one family with one raster per step and owner-reported values: a dose-response pattern, not proof of cause. Any further pruning of this family yields a subset, whose directed 3-px overlap with the GEMSDOE32 raster is 100% by construction, so it fails the 70% duplicate rule.
 
 ## Research and next decision
 
