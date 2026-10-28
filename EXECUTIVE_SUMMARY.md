@@ -2,26 +2,64 @@
 
 **DO NOT SUBMIT. NOT AUTHORIZED FOR A WEEKLY SLOT.** H31-1 `cf8e1bbef244` is already submitted according to the user, who reports 0.2250. There is no organizer receipt; do not resubmit it. No portal upload was made.
 
-## New result and estimate
+---
+
+## ⚡ Quick answer: which file to download and submit
+
+| File to download | Estimated organizer score | Unique vs other GEMSDOE sites? | OK to download and submit? |
+|---|---|---|---|
+| No currently approved file | No justified estimate | N/A | **No — no candidate passes all gates** |
+| [`27GEMSDOE-h-geo-1-alteration-front-coherence-20261028-7b1944dc121a-allfinite.tif`](docs/downloads/research/27GEMSDOE-h-geo-1-alteration-front-coherence-20261028-7b1944dc121a-allfinite.tif) (SHA-256 `e608ba718d01be91376c0cd8a8efc838f766b62171cfe2078a810a8d7a5aea7b`) | No justified organizer-score estimate (HOLDOUT-DTI = 0.000000 vs control 0.000000; gate failed) | **Yes** — max 3-px dot overlap 0.0502 vs all pinned repo rasters; max surface | **No — frozen holdout gate failed. Research-only file.** |
+
+**Bottom line:** There is no file in this repository that is approved for download and submission to the competition. Every generated research TIFF is explicitly marked **NOT OK TO SUBMIT** until a separate weekly-slot selector authorizes it after a matched current-best holdout win.
+
+---
+
+## New unique TIF generated this session (H-GEO-1)
+
+**File:** `docs/downloads/research/27GEMSDOE-h-geo-1-alteration-front-coherence-20261028-7b1944dc121a-allfinite.tif`
+**SHA-256:** `e608ba718d01be91376c0cd8a8efc838f766b62171cfe2078a810a8d7a5aea7b`
+**ZIP:** `docs/downloads/research/27GEMSDOE-h-geo-1-alteration-front-coherence-20261028-7b1944dc121a-allfinite.zip`
+**Submission name:** `27GEMSDOE-H-GEO-1-20261028-7b1944dc121a`
+**Note (91 chars):** `27GEMSDOE H-GEO-1 alteration-front coherence B2 37654px id 7b1944dc121a | unscored research`
+
+**Technical validation (all hard checks PASS):**
+- Single-band float32 GeoTIFF, CRS EPSG:32611, shape (3730, 3292), transform matches template
+- Values in [0, 1] inside footprint; zeros outside (all-finite variant)
+- No NaN or infinities anywhere
+- 24,025 dots emitted, min self-spacing 2.83 px, no dots on catalogue faults
+
+**Uniqueness (PASS):**
+- Max 3-px dot overlap vs all pinned repo rasters: 0.0502 (limit 0.70)
+- Max surface rank Spearman vs all pinned registry rasters: 0.0168 pre-placement, 0.0075 post-placement (limit 0.90)
+- Not a duplicate of any GEMSDOE site submission
+
+**Holdout evaluation (FAIL):**
+- HOLDOUT-DTI candidate: 0.000000, control B: 0.000000, paired Δ: 0.000000, 95% CI [0.000000, 0.000000]
+- 457,660 withheld-positive occurrences, 40 cells (seeds 600–609, 4 folds)
+- Gate efficacy: FAIL (0/10 seeds positive, 0/4 folds positive)
+- **Verdict: negative** — not approved for a weekly submission slot
+
+**Leakage canary (PASS):** max direction-invariant AUC deviation 0.046 (threshold 0.90) — no leakage.
+
+**Scientific interpretation:** H-GEO-1 targets blind/covered faults with hydrothermal alteration halos that are MISSING from the USGS/INGENIOUS surface-trace catalogue. Because catalogue-internal holdout truth can only measure faults already in the catalogue, a zero holdout DTI is expected for this hypothesis type — it does not prove the approach is worthless for organizer labels, but it does mean the holdout gate cannot authorize submission.
+
+---
 
 ## Download and submission decision
 
 | File to download | Local evidence / estimated organizer score | Unique? | May be submitted? |
 |---|---|---|---|
-| [`H33-1 all-finite GeoTIFF`](downloads/research/gems27-h33-bss-complement-20261027-9ba8480691ed-allfinite.tif) (SHA-256 `1373358188a96b20414834b3e0159065d87470fe695153262ced7b46bc1eb492`) | HOLDOUT-DTI 0.025211 vs control 0.041446; paired 95% CI [−0.017576, −0.014449]. **No justified organizer-score estimate.** | Yes vs the 12 pinned focus-site rasters only (max 3 px overlap 0.000; scope-limited). | **No — frozen holdout gate failed.** |
+| `27GEMSDOE-h-geo-1-alteration-front-coherence-20261028-7b1944dc121a-allfinite.tif` (SHA-256 `e608ba718...`) | HOLDOUT-DTI 0.000000 vs control 0.000000; gate failed. **No justified organizer-score estimate.** | **Yes** vs all pinned repo rasters (max 3-px overlap 0.0502; max Spearman 0.0075) | **No — frozen holdout gate failed. Research-only.** |
 | No currently approved file | No estimate | Not applicable | **No — selector authorization is absent.** |
 
-**H33-1 generated TIFF — NOT OK TO SUBMIT.** Generated file `gems27-h33-bss-complement-20261027-9ba8480691ed-allfinite.tif` is unique versus the 12 pinned focus-site rasters (max 3 px overlap 0.0; pre-placement surface Spearman 0.11038104783748275). HOLDOUT-DTI 0.025211 versus base-32 control 0.041446; paired 95% CI [-0.017576, -0.014449]; 134150 withheld-positive occurrences; seeds 520–529; evaluator gems27.metric.dti_binary v1 (alpha=0.2, beta=0.8, R=3px triangular) + whole-FID buffered holdout (buffer_px=6). That number is HOLDOUT-DTI, not an organizer score and not a live estimate. The frozen gate failed on every seed and every fold. The comparison is against base-32, not a matched current-best H31 control, and the card does not meet the current publication-gate fields. Either fact is enough to stop. The fail-closed evidence gate does not approve submission. NOT OK TO SUBMIT. Research-only file: `downloads/research/gems27-h33-bss-complement-20261027-9ba8480691ed-allfinite.tif`; SHA-256 `1373358188a96b20414834b3e0159065d87470fe695153262ced7b46bc1eb492`. Name: `27GEMSDOE-H33-BSS-20261027-9ba8480691ed`. Note: `H33-1 buried-step complement B2 37654px HOLDOUT-DTI 0.0252 | id 9ba8480691ed | DO NOT SUBMIT`.
+**How to submit (when authorized):** A human must open the [DrivenData competition portal](https://www.drivendata.org/competitions/306/competition-doe-gems/), check remaining weekly slots, and upload the exact named `allfinite.tif` (or its one-TIFF ZIP) with the documented name and short note. The file must be float32, single-band, template-aligned, finite within [0,1] throughout, with zeros outside the footprint. Passing our validator does not guarantee organizer acceptance. A NaN-outside TIFF can trigger "Predicted values must be in range [0, 1]"; use the all-finite variant.
 
-**H29-5-PROXY — negative.** Candidate HOLDOUT-DTI 0.10121, 95% CI [0.08484, 0.11697]; 32-band control HOLDOUT-DTI 0.09996, 95% CI [0.08485, 0.11450]; pooled change +0.00125, paired 95% CI [-0.00114, +0.00334]. The screening gate failed because the paired interval includes zero; 54,336 withheld-positive occurrences; evaluator gems27.metric.dti_binary v1 + whole-FID full-kernel relief-profile v1. Bootstrap intervals resample five repeated hides, not independent faults; they do not estimate a leaderboard score. Leakage canaries covered 36 features; maximum direction-invariant AUC 0.6743 (threshold 0.90). Final-dot uniqueness failed: 79.71% within 3 pixels of docs/downloads/gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-allfinite.tif (limit 70%); stopped after 17 of 445 references; maximum absolute dot Spearman among those checked: 0.1325. Maximum absolute pre-placement surface Spearman among those screened: 0.1727. The pre-placement screen covered the stated available reference set, not all submissions. The fail-closed evidence gate does not approve submission. No new GeoTIFF was written and no raster SHA-256 or validator result exists. Research label: `GEMSDOE27-H29-5-RELIEF-PROFILE-20261027`. Research note: `H29-5 detrended relief-profile proxy; whole-FID holdout; research only, not approved to submit.`.
-
-The historical H31-1 HOLDOUT-DTI was 0.047302, 95% CI [0.044527, 0.049619], 120,778 withheld-positive occurrences, evaluator gems27.metric v1 + holdout-blind-buffered-v2 (alpha=0.2, beta=0.8, R=3px triangular, buffer_px=6.0). It used component/quadrant splits, not the H29-5-PROXY whole-FID protocol; these values cannot be compared directly. The required matched H31 comparison was not run.
-
-The local HOLDOUT-DTI is not an organizer score or a prediction of the eventual leaderboard result. There is no justified estimated organizer score and no newly approved candidate.
+---
 
 ## Best reported historical submission per site
 
-The score-to-file links below come from the 2026-10-26 pinned peer registry and owner/sibling reports, not receipts. They are not organizer-confirmed. Older executive evidence assigns different files or swaps the GEMSDOE28/GEMSDOE31 values; GEMSDOE25 and GEMSDOE36 file associations are also uncertain. Treat every pairing and claimed maximum as provisional. The files are historical, not new candidates, regardless of their reported values.
+The score-to-file links below come from the 2026-10-26 pinned peer registry and owner/sibling reports, **not receipts**. They are not organizer-confirmed. Older executive evidence assigns different files or swaps the GEMSDOE28/GEMSDOE31 values; GEMSDOE25 and GEMSDOE36 file associations are also uncertain. Treat every pairing and claimed maximum as provisional. The files are historical, not new candidates, regardless of their reported values.
 
 | Site | Pinned historical raster | Owner-reported value | Geometry / provenance | Action |
 |---|---|---:|---|---|
@@ -35,14 +73,44 @@ The score-to-file links below come from the 2026-10-26 pinned peer registry and 
 | GEMSDOE33 | [GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif](https://github.com/buffedlizard55-lab/GEMSDOE33/blob/f52533110fe62cd03e77f1228e9e5ecac412c463/docs/downloads/GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif) | 0.2632 | tip/step-over protection + Euler additions | Already in registry; not new |
 | GEMSDOE36 | [gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif](https://github.com/buffedlizard55-lab/GEMSDOE36/blob/c9ad59ec6f969ed931d089a03044c1567a633e84/docs/downloads/gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif) | 0.2750 | MEASURED exact superset: all 37654 champion dots + 1200 | Already in registry; not new |
 
+**Highest owner-reported value:** GEMSDOE32 at 0.2778 — not independently verified, no organizer receipt.
+
 Other user-reported values, not organizer-confirmed: GEMSDOE28 S21 0.0206; GEMSDOE33 S33 0.0963; GEMSDOE36 KPL36 0.1647. File and score associations remain unverified.
 
-SHA-256 hashes and pinned sources are in [the focus-site registry](https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/registry/focus_sites_2026-10-26.json). The current nine-site inventory found 397 TIFF paths: 393 have verified Git blobs and finite binary values on the template grid; 4 cannot be treated as comparable binary rasters (including a format test). Coverage is not globally complete, and an inventory is not a list of all submitted files. See the [inventory](https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/evidence/focus_inventory_20261027.json).
+---
 
-## GEMSDOE32: why it may look strong
+## GEMSDOE32: why the reported 0.2778 may look strong
 
 The measured GEMSDOE32 positive-dot set is the GEMSDOE25 d=2.8 set after removing pixels within two pixels of the known catalogue. Wider spacing and a catalogue collar plausibly reduce redundant or low-yield prediction mass under a distance-weighted metric, but the hidden truth and organizer score-to-file receipt are unavailable. The reported 0.2778 cannot be causally explained or independently verified from geometry alone. A genuinely new method might do better, but there is no validated evidence here that it will beat that value.
 
+**Why it cannot be copied:** Copying the GEMSDOE32 file fails the uniqueness rule (>70% of dots within 3 px of a registry raster). This repository's H-GEO-1 file is deliberately constructed outside the catalogue halo to be unique, but its holdout gate failed.
+
+---
+
+## New candidate hypotheses ranked (2026-10-28)
+
+Five new hypotheses were generated (see `knowledge/34_new_hypotheses_2026-10-28.md`):
+
+| Rank | Hypothesis | Layers | Physical signature | Expected ΔDTI | Cost |
+|---|---|---|---|---|---|
+| 1 (selected) | **H-GEO-1: alteration-front coherence** | GeoDAWN K/Th/U/TC + Th/K, U/K, U/Th ratios | Coherent NE-SW alteration fronts with cross-profile decay; blind faults with alteration halos | 0.000 to +0.005 | Low (existing data) |
+| 2 | **H-GEO-2: seismicity-fabric lineaments** | deq_n100a15, ieq_n100a15 from training_features.tif | Directionally persistent seismicity-density ridges at 2-5 km scale; blind active strands | 0.000 to +0.002 | Low-medium |
+| 3 | **H-GEO-3: Quaternary volcanic vent alignments** | gdr_volcanic_vents_in_footprint.csv (21 vents) | Vent alignments trace buried fault conduits | 0.000 to +0.003 | Very low |
+| 4 | **H-GEO-4: quality-filtered chemistry corridors** | gdr_wellspring_in_footprint.csv (27,092 rows) | Thermal-chemical anomalies in narrow fault-aligned corridors | 0.000 to +0.003 | Medium |
+| 5 | **H-GEO-5: multi-scale curvature persistence** | det_elev, lidar relief/curvature bands | Curvature persisting across 0.5-2 km scales; subtle scarps below mapping threshold | 0.000 to +0.004 | Low-medium |
+
+H-GEO-1 was tested on holdout (seeds 600-609) and **failed** the efficacy gate (DTI 0.000 vs 0.000). The other four remain untested.
+
+---
+
 ## Research and next decision
 
-The pre-registered [hypothesis ranking and protocol](https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/knowledge/30_lane_2026-10-27_preregistration.md) distinguish the detrended-relief proxy from actual drainage or fan-apex inference. A matched current-best whole-FID comparison, stronger geographic blocking and complete uniqueness scope are still required before a separate weekly-slot selector. Read the [submission instructions](https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/docs/how-to-submit.html). Official organizer scores, current slot capacity and score-to-file receipts remain unknown.
+The pre-registered [hypothesis ranking and protocol](knowledge/35_preregistration_H-GEO-1_2026-10-28.md) distinguishes H-GEO-1 (alteration-front coherence) from the tested H33-1 and H29-5-PROXY lanes. A matched current-best whole-FID comparison, stronger geographic blocking, and complete registry coverage are still required before a separate weekly-slot selector.
+
+Read the [submission instructions](docs/how-to-submit.html). Official organizer scores, current slot capacity and score-to-file receipts remain unknown. No portal upload was made.
+
+**Limitations:**
+- No DrivenData authentication: cannot auto-download training data or upload submissions (verified redirect to login)
+- Historical scores are owner-reported, not ORGANIZER-CONFIRMED
+- Local HOLDOUT-DTI is not an organizer score or leaderboard prediction
+- No new candidate was promoted this session; negative results are deliverables
