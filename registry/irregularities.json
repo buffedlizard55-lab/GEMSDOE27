@@ -522,6 +522,12 @@
       "severity": "medium",
       "issue": "The user asked that the full prompt be placed in the README. README.md holds a condensed operating brief, which AGENTS.md permits, and states it is not verbatim. The full prompt is very long and repeats the same instructions many times.",
       "action": "Open decision for the owner: keep the condensed brief in README and archive a verbatim copy as a separate file, or replace the brief with the verbatim text. Not changed in session 15."
+    },
+    {
+      "id": "IR-2026-10-28-peer-cache-pin-and-mask",
+      "severity": "high",
+      "issue": "Peer cache manifest previously recorded the hash of already-cached bytes without checking a registry SHA-256; changed cache bytes plus refreshed manifest could masquerade as the pinned source. Readiness byte scan also accepted a finite raster with a nodata tag or pixel mask. A failed uniqueness run could leave an earlier PASS report at its output path.",
+      "action": "Pin 12 SHA-256 values from the earlier byte audit, verify fetched and cached bytes against those pins and bind manifest provenance to registry, remove stale output before a run, and reject nodata tags and masked pixels for all-finite candidates. Regression tests added. Source bytes remain owner mirrors; full registry completeness is not established."
     }
   ]
 }

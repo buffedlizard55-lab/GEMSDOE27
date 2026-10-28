@@ -207,3 +207,28 @@ def test_matching_hash_cannot_hide_wrong_crs(tmp_path):
         dst.crs = "EPSG:4326"
     card["raster"]["sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
     assert not publication_decision(card, tmp_path)["ok_to_publish_as_submission"]
+
+
+def test_byte_validator_rejects_finite_raster_with_nodata_tag(tmp_path):
+    card = valid_card(tmp_path)
+    path = tmp_path / "candidate.tif"
+    with rasterio.open(path, "r+") as ds:
+        ds.nodata = 0
+    card["raster"]["sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
+    result = publication_decision(card, tmp_path)
+    assert not result["ok_to_publish_as_submission"]
+    assert result["independent_byte_validation"]["checks"]["no_nodata_tag"] is False
+    assert result["independent_byte_validation"]["checks"]["whole_array_unmasked"] is False
+
+
+def test_byte_validator_rejects_internal_or_sidecar_mask(tmp_path):
+    card = valid_card(tmp_path)
+    path = tmp_path / "candidate.tif"
+    mask = np.full((4, 4), 255, dtype="uint8")
+    mask[0, 0] = 0
+    with rasterio.open(path, "r+") as ds:
+        ds.write_mask(mask)
+    card["raster"]["sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
+    result = publication_decision(card, tmp_path)
+    assert not result["ok_to_publish_as_submission"]
+    assert result["independent_byte_validation"]["checks"]["whole_array_unmasked"] is False

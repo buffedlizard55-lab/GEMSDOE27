@@ -311,14 +311,14 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
     decision_table = f'''<h2>Download and submission decision</h2>
 <p>This is the decision table for files produced by this repository. An empty “estimated organizer score” is intentional: no local HOLDOUT-DTI can be converted honestly into an organizer score.</p>
 <div class="tw"><table><thead><tr><th>File to download</th><th>Local evidence / estimated organizer score</th><th>Unique?</th><th>May be submitted?</th></tr></thead><tbody>
-<tr><td>{candidate_download}{sha_html}</td><td><b>HOLDOUT-DTI 0.025211</b> vs control 0.041446; paired 95% CI [−0.017576, −0.014449]. <b>No justified organizer-score estimate.</b></td><td>Yes versus the 12 pinned focus-site rasters only (max 3 px overlap 0.000; scope-limited).</td><td><b>No — frozen holdout gate failed.</b></td></tr>
+<tr><td>{candidate_download}{sha_html}</td><td><b>HOLDOUT-DTI 0.025211</b> vs control 0.041446; paired 95% CI [−0.017576, −0.014449]; evaluator gems27.metric.dti_binary v1 + whole-FID buffered holdout, 134,150 withheld-positive occurrences. <b>No justified organizer-score estimate.</b></td><td>Yes versus the 12 pinned focus-site rasters only (max 3 px overlap 0.000; scope-limited).</td><td><b>No — frozen holdout gate failed.</b></td></tr>
 <tr><td>No currently approved file</td><td>No estimate</td><td>Not applicable</td><td><b>No — selector authorization is absent.</b></td></tr>
 </tbody></table></div>'''
     decision_table_md = f'''## Download and submission decision
 
 | File to download | Local evidence / estimated organizer score | Unique? | May be submitted? |
 |---|---|---|---|
-| {md_download}{sha_md} | HOLDOUT-DTI 0.025211 vs control 0.041446; paired 95% CI [−0.017576, −0.014449]. **No justified organizer-score estimate.** | Yes vs the 12 pinned focus-site rasters only (max 3 px overlap 0.000; scope-limited). | **No — frozen holdout gate failed.** |
+| {md_download}{sha_md} | HOLDOUT-DTI 0.025211 vs control 0.041446; paired 95% CI [−0.017576, −0.014449]; evaluator gems27.metric.dti_binary v1 + whole-FID buffered holdout, 134,150 withheld-positive occurrences. **No justified organizer-score estimate.** | Yes vs the 12 pinned focus-site rasters only (max 3 px overlap 0.000; scope-limited). | **No — frozen holdout gate failed.** |
 | No currently approved file | No estimate | Not applicable | **No — selector authorization is absent.** |
 
 '''
