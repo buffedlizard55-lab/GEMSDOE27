@@ -1,58 +1,62 @@
-# Session 17 — repository review and verification, 2026-10-28
+# Session 17 — three-pass review and run card (2026-10-28)
 
-## Executive decision
+## Decision
 
-**No candidate is approved for a competition slot. No new TIFF was generated, no experiment or portal action was performed.** The requested scientific work cannot be honestly completed in this checkout: the hash-pinned raster cache is absent, and the prompt's parallel-run instruction does not identify a specific single-method lane. Do not treat the prior reported 0.2778, 0.3195, or 0.4413 as organizer-confirmed scores or use them as model estimates. The executive site table is a historical owner-reported snapshot, not a current leaderboard feed.
+**No new geological experiment or TIFF was produced. No submission is approved, and no weekly slot was used.** The prompt's required single-method lane paragraph is absent, so no method was inferred. The existing H33-1 TIFF is research-only and remains **NOT OK TO SUBMIT** because its frozen whole-FID HOLDOUT-DTI gate failed. The historical peer audit is descriptive and does not establish an organizer score.
 
-The highest-value next step is to restore and verify the repository's pinned research inputs, then identify the assigned lane and fresh holdout seeds before preregistration. Do not use a submission slot for this work.
+### Relationship to the earlier Session 17 baseline review
 
-## Pass 1 — inventory and task alignment
+The earlier Session 17 review on the base branch observed that ignored `data_cache/` inputs were absent in that checkout, so raster verification was blocked there. In this continued workspace, the pinned mirror cache was restored and hash-checked, the shared 32-feature matrix was prepared, and raster audits then ran successfully. This is a later environment state; it does not imply the earlier missing-cache observation was incorrect or that owner-mirror data are organizer-authenticated. The current review supersedes the baseline for the repository state recorded here.
 
-- Read `README.md` and `AGENTS.md` first. The repo already has the standing charter, submission safety gates, nine-site executive summary, submission instructions, scientific hypothesis records, pinned peer registry, and prior session reviews. The README explicitly says its standing task brief is a consolidated summary rather than a verbatim copy of the full user prompt.
-- The currently recorded primary artifact, H33-1, is explicitly **NOT OK TO SUBMIT**. Its run card records HOLDOUT-DTI 0.025211 versus 0.041446 for its control, paired 95% CI [−0.017576, −0.014449], and 134,150 withheld-positive occurrences. It is a research negative, not a leaderboard score.
-- The peer audit explains the GEMSDOE32 0.2778 geometry as a 2-pixel catalogue-collar deletion from the GEMSDOE25 d=2.8 dot field. That geometric relationship does not establish score causation. Pruning that same dot family further would fail the directed 3-pixel uniqueness stop by construction.
-- Prior ranked hypothesis work is in `knowledge/07_untried_hypotheses.md`; it is not new work in this session. H28-1 is a prior catalogue-internal positive with a different protocol/context, not a current proof of improvement over the latest independent candidate. Do not silently treat it as a new pass.
+## Pass 1 — implementation and evidence assembly
 
-## Pass 2 — adversarial verification and environment checks
+- Read the README's session-start brief and used the restored shared feature matrix rather than building a private feature stack. The prepared matrix has 5,167,373 rows, 32 features, a 3,730×3,292 EPSG:32611 grid, and SHA-256 `83ed2704ee2de03cfb8c1f2966fcf71813501df97c1c35400e6c0415393f6dc`.
+- Added the pairwise final-dot screen for all 12 SHA-pinned historical peer rasters, using the repository's shared directed 3-px comparison and the stated strict stops (>0.90 absolute binary Spearman or >70% directed dot overlap). Historical raster values are compared only inside the shared footprint.
+- Hardened `scripts/verify_peer_relations.py`: each cached file must match its registry SHA-256 before and after reading; peers and candidate must match template CRS, shape, transform and band count; every in-footprint peer/candidate value must be finite and exactly binary. NaN outside the footprint remains allowed for historical encodings.
+- Regenerated the peer relation evidence and site. The executive table now has pinned download links, owner-reported values, unknown organizer-score estimates, pinned-scope uniqueness results and an explicit no-reuse decision for all nine selected sites. Same-repository peers are disambiguated by registry ID.
+- Kept the four registered hypothesis rows data-driven. The page records their layers, targeted signatures, missing-fault rationale, novelty limits, mimics, qualitative priority, cost and data gates; it asserts no numeric expected DTI gain.
 
-Commands and outcomes in this checkout:
+## Pass 2 — defect, edge-case and independent-byte review
 
-| Check | Result | Interpretation |
-|---|---|---|
-| `.venv/bin/python -m pytest -q` | **207 passed, 3 skipped** | All available unit tests passed; skipped tests need raster inputs. |
-| `.venv/bin/ruff check src scripts tests` | **passed** | No lint findings. |
-| `git diff --check` | **passed** | No whitespace errors. |
-| `python scripts/verify_downloads.py` | **blocked** | Required files missing: `data_cache/sample_submission.tif`, `data_cache/labels.tif`, and `data_cache/dotted_h19_5_d1_5_nan.tif`. |
-| `python scripts/restore_data.py --verify` | **failed as expected for absent cache** | All 17 manifest inputs reported BAD because the ignored cache is absent; verify-only mode does not download. No claim of corrupt pinned bytes is warranted. |
+- Added synthetic tests for NaNs outside the footprint, non-finite/soft values inside it, and shape mismatch. Also retained tests for directionality, exact in-footprint identity, strict subset accounting and the duplicate thresholds.
+- Rechecked the H33-1 TIFF independently: one float32 band on the exact EPSG:32611 template grid; all-finite values in [0,1], exact binary footprint values, zero catalogue overlap, 37,654 emitted dots, no nodata tag, and SHA-256 matching the run card (`1373358188a96b20414834b3e0159065d87470fe695153262ced7b46bc1eb492`).
+- The fail-closed readiness audit checked 22 cards. H33's byte checks pass; its publication decision and selector authorization are both false. `verify_downloads.py` reported 0 failures. Those are format/audit results only—not a holdout pass or organizer receipt.
+- Fixed duplicated punctuation in hypothesis data gates and tested it. The generated site's internal links resolve, and its output is deterministic.
 
-A local `.venv` was created from the pinned dependency ranges in `requirements.txt` to run the suite and lint. It is ignored by Git and is not a project deliverable.
+## Pass 3 — requirement re-check and scientific decision
 
-No source files or raster bytes were changed in the verification. The prior Session 16 report says it restored a cache in its earlier environment; this checkout does not contain that ignored cache. That is an environment-state difference, not evidence that its earlier byte validation was false. It must be restored and revalidated before raster-dependent gates can run here.
+### H33-1: prior HOLDOUT-DTI, not rerun
 
-## Pass 3 — requirements review, risks, and next actions
+The prior H33-1 result is labeled **HOLDOUT-DTI**, evaluator `gems27.metric.dti_binary v1` with α=0.2, β=0.8 and a 3-px (300 m) triangular kernel, whole-FID buffered hide-and-recover with a 6-px training buffer, seeds 520–529, and 134,150 withheld-positive occurrences. Candidate pooled DTI was 0.0252105783 versus control 0.0414457522; paired candidate-minus-control was −0.0162351739 with a 95% CI of [−0.0175755532, −0.0144486915]. The gate failed. This is not a leaderboard score or a justified score estimate.
 
-1. **Lane ambiguity:** the parallel protocol says to stay within “the single method paragraph below,” but the request does not provide an unambiguous one-method assignment. Selecting a method now would risk duplicating another parallel session. The already-ranked 3–5 candidates are documented in `knowledge/07_untried_hypotheses.md`; do not claim them as fresh hypotheses.
-2. **Input availability:** `data/manifest.json` describes 16 files plus one assembled input; verify-only confirms no usable cache in this checkout. A true experiment requires `python scripts/restore_data.py` (network access to the pinned owner-repository mirrors), then hash verification, and `python scripts/prepare_data.py` if the prepared stack is absent. Mirror provenance is not organizer authentication.
-3. **Holdout gate:** after inputs and lane are established, preregister fresh seeds and a matched current-best comparison. Run feature-alone leakage canaries (AUC > 0.90 is a stop), whole-FID buffered hide-and-recover with catalogue-derived features from visible faults only, exact visible-fault masking, pooled DTI (α=0.2, β=0.8, 300 m triangular kernel), and paired uncertainty. Stop at three experiments or two hours. Existing H28-1 evidence cannot substitute for this distinct gate.
-4. **Uniqueness and publication:** use the shared pre-placement and post-placement registry checks. A technical validator pass or uniqueness pass is not submission approval. A separate selector must authorize any weekly slot; no upload is automated.
-5. **Scores and official-source status:** keep historical reported values labeled owner-reported; estimate remains **unknown** absent calibrated evidence. Do not describe an estimate/projection as a score. Repository policy forbids agent access to DrivenData; submission receipts and current slot capacity remain owner-supplied. The executive summary should be read as a versioned historical comparison, not a live feed.
-6. **PR/merge:** this review only records verification and limitations. A PR/merge should only be opened if there is a purposeful tracked change; do not fabricate changes or claim a remote PR/merge without GitHub evidence.
+The earlier feature-alone canary tested six H33-1 additions; the maximum direction-invariant AUC was 0.567868, below the 0.90 stop. The saved pre-placement continuous-surface maximum was 0.1103810478 against `g27_tv2_d15`. This review did **not** recompute that surface statistic. The post-placement recheck, freshly rerun against 12 pinned final-dot rasters, found maximum directed 3-px overlap 0.0 and maximum absolute binary Spearman 0.009390; no duplicate stop. The pin set is not a complete global registry.
 
-Official/manual-review references already documented in the repo include the [competition problem statement](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/), [official reference solution](https://github.com/drivendataorg/gems-prize-reference-solution), [USGS GeoDAWN record](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and), and [GDR submission 1391](https://gdr.openei.org/submissions/1391). This session did not fetch or independently verify new external source content.
+### Historical submissions and the reported GEMSDOE32 value
 
-## Run card
+The table in `EXECUTIVE_SUMMARY.md` covers GEMSDOE24/25/27/28/30/31/32/33/36. It labels the claims OWNER-REPORTED, leaves organizer-score estimates unknown, links the pinned historical files for download, and reports uniqueness only within the 12-raster final-dot snapshot. All nine selected per-site historical bests trigger at least one duplicate stop against the other 11 pinned files. Several score-to-file associations remain disputed; the user-supplied 0.3195 and 0.4413 leaderboard maxima conflict and have not been confirmed from a receipt.
 
-```json
-{
-  "hypothesis": "No new hypothesis tested; prior H33-1 remains a negative research result.",
-  "mechanism": "No candidate was built or evaluated in this session.",
-  "named_non_fault_process_that_could_mimic_it": "Not applicable to this session; H33-1's registered mimics include roads, field boundaries, survey seams, and lithologic basin-fill pinch-outs.",
-  "holdout_dti_and_ci": "No new HOLDOUT-DTI. Prior H33-1 HOLDOUT-DTI 0.025211 vs control 0.041446; paired 95% CI [-0.017576, -0.014449]; 134150 withheld-positive occurrences; gems27.metric.dti_binary v1, whole-FID buffered holdout. Historical result only, not a leaderboard score.",
-  "correlation_overlap_vs_registry": "No new candidate to compare. Prior H33-1 check covered 12 pinned peers; not full registry certification.",
-  "raster_sha256": null,
-  "validator_output": "No new raster. Current verify_downloads.py blocked by absent ignored cache inputs; prior H33-1 independent byte validation is recorded in evidence/safety_audit_20261028.json.",
-  "submission_name": null,
-  "note": "No new submission generated; do not submit H33-1.",
-  "verdict": "negative"
-}
-```
+For the GEMSDOE32 explanation, the measured pinned dot set (37,654 dots) is a strict subset of the GEMSDOE25 d=2.8 set (44,090 dots): 6,436 removed dots are within 2 pixels of catalogue cells, and the nearest retained dot is 2.236 px away. The intermediate GEMSDOE31 set removes 3,891 dots within 1 px; GEMSDOE32 then removes 2,545 more at 2 px. The corresponding 0.2600 → 0.2708 → 0.2778 values are OWNER-REPORTED, not causal evidence. The task attributes 0.2778 to GEMSDOE32, while the peer audit labels that raster UNSCORED; no organizer receipt resolves the association. A collar reducing redundant or low-yield mass is plausible, but geometry cannot prove why a score was reported.
+
+### Research gates and next steps
+
+Four formulations remain ranked qualitatively in `registry/next_hypotheses.json`; no numeric gain is claimed. Official GDR #1391 packages and raw conditioned-drainage/fan-apex inputs were not present or freshly verified. The GDR host is outside this sandbox's allowlist, and existing detrended-elevation bands do not establish routed drainage. Treat those ideas as unavailable here, not viable recommendations. Cached gravity/radiometric feature families do not override the missing lane assignment. Future work needs an explicit method paragraph, confirmed free/official data availability and hashes before data-gated hypotheses are treated as viable, preregistration on unused seeds, feature-alone canaries, shared evaluator/writer, matched current-best whole-FID holdout, and current complete pre- and post-placement uniqueness screens. Only a separate selector can authorize a slot.
+
+## Verification record
+
+- `python -m pytest -q`: **213 passed**.
+- Ruff: **passed** for the changed builder, peer-audit script and tests.
+- `py_compile` and `git diff --check`: **passed**.
+- `scripts/verify_downloads.py`: **0 failures**.
+- `scripts/audit_submission_readiness.py`: **22 cards checked; 0 selector-authorized; H33 byte checks pass, publication false**.
+- `scripts/verify_peer_relations.py`: **12 peers; 2 identical in-footprint pairs; 11 strict-subset relations**.
+- `scripts/build_site.py`: generated six pages, root index and executive summary; deterministic output test passed.
+
+Machine-readable audit/run card: [`evidence/session17_run_card_20261028.json`](../evidence/session17_run_card_20261028.json). Detailed pairwise raster evidence: [`evidence/peer_relations_20261028.json`](../evidence/peer_relations_20261028.json). The pre-existing H33 run card, canary and holdout records remain the source for its historic experiment; this session did not rerun the experiment.
+
+## Limitations and immediate next actions
+
+1. Obtain the missing single-method lane assignment before any experiment; do not infer it from the hypothesis ranking.
+2. Verify official-source download availability and bytes (including provenance/license) from an authorized environment before proposing external layers as usable.
+3. Treat peer coverage as finite: 12 pinned historical rasters are not all submissions, and their continuous pre-placement surfaces are unavailable.
+4. Keep all historical score claims provisional until tied to an organizer receipt; do not project a leaderboard value from HOLDOUT-DTI.
+5. Do not submit or spend a slot. The existing H33-1 result is negative, and no selector authorization exists.
