@@ -81,3 +81,7 @@ Read this README and `AGENTS.md` every session. This is a **condensed operating 
 - Preserve sources, access limitations and irregularities honestly. Do not claim line-by-line official verification when the source host is inaccessible.
 
 Latest review: [three-pass safety audit](knowledge/32_submission_safety_review_2026-10-27.md). The readiness gate now rereads TIFF bytes rather than trusting validator booleans. **No new geological experiment or submission slot was used.**
+
+## 2026-10-28 delivery audit
+
+[Session 15 three-pass delivery audit](knowledge/33_session15_delivery_audit_2026-10-28.md) fixes the executive Markdown download link and fails closed if a research TIFF is missing or its bytes disagree with the run card. The previously generated H33-1 GeoTIFF is downloadable **for research only; NOT OK TO SUBMIT**. No new experiment or slot was used: the parallel prompt did not contain its promised single-method lane paragraph. With hash-pinned owner-mirror data restored, 194 tests and the standalone raster-download verifier pass; these are not organizer receipts or a leaderboard-score estimate. Next session: read this charter and the Session 15 audit before choosing any assigned lane.
