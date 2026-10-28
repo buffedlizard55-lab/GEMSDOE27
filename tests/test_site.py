@@ -142,3 +142,34 @@ def test_downloads_have_unique_names_and_zip_single_member():
     for z in (DOCS / "downloads").glob("*.zip"):
         with zipfile.ZipFile(z) as zf:
             assert len(zf.namelist()) == 1 and zf.namelist()[0].endswith(".tif")
+
+
+def test_markdown_research_download_resolves_and_is_not_approved():
+    md = (ROOT / "EXECUTIVE_SUMMARY.md").read_text()
+    match = re.search(r'\[\`H33-1 all-finite GeoTIFF[^]]+\]\(([^)]+\.tif)\)', md)
+    assert match, "executive Markdown must link the verified research TIFF"
+    assert (ROOT / match.group(1)).is_file(), "Markdown link must resolve from repository root"
+    assert "DO NOT SUBMIT" in match.group(0)
+
+
+def test_research_link_fail_closed_for_missing_or_mismatched_bytes(tmp_path, monkeypatch):
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location("site_builder", ROOT / "scripts/build_site.py")
+    builder = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(builder)
+    monkeypatch.setattr(builder, "ROOT", tmp_path)
+    monkeypatch.setattr(builder, "DOCS", tmp_path / "docs")
+    folder = tmp_path / "docs/downloads/research"
+    folder.mkdir(parents=True)
+    file = folder / "candidate.tif"
+    card = {"raster": {"directory": "docs/downloads/research", "primary_allfinite": file.name,
+                       "sha256": "expected"}}
+    gate = {"actual_sha256": "expected", "independent_byte_validation": {"pass": True}}
+    assert builder.verified_research_path(card, gate) is None  # missing
+    file.write_bytes(b"bad")
+    assert builder.verified_research_path(card, {**gate, "actual_sha256": "other"}) is None
+    assert builder.verified_research_path(card, {**gate, "independent_byte_validation": {"pass": False}}) is None
+    assert builder.verified_research_path(card, gate) == ("downloads/research/candidate.tif", "expected")
+    card["raster"]["directory"] = "../outside"
+    assert builder.verified_research_path(card, gate) is None
