@@ -4,6 +4,10 @@
 
 **No new geological experiment or TIFF was produced. No submission is approved, and no weekly slot was used.** The prompt's required single-method lane paragraph is absent, so no method was inferred. The existing H33-1 TIFF is research-only and remains **NOT OK TO SUBMIT** because its frozen whole-FID HOLDOUT-DTI gate failed. The historical peer audit is descriptive and does not establish an organizer score.
 
+### Relationship to the earlier Session 17 baseline review
+
+The earlier Session 17 review on the base branch observed that ignored `data_cache/` inputs were absent in that checkout, so raster verification was blocked there. In this continued workspace, the pinned mirror cache was restored and hash-checked, the shared 32-feature matrix was prepared, and raster audits then ran successfully. This is a later environment state; it does not imply the earlier missing-cache observation was incorrect or that owner-mirror data are organizer-authenticated. The current review supersedes the baseline for the repository state recorded here.
+
 ## Pass 1 — implementation and evidence assembly
 
 - Read the README's session-start brief and used the restored shared feature matrix rather than building a private feature stack. The prepared matrix has 5,167,373 rows, 32 features, a 3,730×3,292 EPSG:32611 grid, and SHA-256 `83ed2704ee2de03cfb8c1f2966fcf71813501df97c1c35400e6c0415393f6dc`.
