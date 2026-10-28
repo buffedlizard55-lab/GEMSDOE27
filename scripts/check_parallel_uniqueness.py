@@ -56,11 +56,17 @@ def validated_manifest(manifest_path: Path, template: Path, registry_path: Path)
     required = [row["id"] for row in required_entries]
     if len(actual) != len(set(actual)) or len(required) != len(set(required)) or set(actual) != set(required):
         raise ValueError("parallel cache manifest is incomplete or has duplicate entries")
+    pins = {row["id"]: row for row in required_entries}
     for row in entries:
-        if (not isinstance(row.get("sha256"), str) or not re.fullmatch(r"[0-9a-f]{64}", row["sha256"])
+        pin = pins[row["id"]]
+        if (not isinstance(pin.get("sha256"), str) or not re.fullmatch(r"[0-9a-f]{64}", pin["sha256"])
+                or row.get("sha256") != pin["sha256"]
                 or not isinstance(row.get("local"), str) or not row["local"]
                 or Path(row["local"]).is_absolute()):
             raise ValueError(f"missing or invalid reference hash/path: {row['id']}")
+        if any(not isinstance(pin.get(key), str) or not pin[key] or row.get(key) != pin[key]
+               for key in ("repo", "commit", "path")):
+            raise ValueError(f"reference provenance mismatch: {row['id']}")
     return manifest
 
 
@@ -71,6 +77,15 @@ def main() -> int:
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--surface-only", action="store_true")
     args = parser.parse_args()
+    # Never leave a previous PASS at the requested output path when this run fails.
+    # Do not allow output cleanup to destroy an input or anything in the peer cache.
+    output = args.out.resolve()
+    cache_root = args.cache_manifest.parent.parent.resolve()
+    registry_path = (paths.REGISTRY / "parallel_submission_registry.json").resolve()
+    if (output in {args.candidate.resolve(), args.cache_manifest.resolve(),
+                   paths.TEMPLATE.resolve(), registry_path} or output.is_relative_to(cache_root)):
+        raise ValueError("unsafe report output path")
+    args.out.unlink(missing_ok=True)
     data, foot = read_candidate(args.candidate, paths.TEMPLATE)
     manifest = validated_manifest(args.cache_manifest, paths.TEMPLATE,
                                   paths.REGISTRY / "parallel_submission_registry.json")

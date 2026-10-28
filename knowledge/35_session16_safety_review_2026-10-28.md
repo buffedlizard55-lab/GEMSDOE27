@@ -1,0 +1,28 @@
+# Session 16 — fail-closed safety review, 2026-10-28
+
+## Decision
+
+**No new candidate; no file is approved for submission.** The prompt references a lane paragraph but does not supply one. The previous ranked hypotheses and the negative proxy screen are in [the prior preregistration](30_lane_2026-10-27_preregistration.md); they are not new experiments in this session. Guessing a lane risks collisions. The full request is not archived verbatim in README; the standing brief is explicitly a summary. The objective, three-pass requirements and limits are preserved there, but this is an outstanding request, not a completed verbatim transcription.
+
+The existing [H33-1 research GeoTIFF](../docs/downloads/research/gems27-h33-bss-complement-20261027-9ba8480691ed-allfinite.tif) is **NOT OK TO SUBMIT**. Its previous HOLDOUT-DTI is 0.025211 versus 0.041446 for base-32, with paired difference 95% CI [−0.017576, −0.014449], 134,150 withheld-positive occurrences, evaluator `gems27.metric.dti_binary v1` and buffered whole-FID holdout. Repeated hides are not independent geological samples. This is not a leaderboard estimate. The later byte recheck below is not another geological experiment or confirmation of effectiveness. [Run card](../evidence/safety_audit_20261028.json).
+
+## Pass 1 — implementation and reproduction
+
+- Found that the shared parallel fetcher recorded hashes of pre-existing cache files without comparing them against an independent expected SHA-256. A modified cache followed by refresh could falsely appear pinned. Added 12 expected hashes from [the previous measured peer audit](../evidence/peer_relations_20261028.json) to the peer registry, and verified the newly fetched codeload bytes against those pins. A cache mismatch stops; it is not silently repaired or accepted. These are owner repository mirrors, **not organizer receipts**. Historical reports using the old registry SHA remain historical snapshots.
+- Bound uniqueness manifest hashes and repo/commit/path to the registry, and removed a previous report before a new run so a failed run cannot leave a stale PASS. Protected input and cache paths from report cleanup. These changes live in the shared tools, not a private experiment fork.
+- Independently scanned the all-finite raster for nodata metadata and per-pixel masks, in addition to finiteness, range, grid, band and dtype. Finite numerical zeros can still be hidden by nodata or a raster mask.
+- Restored owner-mirrored inputs and the cached feature stack via `restore_data.py` and `prepare_data.py`; fetched all 12 pinned peers via `fetch_parallel_registry.py`. No DrivenData access or submission occurred. The files are git-ignored; restore afresh in a new checkout.
+
+## Pass 2 — adversarial checks
+
+Added tests for altered cache plus rewritten manifest, altered source provenance, stale PASS reports, unsafe output paths, altered cached data during refresh, missing pins, nodata tags and explicit pixel masks. The earlier H33-1 final binary raster was re-screened against the 12 pinned peer rasters: [per-peer evidence](../evidence/h33_postplacement_peer_recheck_20261028.json), max absolute final-dot Spearman 0.009390 and max directed 3-pixel overlap 0.0. The pre-placement surface value 0.110381 is **historical**, copied from its original run card, not recomputed here. These checks cover only the pinned peers and do not certify uniqueness against every submission. `verify_downloads.py` returned 0 failures; byte validator found no NaN, range outside [0,1], nodata tag or masked pixels, and the pinned-grid check passed. This does not prove acceptance by the organizer or success on hidden truth.
+
+## Pass 3 — requirements and next steps
+
+After data restoration and all code changes: `python -m pytest -q` — 204 passed; `ruff check src scripts tests` — passed; `git diff --check` — passed. No unused holdout seeds were consumed; no geological experiment was run. The nine-site executive table is a historical, owner-reported snapshot, not a live feed. GEMSDOE32's 0.2778 is not receipt-backed, and the score may reflect lower redundancy and catalogue-adjacent false-positive mass, not proven causation. A higher result is possible but **not demonstrated**. The user's 0.3195 and 0.4413 leaderboard claims conflict and are unverified.
+
+Next: (1) establish a genuinely assigned non-conflicting lane, then pre-register a fresh hypothesis and seeds; (2) require feature-alone canaries, visible-only whole-segment buffered holdout and a same-split current-best control, followed by wider pre/post placement checks and separate selector; (3) obtain a legitimately sourced organizer template and receipts, plus official source data where available, without agent automation against DrivenData; (4) reconcile historical score/file associations, coverage and current weekly cap. The present environment cannot reach DrivenData, USGS, GDR or NLR hosts, and repository policy forbids agent access to DrivenData. Links for authorized review: [official reference solution](https://github.com/drivendataorg/gems-prize-reference-solution), [organizer problem description](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/), [USGS GeoDAWN release](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and), [GDR 1391](https://gdr.openei.org/submissions/1391). No new official-source content was fetched this session.
+
+### Integration check
+
+Main advanced concurrently while this review was underway. Its independent malformed-path readiness fix and tests were merged into this session branch; both sets of tests were retained. Final integrated suite: 207 passed, `ruff check src scripts tests` passed, and `git diff --check` passed.

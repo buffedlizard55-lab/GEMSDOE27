@@ -5,13 +5,15 @@ Inputs are GitHub owner-repository mirrors, not organizer submission receipts. E
 repo/commit/path is read from registry/parallel_submission_registry.json, fetched from a codeload
 archive (rather than repeatedly querying the API), and re-opened against the local template grid.
 Downloads live only in GEMS_DATA_DIR, which is git-ignored. The cache manifest records the content
-SHA-256 actually received.
+SHA-256 checked against the independently recorded registry pin. A pre-existing cache
+is never silently trusted, even if a manifest from an earlier run exists.
 """
 
 from __future__ import annotations
 
 import hashlib
 import json
+import re
 import subprocess
 import sys
 import tarfile
@@ -74,6 +76,17 @@ def fetch_missing_from_archive(items: list[dict], cache: Path) -> None:
 
 def main() -> int:
     registry = json.loads(REGISTRY.read_text())
+    entries = registry.get("entries")
+    if not isinstance(entries, list) or not entries:
+        raise SystemExit("Peer registry is empty or malformed")
+    ids = set()
+    for item in entries:
+        if (not isinstance(item, dict) or not isinstance(item.get("id"), str)
+                or not re.fullmatch(r"[a-zA-Z0-9_-]+", item["id"])
+                or item["id"] in ids or not isinstance(item.get("sha256"), str)
+                or not re.fullmatch(r"[0-9a-f]{64}", item["sha256"])):
+            raise SystemExit("Peer registry contains invalid IDs or missing SHA-256 pins")
+        ids.add(item["id"])
     cache = paths.DATA / "parallel_registry"
     cache.mkdir(parents=True, exist_ok=True)
     manifest_path = cache / "cache_manifest.json"
@@ -85,6 +98,8 @@ def main() -> int:
     for item in registry["entries"]:
         suffix = Path(item["path"]).suffix.lower()
         destination = cache / f"{item['id']}{suffix}"
+        if sha256(destination) != item["sha256"]:
+            raise SystemExit(f"Peer registry SHA-256 mismatch: {item['id']}; remove the bad cache file and fetch again")
         with rasterio.open(destination) as dataset:
             grid_ok = (dataset.crs, dataset.shape, dataset.transform) == expected and dataset.count == 1
             details = {

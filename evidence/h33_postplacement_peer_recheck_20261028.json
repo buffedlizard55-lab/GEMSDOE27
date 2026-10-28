@@ -1,0 +1,98 @@
+{
+  "candidate": "gems27-h33-bss-complement-20261027-9ba8480691ed-allfinite.tif",
+  "candidate_sha256": "1373358188a96b20414834b3e0159065d87470fe695153262ced7b46bc1eb492",
+  "surface_only": false,
+  "thresholds": {
+    "abs_rank_correlation_gt": 0.9,
+    "dot_overlap_within_3px_gt": 0.7
+  },
+  "entries": [
+    {
+      "id": "g24_d15",
+      "reference_sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
+      "spearman_rank_correlation": -0.009291548921871874,
+      "candidate_dot_fraction_within_3px": 0.0,
+      "duplicate": false
+    },
+    {
+      "id": "g25_d28",
+      "reference_sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
+      "spearman_rank_correlation": -0.007947941240407765,
+      "candidate_dot_fraction_within_3px": 0.0,
+      "duplicate": false
+    },
+    {
+      "id": "g27_tv2_d15",
+      "reference_sha256": "33003374335d84bf885f2d8f5e9dd4c57044c8ec58fa6a0d7fa581e8bc41c11d",
+      "spearman_rank_correlation": -0.009389573228118413,
+      "candidate_dot_fraction_within_3px": 0.0,
+      "duplicate": false
+    },
+    {
+      "id": "g28_h27_4_r1",
+      "reference_sha256": "ab02300152248fdda04e988e2cd2a0c13f35eec42fcf670a15e8b76b19e24a73",
+      "spearman_rank_correlation": -0.007586253799214943,
+      "candidate_dot_fraction_within_3px": 0.0,
+      "duplicate": false
+    },
+    {
+      "id": "g28_h32_1",
+      "reference_sha256": "04d31922f5c1ea4016984fc470ab2b0ff8e266c615792f0e86020da3b940d3ff",
+      "spearman_rank_correlation": -0.007783015040560969,
+      "candidate_dot_fraction_within_3px": 0.0,
+      "duplicate": false
+    },
+    {
+      "id": "g28_h36_1",
+      "reference_sha256": "5556aa1438fd67376b60d5ffc99228ec09dcc11a8408298a743ccb88d6163641",
+      "spearman_rank_correlation": -0.0073409521853659634,
+      "candidate_dot_fraction_within_3px": 0.0,
+      "duplicate": false
+    },
+    {
+      "id": "g28_h38_1",
+      "reference_sha256": "81d5b87bc8424f162a8f56aa9aac8fbe630c61646b9cac24d5ebbdc1b1951783",
+      "spearman_rank_correlation": -0.00736056256781113,
+      "candidate_dot_fraction_within_3px": 0.0,
+      "duplicate": false
+    },
+    {
+      "id": "g30_d28",
+      "reference_sha256": "8cf893ead5667df21d3288a9968c35fd5385c425b029d82ee71d311715b129fd",
+      "spearman_rank_correlation": -0.007947941240407765,
+      "candidate_dot_fraction_within_3px": 0.0,
+      "duplicate": false
+    },
+    {
+      "id": "g31_h27_4",
+      "reference_sha256": "07b6db440535404bb41ec8ddc797713e200d308e3da35937393efde5eb84bc40",
+      "spearman_rank_correlation": -0.007586253799214943,
+      "candidate_dot_fraction_within_3px": 0.0,
+      "duplicate": false
+    },
+    {
+      "id": "g32_h33_2_b2",
+      "reference_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+      "spearman_rank_correlation": -0.007340363088114573,
+      "candidate_dot_fraction_within_3px": 0.0,
+      "duplicate": false
+    },
+    {
+      "id": "g33_h33d",
+      "reference_sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+      "spearman_rank_correlation": -0.007743117707008668,
+      "candidate_dot_fraction_within_3px": 0.0,
+      "duplicate": false
+    },
+    {
+      "id": "g36_anderson",
+      "reference_sha256": "e15891020b9c57056ac7fa874a5e506fbd6ed9314a4ea8e73af0753887a3708a",
+      "spearman_rank_correlation": -0.007457283518279028,
+      "candidate_dot_fraction_within_3px": 0.0,
+      "duplicate": false
+    }
+  ],
+  "duplicates": [],
+  "pass": true,
+  "scope": "Pinned registry only; not a current/global uniqueness guarantee"
+}

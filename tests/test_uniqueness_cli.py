@@ -39,10 +39,12 @@ def setup_registry(tmp_path, monkeypatch):
     ref_values[2, 2] = ref_values[3, 3] = 1
     write_raster(template, template_values)
     write_raster(ref, ref_values)
-    registry.write_text(json.dumps({"entries": [{"id": "peer"}]}))
+    pin = {"id": "peer", "repo": "owner/repo", "commit": "pinned", "path": "file.tif",
+           "sha256": uniqueness.sha256_file(ref)}
+    registry.write_text(json.dumps({"entries": [pin]}))
     data = {"registry_sha256": uniqueness.sha256_file(registry),
             "template_sha256": uniqueness.sha256_file(template),
-            "entries": [{"id": "peer", "local": "ref.tif", "sha256": uniqueness.sha256_file(ref)}]}
+            "entries": [{**pin, "local": "ref.tif"}]}
     manifest.write_text(json.dumps(data))
     monkeypatch.setattr(cli.paths, "TEMPLATE", template)
     monkeypatch.setattr(cli.paths, "REGISTRY", registry_dir)
@@ -90,6 +92,11 @@ def test_cli_rejects_missing_hash_manifest_and_shifted_reference(setup_registry,
     a[1, 1] = 1
     write_raster(ref, a, Affine(100, 0, 100, 0, -100, 2000))
     data["entries"][0]["sha256"] = uniqueness.sha256_file(ref)
+    registry = root / "registry" / "parallel_submission_registry.json"
+    pin = json.loads(registry.read_text())
+    pin["entries"][0]["sha256"] = data["entries"][0]["sha256"]
+    registry.write_text(json.dumps(pin))
+    data["registry_sha256"] = uniqueness.sha256_file(registry)
     manifest.write_text(json.dumps(data))
     with pytest.raises(ValueError, match="reference grid mismatch"):
         invoke(monkeypatch, candidate, manifest, root / "bad.json", "--surface-only")
@@ -106,3 +113,39 @@ def test_cli_rejects_undefined_and_invalid_candidate(setup_registry, monkeypatch
     write_raster(candidate, a)
     with pytest.raises(ValueError, match="non-finite"):
         invoke(monkeypatch, candidate, manifest, root / "bad.json", "--surface-only")
+
+
+def test_modified_peer_and_modified_manifest_cannot_bypass_registry_pin(setup_registry, monkeypatch):
+    root, _, ref, manifest, data = setup_registry
+    surface = root / "surface.tif"
+    write_raster(surface, np.arange(400).reshape(20, 20) / 399)
+    altered = np.zeros((20, 20))
+    altered[10, 10] = 1
+    write_raster(ref, altered)
+    data["entries"][0]["sha256"] = uniqueness.sha256_file(ref)
+    manifest.write_text(json.dumps(data))
+    out = root / "report.json"
+    out.write_text('{"pass": true}')
+    with pytest.raises(ValueError, match="invalid reference hash"):
+        invoke(monkeypatch, surface, manifest, out, "--surface-only")
+    assert not out.exists()
+
+
+def test_reference_provenance_is_checked(setup_registry, monkeypatch):
+    root, _, _, manifest, data = setup_registry
+    candidate = root / "surface.tif"
+    write_raster(candidate, np.arange(400).reshape(20, 20) / 399)
+    data["entries"][0]["commit"] = "other"
+    manifest.write_text(json.dumps(data))
+    with pytest.raises(ValueError, match="provenance mismatch"):
+        invoke(monkeypatch, candidate, manifest, root / "out.json", "--surface-only")
+
+
+def test_refuses_to_overwrite_inputs_or_cache(setup_registry, monkeypatch):
+    root, _, ref, manifest, _ = setup_registry
+    before = ref.read_bytes()
+    with pytest.raises(ValueError, match="unsafe report"):
+        invoke(monkeypatch, ref, manifest, ref)
+    assert ref.read_bytes() == before
+    with pytest.raises(ValueError, match="unsafe report"):
+        invoke(monkeypatch, ref, manifest, manifest.parent / "report.json")

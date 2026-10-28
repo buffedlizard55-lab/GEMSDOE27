@@ -1,0 +1,46 @@
+{
+  "session_date": "2026-10-28",
+  "scope": "Safety audit only; no new hypothesis experiment or candidate. Historical H33-1 card referenced; no weekly slot selected.",
+  "hypothesis": "Short buried basement-step features added to the cached 32-band stack, emitted only outside the 3 px registry-dot neighborhood",
+  "mechanism": "A basement-depth step under weak lidar relief can mark a short fault the long-line scarp family does not dot; complement emission is required because the same stack's high scores sit on that family.",
+  "named_non_fault_process_mimic": "roads, field boundaries, airborne-survey seams, and lithologic basin-fill pinch-outs",
+  "holdout_dti": {
+    "source": "evidence/h33_run_card_2026-10-27.json",
+    "label": "HOLDOUT-DTI",
+    "evaluator": "gems27.metric.dti_binary v1 (alpha=0.2, beta=0.8, R=3px triangular) + whole-FID buffered holdout (buffer_px=6)",
+    "pooled_candidate": 0.025210578303887142,
+    "pooled_control": 0.04144575222047764,
+    "withheld_positive_occurrences": 134150,
+    "paired_difference_ci95": [
+      -0.017575553191933015,
+      -0.014448691462792564
+    ],
+    "ci_scope": "paired seed bootstrap; overlapping hides are not independent geologic samples"
+  },
+  "correlation_overlap_vs_registry": {
+    "scope": "12 pinned peer rasters only; no full-corpus uniqueness certificate",
+    "preplacement_surface_max_abs_spearman_previous_run": 0.11038104783748275,
+    "postplacement_max_abs_spearman": 0.009389573228118413,
+    "postplacement_max_candidate_directed_overlap_3px": 0.0,
+    "postplacement_evidence": "evidence/h33_postplacement_peer_recheck_20261028.json"
+  },
+  "raster_sha256": "1373358188a96b20414834b3e0159065d87470fe695153262ced7b46bc1eb492",
+  "validator": {
+    "independent_byte_validation": {
+      "pass": true,
+      "checks": {
+        "grid": true,
+        "single_band_float32_geotiff": true,
+        "no_nodata_tag": true,
+        "whole_array_unmasked": true,
+        "whole_array_finite_in_0_1": true
+      }
+    },
+    "template_and_footprint_checks": "Existing checks JSON and scripts/verify_downloads.py; owner-mirror template, not organizer-authenticated",
+    "verify_downloads_failures": 0
+  },
+  "submission_name": "27GEMSDOE-H33-BSS-20261027-9ba8480691ed",
+  "note": "H33-1 buried-step complement B2 37654px HOLDOUT-DTI 0.0252 | id 9ba8480691ed | DO NOT SUBMIT",
+  "verdict": "negative",
+  "ok_to_submit": false
+}

@@ -31,6 +31,8 @@
         "checks": {
           "grid": true,
           "single_band_float32_geotiff": true,
+          "no_nodata_tag": true,
+          "whole_array_unmasked": true,
           "whole_array_finite_in_0_1": true
         }
       },
@@ -61,6 +63,8 @@
         "checks": {
           "grid": true,
           "single_band_float32_geotiff": true,
+          "no_nodata_tag": true,
+          "whole_array_unmasked": true,
           "whole_array_finite_in_0_1": true
         }
       },
@@ -94,6 +98,8 @@
         "checks": {
           "grid": true,
           "single_band_float32_geotiff": true,
+          "no_nodata_tag": true,
+          "whole_array_unmasked": true,
           "whole_array_finite_in_0_1": true
         }
       },
@@ -152,6 +158,8 @@
         "checks": {
           "grid": true,
           "single_band_float32_geotiff": true,
+          "no_nodata_tag": true,
+          "whole_array_unmasked": true,
           "whole_array_finite_in_0_1": true
         }
       },
@@ -178,6 +186,8 @@
         "checks": {
           "grid": true,
           "single_band_float32_geotiff": true,
+          "no_nodata_tag": true,
+          "whole_array_unmasked": true,
           "whole_array_finite_in_0_1": true
         }
       },
@@ -208,6 +218,8 @@
         "checks": {
           "grid": true,
           "single_band_float32_geotiff": true,
+          "no_nodata_tag": true,
+          "whole_array_unmasked": true,
           "whole_array_finite_in_0_1": true
         }
       },
@@ -238,6 +250,8 @@
         "checks": {
           "grid": true,
           "single_band_float32_geotiff": true,
+          "no_nodata_tag": true,
+          "whole_array_unmasked": true,
           "whole_array_finite_in_0_1": true
         }
       },
@@ -270,6 +284,8 @@
         "checks": {
           "grid": true,
           "single_band_float32_geotiff": true,
+          "no_nodata_tag": true,
+          "whole_array_unmasked": true,
           "whole_array_finite_in_0_1": true
         }
       },
@@ -300,6 +316,8 @@
         "checks": {
           "grid": true,
           "single_band_float32_geotiff": true,
+          "no_nodata_tag": true,
+          "whole_array_unmasked": true,
           "whole_array_finite_in_0_1": true
         }
       },
@@ -326,6 +344,8 @@
         "checks": {
           "grid": true,
           "single_band_float32_geotiff": true,
+          "no_nodata_tag": true,
+          "whole_array_unmasked": true,
           "whole_array_finite_in_0_1": true
         }
       },
@@ -358,6 +378,8 @@
         "checks": {
           "grid": true,
           "single_band_float32_geotiff": true,
+          "no_nodata_tag": true,
+          "whole_array_unmasked": true,
           "whole_array_finite_in_0_1": true
         }
       },
@@ -388,6 +410,8 @@
         "checks": {
           "grid": true,
           "single_band_float32_geotiff": true,
+          "no_nodata_tag": true,
+          "whole_array_unmasked": true,
           "whole_array_finite_in_0_1": true
         }
       },
@@ -418,6 +442,8 @@
         "checks": {
           "grid": true,
           "single_band_float32_geotiff": true,
+          "no_nodata_tag": true,
+          "whole_array_unmasked": true,
           "whole_array_finite_in_0_1": true
         }
       },
@@ -446,6 +472,8 @@
         "checks": {
           "grid": true,
           "single_band_float32_geotiff": true,
+          "no_nodata_tag": true,
+          "whole_array_unmasked": true,
           "whole_array_finite_in_0_1": true
         }
       },
@@ -505,6 +533,8 @@
         "checks": {
           "grid": true,
           "single_band_float32_geotiff": true,
+          "no_nodata_tag": true,
+          "whole_array_unmasked": true,
           "whole_array_finite_in_0_1": true
         }
       },
@@ -665,6 +695,8 @@
         "checks": {
           "grid": true,
           "single_band_float32_geotiff": true,
+          "no_nodata_tag": true,
+          "whole_array_unmasked": true,
           "whole_array_finite_in_0_1": true
         }
       },

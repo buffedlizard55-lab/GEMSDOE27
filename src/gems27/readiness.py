@@ -166,11 +166,18 @@ def inspect_allfinite_raster(path: Path) -> dict:
                               and tuple(src.bounds) == grid.BOUNDS)
             checks["single_band_float32_geotiff"] = (
                 src.driver == "GTiff" and src.count == 1 and src.dtypes == ("float32",))
+            # A finite zero can still be masked by a nodata tag or an internal mask.
+            # The all-finite fallback must expose every pixel to a strict reader.
+            checks["no_nodata_tag"] = src.nodata is None
+            checks["whole_array_unmasked"] = True
             checks["whole_array_finite_in_0_1"] = True
             for _, window in src.block_windows(1):
                 values = src.read(1, window=window)
                 if not (np.isfinite(values).all() and ((values >= 0) & (values <= 1)).all()):
                     checks["whole_array_finite_in_0_1"] = False
+                if not (src.read_masks(1, window=window) == 255).all():
+                    checks["whole_array_unmasked"] = False
+                if not checks["whole_array_finite_in_0_1"] and not checks["whole_array_unmasked"]:
                     break
         return {"pass": all(checks.values()), "checks": checks}
     except (OSError, ValueError, rasterio.errors.RasterioError) as exc:

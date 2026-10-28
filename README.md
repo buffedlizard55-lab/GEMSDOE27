@@ -39,6 +39,8 @@ Latest audit: [Session 15 review and three-pass verification (2026-10-28)](knowl
 
 Session 15 also ran a byte-level peer audit and answers the 0.2778 question: [peer-relations audit](knowledge/34_session15_peer_relations_2026-10-28.md). It reproduces the restored inputs; it measures GEMSDOE32 as the GEMSDOE25 d=2.8 field minus its 2-px catalogue collar; and it records two peer pairs that are identical in value (GEMSDOE25 = GEMSDOE30; GEMSDOE28 H27-4 = GEMSDOE31). **No file is OK to submit, and no new candidate was promoted.** Earlier: [Session 14 review](knowledge/32_session14_review_2026-10-27.md) (malformed cards fail closed; the readiness audit includes H33-1). Its numbers are recorded in `evidence/peer_relations_20261028.json`.
 
+**Latest safety review (2026-10-28):** the shared peer cache is now checked against fixed SHA-256 pins; changed cache bytes and stale PASS reports fail closed. The all-finite byte scan also rejects nodata tags and pixel masks. H33-1 remains a negative research artifact, not an approved submission. [Review and next steps](knowledge/35_session16_safety_review_2026-10-28.md) · [run card](evidence/safety_audit_20261028.json).
+
 ## What is established and what is not
 
 Historical values are **OWNER-REPORTED**, not ORGANIZER-CONFIRMED; the association between some values and files conflicts across sibling evidence. The historical GEMSDOE32 value of 0.2778 is not a forecast. Its measured dot set is the GEMSDOE25 d=2.8 dots minus a 2-pixel catalogue collar. Spacing and collar exclusion are plausible ways to reduce redundant or low-yield DTI mass, but the hidden truth and a receipt are unavailable: geometry does not prove the reported score's cause. We do not know whether any untested method will exceed it.
