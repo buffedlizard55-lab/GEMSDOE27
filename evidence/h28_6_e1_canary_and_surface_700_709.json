@@ -1,0 +1,267 @@
+{
+  "experiment": "E1 H28-6 canaries (51 inputs) and pre-placement surface",
+  "label": "HOLDOUT-DTI setup only; no organizer score",
+  "preregistration_sha256": "4a778fbd5b8b32ec7507ceb423edf7ced6cd508916af0fcaf76fcd7a4fbfe321",
+  "seeds": [
+    700,
+    701,
+    702,
+    703,
+    704,
+    705,
+    706,
+    707,
+    708,
+    709
+  ],
+  "group_map": {
+    "n_features": 1179,
+    "n_segments_rasterized": 15404,
+    "n_fids_on_catalogue": 411,
+    "median_catalogue_to_vector_px": 0.0,
+    "share_catalogue_within_3px": 1.0
+  },
+  "n_hidden_positive_union": 55036,
+  "n_negative_sample": 250000,
+  "canary_max_direction_invariant_auc": 0.5854773301042914,
+  "canary_max_feature": "det_local_relief",
+  "canary_max_new_feature_auc": 0.5322706942364998,
+  "leakage_flags": {},
+  "canary_all": {
+    "mag_anom": {
+      "raw_auc": 0.48904318947389824,
+      "direction_invariant_auc": 0.5109568105261018
+    },
+    "rtp": {
+      "raw_auc": 0.4973920131144326,
+      "direction_invariant_auc": 0.5026079868855674
+    },
+    "tmi_hg": {
+      "raw_auc": 0.5198913824179913,
+      "direction_invariant_auc": 0.5198913824179913
+    },
+    "geod_2ndinv": {
+      "raw_auc": 0.560367553570311,
+      "direction_invariant_auc": 0.560367553570311
+    },
+    "iso_grav_anom_slope": {
+      "raw_auc": 0.5308087393676403,
+      "direction_invariant_auc": 0.5308087393676403
+    },
+    "geod_shearrate": {
+      "raw_auc": 0.5589585231833999,
+      "direction_invariant_auc": 0.5589585231833999
+    },
+    "geod_dilaterate": {
+      "raw_auc": 0.5238996063643485,
+      "direction_invariant_auc": 0.5238996063643485
+    },
+    "tmi_vg": {
+      "raw_auc": 0.48724438732840825,
+      "direction_invariant_auc": 0.5127556126715918
+    },
+    "deq_n100a15": {
+      "raw_auc": 0.5487812785314499,
+      "direction_invariant_auc": 0.5487812785314499
+    },
+    "iso_grav_anom_vg": {
+      "raw_auc": 0.5216781171757652,
+      "direction_invariant_auc": 0.5216781171757652
+    },
+    "det_elev": {
+      "raw_auc": 0.4769526577905158,
+      "direction_invariant_auc": 0.5230473422094841
+    },
+    "iso_grav_anom": {
+      "raw_auc": 0.4616923706303433,
+      "direction_invariant_auc": 0.5383076293696567
+    },
+    "tmi": {
+      "raw_auc": 0.4886773308870628,
+      "direction_invariant_auc": 0.5113226691129372
+    },
+    "depth_to_base_surf": {
+      "raw_auc": 0.5134665385691898,
+      "direction_invariant_auc": 0.5134665385691898
+    },
+    "ieq_n100a15": {
+      "raw_auc": 0.5668771327927219,
+      "direction_invariant_auc": 0.5668771327927219
+    },
+    "cond_surf": {
+      "raw_auc": 0.4915994761752255,
+      "direction_invariant_auc": 0.5084005238247745
+    },
+    "iso_grav_anom_hg": {
+      "raw_auc": 0.505841936792684,
+      "direction_invariant_auc": 0.505841936792684
+    },
+    "det_elev_slope": {
+      "raw_auc": 0.5503562080083645,
+      "direction_invariant_auc": 0.5503562080083645
+    },
+    "lidar_ex_max": {
+      "raw_auc": 0.5663151400964868,
+      "direction_invariant_auc": 0.5663151400964868
+    },
+    "lidar_ex_mean": {
+      "raw_auc": 0.5528283068052928,
+      "direction_invariant_auc": 0.5528283068052928
+    },
+    "lidar_step_max": {
+      "raw_auc": 0.5664177726374173,
+      "direction_invariant_auc": 0.5664177726374173
+    },
+    "lidar_lapneg_max": {
+      "raw_auc": 0.5715065220217995,
+      "direction_invariant_auc": 0.5715065220217995
+    },
+    "lidar_lappos_max": {
+      "raw_auc": 0.5753496000384614,
+      "direction_invariant_auc": 0.5753496000384614
+    },
+    "lidar_downface_max": {
+      "raw_auc": 0.5764424934531012,
+      "direction_invariant_auc": 0.5764424934531012
+    },
+    "lidar_upface_max": {
+      "raw_auc": 0.5834935064701338,
+      "direction_invariant_auc": 0.5834935064701338
+    },
+    "lidar_cross_max": {
+      "raw_auc": 0.5692403643089973,
+      "direction_invariant_auc": 0.5692403643089973
+    },
+    "lidar_relief": {
+      "raw_auc": 0.5631859290453092,
+      "direction_invariant_auc": 0.5631859290453092
+    },
+    "lidar_coh100": {
+      "raw_auc": 0.47476709661977967,
+      "direction_invariant_auc": 0.5252329033802203
+    },
+    "lidar_cos2strike": {
+      "raw_auc": 0.4694322307363294,
+      "direction_invariant_auc": 0.5305677692636706
+    },
+    "lidar_sin2strike": {
+      "raw_auc": 0.48583270739575535,
+      "direction_invariant_auc": 0.5141672926042447
+    },
+    "det_local_relief": {
+      "raw_auc": 0.41452266989570863,
+      "direction_invariant_auc": 0.5854773301042914
+    },
+    "det_gradient": {
+      "raw_auc": 0.56707891143518,
+      "direction_invariant_auc": 0.56707891143518
+    },
+    "sub_gm_rtp_s2": {
+      "raw_auc": 0.5268509008648884,
+      "direction_invariant_auc": 0.5268509008648884
+    },
+    "sub_gm_rtp_s5": {
+      "raw_auc": 0.5302956995784578,
+      "direction_invariant_auc": 0.5302956995784578
+    },
+    "sub_tiltabs_rtp": {
+      "raw_auc": 0.5001823891271168,
+      "direction_invariant_auc": 0.5001823891271168
+    },
+    "sub_analytic_rtp": {
+      "raw_auc": 0.5268530063958136,
+      "direction_invariant_auc": 0.5268530063958136
+    },
+    "sub_gm_grav_s2": {
+      "raw_auc": 0.5359207225452431,
+      "direction_invariant_auc": 0.5359207225452431
+    },
+    "sub_gm_grav_s5": {
+      "raw_auc": 0.5395095811105458,
+      "direction_invariant_auc": 0.5395095811105458
+    },
+    "sub_crossfield_coherence": {
+      "raw_auc": 0.5292505652300312,
+      "direction_invariant_auc": 0.5292505652300312
+    },
+    "sub_gm_cond_s3": {
+      "raw_auc": 0.5078840448070355,
+      "direction_invariant_auc": 0.5078840448070355
+    },
+    "sub_gm_depth_s3": {
+      "raw_auc": 0.531594017479468,
+      "direction_invariant_auc": 0.531594017479468
+    },
+    "sub_gm_depth_s8": {
+      "raw_auc": 0.5314509270659205,
+      "direction_invariant_auc": 0.5314509270659205
+    },
+    "sub_gm_dilate_s3": {
+      "raw_auc": 0.5495676698524602,
+      "direction_invariant_auc": 0.5495676698524602
+    },
+    "sub_gm_2ndinv_s3": {
+      "raw_auc": 0.5315621755214769,
+      "direction_invariant_auc": 0.5315621755214769
+    },
+    "sub_strain_x_cond": {
+      "raw_auc": 0.5233551549531216,
+      "direction_invariant_auc": 0.5233551549531216
+    },
+    "sub_seismic_fabric_ieq": {
+      "raw_auc": 0.5087296011338034,
+      "direction_invariant_auc": 0.5087296011338034
+    },
+    "sub_seismic_fabric_deq": {
+      "raw_auc": 0.5022406963078712,
+      "direction_invariant_auc": 0.5022406963078712
+    },
+    "gpers_h_s1": {
+      "raw_auc": 0.5322706942364998,
+      "direction_invariant_auc": 0.5322706942364998
+    },
+    "gpers_h_s2": {
+      "raw_auc": 0.5321593417036121,
+      "direction_invariant_auc": 0.5321593417036121
+    },
+    "gpers_h_s4": {
+      "raw_auc": 0.5314099793226252,
+      "direction_invariant_auc": 0.5314099793226252
+    },
+    "gpers_persist_min": {
+      "raw_auc": 0.5311502730939749,
+      "direction_invariant_auc": 0.5311502730939749
+    }
+  },
+  "preplacement_surface_spearman_vs_12_peer_rasters": {
+    "g24_d15": 0.10781406792470462,
+    "g25_d28": 0.09174485736731028,
+    "g27_tv2_d15": 0.10857936390018907,
+    "g28_h27_4_r1": 0.08287688652147356,
+    "g28_h32_1": 0.08829338537741037,
+    "g28_h36_1": 0.07997465840807051,
+    "g28_h38_1": 0.080472906810714,
+    "g30_d28": 0.09174485736731028,
+    "g31_h27_4": 0.08287688652147356,
+    "g32_h33_2_b2": 0.07759384109426007,
+    "g33_h33d": 0.0849981498040019,
+    "g36_anderson": 0.07758059068678917
+  },
+  "max_abs_preplacement_surface_spearman": 0.10857936390018907,
+  "registry_ids": [
+    "g24_d15",
+    "g25_d28",
+    "g27_tv2_d15",
+    "g28_h27_4_r1",
+    "g28_h32_1",
+    "g28_h36_1",
+    "g28_h38_1",
+    "g30_d28",
+    "g31_h27_4",
+    "g32_h33_2_b2",
+    "g33_h33d",
+    "g36_anderson"
+  ],
+  "gate_e1_pass": true,
+  "runtime_s": 73.5
+}

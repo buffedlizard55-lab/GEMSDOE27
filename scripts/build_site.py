@@ -215,6 +215,114 @@ def h33_summary() -> tuple[str, str]:
     return html_block, f"**H33-1 generated TIFF — NOT OK TO SUBMIT.** {detail} {gate_text} {file_note}"
 
 
+NINE_SITE_UNIQUENESS = {
+    "GEMSDOE25": "Identical in-footprint dot values to GEMSDOE30 (byte-measured).",
+    "GEMSDOE30": "Identical in-footprint dot values to GEMSDOE25 (byte-measured).",
+    "GEMSDOE28": "Its H27-4 file is identical in dot values to GEMSDOE31 (byte-measured).",
+    "GEMSDOE31": "Identical in dot values to GEMSDOE28 H27-4 (byte-measured).",
+    "GEMSDOE32": "The d=2.8 family minus a 2 px catalogue collar; same lineage as GEMSDOE25.",
+}
+
+
+def _new_tiff_row(label: str, path: str) -> dict | None:
+    """One decision row for a generated research TIFF, from its run card only."""
+    card = read(path)
+    if not card:
+        return None
+    gate = publication_decision(card, ROOT)
+    verified = verified_research_path(card, gate)
+    hold = card.get("holdout") or {}
+    uniq = card.get("uniqueness_vs_registry") or {}
+    paired = hold.get("paired_candidate_minus_B") or {}
+    ci = paired.get("ci95") or hold.get("ci95") or []
+    pooled = hold.get("pooled_candidate")
+    control = hold.get("pooled_control_D", hold.get("pooled_control_B"))
+    if isinstance(pooled, (int, float)) and isinstance(control, (int, float)) and len(ci) == 2:
+        estimate = (f"HOLDOUT-DTI {pooled:.6f} vs control {control:.6f}; paired 95% CI "
+                    f"[{ci[0]:+.6f}, {ci[1]:+.6f}]; {hold.get('n_withheld_positives_total', 'n/a'):,} "
+                    "withheld-positive occurrences. Organizer score: none (no leaderboard estimate is computable).")
+    else:
+        estimate = "No holdout estimate recorded."
+    local = uniq.get("local_prior_rasters") or {}
+    local_max = local.get("max_dot_overlap_within_3px")
+    worst = (local.get("worst") or [{}])[0].get("file", "a local prior raster")
+    pinned_max = uniq.get("max_dot_overlap_within_3px_euclidean")
+    if uniq.get("pass") is True:
+        unique = (f"YES vs the 12 pinned rasters (max 3 px overlap {pinned_max:.3f}; surface abs-rho "
+                  f"{uniq.get('max_surface_spearman', 0):.3f}) and {local.get('n_local_rasters', 0)} local prior "
+                  f"rasters (max overlap {local_max:.3f}; limit 0.70). Scope is limited to these files.")
+    elif uniq:
+        if isinstance(local_max, float) and local_max > 0.70:
+            unique = (f"NO - {local_max:.1%} of dots lie within 3 px of {worst} (limit 70%). "
+                      f"Pinned-set max {pinned_max:.1%}. No TIFF was written.")
+        else:
+            unique = "NO - failed a uniqueness gate; no TIFF was written."
+    else:
+        unique = "Not evaluated."
+    if verified:
+        relative, actual_hash = verified
+        file_cell = (f'<a href="{esc(relative)}" download>{esc(Path(relative).name)}</a>'
+                     f'<br><span class="small">SHA-256 {esc(actual_hash)}</span>')
+        file_md = f"[`{Path(relative).name}`]({relative}) SHA-256 `{actual_hash}`"
+    else:
+        file_cell = "None - no valid TIFF was written for download."
+        file_md = "None - no valid TIFF was written for download."
+    if gate["ok_to_publish_as_submission"]:
+        ok = "Gates pass; still requires the separate weekly-slot selector."
+    else:
+        reasons = card.get("download_decision_reasons") or []
+        if not reasons and hold.get("gate_efficacy_pass") is False:
+            reasons = ["the frozen holdout efficacy gate failed"]
+        reasons = reasons or gate["reasons"] or ["the evidence gate did not pass"]
+        ok = f"NOT OK TO SUBMIT - {reasons[0]}"
+    return {"label": label, "file_cell": file_cell, "file_md": file_md, "estimate": estimate,
+            "unique": unique, "ok": ok}
+
+
+def decision_board() -> tuple[str, str]:
+    """Top-of-site table: the file to download, its estimate, uniqueness, and submit status."""
+    rows = [r for r in (
+        _new_tiff_row("GEMSDOE27 H28-6 gravity persistence (new, 2026-10-28)", "evidence/h28_6_run_card_2026-10-28.json"),
+        _new_tiff_row("GEMSDOE27 H33-1 buried-step complement (new, 2026-10-27)", "evidence/h33_run_card_2026-10-27.json"),
+    ) if r]
+    registry = read("registry/focus_sites_2026-10-26.json", {"sites": []})
+    peers = {x["id"]: x for x in read("registry/parallel_submission_registry.json")["entries"]}
+    for site in registry["sites"]:
+        peer = peers[site["peer_id"]]
+        url = f'https://github.com/{peer["repo"]}/blob/{peer["commit"]}/{peer["path"]}'
+        name = Path(peer["path"]).name
+        uniq = NINE_SITE_UNIQUENESS.get(site["site"], "Already in the 12 pinned rasters; not new.")
+        rows.append({
+            "label": f'{site["site"]} historical best',
+            "file_cell": f'<a href="{esc(url)}">{esc(name)}</a>',
+            "file_md": f"[`{name}`]({url})",
+            "estimate": f'OWNER-REPORTED {site["score"]:.4f} (not organizer-confirmed).',
+            "unique": f"NO. {uniq}",
+            "ok": "NO - historical file; do not resubmit.",
+        })
+    body = "".join(
+        f'<tr><th>{esc(r["label"])}</th><td>{r["file_cell"]}</td><td>{esc(r["estimate"])}</td>'
+        f'<td>{esc(r["unique"])}</td><td><b>{esc(r["ok"])}</b></td></tr>' for r in rows)
+    html_block = (
+        '<div class="card" id="download-decision" style="border-left:5px solid #cf222e">'
+        '<h2 style="margin-top:0">Which file to download, and can it be submitted?</h2>'
+        '<p><b>Short answer: no file is OK to submit right now.</b> The generated TIFFs are unique against the pinned '
+        'rasters but did not pass a matched holdout gate, so they are downloadable for research only. Historical '
+        'files are already in the registry and are not new. Estimates are local HOLDOUT-DTI or owner-reported values, '
+        'never leaderboard projections.</p>'
+        '<div class="tw"><table><thead><tr><th>Site / file</th><th>File to download</th><th>Estimated score</th>'
+        '<th>Unique?</th><th>OK to submit?</th></tr></thead><tbody>' + body + '</tbody></table></div></div>')
+    md_rows = "\n".join(
+        f'| {r["label"]} | {r["file_md"]} | {r["estimate"]} | {r["unique"]} | **{r["ok"]}** |' for r in rows)
+    md = ("## Which file to download, and can it be submitted?\n\n"
+          "**Short answer: no file is OK to submit right now.** Generated TIFFs are unique against the pinned rasters "
+          "but did not pass a matched holdout gate. Historical files are already in the registry. Estimates are local "
+          "HOLDOUT-DTI or owner-reported values, never leaderboard projections.\n\n"
+          "| Site / file | File to download | Estimated score | Unique? | OK to submit? |\n"
+          "|---|---|---|---|---|\n" + md_rows + "\n")
+    return html_block, md
+
+
 def peer_relation_sentences(rel: dict, peers: dict) -> tuple[str, str]:
     """Plain-language sentences built only from evidence/peer_relations_20261028.json.
 
@@ -305,6 +413,7 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
     lane = read("evidence/relief_profile_run_card_20261027.json")
     lane_html, lane_md = card_summary(lane)
     h33_html, h33_md = h33_summary()
+    decision_html, decision_md = decision_board()
     peer_relations = read("evidence/peer_relations_20261028.json", {})
     peer_rel_text, peer_identity_text = peer_relation_sentences(peer_relations, peers)
     peer_final_audit = read("evidence/peer_final_dot_uniqueness_20261028.json", {})
@@ -528,6 +637,7 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
     home = f"""
 <h1>GEMSDOE27 research and submission status</h1>
 <p class="lead">A transparent audit of nine sites, one pre-registered geological proxy, and the gates between research and a competition submission.</p>
+{decision_html}
 {important}
 {h33_html}
 {decision_table}
@@ -540,7 +650,7 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
     executive = f"""
 <h1>Executive summary · nine focus sites</h1>
 <p class="lead">Historical file provenance, reported values, uniqueness and what can safely be submitted.</p>
-{important}{h33_html}{decision_table}{lane_html}
+{decision_html}{important}{h33_html}{decision_table}{lane_html}
 <h2>Highest listed historical claim</h2>
 <p>{esc(highest_report)} The task prompt cites 0.3195 and 0.4413 as current leaderboard maxima; these conflict and were not verified because the organizer site was not accessed.</p>
 <h2>Best reported historical submission per site</h2>
@@ -612,6 +722,7 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
              "topology.html": ("Topology", topology), "sources.html": ("Sources", sources)}
     markdown = f"""# Executive summary — GEMSDOE27 and nine focus sites
 
+{decision_md}
 **DO NOT SUBMIT. NOT AUTHORIZED FOR A WEEKLY SLOT.** H31-1 `{H31_ID}` is already submitted according to the user, who reports 0.2250. There is no organizer receipt; do not resubmit it. No portal upload was made.
 
 ## New result and estimate
