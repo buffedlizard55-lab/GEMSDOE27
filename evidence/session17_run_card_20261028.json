@@ -1,0 +1,107 @@
+{
+  "schema": "session-audit-run-card-v1",
+  "session": 17,
+  "date_utc": "2026-10-28",
+  "purpose": "Audit prior HOLDOUT-DTI and recheck pinned historical final-dot rasters; this is not a new geological experiment.",
+  "new_geological_experiments": 0,
+  "new_tiff_generated": false,
+  "assigned_lane_status": "Missing from the current prompt; no lane was inferred or run.",
+  "hypothesis": {
+    "id": "H33-1 (prior experiment; not rerun in Session 17)",
+    "statement": "Short buried basement-step features added to the cached 32-band stack, emitted only outside the 3 px registry-dot neighborhood.",
+    "mechanism": "A basement-depth step beneath weak lidar relief may mark a short fault missed by the long-line scarp family; complementary emission is intended to avoid the same stack's high-score scarp family.",
+    "named_non_fault_mimics": [
+      "roads",
+      "field boundaries",
+      "airborne-survey seams",
+      "lithologic basin-fill pinch-outs"
+    ],
+    "source_run_card": "evidence/h33_run_card_2026-10-27.json"
+  },
+  "holdout_dti": {
+    "label": "HOLDOUT-DTI",
+    "provenance": "Copied from the prior H33-1 run card; not rerun in Session 17 and not an organizer score.",
+    "evaluator_version": "gems27.metric.dti_binary v1; alpha=0.2, beta=0.8, R=3 px (300 m) triangular kernel; whole-FID buffered holdout, buffer_px=6.",
+    "seeds": [520, 521, 522, 523, 524, 525, 526, 527, 528, 529],
+    "withheld_positive_occurrences": 134150,
+    "candidate_pooled_dti": 0.025210578303887142,
+    "control_pooled_dti": 0.04144575222047764,
+    "candidate_minus_control_pooled_dti": -0.016235173916590497,
+    "paired_candidate_minus_control_95_ci": [
+      -0.017575553191933015,
+      -0.014448691462792564
+    ],
+    "positive_seeds": 0,
+    "n_seeds": 10,
+    "frozen_efficacy_gate_pass": false,
+    "canary": {
+      "new_features_tested_alone": 6,
+      "max_direction_invariant_auc": 0.5678680271840482,
+      "stop_threshold_gt": 0.9,
+      "leakage_flags": [],
+      "source": "evidence/h33_e1_canary_and_surface_520_529.json"
+    }
+  },
+  "registry_uniqueness": {
+    "candidate_final_dot_recheck": {
+      "comparison": "12 pinned registry rasters; final binary dots only; hash-pinned peers and shared directed 3 px comparison.",
+      "candidate_raster_sha256": "1373358188a96b20414834b3e0159065d87470fe695153262ced7b46bc1eb492",
+      "candidate_dots": 37654,
+      "max_candidate_dot_fraction_within_3px": 0.0,
+      "max_abs_binary_spearman": 0.00939,
+      "duplicate_peers": [],
+      "thresholds": {
+        "absolute_spearman_stop_gt": 0.9,
+        "directed_dot_overlap_stop_gt": 0.7
+      },
+      "evidence": "evidence/peer_relations_20261028.json"
+    },
+    "preplacement_surface_check": {
+      "max_abs_spearman": 0.11038104783748275,
+      "peer_id": "g27_tv2_d15",
+      "recomputed_in_session17": false,
+      "provenance": "Prior H33-1 canary/surface run, evidence/h33_e1_canary_and_surface_520_529.json; not recomputed during this final-dot audit."
+    },
+    "historical_best_screen": {
+      "selected_focus_sites": 9,
+      "duplicate_stops": 9,
+      "references_per_selected_raster": 11,
+      "scope": "Pinned final-dot comparison only; not a global submission inventory and not a pre-placement surface screen."
+    }
+  },
+  "raster": {
+    "generated_in_session17": false,
+    "research_file": "docs/downloads/research/gems27-h33-bss-complement-20261027-9ba8480691ed-allfinite.tif",
+    "sha256": "1373358188a96b20414834b3e0159065d87470fe695153262ced7b46bc1eb492",
+    "submission_name": "27GEMSDOE-H33-BSS-20261027-9ba8480691ed",
+    "note": "H33-1 buried-step complement B2 37654px HOLDOUT-DTI 0.0252 | id 9ba8480691ed | DO NOT SUBMIT",
+    "note_characters": 92,
+    "research_only": true
+  },
+  "validator_output": {
+    "independent_byte_validation_pass": true,
+    "checks": {
+      "exact_template_grid_epsg32611_3730x3292": true,
+      "single_band_float32": true,
+      "no_nodata_tag": true,
+      "whole_array_finite_in_0_1": true,
+      "in_footprint_exact_binary": true,
+      "zero_catalogue_overlap": true,
+      "dots": 37654,
+      "sha256_matches_run_card": true
+    },
+    "readiness_audit": {
+      "cards_checked": 22,
+      "publish_approved": false,
+      "selector_authorized": false,
+      "h33_byte_checks_pass": true
+    },
+    "verify_downloads_failures": 0,
+    "scope_note": "Format and hash checks pass; this does not pass the efficacy gate or grant slot authorization."
+  },
+  "organizer_score_estimate": null,
+  "verdict": "negative",
+  "ok_to_submit": false,
+  "slot_authorized": false,
+  "reason": "H33-1's frozen HOLDOUT-DTI gate failed with a negative paired comparison. No new candidate was generated; no file is approved for submission."
+}

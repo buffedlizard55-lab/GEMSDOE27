@@ -43,6 +43,8 @@ DEFAULT_CANDIDATE = (
 DEFAULT_OUT = ROOT / "evidence" / "peer_relations_20261028.json"
 # Shared-tool convention (uniqueness.dot_comparison): directed 3 px overlap, footprint-masked.
 NEAR_PX = (1.0, 2.0, 3.0)
+RANK_STOP = 0.90
+OVERLAP_STOP = 0.70
 
 
 def sha256_file(path: Path) -> str:
@@ -57,13 +59,18 @@ def load_peers() -> dict[str, dict]:
         f = PEER_DIR / f"{e['id']}.tif"
         if not f.exists():
             raise FileNotFoundError(f"missing cached peer {f}; run scripts/fetch_parallel_registry.py")
+        actual_hash = sha256_file(f)
+        if actual_hash != e["sha256"]:
+            raise ValueError(f"{e['id']}: cached peer SHA-256 differs from registry pin")
         with rasterio.open(f) as s:
             vals = s.read(1)
             crs, shape, transform = s.crs, s.shape, s.transform
+        if sha256_file(f) != e["sha256"]:
+            raise ValueError(f"{e['id']}: peer bytes changed while being read")
         peers[e["id"]] = {
             "entry": e,
             "file": f,
-            "sha256": sha256_file(f),
+            "sha256": actual_hash,
             "values": vals,
             "crs": crs,
             "shape": shape,
@@ -74,6 +81,20 @@ def load_peers() -> dict[str, dict]:
 
 def _dot_mask(values: np.ndarray, foot: np.ndarray) -> np.ndarray:
     return (values == 1) & foot
+
+
+def validate_binary_raster(values: np.ndarray, foot: np.ndarray, description: str) -> np.ndarray:
+    """Require finite exact binary values inside the footprint before comparing a peer raster."""
+    data = np.asarray(values)
+    footprint = np.asarray(foot, dtype=bool)
+    if data.shape != footprint.shape:
+        raise ValueError(f"{description}: raster shape differs from the footprint")
+    inside = data[footprint]
+    if not np.isfinite(inside).all():
+        raise ValueError(f"{description}: non-finite values inside the footprint")
+    if np.any((inside != 0) & (inside != 1)):
+        raise ValueError(f"{description}: in-footprint raster values are not binary")
+    return _dot_mask(data, footprint)
 
 
 def _subset_stats(parent: np.ndarray, child: np.ndarray, catalogue: np.ndarray) -> dict:
@@ -100,10 +121,68 @@ def _subset_stats(parent: np.ndarray, child: np.ndarray, catalogue: np.ndarray) 
     return out
 
 
+def pairwise_final_dot_screen(dots: dict[str, np.ndarray], foot: np.ndarray) -> dict:
+    """Screen every pinned raster against every other raster using the shared duplicate rule.
+
+    These historical registry entries contain final binary rasters, not their pre-placement
+    probability surfaces. The returned rank correlation is therefore binary-mask Spearman, and
+    cannot stand in for a continuous pre-placement surface comparison.
+    """
+    per_candidate: dict[str, dict] = {}
+    for candidate_id, candidate in dots.items():
+        comparisons = []
+        for reference_id, reference in dots.items():
+            if candidate_id == reference_id:
+                continue
+            metrics = uniqueness.dot_comparison(candidate, reference, foot)
+            rho = metrics["spearman"]
+            overlap = metrics["dot_overlap_within_3px"]
+            duplicate = abs(rho) > RANK_STOP or overlap > OVERLAP_STOP
+            reasons = []
+            if abs(rho) > RANK_STOP:
+                reasons.append("absolute binary Spearman exceeds 0.90")
+            if overlap > OVERLAP_STOP:
+                reasons.append("directed 3-pixel dot overlap exceeds 70%")
+            comparisons.append({
+                "reference_id": reference_id,
+                "binary_spearman": round(rho, 6),
+                "candidate_dot_fraction_within_3px": round(overlap, 6),
+                "exact_overlap_dots": metrics["exact_overlap_dots"],
+                "candidate_dots": metrics["candidate_dots"],
+                "reference_dots": metrics["reference_dots"],
+                "duplicate": duplicate,
+                "reasons": reasons,
+            })
+        max_overlap = max(comparisons, key=lambda row: row["candidate_dot_fraction_within_3px"], default=None)
+        max_abs_rho = max(comparisons, key=lambda row: abs(row["binary_spearman"]), default=None)
+        duplicate_peers = [row["reference_id"] for row in comparisons if row["duplicate"]]
+        per_candidate[candidate_id] = {
+            "dots": int(candidate.sum()),
+            "duplicate_peers": duplicate_peers,
+            "max_directed_overlap_within_3px": (
+                max_overlap["candidate_dot_fraction_within_3px"] if max_overlap else None
+            ),
+            "worst_overlap_peer": max_overlap["reference_id"] if max_overlap else None,
+            "max_abs_binary_spearman": round(abs(max_abs_rho["binary_spearman"]), 6) if max_abs_rho else None,
+            "worst_correlation_peer": max_abs_rho["reference_id"] if max_abs_rho else None,
+            "pass_within_pinned_peer_set": bool(comparisons) and not duplicate_peers,
+            "comparisons": comparisons,
+        }
+    return {
+        "scope": "Pinned peer rasters only; no claim of current/global registry completeness",
+        "comparison_kind": "final binary dot rasters; pre-placement continuous surfaces are unavailable",
+        "thresholds": {
+            "absolute_binary_spearman_stop_gt": RANK_STOP,
+            "directed_dot_overlap_within_3px_stop_gt": OVERLAP_STOP,
+        },
+        "per_candidate": per_candidate,
+    }
+
+
 def analyse(peers: dict[str, dict], candidate: np.ndarray | None, foot: np.ndarray,
             label: np.ndarray) -> dict:
     ids = list(peers)
-    dots = {i: _dot_mask(peers[i]["values"], foot) for i in ids}
+    dots = {i: validate_binary_raster(peers[i]["values"], foot, i) for i in ids}
     finite_in = {i: np.isfinite(peers[i]["values"]) & foot for i in ids}
 
     # 1) bit-level in-footprint value equality (exact duplicates after re-encoding)
@@ -163,6 +242,7 @@ def analyse(peers: dict[str, dict], candidate: np.ndarray | None, foot: np.ndarr
         "per_peer": per_peer,
         "identical_in_footprint_pairs": identical_in_footprint,
         "strict_subset_relations": subsets,
+        "pairwise_final_dot_screen": pairwise_final_dot_screen(dots, foot),
         "candidate_vs_peers": cand_rows or None,
     }
 
@@ -176,19 +256,32 @@ def main() -> int:
     foot = grid.load_footprint(paths.TEMPLATE)
     label = grid.load_labels(paths.LABELS)
     peers = load_peers()
-    for i, p in peers.items():
-        if p["shape"] != foot.shape or p["crs"] != rasterio.open(paths.TEMPLATE).crs:
+    with rasterio.open(paths.TEMPLATE) as template:
+        expected_grid = (template.crs, template.shape, template.transform, 1)
+    for i, peer in peers.items():
+        actual_grid = (peer["crs"], peer["shape"], peer["transform"], 1)
+        if actual_grid != expected_grid:
             raise ValueError(f"{i}: grid differs from template; refusing to compare")
+        validate_binary_raster(peer["values"], foot, i)
 
+    candidate_path = args.candidate.resolve() if args.candidate is not None else None
+    output_path = args.out.resolve()
     candidate = None
     cand_info = None
-    if args.candidate is not None and args.candidate.exists():
-        with rasterio.open(args.candidate) as s:
-            if s.shape != foot.shape or s.count != 1:
-                raise ValueError("candidate shape/band mismatch")
-            candidate = s.read(1) == 1
-            cand_info = {"path": str(args.candidate.relative_to(ROOT)), "sha256": sha256_file(args.candidate),
-                         "dots": int(candidate.sum())}
+    if candidate_path is not None and candidate_path.is_file():
+        candidate_hash = sha256_file(candidate_path)
+        with rasterio.open(candidate_path) as s:
+            candidate_grid = (s.crs, s.shape, s.transform, s.count)
+            if candidate_grid != expected_grid:
+                raise ValueError("candidate CRS/shape/transform/band count differs from template")
+            candidate_values = s.read(1)
+        if sha256_file(candidate_path) != candidate_hash:
+            raise ValueError("candidate bytes changed while being read")
+        candidate = validate_binary_raster(candidate_values, foot, "candidate")
+        candidate_name = (candidate_path.relative_to(ROOT).as_posix()
+                          if candidate_path.is_relative_to(ROOT) else str(candidate_path))
+        cand_info = {"path": candidate_name, "sha256": candidate_hash,
+                     "dots": int(candidate.sum())}
 
     result = analyse(peers, candidate, foot, label)
     result = {
@@ -202,9 +295,11 @@ def main() -> int:
         "candidate": cand_info,
         **result,
     }
-    args.out.parent.mkdir(parents=True, exist_ok=True)
-    args.out.write_text(json.dumps(result, indent=1) + "\n")
-    print(f"wrote {args.out.relative_to(ROOT)}: {len(peers)} peers, "
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(json.dumps(result, indent=1, allow_nan=False) + "\n")
+    output_label = (output_path.relative_to(ROOT).as_posix()
+                    if output_path.is_relative_to(ROOT) else str(output_path))
+    print(f"wrote {output_label}: {len(peers)} peers, "
           f"{len(result['identical_in_footprint_pairs'])} identical in-footprint pair(s), "
           f"{len(result['strict_subset_relations'])} strict-subset relation(s)")
     return 0

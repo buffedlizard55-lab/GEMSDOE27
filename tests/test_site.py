@@ -80,8 +80,15 @@ def test_research_and_manual_instructions_are_explicit():
     assert "30_lane_2026-10-27_preregistration.md" in research
     assert "not drainage" in research.lower()
     assert "quadrant-stratified" in research and "approximate" in research
+    for hypothesis_id in ("H27-16", "H29-5", "H28-6", "H28-7"):
+        assert hypothesis_id in research
+    assert "current availability and hashes were not verified" in research
+    assert "allowlist..<br>" not in research
+    assert "restored here..<br>" not in research
+    assert "has yet been run..<br>" not in research
+    assert "no new lane has been assigned" in research.lower()
     sources = (DOCS / "sources.html").read_text()
-    assert "IR-2026-10-27-conflicting-score-file-attribution" in sources
+    assert "IR-2026-10-28-06-pairwise-final-dot-screen" in sources
     assert "dated snapshots, not a live leaderboard" in sources
     how = (DOCS / "how-to-submit.html").read_text()
     assert "Predicted values must be in range [0, 1]" in how
@@ -100,6 +107,45 @@ def test_executive_download_decision_table_is_explicit_and_fail_closed():
                  ROOT / "EXECUTIVE_SUMMARY.md"):
         text = path.read_text()
         assert all(item in text for item in expected), path
+
+
+def test_historical_table_reports_unknown_estimates_and_pairwise_duplicate_failures():
+    summary = (DOCS / "executive-summary.html").read_text()
+    markdown = (ROOT / "EXECUTIVE_SUMMARY.md").read_text()
+    expected_sites = ("GEMSDOE24", "GEMSDOE25", "GEMSDOE27", "GEMSDOE28", "GEMSDOE30",
+                      "GEMSDOE31", "GEMSDOE32", "GEMSDOE33", "GEMSDOE36")
+    for site in expected_sites:
+        assert site in summary and site in markdown
+    assert "Estimated organizer score" in summary
+    assert "github.com/buffedlizard55-lab/GEMSDOE32/blob/" in summary
+    assert "?raw=1" in summary and "?raw=1" in markdown
+    assert "Download gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif" in markdown
+    assert "Unknown; no justified conversion to organizer score" in markdown
+    assert "NO — duplicate stop triggered vs 11/11 pinned rasters" in summary
+    assert "Final-dot-only, pinned scope; not a global inventory" in markdown
+    assert "Exact in-footprint dot match: GEMSDOE30" in summary
+    assert "Exact in-footprint dot match: GEMSDOE25" in summary
+    assert "vs GEMSDOE28 [g28_h38_1]" in summary  # disambiguate same-repository peer entries
+    assert "Highest listed historical claim" in summary
+    assert "OWNER-REPORTED in task; peer audit calls file UNSCORED" in summary
+
+
+def test_session17_run_card_is_complete_and_fail_closed():
+    card = json.loads((ROOT / "evidence/session17_run_card_20261028.json").read_text())
+    assert card["new_geological_experiments"] == 0
+    assert card["new_tiff_generated"] is False
+    assert card["assigned_lane_status"].startswith("Missing")
+    assert card["holdout_dti"]["label"] == "HOLDOUT-DTI"
+    assert card["holdout_dti"]["withheld_positive_occurrences"] == 134150
+    assert card["holdout_dti"]["frozen_efficacy_gate_pass"] is False
+    assert card["registry_uniqueness"]["historical_best_screen"]["duplicate_stops"] == 9
+    assert card["raster"]["sha256"] == card["registry_uniqueness"]["candidate_final_dot_recheck"]["candidate_raster_sha256"]
+    assert len(card["raster"]["note"]) == card["raster"]["note_characters"] <= 140
+    assert card["validator_output"]["independent_byte_validation_pass"] is True
+    assert card["validator_output"]["readiness_audit"]["selector_authorized"] is False
+    assert card["organizer_score_estimate"] is None
+    assert card["verdict"] == "negative" and card["ok_to_submit"] is False
+    assert card["slot_authorized"] is False
 
 
 def test_generated_h33_tiff_is_shown_and_not_approved():

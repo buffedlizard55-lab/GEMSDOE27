@@ -85,3 +85,52 @@ def test_candidate_overlap_is_directed_and_identical_candidate_scores_full_overl
     row = res["candidate_vs_peers"]["A"]
     assert row["exact_overlap_dots"] == 3
     assert row["dot_overlap_within_3px"] == 1.0
+
+
+def test_pairwise_final_dot_screen_marks_duplicates_and_keeps_directional_scope():
+    foot, cat = _grid()
+    shared = [(4, 1), (4, 4), (0, 8)]
+    peers = {
+        "A": _peer("A", _values(shared, foot, np.nan)),
+        "A_copy": _peer("A_copy", _values(shared, foot, 0.0)),
+        "far": _peer("far", _values([(0, 0), (0, 3)], foot, 0.0)),
+    }
+    screen = vpr.analyse(peers, None, foot, cat)["pairwise_final_dot_screen"]
+    assert "pre-placement continuous surfaces are unavailable" in screen["comparison_kind"]
+    row = screen["per_candidate"]["A"]
+    assert row["pass_within_pinned_peer_set"] is False
+    assert "A_copy" in row["duplicate_peers"]
+    assert "far" not in row["duplicate_peers"]
+    far = next(item for item in row["comparisons"] if item["reference_id"] == "far")
+    assert far["candidate_dot_fraction_within_3px"] == 0.0
+    assert far["duplicate"] is False
+
+
+def test_binary_peer_validation_allows_nan_only_outside_footprint():
+    foot, _ = _grid()
+    values = _values([(4, 1)], foot, np.nan)
+    dots = vpr.validate_binary_raster(values, foot, "peer")
+    assert dots.sum() == 1
+
+
+def test_binary_peer_validation_rejects_nonfinite_or_soft_values_inside_footprint():
+    foot, _ = _grid()
+    for value in (np.nan, 0.5, np.inf):
+        values = _values([], foot, 0.0)
+        values[0, 0] = value
+        try:
+            vpr.validate_binary_raster(values, foot, "bad peer")
+        except ValueError:
+            pass
+        else:
+            raise AssertionError(f"accepted invalid in-footprint value {value}")
+
+
+def test_binary_peer_validation_rejects_grid_shape_mismatch():
+    foot, _ = _grid()
+    try:
+        vpr.validate_binary_raster(np.zeros((8, 9)), foot, "bad peer")
+    except ValueError as exc:
+        assert "shape differs" in str(exc)
+    else:
+        raise AssertionError("accepted a peer raster with the wrong shape")

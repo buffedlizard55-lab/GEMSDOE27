@@ -1,8 +1,8 @@
 {
- "created_utc": "2026-10-28T16:12:27+00:00",
+ "created_utc": "2026-10-28T19:10:03+00:00",
  "purpose": "Descriptive byte-level dot-set audit of pinned peers. Not a score, not a receipt.",
  "label_convention": "owner-reported scores copied from registry; HOLDOUT-DTI not computed here",
- "registry_sha256": "a433a83f433cf33e9230056165fd92e7fc1097e4f8a0b3d4bfd95129137e0601",
+ "registry_sha256": "382cabd60ccdd4e5f970407a689289faeb378c3640c05f6c402ceb52544df1f9",
  "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
  "labels_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
  "catalogue_cells": 60988,
@@ -323,6 +323,1922 @@
    "min_catalogue_distance_of_kept_dots_px": 2.236
   }
  ],
+ "pairwise_final_dot_screen": {
+  "scope": "Pinned peer rasters only; no claim of current/global registry completeness",
+  "comparison_kind": "final binary dot rasters; pre-placement continuous surfaces are unavailable",
+  "thresholds": {
+   "absolute_binary_spearman_stop_gt": 0.9,
+   "directed_dot_overlap_within_3px_stop_gt": 0.7
+  },
+  "per_candidate": {
+   "g24_d15": {
+    "dots": 60069,
+    "duplicate_peers": [
+     "g25_d28",
+     "g27_tv2_d15",
+     "g28_h27_4_r1",
+     "g28_h32_1",
+     "g28_h36_1",
+     "g28_h38_1",
+     "g30_d28",
+     "g31_h27_4",
+     "g32_h33_2_b2",
+     "g33_h33d",
+     "g36_anderson"
+    ],
+    "max_directed_overlap_within_3px": 1.0,
+    "worst_overlap_peer": "g25_d28",
+    "max_abs_binary_spearman": 0.98956,
+    "worst_correlation_peer": "g27_tv2_d15",
+    "pass_within_pinned_peer_set": false,
+    "comparisons": [
+     {
+      "reference_id": "g25_d28",
+      "binary_spearman": 0.575854,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 29849,
+      "candidate_dots": 60069,
+      "reference_dots": 44090,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g27_tv2_d15",
+      "binary_spearman": 0.98956,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 60069,
+      "candidate_dots": 60069,
+      "reference_dots": 61328,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h27_4_r1",
+      "binary_spearman": 0.546447,
+      "candidate_dot_fraction_within_3px": 0.940785,
+      "exact_overlap_dots": 27059,
+      "candidate_dots": 60069,
+      "reference_dots": 40199,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h32_1",
+      "binary_spearman": 0.559454,
+      "candidate_dot_fraction_within_3px": 0.978491,
+      "exact_overlap_dots": 28411,
+      "candidate_dots": 60069,
+      "reference_dots": 42294,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h36_1",
+      "binary_spearman": 0.530583,
+      "candidate_dot_fraction_within_3px": 0.934792,
+      "exact_overlap_dots": 25435,
+      "candidate_dots": 60069,
+      "reference_dots": 37660,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h38_1",
+      "binary_spearman": 0.529184,
+      "candidate_dot_fraction_within_3px": 0.934925,
+      "exact_overlap_dots": 25437,
+      "candidate_dots": 60069,
+      "reference_dots": 37860,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g30_d28",
+      "binary_spearman": 0.575854,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 29849,
+      "candidate_dots": 60069,
+      "reference_dots": 44090,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g31_h27_4",
+      "binary_spearman": 0.546447,
+      "candidate_dot_fraction_within_3px": 0.940785,
+      "exact_overlap_dots": 27059,
+      "candidate_dots": 60069,
+      "reference_dots": 40199,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g32_h33_2_b2",
+      "binary_spearman": 0.532368,
+      "candidate_dot_fraction_within_3px": 0.884766,
+      "exact_overlap_dots": 25517,
+      "candidate_dots": 60069,
+      "reference_dots": 37654,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g33_h33d",
+      "binary_spearman": 0.565411,
+      "candidate_dot_fraction_within_3px": 0.962393,
+      "exact_overlap_dots": 28561,
+      "candidate_dots": 60069,
+      "reference_dots": 41865,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g36_anderson",
+      "binary_spearman": 0.523873,
+      "candidate_dot_fraction_within_3px": 0.885615,
+      "exact_overlap_dots": 25518,
+      "candidate_dots": 60069,
+      "reference_dots": 38854,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     }
+    ]
+   },
+   "g25_d28": {
+    "dots": 44090,
+    "duplicate_peers": [
+     "g24_d15",
+     "g27_tv2_d15",
+     "g28_h27_4_r1",
+     "g28_h32_1",
+     "g28_h36_1",
+     "g28_h38_1",
+     "g30_d28",
+     "g31_h27_4",
+     "g32_h33_2_b2",
+     "g33_h33d",
+     "g36_anderson"
+    ],
+    "max_directed_overlap_within_3px": 1.0,
+    "worst_overlap_peer": "g24_d15",
+    "max_abs_binary_spearman": 1.0,
+    "worst_correlation_peer": "g30_d28",
+    "pass_within_pinned_peer_set": false,
+    "comparisons": [
+     {
+      "reference_id": "g24_d15",
+      "binary_spearman": 0.575854,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 29849,
+      "candidate_dots": 44090,
+      "reference_dots": 60069,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g27_tv2_d15",
+      "binary_spearman": 0.569774,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 29849,
+      "candidate_dots": 44090,
+      "reference_dots": 61328,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h27_4_r1",
+      "binary_spearman": 0.954493,
+      "candidate_dot_fraction_within_3px": 0.937151,
+      "exact_overlap_dots": 40199,
+      "candidate_dots": 44090,
+      "reference_dots": 40199,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h32_1",
+      "binary_spearman": 0.930909,
+      "candidate_dot_fraction_within_3px": 0.975845,
+      "exact_overlap_dots": 40224,
+      "candidate_dots": 44090,
+      "reference_dots": 42294,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h36_1",
+      "binary_spearman": 0.681038,
+      "candidate_dot_fraction_within_3px": 0.931821,
+      "exact_overlap_dots": 27853,
+      "candidate_dots": 44090,
+      "reference_dots": 37660,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h38_1",
+      "binary_spearman": 0.679257,
+      "candidate_dot_fraction_within_3px": 0.931912,
+      "exact_overlap_dots": 27855,
+      "candidate_dots": 44090,
+      "reference_dots": 37860,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g30_d28",
+      "binary_spearman": 1.0,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 44090,
+      "candidate_dots": 44090,
+      "reference_dots": 44090,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g31_h27_4",
+      "binary_spearman": 0.954493,
+      "candidate_dot_fraction_within_3px": 0.937151,
+      "exact_overlap_dots": 40199,
+      "candidate_dots": 44090,
+      "reference_dots": 40199,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g32_h33_2_b2",
+      "binary_spearman": 0.923555,
+      "candidate_dot_fraction_within_3px": 0.881719,
+      "exact_overlap_dots": 37654,
+      "candidate_dots": 44090,
+      "reference_dots": 37654,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g33_h33d",
+      "binary_spearman": 0.809604,
+      "candidate_dot_fraction_within_3px": 0.960581,
+      "exact_overlap_dots": 34851,
+      "candidate_dots": 44090,
+      "reference_dots": 41865,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g36_anderson",
+      "binary_spearman": 0.909038,
+      "candidate_dot_fraction_within_3px": 0.882649,
+      "exact_overlap_dots": 37654,
+      "candidate_dots": 44090,
+      "reference_dots": 38854,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     }
+    ]
+   },
+   "g27_tv2_d15": {
+    "dots": 61328,
+    "duplicate_peers": [
+     "g24_d15",
+     "g25_d28",
+     "g28_h27_4_r1",
+     "g28_h32_1",
+     "g28_h36_1",
+     "g28_h38_1",
+     "g30_d28",
+     "g31_h27_4",
+     "g32_h33_2_b2",
+     "g33_h33d",
+     "g36_anderson"
+    ],
+    "max_directed_overlap_within_3px": 0.980188,
+    "worst_overlap_peer": "g24_d15",
+    "max_abs_binary_spearman": 0.98956,
+    "worst_correlation_peer": "g24_d15",
+    "pass_within_pinned_peer_set": false,
+    "comparisons": [
+     {
+      "reference_id": "g24_d15",
+      "binary_spearman": 0.98956,
+      "candidate_dot_fraction_within_3px": 0.980188,
+      "exact_overlap_dots": 60069,
+      "candidate_dots": 61328,
+      "reference_dots": 60069,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g25_d28",
+      "binary_spearman": 0.569774,
+      "candidate_dot_fraction_within_3px": 0.980156,
+      "exact_overlap_dots": 29849,
+      "candidate_dots": 61328,
+      "reference_dots": 44090,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h27_4_r1",
+      "binary_spearman": 0.540677,
+      "candidate_dot_fraction_within_3px": 0.922091,
+      "exact_overlap_dots": 27059,
+      "candidate_dots": 61328,
+      "reference_dots": 40199,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h32_1",
+      "binary_spearman": 0.553546,
+      "candidate_dot_fraction_within_3px": 0.959056,
+      "exact_overlap_dots": 28411,
+      "candidate_dots": 61328,
+      "reference_dots": 42294,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h36_1",
+      "binary_spearman": 0.524981,
+      "candidate_dot_fraction_within_3px": 0.916156,
+      "exact_overlap_dots": 25435,
+      "candidate_dots": 61328,
+      "reference_dots": 37660,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h38_1",
+      "binary_spearman": 0.523595,
+      "candidate_dot_fraction_within_3px": 0.916596,
+      "exact_overlap_dots": 25437,
+      "candidate_dots": 61328,
+      "reference_dots": 37860,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g30_d28",
+      "binary_spearman": 0.569774,
+      "candidate_dot_fraction_within_3px": 0.980156,
+      "exact_overlap_dots": 29849,
+      "candidate_dots": 61328,
+      "reference_dots": 44090,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g31_h27_4",
+      "binary_spearman": 0.540677,
+      "candidate_dot_fraction_within_3px": 0.922091,
+      "exact_overlap_dots": 27059,
+      "candidate_dots": 61328,
+      "reference_dots": 40199,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g32_h33_2_b2",
+      "binary_spearman": 0.526747,
+      "candidate_dot_fraction_within_3px": 0.86719,
+      "exact_overlap_dots": 25517,
+      "candidate_dots": 61328,
+      "reference_dots": 37654,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g33_h33d",
+      "binary_spearman": 0.559443,
+      "candidate_dot_fraction_within_3px": 0.943289,
+      "exact_overlap_dots": 28561,
+      "candidate_dots": 61328,
+      "reference_dots": 41865,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g36_anderson",
+      "binary_spearman": 0.518356,
+      "candidate_dot_fraction_within_3px": 0.868037,
+      "exact_overlap_dots": 25519,
+      "candidate_dots": 61328,
+      "reference_dots": 38854,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     }
+    ]
+   },
+   "g28_h27_4_r1": {
+    "dots": 40199,
+    "duplicate_peers": [
+     "g24_d15",
+     "g25_d28",
+     "g27_tv2_d15",
+     "g28_h32_1",
+     "g28_h36_1",
+     "g28_h38_1",
+     "g30_d28",
+     "g31_h27_4",
+     "g32_h33_2_b2",
+     "g33_h33d",
+     "g36_anderson"
+    ],
+    "max_directed_overlap_within_3px": 1.0,
+    "worst_overlap_peer": "g24_d15",
+    "max_abs_binary_spearman": 1.0,
+    "worst_correlation_peer": "g31_h27_4",
+    "pass_within_pinned_peer_set": false,
+    "comparisons": [
+     {
+      "reference_id": "g24_d15",
+      "binary_spearman": 0.546447,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 27059,
+      "candidate_dots": 40199,
+      "reference_dots": 60069,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g25_d28",
+      "binary_spearman": 0.954493,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 40199,
+      "candidate_dots": 40199,
+      "reference_dots": 44090,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g27_tv2_d15",
+      "binary_spearman": 0.540677,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 27059,
+      "candidate_dots": 40199,
+      "reference_dots": 61328,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h32_1",
+      "binary_spearman": 0.944258,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 38953,
+      "candidate_dots": 40199,
+      "reference_dots": 42294,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h36_1",
+      "binary_spearman": 0.713701,
+      "candidate_dot_fraction_within_3px": 0.995622,
+      "exact_overlap_dots": 27853,
+      "candidate_dots": 40199,
+      "reference_dots": 37660,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h38_1",
+      "binary_spearman": 0.711838,
+      "candidate_dot_fraction_within_3px": 0.995647,
+      "exact_overlap_dots": 27855,
+      "candidate_dots": 40199,
+      "reference_dots": 37860,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g30_d28",
+      "binary_spearman": 0.954493,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 40199,
+      "candidate_dots": 40199,
+      "reference_dots": 44090,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g31_h27_4",
+      "binary_spearman": 1.0,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 40199,
+      "candidate_dots": 40199,
+      "reference_dots": 40199,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g32_h33_2_b2",
+      "binary_spearman": 0.967587,
+      "candidate_dot_fraction_within_3px": 0.953904,
+      "exact_overlap_dots": 37654,
+      "candidate_dots": 40199,
+      "reference_dots": 37654,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g33_h33d",
+      "binary_spearman": 0.819315,
+      "candidate_dot_fraction_within_3px": 0.999055,
+      "exact_overlap_dots": 33670,
+      "candidate_dots": 40199,
+      "reference_dots": 41865,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g36_anderson",
+      "binary_spearman": 0.952402,
+      "candidate_dot_fraction_within_3px": 0.954402,
+      "exact_overlap_dots": 37654,
+      "candidate_dots": 40199,
+      "reference_dots": 38854,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     }
+    ]
+   },
+   "g28_h32_1": {
+    "dots": 42294,
+    "duplicate_peers": [
+     "g24_d15",
+     "g25_d28",
+     "g27_tv2_d15",
+     "g28_h27_4_r1",
+     "g28_h36_1",
+     "g28_h38_1",
+     "g30_d28",
+     "g31_h27_4",
+     "g32_h33_2_b2",
+     "g33_h33d",
+     "g36_anderson"
+    ],
+    "max_directed_overlap_within_3px": 1.0,
+    "worst_overlap_peer": "g24_d15",
+    "max_abs_binary_spearman": 0.944258,
+    "worst_correlation_peer": "g28_h27_4_r1",
+    "pass_within_pinned_peer_set": false,
+    "comparisons": [
+     {
+      "reference_id": "g24_d15",
+      "binary_spearman": 0.559454,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 28411,
+      "candidate_dots": 42294,
+      "reference_dots": 60069,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g25_d28",
+      "binary_spearman": 0.930909,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 40224,
+      "candidate_dots": 42294,
+      "reference_dots": 44090,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g27_tv2_d15",
+      "binary_spearman": 0.553546,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 28411,
+      "candidate_dots": 42294,
+      "reference_dots": 61328,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h27_4_r1",
+      "binary_spearman": 0.944258,
+      "candidate_dot_fraction_within_3px": 0.967489,
+      "exact_overlap_dots": 38953,
+      "candidate_dots": 42294,
+      "reference_dots": 40199,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h36_1",
+      "binary_spearman": 0.693132,
+      "candidate_dot_fraction_within_3px": 0.964037,
+      "exact_overlap_dots": 27757,
+      "candidate_dots": 42294,
+      "reference_dots": 37660,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h38_1",
+      "binary_spearman": 0.691322,
+      "candidate_dot_fraction_within_3px": 0.964108,
+      "exact_overlap_dots": 27759,
+      "candidate_dots": 42294,
+      "reference_dots": 37860,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g30_d28",
+      "binary_spearman": 0.930909,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 40224,
+      "candidate_dots": 42294,
+      "reference_dots": 44090,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g31_h27_4",
+      "binary_spearman": 0.944258,
+      "candidate_dot_fraction_within_3px": 0.967489,
+      "exact_overlap_dots": 38953,
+      "candidate_dots": 42294,
+      "reference_dots": 40199,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g32_h33_2_b2",
+      "binary_spearman": 0.923428,
+      "candidate_dot_fraction_within_3px": 0.915898,
+      "exact_overlap_dots": 36874,
+      "candidate_dots": 42294,
+      "reference_dots": 37654,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g33_h33d",
+      "binary_spearman": 0.816085,
+      "candidate_dot_fraction_within_3px": 0.989904,
+      "exact_overlap_dots": 34403,
+      "candidate_dots": 42294,
+      "reference_dots": 41865,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g36_anderson",
+      "binary_spearman": 0.908918,
+      "candidate_dot_fraction_within_3px": 0.916608,
+      "exact_overlap_dots": 36874,
+      "candidate_dots": 42294,
+      "reference_dots": 38854,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     }
+    ]
+   },
+   "g28_h36_1": {
+    "dots": 37660,
+    "duplicate_peers": [
+     "g24_d15",
+     "g25_d28",
+     "g27_tv2_d15",
+     "g28_h27_4_r1",
+     "g28_h32_1",
+     "g28_h38_1",
+     "g30_d28",
+     "g31_h27_4",
+     "g32_h33_2_b2",
+     "g33_h33d",
+     "g36_anderson"
+    ],
+    "max_directed_overlap_within_3px": 1.0,
+    "worst_overlap_peer": "g24_d15",
+    "max_abs_binary_spearman": 0.997336,
+    "worst_correlation_peer": "g28_h38_1",
+    "pass_within_pinned_peer_set": false,
+    "comparisons": [
+     {
+      "reference_id": "g24_d15",
+      "binary_spearman": 0.530583,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 25435,
+      "candidate_dots": 37660,
+      "reference_dots": 60069,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g25_d28",
+      "binary_spearman": 0.681038,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 27853,
+      "candidate_dots": 37660,
+      "reference_dots": 44090,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g27_tv2_d15",
+      "binary_spearman": 0.524981,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 25435,
+      "candidate_dots": 37660,
+      "reference_dots": 61328,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h27_4_r1",
+      "binary_spearman": 0.713701,
+      "candidate_dot_fraction_within_3px": 0.997557,
+      "exact_overlap_dots": 27853,
+      "candidate_dots": 37660,
+      "reference_dots": 40199,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h32_1",
+      "binary_spearman": 0.693132,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 27757,
+      "candidate_dots": 37660,
+      "reference_dots": 42294,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h38_1",
+      "binary_spearman": 0.997336,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 37660,
+      "candidate_dots": 37660,
+      "reference_dots": 37860,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g30_d28",
+      "binary_spearman": 0.681038,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 27853,
+      "candidate_dots": 37660,
+      "reference_dots": 44090,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g31_h27_4",
+      "binary_spearman": 0.713701,
+      "candidate_dot_fraction_within_3px": 0.997557,
+      "exact_overlap_dots": 27853,
+      "candidate_dots": 37660,
+      "reference_dots": 40199,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g32_h33_2_b2",
+      "binary_spearman": 0.694804,
+      "candidate_dot_fraction_within_3px": 0.954727,
+      "exact_overlap_dots": 26248,
+      "candidate_dots": 37660,
+      "reference_dots": 37654,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g33_h33d",
+      "binary_spearman": 0.692918,
+      "candidate_dot_fraction_within_3px": 0.998407,
+      "exact_overlap_dots": 27607,
+      "candidate_dots": 37660,
+      "reference_dots": 41865,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g36_anderson",
+      "binary_spearman": 0.68384,
+      "candidate_dot_fraction_within_3px": 0.955204,
+      "exact_overlap_dots": 26248,
+      "candidate_dots": 37660,
+      "reference_dots": 38854,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     }
+    ]
+   },
+   "g28_h38_1": {
+    "dots": 37860,
+    "duplicate_peers": [
+     "g24_d15",
+     "g25_d28",
+     "g27_tv2_d15",
+     "g28_h27_4_r1",
+     "g28_h32_1",
+     "g28_h36_1",
+     "g30_d28",
+     "g31_h27_4",
+     "g32_h33_2_b2",
+     "g33_h33d",
+     "g36_anderson"
+    ],
+    "max_directed_overlap_within_3px": 0.995774,
+    "worst_overlap_peer": "g27_tv2_d15",
+    "max_abs_binary_spearman": 0.997336,
+    "worst_correlation_peer": "g28_h36_1",
+    "pass_within_pinned_peer_set": false,
+    "comparisons": [
+     {
+      "reference_id": "g24_d15",
+      "binary_spearman": 0.529184,
+      "candidate_dot_fraction_within_3px": 0.995404,
+      "exact_overlap_dots": 25437,
+      "candidate_dots": 37860,
+      "reference_dots": 60069,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g25_d28",
+      "binary_spearman": 0.679257,
+      "candidate_dot_fraction_within_3px": 0.995351,
+      "exact_overlap_dots": 27855,
+      "candidate_dots": 37860,
+      "reference_dots": 44090,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g27_tv2_d15",
+      "binary_spearman": 0.523595,
+      "candidate_dot_fraction_within_3px": 0.995774,
+      "exact_overlap_dots": 25437,
+      "candidate_dots": 37860,
+      "reference_dots": 61328,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h27_4_r1",
+      "binary_spearman": 0.711838,
+      "candidate_dot_fraction_within_3px": 0.992816,
+      "exact_overlap_dots": 27855,
+      "candidate_dots": 37860,
+      "reference_dots": 40199,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h32_1",
+      "binary_spearman": 0.691322,
+      "candidate_dot_fraction_within_3px": 0.995351,
+      "exact_overlap_dots": 27759,
+      "candidate_dots": 37860,
+      "reference_dots": 42294,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h36_1",
+      "binary_spearman": 0.997336,
+      "candidate_dot_fraction_within_3px": 0.995193,
+      "exact_overlap_dots": 37660,
+      "candidate_dots": 37860,
+      "reference_dots": 37660,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g30_d28",
+      "binary_spearman": 0.679257,
+      "candidate_dot_fraction_within_3px": 0.995351,
+      "exact_overlap_dots": 27855,
+      "candidate_dots": 37860,
+      "reference_dots": 44090,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g31_h27_4",
+      "binary_spearman": 0.711838,
+      "candidate_dot_fraction_within_3px": 0.992816,
+      "exact_overlap_dots": 27855,
+      "candidate_dots": 37860,
+      "reference_dots": 40199,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g32_h33_2_b2",
+      "binary_spearman": 0.692995,
+      "candidate_dot_fraction_within_3px": 0.950132,
+      "exact_overlap_dots": 26250,
+      "candidate_dots": 37860,
+      "reference_dots": 37654,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g33_h33d",
+      "binary_spearman": 0.691108,
+      "candidate_dot_fraction_within_3px": 0.993687,
+      "exact_overlap_dots": 27609,
+      "candidate_dots": 37860,
+      "reference_dots": 41865,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g36_anderson",
+      "binary_spearman": 0.682058,
+      "candidate_dot_fraction_within_3px": 0.950634,
+      "exact_overlap_dots": 26250,
+      "candidate_dots": 37860,
+      "reference_dots": 38854,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     }
+    ]
+   },
+   "g30_d28": {
+    "dots": 44090,
+    "duplicate_peers": [
+     "g24_d15",
+     "g25_d28",
+     "g27_tv2_d15",
+     "g28_h27_4_r1",
+     "g28_h32_1",
+     "g28_h36_1",
+     "g28_h38_1",
+     "g31_h27_4",
+     "g32_h33_2_b2",
+     "g33_h33d",
+     "g36_anderson"
+    ],
+    "max_directed_overlap_within_3px": 1.0,
+    "worst_overlap_peer": "g24_d15",
+    "max_abs_binary_spearman": 1.0,
+    "worst_correlation_peer": "g25_d28",
+    "pass_within_pinned_peer_set": false,
+    "comparisons": [
+     {
+      "reference_id": "g24_d15",
+      "binary_spearman": 0.575854,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 29849,
+      "candidate_dots": 44090,
+      "reference_dots": 60069,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g25_d28",
+      "binary_spearman": 1.0,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 44090,
+      "candidate_dots": 44090,
+      "reference_dots": 44090,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g27_tv2_d15",
+      "binary_spearman": 0.569774,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 29849,
+      "candidate_dots": 44090,
+      "reference_dots": 61328,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h27_4_r1",
+      "binary_spearman": 0.954493,
+      "candidate_dot_fraction_within_3px": 0.937151,
+      "exact_overlap_dots": 40199,
+      "candidate_dots": 44090,
+      "reference_dots": 40199,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h32_1",
+      "binary_spearman": 0.930909,
+      "candidate_dot_fraction_within_3px": 0.975845,
+      "exact_overlap_dots": 40224,
+      "candidate_dots": 44090,
+      "reference_dots": 42294,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h36_1",
+      "binary_spearman": 0.681038,
+      "candidate_dot_fraction_within_3px": 0.931821,
+      "exact_overlap_dots": 27853,
+      "candidate_dots": 44090,
+      "reference_dots": 37660,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h38_1",
+      "binary_spearman": 0.679257,
+      "candidate_dot_fraction_within_3px": 0.931912,
+      "exact_overlap_dots": 27855,
+      "candidate_dots": 44090,
+      "reference_dots": 37860,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g31_h27_4",
+      "binary_spearman": 0.954493,
+      "candidate_dot_fraction_within_3px": 0.937151,
+      "exact_overlap_dots": 40199,
+      "candidate_dots": 44090,
+      "reference_dots": 40199,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g32_h33_2_b2",
+      "binary_spearman": 0.923555,
+      "candidate_dot_fraction_within_3px": 0.881719,
+      "exact_overlap_dots": 37654,
+      "candidate_dots": 44090,
+      "reference_dots": 37654,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g33_h33d",
+      "binary_spearman": 0.809604,
+      "candidate_dot_fraction_within_3px": 0.960581,
+      "exact_overlap_dots": 34851,
+      "candidate_dots": 44090,
+      "reference_dots": 41865,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g36_anderson",
+      "binary_spearman": 0.909038,
+      "candidate_dot_fraction_within_3px": 0.882649,
+      "exact_overlap_dots": 37654,
+      "candidate_dots": 44090,
+      "reference_dots": 38854,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     }
+    ]
+   },
+   "g31_h27_4": {
+    "dots": 40199,
+    "duplicate_peers": [
+     "g24_d15",
+     "g25_d28",
+     "g27_tv2_d15",
+     "g28_h27_4_r1",
+     "g28_h32_1",
+     "g28_h36_1",
+     "g28_h38_1",
+     "g30_d28",
+     "g32_h33_2_b2",
+     "g33_h33d",
+     "g36_anderson"
+    ],
+    "max_directed_overlap_within_3px": 1.0,
+    "worst_overlap_peer": "g24_d15",
+    "max_abs_binary_spearman": 1.0,
+    "worst_correlation_peer": "g28_h27_4_r1",
+    "pass_within_pinned_peer_set": false,
+    "comparisons": [
+     {
+      "reference_id": "g24_d15",
+      "binary_spearman": 0.546447,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 27059,
+      "candidate_dots": 40199,
+      "reference_dots": 60069,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g25_d28",
+      "binary_spearman": 0.954493,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 40199,
+      "candidate_dots": 40199,
+      "reference_dots": 44090,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g27_tv2_d15",
+      "binary_spearman": 0.540677,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 27059,
+      "candidate_dots": 40199,
+      "reference_dots": 61328,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h27_4_r1",
+      "binary_spearman": 1.0,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 40199,
+      "candidate_dots": 40199,
+      "reference_dots": 40199,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h32_1",
+      "binary_spearman": 0.944258,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 38953,
+      "candidate_dots": 40199,
+      "reference_dots": 42294,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h36_1",
+      "binary_spearman": 0.713701,
+      "candidate_dot_fraction_within_3px": 0.995622,
+      "exact_overlap_dots": 27853,
+      "candidate_dots": 40199,
+      "reference_dots": 37660,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h38_1",
+      "binary_spearman": 0.711838,
+      "candidate_dot_fraction_within_3px": 0.995647,
+      "exact_overlap_dots": 27855,
+      "candidate_dots": 40199,
+      "reference_dots": 37860,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g30_d28",
+      "binary_spearman": 0.954493,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 40199,
+      "candidate_dots": 40199,
+      "reference_dots": 44090,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g32_h33_2_b2",
+      "binary_spearman": 0.967587,
+      "candidate_dot_fraction_within_3px": 0.953904,
+      "exact_overlap_dots": 37654,
+      "candidate_dots": 40199,
+      "reference_dots": 37654,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g33_h33d",
+      "binary_spearman": 0.819315,
+      "candidate_dot_fraction_within_3px": 0.999055,
+      "exact_overlap_dots": 33670,
+      "candidate_dots": 40199,
+      "reference_dots": 41865,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g36_anderson",
+      "binary_spearman": 0.952402,
+      "candidate_dot_fraction_within_3px": 0.954402,
+      "exact_overlap_dots": 37654,
+      "candidate_dots": 40199,
+      "reference_dots": 38854,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     }
+    ]
+   },
+   "g32_h33_2_b2": {
+    "dots": 37654,
+    "duplicate_peers": [
+     "g24_d15",
+     "g25_d28",
+     "g27_tv2_d15",
+     "g28_h27_4_r1",
+     "g28_h32_1",
+     "g28_h36_1",
+     "g28_h38_1",
+     "g30_d28",
+     "g31_h27_4",
+     "g33_h33d",
+     "g36_anderson"
+    ],
+    "max_directed_overlap_within_3px": 1.0,
+    "worst_overlap_peer": "g24_d15",
+    "max_abs_binary_spearman": 0.984321,
+    "worst_correlation_peer": "g36_anderson",
+    "pass_within_pinned_peer_set": false,
+    "comparisons": [
+     {
+      "reference_id": "g24_d15",
+      "binary_spearman": 0.532368,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 25517,
+      "candidate_dots": 37654,
+      "reference_dots": 60069,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g25_d28",
+      "binary_spearman": 0.923555,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 37654,
+      "candidate_dots": 37654,
+      "reference_dots": 44090,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g27_tv2_d15",
+      "binary_spearman": 0.526747,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 25517,
+      "candidate_dots": 37654,
+      "reference_dots": 61328,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h27_4_r1",
+      "binary_spearman": 0.967587,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 37654,
+      "candidate_dots": 37654,
+      "reference_dots": 40199,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h32_1",
+      "binary_spearman": 0.923428,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 36874,
+      "candidate_dots": 37654,
+      "reference_dots": 42294,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h36_1",
+      "binary_spearman": 0.694804,
+      "candidate_dot_fraction_within_3px": 0.998752,
+      "exact_overlap_dots": 26248,
+      "candidate_dots": 37654,
+      "reference_dots": 37660,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h38_1",
+      "binary_spearman": 0.692995,
+      "candidate_dot_fraction_within_3px": 0.998752,
+      "exact_overlap_dots": 26250,
+      "candidate_dots": 37654,
+      "reference_dots": 37860,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g30_d28",
+      "binary_spearman": 0.923555,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 37654,
+      "candidate_dots": 37654,
+      "reference_dots": 44090,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g31_h27_4",
+      "binary_spearman": 0.967587,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 37654,
+      "candidate_dots": 37654,
+      "reference_dots": 40199,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g33_h33d",
+      "binary_spearman": 0.794679,
+      "candidate_dot_fraction_within_3px": 0.999841,
+      "exact_overlap_dots": 31614,
+      "candidate_dots": 37654,
+      "reference_dots": 41865,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g36_anderson",
+      "binary_spearman": 0.984321,
+      "candidate_dot_fraction_within_3px": 1.0,
+      "exact_overlap_dots": 37654,
+      "candidate_dots": 37654,
+      "reference_dots": 38854,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     }
+    ]
+   },
+   "g33_h33d": {
+    "dots": 41865,
+    "duplicate_peers": [
+     "g24_d15",
+     "g25_d28",
+     "g27_tv2_d15",
+     "g28_h27_4_r1",
+     "g28_h32_1",
+     "g28_h36_1",
+     "g28_h38_1",
+     "g30_d28",
+     "g31_h27_4",
+     "g32_h33_2_b2",
+     "g36_anderson"
+    ],
+    "max_directed_overlap_within_3px": 0.997086,
+    "worst_overlap_peer": "g27_tv2_d15",
+    "max_abs_binary_spearman": 0.819315,
+    "worst_correlation_peer": "g28_h27_4_r1",
+    "pass_within_pinned_peer_set": false,
+    "comparisons": [
+     {
+      "reference_id": "g24_d15",
+      "binary_spearman": 0.565411,
+      "candidate_dot_fraction_within_3px": 0.997062,
+      "exact_overlap_dots": 28561,
+      "candidate_dots": 41865,
+      "reference_dots": 60069,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g25_d28",
+      "binary_spearman": 0.809604,
+      "candidate_dot_fraction_within_3px": 0.997038,
+      "exact_overlap_dots": 34851,
+      "candidate_dots": 41865,
+      "reference_dots": 44090,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g27_tv2_d15",
+      "binary_spearman": 0.559443,
+      "candidate_dot_fraction_within_3px": 0.997086,
+      "exact_overlap_dots": 28561,
+      "candidate_dots": 41865,
+      "reference_dots": 61328,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h27_4_r1",
+      "binary_spearman": 0.819315,
+      "candidate_dot_fraction_within_3px": 0.9748,
+      "exact_overlap_dots": 33670,
+      "candidate_dots": 41865,
+      "reference_dots": 40199,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h32_1",
+      "binary_spearman": 0.816085,
+      "candidate_dot_fraction_within_3px": 0.997038,
+      "exact_overlap_dots": 34403,
+      "candidate_dots": 41865,
+      "reference_dots": 42294,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h36_1",
+      "binary_spearman": 0.692918,
+      "candidate_dot_fraction_within_3px": 0.9705,
+      "exact_overlap_dots": 27607,
+      "candidate_dots": 41865,
+      "reference_dots": 37660,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h38_1",
+      "binary_spearman": 0.691108,
+      "candidate_dot_fraction_within_3px": 0.970524,
+      "exact_overlap_dots": 27609,
+      "candidate_dots": 41865,
+      "reference_dots": 37860,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g30_d28",
+      "binary_spearman": 0.809604,
+      "candidate_dot_fraction_within_3px": 0.997038,
+      "exact_overlap_dots": 34851,
+      "candidate_dots": 41865,
+      "reference_dots": 44090,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g31_h27_4",
+      "binary_spearman": 0.819315,
+      "candidate_dot_fraction_within_3px": 0.9748,
+      "exact_overlap_dots": 33670,
+      "candidate_dots": 41865,
+      "reference_dots": 40199,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g32_h33_2_b2",
+      "binary_spearman": 0.794679,
+      "candidate_dot_fraction_within_3px": 0.92643,
+      "exact_overlap_dots": 31614,
+      "candidate_dots": 41865,
+      "reference_dots": 37654,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g36_anderson",
+      "binary_spearman": 0.78216,
+      "candidate_dot_fraction_within_3px": 0.927123,
+      "exact_overlap_dots": 31614,
+      "candidate_dots": 41865,
+      "reference_dots": 38854,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     }
+    ]
+   },
+   "g36_anderson": {
+    "dots": 38854,
+    "duplicate_peers": [
+     "g24_d15",
+     "g25_d28",
+     "g27_tv2_d15",
+     "g28_h27_4_r1",
+     "g28_h32_1",
+     "g28_h36_1",
+     "g28_h38_1",
+     "g30_d28",
+     "g31_h27_4",
+     "g32_h33_2_b2",
+     "g33_h33d"
+    ],
+    "max_directed_overlap_within_3px": 0.975781,
+    "worst_overlap_peer": "g27_tv2_d15",
+    "max_abs_binary_spearman": 0.984321,
+    "worst_correlation_peer": "g32_h33_2_b2",
+    "pass_within_pinned_peer_set": false,
+    "comparisons": [
+     {
+      "reference_id": "g24_d15",
+      "binary_spearman": 0.523873,
+      "candidate_dot_fraction_within_3px": 0.975678,
+      "exact_overlap_dots": 25518,
+      "candidate_dots": 38854,
+      "reference_dots": 60069,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g25_d28",
+      "binary_spearman": 0.909038,
+      "candidate_dot_fraction_within_3px": 0.974983,
+      "exact_overlap_dots": 37654,
+      "candidate_dots": 38854,
+      "reference_dots": 44090,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g27_tv2_d15",
+      "binary_spearman": 0.518356,
+      "candidate_dot_fraction_within_3px": 0.975781,
+      "exact_overlap_dots": 25519,
+      "candidate_dots": 38854,
+      "reference_dots": 61328,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h27_4_r1",
+      "binary_spearman": 0.952402,
+      "candidate_dot_fraction_within_3px": 0.974571,
+      "exact_overlap_dots": 37654,
+      "candidate_dots": 38854,
+      "reference_dots": 40199,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h32_1",
+      "binary_spearman": 0.908918,
+      "candidate_dot_fraction_within_3px": 0.974829,
+      "exact_overlap_dots": 36874,
+      "candidate_dots": 38854,
+      "reference_dots": 42294,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h36_1",
+      "binary_spearman": 0.68384,
+      "candidate_dot_fraction_within_3px": 0.97313,
+      "exact_overlap_dots": 26248,
+      "candidate_dots": 38854,
+      "reference_dots": 37660,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g28_h38_1",
+      "binary_spearman": 0.682058,
+      "candidate_dot_fraction_within_3px": 0.973156,
+      "exact_overlap_dots": 26250,
+      "candidate_dots": 38854,
+      "reference_dots": 37860,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g30_d28",
+      "binary_spearman": 0.909038,
+      "candidate_dot_fraction_within_3px": 0.974983,
+      "exact_overlap_dots": 37654,
+      "candidate_dots": 38854,
+      "reference_dots": 44090,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g31_h27_4",
+      "binary_spearman": 0.952402,
+      "candidate_dot_fraction_within_3px": 0.974571,
+      "exact_overlap_dots": 37654,
+      "candidate_dots": 38854,
+      "reference_dots": 40199,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g32_h33_2_b2",
+      "binary_spearman": 0.984321,
+      "candidate_dot_fraction_within_3px": 0.974031,
+      "exact_overlap_dots": 37654,
+      "candidate_dots": 38854,
+      "reference_dots": 37654,
+      "duplicate": true,
+      "reasons": [
+       "absolute binary Spearman exceeds 0.90",
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     },
+     {
+      "reference_id": "g33_h33d",
+      "binary_spearman": 0.78216,
+      "candidate_dot_fraction_within_3px": 0.975035,
+      "exact_overlap_dots": 31614,
+      "candidate_dots": 38854,
+      "reference_dots": 41865,
+      "duplicate": true,
+      "reasons": [
+       "directed 3-pixel dot overlap exceeds 70%"
+      ]
+     }
+    ]
+   }
+  }
+ },
  "candidate_vs_peers": {
   "g24_d15": {
    "spearman": -0.009292,
