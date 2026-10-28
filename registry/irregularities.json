@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-27 | merged Session 12/13, relief-profile review, and H33-1 lane. 2026-10-28 session 15 peer-relation audit appended (IR-2026-10-28-*). No weekly slot authorized.",
+  "generated": "2026-10-28 | Session 17 audit: pairwise final-dot uniqueness among 12 pinned peers, executive-table update, no new geological experiment or submission authorization.",
   "items": [
     {
       "id": "prompt-verbatim-unavailable",
@@ -520,14 +520,20 @@
     {
       "id": "IR-2026-10-28-05-verbatim-prompt-not-in-readme",
       "severity": "medium",
-      "issue": "The user asked that the full prompt be placed in the README. README.md holds a condensed operating brief, which AGENTS.md permits, and states it is not verbatim. The full prompt is very long and repeats the same instructions many times.",
-      "action": "Open decision for the owner: keep the condensed brief in README and archive a verbatim copy as a separate file, or replace the brief with the verbatim text. Not changed in session 15."
+      "issue": "The user asked that the long project prompt be placed in README and read at every session. README now contains a durable, session-start operational prompt and explicitly tells agents to read it in full; the exact conversational transcript is not copied word-for-word because it repeats historical lists and requirements. The per-site ledger is in EXECUTIVE_SUMMARY.md and source/hypothesis records are in the registry and knowledge files.",
+      "action": "Operational requirement is addressed by README's prominent session-start prompt. Limitation: not a verbatim transcript; if a literal archival copy is later required, preserve it separately and link it from README rather than duplicating stale historical scores in the main charter."
     },
     {
       "id": "IR-2026-10-28-peer-cache-pin-and-mask",
       "severity": "high",
       "issue": "Peer cache manifest previously recorded the hash of already-cached bytes without checking a registry SHA-256; changed cache bytes plus refreshed manifest could masquerade as the pinned source. Readiness byte scan also accepted a finite raster with a nodata tag or pixel mask. A failed uniqueness run could leave an earlier PASS report at its output path.",
       "action": "Pin 12 SHA-256 values from the earlier byte audit, verify fetched and cached bytes against those pins and bind manifest provenance to registry, remove stale output before a run, and reject nodata tags and masked pixels for all-finite candidates. Regression tests added. Source bytes remain owner mirrors; full registry completeness is not established."
+    },
+    {
+      "id": "IR-2026-10-28-06-pairwise-final-dot-screen",
+      "severity": "medium",
+      "issue": "A new byte-bound audit compares every ordered pair of the 12 pinned historical peer rasters using final binary-mask Spearman and directed 3-pixel dot overlap. It does not contain the peers\u2019 pre-placement continuous surfaces, is limited to this owner-mirrored registry snapshot, and is not a global inventory. The nine selected per-site historical files each trigger at least one duplicate stop within that snapshot. The existing H33-1 research raster\u2019s post-placement screen was reproduced; its previous pre-placement surface statistic was not recomputed. This is a uniqueness audit only, not a HOLDOUT-DTI experiment or submission authorization.",
+      "action": "Use evidence/peer_final_dot_uniqueness_20261028.json and the regenerated executive table. Do not call historical files unique/new; retain scope limits, score provenance, and the independent selector gate."
     },
     {
       "id": "IR-2026-10-28-lane-paragraph-missing-again",

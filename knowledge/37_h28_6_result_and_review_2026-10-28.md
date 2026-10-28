@@ -1,4 +1,4 @@
-# H28-6 result and Session 17 three-pass review (2026-10-28)
+# H28-6 result and three-pass review (2026-10-28)
 
 **Decision: NOT OK TO SUBMIT. No new TIFF was published.** The candidate failed its frozen holdout efficacy gate, and its dots broke the 70% local overlap stop, so the preregistered rule wrote no raster. Nothing was uploaded, and no weekly slot was selected or claimed.
 
