@@ -171,6 +171,52 @@ def h33_summary() -> tuple[str, str]:
     return html_block, f"**H33-1 generated TIFF — NOT OK TO SUBMIT.** {detail} {gate_text} {file_note}"
 
 
+def peer_relation_sentences(rel: dict, peers: dict) -> tuple[str, str]:
+    """Plain-language sentences built only from evidence/peer_relations_20261028.json.
+
+    Returns (GEMSDOE32 collar paragraph, identical-file paragraph). Every number is read from the
+    byte-level audit (scripts/verify_peer_relations.py); owner-reported scores come from the peer
+    registry and are labelled as such. If the audit is missing, the text says so.
+    """
+    subs = {(x["parent"], x["child"]): x for x in rel.get("strict_subset_relations", [])}
+    s32_25 = subs.get(("g25_d28", "g32_h33_2_b2"))
+    s31_25 = subs.get(("g25_d28", "g31_h27_4"))
+    s32_31 = subs.get(("g31_h27_4", "g32_h33_2_b2"))
+    if not (s32_25 and s31_25 and s32_31):
+        return ("Byte-level peer relations are unavailable: run scripts/verify_peer_relations.py.", "")
+
+    def score(pid: str) -> str:
+        v = peers[pid].get("claimed_score")
+        return f"{v:.4f}" if isinstance(v, (int, float)) else "unknown"
+
+    removed = s32_25["removed_dots"]
+    within2 = s32_25["removed_dots_catalogue_distance_px"]["<= 2px"]
+    kept_min = s32_25["min_catalogue_distance_of_kept_dots_px"]
+    collar = (
+        "Measured on the pinned peer bytes (evidence/peer_relations_20261028.json): the owner-reported "
+        f"GEMSDOE32 file ({s32_25['child_dots']:,} dots) is a strict subset of the GEMSDOE25 d=2.8 field "
+        f"({s32_25['parent_dots']:,} dots). {'All' if within2 == removed else f'{within2:,} of'} {removed:,} removed dots lie within 2 px of a "
+        f"catalogue cell, and the nearest kept dot is {kept_min} px away. GEMSDOE31 is the same field with "
+        f"{s31_25['removed_dots']:,} dots within 1 px removed; GEMSDOE32 is GEMSDOE31 minus "
+        f"{s32_31['removed_dots']:,} dots at 2 px. Owner-reported scores therefore step "
+        f"{score('g25_d28')} → {score('g31_h27_4')} → {score('g32_h33_2_b2')} as the removed collar widens "
+        "from none to 1 px to 2 px. That is one family with one raster per step and owner-reported values: a "
+        "dose-response pattern, not proof of cause. Any further pruning of this family yields a subset, whose "
+        "directed 3-px overlap with the GEMSDOE32 raster is 100% by construction, so it fails the 70% duplicate rule."
+    )
+    names = {x["id"]: x["repo"].rsplit("/", 1)[-1] for x in peers.values()}
+    pairs = rel.get("identical_in_footprint_pairs", [])
+    per = rel.get("per_peer", {})
+    ident = " ".join(
+        f"{names[a]} and {names[b]} have identical in-footprint dot values ({per[a]['dots_in_footprint']:,} dots; "
+        f"SHA-256 {per[a]['file_sha256'][:12]}… vs {per[b]['file_sha256'][:12]}…)."
+        for a, b in pairs
+    )
+    identity = ("Byte-level check: " + ident + " Different files with identical values are one submission under "
+                "two names, not independent results.") if pairs else ""
+    return collar, identity
+
+
 def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
     registry = read("registry/focus_sites_2026-10-26.json")
     peers = {x["id"]: x for x in read("registry/parallel_submission_registry.json")["entries"]}
@@ -178,6 +224,8 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
     lane = read("evidence/relief_profile_run_card_20261027.json")
     lane_html, lane_md = card_summary(lane)
     h33_html, h33_md = h33_summary()
+    peer_rel_text, peer_identity_text = peer_relation_sentences(
+        read("evidence/peer_relations_20261028.json", {}), peers)
     h31_hold = read("evidence/h31_s10_run_card_2026-10-26.json")["holdout"]
     h31_ci = h31_hold["pooled_dti_H31S_ci95"]
     h31_history = (f"The historical H31-1 HOLDOUT-DTI was {h31_hold['pooled_dti_H31S_candidate']:.6f}, "
@@ -216,6 +264,7 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
                   "files or swaps the GEMSDOE28/GEMSDOE31 values; GEMSDOE25 and GEMSDOE36 file associations are also "
                   "uncertain. Treat every pairing and claimed maximum as provisional. The files are historical, not "
                   "new candidates, regardless of their reported values.")
+    provenance = provenance + (" " + peer_identity_text if peer_identity_text else "")
     other_reports = ("Other user-reported values, not organizer-confirmed: GEMSDOE28 S21 0.0206; "
                      "GEMSDOE33 S33 0.0963; GEMSDOE36 KPL36 0.1647. File and score associations remain unverified.")
     rationale = ("The measured GEMSDOE32 positive-dot set is the GEMSDOE25 d=2.8 set after removing pixels within "
@@ -223,7 +272,7 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
                  "or low-yield prediction mass under a distance-weighted metric, but the hidden truth and organizer "
                  "score-to-file receipt are unavailable. The reported 0.2778 cannot be causally explained or "
                  "independently verified from geometry alone. A genuinely new method might do better, but there is "
-                 "no validated evidence here that it will beat that value.")
+                 "no validated evidence here that it will beat that value." + " " + peer_rel_text)
     hypothesis_table = """
 <div class="tw"><table><thead><tr><th>Rank / hypothesis</th><th>Signature and missing-fault mechanism</th><th>Non-fault mimic / cost</th></tr></thead><tbody>
 <tr><th>1 · detrended-relief profile (selected)</th><td>Cached detrended elevation → higher/lower-side slope contrast × transverse concavity × fixed tangential support; may find eroded or covered range-front breaks.</td><td>Incision, lithologic contacts and roads mimic it; medium cost. It is not mapped drainage or a validated fan apex.</td></tr>

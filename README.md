@@ -37,6 +37,8 @@ Every generated candidate needs a content-hashed TIFF/name, a note of at most 14
 
 Latest audit: [Session 15 review and three-pass verification (2026-10-28)](knowledge/33_session15_repo_review_2026-10-28.md), following [Session 14 review](knowledge/32_session14_review_2026-10-27.md). The readiness audit now includes H33-1; malformed cards fail closed and cannot suppress other audit results. Session 15 confirmed H29-5-PROXY remains negative, H33-1 is not a submission candidate, restored the hash-pinned owner-mirror cache, and passed `verify_downloads.py` with 0 failures. The mirrors are not organizer-authenticated. **No candidate was promoted.**
 
+Session 15 also ran a byte-level peer audit and answers the 0.2778 question: [peer-relations audit](knowledge/34_session15_peer_relations_2026-10-28.md). It reproduces the restored inputs; it measures GEMSDOE32 as the GEMSDOE25 d=2.8 field minus its 2-px catalogue collar; and it records two peer pairs that are identical in value (GEMSDOE25 = GEMSDOE30; GEMSDOE28 H27-4 = GEMSDOE31). **No file is OK to submit, and no new candidate was promoted.** Earlier: [Session 14 review](knowledge/32_session14_review_2026-10-27.md) (malformed cards fail closed; the readiness audit includes H33-1). Its numbers are recorded in `evidence/peer_relations_20261028.json`.
+
 ## What is established and what is not
 
 Historical values are **OWNER-REPORTED**, not ORGANIZER-CONFIRMED; the association between some values and files conflicts across sibling evidence. The historical GEMSDOE32 value of 0.2778 is not a forecast. Its measured dot set is the GEMSDOE25 d=2.8 dots minus a 2-pixel catalogue collar. Spacing and collar exclusion are plausible ways to reduce redundant or low-yield DTI mass, but the hidden truth and a receipt are unavailable: geometry does not prove the reported score's cause. We do not know whether any untested method will exceed it.
@@ -59,6 +61,7 @@ python scripts/fetch_parallel_registry.py
 python scripts/audit_submission_readiness.py
 python scripts/build_site.py
 python scripts/verify_downloads.py
+python scripts/verify_peer_relations.py      # byte-level peer dot-set audit -> evidence/peer_relations_20261028.json
 ruff check src scripts tests
 python -m pytest -q
 ```
