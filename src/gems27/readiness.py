@@ -102,9 +102,16 @@ def publication_decision(card: dict, root: Path) -> dict:
     directory = raster.get("directory", "docs/downloads/research")
     if not isinstance(name, str) or not isinstance(directory, str):
         name, directory = "", "docs/downloads/research"
-    path = (root / directory / name).resolve()
-    safe = path.is_relative_to(root.resolve()) and path.suffix.lower() == ".tif"
-    require(safe and path.is_file(), "raster missing or outside repository")
+    # Untrusted JSON can contain NULs or symlink loops. A malformed path must
+    # block this card, not abort the audit of every other candidate.
+    try:
+        path = (root / directory / name).resolve()
+        safe = ("\x00" not in str(path) and path.is_relative_to(root.resolve())
+                and path.suffix.lower() == ".tif" and path.is_file())
+    except (OSError, ValueError, RuntimeError):
+        path = root
+        safe = False
+    require(safe, "raster missing or outside repository")
     actual_hash = None
     byte_validation = None
     if safe and path.is_file():
