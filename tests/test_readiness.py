@@ -207,3 +207,22 @@ def test_matching_hash_cannot_hide_wrong_crs(tmp_path):
         dst.crs = "EPSG:4326"
     card["raster"]["sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
     assert not publication_decision(card, tmp_path)["ok_to_publish_as_submission"]
+
+
+@pytest.mark.parametrize("name", ["bad\x00.tif", "../outside.tif"])
+def test_invalid_raster_paths_fail_closed(tmp_path, name):
+    card = valid_card(tmp_path)
+    card["raster"]["primary_allfinite"] = name
+    decision = publication_decision(card, tmp_path)
+    assert not decision["ok_to_publish_as_submission"]
+    assert "raster missing or outside repository" in decision["reasons"]
+    assert decision["actual_sha256"] is None
+
+
+def test_symlink_loop_fails_closed(tmp_path):
+    card = valid_card(tmp_path)
+    (tmp_path / "loop.tif").symlink_to("loop.tif")
+    card["raster"]["primary_allfinite"] = "loop.tif"
+    decision = publication_decision(card, tmp_path)
+    assert not decision["ok_to_publish_as_submission"]
+    assert "raster missing or outside repository" in decision["reasons"]

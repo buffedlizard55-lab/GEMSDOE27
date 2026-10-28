@@ -88,3 +88,7 @@ Latest review: [three-pass safety audit](knowledge/32_submission_safety_review_2
 ## 2026-10-28 delivery audit
 
 [Session 15 three-pass delivery audit](knowledge/33_session15_delivery_audit_2026-10-28.md) fixes the executive Markdown download link and fails closed if a research TIFF is missing or its bytes disagree with the run card. The previously generated H33-1 GeoTIFF is downloadable **for research only; NOT OK TO SUBMIT**. No new experiment or slot was used: the parallel prompt did not contain its promised single-method lane paragraph. With hash-pinned owner-mirror data restored, 194 tests and the standalone raster-download verifier pass; these are not organizer receipts or a leaderboard-score estimate. Next session: read this charter and the Session 15 audit before choosing any assigned lane.
+
+## 2026-10-28 Session 16 continuation audit
+
+[Three-pass review](knowledge/35_session16_delivery_review_2026-10-28.md): fixed malformed-path crashes in the shared readiness gate (NULs and symlink loops now reject the card), restored pinned caches, and reproduced peer relations. **200 tests passed; Ruff passed; download verifier: 0 failures.** No new geological experiment or TIFF was generated, no slot used, and no candidate promoted. The prompt still omits its single-method lane assignment. The existing unique TIFF remains **NOT OK TO SUBMIT**; leaderboard estimates and organizer receipts remain unknown. Read the linked review before continuing.
