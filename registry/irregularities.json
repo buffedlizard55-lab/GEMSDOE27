@@ -528,6 +528,36 @@
       "severity": "high",
       "issue": "Peer cache manifest previously recorded the hash of already-cached bytes without checking a registry SHA-256; changed cache bytes plus refreshed manifest could masquerade as the pinned source. Readiness byte scan also accepted a finite raster with a nodata tag or pixel mask. A failed uniqueness run could leave an earlier PASS report at its output path.",
       "action": "Pin 12 SHA-256 values from the earlier byte audit, verify fetched and cached bytes against those pins and bind manifest provenance to registry, remove stale output before a run, and reject nodata tags and masked pixels for all-finite candidates. Regression tests added. Source bytes remain owner mirrors; full registry completeness is not established."
+    },
+    {
+      "id": "IR-2026-10-28-lane-paragraph-missing-again",
+      "severity": "high",
+      "issue": "The prompt's PARALLEL-RUN PROTOCOL says the lane is 'the single method paragraph below', but no such paragraph is present. The same omission was recorded in Session 16.",
+      "action": "Owner to supply an explicit lane. This session ran only the registry's own rank-3 untried hypothesis H28-6 and says so in knowledge/36 section 0. No lane was invented beyond the registry."
+    },
+    {
+      "id": "IR-2026-10-28-leaderboard-figures-conflict",
+      "severity": "medium",
+      "issue": "The prompt states the current GEMSDOE leaderboard high as 0.4413 in one place and 0.3195 in another, and says 0.2778 is the top GEMSDOE32 value. Neither leaderboard figure was read: drivendata.org is barred for automated access, and the user supplied the numbers.",
+      "action": "Treat all three values as UNRESOLVED. No projection is computed against them. Owner to confirm the leaderboard value from the organizer page by hand."
+    },
+    {
+      "id": "IR-2026-10-28-gdr-bytes-blocked-in-sandbox",
+      "severity": "medium",
+      "issue": "gdr.openei.org metadata pages are readable through the fetch tool (verified 2026-10-28 for submission 1391), but bash curl to gdr.openei.org fails at TLS (SSL_ERROR_SYSCALL), and usgs.gov fails the same way. The GDR zip packages therefore cannot be downloaded or hashed in this sandbox.",
+      "action": "Paleo-sinter (H27-16) and conduit-probe hypotheses stay blocked until a verified copy of the package is available. Metadata links only; no byte-level verification claimed."
+    },
+    {
+      "id": "IR-2026-10-28-gravity-constant-field-roundoff-fixed",
+      "severity": "low",
+      "issue": "In the first build of the H28-6 gravity-persistence features, a constant anomaly field produced full-scale (1.0) edge values because float round-off gradients were normalized by an almost-zero 99th percentile. Caught by tests/test_gravity_persistence.py before any holdout or emission was computed.",
+      "action": "Fixed with a relative floor of 1e-9 of the footprint anomaly amplitude. Regression test added. No scored result was affected."
+    },
+    {
+      "id": "IR-2026-10-28-readiness-gate-needs-matched-control",
+      "severity": "medium",
+      "issue": "The fail-closed readiness gate (src/gems27/readiness.py) requires a matched current-best comparison on identical splits (H31 or H29-S). The H28-6 run compares only against the internally rebuilt D0-type control; H31 and H29-S were not re-run. Under the gate this blocks OK-to-submit even if efficacy passes.",
+      "action": "Any future positive result still needs the matched H31/H29-S run before it can be considered for a slot."
     }
   ]
 }

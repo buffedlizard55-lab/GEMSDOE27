@@ -1,0 +1,184 @@
+{
+  "schema": "parallel-run-card-v2",
+  "generated_utc": "2026-10-28",
+  "lane": "L-S17-H28-6 (registry rank-3 untried hypothesis; no lane paragraph supplied; see knowledge/36 section 0)",
+  "hypothesis_id": "H28-6",
+  "hypothesis": "Scale-persistent gravity horizontal-gradient edges (1, 2, 4 px) added to the cached 32-band stack plus 15 subsurface transforms",
+  "mechanism": "A buried density step that persists across 100-400 m smoothing can mark a basement boundary under alluvium where scarps and magnetics are weak.",
+  "named_non_fault_mimic": "basin-fill density pinch-outs, lithologic contacts, regional-field trends, survey-line seams",
+  "verdict": "negative",
+  "ok_to_submit": false,
+  "slot_authorized": false,
+  "download_decision": "NOT OK TO SUBMIT",
+  "download_decision_reasons": [
+    "Matched current-best comparison (H31 / H29-S architectures on the same splits) was not run; readiness gate requires it.",
+    "Holdout efficacy gate failed against control D on seeds 700-709.",
+    "Whole-FID holdout is catalogue-internal; it cannot see organizer expert labels."
+  ],
+  "submission_name": "27GEMSDOE-H28-6-GPERS-20261028-60a6aea650af",
+  "note_max_140_chars": "H28-6 stopped at duplicate check: no TIFF written. NOT OK TO SUBMIT.",
+  "note_chars": 68,
+  "preregistration_sha256": "4a778fbd5b8b32ec7507ceb423edf7ced6cd508916af0fcaf76fcd7a4fbfe321",
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "provenance_note": "Catalogue-internal whole-FID buffered hide-and-recover; NOT a live organizer score.",
+    "evaluator": "gems27.metric.dti_binary v1 (alpha=0.2, beta=0.8, R=3px triangular) + whole-FID buffered holdout (buffer_px=6)",
+    "seeds": [
+      700,
+      701,
+      702,
+      703,
+      704,
+      705,
+      706,
+      707,
+      708,
+      709
+    ],
+    "n_cells": 10,
+    "n_withheld_positives_total": 121143,
+    "canary_max_auc": 0.5854773301042914,
+    "canary_max_feature": "det_local_relief",
+    "pooled_candidate": 0.04123788062905389,
+    "pooled_control_D": 0.041573697075768294,
+    "gate_efficacy_pass": false,
+    "ci95": [
+      -0.0025503686588748665,
+      0.002142834475745028
+    ],
+    "split_scheme": "whole-fid-segment-v1",
+    "visible_only_catalogue_features": true,
+    "training_buffer_verified": true,
+    "emitter_blind_to_hidden_and_buffer": true,
+    "full_kernel_scored": true,
+    "all_model_features_canary_tested": true,
+    "matched_current_best_comparison": false,
+    "current_best_comparison": {
+      "control_id": "D: base-32 + 15 subsurface (D0-type), same splits and buffer; H31/H29-S NOT re-run",
+      "same_splits_and_buffer": true,
+      "pooled_delta": -0.00033581644671440425,
+      "paired_delta_ci95": [
+        -0.0025503686588748665,
+        0.002142834475745028
+      ]
+    },
+    "paired_candidate_minus_B": {
+      "pooled_delta_dti": -0.00033581644671440425,
+      "mean_seed_paired_delta_dti": -0.00023447613816256625,
+      "ci95": [
+        -0.0025503686588748665,
+        0.002142834475745028
+      ],
+      "positive_seeds": 4,
+      "n_seeds": 10,
+      "positive_folds": 2,
+      "n_folds": 4,
+      "per_fold_pooled_delta_dti": {
+        "NW": 0.002058218949204396,
+        "NE_LidarGapHeavy": 0.0014636620441601036,
+        "SW": -0.002157972515083366,
+        "SE": -0.0008048809062855683
+      }
+    }
+  },
+  "uniqueness_vs_registry": {
+    "pass": false,
+    "registry_checker_pass": true,
+    "max_dot_overlap_within_3px_euclidean": 0.46781218462845914,
+    "max_surface_spearman": 0.10857936390018907,
+    "max_postplacement_dot_spearman": 0.039191788642049176,
+    "all_registry_entries_checked": true,
+    "scope_current_and_complete": false,
+    "scope_note": "12 pinned focus-site rasters plus local all-finite files in docs/downloads; not the full organizer-visible submission list",
+    "duplicates": [],
+    "local_prior_rasters": {
+      "n_local_rasters": 22,
+      "max_dot_overlap_within_3px": 0.8485154299675998,
+      "worst": [
+        {
+          "file": "gems27-h28-3-strain-conductivity-negative-research-20261025-27d6875f3b22-allfinite.tif",
+          "dot_fraction_within_3px": 0.8485154299675998
+        },
+        {
+          "file": "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-allfinite.tif",
+          "dot_fraction_within_3px": 0.8477452594677857
+        },
+        {
+          "file": "gems27-dconfirm-hybrid-armd-b2-38k-20261025-5ea0385b7e70-allfinite.tif",
+          "dot_fraction_within_3px": 0.8371487756944813
+        },
+        {
+          "file": "gems27-h29-1-drefill-b2-38k-20261025-c24b6371179c-allfinite.tif",
+          "dot_fraction_within_3px": 0.8360599139533649
+        },
+        {
+          "file": "gems27-h32-poisson-demag-b2-20261026-1ac69a77008d-allfinite.tif",
+          "dot_fraction_within_3px": 0.8297657619376427
+        }
+      ],
+      "pass": false
+    }
+  },
+  "validator": {
+    "zeros_hard_pass": true,
+    "zeros_checks": {
+      "grid_matches_template": {
+        "pass": true,
+        "detail": "candidate=(CRS.from_wkt('PROJCS[\"WGS 84 / UTM zone 11N\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Transverse_Mercator\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-117],PARAMETER[\"scale_factor\",0.9996],PARAMETER[\"false_easting\",500000],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"32611\"]]'), (3730, 3292), (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0), (243350.0, 4135550.0, 572550.0, 4508550.0)); template=(CRS.from_wkt('PROJCS[\"WGS 84 / UTM zone 11N\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Transverse_Mercator\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-117],PARAMETER[\"scale_factor\",0.9996],PARAMETER[\"false_easting\",500000],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"32611\"]]'), (3730, 3292), (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0), (243350.0, 4135550.0, 572550.0, 4508550.0))",
+        "hard": true
+      },
+      "single_band_float32": {
+        "pass": true,
+        "detail": "count=1 dtype=float32",
+        "hard": true
+      },
+      "inside_footprint_all_finite": {
+        "pass": true,
+        "detail": "0 non-finite inside 5167373 px",
+        "hard": true
+      },
+      "inside_footprint_in_0_1": {
+        "pass": true,
+        "detail": "min=0 max=1",
+        "hard": true
+      },
+      "no_infinities_anywhere": {
+        "pass": true,
+        "detail": "np.isinf(whole array) is empty",
+        "hard": true
+      },
+      "outside_footprint_is_zero_and_finite": {
+        "pass": true,
+        "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+        "hard": true
+      },
+      "strict_whole_array_range": {
+        "pass": true,
+        "detail": "whole-array min=0 max=1",
+        "hard": true
+      },
+      "profile_driver_gtiff": {
+        "pass": true,
+        "detail": "GTiff",
+        "hard": false
+      },
+      "compression_like_sample": {
+        "pass": true,
+        "detail": "Compression.lzw",
+        "hard": false
+      }
+    },
+    "nan_hard_pass": true,
+    "sha256": "fef0b0e25ee2f2245b898bf632e522619abdffc85669e49853621b31f1ca28cd"
+  },
+  "raster": {
+    "primary_allfinite": null,
+    "nan_twin": null,
+    "zip": null,
+    "directory": null,
+    "sha256": null,
+    "dots": 37654,
+    "content_id": "60a6aea650af"
+  },
+  "runtime_s": 1436.2
+}

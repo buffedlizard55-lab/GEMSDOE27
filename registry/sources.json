@@ -376,6 +376,18 @@
    "accessed": null,
    "evidence": "knowledge/30_lane_2026-10-27_preregistration.md",
    "feed": false
+  },
+  {
+   "id": "gdr-1391-ingenious-metadata-20261028",
+   "title": "GDR submission 1391: INGENIOUS Great Basin Regional Dataset Compilation (DOI 10.15121/1881483)",
+   "publisher": "Geothermal Data Repository (U.S. DOE), CC-BY-4.0 licence shown on page",
+   "url": "https://gdr.openei.org/submissions/1391",
+   "category": "official-metadata",
+   "used_for": "Lists the packages referenced by H27-16 (paleo geothermal features, 2 m temperature probes, Quaternary volcanics, Quaternary faults v2, well/spring data). Metadata only.",
+   "status": "READ 2026-10-28 via fetch tool (metadata page, text only). Package bytes NOT downloaded: sandbox bash cannot reach gdr.openei.org (TLS failure). Links to package files are listed on the page.",
+   "accessed": "2026-10-28",
+   "evidence": "knowledge/36_preregistration_H28-6_2026-10-28.md",
+   "feed": false
   }
  ]
 }
