@@ -1,6 +1,6 @@
 {
-  "generated": "2026-10-27 | H29-5-PROXY and H33-1 are tested negatives. No selector authorization.",
-  "status": "Three additional formulations and a separate actual drainage hypothesis remain research ideas; H29-5-PROXY was tested and is negative. No selector authorization.",
+  "generated": "2026-10-29 | H29-5-PROXY, H33-1 and H28-6 are tested negatives. No selector authorization.",
+  "status": "Historical qualitative screen; H28-6 was subsequently tested negative, H29-5-PROXY was negative, and the actual drainage hypothesis remains untested. No selector authorization.",
   "novelty_scope": "Screened against current source tree and available experiment/evidence ledgers in this checkout through 2026-10-27; not a global novelty claim across sibling sites or other competitors.",
   "target": "Fault-location pixels in the organizer-created test labels, which remain unobserved here. Catalogue-internal holdouts are only a proxy and cannot validate far-field behavior.",
   "baseline": {
@@ -60,12 +60,12 @@
       "signature": "Persistence of gravity edge/analytic-signal ridges across multiple smoothing scales, rather than raw anomaly amplitude.",
       "why_missing_faults": "Buried density boundaries may remain coherent in gravity derivatives beneath alluvium where surface mapping and LiDAR scarp evidence are weak.",
       "confounders": "Basin-fill density transitions, lithologic contacts, regional gravity trends and correlated potential-field artifacts.",
-      "differs_from_repo": "The exact standalone multiscale persistence transform was not found in the executed experiment ledger; prior H28-1/H32 experiments used related potential-field combinations, so independence is limited.",
+      "differs_from_repo": "This exact multiscale gravity-persistence formulation was subsequently implemented and tested; see evidence/h28_6_run_card_2026-10-28.json. Related potential-field combinations also exist.",
       "cost": "Low-medium; derive transforms from the existing feature stack.",
-      "data_gate": "Inputs and prepared feature matrix were restored and SHA-256 verified in Session 12; no holdout experiment has yet been run.",
-      "validation": "No implementation or holdout experiment in Session 12. Requires assigned lane, preregistration, individual-feature canaries, and fresh paired holdout seeds.",
-      "status": "UNTRIED exact formulation; lower priority due related prior geophysics tests.",
-      "expected_benefit": "Uncertain; no numerical improvement is established."
+      "data_gate": "Inputs were restored from hash-pinned owner mirrors in an earlier session; they are not organizer-authenticated and the cache is not included in this checkout.",
+      "validation": "Previously tested on seeds 700\u2013709 against control D, not a matched current-best architecture; efficacy and local duplicate gates failed. Do not reuse these seeds.",
+      "status": "TESTED NEGATIVE; no TIFF written, not authorized for submission.",
+      "expected_benefit": "No demonstrated improvement; the prior matched control-D holdout gate failed."
     },
     {
       "id": "H28-7",

@@ -543,7 +543,7 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
             "</tr>"
         )
     hypothesis_table = (
-        '<div class="tw"><table><thead><tr><th>Qualitative rank / untried formulation</th>'
+        '<div class="tw"><table><thead><tr><th>Original qualitative rank / formulation</th>'
         '<th>Layers, physical signature and missing-fault rationale</th>'
         '<th>Difference from repo / named non-fault mimics</th>'
         '<th>Expected HOLDOUT-DTI improvement / cost</th>'
@@ -556,7 +556,7 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
         "official GDR packages absent from this checkout; the GDR host is outside this sandbox's "
         "network allowlist, so current availability and hashes were not verified. H29-5 actual routing "
         "needs unmodified DEM and verified outlet observations not present in the restored cache. "
-        "Neither data-gated idea is viable in this session. H28-6 and H28-7 use cached feature families, "
+        "Neither data-gated idea is viable in this session. H28-6 was tested negative; H28-7 uses cached feature families, "
         "but the assigned method paragraph is missing; no experiment may be launched by guessing a lane."
     )
     important = ('<div class="card" style="border-left:5px solid #cf222e"><h2 style="margin-top:0">'
@@ -569,7 +569,7 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
     g32 = f'<h2>What might explain the reported GEMSDOE32 result?</h2><p>{esc(rationale)}</p>'
     action = ('<h2>Next decision</h2><p>No new geological experiment was run: the current prompt says a single-method '
               'paragraph assigns the lane, but no such paragraph is present. Do not invent a lane. The <a '
-              'href="research.html">four-formulation untried-hypothesis screen</a> is a qualitative planning aid; '
+              'href="research.html">four-formulation hypothesis screen</a> is a qualitative planning aid; '
               'external-data blockers and missing assignment prevent testing. Next, obtain an explicit lane, '
               'preregister unused seeds, use the shared cached stack/evaluator/writer, run feature-alone leakage '
               'canaries, and compare a candidate against a same-split current-best control. Strengthen geographic '
@@ -644,7 +644,7 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
 {lane_html}
 <h2>Executive snapshot</h2>
 <p>{esc(highest_report)} The prompt cites conflicting USER-REPORTED leaderboard maxima of 0.3195 and 0.4413; no DrivenData page was accessed and neither is ORGANIZER-CONFIRMED here.</p>
-<p><a class="btn alt" href="executive-summary.html">Read the nine-site executive summary</a> <a class="btn alt" href="research.html">See the untried hypothesis screen and run card</a></p>
+<p><a class="btn alt" href="executive-summary.html">Read the nine-site executive summary</a> <a class="btn alt" href="research.html">See the hypothesis screen and run card</a></p>
 {g32}{action}
 """
     executive = f"""
@@ -673,7 +673,7 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
     research = f"""
 <h1>Research: hypotheses and evidence</h1>{important}
 {h33_html}
-<p>The following four formulations are registered as untried in this repository's 2026-10-27 screen; the rank is qualitative, not a numerical DTI prediction. See the <a href="{repo_link('registry/next_hypotheses.json')}">machine-readable hypothesis ledger</a> and <a href="{PRE}">prior preregistration</a>. No new lane has been assigned in the current prompt.</p>
+<p>The following formulations retain their original qualitative 2026-10-27 screen ranks, not numerical DTI predictions. H28-6 was subsequently tested negative; see its run card. See the <a href="{repo_link('registry/next_hypotheses.json')}">machine-readable hypothesis ledger</a> and <a href="{PRE}">prior preregistration</a>. No new lane has been assigned in the current prompt.</p>
 {hypothesis_table}
 <p class="warnbox">{esc(hypothesis_caveat)}</p>
 <h2>Previously tested negative H29-5-PROXY</h2>
@@ -711,7 +711,7 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
 <p>These are dated snapshots, not a live leaderboard. The latest recorded feed was generated {esc(feed.get('generated_utc', 'unknown'))}. A source listed below may have changed or be inaccessible since its last check. The feed does not request DrivenData; no organizer score or submission status is verified automatically.</p>
 <ul>{feed_rows}</ul><p><a href="data/feed.json">Machine-readable feed</a> · <a href="data/feed_history.json">Feed history</a> · <a href="{repo_link('registry/sources.json')}">Source registry</a>.</p>
 <h2>Primary references and data provenance</h2><ul>
-<li><a href="https://github.com/drivendataorg/gems-prize-reference-solution">Official competition reference solution</a> — read from GitHub in this session; not evidence of this repository's scores.</li>
+<li><a href="https://github.com/drivendataorg/gems-prize-reference-solution">Official competition reference solution</a> — official source link; not evidence of this repository's scores.</li>
 <li><a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN release</a>, <a href="https://gdr.openei.org/submissions/1391">DOE INGENIOUS GDR listing</a> and <a href="https://www.usgs.gov/3d-elevation-program">USGS 3DEP</a> — official source links, not newly downloaded here.</li>
 <li><a href="{repo_link('data/manifest.json')}">Hash-pinned owner-mirror data manifest</a> — restored bytes are not independently organizer-authenticated.</li></ul>
 <h2>Recorded irregularities</h2><p>These dated records describe the state when each audit was made; older status statements may since have changed.</p><ul>{issue_rows}</ul><p><a href="{repo_link('registry/irregularities.json')}">Full irregularity registry</a>.</p>
