@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Standalone verification of the shipped submission files (rasterio + numpy only; imports no project code).
+"""Standalone verification of shipped historical files (numpy, rasterio, scipy and project helpers).
 
 Re-derives, from the files themselves: grid, dtype, band count, nodata, NaN-outside count, value range inside, the
 value set, catalogue overlap, zip contents, SHA-256s against docs/downloads/manifest.json, and the relation of the
@@ -37,11 +37,36 @@ def sha(p: Path) -> str:
     return hashlib.sha256(p.read_bytes()).hexdigest()
 
 
+def fallback_hash_matches(path: Path, manifest_row: dict, download_dir: Path) -> bool:
+    """Bind the fallback bytes and filename to the recorded checks, never just their existence."""
+    try:
+        checks_path = download_dir / f"checks-{manifest_row['nan'][:-4]}.json"
+        checks = json.loads(checks_path.read_text())
+        variant = (checks.get("variants") or checks.get("geotiff"))["allfinite"]
+        return variant["file"] == path.name and sha(path) == variant["sha256"]
+    except (OSError, ValueError, KeyError, TypeError, AttributeError):
+        return False
+
+
+def input_pin_failures(data_dir: Path, manifest: dict) -> list[str]:
+    """Reject altered owner-mirror inputs before deriving footprint or catalogue claims."""
+    paths = {
+        "data/bridge/sample_submission.tif": "sample_submission.tif",
+        "data/bridge/labels.tif": "labels.tif",
+        "docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif": "dotted_h19_5_d1_5_nan.tif",
+        "inputs/gems19-h19-5-powerlaw-budget-multiline-corroborated-20260930-e27054cf-nan.tif": "h19_5_nan.tif",
+    }
+    pins = {row["path"]: row["sha256"] for row in manifest["files"]}
+    return [name for source, name in paths.items()
+            if source not in pins or not (data_dir / name).is_file() or sha(data_dir / name) != pins[source]]
+
+
 def main() -> int:
     required_inputs = (
         DATA / "sample_submission.tif",
         DATA / "labels.tif",
         DATA / "dotted_h19_5_d1_5_nan.tif",
+        DATA / "h19_5_nan.tif",
     )
     missing = [path for path in required_inputs if not path.is_file()]
     if missing:
@@ -54,6 +79,17 @@ def main() -> int:
             "again. These inputs are not an organizer-authenticated DrivenData download.",
             file=sys.stderr,
         )
+        return 2
+
+    try:
+        input_manifest = json.loads((ROOT / "data/manifest.json").read_text())
+        mismatches = input_pin_failures(DATA, input_manifest)
+    except (OSError, ValueError, KeyError, TypeError):
+        print("Cannot verify raster downloads: input manifest is missing or malformed.", file=sys.stderr)
+        return 2
+    if mismatches:
+        print("Cannot verify raster downloads: owner-mirror input SHA-256 mismatch: "
+              + ", ".join(mismatches), file=sys.stderr)
         return 2
 
     man = json.loads((DL / "manifest.json").read_text())
@@ -100,7 +136,10 @@ def main() -> int:
             else:
                 ok(bool((outside == 0).all()) and nd is None and bool(np.isfinite(a).all()),
                    f"{tag}: zeros outside, no NaN anywhere, no nodata tag (fallback)")
-            ok(sha(p) == m["sha256_nan"] or variant != "nan", f"{tag}: sha256 matches manifest" if variant == "nan" else f"{tag}: (fallback hash recorded in checks json)")
+            if variant == "nan":
+                ok(sha(p) == m["sha256_nan"], f"{tag}: sha256 matches manifest")
+            else:
+                ok(fallback_hash_matches(p, m, DL), f"{tag}: sha256 matches recorded checks")
         z = DL / m["zip"]
         with zipfile.ZipFile(z) as zf:
             ok(zf.namelist() == [m["nan"]] and zf.read(m["nan"]) == (DL / m["nan"]).read_bytes(), f"{slot}: zip holds exactly the one nan GeoTIFF, byte-identical")

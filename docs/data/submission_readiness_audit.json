@@ -719,6 +719,39 @@
       },
       "slot_authorized": false,
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
+    },
+    "session17_run_card_20261028.json": {
+      "ok_to_publish_as_submission": false,
+      "reasons": [
+        "run card does not authorize submission",
+        "verdict is not promote",
+        "missing HOLDOUT-DTI label",
+        "missing evaluator version",
+        "missing withheld positive count",
+        "efficacy gate not explicitly passed",
+        "whole-FID split evidence missing",
+        "visible-only catalogue features not proven",
+        "hidden-segment training buffer not proven",
+        "blind emission not proven",
+        "full 300m scoring kernel not proven",
+        "not all input features have canaries",
+        "current-best matched control not proven",
+        "paired improvement CI missing or does not exclude zero",
+        "canary missing or direction-invariant leakage threshold exceeded",
+        "uniqueness gate not passed",
+        "dot overlap missing or exceeds threshold",
+        "surface correlation missing or exceeds threshold",
+        "post-placement correlation missing or exceeds threshold",
+        "complete pre- and post-placement registry screen not proven",
+        "current, complete comparison scope not proven",
+        "all-finite validator missing required checks or failed",
+        "missing or overlong submission note",
+        "raster missing or outside repository"
+      ],
+      "actual_sha256": null,
+      "independent_byte_validation": null,
+      "slot_authorized": false,
+      "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     }
   }
 }

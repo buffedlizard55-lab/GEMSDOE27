@@ -1,0 +1,32 @@
+{
+  "date_utc": "2026-10-29",
+  "hypothesis": "No new assigned lane; prior H33-1 buried-step complement reviewed, not rerun.",
+  "mechanism": "A basement-depth step beneath weak LiDAR relief may mark an unmapped fault.",
+  "named_non_fault_process": "Basin-fill pinch-out can create a density contrast without faulting.",
+  "holdout_dti": {
+    "label": "HOLDOUT-DTI",
+    "source": "evidence/h33_run_card_2026-10-27.json; prior result, not rerun",
+    "evaluator": "gems27.metric.dti_binary v1, alpha 0.2, beta 0.8, 300 m triangular kernel",
+    "withheld_positive_occurrences": 134150,
+    "candidate": 0.025210578303887142,
+    "control": 0.04144575222047764,
+    "paired_delta": -0.016235173916590497,
+    "paired_delta_ci95": [-0.017575553191933015, -0.014448691462792564]
+  },
+  "registry_comparison": {
+    "source": "evidence/session17_run_card_20261028.json; prior screen, not rerun",
+    "scope": "12 pinned final-dot peers; not a complete registry",
+    "max_directed_3px_overlap": 0.0,
+    "max_absolute_final_dot_spearman": 0.00939,
+    "max_absolute_surface_spearman": 0.11038104783748275
+  },
+  "raster_sha256": "1373358188a96b20414834b3e0159065d87470fe695153262ced7b46bc1eb492",
+  "validator_output": "Current independent re-read: single float32 band, grid matches owner-mirror template, finite [0,1] throughout, zeros outside footprint, no catalogue overlap, no nodata; no organizer authentication.",
+  "submission_name": "27GEMSDOE-H33-BSS-20261027-9ba8480691ed",
+  "note": "H33-1 buried-step complement B2 37654px HOLDOUT-DTI 0.0252 | id 9ba8480691ed | DO NOT SUBMIT",
+  "verdict": "negative",
+  "ok_to_submit": false,
+  "new_experiments": 0,
+  "new_tiff_generated": false,
+  "slot_authorized": false
+}
