@@ -113,3 +113,5 @@ The website now presents the four registry-listed untried formulations with laye
 ## 2026-10-29 continuation review
 
 [Three-pass review](knowledge/38_review_2026-10-29.md): fixed a stale H28-6 "untried" designation (its prior experiment was negative), made historical all-finite SHA checks real and verified input pins, and added missing site/feed workflow dependencies. The current checkout restored only the four inputs needed for the download audit, not the full feature stack. The historical verifier reports zero failures, but that is not a slot authorization. **No new experiment or TIFF was generated; no candidate is OK to submit.** The lane assignment remains missing, and the README is a condensed operating brief, not the verbatim task prompt.
+
+An independent parallel review also documented the H28-6 result and lane deviation: [2026-10-29 review](knowledge/37_review_2026-10-29.md). The current untried list excludes H28-6; earlier screen ranks and session narratives remain historical.

@@ -2,6 +2,12 @@
   "generated": "2026-10-29 | Reconciled stale hypothesis status, verifier and site-workflow dependencies; no new experiment or slot authorization.",
   "items": [
     {
+      "id": "IR-2026-10-29-gravity-stale-status-and-lane",
+      "severity": "high",
+      "issue": "The research screen called H28-6 untried after its run card recorded a negative test. The H28-6 run card also states the method was selected without the requested lane paragraph, while a separate Session 17 review says no experiment was run. The records describe different work and cannot both characterize the entire session.",
+      "action": "Correct the current screen to tested negative; retain prior reports as historical records. Do not infer a new lane. The H28-6 validator fields do not establish a downloadable file: raster paths and raster SHA are null and the duplicate stop prevented publication."
+    },
+    {
       "id": "prompt-verbatim-unavailable",
       "severity": "low",
       "issue": "The README contains a condensed session-start charter, not the verbatim current user prompt. An older entry incorrectly claimed the complete prompt was recorded word-for-word.",
