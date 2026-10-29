@@ -75,6 +75,18 @@ def test_executive_summary_qualifies_conflicting_historical_reports():
         assert "hidden truth" in text.lower() and "cannot" in text.lower()
 
 
+def test_h28_7_novelty_is_nuanced_not_misclassified():
+    registry = json.loads((ROOT / "registry/next_hypotheses.json").read_text())
+    h28_7 = next(row for row in registry["hypotheses"] if row["id"] == "H28-7")
+    assert "UNTESTED exact direction-coherent" in h28_7["status"]
+    assert "related ratio/front features were already tested" in h28_7["status"]
+    assert "not a new radiometric source" in h28_7["differs_from_repo"]
+    assert "not organizer-authenticated" in h28_7["data_gate"]
+    research = (DOCS / "research.html").read_text()
+    assert "exact direction-coherent, scale-persistence operator" in research
+    assert "not a new radiometric source or wholly untested signal" in research
+
+
 def test_research_and_manual_instructions_are_explicit():
     research = (DOCS / "research.html").read_text()
     assert "30_lane_2026-10-27_preregistration.md" in research

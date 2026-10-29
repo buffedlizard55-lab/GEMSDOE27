@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-29 | Reconciled stale hypothesis status, verifier and site-workflow dependencies; no new experiment or slot authorization.",
+  "generated": "2026-10-29 | Session 19 repo audit: restored hash-pinned owner-mirror cache; no experiment or slot; reconciled H28-7 novelty status.",
   "items": [
     {
       "id": "IR-2026-10-29-gravity-stale-status-and-lane",
@@ -603,9 +603,9 @@
     },
     {
       "id": "IR-2026-10-29-h28-7-duplicate-not-run",
-      "severity": "low",
-      "issue": "Registry hypothesis H28-7 (directional radiometric alteration continuity) repeats radiometric alteration-front edges already tested in D-confirm (knowledge/16, 8 new dip/rad/polarity transforms: E < B < D) and computed in the H29 canary (evidence/h29_e1_canary_and_surface.json, h29_k_th_alter_grad).",
-      "action": "Not run, to avoid repeating a tested result. Recorded in knowledge/38 as a duplicate, not a failure."
+      "severity": "medium",
+      "issue": "Earlier review wording overclassified H28-7 as a duplicate of tested radiometric-front features. D-confirm and the H29 canary show that related radiometric value/gradient features were tested, but the exact orientation-coherent, multi-scale persistence/line-integral operator is not documented as a separate holdout. The full related arms underperformed their controls; this reduces priority but does not establish the exact operator as failed.",
+      "action": "Treat H28-7 as an untested, lower-priority operator hypothesis with substantial feature-family overlap, not as an exact duplicate or as a fresh data source. Do not claim efficacy. Require an assigned lane, fresh preregistration, individual-feature canaries and a matched spatial holdout before implementation/promotion; see knowledge/41_session19_repo_review_2026-10-29.md."
     },
     {
       "id": "IR-2026-10-29-gdr-and-usgs-unreachable-from-sandbox",
