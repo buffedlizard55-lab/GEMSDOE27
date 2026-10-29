@@ -88,7 +88,8 @@ def test_research_and_manual_instructions_are_explicit():
     assert "has yet been run..<br>" not in research
     assert "no new lane has been assigned" in research.lower()
     sources = (DOCS / "sources.html").read_text()
-    assert "IR-2026-10-29-gravity-stale-status-and-lane" in sources
+    assert "IR-2026-10-29-h28-6-stale-untried" in sources
+    assert "IR-2026-10-28-06-pairwise-final-dot-screen" in (ROOT / "registry/irregularities.json").read_text()
     assert "dated snapshots, not a live leaderboard" in sources
     how = (DOCS / "how-to-submit.html").read_text()
     assert "Predicted values must be in range [0, 1]" in how
@@ -221,13 +222,10 @@ def test_research_link_fail_closed_for_missing_or_mismatched_bytes(tmp_path, mon
     assert builder.verified_research_path(card, gate) is None
 
 
-def test_research_screen_does_not_call_tested_gravity_hypothesis_untried():
-    import json
-
-    registry = json.loads((ROOT / "registry" / "next_hypotheses.json").read_text())
-    gravity = next(h for h in registry["hypotheses"] if h["id"] == "H28-6")
-    assert "TESTED NEGATIVE" in gravity["status"]
-    assert "700–709" in gravity["validation"]
-    research = (DOCS / "research.html").read_text()
-    assert "H28-6 was subsequently tested negative" in research
-    assert "TESTED NEGATIVE; no TIFF written" in research
+def test_untried_registry_does_not_recommend_a_tested_hypothesis():
+    ledger = json.loads((ROOT / "registry/next_hypotheses.json").read_text())
+    untried = {row["id"] for row in ledger["hypotheses"]}
+    tested = {row["id"] for row in ledger["tested_hypotheses"]}
+    assert not (untried & tested)
+    assert "H28-6" in tested and "H28-6" not in untried
+    assert "H28-6 gravity persistence: tested negative" in (DOCS / "research.html").read_text()

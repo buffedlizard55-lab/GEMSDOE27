@@ -27,6 +27,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Install site builder dependencies
+        run: pip install numpy rasterio
       - run: python scripts/build_site.py
       - name: Commit rebuilt pages
         run: |
