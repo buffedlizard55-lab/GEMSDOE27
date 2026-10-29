@@ -136,3 +136,7 @@ The website now presents the four registry-listed untried formulations with laye
 [Three-pass review](knowledge/38_review_2026-10-29.md): fixed a stale H28-6 "untried" designation (its prior experiment was negative), made historical all-finite SHA checks real and verified input pins, and added missing site/feed workflow dependencies. The current checkout restored only the four inputs needed for the download audit, not the full feature stack. The historical verifier reports zero failures, but that is not a slot authorization. **No new experiment or TIFF was generated; no candidate is OK to submit.** The lane assignment remains missing, and the README is a condensed operating brief, not the verbatim task prompt.
 
 An independent parallel review also documented the H28-6 result and lane deviation: [2026-10-29 review](knowledge/37_review_2026-10-29.md). The current untried list excludes H28-6; earlier screen ranks and session narratives remain historical.
+
+## 2026-10-29 Session 19 — repo review (no new experiment)
+
+[Review and irregularity list](knowledge/41_session19_review_2026-10-29.md). Re-ran lint (passed), tests (225 passed, 3 skipped), the hash-pinned restore (17 inputs OK) and the download verifier (0 failures). Independently re-read all 22 `-allfinite` GeoTIFFs: single-band float32, no NaN, values in [0, 1], on the template grid. **No file is OK to submit.** No lane was assigned because the prompt omits its single-method paragraph.
