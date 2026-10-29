@@ -19,7 +19,7 @@ This is a condensed record of the standing task, not a verbatim transcript. The 
 
 **Current decision (2026-10-29).** No file is OK to submit. On 2026-10-29 one preregistered experiment (H29-XG, joint gravity–magnetic cross-gradient, `knowledge/39`) was **negative**: its efficacy gate failed against the matched control, and its dots broke the local-overlap stop, so no TIFF was written. The unique research file from 2026-10-27 (H33-1) is NOT OK to submit. A unique TIFF that is OK to submit does not yet exist. The decision table is in `EXECUTIVE_SUMMARY.md` and is generated from the run cards.
 
-Screen and reasoning: `knowledge/38_hypothesis_screen_2026-10-29.md`. Session review: `knowledge/40_session18_review_2026-10-29.md`.
+Screen and reasoning: `knowledge/38_hypothesis_screen_2026-10-29.md`, with the novelty-scope correction and current three-candidate screen in `knowledge/41_session19_repo_review_2026-10-29.md`. Session 19 restored and re-hash-verified all 17 pinned owner-mirror inputs, rebuilt the 32-feature cache, and rechecked all 12 pinned peer rasters. This does not authenticate inputs to the organizer. The readiness audit still has zero evidence-passed files and zero slot authorizations. No experiment was run because the lane paragraph is still missing. See the full [Session 19 repository review](knowledge/41_session19_repo_review_2026-10-29.md) and [Session 18 result](knowledge/40_session18_review_2026-10-29.md).
 
 ## Project charter — read at the start of every session
 
@@ -137,6 +137,10 @@ The website now presents the four registry-listed untried formulations with laye
 
 An independent parallel review also documented the H28-6 result and lane deviation: [2026-10-29 review](knowledge/37_review_2026-10-29.md). The current untried list excludes H28-6; earlier screen ranks and session narratives remain historical.
 
-## 2026-10-29 Session 19 — repo review (no new experiment)
+## 2026-10-29 Session 19 — repository review and cache verification
 
-[Review and irregularity list](knowledge/41_session19_review_2026-10-29.md). Re-ran lint (passed), tests (225 passed, 3 skipped), the hash-pinned restore (17 inputs OK) and the download verifier (0 failures). Independently re-read all 22 `-allfinite` GeoTIFFs: single-band float32, no NaN, values in [0, 1], on the template grid. **No file is OK to submit.** No lane was assigned because the prompt omits its single-method paragraph.
+[Three-pass repository review](knowledge/41_session19_repo_review_2026-10-29.md) confirms that no new TIFF is approved and no organizer-score estimate is defensible. After restoring the full owner-mirror cache, all 17 input hashes and all 12 pinned peer raster hashes/grid checks passed; the prepared feature matrix is 5,167,373 × 32 at EPSG:32611. `pytest`: 229 passed, 0 skipped after the full cache restore; Ruff passed; `verify_downloads.py`: 0 failures on existing configured artifacts; readiness audit: 25 cards, 0 evidence passes and 0 slot authorizations. These are local checks against owner-mirror files, not organizer authentication. No experiment or slot was used: the prompt still omits its required lane paragraph. The H28-7 registry wording now distinguishes a not-yet-tested orientation/persistence operator from related radiometric value/front features already tested in broader negative arms. The next action remains to obtain an explicit lane and resolve the incomplete peer-registry scope before any new validation run.
+
+### Independent Session 19 review preserved from parallel work
+
+[Parallel review and irregularity list](knowledge/41_session19_review_2026-10-29.md) is retained as a separate audit. It records an earlier verification snapshot; this review adds the fully restored feature stack, the 12-raster peer recheck, the H28-7 novelty-scope correction and the final 229-test result. Neither review authorizes a submission or reports an organizer-confirmed score.

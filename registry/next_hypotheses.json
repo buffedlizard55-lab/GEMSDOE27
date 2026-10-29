@@ -63,12 +63,12 @@
       "signature": "Orientation-coherent, scale-persistent alteration fronts rather than pixelwise radiometric-ratio ranks.",
       "why_missing_faults": "Fault-controlled fluid flow can form elongated alteration patterns extending beyond mapped surface traces.",
       "confounders": "Lithology/soil contrast, soil moisture, drainage and survey artifacts.",
-      "differs_from_repo": "The exact directional lineament operator was not found as an executed gate. Addendum D already found weak benefit for radiometric-ratio feature addition (+0.0007 PR-AUC against a +0.005 screen), so this is a new transform over weakly supported signals, not an untested source.",
+      "differs_from_repo": "Radiometric ratio values and ratio-front gradient-magnitude features appeared in earlier ablation/augmentation arms; those complete arms did not beat their controls. The exact orientation-coherent, multi-scale persistence/line-integral operator is not documented as a separate holdout experiment. This is a related operator hypothesis, not a new radiometric source or wholly untested signal.",
       "cost": "Low; existing radiometric bands if restored.",
-      "data_gate": "Inputs and prepared feature matrix were restored and SHA-256 verified in Session 12; no holdout experiment has yet been run.",
+      "data_gate": "GeoDAWN K/Th/U and extension grids are present in the restored, SHA-pinned owner-mirror cache; they are not organizer-authenticated. USGS ScienceBase metadata is recorded in registry/sources.json, but no fresh official retrieval was made in this review.",
       "validation": "No implementation or holdout experiment in Session 12. Requires assigned lane, preregistration, individual-feature canaries, and fresh paired holdout seeds.",
-      "status": "UNTRIED exact formulation; low priority after negative additive ratio arm.",
-      "expected_benefit": "Uncertain; no numerical improvement is established."
+      "status": "UNTESTED exact direction-coherent, scale-persistence operator; related ratio/front features were already tested in wider arms and those arms underperformed their controls. Low-priority candidate only; no new run until an explicit lane is assigned.",
+      "expected_benefit": "Unknown; no numerical improvement is established; related ablations were negative."
     }
   ],
   "tested_hypotheses": [
