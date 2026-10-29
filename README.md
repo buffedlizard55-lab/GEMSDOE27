@@ -1,5 +1,26 @@
 # GEMSDOE27: fault-discovery research and submission audit
 
+## Task prompt (2026-10-29) — condensed requirements, read first every session
+
+This is a condensed record of the standing task, not a verbatim transcript. The user's full prompt repeats itself many times, so it is summarised here. The current parallel-run prompt also omits its single-method lane paragraph (`IR-2026-10-29-lane-paragraph-missing`).
+
+**Goal.** Produce a GeoTIFF that is unique against every listed GEMSDOE submission and scores as high as possible on the DrivenData GEMS leaderboard. The user reports two different leaderboard highs, 0.4413 and 0.3195. Neither was read by this agent, and both are unverified (`IR-2026-10-29-leaderboard-figures-conflict`).
+
+**Requirements (all sessions):**
+1. **Executive summary at the top** of the site (`EXECUTIVE_SUMMARY.md`, `docs/executive-summary.html`). It must show, for each file: the file to download, its estimated score, whether it is unique, and whether it is OK to submit.
+2. **Unique.** Pass both duplicate stops against every listed submission before placement, and again after placement: 3-px directed dot overlap ≤ 70% and surface |Spearman| ≤ 0.90.
+3. **Valid without human inspection.** Single-band float32 GeoTIFF, same CRS, shape and transform as the template, finite values in [0, 1]. Use the `-allfinite` file: the NaN-outside variant is what triggers the portal error "Predicted values must be in range [0, 1]". A unique name and a note of at most 140 characters.
+4. **Hypothesis first.** Rank 3–5 candidate hypotheses (layers, physical signature, why it finds a catalogue-missing fault, non-fault mimic, novelty, cost) before implementing. Validate on the spatially blocked holdout. Do not spend a submission slot on an idea that has not beaten the current holdout best.
+5. **Evidence labels.** HOLDOUT-DTI for local measurements, ORGANIZER-CONFIRMED only for a portal receipt, OWNER-REPORTED for historical values. Never write a projection as a score.
+6. **Verify and flag.** Check every claim against an official source and link it for manual review. Record irregularities in `registry/irregularities.json`. No hallucinated values.
+7. **Budget.** Three experiments or two hours per session. Negative results are deliverables.
+8. **No automated portal access or uploads.** A human submits. DrivenData is never accessed by script or agent.
+9. **Core values.** *Maximize P(Win)* and *Own the Outcome.*
+
+**Current decision (2026-10-29).** No file is OK to submit. On 2026-10-29 one preregistered experiment (H29-XG, joint gravity–magnetic cross-gradient, `knowledge/39`) was **negative**: its efficacy gate failed against the matched control, and its dots broke the local-overlap stop, so no TIFF was written. The unique research file from 2026-10-27 (H33-1) is NOT OK to submit. A unique TIFF that is OK to submit does not yet exist. The decision table is in `EXECUTIVE_SUMMARY.md` and is generated from the run cards.
+
+Screen and reasoning: `knowledge/38_hypothesis_screen_2026-10-29.md`. Session review: `knowledge/40_session18_review_2026-10-29.md`.
+
 ## Project charter — read at the start of every session
 
 This repository is an auditable research system for the DOE GEMS fault-discovery competition. The objective is to discover **previously unmapped faults** using defensible geology and free, official data—not to recreate, rename, or lightly re-thin a prior submission. A high leaderboard result is an objective, not evidence that an unvalidated raster will score well.

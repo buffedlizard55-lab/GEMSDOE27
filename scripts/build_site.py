@@ -282,6 +282,7 @@ def _new_tiff_row(label: str, path: str) -> dict | None:
 def decision_board() -> tuple[str, str]:
     """Top-of-site table: the file to download, its estimate, uniqueness, and submit status."""
     rows = [r for r in (
+        _new_tiff_row("GEMSDOE27 H29-XG joint gravity-magnetic cross-gradient (new, 2026-10-29)", "evidence/h29xg_run_card_2026-10-29.json"),
         _new_tiff_row("GEMSDOE27 H28-6 gravity persistence (new, 2026-10-28)", "evidence/h28_6_run_card_2026-10-28.json"),
         _new_tiff_row("GEMSDOE27 H33-1 buried-step complement (new, 2026-10-27)", "evidence/h33_run_card_2026-10-27.json"),
     ) if r]
@@ -306,8 +307,8 @@ def decision_board() -> tuple[str, str]:
     html_block = (
         '<div class="card" id="download-decision" style="border-left:5px solid #cf222e">'
         '<h2 style="margin-top:0">Which file to download, and can it be submitted?</h2>'
-        '<p><b>Short answer: no file is OK to submit right now.</b> The generated TIFFs are unique against the pinned '
-        'rasters but did not pass a matched holdout gate, so they are downloadable for research only. Historical '
+        '<p><b>Short answer: no file is OK to submit right now.</b> The only generated TIFF on disk (H33-1) is unique against the pinned '
+        'and local rasters but failed its holdout gate, so it is downloadable for research only. H28-6 and H29-XG wrote no TIFF. Historical '
         'files are already in the registry and are not new. Estimates are local HOLDOUT-DTI or owner-reported values, '
         'never leaderboard projections.</p>'
         '<div class="tw"><table><thead><tr><th>Site / file</th><th>File to download</th><th>Estimated score</th>'
@@ -315,8 +316,8 @@ def decision_board() -> tuple[str, str]:
     md_rows = "\n".join(
         f'| {r["label"]} | {r["file_md"]} | {r["estimate"]} | {r["unique"]} | **{r["ok"]}** |' for r in rows)
     md = ("## Which file to download, and can it be submitted?\n\n"
-          "**Short answer: no file is OK to submit right now.** Generated TIFFs are unique against the pinned rasters "
-          "but did not pass a matched holdout gate. Historical files are already in the registry. Estimates are local "
+          "**Short answer: no file is OK to submit right now.** The only generated TIFF on disk (H33-1) is unique against the pinned "
+          "and local rasters but failed its holdout gate. H28-6 and H29-XG wrote no TIFF. Historical files are already in the registry. Estimates are local "
           "HOLDOUT-DTI or owner-reported values, never leaderboard projections.\n\n"
           "| Site / file | File to download | Estimated score | Unique? | OK to submit? |\n"
           "|---|---|---|---|---|\n" + md_rows + "\n")
@@ -697,9 +698,10 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
     irregularities = read("registry/irregularities.json", {}).get("items", [])
     issue_dates = [re.match(r"IR-(\d{4}-\d{2}-\d{2})", x.get("id", ""))
                    for x in irregularities]
-    latest_issue_date = max((match.group(1) for match in issue_dates if match), default=None)
-    latest_issues = [x for x in irregularities if latest_issue_date
-                     and x.get("id", "").startswith(f"IR-{latest_issue_date}")]
+    # Show the two most recent dated batches so a new session never hides the previous session's records.
+    recent_dates = set(sorted({match.group(1) for match in issue_dates if match}, reverse=True)[:2])
+    latest_issues = [x for x in irregularities
+                     if any(x.get("id", "").startswith(f"IR-{d}") for d in recent_dates)]
     issue_rows = "".join(f'<li><b>{esc(x.get("id"))}:</b> {esc(x.get("issue"))} '
                          f'<i>{esc(x.get("action"))}</i></li>' for x in latest_issues)
     feed_rows = "".join(f'<li><a href="{esc(x.get("url", ""))}">{esc(x.get("title", x.get("id", "source")))}</a>'
@@ -727,7 +729,7 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
 
 ## New result and estimate
 
-No geological experiment or new TIFF was produced in this review because the prompt's required single-method lane paragraph is absent. The existing H33-1 file remains a research-only negative; its HOLDOUT-DTI is reported below and no organizer-score estimate is justified.
+On 2026-10-29 one preregistered experiment ran (H29-XG, joint gravity–magnetic cross-gradient, seeds 800–809, `knowledge/39`). It is **negative**: its holdout efficacy gate failed against the matched control, and its dots broke the 70% local-overlap stop, so **no TIFF was written**. The earlier research files (H28-6 and H33-1) are also negative. Every file in the table is NOT OK TO SUBMIT. The decision table below is generated from the run cards. Its numbers are HOLDOUT-DTI, not organizer scores.
 
 {decision_table_md}{h33_md}
 
