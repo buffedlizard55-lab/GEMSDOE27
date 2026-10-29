@@ -2,10 +2,11 @@
 
 ## Which file to download, and can it be submitted?
 
-**Short answer: no file is OK to submit right now.** Generated TIFFs are unique against the pinned rasters but did not pass a matched holdout gate. Historical files are already in the registry. Estimates are local HOLDOUT-DTI or owner-reported values, never leaderboard projections.
+**Short answer: no file is OK to submit right now.** The only generated TIFF on disk (H33-1) is unique against the pinned and local rasters but failed its holdout gate. H28-6 and H29-XG wrote no TIFF. Historical files are already in the registry. Estimates are local HOLDOUT-DTI or owner-reported values, never leaderboard projections.
 
 | Site / file | File to download | Estimated score | Unique? | OK to submit? |
 |---|---|---|---|---|
+| GEMSDOE27 H29-XG joint gravity-magnetic cross-gradient (new, 2026-10-29) | None - no valid TIFF was written for download. | HOLDOUT-DTI 0.043372 vs control 0.043878; paired 95% CI [-0.001546, +0.000614]; 126,011 withheld-positive occurrences. Organizer score: none (no leaderboard estimate is computable). | NO - 84.5% of dots lie within 3 px of gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-allfinite.tif (limit 70%). Pinned-set max 46.5%. No TIFF was written. | **NOT OK TO SUBMIT - Holdout efficacy gate failed against control D on seeds 800-809.** |
 | GEMSDOE27 H28-6 gravity persistence (new, 2026-10-28) | None - no valid TIFF was written for download. | HOLDOUT-DTI 0.041238 vs control 0.041574; paired 95% CI [-0.002550, +0.002143]; 121,143 withheld-positive occurrences. Organizer score: none (no leaderboard estimate is computable). | NO - 84.9% of dots lie within 3 px of gems27-h28-3-strain-conductivity-negative-research-20261025-27d6875f3b22-allfinite.tif (limit 70%). Pinned-set max 46.8%. No TIFF was written. | **NOT OK TO SUBMIT - Matched current-best comparison (H31 / H29-S architectures on the same splits) was not run; readiness gate requires it.** |
 | GEMSDOE27 H33-1 buried-step complement (new, 2026-10-27) | [`gems27-h33-bss-complement-20261027-9ba8480691ed-allfinite.tif`](downloads/research/gems27-h33-bss-complement-20261027-9ba8480691ed-allfinite.tif) SHA-256 `1373358188a96b20414834b3e0159065d87470fe695153262ced7b46bc1eb492` | HOLDOUT-DTI 0.025211 vs control 0.041446; paired 95% CI [-0.017576, -0.014449]; 134,150 withheld-positive occurrences. Organizer score: none (no leaderboard estimate is computable). | YES vs the 12 pinned rasters (max 3 px overlap 0.000; surface abs-rho 0.110) and 21 local prior rasters (max overlap 0.607; limit 0.70). Scope is limited to these files. | **NOT OK TO SUBMIT - the frozen holdout efficacy gate failed** |
 | GEMSDOE24 historical best | [`gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif`](https://github.com/buffedlizard55-lab/GEMSDOE24/blob/05f6f85c695ff25546dcc2cbbfa34b3c2a8f4f4c/docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif) | OWNER-REPORTED 0.2477 (not organizer-confirmed). | NO. Already in the 12 pinned rasters; not new. | **NO - historical file; do not resubmit.** |
@@ -22,7 +23,7 @@
 
 ## New result and estimate
 
-No geological experiment or new TIFF was produced in this review because the prompt's required single-method lane paragraph is absent. The existing H33-1 file remains a research-only negative; its HOLDOUT-DTI is reported below and no organizer-score estimate is justified.
+On 2026-10-29 one preregistered experiment ran (H29-XG, joint gravity–magnetic cross-gradient, seeds 800–809, `knowledge/39`). It is **negative**: its holdout efficacy gate failed against the matched control, and its dots broke the 70% local-overlap stop, so **no TIFF was written**. The earlier research files (H28-6 and H33-1) are also negative. Every file in the table is NOT OK TO SUBMIT. The decision table below is generated from the run cards. Its numbers are HOLDOUT-DTI, not organizer scores.
 
 ## Download and submission decision
 

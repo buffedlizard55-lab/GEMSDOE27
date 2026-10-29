@@ -588,6 +588,48 @@
       "severity": "medium",
       "issue": "GitHub Actions reports failure at the site-build step on the source-feed and rebuild workflows; both workflows lacked explicitly installed numpy and rasterio required by the readiness import. Remote logs were not accessible from this sandbox, so the exact failure text is unknown.",
       "action": "Install those dependencies explicitly and verify the site builder in an isolated environment; monitor the actual GitHub workflows after merge."
+    },
+    {
+      "id": "IR-2026-10-29-lane-paragraph-missing",
+      "severity": "medium",
+      "issue": "The parallel-run prompt says 'Your lane is the single method paragraph below', but no method paragraph follows. The REUSE section comes next. The same omission was recorded in Sessions 15 to 17.",
+      "action": "No lane was assigned. H29-XG was self-selected from the registry screen (knowledge/38) and is labelled as self-selected in its run card. Supply the lane paragraph to fix this for future runs."
+    },
+    {
+      "id": "IR-2026-10-29-leaderboard-figures-conflict",
+      "severity": "high",
+      "issue": "The prompt gives two different 'current leaderboard high' values: 0.4413 and 0.3195, and states that 0.3195 'is the highest score right now'. Neither was read from the leaderboard by this agent. The leaderboard is a DrivenData page, which repository rules forbid this agent to access.",
+      "action": "Treat both as user-reported and unverified. A human should read the leaderboard page and record the value with a link and date. No estimate may be computed against either value."
+    },
+    {
+      "id": "IR-2026-10-29-h28-7-duplicate-not-run",
+      "severity": "low",
+      "issue": "Registry hypothesis H28-7 (directional radiometric alteration continuity) repeats radiometric alteration-front edges already tested in D-confirm (knowledge/16, 8 new dip/rad/polarity transforms: E < B < D) and computed in the H29 canary (evidence/h29_e1_canary_and_surface.json, h29_k_th_alter_grad).",
+      "action": "Not run, to avoid repeating a tested result. Recorded in knowledge/38 as a duplicate, not a failure."
+    },
+    {
+      "id": "IR-2026-10-29-gdr-and-usgs-unreachable-from-sandbox",
+      "severity": "high",
+      "issue": "On 2026-10-29, curl to https://gdr.openei.org/submissions/1391 and https://www.drivendata.org/ returned HTTP code 000 (no connection) from the sandbox. The sandbox allowlist excludes both hosts, so the DOE GDR #1391 packages, USGS 3DEP DEM tiles and DrivenData data are unavailable to this agent.",
+      "action": "H27-16 (GDR sinter/tufa and 2 m probes) and H29-5 (routed drainage, raw DEM) remain blocked. Obtaining them needs a human download from the official pages, followed by SHA-256 pinning."
+    },
+    {
+      "id": "IR-2026-10-29-xg1-sibling-not-in-pinned-set",
+      "severity": "medium",
+      "issue": "A sibling GEMSDOE25 raster `gems25-xg1-crossgrad-sapd2-4-k3p5-20261025-52e65fb521f9-nan.tif` (sha256 15073e72f04a6371d8f4169a93d7ffd9e98f546bc436a53c7b47d32e0502e032, listed in evidence/focus_inventory_20261027.json) is a cross-gradient product of a different lineage. It is not in the 12 pinned rasters, and its score is not recorded in the user's list.",
+      "action": "Its uniqueness is not covered by the H29-XG check unless it is added to the pinned set. Recorded as a scope limit in the H29-XG run card."
+    },
+    {
+      "id": "IR-2026-10-29-research-tif-write-policy-inconsistent",
+      "severity": "medium",
+      "issue": "scripts/run_h28_6_gravity_persistence.py wrote research TIFFs whenever the uniqueness gate passed, even when the holdout efficacy gate failed (H28-6 wrote none only because uniqueness failed). The H33 precedent also wrote a NOT OK file after a failed holdout. This makes a failed candidate downloadable from docs/downloads/research.",
+      "action": "scripts/run_h29xg_crossgrad.py writes a TIFF only if efficacy AND uniqueness both pass. The older runners are unchanged and should be aligned in a later session."
+    },
+    {
+      "id": "IR-2026-10-29-committed-readiness-audit-stale",
+      "severity": "low",
+      "issue": "docs/data/submission_readiness_audit.json was committed without the session17_run_card_20261028.json entry. Re-running scripts/audit_submission_readiness.py after restoring the data added it (33 lines).",
+      "action": "Regenerated and committed with this session. No slot was authorised by the regeneration (all cards still slot_authorized=false)."
     }
   ]
 }

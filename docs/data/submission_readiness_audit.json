@@ -183,6 +183,24 @@
       "slot_authorized": false,
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
+    "h29xg_run_card_2026-10-29.json": {
+      "ok_to_publish_as_submission": false,
+      "reasons": [
+        "run card does not authorize submission",
+        "verdict is not promote",
+        "efficacy gate not explicitly passed",
+        "current-best matched control not proven",
+        "paired improvement CI missing or does not exclude zero",
+        "uniqueness gate not passed",
+        "complete pre- and post-placement registry screen not proven",
+        "current, complete comparison scope not proven",
+        "raster missing or outside repository"
+      ],
+      "actual_sha256": null,
+      "independent_byte_validation": null,
+      "slot_authorized": false,
+      "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
+    },
     "h30_1_run_card.json": {
       "ok_to_publish_as_submission": false,
       "reasons": [
