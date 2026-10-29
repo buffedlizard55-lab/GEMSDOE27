@@ -83,3 +83,9 @@ Cross-gradient literature: Gallardo & Meju 2003 (https://doi.org/10.1029/2003GL0
 - The holdouts repeat the same catalogue. They are not independent geological samples.
 - Lane: no lane paragraph was supplied. H29-XG was self-selected and is labelled as such.
 - The 0.4413 and 0.3195 figures cannot be verified from this sandbox, and no DrivenData access is allowed.
+
+## 7. Merge note (parallel work on main)
+
+While this session was open, `main` gained PRs #54 and #55. Their files were merged into this branch, not rewritten. `knowledge/37_review_2026-10-29.md` and `knowledge/38_review_2026-10-29.md` come from that work, so the number 38 is used twice. Those filenames differ, and no file was renamed, because the H29-XG run card and preregistration cite the paths written here. The registry union kept every irregularity ID from both sides (98 from `main` plus 7 from this session, 105 in total). `main`'s H28-6 correction (untried → tested, seeds 700–709 reserved) agrees with section 1 and `knowledge/38`.
+
+Site build with the workflow's exact dependency set (`pip install numpy rasterio`, then `python scripts/build_site.py`) succeeds in a clean venv (checked 2026-10-29). Failures that `main`'s review reports on remote runs could not be read, because the Actions logs were blocked, so their cause is not established here.

@@ -95,8 +95,8 @@ def card_summary(card: dict | None) -> tuple[str, str]:
                      f"Short note: `{card.get('note_max_140_chars', 'not supplied')}`.")
         extra = f'<p class="small">{esc(file_note)}</p>'
     else:
-        download = "<p>No new GeoTIFF is available: the run stopped before publication.</p>"
-        file_note = ("No new GeoTIFF was written and no raster SHA-256 or validator result exists. "
+        download = "<p>No byte-verified GeoTIFF is available from this card.</p>"
+        file_note = ("No byte-verified research GeoTIFF is available from this card; it may be missing, modified, or incomplete. "
                      f"Research label: `{card.get('submission_name', 'not supplied')}`. "
                      f"Research note: `{card.get('note_max_140_chars', 'not supplied')}`.")
         extra = f'<p class="small">{esc(file_note)}</p>'
@@ -557,7 +557,7 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
         "official GDR packages absent from this checkout; the GDR host is outside this sandbox's "
         "network allowlist, so current availability and hashes were not verified. H29-5 actual routing "
         "needs unmodified DEM and verified outlet observations not present in the restored cache. "
-        "Neither data-gated idea is viable in this session. H28-6 and H28-7 use cached feature families, "
+        "Neither data-gated idea is viable in this session. H28-7 uses cached feature families, "
         "but the assigned method paragraph is missing; no experiment may be launched by guessing a lane."
     )
     important = ('<div class="card" style="border-left:5px solid #cf222e"><h2 style="margin-top:0">'
@@ -570,7 +570,7 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
     g32 = f'<h2>What might explain the reported GEMSDOE32 result?</h2><p>{esc(rationale)}</p>'
     action = ('<h2>Next decision</h2><p>No new geological experiment was run: the current prompt says a single-method '
               'paragraph assigns the lane, but no such paragraph is present. Do not invent a lane. The <a '
-              'href="research.html">four-formulation untried-hypothesis screen</a> is a qualitative planning aid; '
+              'href="research.html">three-formulation untried-hypothesis screen</a> is a qualitative planning aid; '
               'external-data blockers and missing assignment prevent testing. Next, obtain an explicit lane, '
               'preregister unused seeds, use the shared cached stack/evaluator/writer, run feature-alone leakage '
               'canaries, and compare a candidate against a same-split current-best control. Strengthen geographic '
@@ -674,14 +674,14 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
     research = f"""
 <h1>Research: hypotheses and evidence</h1>{important}
 {h33_html}
-<p>The following four formulations are registered as untried in this repository's 2026-10-27 screen; the rank is qualitative, not a numerical DTI prediction. See the <a href="{repo_link('registry/next_hypotheses.json')}">machine-readable hypothesis ledger</a> and <a href="{PRE}">prior preregistration</a>. No new lane has been assigned in the current prompt.</p>
+<p>The following three formulations remain untried in this repository's updated screen; the rank is qualitative, not a numerical DTI prediction. See the <a href="{repo_link('registry/next_hypotheses.json')}">machine-readable hypothesis ledger</a> and <a href="{PRE}">prior preregistration</a>. No new lane has been assigned in the current prompt.</p>
 {hypothesis_table}
 <p class="warnbox">{esc(hypothesis_caveat)}</p>
 <h2>Previously tested negative H29-5-PROXY</h2>
 {lane_html}
 <p>{esc(h31_history)}</p>
 <p>The tested H29-5-PROXY used <code>det_elev</code>, a detrended owner-mirrored band: its gradient is not guaranteed to be downhill and the proxy is not drainage or an actual fan-apex inference. It used the shared cached 32-band stack, four added features, visible catalogue labels, a 600 m hidden-group training buffer, and an emitter blind to withheld truth. The DTI evaluator masked exact known pixels and scored the full 300 m kernel. Nearest-Qfault FID attribution was approximate; grouping was quadrant-stratified rather than an independent geographic block, and repeated catalogue hides do not establish performance on hidden competition faults.</p>
-<h2>Earlier negative research</h2><p><b>H27-10 annulus: rejected</b> (<a href="{repo_link('evidence/h27_10_annulus_holdout_initial.json')}">initial</a> and <a href="{repo_link('evidence/h27_10_annulus_holdout.json')}">corrected</a> evidence). <b>H28-3 strain × conductivity: failed</b> (<a href="{repo_link('evidence/h28_3_strain_holdout.json')}">run evidence</a>). Neither is approved for submission or a weekly slot.</p>
+<h2>Earlier negative research</h2><p><b>H28-6 gravity persistence: tested negative, not an untried hypothesis.</b> Its local final-dot overlap also exceeded the duplicate stop; no TIFF was written. <a href="{repo_link('evidence/h28_6_run_card_2026-10-28.json')}">H28-6 run card</a>. <b>H27-10 annulus: rejected</b> (<a href="{repo_link('evidence/h27_10_annulus_holdout_initial.json')}">initial</a> and <a href="{repo_link('evidence/h27_10_annulus_holdout.json')}">corrected</a> evidence). <b>H28-3 strain × conductivity: failed</b> (<a href="{repo_link('evidence/h28_3_strain_holdout.json')}">run evidence</a>). Neither is approved for submission or a weekly slot.</p>
 <p><a href="{repo_link('evidence/h31_3_run_card_2026-10-26.json')}">H31-3 negative run</a> · <a href="{repo_link('evidence/h32_run_card_2026-10-26.json')}">H32 negative run</a> · <a href="{repo_link('knowledge/21_preregistration_H29-2_20261025.md')}">Earlier whole-FID preregistration</a>. Historic interpretations in archived files are not organizer confirmation and may conflict with this status page.</p>
 """
     topology = f"""
@@ -759,7 +759,7 @@ SHA-256 hashes and pinned sources are in [the focus-site registry]({repo_link('r
 
 ## Research and next decision
 
-A qualitative four-hypothesis screen (no numerical expected gains) and official-source access gates are on the [Research page]({REPO}/blob/main/docs/research.html) and in [`registry/next_hypotheses.json`]({repo_link('registry/next_hypotheses.json')}). The single-method lane paragraph referenced by the prompt is absent, so no experiment or new TIFF was generated in this review. No currently available file passes both efficacy and authorization gates. Obtain an explicit lane; preregister fresh seeds; run feature-alone leakage checks and same-split current-best holdout; then check pre-placement and final-dot uniqueness against a current complete registry. Only a separate selector may consider a weekly slot. Official organizer scores, current slot capacity and score-to-file receipts remain unknown. Read the [submission instructions]({REPO}/blob/main/docs/how-to-submit.html).
+A qualitative three-hypothesis screen (no numerical expected gains) and official-source access gates are on the [Research page]({REPO}/blob/main/docs/research.html) and in [`registry/next_hypotheses.json`]({repo_link('registry/next_hypotheses.json')}). The single-method lane paragraph referenced by the prompt is absent, so no experiment or new TIFF was generated in this review. No currently available file passes both efficacy and authorization gates. Obtain an explicit lane; preregister fresh seeds; run feature-alone leakage checks and same-split current-best holdout; then check pre-placement and final-dot uniqueness against a current complete registry. Only a separate selector may consider a weekly slot. Official organizer scores, current slot capacity and score-to-file receipts remain unknown. Read the [submission instructions]({REPO}/blob/main/docs/how-to-submit.html).
 """
     return pages, markdown
 
