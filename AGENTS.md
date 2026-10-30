@@ -25,7 +25,7 @@ Exact 0.0/1.0 (or sanitised probabilities) inside the footprint, NaN outside wit
 `verify_downloads.py` passing, no pixel on a catalogue cell, a documented hypothesis and its holdout gate result, and an entry in the correct manifest (`docs/downloads/manifest.json` for a weekly slot; `docs/downloads/h28_1_candidate_manifest.json` for the separate H28-1 research file).
 
 ## Session-start handoff
-Read `README.md` and its latest dated review link first. Treat the newest `knowledge/*review*` entry as the handoff; do not follow stale session-specific next-step sections when a later review supersedes them. For this checkout, the latest review is `knowledge/41_session19_repo_review_2026-10-29.md`.
+Read `README.md` and its latest dated review link first. Treat the newest `knowledge/*review*` entry as the handoff; do not follow stale session-specific next-step sections when a later review supersedes them. For this checkout, the latest review is `knowledge/42_session20_repo_review_2026-10-30.md`.
 
 ## Session-3 additions to the hard rules
 * **Every scored raster used in an argument must be hash-authenticated.** `scripts/fetch_scored_corpus.py` accepts a sibling file only if its SHA-256 equals a `registry/live_scores.json` row; unmatched rows stay listed as unmatched. Never match by filename.
