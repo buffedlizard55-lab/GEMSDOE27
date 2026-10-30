@@ -1,5 +1,11 @@
 # GEMSDOE27: fault-discovery research and submission audit
 
+## Current review — 2026-10-30
+
+**No new TIFF is OK to submit.** The required single-method lane paragraph is absent, so no experiment or submission artifact was created. Current local checks: see the verification record below; Ruff passed; readiness audit reports zero slot authorizations. After `scripts/restore_data.py` restored the 16 SHA-pinned owner-mirror inputs, `verify_downloads.py` reports 0 failures and `pytest` reports 229 passed (see [Session 20 verification](knowledge/43_session20_verification_2026-10-30.md)). The earlier "blocked" statement applied only to a checkout without those inputs. Full audit: [Session 20 review](knowledge/42_session20_repo_review_2026-10-30.md).
+
+Known unconfirmed items: owner-reported scores are not organizer receipts. The official [DrivenData leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/), read 2026-10-30, shows #1 at 0.4544 and rank 50 at 0.3195; the prompt's 0.4413 does not appear on that page. The earlier range-validation error's cause is unknown because the exact uploaded file is unknown. Restore the hash-pinned owner-mirror inputs before claiming any raster validation; those mirrors are not organizer-authenticated. No PR or merge is claimed.
+
 ## Task prompt (2026-10-29) — condensed requirements, read first every session
 
 This is a condensed record of the standing task, not a verbatim transcript. The user's full prompt repeats itself many times, so it is summarised here. The current parallel-run prompt also omits its single-method lane paragraph (`IR-2026-10-29-lane-paragraph-missing`).
@@ -9,7 +15,7 @@ This is a condensed record of the standing task, not a verbatim transcript. The 
 **Requirements (all sessions):**
 1. **Executive summary at the top** of the site (`EXECUTIVE_SUMMARY.md`, `docs/executive-summary.html`). It must show, for each file: the file to download, its estimated score, whether it is unique, and whether it is OK to submit.
 2. **Unique.** Pass both duplicate stops against every listed submission before placement, and again after placement: 3-px directed dot overlap ≤ 70% and surface |Spearman| ≤ 0.90.
-3. **Valid without human inspection.** Single-band float32 GeoTIFF, same CRS, shape and transform as the template, finite values in [0, 1]. Use the `-allfinite` file: the NaN-outside variant is what triggers the portal error "Predicted values must be in range [0, 1]". A unique name and a note of at most 140 characters.
+3. **Valid without human inspection.** Single-band float32 GeoTIFF, same CRS, shape and transform as the template, finite values in [0, 1]. Prefer the `-allfinite` variant if the portal requires [0,1] across the entire raster. The user's prior range-error cause is unconfirmed because the exact uploaded file is unknown. A unique name and a note of at most 140 characters.
 4. **Hypothesis first.** Rank 3–5 candidate hypotheses (layers, physical signature, why it finds a catalogue-missing fault, non-fault mimic, novelty, cost) before implementing. Validate on the spatially blocked holdout. Do not spend a submission slot on an idea that has not beaten the current holdout best.
 5. **Evidence labels.** HOLDOUT-DTI for local measurements, ORGANIZER-CONFIRMED only for a portal receipt, OWNER-REPORTED for historical values. Never write a projection as a score.
 6. **Verify and flag.** Check every claim against an official source and link it for manual review. Record irregularities in `registry/irregularities.json`. No hallucinated values.
@@ -137,6 +143,10 @@ The website now presents the four registry-listed untried formulations with laye
 
 An independent parallel review also documented the H28-6 result and lane deviation: [2026-10-29 review](knowledge/37_review_2026-10-29.md). The current untried list excludes H28-6; earlier screen ranks and session narratives remain historical.
 
+## 2026-10-30 Session 20 — parallel review records
+
+The repository review and source/verification snapshot are preserved separately: [Session 20 review](knowledge/42_session20_repo_review_2026-10-30.md) and [Session 20 source verification](knowledge/43_session20_verification_2026-10-30.md). Those records report no new TIFF and no submission authorization. The later [Session 20 safety review](knowledge/44_session20_safety_review_2026-10-30.md) adds a hardening fix to independently verify the footprint and catalogue-zero rules.
+
 ## 2026-10-29 Session 19 — repository review and cache verification
 
 [Three-pass repository review](knowledge/41_session19_repo_review_2026-10-29.md) confirms that no new TIFF is approved and no organizer-score estimate is defensible. After restoring the full owner-mirror cache, all 17 input hashes and all 12 pinned peer raster hashes/grid checks passed; the prepared feature matrix is 5,167,373 × 32 at EPSG:32611. `pytest`: 229 passed, 0 skipped after the full cache restore; Ruff passed; `verify_downloads.py`: 0 failures on existing configured artifacts; readiness audit: 25 cards, 0 evidence passes and 0 slot authorizations. These are local checks against owner-mirror files, not organizer authentication. No experiment or slot was used: the prompt still omits its required lane paragraph. The H28-7 registry wording now distinguishes a not-yet-tested orientation/persistence operator from related radiometric value/front features already tested in broader negative arms. The next action remains to obtain an explicit lane and resolve the incomplete peer-registry scope before any new validation run.
@@ -147,4 +157,4 @@ An independent parallel review also documented the H28-6 result and lane deviati
 
 ## 2026-10-30 Session 20 — repository and validator safety review
 
-[Three-pass review](knowledge/42_session20_repo_review_2026-10-30.md) restored and hash-verified 17 owner-mirror inputs, rebuilt the 32-feature cache, rechecked all 12 pinned peer rasters, and reran the GeoTIFF and readiness audits. It also strengthened `publication_decision()` to independently compare candidate TIFF blocks with the local template and label rasters, rejecting nonzero predictions outside the footprint or on catalogue cells. **232 tests passed; Ruff/compile checks passed; historical download verifier: 0 failures; readiness audit: 25 cards, 0 evidence passes, 0 slot authorizations.** These local checks do not authenticate data with the organizer. No geological experiment or new TIFF was produced because the prompt omits the required lane paragraph. No file is OK to submit.
+[Three-pass review](knowledge/44_session20_safety_review_2026-10-30.md) restored and hash-verified 17 owner-mirror inputs, rebuilt the 32-feature cache, rechecked all 12 pinned peer rasters, and reran the GeoTIFF and readiness audits. It also strengthened `publication_decision()` to independently compare candidate TIFF blocks with the local template and label rasters, rejecting nonzero predictions outside the footprint or on catalogue cells. **232 tests passed; Ruff/compile checks passed; historical download verifier: 0 failures; readiness audit: 25 cards, 0 evidence passes, 0 slot authorizations.** These local checks do not authenticate data with the organizer. No geological experiment or new TIFF was produced because the prompt omits the required lane paragraph. No file is OK to submit.

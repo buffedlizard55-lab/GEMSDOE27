@@ -1,141 +1,87 @@
 # Session 20 repository review — 2026-10-30
 
-## Executive decision
+## Decision
 
-**No geological experiment was run, no new TIFF was produced, and no submission slot was selected. The active prompt again omits the single-method paragraph required by its parallel-run protocol.** Choosing a new geology lane without that assignment would violate the protocol and the repository's preregistration rule. There is no newly generated file that is OK to download and submit.
+**No experiment was run, no candidate TIFF was generated, and no submission slot was used. No file is approved to download and submit.** The parallel-run prompt specifies a lane as “the single method paragraph below” but contains no method paragraph. Selecting a method ourselves would violate the lane restriction. The current repo's last recorded experimental decision remains negative: H29-XG failed its efficacy gate and duplicate stop; the H33-1 raster is research-only and failed its holdout gate.
 
-This session completed a three-pass repository and safety review. It found and fixed one substantive technical validation gap in the fail-closed publication audit: the audit previously verified the candidate's CRS/grid/band/value range from TIFF bytes but relied on self-reported validator booleans for zero values outside the competition footprint and zero overlap with catalogue fault pixels. The audit now independently reads the local template and labels in bounded raster windows and checks those two invariants against the candidate bytes. Missing/mismatched reference rasters fail closed. Tests cover nonzero out-of-footprint values, catalogue-cell predictions and a wrong-shape TIFF.
+This is a repository/quality review, not new scientific evidence and not an organizer score. The reported GEMSDOE32 value 0.2778 remains OWNER-REPORTED; it is not an organizer receipt. Neither the prompt's conflicting leaderboard highs (0.4413 and 0.3195) was independently read or verified. Do not claim a score projection or promise a higher score.
 
-The reference template and labels are hash-pinned copies from owner GitHub mirrors. This byte validation does not make those files organizer-authenticated and is not a DrivenData receipt.
+## GEMSDOE32 0.2778: evidence-based interpretation
 
-## Pass 1 — task and repository inventory
+The owner-mirror audit documented in [Session 19](41_session19_repo_review_2026-10-29.md) found the H33-2/B2 dot mask to be a strict subset of GEMSDOE25's d=2.8 mask, with 6,436 removed dots at catalogue distances no greater than two pixels. The remaining dots have minimum catalogue distance 2.236 pixels. The listed values 0.2600 → 0.2708 → 0.2778 are user-/owner-reported and do not establish that collar pruning caused the score increase. Such pruning is consistent with improving a precision-weighted DTI objective when removed candidates have low marginal utility, but causal credit requires blind labels or a valid matched holdout. Further narrowing that same raster family is not a distinct strategy and risks duplication. The audit also reports a sibling-source disagreement about whether the 0.2778 item was actually scored; resolve only from an organizer receipt, not inference.
 
-- Read `README.md`, `AGENTS.md`, the Session 19 repository review and the latest research/decision records before changing code.
-- Confirmed the nine requested focus sites appear in `EXECUTIVE_SUMMARY.md` and the generated executive-summary page. Their historical scores are labeled **OWNER-REPORTED**, organizer-score estimates remain unknown, and all nine selected historical files are not offered as a new authorized submission.
-- Confirmed the strongest claim for GEMSDOE32 is **OWNER-REPORTED 0.2778**, not an organizer receipt. The repository's byte audit describes it as nested pruning of the d=2.8 family, removing 6,436 dots inside a two-pixel catalogue collar. The reported sequence 0.2600 → 0.2708 → 0.2778 is compatible with reduced low-utility predictions but does not establish causality; the hidden truth and a score-to-file receipt are unavailable. A subset of this field would fail the local directed-overlap uniqueness rule by construction.
-- Confirmed that the prompt's competing current-high claims, 0.4413 and 0.3195, are not independently verified in this repository. The source registry and `AGENTS.md` prohibit automated DrivenData access.
-- Read the current three-candidate screen in `knowledge/41_session19_repo_review_2026-10-29.md`. It ranks H28-7 (direction/scale-persistent radiometric alteration fronts) as the most testable from the cached bands; H27-16 (paleo-geothermal deposits plus shallow probes) and full H29-5 routed-drainage/fan-apex analysis require additional data. Those are hypotheses, not validated score predictions. No numerical score estimate is justified.
+Therefore, **the repo does not establish that a unique submission can beat 0.2778**, and it does not support estimating a leaderboard score from holdout DTI. The current documented local holdouts are diagnostics, not calibrated leaderboard projections.
 
-## Pass 2 — reproducibility and integrity checks
+## Ranked hypotheses to consider after a lane is assigned
 
-The checkout began clean on `arena/e3944b7f-gemsdoe27`. Python 3.11 environment dependencies were installed from PyPI. No DrivenData host was contacted.
+This is a desk-screen only, drawn from the prior repo review/registry; it is not a new experiment or a claim of efficacy. “Potential” is qualitative because there is no validated mapping from holdout DTI to leaderboard score.
 
-| Check | Result |
-|---|---|
-| `python scripts/restore_data.py` | 17 owner-mirror input files restored; all recorded SHA-256 pins matched. |
-| `python scripts/prepare_data.py` | Rebuilt 5,167,373 × 32 label-free feature matrix, EPSG:32611, cache SHA-256 `83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc`. |
-| `python scripts/restore_data.py --verify` | 17/17 input checks passed. |
-| `python scripts/fetch_parallel_registry.py` | All 12 pinned peer rasters matched SHA-256 pins and template grids. This is an incomplete owner-mirror peer set, not a census of submissions. |
-| `python scripts/verify_peer_relations.py --out /tmp/peer_relations_review_20261030.json` | 12 peer rasters checked; two exact in-footprint dot pairs: GEMSDOE25/GEMSDOE30 and GEMSDOE28 H27-4/GEMSDOE31; 11 strict-subset relations. |
-| `python scripts/verify_downloads.py` | 0 failures for configured historical downloads, format, hashes, and local reference checks. Passing this does not establish scientific efficacy or slot authorization. |
-| `python scripts/audit_submission_readiness.py` | 25 cards reviewed; 0 evidence-passed files; 0 weekly-slot authorizations. |
-| `python scripts/build_site.py` | Built six documentation pages, root index and executive summary. |
-| Ruff and compile check | `ruff check src scripts tests` passed; `compileall` passed. |
-| Full test suite before safety change | 229 passed. |
+| Rank | Candidate; layers | Target signature and catalogue-missing rationale | Named non-fault mimic | Novelty relative to repo | Cost / gate |
+|---|---|---|---|---|---|
+| 1 | **Directional, multiscale radiometric alteration-front persistence** — GeoDAWN K, Th, U, Th/K, U/K. | Coherent, persistent directional ratio edges as a possible alteration halo along buried fluid pathways without a mapped young surface trace. | Lithology/soil boundaries, moisture/drainage, survey seams. | Related radiometric values/front gradients have occurred in broader arms; this exact orientation-coherent persistence operator is not documented as a separately validated test. Not a new data source. | Low–medium if pinned cached bands are available; proceed only with assigned lane, per-feature canaries, fresh blocked folds, matched control, uniqueness screen. Previous related negative arms lower priority. Official listing: [USGS GeoDAWN](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and). |
+| 2 | **Paleo-geothermal deposits plus shallow-temperature residuals** — DOE GDR #1391 sinter/tufa/travertine, shallow probes, Quaternary volcanic polygons. | Spatial association of fossil hydrothermal deposits and local temperature residuals could flag concealed upflow structures. | Lahontan shoreline tufa, groundwater discharge, volcanic contacts. | Distinct from existing well/spring chemistry features; exact official package has not been downloaded or hash-verified in this environment. | Medium–high; blocked until official package bytes, licensing, coverage and geometry are checked. Source metadata: [DOE GDR submission 1391](https://gdr.openei.org/submissions/1391). Not currently viable from this checkout. |
+| 3 | **Routed drainage/fan-apex structural alignment** — conditioned USGS 3DEP elevation, flow direction/accumulation, stream outlets/knickpoints, fan apices. | Range-front discontinuities may be expressed by aligned outlets or knickpoints where aggradation conceals scarps. | Bedrock resistance/hogbacks, inherited drainage, roads, stratigraphic contacts. | Earlier H29-5 proxy used detrended relief; it is not equivalent to explicit routed drainage and fan-apex analysis. Raw conditioned DEM/observations are absent from this checkout. | Medium–high; blocked until the official DEM and required observations can be obtained and pinned. Source: [USGS 3DEP](https://www.usgs.gov/3d-elevation-program). |
+| 4 | **Subsurface temperature-gradient residuals along mapped stratigraphic boundaries** — official shallow temperature / well logs and geologic map contacts. | Localized departures from regional thermal trend near permeable contacts could indicate concealed fluid pathways and faults. | Sampling bias, well construction/depth, groundwater circulation, lithologic conductivity. | Not established as a validated spatial residual surface in repo; overlaps existing chemistry/well evidence and requires new sourced records. | High; only consider after a specific official dataset with downloadable records and coordinate/depth metadata is verified. |
+| 5 | **Magnetic analytic-signal edge + remanence-robust multiscale ridge agreement** — GeoDAWN magnetic channels and derivatives. | Scale-stable lineaments in analytic-signal amplitude may expose basement discontinuities irrespective of magnetization direction, including buried structures. | Lithologic contacts, dikes, cultural noise, flight-line artifacts. | Magnetic derivatives/edges already appear in the existing feature stack; this is a specific remanence-robust consensus operator, not a new source. | Medium if stack has channels; low expected novelty given related tested features. Must have an individual canary and fresh spatial blocks. Official source listing: [USGS GeoDAWN](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and). |
 
-## Pass 3 — adversarial review, changes and final verification
+Ranks describe experiment priority conditional on lane/data gates, not predicted scores. For candidates 2–4, data acquisition cannot be called successful based on a landing page alone. The host allowlist for this agent does not include USGS or GDR; this session did not verify current package bytes or availability. Official source links are provided for subsequent review.
 
-### Finding fixed
+## Repository review / three passes
 
-`publication_decision()` used the run card's `zeros_checks` for two properties not re-derived from candidate bytes: (1) every cell outside the sample-submission footprint is zero, and (2) no predicted value is one on a catalogue cell. An otherwise in-range GeoTIFF could therefore claim those booleans while violating the documented output contract. The independent validator now compares candidate, template and labels on their shared grid, rejects a reference-grid mismatch, and checks all candidate blocks for: float32 single-band GeoTIFF format, exact grid, no nodata/mask, finite whole-array [0,1] values, zero outside the footprint, and zero on catalogue cells. A shape/band mismatch returns a failed result rather than aborting the whole-card audit.
+### Pass 1 — baseline and scope
 
-Changed files: `src/gems27/readiness.py`, `tests/test_readiness.py`, the CI/site-build workflows, and the regenerated `docs/data/submission_readiness_audit.json`. Added negative tests for an in-range one outside the footprint, a one on a catalogue cell, and wrong raster shape. The first pull-request CI run failed in pytest; GitHub's downloadable job log was inaccessible from this sandbox. Reproducing the run with an empty `GEMS_DATA_DIR` showed that clean runners lacked the reference rasters now required for independent validation. Both CI workflows now restore hash-pinned owner-mirror inputs before tests/site generation, and the readiness tests isolate their synthetic reference data from an external environment override. All 25 existing run cards still fail closed; the technical hardening does not promote any historical result.
+- Working tree started clean on `arena/1812ef2c-gemsdoe27`, based on the available shallow checkout at `bdbc3c9`.
+- Read README operating brief, executive-summary artifacts, latest Session 19 review, scripts/tests layout, and current irregularities registry.
+- Confirmed README says no current submission is approved and preserves the missing-lane constraint.
+- No `data_cache/` files are present. `data/manifest.json` is metadata only; ignored data is not included in this checkout.
 
-### Final checks after the change
+### Pass 2 — executable checks
 
-- `python -m pytest -q`: **232 passed**.
-- `ruff check src scripts tests`: **passed**.
-- `python -m compileall -q src scripts tests`: **passed**.
-- `python scripts/restore_data.py --verify`: **17/17 passed**.
-- `python scripts/verify_downloads.py`: **0 failures**.
-- Readiness audit: **25 cards; 0 evidence passes; 0 slot authorizations**.
-- `build_site.py` completed; `git diff --check` passed.
+- Created an ignored local virtual environment and installed declared requirements; no repository dependencies or tracked files were changed.
+- `.venv/bin/pytest -q`: **226 passed, 3 skipped** (17.81 s). The skip count differs from prior full-cache reports; this checkout lacks the owner-mirror inputs and data-dependent tests are skipped. These results do not reproduce the prior 229-pass full-cache run.
+- `.venv/bin/ruff check src scripts tests`: passed.
+- `.venv/bin/python -m compileall -q src scripts`: passed.
+- `git diff --check`: passed.
+- `.venv/bin/python scripts/build_site.py`: built 6 pages, root index, and executive summary. It left no tracked changes.
+- `.venv/bin/python scripts/verify_downloads.py`: **blocked/exit 2**, missing `data_cache/sample_submission.tif`, `labels.tif`, `dotted_h19_5_d1_5_nan.tif`, `h19_5_nan.tif`. It explicitly recommends restoring the owner-repository mirror; this is not organizer-authenticated data.
+- `.venv/bin/python scripts/audit_submission_readiness.py`: completed; **zero evidence-passed files and zero slot authorizations**. Existing run cards fail closed for missing evidence, failed gates, or absent raster files. A byte-valid historical raster does not change that decision.
 
-## Nine-site summary and decision
+### Pass 3 — risk and requirements audit
 
-Listed values are **OWNER-REPORTED** from the user-provided ledger, not organizer receipts. No justified conversion from these numbers or local HOLDOUT-DTI to an organizer score exists.
+- **Highest-priority protocol issue:** missing lane paragraph means no experiment or candidate selection can comply. Preserve the stop rather than generating an unvalidated TIFF.
+- **Unique-download blocker:** no new TIFF has passed all pre-/post-placement screens and holdout efficacy gates. The H33-1 file remains a failed research artifact and must not be presented as submit-ready.
+- **Score-estimation limitation:** historical numbers in user prompt are not organizer receipts; holdout DTI is not a leaderboard score estimator. Executive summary must keep these labels separate.
+- **Peer scope:** historical uniqueness is limited to the pinned owner-mirror rasters; no claim of global uniqueness is justified. Current live registry completeness is unknown.
+- **Data provenance:** local missing-data verifier is correctly fail-closed. Restoring owner mirrors would support local reproducibility but not establish organizer provenance.
+- **Process wording:** user requests a PR and merge to main. The session must preserve Arena's assigned branch; PR creation can be considered from this branch, but direct merging is subject to repository policy and must not be represented as complete unless `gh` confirms it.
 
-| Site | Highest listed historical file / reported value | Uniqueness / action |
-|---|---|---|
-| GEMSDOE24 | `h25-1-dotted-h19-5-d1-5`; 0.2477 | Duplicate stop vs pinned peers; do not resubmit. |
-| GEMSDOE25 | `dotted-h19-5-d2-8`; 0.2600 (score/file attribution disputed) | Dot-identical to GEMSDOE30; do not resubmit. |
-| GEMSDOE27 | `topo-gap-closure-t-v2-on-d1-5`; 0.2449 | Duplicate stop vs pinned peers; do not resubmit. |
-| GEMSDOE28 | `h36-1-rung30-blind-r1`; 0.2710 | Duplicate stop; related H27-4 dots identical to GEMSDOE31; do not resubmit. |
-| GEMSDOE30 | `d28-poisson300m-offcat-44090`; 0.2600 (attribution disputed) | Dot-identical to GEMSDOE25; do not resubmit. |
-| GEMSDOE31 | `h27-4-solo-d28`; 0.2708 | Dot-identical to GEMSDOE28 H27-4; do not resubmit. |
-| GEMSDOE32 | `h33-h33-2-b2`; 0.2778 | Owner-reported, peer audit calls the file unscored; nested subset; do not resubmit. |
-| GEMSDOE33 | `h33d-analog-tip-stepover-r30`; 0.2632 | Duplicate stop vs pinned peers; do not resubmit. |
-| GEMSDOE36 | `anderson-geothermal-pinn`; 0.2750 | Duplicate stop vs pinned peers; do not resubmit. |
+## Required next actions
 
-Uniqueness here is limited to the 12 SHA-pinned final-dot rasters. The complete pre-placement surfaces and a complete global registry are not present; therefore this result cannot establish global uniqueness. Historical score attribution is not organizer-confirmed.
+1. Obtain the exact single-method lane paragraph; until then do not run an experiment or write a candidate TIFF.
+2. Restore data using the documented `python scripts/restore_data.py`, then rerun `verify_downloads.py`; record source provenance accurately as owner-mirror, not organizer download.
+3. Resolve the 0.2778 score/file attribution and current leaderboard figures from organizer receipts/page via permitted human review; update evidence with date and evidence source.
+4. Refresh/expand pinned peer rasters and score provenance; compare both pre-placement surfaces and final dots where source rasters exist.
+5. Once a lane is assigned, preregister one ranked hypothesis, use fresh whole-segment spatial folds with visible-only catalogue-derived features, run feature-by-feature leakage canaries, and compare to the current best on matched folds. Respect the three-experiment/two-hour budget.
+6. Only after positive HOLDOUT-DTI efficacy with CI, full uniqueness scope, automated TIF validation and a separate selector authorization should a submission be marked **OK TO DOWNLOAD AND SUBMIT**. Never describe holdout DTI as a predicted organizer score.
 
-**Current download decision: NOT OK TO SUBMIT.** The available newly generated research TIFF H33-1 failed its frozen efficacy gate: HOLDOUT-DTI 0.025211 vs control 0.041446, paired 95% CI [−0.017576, −0.014449], 134,150 withheld-positive occurrences. It is also not a matched current-best result and not slot-authorized. H29-XG was negative and emitted no file. Passing a TIFF validator or being unique within a limited registry would not override these failures.
-
-## Ranked candidate screen (hypotheses, not score promises)
-
-The ranking below prioritizes testability and expected value per effort; none has a numerical predicted DTI gain. The full novelty limits and source statuses are documented in the linked Session 19 screen and `registry/next_hypotheses.json`.
-
-1. **H28-7, directional and scale-persistent radiometric alteration fronts.** Layers: GeoDAWN K, Th, U and ratio grids. Target: orientation-coherent, multi-scale persistent ratio boundaries potentially caused by alteration along a buried fluid pathway, including where no young fault trace is mapped. Named mimics: lithologic and soil boundaries, soil moisture/drainage and survey seams. Novelty is limited: ratio/front features were included in earlier broad tests; this exact direction/persistence operator is not a wholly new source and still needs its own preregistered holdout. Raster bands are locally hash-pinned owner mirrors, not organizer-authenticated.
-2. **H27-16, paleo-geothermal deposits plus shallow-temperature residual.** Layers: official DOE GDR #1391 sinter/tufa/travertine, shallow temperature probes and Quaternary volcanic polygons. Target: spatially aligned fossil hydrothermal deposits and local probe anomalies that could reveal buried upflow structures. Named mimics: Lake Lahontan shoreline tufa, groundwater outflow and volcanic contacts. Source listing is recorded, but raw packages were not obtained or hash-verified in this checkout; blocked until official bytes/coverage/license are checked.
-3. **H29-5 full routed drainage and fan-apex collinearity.** Layers: official USGS 3DEP DEM, conditioned flow routing/accumulation and validated stream outlets/fan apices. Target: transverse range-front outlet/knickpoint alignments where bajada deposition could bury a continuous scarp. Named mimics: resistant bedrock hogbacks, inherited drainage, roads and stratigraphic contacts. Previous detrended-relief proxy is not a test of this full hypothesis. Required raw DEM/observations are not in the cache, so blocked pending acquisition and hash/coverage validation.
-
-Because the protocol's specific assigned lane paragraph is absent, no top candidate was run. No weekly slot was considered. This review does not claim a score improvement.
-
-## Limitations and work still required
-
-1. The lane paragraph must be supplied before a new method can be selected and preregistered; do not invent an assignment.
-2. An organizer-authorized human must resolve the 0.2778 score/file attribution and the conflicting 0.4413/0.3195 leaderboard claims. The agent must not access DrivenData or upload files.
-3. The peer registry is incomplete. Add authenticated hash pins for new sibling submissions before claiming uniqueness; pre-placement continuous-surface comparisons are missing for historical peers.
-4. H28-7 needs per-feature leakage canaries, fresh whole-segment buffered hide-and-recover splits, exact visible-fault masking, full-kernel pooled DTI and a matched current-best comparison before any raster emission.
-5. H27-16/H29-5 require obtaining official source bytes, checking licence/coverage/grid, and recording hashes before either is considered viable.
-6. The upload error's original file and cause remain unknown. Local all-finite validation mitigates the NaN/range ambiguity but cannot guarantee portal acceptance.
-7. Keep the separate selector and weekly-cap checks distinct from technical and scientific validation; none is established by this session.
-
-## Official/manual-review references
-
-These references are cited in the repository source registry; this session did not fetch external source pages. Review using a browser if required:
-
-- DrivenData competition overview (manual only): <https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/>
-- DrivenData official rules (manual only): <https://www.drivendata.org/competitions/306/competition-doe-gems/>
-- DOE GDR #1391 INGENIOUS: <https://gdr.openei.org/submissions/1391>
-- USGS GeoDAWN airborne survey: <https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and>
-- USGS 3DEP: <https://www.usgs.gov/3d-elevation-program>
-- INGENIOUS project: <https://gbcge.org/current-projects/ingenious/>
-- EPSG:32611: <https://epsg.io/32611>
-- Reference solution: <https://github.com/drivendataorg/gems-prize-reference-solution>
-- Source status and irregularities: `registry/sources.json`, `registry/irregularities.json`.
-
-## Run card — review only, no experiment
+## Run card
 
 ```json
 {
-  "hypothesis": "No new hypothesis tested; Session 20 was a repository and submission-safety review. The current prompt omits the assigned method paragraph.",
-  "mechanism": "No geological mechanism evaluated in this session. The existing highest reported GEMSDOE32 value is consistent with removing low-utility dots near the known catalogue, but does not prove a causal gain.",
-  "named_non_fault_process_that_could_mimic_it": "For the leading untested H28-7 candidate: lithologic/soil boundaries, soil moisture and drainage, or survey/levelling seams can mimic radiometric alteration fronts.",
-  "holdout_dti": {
-    "status": "NOT RUN this session",
-    "latest_prior_result_label": "HOLDOUT-DTI",
-    "latest_prior_candidate": 0.043371801082373,
-    "latest_prior_control": 0.04387770406333056,
-    "latest_prior_paired_delta_ci95": [-0.001545779423320248, 0.0006137878023858685],
-    "latest_prior_withheld_positive_occurrences": 126011,
-    "evaluator": "gems27.metric.dti_binary v1; alpha=0.2, beta=0.8, 300 m triangular kernel; whole-FID buffered holdout; latest prior H29-XG result, not a Session 20 measurement"
-  },
-  "correlation_overlap_vs_registry": {
-    "new_candidate": null,
-    "scope": "No new raster. The 12 pinned peer rasters were rechecked; the registry is not a global census and continuous peer surfaces are unavailable."
-  },
+  "hypothesis": "No experiment; candidate screen only because the assigned lane paragraph is absent.",
+  "mechanism": "No new mechanism was evaluated this review.",
+  "named_non_fault_process_that_could_mimic_it": "Not applicable to a no-experiment review; candidate mimics are listed in the ranked table.",
+  "holdout_dti_and_ci": "Not measured this session; no withheld positives.",
+  "correlation_overlap_vs_registry": "Not measured this session; no new surface or dots.",
   "raster_sha256": null,
-  "validator_output": {
-    "new_candidate": "NOT APPLICABLE; no TIFF generated",
-    "readiness_audit": "25 cards reviewed; 0 evidence passes; 0 slot authorizations",
-    "historical_download_verifier": "0 failures; local owner-mirror checks only",
-    "new_candidate_no_nan_inside_footprint": null,
-    "new_candidate_values_in_0_1": null,
-    "new_candidate_crs_shape_transform_match": null
-  },
-  "submission_name": null,
-  "submission_note": "No new TIFF generated. Existing H33-1 is research-only and NOT OK TO SUBMIT.",
+  "validator_output": "No new raster. Existing readiness audit: zero evidence passes, zero slot authorizations. Download verifier blocked by missing local inputs.",
+  "submission_name_and_note": "None; no candidate TIFF generated.",
   "verdict": "negative"
 }
 ```
+
+## Arena session 20 follow-up verification (2026-10-30)
+
+A second review pass on the tracked Arena branch independently repeated the source checks after installing the declared requirements into an ignored `.venv`: `.venv/bin/python -m pytest -q` reported **226 passed, 3 skipped**; `.venv/bin/ruff check src scripts tests` passed; `scripts/build_site.py` built 6 pages and the executive summary without tracked generated-file changes; `scripts/audit_submission_readiness.py` completed with no slot authorizations. `scripts/verify_downloads.py` again exited 2 because the four local `data_cache/` inputs listed above are absent. No candidate raster or new experiment was produced.
+
+Additional correction: the README previously asserted that the NaN-outside file caused the user's [0,1] submission error. The exact file used in that attempt is not identified, so causation is unknown. README now states this limitation and prefers all-finite output only as a precaution for a whole-raster range check; this is not evidence of organizer acceptance.
