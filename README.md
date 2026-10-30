@@ -85,6 +85,16 @@ The **previously executed H29-5-PROXY** lane evaluated a detrended-relief proxy,
 
 The 2026-10-27 nine-site inventory is broader than the 12 pinned peer rasters but is incomplete: it is a GitHub snapshot, not a global list of submissions, and not every TIFF can be compared on the competition grid. The code fails closed when the required scope or validation is missing. No automated access to or upload to DrivenData is permitted.
 
+## 2026-10-30 Session 20 — repository review (latest handoff)
+
+Read [`knowledge/44_session20_ledger_review_2026-10-30.md`](knowledge/44_session20_ledger_review_2026-10-30.md) first. Summary:
+
+- **Still no file OK to submit.** The H33-1 TIFF is format-valid and unique within the 12 pinned rasters (independently re-read and re-hashed this session), but it lost on the holdout (HOLDOUT-DTI 0.0252 against 0.0414).
+- **No experiment, no new TIFF, no slot.** The 2026-10-30 prompt again omits its single-method lane paragraph (`IR-2026-10-30-lane-paragraph-still-missing`).
+- **Owner-reported ledger:** [`registry/owner_reported_scores_20261030.csv`](registry/owner_reported_scores_20261030.csv) holds all 160 rows of the prompt's list (138 scored, 22 blank). The highest value is 0.2778 (GEMSDOE32). The 0.4413 and 0.3195 figures conflict and are unverified. Tests: `tests/test_owner_ledger.py`.
+- **Verification:** 17/17 inputs restored and hash-matched; 12/12 peer rasters fetched; verifier 0 failures; **234 tests passed**; Ruff clean; readiness gate 0 evidence passes and 0 slot authorizations.
+- **Next step:** an explicit lane paragraph from the user, then a preregistered holdout run with fresh seeds. A feasible uniqueness-scope extension (fetching the 113 owner repos) is recorded in the review.
+
 ## Reproduce
 
 Use Python 3.11 or newer. Restored data are hash-pinned owner-mirror copies, **not independently organizer-authenticated**; the preparation cache is ignored by Git.
@@ -145,7 +155,7 @@ An independent parallel review also documented the H28-6 result and lane deviati
 
 ## 2026-10-30 Session 20 — parallel review records
 
-The repository review and source/verification snapshot are preserved separately: [Session 20 review](knowledge/42_session20_repo_review_2026-10-30.md) and [Session 20 source verification](knowledge/43_session20_verification_2026-10-30.md). Those records report no new TIFF and no submission authorization. The later [Session 20 safety review](knowledge/44_session20_safety_review_2026-10-30.md) adds a hardening fix to independently verify the footprint and catalogue-zero rules.
+Parallel Session 20 records are preserved separately: [repository review](knowledge/42_session20_repo_review_2026-10-30.md), [source verification](knowledge/43_session20_verification_2026-10-30.md), [owner-ledger review](knowledge/44_session20_ledger_review_2026-10-30.md), and [validator safety review](knowledge/44_session20_safety_review_2026-10-30.md). They report no new submission TIFF or slot authorization. The safety review independently verifies the footprint and catalogue-zero rules.
 
 ## 2026-10-29 Session 19 — repository review and cache verification
 
