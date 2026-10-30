@@ -12,17 +12,31 @@ from gems27.readiness import publication_decision
 
 
 @pytest.fixture(autouse=True)
-def tiny_grid(monkeypatch):
+def tiny_grid(monkeypatch, tmp_path):
+    # Each test's publication audit must use its own synthetic reference rasters,
+    # regardless of a developer/CI GEMS_DATA_DIR environment override.
+    monkeypatch.setenv("GEMS_DATA_DIR", str(tmp_path / "data_cache"))
     monkeypatch.setattr(grid, "SHAPE", (4, 4))
     monkeypatch.setattr(grid, "BOUNDS", (243350.0, 4508150.0, 243750.0, 4508550.0))
 
 
 def valid_card(tmp_path):
     f = tmp_path / "candidate.tif"
-    with rasterio.open(f, "w", driver="GTiff", height=4, width=4, count=1,
-                       dtype="float32", crs="EPSG:32611",
-                       transform=Affine(*grid.TRANSFORM)) as dst:
-        dst.write(np.zeros((4, 4), dtype=np.float32), 1)
+    profile = dict(driver="GTiff", height=4, width=4, count=1, dtype="float32",
+                   crs="EPSG:32611", transform=Affine(*grid.TRANSFORM))
+    values = np.zeros((4, 4), dtype=np.float32)
+    with rasterio.open(f, "w", **profile) as dst:
+        dst.write(values, 1)
+    data = tmp_path / "data_cache"
+    data.mkdir(exist_ok=True)
+    template = values.copy()
+    template[-1, -1] = np.nan
+    with rasterio.open(data / "sample_submission.tif", "w", nodata=np.nan, **profile) as dst:
+        dst.write(template, 1)
+    labels = np.zeros((4, 4), dtype=np.float32)
+    labels[0, 0] = 1
+    with rasterio.open(data / "labels.tif", "w", **profile) as dst:
+        dst.write(labels, 1)
     registry = tmp_path / "registry"
     registry.mkdir(exist_ok=True)
     (registry / "submitted_rasters.json").write_text(json.dumps({"entries": [
@@ -207,6 +221,38 @@ def test_matching_hash_cannot_hide_wrong_crs(tmp_path):
         dst.crs = "EPSG:4326"
     card["raster"]["sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
     assert not publication_decision(card, tmp_path)["ok_to_publish_as_submission"]
+
+
+@pytest.mark.parametrize("row,col,reason", [
+    (3, 3, "outside_footprint_zero"),
+    (0, 0, "catalogue_cells_zero"),
+])
+def test_byte_validator_rejects_in_range_pixels_outside_policy(tmp_path, row, col, reason):
+    card = valid_card(tmp_path)
+    path = tmp_path / "candidate.tif"
+    with rasterio.open(path, "r+") as ds:
+        values = ds.read(1)
+        values[row, col] = 1.0
+        ds.write(values, 1)
+    card["raster"]["sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
+    result = publication_decision(card, tmp_path)
+    assert not result["ok_to_publish_as_submission"]
+    assert "independent raster byte validation failed" in result["reasons"]
+    assert result["independent_byte_validation"]["checks"][reason] is False
+
+
+def test_byte_validator_rejects_wrong_shape_without_aborting_audit(tmp_path):
+    card = valid_card(tmp_path)
+    path = tmp_path / "candidate.tif"
+    with rasterio.open(path, "w", driver="GTiff", height=3, width=4, count=1,
+                       dtype="float32", crs="EPSG:32611",
+                       transform=Affine(*grid.TRANSFORM)) as dst:
+        dst.write(np.zeros((3, 4), dtype=np.float32), 1)
+    card["raster"]["sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
+    result = publication_decision(card, tmp_path)
+    assert not result["ok_to_publish_as_submission"]
+    assert "independent raster byte validation failed" in result["reasons"]
+    assert result["independent_byte_validation"]["checks"]["grid"] is False
 
 
 def test_byte_validator_rejects_finite_raster_with_nodata_tag(tmp_path):

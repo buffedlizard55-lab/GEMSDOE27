@@ -29,6 +29,9 @@ jobs:
           python-version: '3.11'
       - name: Install site builder dependencies
         run: pip install numpy rasterio
+      # The fail-closed readiness audit independently checks footprint and catalogue
+      # pixels against hash-pinned owner-mirror reference rasters.
+      - run: python scripts/restore_data.py
       - run: python scripts/build_site.py
       - name: Commit rebuilt pages
         run: |

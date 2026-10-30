@@ -8,6 +8,7 @@ from __future__ import annotations
 import hashlib
 import json
 import math
+import os
 from pathlib import Path
 
 import numpy as np
@@ -120,7 +121,10 @@ def publication_decision(card: dict, root: Path) -> dict:
         require(actual_hash == raster.get("sha256"), "raster hash differs from evidence")
         # Do not let a hash plus self-reported validator booleans approve arbitrary
         # bytes. Independently read the actual raster, including every data block.
-        byte_validation = inspect_allfinite_raster(path)
+        data_dir = Path(os.environ.get("GEMS_DATA_DIR", root / "data_cache"))
+        template_path = data_dir / "sample_submission.tif"
+        labels_path = data_dir / "labels.tif"
+        byte_validation = inspect_allfinite_raster(path, template_path, labels_path)
         require(byte_validation["pass"], "independent raster byte validation failed")
     # Owner reports are not organizer receipts, but are sufficient to block a possible
     # duplicate upload. Match both the content id and the actual bytes; never upgrade
@@ -151,34 +155,58 @@ def _finite(value):
     return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
 
 
-def inspect_allfinite_raster(path: Path) -> dict:
-    """Bounded-memory byte check against the pinned grid, not a portal receipt.
+def inspect_allfinite_raster(path: Path, template_path: Path, labels_path: Path) -> dict:
+    """Independently verify candidate bytes against the local template and fault raster.
 
-    Whole-array finiteness/range implies footprint finiteness/range. Footprint
-    membership and outside-zero checks still require the shared template validator.
+    The template and labels are hash-pinned owner-mirror inputs, not organizer-authenticated.
+    This check binds the candidate to those local bytes and is not a submission receipt.
     """
     checks = {}
     try:
-        with rasterio.open(path) as src:
-            checks["grid"] = (src.crs is not None and src.crs.to_epsg() == grid.CRS_EPSG
-                              and src.shape == grid.SHAPE
-                              and tuple(src.transform)[:6] == grid.TRANSFORM
-                              and tuple(src.bounds) == grid.BOUNDS)
-            checks["single_band_float32_geotiff"] = (
-                src.driver == "GTiff" and src.count == 1 and src.dtypes == ("float32",))
-            # A finite zero can still be masked by a nodata tag or an internal mask.
-            # The all-finite fallback must expose every pixel to a strict reader.
-            checks["no_nodata_tag"] = src.nodata is None
-            checks["whole_array_unmasked"] = True
-            checks["whole_array_finite_in_0_1"] = True
-            for _, window in src.block_windows(1):
-                values = src.read(1, window=window)
-                if not (np.isfinite(values).all() and ((values >= 0) & (values <= 1)).all()):
-                    checks["whole_array_finite_in_0_1"] = False
-                if not (src.read_masks(1, window=window) == 255).all():
-                    checks["whole_array_unmasked"] = False
-                if not checks["whole_array_finite_in_0_1"] and not checks["whole_array_unmasked"]:
-                    break
+        with rasterio.open(template_path) as template, rasterio.open(labels_path) as labels:
+            checks["reference_grids_match"] = (
+                template.shape == labels.shape == grid.SHAPE
+                and template.crs is not None and template.crs.to_epsg() == grid.CRS_EPSG
+                and labels.crs == template.crs
+                and tuple(template.transform)[:6] == grid.TRANSFORM
+                and tuple(labels.transform)[:6] == grid.TRANSFORM
+                and tuple(template.bounds) == grid.BOUNDS
+                and tuple(labels.bounds) == grid.BOUNDS
+                and template.count >= 1 and labels.count >= 1
+            )
+            if not checks["reference_grids_match"]:
+                return {"pass": False, "checks": checks, "error": "template or labels grid mismatch"}
+            with rasterio.open(path) as src:
+                checks["grid"] = (src.crs is not None and src.crs == template.crs
+                                  and src.shape == template.shape
+                                  and tuple(src.transform) == tuple(template.transform)
+                                  and tuple(src.bounds) == tuple(template.bounds)
+                                  and src.crs.to_epsg() == grid.CRS_EPSG
+                                  and src.shape == grid.SHAPE
+                                  and tuple(src.transform)[:6] == grid.TRANSFORM
+                                  and tuple(src.bounds) == grid.BOUNDS)
+                checks["single_band_float32_geotiff"] = (
+                    src.driver == "GTiff" and src.count == 1 and src.dtypes == ("float32",))
+                if not checks["grid"] or not checks["single_band_float32_geotiff"]:
+                    return {"pass": False, "checks": checks, "error": "candidate grid or band format mismatch"}
+                # A finite zero can still be masked by a nodata tag or an internal mask.
+                checks["no_nodata_tag"] = src.nodata is None
+                checks["whole_array_unmasked"] = True
+                checks["whole_array_finite_in_0_1"] = True
+                checks["outside_footprint_zero"] = True
+                checks["catalogue_cells_zero"] = True
+                for _, window in src.block_windows(1):
+                    values = src.read(1, window=window)
+                    footprint = np.isfinite(template.read(1, window=window))
+                    catalogue = labels.read(1, window=window) == 1
+                    if not (np.isfinite(values).all() and ((values >= 0) & (values <= 1)).all()):
+                        checks["whole_array_finite_in_0_1"] = False
+                    if not (src.read_masks(1, window=window) == 255).all():
+                        checks["whole_array_unmasked"] = False
+                    if not (values[~footprint] == 0).all():
+                        checks["outside_footprint_zero"] = False
+                    if (values[catalogue] != 0).any():
+                        checks["catalogue_cells_zero"] = False
         return {"pass": all(checks.values()), "checks": checks}
     except (OSError, ValueError, rasterio.errors.RasterioError) as exc:
         return {"pass": False, "checks": checks, "error": str(exc)}
