@@ -144,3 +144,7 @@ An independent parallel review also documented the H28-6 result and lane deviati
 ### Independent Session 19 review preserved from parallel work
 
 [Parallel review and irregularity list](knowledge/41_session19_review_2026-10-29.md) is retained as a separate audit. It records an earlier verification snapshot; this review adds the fully restored feature stack, the 12-raster peer recheck, the H28-7 novelty-scope correction and the final 229-test result. Neither review authorizes a submission or reports an organizer-confirmed score.
+
+## 2026-10-30 Session 20 — repository and validator safety review
+
+[Three-pass review](knowledge/42_session20_repo_review_2026-10-30.md) restored and hash-verified 17 owner-mirror inputs, rebuilt the 32-feature cache, rechecked all 12 pinned peer rasters, and reran the GeoTIFF and readiness audits. It also strengthened `publication_decision()` to independently compare candidate TIFF blocks with the local template and label rasters, rejecting nonzero predictions outside the footprint or on catalogue cells. **232 tests passed; Ruff/compile checks passed; historical download verifier: 0 failures; readiness audit: 25 cards, 0 evidence passes, 0 slot authorizations.** These local checks do not authenticate data with the organizer. No geological experiment or new TIFF was produced because the prompt omits the required lane paragraph. No file is OK to submit.

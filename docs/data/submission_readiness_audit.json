@@ -29,11 +29,14 @@
       "independent_byte_validation": {
         "pass": true,
         "checks": {
+          "reference_grids_match": true,
           "grid": true,
           "single_band_float32_geotiff": true,
           "no_nodata_tag": true,
           "whole_array_unmasked": true,
-          "whole_array_finite_in_0_1": true
+          "whole_array_finite_in_0_1": true,
+          "outside_footprint_zero": true,
+          "catalogue_cells_zero": true
         }
       },
       "slot_authorized": false,
@@ -78,11 +81,14 @@
       "independent_byte_validation": {
         "pass": true,
         "checks": {
+          "reference_grids_match": true,
           "grid": true,
           "single_band_float32_geotiff": true,
           "no_nodata_tag": true,
           "whole_array_unmasked": true,
-          "whole_array_finite_in_0_1": true
+          "whole_array_finite_in_0_1": true,
+          "outside_footprint_zero": true,
+          "catalogue_cells_zero": true
         }
       },
       "slot_authorized": false,
@@ -113,11 +119,14 @@
       "independent_byte_validation": {
         "pass": true,
         "checks": {
+          "reference_grids_match": true,
           "grid": true,
           "single_band_float32_geotiff": true,
           "no_nodata_tag": true,
           "whole_array_unmasked": true,
-          "whole_array_finite_in_0_1": true
+          "whole_array_finite_in_0_1": true,
+          "outside_footprint_zero": true,
+          "catalogue_cells_zero": true
         }
       },
       "slot_authorized": false,
@@ -173,11 +182,14 @@
       "independent_byte_validation": {
         "pass": true,
         "checks": {
+          "reference_grids_match": true,
           "grid": true,
           "single_band_float32_geotiff": true,
           "no_nodata_tag": true,
           "whole_array_unmasked": true,
-          "whole_array_finite_in_0_1": true
+          "whole_array_finite_in_0_1": true,
+          "outside_footprint_zero": true,
+          "catalogue_cells_zero": true
         }
       },
       "slot_authorized": false,
@@ -219,11 +231,14 @@
       "independent_byte_validation": {
         "pass": true,
         "checks": {
+          "reference_grids_match": true,
           "grid": true,
           "single_band_float32_geotiff": true,
           "no_nodata_tag": true,
           "whole_array_unmasked": true,
-          "whole_array_finite_in_0_1": true
+          "whole_array_finite_in_0_1": true,
+          "outside_footprint_zero": true,
+          "catalogue_cells_zero": true
         }
       },
       "slot_authorized": false,
@@ -251,11 +266,14 @@
       "independent_byte_validation": {
         "pass": true,
         "checks": {
+          "reference_grids_match": true,
           "grid": true,
           "single_band_float32_geotiff": true,
           "no_nodata_tag": true,
           "whole_array_unmasked": true,
-          "whole_array_finite_in_0_1": true
+          "whole_array_finite_in_0_1": true,
+          "outside_footprint_zero": true,
+          "catalogue_cells_zero": true
         }
       },
       "slot_authorized": false,
@@ -283,11 +301,14 @@
       "independent_byte_validation": {
         "pass": true,
         "checks": {
+          "reference_grids_match": true,
           "grid": true,
           "single_band_float32_geotiff": true,
           "no_nodata_tag": true,
           "whole_array_unmasked": true,
-          "whole_array_finite_in_0_1": true
+          "whole_array_finite_in_0_1": true,
+          "outside_footprint_zero": true,
+          "catalogue_cells_zero": true
         }
       },
       "slot_authorized": false,
@@ -317,11 +338,14 @@
       "independent_byte_validation": {
         "pass": true,
         "checks": {
+          "reference_grids_match": true,
           "grid": true,
           "single_band_float32_geotiff": true,
           "no_nodata_tag": true,
           "whole_array_unmasked": true,
-          "whole_array_finite_in_0_1": true
+          "whole_array_finite_in_0_1": true,
+          "outside_footprint_zero": true,
+          "catalogue_cells_zero": true
         }
       },
       "slot_authorized": false,
@@ -349,11 +373,14 @@
       "independent_byte_validation": {
         "pass": true,
         "checks": {
+          "reference_grids_match": true,
           "grid": true,
           "single_band_float32_geotiff": true,
           "no_nodata_tag": true,
           "whole_array_unmasked": true,
-          "whole_array_finite_in_0_1": true
+          "whole_array_finite_in_0_1": true,
+          "outside_footprint_zero": true,
+          "catalogue_cells_zero": true
         }
       },
       "slot_authorized": false,
@@ -377,11 +404,14 @@
       "independent_byte_validation": {
         "pass": true,
         "checks": {
+          "reference_grids_match": true,
           "grid": true,
           "single_band_float32_geotiff": true,
           "no_nodata_tag": true,
           "whole_array_unmasked": true,
-          "whole_array_finite_in_0_1": true
+          "whole_array_finite_in_0_1": true,
+          "outside_footprint_zero": true,
+          "catalogue_cells_zero": true
         }
       },
       "slot_authorized": false,
@@ -411,11 +441,14 @@
       "independent_byte_validation": {
         "pass": true,
         "checks": {
+          "reference_grids_match": true,
           "grid": true,
           "single_band_float32_geotiff": true,
           "no_nodata_tag": true,
           "whole_array_unmasked": true,
-          "whole_array_finite_in_0_1": true
+          "whole_array_finite_in_0_1": true,
+          "outside_footprint_zero": true,
+          "catalogue_cells_zero": true
         }
       },
       "slot_authorized": false,
@@ -443,11 +476,14 @@
       "independent_byte_validation": {
         "pass": true,
         "checks": {
+          "reference_grids_match": true,
           "grid": true,
           "single_band_float32_geotiff": true,
           "no_nodata_tag": true,
           "whole_array_unmasked": true,
-          "whole_array_finite_in_0_1": true
+          "whole_array_finite_in_0_1": true,
+          "outside_footprint_zero": true,
+          "catalogue_cells_zero": true
         }
       },
       "slot_authorized": false,
@@ -475,11 +511,14 @@
       "independent_byte_validation": {
         "pass": true,
         "checks": {
+          "reference_grids_match": true,
           "grid": true,
           "single_band_float32_geotiff": true,
           "no_nodata_tag": true,
           "whole_array_unmasked": true,
-          "whole_array_finite_in_0_1": true
+          "whole_array_finite_in_0_1": true,
+          "outside_footprint_zero": true,
+          "catalogue_cells_zero": true
         }
       },
       "slot_authorized": false,
@@ -505,11 +544,14 @@
       "independent_byte_validation": {
         "pass": true,
         "checks": {
+          "reference_grids_match": true,
           "grid": true,
           "single_band_float32_geotiff": true,
           "no_nodata_tag": true,
           "whole_array_unmasked": true,
-          "whole_array_finite_in_0_1": true
+          "whole_array_finite_in_0_1": true,
+          "outside_footprint_zero": true,
+          "catalogue_cells_zero": true
         }
       },
       "slot_authorized": false,
@@ -566,11 +608,14 @@
       "independent_byte_validation": {
         "pass": true,
         "checks": {
+          "reference_grids_match": true,
           "grid": true,
           "single_band_float32_geotiff": true,
           "no_nodata_tag": true,
           "whole_array_unmasked": true,
-          "whole_array_finite_in_0_1": true
+          "whole_array_finite_in_0_1": true,
+          "outside_footprint_zero": true,
+          "catalogue_cells_zero": true
         }
       },
       "slot_authorized": false,
@@ -728,11 +773,14 @@
       "independent_byte_validation": {
         "pass": true,
         "checks": {
+          "reference_grids_match": true,
           "grid": true,
           "single_band_float32_geotiff": true,
           "no_nodata_tag": true,
           "whole_array_unmasked": true,
-          "whole_array_finite_in_0_1": true
+          "whole_array_finite_in_0_1": true,
+          "outside_footprint_zero": true,
+          "catalogue_cells_zero": true
         }
       },
       "slot_authorized": false,
