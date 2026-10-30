@@ -630,6 +630,30 @@
       "severity": "low",
       "issue": "docs/data/submission_readiness_audit.json was committed without the session17_run_card_20261028.json entry. Re-running scripts/audit_submission_readiness.py after restoring the data added it (33 lines).",
       "action": "Regenerated and committed with this session. No slot was authorised by the regeneration (all cards still slot_authorized=false)."
+    },
+    {
+      "id": "IR-2026-10-30-leaderboard-official-snapshot",
+      "severity": "high",
+      "issue": "The prompt's leaderboard figures conflict with the official DrivenData leaderboard page. Fetched 2026-10-30: #1 xiaofanhu 0.4544, #2 cfld__ 0.3925, #50 kpomazi 0.3195 (the 0.3195 figure is the page-1 cutoff at rank 50, not the top score). The value 0.4413 does not appear on page 1. No GEMSDOE team or handle appears in the 50 rows fetched. The page lists 'Best public DW-Tversky', which is not necessarily the private score.",
+      "action": "Treat 0.4413 and 0.3195 as UNVERIFIED user statements. Use the official page as the current public reference: https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/ . Do not state a leaderboard-based score estimate for any GEMSDOE file. Confirm the team's own organizer receipt separately."
+    },
+    {
+      "id": "IR-2026-10-30-verifier-blocked-claim-corrected",
+      "severity": "medium",
+      "issue": "Session 20 notes (knowledge/42 and the README paragraph) say verify_downloads.py was blocked by missing data_cache inputs. That is no longer true: scripts/restore_data.py restored and SHA-verified all 16 pinned inputs from codeload.github.com in this session, after which the pytest suite passed 229 of 229 and verify_downloads.py reported 0 failures.",
+      "action": "Treat the 'blocked' statement as superseded for this checkout. Restoration remains owner-mirror provenance, not organizer authentication."
+    },
+    {
+      "id": "IR-2026-10-30-unrelated-history-reconciled",
+      "severity": "medium",
+      "issue": "The session branch was based on bdbc3c9, which is not an ancestor of origin/main (fe16740, a PR #59 merge). The two trees were identical except the Session 20 README/knowledge additions, so a plain PR could not be opened against main.",
+      "action": "Reconciled by merging origin/main into the session branch with --allow-unrelated-histories and keeping main's tree. No file content from main was lost; see the merge commit for details."
+    },
+    {
+      "id": "IR-2026-10-30-lane-paragraph-still-missing",
+      "severity": "high",
+      "issue": "The 2026-10-30 prompt again says 'Your lane is the single method paragraph below' but no method paragraph follows. The prompt's sections jump from the lane rules to unrelated instructions. Without a lane, no experiment, candidate TIFF, or submission slot can comply with the protocol.",
+      "action": "Blocker unchanged: the user must supply the single-method paragraph. No experiment was run and no TIFF was generated in Session 20."
     }
   ]
 }
