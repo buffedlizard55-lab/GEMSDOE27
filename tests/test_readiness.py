@@ -12,7 +12,10 @@ from gems27.readiness import publication_decision
 
 
 @pytest.fixture(autouse=True)
-def tiny_grid(monkeypatch):
+def tiny_grid(monkeypatch, tmp_path):
+    # Each test's publication audit must use its own synthetic reference rasters,
+    # regardless of a developer/CI GEMS_DATA_DIR environment override.
+    monkeypatch.setenv("GEMS_DATA_DIR", str(tmp_path / "data_cache"))
     monkeypatch.setattr(grid, "SHAPE", (4, 4))
     monkeypatch.setattr(grid, "BOUNDS", (243350.0, 4508150.0, 243750.0, 4508550.0))
 

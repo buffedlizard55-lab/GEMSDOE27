@@ -19,6 +19,9 @@ jobs:
           python-version: '3.11'
           cache: pip
       - run: pip install -r requirements.txt
+      # Readiness byte checks require the hash-pinned template/labels. These are
+      # restored only from the owner GitHub mirror; never from DrivenData.
+      - run: python scripts/restore_data.py
       - run: ruff check src scripts tests
       - run: python -m pytest -q
       - name: Site builds from JSON only and is unchanged
