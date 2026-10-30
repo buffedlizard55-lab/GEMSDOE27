@@ -1,5 +1,11 @@
 # GEMSDOE27: fault-discovery research and submission audit
 
+## Current review — 2026-10-30
+
+**No new TIFF is OK to submit.** The required single-method lane paragraph is absent, so no experiment or submission artifact was created. Current local checks: 226 tests passed, 3 skipped; Ruff passed; readiness audit reports zero slot authorizations. `verify_downloads.py` is blocked because the ignored `data_cache/` inputs are absent; do not treat older verification as current. Full audit: [Session 20 review](knowledge/42_session20_repo_review_2026-10-30.md).
+
+Known unconfirmed items: owner-reported scores are not organizer receipts; current leaderboard high is unknown here. The earlier range-validation error's cause is unknown because the exact uploaded file is unknown. Restore the hash-pinned owner-mirror inputs before claiming any raster validation; those mirrors are not organizer-authenticated. No PR or merge is claimed.
+
 ## Task prompt (2026-10-29) — condensed requirements, read first every session
 
 This is a condensed record of the standing task, not a verbatim transcript. The user's full prompt repeats itself many times, so it is summarised here. The current parallel-run prompt also omits its single-method lane paragraph (`IR-2026-10-29-lane-paragraph-missing`).
@@ -9,7 +15,7 @@ This is a condensed record of the standing task, not a verbatim transcript. The 
 **Requirements (all sessions):**
 1. **Executive summary at the top** of the site (`EXECUTIVE_SUMMARY.md`, `docs/executive-summary.html`). It must show, for each file: the file to download, its estimated score, whether it is unique, and whether it is OK to submit.
 2. **Unique.** Pass both duplicate stops against every listed submission before placement, and again after placement: 3-px directed dot overlap ≤ 70% and surface |Spearman| ≤ 0.90.
-3. **Valid without human inspection.** Single-band float32 GeoTIFF, same CRS, shape and transform as the template, finite values in [0, 1]. Use the `-allfinite` file: the NaN-outside variant is what triggers the portal error "Predicted values must be in range [0, 1]". A unique name and a note of at most 140 characters.
+3. **Valid without human inspection.** Single-band float32 GeoTIFF, same CRS, shape and transform as the template, finite values in [0, 1]. Prefer the `-allfinite` variant if the portal requires [0,1] across the entire raster. The user's prior range-error cause is unconfirmed because the exact uploaded file is unknown. A unique name and a note of at most 140 characters.
 4. **Hypothesis first.** Rank 3–5 candidate hypotheses (layers, physical signature, why it finds a catalogue-missing fault, non-fault mimic, novelty, cost) before implementing. Validate on the spatially blocked holdout. Do not spend a submission slot on an idea that has not beaten the current holdout best.
 5. **Evidence labels.** HOLDOUT-DTI for local measurements, ORGANIZER-CONFIRMED only for a portal receipt, OWNER-REPORTED for historical values. Never write a projection as a score.
 6. **Verify and flag.** Check every claim against an official source and link it for manual review. Record irregularities in `registry/irregularities.json`. No hallucinated values.

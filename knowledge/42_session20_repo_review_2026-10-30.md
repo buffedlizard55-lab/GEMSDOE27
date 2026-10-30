@@ -79,3 +79,9 @@ Ranks describe experiment priority conditional on lane/data gates, not predicted
   "verdict": "negative"
 }
 ```
+
+## Arena session 20 follow-up verification (2026-10-30)
+
+A second review pass on the tracked Arena branch independently repeated the source checks after installing the declared requirements into an ignored `.venv`: `.venv/bin/python -m pytest -q` reported **226 passed, 3 skipped**; `.venv/bin/ruff check src scripts tests` passed; `scripts/build_site.py` built 6 pages and the executive summary without tracked generated-file changes; `scripts/audit_submission_readiness.py` completed with no slot authorizations. `scripts/verify_downloads.py` again exited 2 because the four local `data_cache/` inputs listed above are absent. No candidate raster or new experiment was produced.
+
+Additional correction: the README previously asserted that the NaN-outside file caused the user's [0,1] submission error. The exact file used in that attempt is not identified, so causation is unknown. README now states this limitation and prefers all-finite output only as a precaution for a whole-raster range check; this is not evidence of organizer acceptance.
