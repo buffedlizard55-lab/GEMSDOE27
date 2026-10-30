@@ -2,9 +2,9 @@
 
 ## Current review — 2026-10-30
 
-**No new TIFF is OK to submit.** The required single-method lane paragraph is absent, so no experiment or submission artifact was created. Current local checks: 226 tests passed, 3 skipped; Ruff passed; readiness audit reports zero slot authorizations. `verify_downloads.py` is blocked because the ignored `data_cache/` inputs are absent; do not treat older verification as current. Full audit: [Session 20 review](knowledge/42_session20_repo_review_2026-10-30.md).
+**No new TIFF is OK to submit.** The required single-method lane paragraph is absent, so no experiment or submission artifact was created. Current local checks: see the verification record below; Ruff passed; readiness audit reports zero slot authorizations. After `scripts/restore_data.py` restored the 16 SHA-pinned owner-mirror inputs, `verify_downloads.py` reports 0 failures and `pytest` reports 229 passed (see [Session 20 verification](knowledge/43_session20_verification_2026-10-30.md)). The earlier "blocked" statement applied only to a checkout without those inputs. Full audit: [Session 20 review](knowledge/42_session20_repo_review_2026-10-30.md).
 
-Known unconfirmed items: owner-reported scores are not organizer receipts; current leaderboard high is unknown here. The earlier range-validation error's cause is unknown because the exact uploaded file is unknown. Restore the hash-pinned owner-mirror inputs before claiming any raster validation; those mirrors are not organizer-authenticated. No PR or merge is claimed.
+Known unconfirmed items: owner-reported scores are not organizer receipts. The official [DrivenData leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/), read 2026-10-30, shows #1 at 0.4544 and rank 50 at 0.3195; the prompt's 0.4413 does not appear on that page. The earlier range-validation error's cause is unknown because the exact uploaded file is unknown. Restore the hash-pinned owner-mirror inputs before claiming any raster validation; those mirrors are not organizer-authenticated. No PR or merge is claimed.
 
 ## Task prompt (2026-10-29) — condensed requirements, read first every session
 
