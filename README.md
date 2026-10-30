@@ -81,7 +81,7 @@ The 2026-10-27 nine-site inventory is broader than the 12 pinned peer rasters bu
 
 ## 2026-10-30 Session 20 — repository review (latest handoff)
 
-Read [`knowledge/42_session20_repo_review_2026-10-30.md`](knowledge/42_session20_repo_review_2026-10-30.md) first. Summary:
+Read [`knowledge/44_session20_ledger_review_2026-10-30.md`](knowledge/44_session20_ledger_review_2026-10-30.md) first. Summary:
 
 - **Still no file OK to submit.** The H33-1 TIFF is format-valid and unique within the 12 pinned rasters (independently re-read and re-hashed this session), but it lost on the holdout (HOLDOUT-DTI 0.0252 against 0.0414).
 - **No experiment, no new TIFF, no slot.** The 2026-10-30 prompt again omits its single-method lane paragraph (`IR-2026-10-30-lane-paragraph-still-missing`).

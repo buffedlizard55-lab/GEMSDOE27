@@ -2,6 +2,8 @@
 
 Handoff for the next session. It supersedes `41_session19_repo_review_2026-10-29.md` as the latest review. The charter in `README.md` and the hard rules in `AGENTS.md` still apply.
 
+**Parallel Session 20 records on `main`:** `knowledge/42_session20_repo_review_2026-10-30.md` (a separate review, from another branch) and `knowledge/43_session20_verification_2026-10-30.md` (a verification record). This file does not replace them. It adds the owner-reported ledger, the independent TIFF re-read, and the metric check. Section 8 flags one provenance problem in `43` (a DrivenData leaderboard snapshot).
+
 ## 1. Bottom line
 
 - **No file is OK to submit.** This is unchanged. The one new-to-the-repo finding is that the only generated unique TIFF (H33-1) is format-valid and unique against the 12 pinned rasters, but it **lost** on the holdout (HOLDOUT-DTI 0.0252 against control 0.0414).
@@ -17,6 +19,7 @@ Environment: Python 3.11.2 venv, `requirements.txt` installed (rasterio 1.4.4, n
 | Check | Command | Result |
 |---|---|---|
 | Hash-pinned inputs | `python scripts/restore_data.py` | 17/17 files restored; every SHA-256 matched `data/manifest.json` |
+| Input restore note | the manifest lists 16 files; the restore produces 17 outputs because `training_features.tif` is assembled from 5 parts (`data/manifest.json` `assembled`). Both counts are correct for different definitions. |
 | Peer rasters | `python scripts/fetch_parallel_registry.py` | 12/12 pinned peer rasters fetched from codeload archives (ledger in the run log) |
 | Download verifier | `python scripts/verify_downloads.py` | 288 PASS lines, **0 failures** |
 | Peer byte audit | `python scripts/verify_peer_relations.py` | reproduced: 12 peers, 2 identical in-footprint pairs, 11 strict-subset relations. Only `created_utc` changed; the cosmetic diff was reverted (`IR-2026-10-30-peer-audit-timestamp-churn`) |
@@ -123,6 +126,8 @@ The full list is in `registry/owner_reported_scores_20261030.csv`. Top 12 by val
 The prompt's 0.4413 and 0.3195 values do not appear in the list. Neither was matched to a file.
 
 ## 8. Irregularities
+
+**Provenance flag for review (high):** `knowledge/43` and the README paragraph on `main` report an "official leaderboard snapshot (read 2026-10-30)" from the DrivenData leaderboard page, with #1 at 0.4544 and rank 50 at 0.3195. AGENTS.md hard rule 1 forbids agent or script access to drivendata.org. The record does not say how the page was read. This session did not access drivendata.org and does not rely on those figures. Recorded as `IR-2026-10-30-drivendata-snapshot-provenance`. The owner should confirm the method; if the page was read by an agent, the record should be treated as a rule breach, and the snapshot should not be used.
 
 Nine new records were added to `registry/irregularities.json` (IDs `IR-2026-10-30-*`):
 

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-30 | Session 20 repo review: ledger of owner-reported prompt scores added; no experiment, no slot; new irregularity IR-2026-10-30 items appended.",
+  "generated": "2026-10-30 | Session 20 repo review (ledger branch): owner-reported ledger, 9 IR-2026-10-30 records, and a provenance flag on the leaderboard snapshot recorded on main; no experiment, no slot.",
   "items": [
     {
       "id": "IR-2026-10-29-gravity-stale-status-and-lane",
@@ -684,6 +684,12 @@
       "severity": "low",
       "issue": "scripts/verify_peer_relations.py rewrites created_utc in evidence/peer_relations_20261028.json on every run, so a clean rerun shows a diff with no substantive change. The result was reproduced (same pairs and counts).",
       "action": "Reverted the cosmetic diff. Consider keeping the timestamp stable when the content hash is unchanged."
+    },
+    {
+      "id": "IR-2026-10-30-drivendata-snapshot-provenance",
+      "severity": "high",
+      "issue": "Records on main (knowledge/43 and the README 2026-10-30 paragraph) report an 'official leaderboard snapshot (read 2026-10-30)' from https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/ (#1 0.4544; rank 50 0.3195). AGENTS.md hard rule 1 prohibits agent or script access to drivendata.org. The record does not state how the page was read. This session did not access drivendata.org and did not verify those figures.",
+      "action": "Owner to confirm how the snapshot was obtained. If by agent or script, treat as a rule breach: remove or quarantine the snapshot and use only a human-supplied leaderboard row. Until then, do not use the 0.4544 or 0.3195 figures for any estimate or target."
     }
   ]
 }
