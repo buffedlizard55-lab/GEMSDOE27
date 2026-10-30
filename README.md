@@ -143,6 +143,10 @@ The website now presents the four registry-listed untried formulations with laye
 
 An independent parallel review also documented the H28-6 result and lane deviation: [2026-10-29 review](knowledge/37_review_2026-10-29.md). The current untried list excludes H28-6; earlier screen ranks and session narratives remain historical.
 
+## 2026-10-30 Session 20 — repository review
+
+[Three-pass review](knowledge/42_session20_repo_review_2026-10-30.md): no experiment or TIFF was produced because the required single-method lane paragraph is missing. This checkout's validation: 226 tests passed, 3 skipped (missing owner-mirror cache); Ruff, compileall, site build and diff checks passed. `verify_downloads.py` is blocked by absent `data_cache/` rasters. The readiness audit reports zero evidence-passed candidates and zero slot authorizations. The five ranked hypotheses are desk-screen priorities only, not score estimates. No current file is OK to download and submit.
+
 ## 2026-10-29 Session 19 — repository review and cache verification
 
 [Three-pass repository review](knowledge/41_session19_repo_review_2026-10-29.md) confirms that no new TIFF is approved and no organizer-score estimate is defensible. After restoring the full owner-mirror cache, all 17 input hashes and all 12 pinned peer raster hashes/grid checks passed; the prepared feature matrix is 5,167,373 × 32 at EPSG:32611. `pytest`: 229 passed, 0 skipped after the full cache restore; Ruff passed; `verify_downloads.py`: 0 failures on existing configured artifacts; readiness audit: 25 cards, 0 evidence passes and 0 slot authorizations. These are local checks against owner-mirror files, not organizer authentication. No experiment or slot was used: the prompt still omits its required lane paragraph. The H28-7 registry wording now distinguishes a not-yet-tested orientation/persistence operator from related radiometric value/front features already tested in broader negative arms. The next action remains to obtain an explicit lane and resolve the incomplete peer-registry scope before any new validation run.
