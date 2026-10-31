@@ -61,3 +61,21 @@ Water-well alignments along roads, field boundaries, irrigation ditches and pipe
 - `https://www.drivendata.org`: HTTP 000. Not accessed by agent policy; checked only for reachability.
 - `https://raw.githubusercontent.com/...`: HTTP 000 (so the reference notebook must come from `codeload.github.com`).
 - Local CSV `data_cache/gdr_wellspring_in_footprint.csv`: 27,092 rows, 12,570 unique (row, col) stations, 973 rows with a finite `geothermquartz_c` (row count, before the 20–300 °C QA and the (row, col) merge). These numbers were read in this session from the restored file.
+
+## 7. Addendum A (written 2026-10-31, before any E2 holdout score or any H34-1 raster)
+
+**Why this addendum exists.** The uniform-random collinearity null in §3 is not a valid null for clustered stations. Exploratory counts (this session, before this addendum; reproducible with the functions in `src/gems27/hot_station_lines.py`) found:
+
+- Real station layout: 564 stations after QA, 143 hot (≥120 °C), **149 accepted lines** (41 with ≥3 supporting stations, 25 with ≥4). The median nearest-neighbour spacing between stations is **11.7 px** (1.17 km).
+- Uniform-random placement of the same stations (5 draws): 0–2 lines. This is not a fair comparison: the real stations are clustered, so random placement destroys the clusters.
+- Cluster-preserving jitter null (each station displaced uniformly inside a disk; 10 draws per radius): R = 10 px → mean 152.8 lines (range 141–173); 41 real ≥3-station lines vs null mean 34.9; 25 real ≥4-station lines vs null mean 16.9. R = 20 px → mean 155.8 lines, but ≥3-station mean 16.1 and ≥4-station mean 4.0; R = 30 px → 135.4 lines, ≥3-station mean 7.4.
+
+**Choice of null (fixed here, before E2).** R = 10 px is the cluster-preserving null: displacement is below the median nearest-neighbour spacing (11.7 px), so local clusters survive and only alignment is perturbed. R = 20 and 30 px displace stations beyond their neighbours and destroy the clusters themselves, so they test something else. I disclose that R = 20 px would show a larger excess (≥3-station ratio about 2.5); the choice of R = 10 px is a researcher degree of freedom, made after this exploratory look, and the result is reported with that caveat.
+
+**Amended gates.**
+
+1. The uniform-random null in §3 is retained as registered. It passed (real 149 vs mean 0.4), so **E2 and E3 are permitted to run under the registered protocol.** This passage is not evidence of collinearity; it only shows that the registered gate was not a sufficient null.
+2. **New promotion gate A2 (required for `promote`, not for running E2/E3):** with 20 cluster-preserving jitter draws at R = 10 px (RNG seed 45), the ratio real / null-mean must exceed 1.5 for both the total line count (support ≥1) and the ≥3-station count (support ≥3). If either ratio is ≤ 1.5, the verdict cannot be `promote`, and the line geometry is reported as clustering-explained.
+3. The verdict is `promote` only if E1 (registered), E2, E3 and A2 all pass. Otherwise `negative`. A negative TIFF is written only as a research artifact, labelled **NOT OK TO SUBMIT**, and is not authorized for a weekly slot.
+
+**Expected outcome from the exploratory numbers.** A2 is expected to fail on the total count (ratio ≈ 0.98) and is borderline on the ≥3 count (ratio ≈ 1.17). This is disclosed here so the verdict is not read as a surprise.
