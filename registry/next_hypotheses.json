@@ -1,6 +1,6 @@
 {
-  "generated": "2026-10-29 | H28-6, H29-5-PROXY and H33-1 are tested negatives. No selector authorization.",
-  "status": "Three formulations remain research ideas; H28-6 and H29-5-PROXY were tested and negative. No selector authorization.",
+  "generated": "2026-10-31 | H34-1 proxy positive but not promotable; H28-6, H29-5-PROXY, H33-1 tested negative. No selector authorization.",
+  "status": "H34-1 (magnetic-gravity gradient alignment) is the first positive catalogue-internal proxy but is NOT OK TO SUBMIT (component split, gravity-only control, 12-raster scope, not all features canaried). H28-6, H29-5-PROXY and H33-1 are tested negatives. No selector authorization.",
   "novelty_scope": "Screened against current source tree and available experiment/evidence ledgers in this checkout through 2026-10-27; not a global novelty claim across sibling sites or other competitors.",
   "target": "Fault-location pixels in the organizer-created test labels, which remain unobserved here. Catalogue-internal holdouts are only a proxy and cannot validate far-field behavior.",
   "baseline": {
@@ -43,7 +43,7 @@
       "differs_from_repo": "The actual routed-drainage and verified fan-apex alignment operator was not executed; H29-5-PROXY tested only slope-side contrast, concavity and tangent support.",
       "cost": "medium; current DEM/LiDAR bands",
       "data_gate": "Requires unmodified elevation and conditioned/routed drainage plus verified fan-apex observations; existing detrended-elevation bands alone do not establish stream or outlet geometry, and these inputs were not restored here.",
-      "validation": "If raw inputs become available, preregister separately with unused seeds; never reuse 620–624 or portray the tested proxy as a fresh trial.",
+      "validation": "If raw inputs become available, preregister separately with unused seeds; never reuse 620\u2013624 or portray the tested proxy as a fresh trial.",
       "status": "UNTRIED actual conditioned-drainage/fan-apex hypothesis. The related H29-5-PROXY used only detrended-relief features and was tested negative; it was not a stream, fan-apex or outlet analysis.",
       "expected_benefit": "Uncertain; no numerical improvement is established."
     },
@@ -75,7 +75,7 @@
     {
       "id": "H28-6",
       "title": "Gravity analytic-signal scale persistence",
-      "status": "TESTED — negative; frozen efficacy gate and local duplicate stop failed; no TIFF written",
+      "status": "TESTED \u2014 negative; frozen efficacy gate and local duplicate stop failed; no TIFF written",
       "validation": "evidence/h28_6_run_card_2026-10-28.json",
       "seeds": [
         700,
@@ -99,7 +99,7 @@
     {
       "id": "H28-4",
       "title": "Anisotropic seismicity-fabric lineaments",
-      "status": "TESTED — FROZEN GATE FAILED; negative result, not slot-eligible",
+      "status": "TESTED \u2014 FROZEN GATE FAILED; negative result, not slot-eligible",
       "validation": "evidence/h28_4_seismicity_fabric_holdout.json",
       "seeds": [
         230,
@@ -111,7 +111,7 @@
     {
       "id": "H27-10",
       "title": "Model-ranked 100-300 m offset-scarp annulus substitution",
-      "status": "TESTED — FROZEN GATE FAILED; not untried and not eligible to justify a weekly slot",
+      "status": "TESTED \u2014 FROZEN GATE FAILED; not untried and not eligible to justify a weekly slot",
       "validation": "knowledge/03_preregistration_topology_gate.md#addendum-f-h27-10; evidence/h27_10_annulus_holdout.json; initial diagnostic output preserved at evidence/h27_10_annulus_holdout_initial.json",
       "seeds": [
         150,
@@ -136,8 +136,8 @@
     },
     {
       "id": "H28-3",
-      "title": "Dilatational-strain × conductivity intersection corridors",
-      "status": "TESTED — FROZEN GATE FAILED; negative result, not slot-eligible",
+      "title": "Dilatational-strain \u00d7 conductivity intersection corridors",
+      "status": "TESTED \u2014 FROZEN GATE FAILED; negative result, not slot-eligible",
       "validation": "knowledge/13_preregistration_H28-3.md; evidence/h28_3_strain_holdout.json; evidence/h28_3_negative_uniqueness.json",
       "seeds": [
         160,
@@ -158,8 +158,8 @@
     },
     {
       "id": "H29-1",
-      "title": "Hydrothermal Upflow Disequilibrium × Piedmont-Toe Concave Flexure × Destriped Shallow Geophysical Vesselness + Probability-Weighted 300 m CELF Submodular Cover (Lane L-S7-2026-10-25)",
-      "status": "TESTED & LIVE-SCORED (OWNER-REPORTED 0.2190, #1 of 2026-10-25 non-H19-5 cohort) — FROZEN HOLDOUT GATE HELD ON SE CI SUB-CLAUSE vs D0 (0.042198 buffered vs 0.040902 D0, 0.036368 B0)",
+      "title": "Hydrothermal Upflow Disequilibrium \u00d7 Piedmont-Toe Concave Flexure \u00d7 Destriped Shallow Geophysical Vesselness + Probability-Weighted 300 m CELF Submodular Cover (Lane L-S7-2026-10-25)",
+      "status": "TESTED & LIVE-SCORED (OWNER-REPORTED 0.2190, #1 of 2026-10-25 non-H19-5 cohort) \u2014 FROZEN HOLDOUT GATE HELD ON SE CI SUB-CLAUSE vs D0 (0.042198 buffered vs 0.040902 D0, 0.036368 B0)",
       "validation": "knowledge/15_geothermal_vent_discovery_and_h29_preregistration.md; evidence/h29_e2_holdout_210_219.json; evidence/h29_run_card_2026-10-25.json",
       "seeds": [
         210,
@@ -189,7 +189,7 @@
     {
       "id": "H29-2",
       "title": "Andersonian 60-degree Hanging-Wall Dip-Offset Geophysical-to-Scarp Doublet Pairing (DIPDIRECT)",
-      "status": "TESTED — FROZEN GATE FAILED / DUPLICATE STOP (seeds 300-309 in PR #26; pooled HOLDOUT-DTI 0.1059 vs Arm-D 0.1060; >70% overlap with dense H28-1; no TIFF promoted)",
+      "status": "TESTED \u2014 FROZEN GATE FAILED / DUPLICATE STOP (seeds 300-309 in PR #26; pooled HOLDOUT-DTI 0.1059 vs Arm-D 0.1060; >70% overlap with dense H28-1; no TIFF promoted)",
       "validation": "knowledge/21_preregistration_H29-2_20261025.md; evidence/h29_2_run_card_2026-10-25.json; knowledge/22_h29_2_result_and_h33_2_b2_audit_20261025.md",
       "seeds": [
         300,
@@ -223,7 +223,7 @@
       "cost": "low-medium; 100% locally hash-pinned rasters (~23 min CPU, <2.2 GiB RAM)",
       "data_gate": "17/17 hash-pinned inputs verified locally in data_cache/.",
       "validation": "Preregistered in knowledge/24_preregistration_H31_2026-10-26.md on fresh unconsumed seeds 400-409 against U0, B0, H28_1_B2, D0, and H29-S.",
-      "status": "TESTED & PROMOTED (Session 10, seeds 400-409) — ALL 5/5 FROZEN GATES PASSED; NEW #1 BLIND POOLED HOLDOUT-DTI 0.047302 (+0.009577 vs B0, +0.007004 vs D0, +0.003185 vs H29-S); 27-raster unique (max 62.8% <= 70%)."
+      "status": "TESTED & PROMOTED (Session 10, seeds 400-409) \u2014 ALL 5/5 FROZEN GATES PASSED; NEW #1 BLIND POOLED HOLDOUT-DTI 0.047302 (+0.009577 vs B0, +0.007004 vs D0, +0.003185 vs H29-S); 27-raster unique (max 62.8% <= 70%)."
     },
     {
       "id": "H31-2",
@@ -243,9 +243,9 @@
       "cost": "low-medium; locally hash-pinned rasters",
       "data_gate": "Existing hash-pinned raster bands; no external download needed.",
       "validation": "Preregister on fresh unused seeds >= 410.",
-      "status": "TESTED — FROZEN GATE FAILED; negative. Do not retry the tested formulation.",
+      "status": "TESTED \u2014 FROZEN GATE FAILED; negative. Do not retry the tested formulation.",
       "tested_as": "H32 / Lane L-S11",
-      "result": "Fresh seeds 500–509; P HOLDOUT-DTI 0.035732 vs D 0.039219; P-D -0.003487, 95% CI [-0.004767,-0.002228], 1/10 seeds and 0/4 folds. E1 canary clean; evidence/h32_run_card_2026-10-26.json.",
+      "result": "Fresh seeds 500\u2013509; P HOLDOUT-DTI 0.035732 vs D 0.039219; P-D -0.003487, 95% CI [-0.004767,-0.002228], 1/10 seeds and 0/4 folds. E1 canary clean; evidence/h32_run_card_2026-10-26.json.",
       "eligible_for_weekly_slot": false
     },
     {
@@ -266,7 +266,7 @@
       "cost": "medium; locally hash-pinned rasters",
       "data_gate": "Existing hash-pinned raster bands; no external download needed.",
       "validation": "Preregister on fresh unused seeds >= 420.",
-      "status": "TESTED — FROZEN GATE FAILED; negative. Do not tune or rerun seeds 510–519.",
+      "status": "TESTED \u2014 FROZEN GATE FAILED; negative. Do not tune or rerun seeds 510\u2013519.",
       "result": "H31-3-S HOLDOUT-DTI 0.045332 vs H31-S 0.044966; pooled delta +0.000366, paired mean +0.000392, 95% CI [-0.001182,+0.001823], 6/10 seeds, 2/4 folds; 4/5 efficacy clauses failed. E1 canary max AUC 0.53194. 12-peer max overlap 56.74%, extended local maximum 86.87% vs H31-1; evidence/h31_3_run_card_2026-10-26.json.",
       "eligible_for_weekly_slot": false
     },
@@ -287,7 +287,7 @@
     {
       "id": "H33-1",
       "title": "Short buried basement-step complement emission",
-      "status": "TESTED — FROZEN GATE FAILED; negative; NOT OK TO SUBMIT",
+      "status": "TESTED \u2014 FROZEN GATE FAILED; negative; NOT OK TO SUBMIT",
       "validation": "knowledge/30_preregistration_H33_2026-10-27.md; knowledge/31_h33_result_2026-10-27.md; evidence/h33_run_card_2026-10-27.json",
       "seeds": [
         520,
@@ -342,7 +342,7 @@
       "docs/assets/fig_map_h27_5b_priority.png"
     ],
     "refuted_signals": [
-      "graph-ΔP ranking as a holdout-improvement signal (Addendum D-3)",
+      "graph-\u0394P ranking as a holdout-improvement signal (Addendum D-3)",
       "overlapping en-echelon step-over as a holdout-improvement signal (Addendum D-4)"
     ]
   }

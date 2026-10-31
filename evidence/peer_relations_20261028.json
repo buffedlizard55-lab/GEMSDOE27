@@ -1,5 +1,5 @@
 {
- "created_utc": "2026-10-28T19:10:03+00:00",
+ "created_utc": "2026-10-31T01:39:08+00:00",
  "purpose": "Descriptive byte-level dot-set audit of pinned peers. Not a score, not a receipt.",
  "label_convention": "owner-reported scores copied from registry; HOLDOUT-DTI not computed here",
  "registry_sha256": "382cabd60ccdd4e5f970407a689289faeb378c3640c05f6c402ceb52544df1f9",

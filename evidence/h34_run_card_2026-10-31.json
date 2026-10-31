@@ -1,0 +1,159 @@
+{
+  "experiment": "H34-1 magnetic-gravity gradient alignment",
+  "preregistration": "knowledge/46_session21_hypothesis_screen_2026-10-31.md",
+  "mechanism": "min(|\u2207M|,|\u2207G|)*|cos\u03b8|; orthogonal complement of H29-XG cross-gradient",
+  "named_non_fault_process_that_could_mimic_it": "parallel lithologic contacts with contrasting density+susceptibility; basin-margin stratigraphic contacts; survey lineation seams; remanence stripes",
+  "e1_canary": {
+    "n_pos": 11714,
+    "n_neg": 200000,
+    "auc": 0.4789251321068807,
+    "direction_invariant_auc": 0.5210748678931193
+  },
+  "canary": {
+    "max_auc": 0.5210748678931193,
+    "features_tested": 1
+  },
+  "holdout_dti_C": 0.01773990270924653,
+  "holdout_dti_D_control": 0.014084103758122545,
+  "paired_mean_delta_dti": 0.003685067013785237,
+  "paired_95ci": [
+    0.0019390269355516094,
+    0.005431107092018865
+  ],
+  "withheld_positive_occurrences": 121621,
+  "seeds": [
+    900,
+    901,
+    902,
+    903,
+    904,
+    905,
+    906,
+    907,
+    908,
+    909
+  ],
+  "folds": 4,
+  "seeds_positive": 9,
+  "budget_total": 37654,
+  "emitted_px": 37654,
+  "ok_to_submit": false,
+  "verdict": "negative",
+  "uniqueness_vs_registry": {
+    "pass": true,
+    "max_dot_overlap_within_3px_euclidean": 0.22550061082487916,
+    "max_surface_spearman": 0.004131992030755414,
+    "all_registry_entries_checked": true,
+    "scope_current_and_complete": false,
+    "post_placement_checked": false,
+    "local_prior_rasters": {
+      "n_local_rasters": 0,
+      "max_dot_overlap_within_3px": 0.0,
+      "worst": []
+    }
+  },
+  "validator": {
+    "zeros_hard_pass": true,
+    "zeros_checks": {
+      "grid_matches_template": {
+        "pass": true,
+        "hard": true
+      },
+      "single_band_float32": {
+        "pass": true,
+        "hard": true
+      },
+      "inside_footprint_all_finite": {
+        "pass": true,
+        "hard": true
+      },
+      "inside_footprint_in_0_1": {
+        "pass": true,
+        "hard": true
+      },
+      "no_infinities_anywhere": {
+        "pass": true,
+        "hard": true
+      },
+      "outside_footprint_is_zero_and_finite": {
+        "pass": true,
+        "hard": true
+      },
+      "strict_whole_array_range": {
+        "pass": true,
+        "hard": true
+      },
+      "profile_driver_gtiff": {
+        "pass": true,
+        "hard": false
+      },
+      "compression_like_sample": {
+        "pass": true,
+        "hard": false
+      }
+    }
+  },
+  "raster": {
+    "primary_allfinite": "gems27-h34-1-align-b2-20261031-8e61fd96ce99-allfinite.tif",
+    "directory": "docs/downloads/h34",
+    "sha256": "ea8a36a48f192333f5da281ffe649e88497a36af49c57088ef18d036f8dc16c2"
+  },
+  "raster_sha256": "ea8a36a48f192333f5da281ffe649e88497a36af49c57088ef18d036f8dc16c2",
+  "validator_output": {
+    "grid_matches_template": true,
+    "single_band_float32": true,
+    "inside_footprint_all_finite": true,
+    "inside_footprint_in_0_1": true,
+    "no_infinities_anywhere": true,
+    "outside_footprint_is_zero_and_finite": true,
+    "strict_whole_array_range": true,
+    "profile_driver_gtiff": true,
+    "compression_like_sample": true
+  },
+  "bytes_tif": 825516,
+  "bytes_zip": 181476,
+  "submission_name": "gems27-h34-1-align-b2-20261031-8e61fd96ce99-allfinite.tif",
+  "submission_note": "27GEMSDOE H34-1 magnetic-gravity alignment | HOLDOUT-DTI 0.0177 vs ctrl 0.0141 | 9/10 seeds | id 8e61fd96ce99 | research only",
+  "note_max_140_chars": "27GEMSDOE H34-1 magnetic-gravity alignment | HOLDOUT-DTI 0.0177 vs ctrl 0.0141 | 9/10 seeds | id 8e61fd96ce99 | research only",
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "evaluator": "gems27.metric.dti_binary v1 (alpha=0.2, beta=0.8, R=3px triangular)",
+    "n_withheld_positives_total": 121621,
+    "pooled_candidate": 0.01773990270924653,
+    "pooled_control_D": 0.014084103758122545,
+    "paired_candidate_minus_B": {
+      "ci95": [
+        0.0019390269355516094,
+        0.005431107092018865
+      ],
+      "mean": 0.003685067013785237
+    },
+    "gate_efficacy_pass": true,
+    "split_scheme": "component-quadrant-v1",
+    "visible_only_catalogue_features": true,
+    "training_buffer_verified": true,
+    "emitter_blind_to_hidden_and_buffer": true,
+    "full_kernel_scored": true,
+    "all_model_features_canary_tested": false,
+    "matched_current_best_comparison": false,
+    "current_best_comparison": {
+      "control_id": "gravity-HG single-physics (not current best)"
+    },
+    "canary_max_auc": 0.5210748678931193
+  },
+  "publication_gate": {
+    "ok_to_publish_as_submission": false,
+    "reasons": [
+      "run card does not authorize submission",
+      "verdict is not promote",
+      "whole-FID split evidence missing",
+      "not all input features have canaries",
+      "current-best matched control not proven",
+      "post-placement correlation missing or exceeds threshold",
+      "current, complete comparison scope not proven"
+    ]
+  },
+  "download_decision_reasons": [
+    "failed the repository publication gate: no whole-FID split, no matched current-best control, not all features canaried, uniqueness scope limited to the 12 pinned rasters"
+  ]
+}
