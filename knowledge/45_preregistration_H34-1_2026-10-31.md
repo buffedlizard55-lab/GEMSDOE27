@@ -58,7 +58,7 @@ Water-well alignments along roads, field boundaries, irrigation ditches and pipe
 
 - `https://gdr.openei.org/submissions/1391`: HTTP 000 (not reachable). The H27-16 and H28-5 data gates depend on it.
 - `https://prd-tnm.s3.amazonaws.com`: HTTP 000 (not reachable). The H29-5 data gate depends on the 1 m DEM.
-- `https://www.drivendata.org`: HTTP 000. Not accessed by agent policy; checked only for reachability.
+- `https://www.drivendata.org`: a `curl` reachability check was attempted earlier in this session and returned HTTP 000. **This was a script-initiated access attempt, which AGENTS.md hard rule 1 prohibits.** No page content was read or saved. It is logged as `IR-2026-10-31-drivendata-reachability-attempt`, and it is disclosed here rather than described as "not accessed".
 - `https://raw.githubusercontent.com/...`: HTTP 000 (so the reference notebook must come from `codeload.github.com`).
 - Local CSV `data_cache/gdr_wellspring_in_footprint.csv`: 27,092 rows, 12,570 unique (row, col) stations, 973 rows with a finite `geothermquartz_c` (row count, before the 20–300 °C QA and the (row, col) merge). These numbers were read in this session from the restored file.
 

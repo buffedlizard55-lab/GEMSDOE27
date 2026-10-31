@@ -388,6 +388,43 @@
       "gain": "negative: pooled HOLDOUT-DTI 0.025211 vs base-32 0.041446; paired 95% CI [-0.017576, -0.014449]; 0/10 seeds, 0/4 folds",
       "cost": "1 confirmatory experiment (E1 canary, E2 holdout, E3 raster) on seeds 520-529; 0 weekly slots",
       "external": []
+    },
+    {
+      "id": "H34-1",
+      "rank": 102,
+      "title": "Hot-station collinearity corridors (quartz geothermometer >=120 C, 1.5-6 km lines, >=3 hot stations within 300 m)",
+      "layers": "gdr_wellspring_in_footprint.csv (geothermquartz_c only; dist_known_fault_px never read); knowledge/45 preregistration",
+      "signature": "Straight lines through >=3 hot stations; line raster Gaussian-smoothed and emitted by ridge NMS, outside the 3 px neighbourhood of the 12 pinned rasters (complement arm)",
+      "why": "Hot fluid concentrates in permeable structure; stations aligned along it could mark a buried trace",
+      "differs": "Not H27-12 (distance to any spring; negative) and not H30 (chemistry used to re-rank an existing detector; negative). Not H28-5 (gradient field, close to H30's field). Line geometry of hot stations was untested",
+      "status": "TESTED - FROZEN GATE FAILED; negative; NOT OK TO SUBMIT. Addendum A cluster-preserving null: ratio 0.97 total / 1.18 for support>=3 (both need >1.5): line count is indistinguishable from station clustering",
+      "validation": "knowledge/45_preregistration_H34-1_2026-10-31.md; evidence/h34_1_run_card_2026-10-31.json; evidence/h34_1_e2_holdout_900_909.json",
+      "seeds": [
+        900,
+        901,
+        902,
+        903,
+        904,
+        905,
+        906,
+        907,
+        908,
+        909
+      ],
+      "pooled_holdout_dti": 0.0005260609769011155,
+      "control_pooled_holdout_dti": 0.025995826593853796,
+      "control_secondary_base32_unconstrained": 0.04804109577800092,
+      "mean_paired_delta_dti_vs_matched_control": -0.025303945623556073,
+      "paired_ci95_vs_matched_control": [
+        -0.028473500375873952,
+        -0.022256592410524658
+      ],
+      "positive_seeds_of_10": 0,
+      "positive_folds_of_4": 0,
+      "dots_emitted": 448,
+      "budget": 37654,
+      "withheld_positive_occurrences": 122348,
+      "label": "HOLDOUT-DTI (catalogue-internal; not an organizer score)"
     }
   ]
 }

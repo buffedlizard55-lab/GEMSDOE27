@@ -116,3 +116,29 @@ def permuted_null_line_counts(
         rows, cols = np.divmod(pick, foot.shape[1])
         counts.append(len(accepted_lines(rows, cols, np.asarray(temps))))
     return counts
+
+
+def jitter_null_counts(
+    rows: np.ndarray, cols: np.ndarray, temps: np.ndarray, foot: np.ndarray,
+    radius_px: float, n_draws: int, seed: int,
+) -> list[tuple[int, int]]:
+    """Cluster-preserving null (knowledge/45 Addendum A): displace every station uniformly inside a
+    disk of ``radius_px``, keep only stations that stay in the footprint, and return
+    ``(n_lines_total, n_lines_with_support_ge_3)`` per draw."""
+    rng = np.random.default_rng(seed)
+    foot = np.asarray(foot, bool)
+    H, W = foot.shape
+    rows = np.asarray(rows, float)
+    cols = np.asarray(cols, float)
+    temps = np.asarray(temps, float)
+    out: list[tuple[int, int]] = []
+    for _ in range(n_draws):
+        ang = rng.uniform(0.0, 2.0 * np.pi, rows.size)
+        rad = radius_px * np.sqrt(rng.uniform(0.0, 1.0, rows.size))
+        r = np.rint(rows + rad * np.sin(ang)).astype(int)
+        c = np.rint(cols + rad * np.cos(ang)).astype(int)
+        ok = (r >= 0) & (r < H) & (c >= 0) & (c < W)
+        ok[ok] &= foot[r[ok], c[ok]]
+        lines = accepted_lines(r[ok], c[ok], temps[ok])
+        out.append((len(lines), sum(1 for ln in lines if ln["support"] >= 3)))
+    return out

@@ -1,5 +1,9 @@
 # GEMSDOE27: fault-discovery research and submission audit
 
+## Current review — 2026-10-31 (Session 21, latest)
+
+**No file is OK to download and submit.** Two unique GeoTIFFs exist and both failed their gates: H33-1 (research only, NOT OK) and H34-1 (hot-station collinearity, `docs/downloads/research/gems27-h34-1-hotline-NOT-OK-TO-SUBMIT-20261031-239619b728d6-allfinite.tif`, NOT OK). H34-1 is negative: its line count matches station clustering (Addendum A null ratio 0.97), and its HOLDOUT-DTI is 0.000526 against 0.025996 for the matched control. These are HOLDOUT-DTI numbers, not organizer scores. The highest owner-reported submission is GEMSDOE32 (0.2778, OWNER-REPORTED), which is not unique and is already submitted. The lane paragraph is still missing, so no lane, slot or promotion is authorised. A DrivenData reachability attempt (HTTP 000) was made by script during this session; that is disclosed as IR-2026-10-31-drivendata-reachability-attempt. Full record: [Session 21 review](knowledge/46_session21_review_2026-10-31.md). Preregistration: [knowledge/45](knowledge/45_preregistration_H34-1_2026-10-31.md).
+
 ## Current review — 2026-10-30
 
 **No new TIFF is OK to submit.** The required single-method lane paragraph is absent, so no experiment or submission artifact was created. Current local checks: see the verification record below; Ruff passed; readiness audit reports zero slot authorizations. After `scripts/restore_data.py` restored the 16 SHA-pinned owner-mirror inputs, `verify_downloads.py` reports 0 failures and `pytest` reports 229 passed (see [Session 20 verification](knowledge/43_session20_verification_2026-10-30.md)). The earlier "blocked" statement applied only to a checkout without those inputs. Full audit: [Session 20 review](knowledge/42_session20_repo_review_2026-10-30.md).
