@@ -154,7 +154,7 @@ def h33_summary() -> tuple[str, str]:
         text = "H33-1: no run card is present. Do not upload an older file in its place."
         return f'<div class="card"><h3>Generated TIFF</h3><p>{esc(text)}</p></div>', text
     hold = card.get("holdout") or {}
-    paired = hold.get("paired_candidate_minus_B") or {}
+    paired = hold.get("paired_candidate_minus_B") or hold.get("paired_candidate_minus_Bc") or {}
     ci = paired.get("ci95") or []
     unique = card.get("uniqueness_vs_registry") or {}
     raster = card.get("raster") or {}
@@ -233,10 +233,10 @@ def _new_tiff_row(label: str, path: str) -> dict | None:
     verified = verified_research_path(card, gate)
     hold = card.get("holdout") or {}
     uniq = card.get("uniqueness_vs_registry") or {}
-    paired = hold.get("paired_candidate_minus_B") or {}
+    paired = hold.get("paired_candidate_minus_B") or hold.get("paired_candidate_minus_Bc") or {}
     ci = paired.get("ci95") or hold.get("ci95") or []
     pooled = hold.get("pooled_candidate")
-    control = hold.get("pooled_control_D", hold.get("pooled_control_B"))
+    control = hold.get("pooled_control_D", hold.get("pooled_control_B", hold.get("pooled_matched_control_Bc")))
     if isinstance(pooled, (int, float)) and isinstance(control, (int, float)) and len(ci) == 2:
         estimate = (f"HOLDOUT-DTI {pooled:.6f} vs control {control:.6f}; paired 95% CI "
                     f"[{ci[0]:+.6f}, {ci[1]:+.6f}]; {hold.get('n_withheld_positives_total', 'n/a'):,} "
@@ -285,6 +285,7 @@ def decision_board() -> tuple[str, str]:
         _new_tiff_row("GEMSDOE27 H29-XG joint gravity-magnetic cross-gradient (new, 2026-10-29)", "evidence/h29xg_run_card_2026-10-29.json"),
         _new_tiff_row("GEMSDOE27 H28-6 gravity persistence (new, 2026-10-28)", "evidence/h28_6_run_card_2026-10-28.json"),
         _new_tiff_row("GEMSDOE27 H33-1 buried-step complement (new, 2026-10-27)", "evidence/h33_run_card_2026-10-27.json"),
+        _new_tiff_row("GEMSDOE27 H34-1 hot-station collinearity (new, 2026-10-31)", "evidence/h34_1_run_card_2026-10-31.json"),
     ) if r]
     registry = read("registry/focus_sites_2026-10-26.json", {"sites": []})
     peers = {x["id"]: x for x in read("registry/parallel_submission_registry.json")["entries"]}
@@ -307,8 +308,7 @@ def decision_board() -> tuple[str, str]:
     html_block = (
         '<div class="card" id="download-decision" style="border-left:5px solid #cf222e">'
         '<h2 style="margin-top:0">Which file to download, and can it be submitted?</h2>'
-        '<p><b>Short answer: no file is OK to submit right now.</b> The only generated TIFF on disk (H33-1) is unique against the pinned '
-        'and local rasters but failed its holdout gate, so it is downloadable for research only. H28-6 and H29-XG wrote no TIFF. Historical '
+        '<p><b>Short answer: no file is OK to submit right now.</b> Two generated TIFFs are unique against the pinned and local rasters but failed their holdout gates: H33-1 (research only, NOT OK) and H34-1 (hot-station collinearity, 2026-10-31, NOT OK; its holdout is far below its matched control and its cluster-null check fails). H28-6 and H29-XG wrote no TIFF. Historical '
         'files are already in the registry and are not new. Estimates are local HOLDOUT-DTI or owner-reported values, '
         'never leaderboard projections.</p>'
         '<div class="tw"><table><thead><tr><th>Site / file</th><th>File to download</th><th>Estimated score</th>'
@@ -316,8 +316,8 @@ def decision_board() -> tuple[str, str]:
     md_rows = "\n".join(
         f'| {r["label"]} | {r["file_md"]} | {r["estimate"]} | {r["unique"]} | **{r["ok"]}** |' for r in rows)
     md = ("## Which file to download, and can it be submitted?\n\n"
-          "**Short answer: no file is OK to submit right now.** The only generated TIFF on disk (H33-1) is unique against the pinned "
-          "and local rasters but failed its holdout gate. H28-6 and H29-XG wrote no TIFF. Historical files are already in the registry. Estimates are local "
+          "**Short answer: no file is OK to submit right now.** Two generated TIFFs (H33-1 and H34-1) are unique against the pinned "
+          "and local rasters but failed their holdout gates (H34-1 also fails its cluster-null check). H28-6 and H29-XG wrote no TIFF. Historical files are already in the registry. Estimates are local "
           "HOLDOUT-DTI or owner-reported values, never leaderboard projections.\n\n"
           "| Site / file | File to download | Estimated score | Unique? | OK to submit? |\n"
           "|---|---|---|---|---|\n" + md_rows + "\n")
@@ -728,6 +728,8 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
 **DO NOT SUBMIT. NOT AUTHORIZED FOR A WEEKLY SLOT.** H31-1 `{H31_ID}` is already submitted according to the user, who reports 0.2250. There is no organizer receipt; do not resubmit it. No portal upload was made.
 
 ## New result and estimate
+
+On 2026-10-31 one preregistered experiment ran (H34-1, hot-station collinearity, seeds 900–909, `knowledge/45`). It is **negative**. Its cluster-preserving null check (Addendum A) shows the line count is not distinguishable from station clustering (ratio 0.97 total, 1.18 for three or more supporting stations; both need >1.5). Its holdout pooled HOLDOUT-DTI was 0.000526 against 0.025996 for the matched control, with 0 of 10 seeds positive. Part of that gap is sparseness: the candidate emitted 448 dots against a 37,654-dot budget. The file is downloadable for research only and is **NOT OK TO SUBMIT**. Full record: `knowledge/46_session21_review_2026-10-31.md`.
 
 On 2026-10-29 one preregistered experiment ran (H29-XG, joint gravity–magnetic cross-gradient, seeds 800–809, `knowledge/39`). It is **negative**: its holdout efficacy gate failed against the matched control, and its dots broke the 70% local-overlap stop, so **no TIFF was written**. The earlier research files (H28-6 and H33-1) are also negative. Every file in the table is NOT OK TO SUBMIT. The decision table below is generated from the run cards. Its numbers are HOLDOUT-DTI, not organizer scores.
 
