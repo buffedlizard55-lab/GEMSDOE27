@@ -1,6 +1,6 @@
 {
-  "generated": "2026-10-29 | H28-6, H29-5-PROXY and H33-1 are tested negatives. No selector authorization.",
-  "status": "Three formulations remain research ideas; H28-6 and H29-5-PROXY were tested and negative. No selector authorization.",
+  "generated": "2026-10-31 | H34-1 NEGATIVE under the whole-FID matched-control protocol; the component/quadrant proxy on a gravity-only control is superseded. No selector authorization.",
+  "status": "H34-1 (magnetic-gravity gradient alignment) is NEGATIVE under the required whole-FID buffered hide-and-recover protocol with a matched control Bc: pooled HOLDOUT-DTI 0.000526 vs 0.025996 (evidence/h34_1_e2_holdout_900_909.json). A component/quadrant proxy on a gravity-only control appeared positive and is superseded. H28-6, H29-5-PROXY and H33-1 are tested negatives. No selector authorization.",
   "novelty_scope": "Screened against current source tree and available experiment/evidence ledgers in this checkout through 2026-10-27; not a global novelty claim across sibling sites or other competitors.",
   "target": "Fault-location pixels in the organizer-created test labels, which remain unobserved here. Catalogue-internal holdouts are only a proxy and cannot validate far-field behavior.",
   "baseline": {
@@ -307,6 +307,10 @@
       "ok_to_submit": false
     },
     {
+      "id": "H34-1",
+      "status": "TESTED negative (2026-10-31); knowledge/45, evidence/h34_1_run_card_2026-10-31.json"
+    },
+    {
       "id": "H35-1",
       "result": "tested negative (2026-10-31)",
       "evidence": "evidence/h35_run_card_2026-10-31.json",
@@ -352,5 +356,12 @@
       "graph-\u0394P ranking as a holdout-improvement signal (Addendum D-3)",
       "overlapping en-echelon step-over as a holdout-improvement signal (Addendum D-4)"
     ]
+  },
+  "session21_screen_2026_10_31": {
+    "H28-7": "Not run on 2026-10-31: knowledge/38 records the same edges as tested augmentation (dip_rad_features, h29_k_th_alter_grad canary). Standalone form not separately run.",
+    "H28-5": "Still untried as a standalone gradient field; close to the H30 chemistry field (knowledge/21 / hydrochemistry.py). Lower priority than a new null-controlled design.",
+    "H27-16": "Blocked: gdr.openei.org HTTP 000 from the sandbox (2026-10-31).",
+    "H29-5": "Blocked: 1 m 3DEP DEM not reachable (prd-tnm.s3.amazonaws.com HTTP 000 on 2026-10-31).",
+    "vent_alignment": "Rejected on sample size: 21 volcanic vents in footprint (data_cache/gdr_volcanic_vents_in_footprint.csv)."
   }
 }

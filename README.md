@@ -31,6 +31,22 @@ This section is the standing task prompt. Read it at the start of every session 
 
 **Arena core values (verbatim excerpt):** "Maximize P(Win) — In every decision, we weigh tradeoffs, assess risk, and choose the path that maximizes the probability that Arena succeeds… Own the Outcome — We own results end to end — not just our individual slice of the work. When problems arise and we have the means to act, we do so without waiting for permission or assignment."
 
+## 2026-10-31 Session 21-B — L-DCONFIRM arm-D candidate built (this branch, latest)
+
+**One candidate TIFF now exists for a selector decision.** Lane L-DCONFIRM's preregistered, already-confirmed arm D (32-band + 15 subsurface-transform full-fit HGB detector; ridge NMS; priority Poisson-disk ≥2.8 px; B2 collar; 38,000 dots) was rebuilt from the unchanged E3 builder after this session restored the hash-pinned inputs and the lost transform caches ([`scripts/rebuild_dconfirm_caches.py`](scripts/rebuild_dconfirm_caches.py), identical builder closures). Record: [`knowledge/45_session21_e3_dconfirm_build_2026-10-31.md`](knowledge/45_session21_e3_dconfirm_build_2026-10-31.md); run card: [`evidence/dconfirm_run_card_2026-10-25.json`](evidence/dconfirm_run_card_2026-10-25.json) (regenerated 2026-10-31).
+
+- **File:** [`docs/downloads/research/gems27-dconfirm-hybrid-armd-b2-38k-20261031-5ea0385b7e70-allfinite.tif`](docs/downloads/research/gems27-dconfirm-hybrid-armd-b2-38k-20261031-5ea0385b7e70-allfinite.tif) (also `-nan.tif` twin and single-TIF zip), SHA-256 `40b88a6477b1914a525c587ef139f1016f3d52188442099e5fa5eeab716008c2`, name `GEMSDOE27-DCONFIRM-ARMD-B2-38K`, note (111/140): `27GEMSDOE L-DCONFIRM armD hybrid B2 38k; HOLDOUT-DTI 0.1066 vs 0.0992; UNSCORED | id 5ea0385b7e70`.
+- **Independent byte re-read (this session):** 1-band float32, EPSG:32611, 3730×3292 identical transform to the template, nodata=None, whole-array finite in [0,1], 38,000 dots, 0 NaN inside the 5,167,373-px footprint, 0 non-zero outside, 0 dots on catalogue, minimum catalogue distance 2.236 px. `verify_downloads.py`: 0 failures; `pytest`: 237 passed; Ruff clean.
+- **HOLDOUT-DTI (recorded confirmation, not re-run):** D 0.106588 vs B 0.099175, paired Δ +0.007599, 95 % CI [+0.004885, +0.010380], 10/10 seeds and 4/4 folds, 121,404 withheld-positive occurrences (`evidence/dconfirm_holdout_2026-10-25.json`). That is not a leaderboard score.
+- **Uniqueness:** max 3-px dot overlap **46.6 %** vs the 12 pinned peer submissions and **52.6 %** vs the already-submitted H31-1 — both under the 70 % stop; surface Spearman 0.446 ≤ 0.90. The frozen self-repo screen fails only against this repo's own never-submitted H28-1 research raster (85.2 %), and the card predates the current publication-gate provenance fields. Verdict therefore stays **negative / not promoted** by the frozen gate; per `knowledge/15` §4, retiring the H28-1 artifact from the self-registry is a **selector decision**, which this session does not take.
+- **Live score: UNKNOWN.** No projection is written. Nearest owner-reported anchors of this emission family: H31-1 0.2250, H29-PM 0.2190, slot-1 0.2449. Nothing here beats or claims to beat the owner-reported 0.2778 (GEMSDOE32), which remains a same-field re-thinning that fails this repo's uniqueness rule.
+- **No upload, no slot, no DrivenData access.** The prompt's lane paragraph is still missing (`IR-2026-10-31-lane-paragraph-still-missing`); this session ran no new hypothesis gate, only the frozen E3 build of the already-confirmed candidate.
+
+## Current review — 2026-10-31 (Session 21, parallel branch)
+
+**No file is OK to download and submit under the frozen gate.** Two unique GeoTIFFs exist and both failed their gates: H33-1 (research only, NOT OK) and H34-1 (hot-station collinearity, `docs/downloads/research/gems27-h34-1-hotline-NOT-OK-TO-SUBMIT-20261031-239619b728d6-allfinite.tif`, NOT OK). H34-1 is negative: its line count matches station clustering (Addendum A null ratio 0.97), and its HOLDOUT-DTI is 0.000526 against 0.025996 for the matched control. These are HOLDOUT-DTI numbers, not organizer scores. The highest owner-reported submission is GEMSDOE32 (0.2778, OWNER-REPORTED), which is not unique and is already submitted. The lane paragraph is still missing, so no lane, slot or promotion is authorised. A DrivenData reachability attempt (HTTP 000) was made by script during that session; that is disclosed as IR-2026-10-31-drivendata-reachability-attempt. Full record: [Session 21 review](knowledge/46_session21_review_2026-10-31.md). Preregistration: [knowledge/45](knowledge/45_preregistration_H34-1_2026-10-31.md).
+
+
 ## Current review — 2026-10-31
 
 **No new TIFF is approved to submit (2026-10-31).** The H35-1 weak-scarp-continuity lane (self-assigned as L-2026-10-31-H35 under the registry duplicate stops; the prompt's single-method lane paragraph is still absent, IR-2026-10-31-lane-paragraph-still-missing) ran its preregistered whole-FID buffered holdout (seeds 930–939). Result, all numbers HOLDOUT-DTI: hypothesis arm C1 (WSC fusion) 0.037312 vs architecture arm C0 (arm-D + T-v2) 0.043225 vs base arm B 0.041918 — the WSC hypothesis **failed** (−0.0059, 2/10 seeds), while C0's +0.001307 (10/10 seeds) **passed** its frozen gate but was rejected as a re-dotted resubmission of the submitted `h32-poisson-demag-b2` sibling family (83% dot overlap vs the 70% drift stop). The frozen file-choice rule therefore writes the primary file as arm B (`docs/downloads/research/gems27-h35-wsc-b-20261031-4884673ab249-allfinite.tif`, NOT APPROVED); the two research arms are downloadable alongside it for study only. Full result: [knowledge/46](knowledge/46_h35_result_2026-10-31.md); preregistration: [knowledge/45](knowledge/45_preregistration_H35_2026-10-31.md); geothermal-vent research: [knowledge/47](knowledge/47_geothermal_vent_research_2026-10-31.md). The leakage canary stayed below its 0.90 stop in both directions (max 0.5899 over 47 inputs). Readiness audit reports zero slot authorizations; no projection is written as a score. Prior session record: [Session 20 review](knowledge/42_session20_repo_review_2026-10-30.md).
@@ -199,3 +215,58 @@ Parallel Session 20 records are preserved separately: [repository review](knowle
 ## 2026-10-30 Session 20 — repository and validator safety review
 
 [Three-pass review](knowledge/44_session20_safety_review_2026-10-30.md) restored and hash-verified 17 owner-mirror inputs, rebuilt the 32-feature cache, rechecked all 12 pinned peer rasters, and reran the GeoTIFF and readiness audits. It also strengthened `publication_decision()` to independently compare candidate TIFF blocks with the local template and label rasters, rejecting nonzero predictions outside the footprint or on catalogue cells. **232 tests passed; Ruff/compile checks passed; historical download verifier: 0 failures; readiness audit: 25 cards, 0 evidence passes, 0 slot authorizations.** These local checks do not authenticate data with the organizer. No geological experiment or new TIFF was produced because the prompt omits the required lane paragraph. No file is OK to submit.
+
+## Session 21 (this branch) — recorded task prompt (starting base) and H34-1 addendum
+
+Recorded from the conversation. This is a **recorded charter, not a verbatim transcript**; the conversation is
+authoritative (see the `prompt-verbatim-unavailable` irregularity).
+
+- Review the repository and produce an executive summary over the highest-scoring submissions across
+  GEMSDOE24/25/27/28/30/31/32/33/36 that names the best file to download per site and its estimated score, and
+  states whether it is unique versus any other listed GEMSDOE site.
+- Core mandate: generate ONE unique TIF submission (never an exact duplicate of a prior site submission); make it
+  obvious whether it is OK to download and submit; keep values in [0,1] with a unique name and a short note; keep
+  iterating and testing until the highest-scoring submission is produced.
+- Answer at PhD level why the GEMSDOE32 file `h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros` scored 0.2778 and
+  whether a higher score is achievable (byte-level answer in `knowledge/34_session15_peer_relations_2026-10-28.md`).
+- Create a GitHub Pages site with a clean UI whose FIRST/executive-summary section makes the one-click TIF download
+  obvious.
+- Write the full prompt into the repo README as the starting base (this section).
+- Create a PR and merge to main.
+- Suggest remaining work and limitations for the next session.
+- Standing constraints: work autonomously with no manual input and flag irregularities for review; verify line by
+  line from official verified trusted sources and provide links for manual review, with no hallucinations; never
+  access drivendata.org by script or agent (the leaderboard/forum/submission pages are links for a human only, and
+  the guard stays in `scripts/refresh_source_feed.py`); never state or invent a leaderboard score, PR, merge or
+  deployment without evidence; every external claim needs a row in `registry/sources.json` with an honest status and
+  every irregularity a row in `registry/irregularities.json`; do not pick submissions directly — promotion is a
+  separate selector step.
+- Parallel-run protocol: stay in one lane; rank-correlation vs any registry raster >0.90 or >70% dots within 3 px of
+  a registry raster is a duplicate (log and stop); reuse the template's cached feature stack plus `evaluate_holdout.py`
+  and `submission_writer.py` (do not fork); label every number HOLDOUT-DTI (evaluator version, withheld-positive
+  count, 95% CI) or ORGANIZER-CONFIRMED; leakage canary AUC >0.90 is a stop; end with one JSON run card (hypothesis,
+  mechanism, named non-fault mimic, holdout DTI + CI, correlation/overlap vs registry, raster sha256, validator
+  output, submission name + ≤140-char note, verdict promote/negative); budget 3 experiments or 2 hours; promotion to
+  a real slot is a separate selector step within the weekly cap.
+- Pre-register before any gate; use fresh seeds; disclose deviations and bugs; paired comparisons against controls
+  only on the holdout (the dotted-H19-5 base is leaky). A renamed or re-thinned reference is not new work; new files
+  are labelled unscored with a unique content-hashed name and a note ≤200 chars.
+- Produce a full list satisfying the requirements; verify line by line; three passes (implement → review/fix →
+  re-check) are required before finishing.
+
+### H34-1 addendum for this branch
+
+- **Contribution kept:** `src/gems27/h34_features.py` — a label-free alignment feature module
+  (`score = min(|∇M|, |∇G|)·|cosθ|`, `ALIGN_SIGMA 2.0`, reads only `rtp` and `iso_grav_anom`), plus
+  `scripts/build_h34_submission.py` and the run card / evidence for an exploratory test.
+- **H34-1 is NEGATIVE.** A parallel Session 21 branch ran the same hypothesis under the required whole-FID
+  buffered hide-and-recover protocol with a matched control Bc and measured pooled HOLDOUT-DTI **0.000526** vs
+  **0.025996** (`evidence/h34_1_e2_holdout_900_909.json`, `evidence/h34_1_run_card_2026-10-31.json`). The
+  component/quadrant proxy on a gravity-only control that this branch first observed (0.017740 vs 0.014084) is
+  **superseded** and must not be read as support for H34-1 (`IR-2026-10-31-h34-1-proxy-superseded`).
+- **No file is OK to submit.** The TIFF this branch generated
+  (`docs/downloads/h34/gems27-h34-1-align-b2-20261031-8e61fd96ce99-allfinite.tif`) is a research artifact.
+- **Remaining work / limitations:** the uniqueness scope is still the 12 pinned rasters (not the 113 owner
+  repositories); no organizer receipt exists for any file; every historical value is OWNER-REPORTED; the lane
+  paragraph is still missing from the prompt; and the 2026-10-30 leaderboard snapshot is UNVERIFIED, so 0.4544,
+  0.4413 and 0.3195 must not be used for any estimate.

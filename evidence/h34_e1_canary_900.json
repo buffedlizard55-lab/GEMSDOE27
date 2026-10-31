@@ -1,0 +1,9 @@
+{
+  "experiment": "H34-1 E1 canary",
+  "seed": 900,
+  "n_pos": 11714,
+  "n_neg": 200000,
+  "auc": 0.4789251321068807,
+  "direction_invariant_auc": 0.5210748678931193,
+  "leakage_flag": false
+}

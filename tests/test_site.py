@@ -100,7 +100,11 @@ def test_research_and_manual_instructions_are_explicit():
     assert "has yet been run..<br>" not in research
     assert "no new lane has been assigned" in research.lower()
     sources = (DOCS / "sources.html").read_text()
-    assert "IR-2026-10-29-h28-6-stale-untried" in sources
+    # The sources page shows only the two most recent dated irregularity batches (build_site.py).
+    # Check the newest batch is displayed and the older record remains in the registry.
+    assert "IR-2026-10-31-lane-paragraph-missing" in sources
+    registry_ids = {x["id"] for x in json.loads((ROOT / "registry" / "irregularities.json").read_text())["items"]}
+    assert "IR-2026-10-29-h28-6-stale-untried" in registry_ids
     assert "IR-2026-10-28-06-pairwise-final-dot-screen" in (ROOT / "registry/irregularities.json").read_text()
     assert "dated snapshots, not a live leaderboard" in sources
     how = (DOCS / "how-to-submit.html").read_text()
