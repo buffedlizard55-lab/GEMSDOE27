@@ -1,0 +1,66 @@
+{
+  "experiment": "E1 H35-1 canary and pre-placement surface screen",
+  "label": "HOLDOUT-DTI instrument; canary AUC is direction-invariant",
+  "preregistration_sha256": "0df47b20d3b825d54543e77dc7b91e23e32aba827802fe4dc61c260420516f8b",
+  "seeds": [
+    930,
+    931,
+    932,
+    933,
+    934,
+    935,
+    936,
+    937,
+    938,
+    939
+  ],
+  "canary_wsc_score_auc": [
+    0.5211388796550372,
+    0.5211388796550372
+  ],
+  "canary_weak_response_auc": [
+    0.5393682476713147,
+    0.5393682476713147
+  ],
+  "canary_max_auc": 0.5393682476713147,
+  "leakage_stop_triggered": false,
+  "preplacement_surface_spearman_vs_12_peer_rasters_prob": {
+    "g24_d15": 0.11054178537022089,
+    "g25_d28": 0.09524093413678536,
+    "g27_tv2_d15": 0.11156802224139728,
+    "g28_h27_4_r1": 0.08843945815074385,
+    "g28_h32_1": 0.09205074870863834,
+    "g28_h36_1": 0.08567017440989882,
+    "g28_h38_1": 0.08593635953412862,
+    "g30_d28": 0.09524093413678536,
+    "g31_h27_4": 0.08843945815074385,
+    "g32_h33_2_b2": 0.0842615552222659,
+    "g33_h33d": 0.09023130350148015,
+    "g36_anderson": 0.08514780100876501
+  },
+  "preplacement_surface_spearman_vs_12_peer_rasters_wsc": {
+    "g24_d15": 0.05332908281390329,
+    "g25_d28": 0.045303408071890025,
+    "g27_tv2_d15": 0.053743027499456746,
+    "g28_h27_4_r1": 0.04185243412040789,
+    "g28_h32_1": 0.04441300369105241,
+    "g28_h36_1": 0.03905354468722315,
+    "g28_h38_1": 0.03916310394795936,
+    "g30_d28": 0.045303408071890025,
+    "g31_h27_4": 0.04185243412040789,
+    "g32_h33_2_b2": 0.03979973912081111,
+    "g33_h33d": 0.043052541091572166,
+    "g36_anderson": 0.04116186654295888
+  },
+  "max_abs_preplacement_surface_spearman": 0.11156802224139728,
+  "n_withheld_positive_occurrences": 53571,
+  "wsc_ridge_px": 704647,
+  "group_map_stats": {
+    "n_features": 1179,
+    "n_segments_rasterized": 15404,
+    "n_fids_on_catalogue": 411,
+    "median_catalogue_to_vector_px": 0.0,
+    "share_catalogue_within_3px": 1.0
+  },
+  "e1_pass": true
+}

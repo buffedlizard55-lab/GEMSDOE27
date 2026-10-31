@@ -1,0 +1,596 @@
+{
+  "all_arms": {
+    "B": {
+      "file": "gems27-h35-wsc-b-20261031-4884673ab249-allfinite.tif",
+      "max_registry_overlap": 0.4618367238540394,
+      "n_dots": 37654,
+      "sha256": "28c2da947189cddfcbc716841eb8666534cf04923a28a47899f349cc48e59ccd",
+      "unique_pass": false
+    },
+    "C0": {
+      "file": "gems27-h35-wsc-c0-20261031-da91e60d7d5e-allfinite.tif",
+      "max_registry_overlap": 0.474726528072995,
+      "n_dots": 38578,
+      "sha256": "bc39da6dee60cb25c5b85a47f1ce711f9fafd9797407ededa52fbeb36035c953",
+      "unique_pass": false
+    },
+    "C1": {
+      "file": "gems27-h35-wsc-c1-20261031-fb8c1dbccbb7-allfinite.tif",
+      "max_registry_overlap": 0.46674988049078453,
+      "n_dots": 37654,
+      "sha256": "48b210bca546f6935d247c6d718dd2903411518db738153e5441194542df731e",
+      "unique_pass": true
+    }
+  },
+  "architecture_gate_C0_vs_B_passed": true,
+  "canary_hidden_set": {
+    "direction_a_b": {
+      "cond_surf": 0.5230364265862444,
+      "depth_to_base_surf": 0.511521882938282,
+      "deq_n100a15": 0.5527968957442626,
+      "det_elev": 0.5067097961871374,
+      "det_elev_slope": 0.5619405381709862,
+      "det_gradient": 0.5779654645284155,
+      "det_local_relief": 0.5827297512619432,
+      "geod_2ndinv": 0.5777948479094599,
+      "geod_dilaterate": 0.5327526282884346,
+      "geod_shearrate": 0.5799429450781927,
+      "ieq_n100a15": 0.5727163473883373,
+      "iso_grav_anom": 0.5373871473773407,
+      "iso_grav_anom_hg": 0.5102237415681103,
+      "iso_grav_anom_slope": 0.531382641579724,
+      "iso_grav_anom_vg": 0.5274140690178304,
+      "lidar_coh100": 0.5241490725703677,
+      "lidar_cos2strike": 0.5320289795000148,
+      "lidar_cross_max": 0.5762913563712752,
+      "lidar_downface_max": 0.5822820273601699,
+      "lidar_ex_max": 0.5706867309015488,
+      "lidar_ex_mean": 0.5584290494610218,
+      "lidar_lapneg_max": 0.5765902503472385,
+      "lidar_lappos_max": 0.5805874209693974,
+      "lidar_relief": 0.571181574661474,
+      "lidar_sin2strike": 0.5132824554788584,
+      "lidar_step_max": 0.5729161769586293,
+      "lidar_upface_max": 0.5880247234817917,
+      "mag_anom": 0.5142728076899843,
+      "rtp": 0.5050948233541439,
+      "sub0": 0.5382388441723289,
+      "sub1": 0.5416222052564772,
+      "sub10": 0.563490188157993,
+      "sub11": 0.547401669155529,
+      "sub12": 0.5270377587172403,
+      "sub13": 0.5078121821100575,
+      "sub14": 0.5062182218323005,
+      "sub2": 0.5044258821772567,
+      "sub3": 0.5382429323153887,
+      "sub4": 0.5372540353169566,
+      "sub5": 0.541208421750168,
+      "sub6": 0.5317888577988501,
+      "sub7": 0.5080293302471441,
+      "sub8": 0.5315356624729337,
+      "sub9": 0.5284072377361309,
+      "tmi": 0.5169426471603077,
+      "tmi_hg": 0.5342525975241583,
+      "tmi_vg": 0.5111605380924391
+    },
+    "direction_b_a": {
+      "cond_surf": 0.5273593690284326,
+      "depth_to_base_surf": 0.5070912092493312,
+      "deq_n100a15": 0.5541252698858855,
+      "det_elev": 0.5035096842969582,
+      "det_elev_slope": 0.5634078662647046,
+      "det_gradient": 0.5794239681023778,
+      "det_local_relief": 0.5865685182900142,
+      "geod_2ndinv": 0.5788821398925185,
+      "geod_dilaterate": 0.5353201854646742,
+      "geod_shearrate": 0.5811587919644767,
+      "ieq_n100a15": 0.5732890270109969,
+      "iso_grav_anom": 0.5361105432414952,
+      "iso_grav_anom_hg": 0.5085719590922186,
+      "iso_grav_anom_slope": 0.5289445387027103,
+      "iso_grav_anom_vg": 0.5291809112966785,
+      "lidar_coh100": 0.5215076567015161,
+      "lidar_cos2strike": 0.5252825975657649,
+      "lidar_cross_max": 0.5754135164519223,
+      "lidar_downface_max": 0.5825990138443157,
+      "lidar_ex_max": 0.5705915283172135,
+      "lidar_ex_mean": 0.5564406227730857,
+      "lidar_lapneg_max": 0.5761340520669284,
+      "lidar_lappos_max": 0.580995537571843,
+      "lidar_relief": 0.5713313675413066,
+      "lidar_sin2strike": 0.5152806523535511,
+      "lidar_step_max": 0.571116370661887,
+      "lidar_upface_max": 0.5899481121025543,
+      "mag_anom": 0.512180037024339,
+      "rtp": 0.5048831702416752,
+      "sub0": 0.5403050847489267,
+      "sub1": 0.5442163203285422,
+      "sub10": 0.563577878663431,
+      "sub11": 0.5488352452865409,
+      "sub12": 0.5293985014000373,
+      "sub13": 0.5059426516707112,
+      "sub14": 0.5069022936344969,
+      "sub2": 0.5000144127310062,
+      "sub3": 0.5403089854396117,
+      "sub4": 0.534169404890797,
+      "sub5": 0.5386699975732687,
+      "sub6": 0.528074019973866,
+      "sub7": 0.5095793483292889,
+      "sub8": 0.5266096951652044,
+      "sub9": 0.5240514177711406,
+      "tmi": 0.5153299794263928,
+      "tmi_hg": 0.5350527945452205,
+      "tmi_vg": 0.5138508136325403
+    },
+    "evaluator": "gems27.metric.dti_binary v1 (alpha=0.2, beta=0.8, R=3px triangular) + whole-FID buffered holdout (buffer_px=6)",
+    "label": "direction-invariant 47-input canary (held-out evaluation labels)",
+    "max_auc": 0.5899481121025543,
+    "max_auc_feature": "lidar_upface_max [direction_b_a]",
+    "n_features": 47,
+    "pass": true,
+    "stop_auc": 0.9
+  },
+  "download_decision_reasons": [
+    "the WSC hypothesis gate (C1 vs C0) failed",
+    "the registry uniqueness gate failed",
+    "local drift stop: 84.8% of dots within 3 px of gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-allfinite.tif (limit 70%)",
+    "the primary file has no positive paired gain over its own control"
+  ],
+  "evidence": {
+    "e1": "h35_e1_canary_and_surface_930_939.json",
+    "e2": "h35_e2_holdout_930_939.json"
+  },
+  "holdout": {
+    "all_model_features_canary_tested": true,
+    "architecture_gate_C0_vs_B": {
+      "ci95": [
+        0.0008361738993665764,
+        0.0017684507523532036
+      ],
+      "fold_ids_unused_here": 3,
+      "gate_efficacy_pass": true,
+      "mean_seed_paired_delta_dti": 0.001297197235802315,
+      "n_folds": 4,
+      "n_seeds": 10,
+      "per_fold_pooled_delta_dti": {
+        "NE_LidarGapHeavy": -0.0003137412898977926,
+        "NW": 0.00018332826136050612,
+        "SE": 0.0016430494324689848,
+        "SW": 0.00246146030742736
+      },
+      "per_seed_pooled_delta_dti": [
+        0.001427974592287086,
+        0.000501724913737539,
+        0.0007928728795475251,
+        0.00011838989350191481,
+        0.0005903290453473306,
+        0.0015787009519061812,
+        0.0025296931778186274,
+        0.001518747730044942,
+        0.0023418479085252006,
+        0.0015716912653068044
+      ],
+      "pooled_delta_dti": 0.0013071857433714848,
+      "positive_folds": 3,
+      "positive_seeds": 10
+    },
+    "canary_all_features_max_auc": 0.5899481121025543,
+    "canary_max_auc": 0.5899481121025543,
+    "current_best_comparison": {
+      "control_id": "ar-md-b2-38k-30band-h29xg-3e5b45e9 (arm-D base emission = arm B)",
+      "paired_delta_ci95": [
+        0.0008361738993665764,
+        0.0017684507523532036
+      ],
+      "pooled_delta": 0.0013071857433714848,
+      "same_splits_and_buffer": true
+    },
+    "emitter_blind_to_hidden_and_buffer": true,
+    "evaluator": "gems27.metric.dti_binary v1 (alpha=0.2, beta=0.8, R=3px triangular) + whole-FID buffered holdout (buffer_px=6)",
+    "full_kernel_scored": true,
+    "gate_efficacy_pass": false,
+    "hypothesis_gate_C1_vs_C0": {
+      "ci95": [
+        -0.008458495424404633,
+        -0.0029856207804148716
+      ],
+      "fold_ids_unused_here": 3,
+      "gate_efficacy_pass": false,
+      "mean_seed_paired_delta_dti": -0.005817978462699922,
+      "n_folds": 4,
+      "n_seeds": 10,
+      "per_fold_pooled_delta_dti": {
+        "NE_LidarGapHeavy": -0.004304110700324278,
+        "NW": 0.0013863695309173224,
+        "SE": -0.01543470999883935,
+        "SW": -0.0026310393107000993
+      },
+      "per_seed_pooled_delta_dti": [
+        -0.00805561814179371,
+        -0.0030953825567336286,
+        -0.006863481071454666,
+        0.0016460959923374277,
+        -0.0065652831848100265,
+        -0.008995171411603421,
+        -0.011927560936502837,
+        -0.0042672036745312475,
+        -0.011245905042297263,
+        0.0011897254003901472
+      ],
+      "pooled_delta_dti": -0.0059126397645617515,
+      "positive_folds": 1,
+      "positive_seeds": 2
+    },
+    "label": "HOLDOUT-DTI",
+    "matched_current_best_comparison": true,
+    "n_withheld_positives_total": 122579,
+    "paired_C0_minus_B": {
+      "ci95": [
+        0.0008361738993665764,
+        0.0017684507523532036
+      ],
+      "fold_ids_unused_here": 3,
+      "mean_seed_paired_delta_dti": 0.001297197235802315,
+      "n_seeds": 10,
+      "per_seed_pooled_delta_dti": [
+        0.001427974592287086,
+        0.000501724913737539,
+        0.0007928728795475251,
+        0.00011838989350191481,
+        0.0005903290453473306,
+        0.0015787009519061812,
+        0.0025296931778186274,
+        0.001518747730044942,
+        0.0023418479085252006,
+        0.0015716912653068044
+      ],
+      "pooled_delta_dti": 0.0013071857433714848,
+      "positive_seeds": 10
+    },
+    "paired_C1_minus_C0": {
+      "ci95": [
+        -0.008458495424404633,
+        -0.0029856207804148716
+      ],
+      "fold_ids_unused_here": 3,
+      "mean_seed_paired_delta_dti": -0.005817978462699922,
+      "n_seeds": 10,
+      "per_seed_pooled_delta_dti": [
+        -0.00805561814179371,
+        -0.0030953825567336286,
+        -0.006863481071454666,
+        0.0016460959923374277,
+        -0.0065652831848100265,
+        -0.008995171411603421,
+        -0.011927560936502837,
+        -0.0042672036745312475,
+        -0.011245905042297263,
+        0.0011897254003901472
+      ],
+      "pooled_delta_dti": -0.0059126397645617515,
+      "positive_seeds": 2
+    },
+    "paired_candidate_minus_B": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "mean_delta": 0.0,
+      "note": "primary arm B is the matched control itself"
+    },
+    "pooled_B": 0.041917658550667695,
+    "pooled_C0": 0.04322484429403918,
+    "pooled_C1": 0.03731220452947743,
+    "pooled_arm_B": 0.041917658550667695,
+    "pooled_arm_C0": 0.04322484429403918,
+    "pooled_arm_C1": 0.03731220452947743,
+    "pooled_candidate": 0.041917658550667695,
+    "pooled_control_B": 0.041917658550667695,
+    "pooled_delta_candidate_minus_B": 0.0,
+    "seeds": [
+      930,
+      931,
+      932,
+      933,
+      934,
+      935,
+      936,
+      937,
+      938,
+      939
+    ],
+    "split_scheme": "whole-fid-segment-v1",
+    "training_buffer_verified": true,
+    "visible_only_catalogue_features": true
+  },
+  "hypothesis": "weak-scarp continuity (WSC) augmentation of the arm-D emission (candidate pool = detector ridges OR WSC ridges, priority = prob + 0.5*wsc_pct)",
+  "hypothesis_gate_passed": false,
+  "hypothesis_id": "H35-1",
+  "layers": [
+    "lidar_scarp_features_u8.tif step_max (band 3)",
+    "lappos_max (band 5)",
+    "ex_max (band 1)"
+  ],
+  "mechanism": "orientation-coherent weak-moderate-amplitude LiDAR scarp continuity supplies ridge candidates the corroborated-ridge family never emitted on",
+  "named_non_fault_mimic": "lithologic dip slopes and hogbacks, fluvial terrace risers, Lake Lahontan shoreline strandlines, avalanche chutes, graded-road berms",
+  "note_length": 83,
+  "note_max_140_chars": "27GEMSDOE H35-1 WSC B HOLDOUT-DTI 0.0419 vs 0.0419 id 4884673ab249 NOT OK TO SUBMIT",
+  "ok_to_submit": false,
+  "ok_to_submit_reason": "H35-1 verdict negative. WSC hypothesis C1 0.037312 vs architecture arm C0 0.043225 (delta -0.005913; gate failed). C0 (arm-D + T-v2) beat base arm B 0.043225 vs 0.041918 (delta +0.001307, gate passed) but is not new work: 84.8% of its dots lie within 3 px of gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-allfinite.tif and 83% of the scored sibling gems27-h32-poisson-demag-b2 (drift stop 70%). Frozen file-choice rule therefore writes primary = arm B (gems27-h35-wsc-b-20261031-4884673ab249-allfinite.tif); nothing is approved to submit this session.",
+  "organizer_score_estimate": null,
+  "preregistration_sha256": "0df47b20d3b825d54543e77dc7b91e23e32aba827802fe4dc61c260420516f8b",
+  "projection_written_as_score": false,
+  "publication_decision": {
+    "actual_sha256": "28c2da947189cddfcbc716841eb8666534cf04923a28a47899f349cc48e59ccd",
+    "independent_byte_validation": {
+      "checks": {
+        "catalogue_cells_zero": true,
+        "grid": true,
+        "no_nodata_tag": true,
+        "outside_footprint_zero": true,
+        "reference_grids_match": true,
+        "single_band_float32_geotiff": true,
+        "whole_array_finite_in_0_1": true,
+        "whole_array_unmasked": true
+      },
+      "pass": true
+    },
+    "ok_to_publish_as_submission": false,
+    "reasons": [
+      "run card does not authorize submission",
+      "verdict is not promote",
+      "efficacy gate not explicitly passed",
+      "paired improvement CI missing or does not exclude zero",
+      "uniqueness gate not passed",
+      "all-finite validator missing required checks or failed"
+    ],
+    "scope": "Recorded evidence audit only; selector and current-registry recheck still required",
+    "slot_authorized": false
+  },
+  "publication_gate_harmonized_utc": "2026-10-31",
+  "raster": {
+    "content_id": "4884673ab249",
+    "directory": "docs/downloads/research",
+    "file": "gems27-h35-wsc-b-20261031-4884673ab249-allfinite.tif",
+    "n_dots": 37654,
+    "nan_file": "gems27-h35-wsc-b-20261031-4884673ab249-nan.tif",
+    "nan_sha256": "56cd677be4edaa82349dc3b48660b6937da96b409279ddfcc524053aaf2417f2",
+    "path": "docs/downloads/research/gems27-h35-wsc-b-20261031-4884673ab249-allfinite.tif",
+    "primary_allfinite": "gems27-h35-wsc-b-20261031-4884673ab249-allfinite.tif",
+    "primary_arm": "B",
+    "primary_label": "base arm B (arm-D emission); no hypothesis gate passed",
+    "sha256": "28c2da947189cddfcbc716841eb8666534cf04923a28a47899f349cc48e59ccd",
+    "validator_allfinite": {
+      "bytes": 826218,
+      "checks": {
+        "compression_like_sample": {
+          "detail": "Compression.lzw",
+          "hard": false,
+          "pass": true
+        },
+        "grid_matches_template": {
+          "detail": "candidate=(CRS.from_wkt('PROJCS[\"WGS 84 / UTM zone 11N\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Transverse_Mercator\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-117],PARAMETER[\"scale_factor\",0.9996],PARAMETER[\"false_easting\",500000],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"32611\"]]'), (3730, 3292), (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0), (243350.0, 4135550.0, 572550.0, 4508550.0)); template=(CRS.from_wkt('PROJCS[\"WGS 84 / UTM zone 11N\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Transverse_Mercator\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-117],PARAMETER[\"scale_factor\",0.9996],PARAMETER[\"false_easting\",500000],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"32611\"]]'), (3730, 3292), (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0), (243350.0, 4135550.0, 572550.0, 4508550.0))",
+          "hard": true,
+          "pass": true
+        },
+        "inside_footprint_all_finite": {
+          "detail": "0 non-finite inside 5167373 px",
+          "hard": true,
+          "pass": true
+        },
+        "inside_footprint_in_0_1": {
+          "detail": "min=0 max=1",
+          "hard": true,
+          "pass": true
+        },
+        "no_infinities_anywhere": {
+          "detail": "np.isinf(whole array) is empty",
+          "hard": true,
+          "pass": true
+        },
+        "outside_footprint_is_zero_and_finite": {
+          "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+          "hard": true,
+          "pass": true
+        },
+        "profile_driver_gtiff": {
+          "detail": "GTiff",
+          "hard": false,
+          "pass": true
+        },
+        "single_band_float32": {
+          "detail": "count=1 dtype=float32",
+          "hard": true,
+          "pass": true
+        },
+        "strict_whole_array_range": {
+          "detail": "whole-array min=0 max=1",
+          "hard": true,
+          "pass": true
+        }
+      },
+      "file": "gems27-h35-wsc-b-20261031-4884673ab249-allfinite.tif",
+      "hard_checks_passed": true,
+      "hard_failures": [],
+      "nonzero_inside_px": 37654,
+      "sha256": "28c2da947189cddfcbc716841eb8666534cf04923a28a47899f349cc48e59ccd",
+      "value_set_inside": [
+        0.0,
+        1.0
+      ],
+      "variant": "allfinite"
+    },
+    "validator_nan": {
+      "bytes": 1590448,
+      "checks": {
+        "compression_like_sample": {
+          "detail": "Compression.lzw",
+          "hard": false,
+          "pass": true
+        },
+        "grid_matches_template": {
+          "detail": "candidate=(CRS.from_wkt('PROJCS[\"WGS 84 / UTM zone 11N\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Transverse_Mercator\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-117],PARAMETER[\"scale_factor\",0.9996],PARAMETER[\"false_easting\",500000],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"32611\"]]'), (3730, 3292), (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0), (243350.0, 4135550.0, 572550.0, 4508550.0)); template=(CRS.from_wkt('PROJCS[\"WGS 84 / UTM zone 11N\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Transverse_Mercator\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-117],PARAMETER[\"scale_factor\",0.9996],PARAMETER[\"false_easting\",500000],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"32611\"]]'), (3730, 3292), (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0), (243350.0, 4135550.0, 572550.0, 4508550.0))",
+          "hard": true,
+          "pass": true
+        },
+        "inside_footprint_all_finite": {
+          "detail": "0 non-finite inside 5167373 px",
+          "hard": true,
+          "pass": true
+        },
+        "inside_footprint_in_0_1": {
+          "detail": "min=0 max=1",
+          "hard": true,
+          "pass": true
+        },
+        "masked_read_in_0_1": {
+          "detail": "masked count=5167373, min=0, max=1",
+          "hard": true,
+          "pass": true
+        },
+        "nan_aware_range_in_0_1": {
+          "detail": "nanmin=0 nanmax=1",
+          "hard": true,
+          "pass": true
+        },
+        "no_infinities_anywhere": {
+          "detail": "np.isinf(whole array) is empty",
+          "hard": true,
+          "pass": true
+        },
+        "nodata_tag_is_nan": {
+          "detail": "nodata=NaN declared, same as the sample submission",
+          "hard": true,
+          "pass": true
+        },
+        "outside_footprint_is_nan": {
+          "detail": "7111787/7111787 NaN outside the footprint (as in the sample)",
+          "hard": true,
+          "pass": true
+        },
+        "profile_driver_gtiff": {
+          "detail": "GTiff",
+          "hard": false,
+          "pass": true
+        },
+        "single_band_float32": {
+          "detail": "count=1 dtype=float32",
+          "hard": true,
+          "pass": true
+        },
+        "strict_whole_array_range_ignoring_nan_is_informational": {
+          "detail": "A validator that compares NaN directly would fail ANY file with NaN outside the footprint, including the sample. Informational only; use the allfinite fallback if the portal rejects.",
+          "hard": false,
+          "pass": false
+        }
+      },
+      "file": "gems27-h35-wsc-b-20261031-4884673ab249-nan.tif",
+      "hard_checks_passed": true,
+      "hard_failures": [],
+      "nonzero_inside_px": 37654,
+      "sha256": "56cd677be4edaa82349dc3b48660b6937da96b409279ddfcc524053aaf2417f2",
+      "value_set_inside": [
+        0.0,
+        1.0
+      ],
+      "variant": "nan"
+    },
+    "zip": "gems27-h35-wsc-b-20261031-4884673ab249-allfinite.zip"
+  },
+  "schema": "parallel-run-card-v2",
+  "slot_authorized": false,
+  "submission_name": "27GEMSDOE-H35-B-20261031-4884673ab249",
+  "uniqueness_scope": {
+    "all_registry_entries_checked": true,
+    "local_prior_rasters_checked": 22,
+    "registry_entries_checked": 12,
+    "scope_note": "pinned parallel-run registry plus local docs/downloads *allfinite.tif; not a global inventory"
+  },
+  "uniqueness_vs_registry": {
+    "all_registry_entries_checked": true,
+    "local_overlap": {
+      "max_dot_overlap_within_3px": 0.8476921442609019,
+      "n_local_rasters": 22,
+      "pass": false,
+      "worst": [
+        {
+          "dot_fraction_within_3px": 0.8476921442609019,
+          "file": "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-allfinite.tif"
+        },
+        {
+          "dot_fraction_within_3px": 0.8421947203484358,
+          "file": "gems27-h28-3-strain-conductivity-negative-research-20261025-27d6875f3b22-allfinite.tif"
+        },
+        {
+          "dot_fraction_within_3px": 0.8351303978328996,
+          "file": "gems27-dconfirm-hybrid-armd-b2-38k-20261025-5ea0385b7e70-allfinite.tif"
+        },
+        {
+          "dot_fraction_within_3px": 0.8340946512986668,
+          "file": "gems27-h29-1-drefill-b2-38k-20261025-c24b6371179c-allfinite.tif"
+        },
+        {
+          "dot_fraction_within_3px": 0.8307218356615499,
+          "file": "gems27-h32-poisson-demag-b2-20261026-1ac69a77008d-allfinite.tif"
+        }
+      ]
+    },
+    "max_dot_overlap_within_3px_euclidean": 0.4618367238540394,
+    "max_postplacement_dot_spearman": 0.03702659580863415,
+    "max_surface_spearman": 0.11156802224139728,
+    "pass": false,
+    "scope_current_and_complete": true
+  },
+  "validator": {
+    "report": {
+      "parse_error": true,
+      "stdout_tail": ""
+    },
+    "zeros_checks": {
+      "grid_matches_template": {
+        "hard": true,
+        "pass": false
+      },
+      "inside_footprint_all_finite": {
+        "hard": true,
+        "pass": false
+      },
+      "inside_footprint_in_0_1": {
+        "hard": true,
+        "pass": false
+      },
+      "no_infinities_anywhere": {
+        "hard": true,
+        "pass": false
+      },
+      "outside_footprint_is_zero_and_finite": {
+        "hard": true,
+        "pass": false
+      },
+      "single_band_float32": {
+        "hard": true,
+        "pass": false
+      },
+      "strict_whole_array_range": {
+        "hard": true,
+        "pass": false
+      }
+    },
+    "zeros_hard_pass": false
+  },
+  "validator_output": {
+    "actual_sha256": "28c2da947189cddfcbc716841eb8666534cf04923a28a47899f349cc48e59ccd",
+    "all_seven_hard_checks_pass": false,
+    "h35_primary_allfinite_sha256_match": true,
+    "independent_byte_validation": {
+      "pass": false,
+      "tool": "scripts/submission_writer.py"
+    },
+    "report": {
+      "parse_error": true,
+      "stdout_tail": ""
+    }
+  },
+  "verdict": "negative",
+  "verdict_note": "H35-1 verdict negative. WSC hypothesis C1 0.037312 vs architecture arm C0 0.043225 (delta -0.005913; gate failed). C0 (arm-D + T-v2) beat base arm B 0.043225 vs 0.041918 (delta +0.001307, gate passed) but is not new work: 84.8% of its dots lie within 3 px of gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-allfinite.tif and 83% of the scored sibling gems27-h32-poisson-demag-b2 (drift stop 70%). Frozen file-choice rule therefore writes primary = arm B (gems27-h35-wsc-b-20261031-4884673ab249-allfinite.tif); nothing is approved to submit this session."
+}
