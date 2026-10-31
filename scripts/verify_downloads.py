@@ -482,6 +482,48 @@ def main() -> int:
            and rc313["holdout"]["gate_efficacy_pass"] is False,
            "h31_3/gate-consistency: verdict=negative ok_to_submit=False (DO NOT SUBMIT)")
 
+    # ---- Session 21 H34-1 positive-proxy research artifact (must stay NOT approved) ----
+    # The catalogue-internal proxy beats its gravity-only control, but the repository publication
+    # gate is not met (component split, gravity-only control, 12-raster scope). NOT OK TO SUBMIT.
+    h34_card_path = ROOT / "evidence" / "h34_run_card_2026-10-31.json"
+    if h34_card_path.exists():
+        rc34 = json.loads(h34_card_path.read_text())
+        r34 = rc34["raster"]
+        d34 = ROOT / r34["directory"]
+        p34 = d34 / r34["primary_allfinite"]
+        with rasterio.open(p34) as s34:
+            a34 = s34.read(1)
+            prof34 = (s34.crs.to_epsg(), s34.shape, tuple(s34.transform)[:6], s34.dtypes[0])
+            nd34, cnt34 = s34.nodata, s34.count
+        ok(prof34 == tprof, "h34/allfinite: same CRS/shape/transform/dtype as template")
+        ok(cnt34 == 1, "h34/allfinite: single band")
+        in34, out34 = a34[foot], a34[~foot]
+        ok(bool(np.isfinite(in34).all()), "h34/allfinite: every in-footprint value finite")
+        ok(float(in34.min()) >= 0.0 and float(in34.max()) <= 1.0, "h34/allfinite: in-footprint range in [0,1]")
+        ok(set(np.unique(in34).tolist()) <= {0.0, 1.0}, "h34/allfinite: exact binary")
+        ok(int((in34 == 1.0).sum()) == rc34["emitted_px"],
+           f"h34/allfinite: emitted {rc34['emitted_px']} dots")
+        ok(not bool((a34 == 1.0)[cat].any()), "h34/allfinite: 0 catalogue overlap")
+        ok(bool(np.isfinite(a34).all() and (out34 == 0.0).all() and nd34 is None),
+           "h34/allfinite: all cells finite in [0,1], zeros outside, nodata=None")
+        ok(sha(p34) == r34["sha256"], "h34/allfinite: sha256 matches H34-1 run card")
+        v34 = rc34["validator"]["zeros_checks"]
+        ok(all(v34[k]["pass"] for k in ("grid_matches_template", "single_band_float32",
+                                        "inside_footprint_all_finite", "inside_footprint_in_0_1",
+                                        "no_infinities_anywhere", "outside_footprint_is_zero_and_finite",
+                                        "strict_whole_array_range")),
+           "h34/validator: all hard all-finite checks pass")
+        u34 = rc34["uniqueness_vs_registry"]
+        ok(u34["pass"] and u34["max_dot_overlap_within_3px_euclidean"] <= 0.70
+           and u34["max_surface_spearman"] <= 0.90,
+           "h34/uniqueness: unique vs the 12 pinned rasters (max 3 px overlap <= 0.70)")
+        ok(rc34["holdout"]["gate_efficacy_pass"] is True
+           and rc34["holdout"]["paired_candidate_minus_B"]["ci95"][0] > 0.0,
+           "h34/efficacy: positive catalogue-internal proxy (paired CI excludes zero)")
+        ok(rc34["verdict"] == "negative" and rc34["ok_to_submit"] is False
+           and rc34["holdout"]["split_scheme"] != "whole-fid-segment-v1",
+           "h34/gate-consistency: verdict=negative ok_to_submit=False (DO NOT SUBMIT)")
+
     print(f"\n{len(FAIL)} failure(s)")
     return 1 if FAIL else 0
 

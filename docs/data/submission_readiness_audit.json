@@ -489,6 +489,34 @@
       "slot_authorized": false,
       "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
     },
+    "h34_run_card_2026-10-31.json": {
+      "ok_to_publish_as_submission": false,
+      "reasons": [
+        "run card does not authorize submission",
+        "verdict is not promote",
+        "whole-FID split evidence missing",
+        "not all input features have canaries",
+        "current-best matched control not proven",
+        "post-placement correlation missing or exceeds threshold",
+        "current, complete comparison scope not proven"
+      ],
+      "actual_sha256": "ea8a36a48f192333f5da281ffe649e88497a36af49c57088ef18d036f8dc16c2",
+      "independent_byte_validation": {
+        "pass": true,
+        "checks": {
+          "reference_grids_match": true,
+          "grid": true,
+          "single_band_float32_geotiff": true,
+          "no_nodata_tag": true,
+          "whole_array_unmasked": true,
+          "whole_array_finite_in_0_1": true,
+          "outside_footprint_zero": true,
+          "catalogue_cells_zero": true
+        }
+      },
+      "slot_authorized": false,
+      "scope": "Recorded evidence audit only; selector and current-registry recheck still required"
+    },
     "lane_run_card_2026-10-25.json": {
       "ok_to_publish_as_submission": false,
       "reasons": [
