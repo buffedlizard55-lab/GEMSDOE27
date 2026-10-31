@@ -215,6 +215,124 @@ def h33_summary() -> tuple[str, str]:
     return html_block, f"**H33-1 generated TIFF — NOT OK TO SUBMIT.** {detail} {gate_text} {file_note}"
 
 
+def h35_summary() -> tuple[str, str]:
+    """Verdict + download block for the 2026-10-31 H35 lane (card-driven; honours ok_to_submit)."""
+    card = read("evidence/h35_run_card_2026-10-31.json")
+    if not card:
+        return "", ""
+    hold = card.get("holdout") or {}
+    uniq = card.get("uniqueness_vs_registry") or {}
+    raster = card.get("raster") or {}
+    ok = bool(card.get("ok_to_submit") is True and card.get("verdict") == "promote")
+    green = "#1a7f37" if ok else "#cf222e"
+    title = ("OK TO DOWNLOAD AND SUBMIT — H35 primary file passes every local gate"
+             if ok else "NOT OK TO SUBMIT — H35 result")
+    hyp = card.get("hypothesis_gate_passed")
+    arch = card.get("architecture_gate_C0_vs_B_passed")
+    pair = hold.get("current_best_comparison") or {}
+    ci = (hold.get("paired_candidate_minus_B") or {}).get("ci95") or []
+    ci_text = (f"paired 95% CI [{ci[0]:+.6f}, {ci[1]:+.6f}]" if len(ci) == 2
+               else "paired CI unavailable")
+    detail = (
+        f"Primary arm {raster.get('primary_arm', 'unknown')} ({raster.get('primary_label', '')}); "
+        f"{raster.get('n_dots', 'unknown')} dots. HOLDOUT-DTI {hold.get('pooled_candidate', 0):.6f} vs "
+        f"matched control {hold.get('pooled_control_B', 0):.6f} ({pair.get('control_id', 'unknown')}); "
+        f"{ci_text}; {hold.get('n_withheld_positives_total', 'n/a')} withheld-positive occurrences; "
+        f"seeds 930–939; evaluator {hold.get('evaluator', 'n/a')}. "
+        f"Hypothesis gate (C1 WSC vs C0): {'passed' if hyp else 'FAILED'}. "
+        f"Architecture gate (C0 T-v2 vs B): {'passed' if arch else 'FAILED'}. "
+        f"Leakage canary max AUC {hold.get('canary_max_auc', 'n/a')} (all-input max "
+        f"{hold.get('canary_all_features_max_auc', 'n/a')}; stop 0.90). "
+        f"Uniqueness vs 12 pinned rasters: max directed 3-px overlap "
+        f"{uniq.get('max_dot_overlap_within_3px_euclidean', 'n/a')} (stop 0.70); max |surface rho| "
+        f"{uniq.get('max_surface_spearman', 'n/a')}; max |dot rho| "
+        f"{uniq.get('max_postplacement_dot_spearman', 'n/a')} (stop 0.90). "
+        "Every number here is HOLDOUT-DTI, not an organizer score; no projection is written as a score."
+    )
+    reason = card.get("ok_to_submit_reason") or card.get("verdict_note") or ""
+    name = card.get("submission_name", "")
+    note = card.get("note_max_140_chars", "")
+    file_name = raster.get("primary_allfinite") or raster.get("file") or ""
+    zip_name = raster.get("zip") or ""
+    sha = raster.get("sha256", "")
+    if file_name:
+        href = f"downloads/research/{file_name}"
+        btn = ("⬇ Download submission GeoTIFF" if ok
+               else "⬇ Download research GeoTIFF — NOT APPROVED FOR SUBMISSION")
+        download = (
+            f'<p><a class="btn" href="{esc(href)}" download>{btn} '
+            f'({esc(file_name)})</a> '
+            + (f'<a class="btn alt" href="downloads/research/{esc(zip_name)}" download>ZIP (one GeoTIFF)</a> '
+               if zip_name else "")
+            + f'<a class="btn alt" href="downloads/research/{esc(raster.get("nan_file", ""))}" download>NaN-outside variant</a></p>'
+        )
+    else:
+        download = "<p>No GeoTIFF was written.</p>"
+    file_note = (
+        f"Use this exact file name when uploading: `{name}`. "
+        f"Submission note (copy into the Note field, {len(note)} of 140 chars): "
+        f"`{note}`. SHA-256 `{sha}`. "
+        f"The all-finite variant has zeros outside the footprint and finite values in [0,1] everywhere, "
+        f"so it passes the portal's strict “Predicted values must be in range [0, 1]” check."
+    )
+    html_block = (
+        f'<div class="card" id="h35-verdict" style="border-left:5px solid {green}">'
+        f'<h2 style="margin-top:0">{"✅" if ok else "⛔"} {esc(title)}</h2>'
+        f'<p>{esc(detail)}</p><p><b>{esc(reason)}</b> '
+        f'<a href="{repo_link("evidence/h35_run_card_2026-10-31.json")}">H35-1 run card</a> · '
+        f'<a href="{repo_link("knowledge/45_preregistration_H35_2026-10-31.md")}">preregistration</a> · '
+        f'<a href="{repo_link("knowledge/46_h35_result_2026-10-31.md")}">result note</a>.</p>'
+        f'{download}<p class="small">{esc(file_note)}</p></div>'
+    )
+    md = (
+        f"**H35-1 (2026-10-31) — {title}.** {detail} {reason} "
+        f"File: `{file_name}`; name `{name}`; note `{note}`; SHA-256 `{sha}`. {file_note}"
+    )
+    return html_block, md
+
+
+def h35_row() -> dict | None:
+    """Decision-table row for the H35 primary file (card-driven)."""
+    card = read("evidence/h35_run_card_2026-10-31.json")
+    if not card:
+        return None
+    hold = card.get("holdout") or {}
+    uniq = card.get("uniqueness_vs_registry") or {}
+    raster = card.get("raster") or {}
+    ok = bool(card.get("ok_to_submit") is True and card.get("verdict") == "promote")
+    ci = (hold.get("paired_candidate_minus_B") or {}).get("ci95") or []
+    ci_text = f", paired 95% CI [{ci[0]:+.6f}, {ci[1]:+.6f}]" if len(ci) == 2 else ""
+    estimate = (
+        f"HOLDOUT-DTI {hold.get('pooled_candidate', 0):.6f} vs control {hold.get('pooled_control_B', 0):.6f}"
+        f"{ci_text}; {hold.get('n_withheld_positives_total', 'n/a')} withheld-positive occurrences; "
+        f"seeds 930–939. Organizer score: none (no leaderboard estimate is computable)."
+    )
+    unique = (
+        f"YES within scope: max directed 3-px overlap {uniq.get('max_dot_overlap_within_3px_euclidean', 'n/a')} "
+        f"vs the 12 pinned rasters (stop 0.70); |surface rho| max {uniq.get('max_surface_spearman', 'n/a')}; "
+        f"|dot rho| max {uniq.get('max_postplacement_dot_spearman', 'n/a')} (stop 0.90); local all-finite "
+        f"rasters max {uniq.get('local_overlap', {}).get('max_dot_overlap_within_3px', 'n/a')}. "
+        "Pinned + local scope only; not a global inventory."
+    )
+    file_name = raster.get("primary_allfinite") or raster.get("file") or ""
+    if file_name:
+        file_cell = (
+            f'<a href="downloads/research/{esc(file_name)}" download>{esc(file_name)}</a>'
+            f'<br><span class="small">SHA-256 {esc(raster.get("sha256", ""))}</span>'
+        )
+        file_md = f"[`{file_name}`](downloads/research/{file_name}) SHA-256 `{raster.get('sha256', '')}`"
+    else:
+        file_cell = "None - no valid TIFF was written for download."
+        file_md = file_cell
+    if ok:
+        verdict = "OK TO DOWNLOAD AND SUBMIT - every local gate passed; you (the selector) confirm the weekly slot."
+    else:
+        verdict = f"NOT OK TO SUBMIT - {card.get('verdict_note') or card.get('ok_to_submit_reason') or 'a gate failed'}"
+    return {"label": "GEMSDOE27 H35-1 WSC + T-v2 + arm-D emission (new, 2026-10-31)",
+            "file_cell": file_cell, "file_md": file_md, "estimate": estimate,
+            "unique": unique, "ok": verdict}
+
+
 NINE_SITE_UNIQUENESS = {
     "GEMSDOE25": "Identical in-footprint dot values to GEMSDOE30 (byte-measured).",
     "GEMSDOE30": "Identical in-footprint dot values to GEMSDOE25 (byte-measured).",
@@ -282,6 +400,7 @@ def _new_tiff_row(label: str, path: str) -> dict | None:
 def decision_board() -> tuple[str, str]:
     """Top-of-site table: the file to download, its estimate, uniqueness, and submit status."""
     rows = [r for r in (
+        h35_row(),
         _new_tiff_row("GEMSDOE27 H29-XG joint gravity-magnetic cross-gradient (new, 2026-10-29)", "evidence/h29xg_run_card_2026-10-29.json"),
         _new_tiff_row("GEMSDOE27 H28-6 gravity persistence (new, 2026-10-28)", "evidence/h28_6_run_card_2026-10-28.json"),
         _new_tiff_row("GEMSDOE27 H33-1 buried-step complement (new, 2026-10-27)", "evidence/h33_run_card_2026-10-27.json"),
@@ -301,24 +420,51 @@ def decision_board() -> tuple[str, str]:
             "unique": f"NO. {uniq}",
             "ok": "NO - historical file; do not resubmit.",
         })
+    h35_card = read("evidence/h35_run_card_2026-10-31.json", {})
+    h35_ok = bool(h35_card.get("ok_to_submit") is True and h35_card.get("verdict") == "promote")
+    if h35_ok:
+        short_html = (
+            '<p><b>Short answer: the H35-1 file in the first row passes every local gate and is OK to '
+            'download and submit.</b> It is unique within the pinned and local scope shown in its row. '
+            'Historical files are already in the registry and must not be resubmitted. Estimates are '
+            'local HOLDOUT-DTI or owner-reported values, never leaderboard projections.</p>'
+        )
+        short_md = (
+            "**Short answer: the H35-1 file in the first row passes every local gate and is OK to download "
+            "and submit.** It is unique within the pinned and local scope shown in its row. Historical files "
+            "are already in the registry. Estimates are local HOLDOUT-DTI or owner-reported values, never "
+            "leaderboard projections.\n\n"
+        )
+    else:
+        short_html = (
+            '<p><b>Short answer: no file is OK to submit right now.</b> The 2026-10-31 H35-1 lane result is '
+            'shown in the first row; its frozen gates decide its badge. The earlier generated TIFFs '
+            '(H33-1) are unique against the pinned and local rasters but failed their holdout gates, so '
+            'they are downloadable for research only. H28-6 and H29-XG wrote no TIFF. Historical '
+            'files are already in the registry and are not new. Estimates are local HOLDOUT-DTI or '
+            'owner-reported values, never leaderboard projections.</p>'
+        )
+        short_md = (
+            "**Short answer: no file is OK to submit right now.** The 2026-10-31 H35-1 lane result is shown "
+            "in the first row; its frozen gates decide its badge. The earlier generated TIFF (H33-1) is "
+            "unique against the pinned and local rasters but failed its holdout gate. H28-6 and H29-XG "
+            "wrote no TIFF. Historical files are already in the registry. Estimates are local HOLDOUT-DTI "
+            "or owner-reported values, never leaderboard projections.\n\n"
+        )
     body = "".join(
         f'<tr><th>{esc(r["label"])}</th><td>{r["file_cell"]}</td><td>{esc(r["estimate"])}</td>'
         f'<td>{esc(r["unique"])}</td><td><b>{esc(r["ok"])}</b></td></tr>' for r in rows)
     html_block = (
-        '<div class="card" id="download-decision" style="border-left:5px solid #cf222e">'
+        '<div class="card" id="download-decision" style="border-left:5px solid '
+        + ('#1a7f37' if h35_ok else '#cf222e') + '">'
         '<h2 style="margin-top:0">Which file to download, and can it be submitted?</h2>'
-        '<p><b>Short answer: no file is OK to submit right now.</b> The only generated TIFF on disk (H33-1) is unique against the pinned '
-        'and local rasters but failed its holdout gate, so it is downloadable for research only. H28-6 and H29-XG wrote no TIFF. Historical '
-        'files are already in the registry and are not new. Estimates are local HOLDOUT-DTI or owner-reported values, '
-        'never leaderboard projections.</p>'
+        + short_html +
         '<div class="tw"><table><thead><tr><th>Site / file</th><th>File to download</th><th>Estimated score</th>'
         '<th>Unique?</th><th>OK to submit?</th></tr></thead><tbody>' + body + '</tbody></table></div></div>')
     md_rows = "\n".join(
         f'| {r["label"]} | {r["file_md"]} | {r["estimate"]} | {r["unique"]} | **{r["ok"]}** |' for r in rows)
     md = ("## Which file to download, and can it be submitted?\n\n"
-          "**Short answer: no file is OK to submit right now.** The only generated TIFF on disk (H33-1) is unique against the pinned "
-          "and local rasters but failed its holdout gate. H28-6 and H29-XG wrote no TIFF. Historical files are already in the registry. Estimates are local "
-          "HOLDOUT-DTI or owner-reported values, never leaderboard projections.\n\n"
+          + short_md +
           "| Site / file | File to download | Estimated score | Unique? | OK to submit? |\n"
           "|---|---|---|---|---|\n" + md_rows + "\n")
     return html_block, md
@@ -414,6 +560,10 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
     lane = read("evidence/relief_profile_run_card_20261027.json")
     lane_html, lane_md = card_summary(lane)
     h33_html, h33_md = h33_summary()
+    h35_html, h35_md = h35_summary()
+    h35_card_state = read("evidence/h35_run_card_2026-10-31.json", {})
+    h35_ok = bool(h35_card_state.get("ok_to_submit") is True
+                  and h35_card_state.get("verdict") == "promote")
     decision_html, decision_md = decision_board()
     peer_relations = read("evidence/peer_relations_20261028.json", {})
     peer_rel_text, peer_identity_text = peer_relation_sentences(peer_relations, peers)
@@ -638,6 +788,7 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
     home = f"""
 <h1>GEMSDOE27 research and submission status</h1>
 <p class="lead">A transparent audit of nine sites, one pre-registered geological proxy, and the gates between research and a competition submission.</p>
+{h35_html}
 {decision_html}
 {important}
 {h33_html}
@@ -651,6 +802,7 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
     executive = f"""
 <h1>Executive summary · nine focus sites</h1>
 <p class="lead">Historical file provenance, reported values, uniqueness and what can safely be submitted.</p>
+{h35_html}
 {decision_html}{important}{h33_html}{decision_table}{lane_html}
 <h2>Highest listed historical claim</h2>
 <p>{esc(highest_report)} The task prompt cites 0.3195 and 0.4413 as current leaderboard maxima; these conflict and were not verified because the organizer site was not accessed.</p>
@@ -660,15 +812,24 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
 <h2>Scope and confidence</h2><p>GEMSDOE25/GEMSDOE30 and GEMSDOE28/GEMSDOE31 have documented dot-identical pairs; renaming or thinning a prior file is not a new method. Historic claims of higher leaderboard values conflict and are unverified. Local validation reports HOLDOUT-DTI, not organizer performance.</p>
 {action}
 """
+    h35_ok_text = (
+        "The H35-1 file shown above is the approved new TIFF for this week's decision: download the "
+        "exact allfinite.tif named above, give the upload the documented submission name, and paste "
+        "the note shown above. Do not re-upload H31-1 or any old file."
+        if h35_ok else
+        "There is currently no approved new TIFF. Do not re-upload H31-1 or any old file; do not treat a research link as an invitation to submit."
+    )
     how = f"""
 <h1>Submission instructions</h1>
-<p class="lead">Use only after a separate selector authorizes an eligible candidate.</p>{important}
-{h33_html}
+<p class="lead">Exactly how to make a submission into the contest, start to finish.</p>{important}
+{h35_html}
 <ol class="steps"><li>Read the current run card, the shared readiness audit and the selector decision. No weekly slot is authorized by an evidence pass alone.</li>
 <li>Confirm the candidate is not already submitted, its full-scope pre-placement surface and post-placement dots meet the duplicate thresholds, and a matched current-best holdout comparison passes. If any evidence is missing, stop.</li>
 <li>For an authorized candidate only, download the exact named <code>allfinite.tif</code> or its one-TIFF ZIP. Check the published SHA-256. The file must be float32, single-band, template-aligned and finite within [0,1] throughout, with zeros outside the footprint. A NaN-outside TIFF can trigger “Predicted values must be in range [0, 1]”. Passing our validator does not guarantee organizer acceptance.</li>
-<li>Use the documented name and short note. Open the <a href="https://www.drivendata.org/competitions/306/">competition portal</a> yourself, check remaining slots and upload only if authorized. Record the organizer receipt and resulting score separately.</li></ol>
-<p>There is currently no approved new TIFF. Do not re-upload H31-1 or any old file; do not treat a research link as an invitation to submit.</p>
+<li>Open the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">competition portal</a>, go to the Submissions page and click <b>New submission</b>. Choose the downloaded .tif (or the .zip containing exactly one GeoTIFF). The form checks that the file matches the submission format's CRS, shape and geotransform and that predicted values are in range [0, 1].</li>
+<li>Give it a unique name and fill the <b>Note</b> field with the short comment from the run card (at most 140 characters, e.g. “clustering with k=25”) so you can tell submissions apart later. Click <b>Create submission</b>, then record the organizer receipt and the resulting score in the ledger — an owner-reported number is never a receipt.</li></ol>
+<p>{esc(h35_ok_text)}</p>
+{h33_html}
 {lane_html}
 """
     research = f"""
@@ -677,6 +838,17 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
 <p>The following three formulations remain untried in this repository's updated screen; the rank is qualitative, not a numerical DTI prediction. See the <a href="{repo_link('registry/next_hypotheses.json')}">machine-readable hypothesis ledger</a> and <a href="{PRE}">prior preregistration</a>. No new lane has been assigned in the current prompt.</p>
 {hypothesis_table}
 <p class="warnbox">{esc(hypothesis_caveat)}</p>
+<h2>H35 hypothesis screen (2026-10-31) and lane result</h2>
+<p>Five candidate hypotheses were ranked before implementation (layers, physical signature, why each could catch a catalogue-missing fault, named non-fault mimic, novelty vs this repo, cost; full screen in <a href="{repo_link('knowledge/45_preregistration_H35_2026-10-31.md')}">knowledge/45</a>). The prompt still assigns no new lane by paragraph, so lane L-2026-10-31-H35 was self-assigned inside the registry duplicate stops (IR-2026-10-31-lane-paragraph-still-missing) and validated on the whole-FID buffered holdout, seeds 930–939:</p>
+<div class="tw"><table><thead><tr><th>Rank</th><th>Hypothesis</th><th>Layers and signature</th><th>Why it could catch a missing fault</th><th>Named non-fault mimic</th><th>Novelty vs this repo</th><th>Cost</th></tr></thead><tbody>
+<tr><td>1 (tested)</td><td><b>H35-1 WSC</b> weak-scarp continuity augmentation</td><td>LiDAR 100 m <code>step_max</code>/<code>lappos_max</code>/<code>ex_max</code>; orientation-coherent anisotropic line-integral response in the weak-moderate amplitude band</td><td>Degraded / partially buried young scarps fall below the corroborated-ridge bar; mappers and the H19-5 family omit them</td><td>Dip slopes and hogbacks, terrace risers, Lake Lahontan strandlines, avalanche chutes, graded-road berms</td><td>Directional bands were only HGB augmentation before (negative); no standalone continuity emitter exists here</td><td>Low</td></tr>
+<tr><td>2</td><td>H35-2 hydrothermal-discharge lineaments</td><td>Wells/springs thermal residual (27,092 stations) × oriented continuity; linear warm-discharge alignments</td><td>Upflow conduits of blind faults; fossil sinter masks scarp while marking the structure</td><td>Valley-bottom discharge lines, artesian trends, sampling bias</td><td>H29-1/H31 used chemistry as augmentation (0.219/0.225 owner-reported); no pure emitter</td><td>Low</td></tr>
+<tr><td>3</td><td>H35-3 triple-concordance buried corridors</td><td>Thermal anomaly ∩ gravity analytic edge ∩ magnetic edge</td><td>Basement structures with no surface trace show coincident potential-field and thermal signatures</td><td>Lithologic contacts with both contrasts</td><td>Extends the tested-negative H29-XG two-axis form with the thermal axis</td><td>Medium</td></tr>
+<tr><td>4</td><td>H35-4 SGMC-concordant young-expression conjunction</td><td>Off-catalogue SGMC fault traces ∩ weak LiDAR continuity</td><td>State-map faults absent from the Quaternary catalogue with residual young expression</td><td>Eroded structures with no young displacement</td><td>SGMC-only emission is a tested negative (0.0512 owner-reported); the conjunction is untested</td><td>Low</td></tr>
+<tr><td>5</td><td>H35-5 volcanic-vent transfer corridors</td><td>21 Quaternary vents; vent-alignment corridors and conjugate transfers</td><td>Vent-feeding structures can be blind but aligned</td><td>Random cinder-cone clustering</td><td>Vents were only aux distance bands before</td><td>Low</td></tr>
+</tbody></table></div>
+<p class="warnbox">Blocked and therefore not ranked as runnable: H27-16 GDR #1391 sinter/probe packages and H29-5 routed drainage still need bytes outside the sandbox allowlist. Related operator H28-7 (orientation-coherent radiometric fronts) remains untested but its wider augmentation arms were negative.</p>
+{h35_html}
 <h2>Previously tested negative H29-5-PROXY</h2>
 {lane_html}
 <p>{esc(h31_history)}</p>
@@ -698,8 +870,8 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
     irregularities = read("registry/irregularities.json", {}).get("items", [])
     issue_dates = [re.match(r"IR-(\d{4}-\d{2}-\d{2})", x.get("id", ""))
                    for x in irregularities]
-    # Show the two most recent dated batches so a new session never hides the previous session's records.
-    recent_dates = set(sorted({match.group(1) for match in issue_dates if match}, reverse=True)[:2])
+    # Show the three most recent dated batches so a new session never hides the previous sessions' records.
+    recent_dates = set(sorted({match.group(1) for match in issue_dates if match}, reverse=True)[:3])
     latest_issues = [x for x in irregularities
                      if any(x.get("id", "").startswith(f"IR-{d}") for d in recent_dates)]
     issue_rows = "".join(f'<li><b>{esc(x.get("id"))}:</b> {esc(x.get("issue"))} '
@@ -724,12 +896,14 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
              "topology.html": ("Topology", topology), "sources.html": ("Sources", sources)}
     markdown = f"""# Executive summary — GEMSDOE27 and nine focus sites
 
+{h35_md}
+
 {decision_md}
 **DO NOT SUBMIT. NOT AUTHORIZED FOR A WEEKLY SLOT.** H31-1 `{H31_ID}` is already submitted according to the user, who reports 0.2250. There is no organizer receipt; do not resubmit it. No portal upload was made.
 
 ## New result and estimate
 
-On 2026-10-29 one preregistered experiment ran (H29-XG, joint gravity–magnetic cross-gradient, seeds 800–809, `knowledge/39`). It is **negative**: its holdout efficacy gate failed against the matched control, and its dots broke the 70% local-overlap stop, so **no TIFF was written**. The earlier research files (H28-6 and H33-1) are also negative. Every file in the table is NOT OK TO SUBMIT. The decision table below is generated from the run cards. Its numbers are HOLDOUT-DTI, not organizer scores.
+On 2026-10-31 one preregistered experiment ran (H35-1, weak-scarp continuity augmentation of the arm-D emission, seeds 930–939, `knowledge/45`); its run card above carries the verdict and the file badge. On 2026-10-29 H29-XG (joint gravity–magnetic cross-gradient, seeds 800–809, `knowledge/39`) was **negative**: its holdout efficacy gate failed against the matched control, and its dots broke the 70% local-overlap stop, so no TIFF was written. The earlier research files (H28-6 and H33-1) are also negative. The decision table below is generated from the run cards. Its numbers are HOLDOUT-DTI, not organizer scores.
 
 {decision_table_md}{h33_md}
 
@@ -759,7 +933,7 @@ SHA-256 hashes and pinned sources are in [the focus-site registry]({repo_link('r
 
 ## Research and next decision
 
-A qualitative three-hypothesis screen (no numerical expected gains) and official-source access gates are on the [Research page]({REPO}/blob/main/docs/research.html) and in [`registry/next_hypotheses.json`]({repo_link('registry/next_hypotheses.json')}). The single-method lane paragraph referenced by the prompt is absent, so no experiment or new TIFF was generated in this review. No currently available file passes both efficacy and authorization gates. Obtain an explicit lane; preregister fresh seeds; run feature-alone leakage checks and same-split current-best holdout; then check pre-placement and final-dot uniqueness against a current complete registry. Only a separate selector may consider a weekly slot. Official organizer scores, current slot capacity and score-to-file receipts remain unknown. Read the [submission instructions]({REPO}/blob/main/docs/how-to-submit.html).
+A qualitative three-hypothesis screen (no numerical expected gains) and official-source access gates are on the [Research page]({REPO}/blob/main/docs/research.html) and in [`registry/next_hypotheses.json`]({repo_link('registry/next_hypotheses.json')}). The single-method lane paragraph referenced by the prompt is absent (IR-2026-10-31-lane-paragraph-still-missing); lane L-2026-10-31-H35 was therefore self-assigned inside the registry duplicate stops and its preregistered holdout run (seeds 930–939) is recorded in `knowledge/45` and `knowledge/46`. Promotion to a weekly slot remains a separate selector decision. Official organizer scores, current slot capacity and score-to-file receipts remain unknown. Read the [submission instructions]({REPO}/blob/main/docs/how-to-submit.html).
 """
     return pages, markdown
 

@@ -421,6 +421,18 @@
       "status": "listing verified 2026-10-29 from the Wiley Online Library page (search result, secondary). Full text NOT read.",
       "accessed": "2026-10-29",
       "evidence": "knowledge/39_preregistration_H29-XG_2026-10-29.md section 1"
+    },
+    {
+      "id": "geothermal-vent-research-20261031",
+      "title": "Geothermal-vent research compilation (knowledge/47) with official-source provenance labels",
+      "publisher": "This repository (compilation); upstream: USGS GeoDAWN, DOE GDR #1391, USGS 3DEP, Mack et al., Williams (1996) as transcribed in knowledge/41",
+      "url": "https://github.com/drivendataorg/gems-prize-reference-solution",
+      "category": "research compilation",
+      "used_for": "Sourcing the H35-5 volcanic-vent transfer corridor hypothesis screen (knowledge/45) and storing the requested deep geothermal-vent research (task requirement 8).",
+      "status": "Compiled 2026-10-31. Only github.com reachable from this sandbox: the official reference solution README was fetched first-hand; USGS/GDR/publisher pages were NOT fetched (allowlist) and are labelled [NOT FETCHED - allowlist]; Mack et al. / Williams (1996) ages remain OWNER-REPORTED transcriptions pending human re-check (IR-2026-10-31-vent-citation-ages-unverified).",
+      "accessed": "2026-10-31",
+      "evidence": "knowledge/47_geothermal_vent_research_2026-10-31.md",
+      "feed": false
     }
   ]
 }
