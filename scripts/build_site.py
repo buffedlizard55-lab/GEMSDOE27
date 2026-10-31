@@ -154,7 +154,7 @@ def h33_summary() -> tuple[str, str]:
         text = "H33-1: no run card is present. Do not upload an older file in its place."
         return f'<div class="card"><h3>Generated TIFF</h3><p>{esc(text)}</p></div>', text
     hold = card.get("holdout") or {}
-    paired = hold.get("paired_candidate_minus_B") or {}
+    paired = hold.get("paired_candidate_minus_B") or hold.get("paired_candidate_minus_Bc") or {}
     ci = paired.get("ci95") or []
     unique = card.get("uniqueness_vs_registry") or {}
     raster = card.get("raster") or {}
@@ -233,10 +233,10 @@ def _new_tiff_row(label: str, path: str) -> dict | None:
     verified = verified_research_path(card, gate)
     hold = card.get("holdout") or {}
     uniq = card.get("uniqueness_vs_registry") or {}
-    paired = hold.get("paired_candidate_minus_B") or {}
+    paired = hold.get("paired_candidate_minus_B") or hold.get("paired_candidate_minus_Bc") or {}
     ci = paired.get("ci95") or hold.get("ci95") or []
     pooled = hold.get("pooled_candidate")
-    control = hold.get("pooled_control_D", hold.get("pooled_control_B"))
+    control = hold.get("pooled_control_D", hold.get("pooled_control_B", hold.get("pooled_matched_control_Bc")))
     if isinstance(pooled, (int, float)) and isinstance(control, (int, float)) and len(ci) == 2:
         estimate = (f"HOLDOUT-DTI {pooled:.6f} vs control {control:.6f}; paired 95% CI "
                     f"[{ci[0]:+.6f}, {ci[1]:+.6f}]; {hold.get('n_withheld_positives_total', 'n/a'):,} "
@@ -342,6 +342,7 @@ def decision_board() -> tuple[str, str]:
         _new_tiff_row("GEMSDOE27 H29-XG joint gravity-magnetic cross-gradient (new, 2026-10-29)", "evidence/h29xg_run_card_2026-10-29.json"),
         _new_tiff_row("GEMSDOE27 H28-6 gravity persistence (new, 2026-10-28)", "evidence/h28_6_run_card_2026-10-28.json"),
         _new_tiff_row("GEMSDOE27 H33-1 buried-step complement (new, 2026-10-27)", "evidence/h33_run_card_2026-10-27.json"),
+        _new_tiff_row("GEMSDOE27 H34-1 hot-station collinearity (new, 2026-10-31)", "evidence/h34_1_run_card_2026-10-31.json"),
     ) if r]
     registry = read("registry/focus_sites_2026-10-26.json", {"sites": []})
     peers = {x["id"]: x for x in read("registry/parallel_submission_registry.json")["entries"]}
@@ -364,30 +365,33 @@ def decision_board() -> tuple[str, str]:
     html_block = (
         '<div class="card" id="download-decision" style="border-left:5px solid #cf222e">'
         '<h2 style="margin-top:0">Which file to download, and can it be submitted?</h2>'
-        '<p><b>Short answer: one candidate file exists for a selector decision; the frozen internal gate has not promoted it.</b> '
-        'Session 21 (2026-10-31) built the confirmed L-DCONFIRM arm-D GeoTIFF '
+        '<p><b>Short answer: one candidate file exists for a selector decision; no file is auto-approved.</b> '
+        'Session 21-B (2026-10-31, this branch) built the confirmed L-DCONFIRM arm-D GeoTIFF '
         '(<code>docs/downloads/research/gems27-dconfirm-hybrid-armd-b2-38k-20261031-5ea0385b7e70-allfinite.tif</code>): '
         'format-valid by independent byte re-read, holdout-confirmed (HOLDOUT-DTI 0.1066 vs 0.0992, 10/10 seeds), '
         'unique vs all 12 pinned peer submissions and vs every already-submitted file. The frozen gate holds it at '
         'NOT OK only because 85.2% of its dots lie within 3 px of this repo\'s own never-submitted H28-1 research '
         'artifact, and because its older-schema card lacks the newer provenance fields; slot authorization is the '
-        'project owner\'s selector decision. H33-1 remains holdout-negative (research only). H28-6 and H29-XG wrote '
-        'no TIFF. Historical files are already in the registry and are not new. Estimates are local HOLDOUT-DTI or '
-        'owner-reported values, never leaderboard projections.</p>'
+        'project owner\'s selector decision. Two other generated TIFFs are unique but holdout-negative (research '
+        'only, NOT OK): H33-1 (2026-10-27) and H34-1 hot-station collinearity (2026-10-31; holdout far below its '
+        'matched control and cluster-null check fails). H28-6 and H29-XG wrote no TIFF. Historical '
+        'files are already in the registry and are not new. Estimates are local HOLDOUT-DTI or owner-reported values, '
+        'never leaderboard projections.</p>'
         '<div class="tw"><table><thead><tr><th>Site / file</th><th>File to download</th><th>Estimated score</th>'
         '<th>Unique?</th><th>OK to submit?</th></tr></thead><tbody>' + body + '</tbody></table></div></div>')
     md_rows = "\n".join(
         f'| {r["label"]} | {r["file_md"]} | {r["estimate"]} | {r["unique"]} | **{r["ok"]}** |' for r in rows)
     md = ("## Which file to download, and can it be submitted?\n\n"
-          "**Short answer: one candidate file exists for a selector decision; the frozen internal gate has not promoted it.** "
-          "Session 21 (2026-10-31) built the confirmed L-DCONFIRM arm-D GeoTIFF "
+          "**Short answer: one candidate file exists for a selector decision; no file is auto-approved.** "
+          "Session 21-B (2026-10-31, this branch) built the confirmed L-DCONFIRM arm-D GeoTIFF "
           "(`docs/downloads/research/gems27-dconfirm-hybrid-armd-b2-38k-20261031-5ea0385b7e70-allfinite.tif`): "
           "format-valid by independent byte re-read, holdout-confirmed (HOLDOUT-DTI 0.1066 vs 0.0992, 10/10 seeds), "
           "unique vs all 12 pinned peer submissions and vs every already-submitted file. The frozen gate holds it at "
           "NOT OK only because 85.2% of its dots lie within 3 px of this repo's own never-submitted H28-1 research "
           "artifact, and because its older-schema card lacks the newer provenance fields; slot authorization is the "
-          "project owner's selector decision. H33-1 remains holdout-negative (research only). H28-6 and H29-XG wrote "
-          "no TIFF. Historical files are already in the registry. Estimates are local "
+          "project owner's selector decision. Two other generated TIFFs are unique but holdout-negative (research "
+          "only, NOT OK): H33-1 (2026-10-27) and H34-1 hot-station collinearity (2026-10-31; holdout far below its "
+          "matched control and cluster-null check fails). H28-6 and H29-XG wrote no TIFF. Historical files are already in the registry. Estimates are local "
           "HOLDOUT-DTI or owner-reported values, never leaderboard projections.\n\n"
           "| Site / file | File to download | Estimated score | Unique? | OK to submit? |\n"
           "|---|---|---|---|---|\n" + md_rows + "\n")
@@ -798,6 +802,8 @@ def make_pages() -> tuple[dict[str, tuple[str, str]], str]:
 **DO NOT SUBMIT. NOT AUTHORIZED FOR A WEEKLY SLOT.** H31-1 `{H31_ID}` is already submitted according to the user, who reports 0.2250. There is no organizer receipt; do not resubmit it. No portal upload was made.
 
 ## New result and estimate
+
+On 2026-10-31 one preregistered experiment ran (H34-1, hot-station collinearity, seeds 900–909, `knowledge/45`). It is **negative**. Its cluster-preserving null check (Addendum A) shows the line count is not distinguishable from station clustering (ratio 0.97 total, 1.18 for three or more supporting stations; both need >1.5). Its holdout pooled HOLDOUT-DTI was 0.000526 against 0.025996 for the matched control, with 0 of 10 seeds positive. Part of that gap is sparseness: the candidate emitted 448 dots against a 37,654-dot budget. The file is downloadable for research only and is **NOT OK TO SUBMIT**. Full record: `knowledge/46_session21_review_2026-10-31.md`.
 
 On 2026-10-29 one preregistered experiment ran (H29-XG, joint gravity–magnetic cross-gradient, seeds 800–809, `knowledge/39`). It is **negative**: its holdout efficacy gate failed against the matched control, and its dots broke the 70% local-overlap stop, so **no TIFF was written**. The earlier research files (H28-6 and H33-1) are also negative. Every file in the table is NOT OK TO SUBMIT. The decision table below is generated from the run cards. Its numbers are HOLDOUT-DTI, not organizer scores.
 

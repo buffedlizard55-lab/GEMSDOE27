@@ -1,0 +1,63 @@
+{
+  "experiment": "E1 H34-1 canary, pre-placement surface, registered collinearity null",
+  "label": "HOLDOUT-DTI setup only; no organizer score",
+  "preregistration_sha256": "80e05537f08d5d108ab68e1fa266170d5183b41ab3d8ce5c1198c08e65413ef2",
+  "seeds": [
+    900,
+    901,
+    902,
+    903,
+    904,
+    905,
+    906,
+    907,
+    908,
+    909
+  ],
+  "stations_after_qa": 564,
+  "hot_stations": 143,
+  "accepted_lines": 149,
+  "accepted_lines_support_ge3": 41,
+  "uniform_null_line_counts": [
+    0,
+    0,
+    2,
+    0,
+    0
+  ],
+  "uniform_null_pass_registered": true,
+  "addendum_a_jitter_radius_px": 10.0,
+  "addendum_a_jitter_totals_mean": 153.0,
+  "addendum_a_jitter_ge3_mean": 34.7,
+  "addendum_a_ratio_total": 0.9738562091503268,
+  "addendum_a_ratio_ge3": 1.1815561959654177,
+  "addendum_a2_pass": false,
+  "canary_auc_raw": 0.5002508533979309,
+  "canary_auc_direction_invariant": 0.5002508533979309,
+  "canary_leak": false,
+  "surface_spearman_vs_12_pinned": {
+    "g24_d15": -0.0012350736308964346,
+    "g25_d28": -0.0021467705164506415,
+    "g27_tv2_d15": -0.001354660550427153,
+    "g28_h27_4_r1": -0.0022698034135872616,
+    "g28_h32_1": -0.0019099455875059707,
+    "g28_h36_1": -0.0014411866221389381,
+    "g28_h38_1": -0.0014561220227825341,
+    "g30_d28": -0.0021467705164506415,
+    "g31_h27_4": -0.0022698034135872616,
+    "g32_h33_2_b2": -0.0025600661782682293,
+    "g33_h33d": -0.0023928929495604678,
+    "g36_anderson": -0.0021503262876352795
+  },
+  "max_abs_surface_spearman": 0.0025600661782682293,
+  "duplicate_stop": false,
+  "group_map": {
+    "n_features": 1179,
+    "n_segments_rasterized": 15404,
+    "n_fids_on_catalogue": 411,
+    "median_catalogue_to_vector_px": 0.0,
+    "share_catalogue_within_3px": 1.0
+  },
+  "gate_e1_pass_registered": true,
+  "runtime_s": 9.2
+}

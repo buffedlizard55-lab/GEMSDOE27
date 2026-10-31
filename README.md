@@ -1,6 +1,6 @@
 # GEMSDOE27: fault-discovery research and submission audit
 
-## 2026-10-31 Session 21 — L-DCONFIRM arm-D candidate built (latest)
+## 2026-10-31 Session 21-B — L-DCONFIRM arm-D candidate built (this branch, latest)
 
 **One candidate TIFF now exists for a selector decision.** Lane L-DCONFIRM's preregistered, already-confirmed arm D (32-band + 15 subsurface-transform full-fit HGB detector; ridge NMS; priority Poisson-disk ≥2.8 px; B2 collar; 38,000 dots) was rebuilt from the unchanged E3 builder after this session restored the hash-pinned inputs and the lost transform caches ([`scripts/rebuild_dconfirm_caches.py`](scripts/rebuild_dconfirm_caches.py), identical builder closures). Record: [`knowledge/45_session21_e3_dconfirm_build_2026-10-31.md`](knowledge/45_session21_e3_dconfirm_build_2026-10-31.md); run card: [`evidence/dconfirm_run_card_2026-10-25.json`](evidence/dconfirm_run_card_2026-10-25.json) (regenerated 2026-10-31).
 
@@ -10,6 +10,10 @@
 - **Uniqueness:** max 3-px dot overlap **46.6 %** vs the 12 pinned peer submissions and **52.6 %** vs the already-submitted H31-1 — both under the 70 % stop; surface Spearman 0.446 ≤ 0.90. The frozen self-repo screen fails only against this repo's own never-submitted H28-1 research raster (85.2 %), and the card predates the current publication-gate provenance fields. Verdict therefore stays **negative / not promoted** by the frozen gate; per `knowledge/15` §4, retiring the H28-1 artifact from the self-registry is a **selector decision**, which this session does not take.
 - **Live score: UNKNOWN.** No projection is written. Nearest owner-reported anchors of this emission family: H31-1 0.2250, H29-PM 0.2190, slot-1 0.2449. Nothing here beats or claims to beat the owner-reported 0.2778 (GEMSDOE32), which remains a same-field re-thinning that fails this repo's uniqueness rule.
 - **No upload, no slot, no DrivenData access.** The prompt's lane paragraph is still missing (`IR-2026-10-31-lane-paragraph-still-missing`); this session ran no new hypothesis gate, only the frozen E3 build of the already-confirmed candidate.
+
+## Current review — 2026-10-31 (Session 21, parallel branch)
+
+**No file is OK to download and submit under the frozen gate.** Two unique GeoTIFFs exist and both failed their gates: H33-1 (research only, NOT OK) and H34-1 (hot-station collinearity, `docs/downloads/research/gems27-h34-1-hotline-NOT-OK-TO-SUBMIT-20261031-239619b728d6-allfinite.tif`, NOT OK). H34-1 is negative: its line count matches station clustering (Addendum A null ratio 0.97), and its HOLDOUT-DTI is 0.000526 against 0.025996 for the matched control. These are HOLDOUT-DTI numbers, not organizer scores. The highest owner-reported submission is GEMSDOE32 (0.2778, OWNER-REPORTED), which is not unique and is already submitted. The lane paragraph is still missing, so no lane, slot or promotion is authorised. A DrivenData reachability attempt (HTTP 000) was made by script during that session; that is disclosed as IR-2026-10-31-drivendata-reachability-attempt. Full record: [Session 21 review](knowledge/46_session21_review_2026-10-31.md). Preregistration: [knowledge/45](knowledge/45_preregistration_H34-1_2026-10-31.md).
 
 ## Current review — 2026-10-30
 
