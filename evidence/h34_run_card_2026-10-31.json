@@ -155,5 +155,13 @@
   },
   "download_decision_reasons": [
     "failed the repository publication gate: no whole-FID split, no matched current-best control, not all features canaried, uniqueness scope limited to the 12 pinned rasters"
-  ]
+  ],
+  "superseded_by": {
+    "card": "evidence/h34_1_run_card_2026-10-31.json",
+    "protocol": "whole-FID buffered hide-and-recover (buffer_px=6) with matched control Bc",
+    "pooled_candidate_H34_1": 0.0005260609769011155,
+    "pooled_matched_control_Bc": 0.025995826593853796,
+    "verdict": "negative",
+    "note": "This component/quadrant proxy result is SUPERSEDED. The authoritative whole-FID matched-control test measured H34-1 at 0.000526 vs the matched control 0.025996 (negative). Do not read the positive proxy below as support for H34-1."
+  }
 }

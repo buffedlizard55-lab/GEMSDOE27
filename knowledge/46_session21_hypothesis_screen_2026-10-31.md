@@ -49,3 +49,17 @@ Ranks describe experiment priority conditional on the lane/data gates, not predi
 - **Limitations to record:** the holdout truth is catalogue-internal (proxy), so the result is
   a diagnostic and NOT an organizer score; the control is a single-physics edge, not the full
   current-best H29-S/H31 architecture, so a win here is not automatically a slot authorization.
+
+## Addendum — H34-1 result superseded by the whole-FID matched-control test
+
+This branch preregistered and ran H34-1 on a **component/quadrant split with a gravity-only control** and
+observed a positive catalogue-internal proxy (pooled HOLDOUT-DTI 0.017740 vs 0.014084; paired 95% CI
+[+0.001939, +0.005431]; 9/10 seeds positive; 121,621 withheld positives).
+
+A parallel Session 21 branch ran the **same hypothesis under the required whole-FID buffered hide-and-recover
+protocol with a matched control Bc** and measured pooled HOLDOUT-DTI **0.000526 vs 0.025996** — i.e. **NEGATIVE**
+(`evidence/h34_1_e2_holdout_900_909.json`, `evidence/h34_1_run_card_2026-10-31.json`).
+
+The component/quadrant proxy result above is therefore **SUPERSEDED** and must not be read as support for H34-1.
+The generated TIFF (`docs/downloads/h34/gems27-h34-1-align-b2-20261031-8e61fd96ce99-allfinite.tif`) is a research
+artifact, NOT OK TO SUBMIT. Recorded as `IR-2026-10-31-h34-1-proxy-superseded`.

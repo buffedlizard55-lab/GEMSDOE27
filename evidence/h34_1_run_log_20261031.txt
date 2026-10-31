@@ -1,0 +1,21 @@
+{"accepted_lines": 149, "uniform_null_pass_registered": true, "addendum_a_ratio_total": 0.9738562091503268, "addendum_a_ratio_ge3": 1.1815561959654177, "canary_auc_direction_invariant": 0.5002508533979309, "max_abs_surface_spearman": 0.0025600661782682293, "gate_e1_pass_registered": true}
+seed 900 C 0.0024 Bc 0.0257 Bu 0.0498 dotsC 470 dotsBc 37654
+seed 901 C 0.0005 Bc 0.0323 Bu 0.0521 dotsC 453 dotsBc 37654
+seed 902 C 0.0009 Bc 0.0232 Bu 0.0484 dotsC 454 dotsBc 37654
+seed 903 C 0.0000 Bc 0.0271 Bu 0.0596 dotsC 448 dotsBc 37654
+seed 904 C 0.0003 Bc 0.0262 Bu 0.0562 dotsC 449 dotsBc 37654
+seed 905 C 0.0008 Bc 0.0341 Bu 0.0456 dotsC 460 dotsBc 37654
+seed 906 C 0.0000 Bc 0.0181 Bu 0.0449 dotsC 448 dotsBc 37654
+seed 907 C 0.0000 Bc 0.0188 Bu 0.0384 dotsC 448 dotsBc 37654
+seed 908 C 0.0002 Bc 0.0312 Bu 0.0412 dotsC 455 dotsBc 37654
+seed 909 C 0.0002 Bc 0.0216 Bu 0.0444 dotsC 455 dotsBc 37654
+{"pooled_C": 0.0005260609769011155, "pooled_Bc": 0.025995826593853796, "efficacy": false}
+{"candidate": "h34_1_surface.tif", "duplicates": [], "pass": true}
+{"candidate": "gems27-h34-1-hotline-tmp-20261031-239619b728d6-allfinite.tif", "duplicates": [], "pass": true}
+{
+  "verdict": "negative",
+  "dots": 448,
+  "sha": "dad10dfe129d84b8",
+  "file": "gems27-h34-1-hotline-NOT-OK-TO-SUBMIT-20261031-239619b728d6-allfinite.tif",
+  "unique": true
+}

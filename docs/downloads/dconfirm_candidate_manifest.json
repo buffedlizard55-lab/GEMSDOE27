@@ -1,6 +1,6 @@
 {
-  "generated_utc": "2026-10-25T21:07:09Z",
-  "stem": "gems27-dconfirm-hybrid-armd-b2-38k-20261025-5ea0385b7e70",
+  "generated_utc": "2026-10-31T01:11:54Z",
+  "stem": "gems27-dconfirm-hybrid-armd-b2-38k-20261031-5ea0385b7e70",
   "arm": "D",
   "run_card": "Lane L-DCONFIRM (knowledge/15; parallel-run protocol \u00a75)",
   "hypothesis": "Subsurface physics (potential-field/strain/conductivity/seismicity transforms), dip-offset doublets, radiometric alteration fronts and scarp-polarity pairs add detector information about faults missing from the surface-rupture catalogue when layered ON TOP of the full 32-band stack, emitted at the live optimum (B2, >=2.8 px, 38 k).",
@@ -872,6 +872,9 @@
       "repo:gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-nan.tif": 0.44013157894736843,
       "repo:gems27-farfield-swap-augmented-detector-probe-20261002-a34b0799df59-nan.tif": 0.5048421052631579,
       "repo:gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.tif": 0.8522105263157894,
+      "repo:gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-nan.tif": 0.3738421052631579,
+      "repo:gems27-h30-1-updip-hydrothermal-b2-35k-20261025-801dff07541d-nan.tif": 0.6082894736842105,
+      "repo:gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-nan.tif": 0.5258421052631579,
       "repo:gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif": 0.46628947368421053,
       "repo:gems27-topo-gap-closure-t-v2-on-d2-8-20261002-3ebd51534bb1-nan.tif": 0.4517894736842105,
       "repo:gems27-topo-gap-closure-t-v2-plus-h27-4-r1-on-d1-5-20261002-d466b251f309-nan.tif": 0.45631578947368423
@@ -886,13 +889,13 @@
     "selector_note": "Frozen gate (knowledge/15 \u00a74) FAILS only against this repo's own unsubmitted H28-1 research raster (audit-only, never scored); against the 12-raster peer parallel registry the file passes. Promotion would require a selector decision to retire the H28-1 artifact from the self-registry \u2014 not taken unilaterally here (no post-hoc gate edits)."
   },
   "raster": {
-    "primary_allfinite": "gems27-dconfirm-hybrid-armd-b2-38k-20261025-5ea0385b7e70-allfinite.tif",
+    "primary_allfinite": "gems27-dconfirm-hybrid-armd-b2-38k-20261031-5ea0385b7e70-allfinite.tif",
     "sha256": "40b88a6477b1914a525c587ef139f1016f3d52188442099e5fa5eeab716008c2",
     "bytes": 826788,
     "dots": 38000,
     "content_id": "5ea0385b7e70",
-    "zip": "gems27-dconfirm-hybrid-armd-b2-38k-20261025-5ea0385b7e70-allfinite.zip",
-    "nan_twin": "gems27-dconfirm-hybrid-armd-b2-38k-20261025-5ea0385b7e70-nan.tif",
+    "zip": "gems27-dconfirm-hybrid-armd-b2-38k-20261031-5ea0385b7e70-allfinite.zip",
+    "nan_twin": "gems27-dconfirm-hybrid-armd-b2-38k-20261031-5ea0385b7e70-nan.tif",
     "nan_twin_sha256": "eed607e61b9e12b7540f2ed34939d620aaf87ef1c24f1a38b3c6d88ac548b9fa",
     "directory": "docs/downloads/research"
   },
@@ -901,7 +904,7 @@
     "zeros_checks": {
       "grid_matches_template": {
         "pass": true,
-        "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+        "detail": "candidate=(CRS.from_wkt('PROJCS[\"WGS 84 / UTM zone 11N\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Transverse_Mercator\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-117],PARAMETER[\"scale_factor\",0.9996],PARAMETER[\"false_easting\",500000],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"32611\"]]'), (3730, 3292), (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0), (243350.0, 4135550.0, 572550.0, 4508550.0)); template=(CRS.from_wkt('PROJCS[\"WGS 84 / UTM zone 11N\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Transverse_Mercator\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-117],PARAMETER[\"scale_factor\",0.9996],PARAMETER[\"false_easting\",500000],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"32611\"]]'), (3730, 3292), (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0), (243350.0, 4135550.0, 572550.0, 4508550.0))",
         "hard": true
       },
       "single_band_float32": {
